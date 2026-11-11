@@ -1,0 +1,7 @@
+{
+  "version": "complete_v1",
+  "admissible_for_science": false,
+  "Native_Optimize_calls": 0,
+  "reason": "Source/header updates occurred while the engineering build was running. Its end-of-build source_hashes do not establish byte identity with every compiled unit. No solver was launched from this PE.",
+  "action": "Retain build/fees as engineering evidence; freeze current C++ sources, rebuild all changed units as v2 and require pre/post source-hash equality before qualification."
+}

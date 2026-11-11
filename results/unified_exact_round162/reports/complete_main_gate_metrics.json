@@ -1,0 +1,66 @@
+{
+  "pairs": [
+    {
+      "role": "R-X35-S-T2",
+      "control": "Eplus",
+      "U_gain": -0.028518576638220994,
+      "L_gain": 0.0,
+      "gap_reduction": -0.028518576638220994,
+      "PC_certificate": false,
+      "control_certificate": false,
+      "PC_T_total": 7185.3053273973055,
+      "control_T_total": 7180.118142765947,
+      "PC_U": 0.3281879773746227,
+      "control_U": 0.2996694007364017,
+      "PC_L": 0.2360521029074557,
+      "control_L": 0.2360521029074557
+    },
+    {
+      "role": "R-X35-S-T2",
+      "control": "Stock",
+      "U_gain": -0.028518576638220994,
+      "L_gain": 0.0,
+      "gap_reduction": -0.028518576638220994,
+      "PC_certificate": false,
+      "control_certificate": false,
+      "PC_T_total": 7185.3053273973055,
+      "control_T_total": 7178.504698626231,
+      "PC_U": 0.3281879773746227,
+      "control_U": 0.2996694007364017,
+      "PC_L": 0.2360521029074557,
+      "control_L": 0.2360521029074557
+    },
+    {
+      "role": "N-B35-S",
+      "control": "Eplus",
+      "U_gain": -0.0012396266129806044,
+      "L_gain": 0.0,
+      "gap_reduction": -0.0012396266129806044,
+      "PC_certificate": false,
+      "control_certificate": false,
+      "PC_T_total": 2383.5024676560424,
+      "control_T_total": 2379.99566647131,
+      "PC_U": 0.4515311298758586,
+      "control_U": 0.450291503262878,
+      "PC_L": 0.3959564087240911,
+      "control_L": 0.3959564087240911
+    },
+    {
+      "role": "N-B35-S",
+      "control": "Stock",
+      "U_gain": -0.0020617664847457084,
+      "L_gain": 0.0,
+      "gap_reduction": -0.0020617664847457084,
+      "PC_certificate": false,
+      "control_certificate": false,
+      "PC_T_total": 2383.5024676560424,
+      "control_T_total": 2378.6596659347415,
+      "PC_U": 0.4515311298758586,
+      "control_U": 0.4494693633911129,
+      "PC_L": 0.3959564087240911,
+      "control_L": 0.3959564087240911
+    }
+  ],
+  "automatic_mechanism_change": false,
+  "decision_required": "Apply only the predeclared stop-after-six condition; other outcomes retain the four small roles"
+}

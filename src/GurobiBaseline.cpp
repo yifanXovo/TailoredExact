@@ -21,6 +21,7 @@
 #include "Round141Research.hpp"
 #include "Round143Research.hpp"
 #include "Round161NativeRN.hpp"
+#include "Round162PhysicalCompletion.hpp"
 #include "Round144Research.hpp"
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
@@ -762,6 +763,34 @@ void auditRound143Native(const GurobiApi& api,GRBmodel* model,const Instance& in
         <<",\"S_L\":"<<expected.sl<<",\"S_U\":"<<expected.su<<",\"L_t\":"<<expected.lt<<",\"U_t\":"<<expected.ut
         <<",\"joint_NC_TS_rows_checked\":"<<(joint?6:0)<<",\"Optimize_extra\":0}\n";
     f.close();require(bool(f),"native_audit_write");
+}
+
+void auditRound162Native(const GurobiApi& api,GRBmodel* model,const FixedIntervalMipRequest& request,
+        const std::vector<std::string>& names){
+    auto& c=round162();if(!c.enabled)return;
+    const auto require=[](bool ok,const std::string& why){if(!ok)throw std::runtime_error("round162_native_"+why);};
+    double node_limit=0;require(api.getdblparam(api.getenv(model),"NodeLimit",&node_limit)==0&&node_limit==GRB_INFINITY,"formal_NodeLimit_must_be_unlimited");
+    int new_columns=0;for(const auto& n:names)new_columns+=n.rfind("pc162_",0)==0;
+    int found=0,nz=0;
+    if(c.source_running){require(request.canonical_model_fingerprint==c.source_sha&&new_columns>0,"disposable_source_identity");}
+    else{
+        require(new_columns==0,"persistent_endpoint_columns");
+        const auto expected=c.expected.find(request.canonical_model_fingerprint);
+        if(c.ready&&expected==c.expected.end())require(c.expected_without_row.count(request.canonical_model_fingerprint)>0,"formal_model_registry");
+        int count=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&count)==0,"row_count");
+        SolverNeutralLinearModel matrix;require(readLinearModel(api,model,int(names.size()),count,matrix),"matrix_read");
+        for(int k=0;k<count;++k){char* name=nullptr;require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"row_name");
+            const std::string n(name);if(n.rfind("pc162_",0)!=0)continue;
+            require(n=="pc162_projected"&&expected!=c.expected.end(),"unregistered_projection_row");
+            std::map<std::string,double> terms;for(int z=matrix.row_starts[k];z<matrix.row_starts[k+1];++z)terms[names.at(matrix.column_indices[z])]=matrix.coefficients[z];
+            require(terms==expected->second.coefficients&&matrix.senses[k]=='<'&&matrix.rhs[k]==expected->second.rhs,"actual_projection_transport");++found;nz=int(terms.size());
+        }
+        require(found==(expected==c.expected.end()?0:1),"projection_row_count");
+    }
+    std::ofstream f(request.native_log_path.string()+".round162.native.json");f<<std::setprecision(17)<<std::boolalpha
+        <<"{\"PASS\":true,\"model_SHA256\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"temporary_source\":"<<c.source_running
+        <<",\"NodeLimit\":"<<node_limit<<",\"NodeLimit_unlimited\":true,\"endpoint_columns\":"<<new_columns<<",\"PC_rows\":"<<found<<",\"PC_nonzeros\":"<<nz<<",\"Optimize_extra\":0}\n";
+    require(bool(f),"audit_write");
 }
 
 void auditRound144Native(const GurobiApi& api,GRBmodel* model,const FixedIntervalMipRequest& request,
@@ -3017,6 +3046,7 @@ public:
         try{auditRound120Native(api_,model,request,native_names,native_types);auditRound141Native(api_,model,request,native_names,native_types);
             auditRound143Native(api_,model,instance_,request,native_names,native_types);
             auditRound144Native(api_,model,request,native_names);
+            auditRound162Native(api_,model,request,native_names);
             auditRound146Native(api_,model,request,native_names);
             auditRound149Native(api_,model,request,native_names);
             auditRound151Native(api_,model,request,native_names);
@@ -3462,14 +3492,15 @@ public:
                 return out;
             }
         }
-        if(round161().active) {
-            const double limit=round161().development_node_limit<0?GRB_INFINITY:round161().development_node_limit;
+        if(round161().active || round162().active) {
+            const double requested=round162().active?round162().development_node_limit:round161().development_node_limit;
+            const double limit=requested<0?GRB_INFINITY:requested;
             double actual=-1;
             if(api_.setdblparam(model_env,"NodeLimit",limit) ||
                api_.getdblparam(model_env,"NodeLimit",&actual) || actual!=limit) {
                 out.failure_reason="round161_node_limit_readback_failed";return out;
             }
-            std::ofstream params(request.native_log_path.string()+".round161_parameters.json");
+            std::ofstream params(request.native_log_path.string()+(round162().active?".round162_parameters.json":".round161_parameters.json"));
             params<<std::setprecision(17)<<"{\"development\":"<<(limit<GRB_INFINITY?"true":"false")
                 <<",\"NodeLimit\":"<<actual<<",\"MIPFocus\":"<<round127().mip_focus
                 <<",\"Seed\":"<<options_.gurobi_seed<<",\"Threads\":1}\n";

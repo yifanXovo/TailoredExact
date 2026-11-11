@@ -1,0 +1,63 @@
+{
+  "PASS": true,
+  "label": "N-B35-S_C_LP_v1",
+  "source": "N-B35-S_F_LP_v1",
+  "matrix": {
+    "PASS": true,
+    "old_columns": 10003,
+    "old_rows": 23612,
+    "Q_columns": 8762,
+    "Q_rows": 18148,
+    "new_columns": 0,
+    "new_rows": 1,
+    "old_penalty_objective_types_rows_exact": true,
+    "actual_new_rows_exact": true,
+    "unknown_columns": 0,
+    "endpoint_boxes_same_Q": true
+  },
+  "primal": {
+    "max_residual": 2.7284841053187847e-12,
+    "worst_row": "c13743",
+    "objective_up": 0.38279681440668595,
+    "G": 0.024741258851130283,
+    "max_state_product_residual": 0.023680775726473452,
+    "max_inventory_product_residual": 0.24741258851130282,
+    "qualifies_under_inherited_1e_6": true
+  },
+  "dual": {
+    "exact_lower": "63603030300824566411138587765450119/166153499473114484112975882535043072",
+    "lower_down": 0.38279681440664604,
+    "row_aggregate": 0.38279681440668606,
+    "box_compensation": -4.00295473389846e-14,
+    "sign_repairs": 126,
+    "nonzero_duals": 1098,
+    "exact_binary64_rational": true,
+    "Optimize": 0,
+    "max_reduced_cost_box_coefficient": 0.018333531963958954
+  },
+  "new_column_elimination_support": 2.030518469215822e-05,
+  "old_coefficient_conversion_support": 0.0,
+  "outward_slack_exact": "722811750760278330069/83076749736557242056487941267521536",
+  "outward_slack": 8.700529968401147e-15,
+  "sign_repairs": 2,
+  "cut_terms": 5348,
+  "nonzero_source_rows": 9172,
+  "new_columns": 0,
+  "old_physical_families": [
+    "G",
+    "Y_#",
+    "conn_#_#_#",
+    "d_#_#",
+    "load_#_#",
+    "ord_#_#",
+    "p_#_#",
+    "state_#_#",
+    "x_#_#_#",
+    "z_#_#",
+    "zprod_#"
+  ],
+  "source_objective": 0.3828211594449765,
+  "projected_objective": 0.38279681440668595,
+  "retained_increment": 0.0001629047532855088,
+  "retained_fraction": 0.8699862996881286
+}

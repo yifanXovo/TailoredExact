@@ -34,6 +34,7 @@
 #include "Round151Research.hpp"
 #include "Round153Research.hpp"
 #include "Round154Research.hpp"
+#include "Round162PhysicalCompletion.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -1762,6 +1763,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                        double root_gamma_U) {
     round141ResetRun();
     round144ResetRun();
+    round162ResetRun();
     round146ResetRun();
     round148ResetRun();
     round149ResetRun();
@@ -2282,6 +2284,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : std::filesystem::path(options.external_gini_artifact_dir);
     std::filesystem::create_directories(artifact_dir / "models");
     std::filesystem::create_directories(artifact_dir / "native_logs");
+#if EXACT_EBRP_ENABLE_GUROBI
+    struct Round162Finish {
+        std::filesystem::path directory;
+        ~Round162Finish(){try{finishRound162Run(directory);}catch(...) {}}
+    } round162_finish{artifact_dir};
+#endif
     auto persistCurrentWitness = [&](double objective,const std::vector<RoutePlan>& routes,const std::string& filename) {
         // Original-route evidence acquired within this paid run. Round68 also
         // records the current witness before each complete native Start map.
@@ -4176,6 +4184,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             state.artifact=round144_detail::embed(instance,base,verified_ub,
                 base.path.parent_path()/(base.path.stem().string()+"_round144_compact.lp"));
         }
+#if EXACT_EBRP_ENABLE_GUROBI
+        if(round162().ready&&state.artifact.written){
+            const auto base=state.artifact;
+            state.artifact=embedRound162Row(instance,base,verified_ub,
+                base.path.parent_path()/(base.path.stem().string()+"_round162_PC.lp"));
+        }
+#endif
         if(round141().ready&&state.artifact.written) {
             round141_detail::require(native_evidence&&native_evidence->proofUsable(),"inherited_proof_dependency_revoked");
             round141_detail::require(round141().choice.input_sha==fileSha256(instance.path),"inherited_source_input_identity");
@@ -4277,6 +4292,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         if (state.lp_complete &&
             state.lp_incumbent_epoch == incumbent_epoch) return true;
         if (!ensureArtifact(leaf, state)) return false;
+#if EXACT_EBRP_ENABLE_GUROBI
+        if(round162().enabled&&!round162().attempted){
+            if(leaf.id!="L0"||leaf.gamma_L!=root_gamma_L||leaf.gamma_U!=root_gamma_U)
+                throw std::runtime_error("round162_initial_complete_root_only");
+            state.artifact=prepareRound162Root(instance,options,state.artifact,verified_ub,best_routes,
+                artifact_dir/"round162",globalDeadlineRemaining);
+        }
+#endif
         if(round144().enabled&&!round144().attempted) {
             using namespace round144_detail;auto& c=round144();
             require(leaf.id=="L0"&&leaf.gamma_L==root_gamma_L&&leaf.gamma_U==root_gamma_U,"initial_root_source_only");

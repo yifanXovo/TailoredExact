@@ -1,0 +1,91 @@
+{
+  "role": "K-20-S",
+  "panel": {
+    "id": "K-20-S",
+    "layer": "K",
+    "source": "CITI",
+    "V": 20,
+    "M": 2,
+    "inventory": "shortage",
+    "geometry": "compact",
+    "replicate": 1,
+    "Q_vector": [
+      30,
+      30
+    ],
+    "T_seconds": 5400,
+    "cap_seconds": 1200,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "selection_id": "r132_K_20-S_CITI",
+    "panel_kind": "Round160 fresh paid complete Eplus / EplusR",
+    "input_path": "results/unified_exact_round160/inputs/K-20-S/instance.txt",
+    "instance_path": "results/unified_exact_round160/inputs/K-20-S/instance.txt",
+    "input_sha256": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+    "selection_path": "results/unified_exact_round132/inputs/K-20-S_selection.json",
+    "landscape_path": "results/unified_exact_round132/inputs/K-20-S_landscape.json",
+    "input_bytes": 1287,
+    "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "total_initial": 208,
+    "total_target": 236,
+    "total_capacity": 470,
+    "sum_weights": 11.312498,
+    "Omega": 11.312498,
+    "rho": 1.6968747,
+    "gurobi_seed": 0,
+    "reference": {
+      "optimizer_calls": 0,
+      "canonical_sha256": "33bd7545eceb2271c50dabd40cbea06da7ab34676a96e9427e9d7e09551b6ea8",
+      "rows": 3629,
+      "columns": 1551,
+      "nonzeros": 16310,
+      "fingerprint": 1315253155
+    },
+    "module": "B1",
+    "base_id": "K-20-S",
+    "known": true,
+    "round137_delete_ab": false,
+    "round154_method": "E",
+    "round156_method": "Eplus",
+    "round160_method": "Eplus",
+    "round138_stock_rlt": false,
+    "round146_gd": false,
+    "round149_penalty_feedback": false,
+    "exposed": true
+  },
+  "parent_J": 0.7752127578025219,
+  "parent_stage": "own H + R83, before root scope/helper; R160 Eplus control",
+  "parent_SHA256": "b208ed2e91c410b76a2c330490c1f394a8019e2969413e06a4d46632480f991c",
+  "H_seed": 20260626,
+  "production_PE_SHA256": "dd39a3671c114a9e60d1d169bf6ffb533595f1a632cdd5876fe03f08d0e4da08",
+  "fixed_commit": "695ea68caad088a54ebed45b7d49360d12bd0e8d",
+  "delivery_commit": "53e5c62fbcf6bc24898b7d5d3ecb755e4331ab0b",
+  "archive": {
+    "path": "results/unified_exact_round160/artifacts/complete_005.zip",
+    "SHA256": "4dea6f818c647351d0dfc136850f93dea34208ddb7d209a7d8e8854af1b0bfe0",
+    "bytes": 40522414,
+    "members": 78852,
+    "uncompressed_bytes": 176348662,
+    "index": "results/unified_exact_round160/artifacts/complete_005.members.json"
+  },
+  "members": [
+    {
+      "member": "results/unified_exact_round160/campaign_confirmation/005/raw/R160_005_K-20-S_S0_Eplus/external/initial_witness.json",
+      "SHA256": "0481429579b640fe60e9ad726e4903bb86eadc6a4b72016520a13906111f4876",
+      "bytes": 653
+    },
+    {
+      "member": "results/unified_exact_round160/campaign_confirmation/005/raw/R160_005_K-20-S_S0_Eplus/hga.csv.exchange/final.json",
+      "SHA256": "d8610c450a253ca8a160adbcccf499da758405e727c0062fbc446696a1b36e8c",
+      "bytes": 568
+    },
+    {
+      "member": "results/unified_exact_round160/campaign_confirmation/005/identity.json",
+      "SHA256": "e676d5ae8f3c02bf174c8399d6c5eb9352f2a1e18839dbe2e58566460d8ae49b",
+      "bytes": 37383
+    }
+  ],
+  "offline_development_only": true,
+  "old_producers": 0
+}
