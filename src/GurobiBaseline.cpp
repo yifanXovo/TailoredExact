@@ -21,6 +21,7 @@
 #include "Round141Research.hpp"
 #include "Round143Research.hpp"
 #include "Round161NativeRN.hpp"
+#include "Round162PhysicalCompletion.hpp"
 #include "Round144Research.hpp"
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
@@ -3462,14 +3463,15 @@ public:
                 return out;
             }
         }
-        if(round161().active) {
-            const double limit=round161().development_node_limit<0?GRB_INFINITY:round161().development_node_limit;
+        if(round161().active || round162().active) {
+            const double requested=round162().active?round162().development_node_limit:round161().development_node_limit;
+            const double limit=requested<0?GRB_INFINITY:requested;
             double actual=-1;
             if(api_.setdblparam(model_env,"NodeLimit",limit) ||
                api_.getdblparam(model_env,"NodeLimit",&actual) || actual!=limit) {
                 out.failure_reason="round161_node_limit_readback_failed";return out;
             }
-            std::ofstream params(request.native_log_path.string()+".round161_parameters.json");
+            std::ofstream params(request.native_log_path.string()+(round162().active?".round162_parameters.json":".round161_parameters.json"));
             params<<std::setprecision(17)<<"{\"development\":"<<(limit<GRB_INFINITY?"true":"false")
                 <<",\"NodeLimit\":"<<actual<<",\"MIPFocus\":"<<round127().mip_focus
                 <<",\"Seed\":"<<options_.gurobi_seed<<",\"Threads\":1}\n";
