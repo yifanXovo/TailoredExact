@@ -66,8 +66,14 @@ def restore(commit):
 
 def cleanup():
     before=shutil.disk_usage(WORK).free;items=[];limit=100000
-    for base in (OUT,BUILD,WORK/'temp/round161'):
+    bases=[OUT,BUILD,WORK/'temp/round161',WORK/'temp/round161_plot_deps',WORK/'temp/round161_plot_config']
+    if (OUT/'public_restore_receipt.json').exists():
+        recovered=Path(read(OUT/'public_restore_receipt.json')['target']).resolve()
+        assert recovered.is_relative_to((WORK/'restore').resolve()) and recovered.name.startswith('round161_')
+        bases.append(recovered)
+    for base in bases:
         if not base.exists():continue
+        assert base.resolve().is_relative_to(WORK.resolve())
         for p in base.rglob('*'):
             if p.is_file():
                 items.append(dict(root=str(base),bytes=p.stat().st_size));assert len(items)<=limit
@@ -75,11 +81,31 @@ def cleanup():
     for tree in protected['trees']:
         for name,h in tree['dirty'].items():assert sha(Path(tree['tree'])/name)==h;dirty+=1
     after=shutil.disk_usage(WORK).free
-    write(OUT/'cleanup_record.json',dict(UTC=utc(),screening='bounded metadata only for R161 output/build/temp; no old-round enumeration/deletion',
+    write(OUT/'cleanup_record.json',dict(UTC=utc(),screening='bounded metadata only for R161 output/build/temp/plot dependencies/current public recovery; no old-round enumeration/deletion',
+        screened_roots=[str(p) for p in bases],
         screening_file_limit=limit,screened_files=len(items),screened_file_bytes=sum(i['bytes'] for i in items),deleted_files=0,deleted_file_bytes=0,
         free_bytes_before=before,free_bytes_after=after,observed_free_change=after-before,protected_dirty_hashes_unchanged=dirty,
         retained='Unique raw science, failed calls, same measured PE and necessary objects, archives, public recovery and active worktree',
         reason='Zero deletion is permitted; retain this finite evidence chain and runtime. No temporary duplicate requires deletion.',
         no_global_settings_changed=True))
 
-if __name__=='__main__':globals()[sys.argv[1]](*sys.argv[2:])
+def gitio(*args):
+    assert args and args[0] in ('commit','push')
+    assert not any(a in ('--force','-f','--force-with-lease','--delete') for a in args)
+    p=subprocess.run(['git',*args],cwd=ROOT,capture_output=True,text=True)
+    print(p.stdout,end='');print(p.stderr,end='',file=sys.stderr)
+    assert p.returncode==0,f'git {args[0]} failed with {p.returncode}'
+
+def record_io(action,args):
+    began=time.perf_counter();started=utc();ok=False
+    try:
+        globals()[action](*args);ok=True
+    finally:
+        path=OUT/'publication_costs.json'
+        v=read(path) if path.exists() else dict(category='publication/archive/recovery/cleanup I/O; excluded from scientific meter',records=[])
+        v['records'].append(dict(action=action,args=args,start_UTC=started,end_UTC=utc(),elapsed_seconds=time.perf_counter()-began,success=ok))
+        v['total_seconds']=sum(x['elapsed_seconds'] for x in v['records']);v['no_new_Optimize']=True
+        v['final_metadata_push']='Receipt after the metadata commit is retained locally; no self-referential commit loop.'
+        write(path,v)
+
+if __name__=='__main__':record_io(sys.argv[1],sys.argv[2:])

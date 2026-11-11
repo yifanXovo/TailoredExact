@@ -1,0 +1,1130 @@
+{
+  "samples": [
+    {
+      "role": "R-X35-S-T2",
+      "formulation": "OLD",
+      "mode": "LP",
+      "physical_U": 0.4246498451636405,
+      "raw_lower": 0.18609979544714436,
+      "qualified_lower": 0.18609979544714436,
+      "global_transported_floor": 0.18609979544714436,
+      "absolute_gap": 0.23855004971649615,
+      "relative_gap": 0.5617570627502995,
+      "T_outer": 3.2026108000427485,
+      "T_cpp": 3.1536366,
+      "Native_Runtime": 0.8970000743865967,
+      "Work": 2.7899207209366677,
+      "nodes": 0,
+      "T_build_convert_Start_and_registry": 2.0813664,
+      "T_other_environment_read_Start_return": 0.22424432565615193,
+      "root_gap": 0.5617570627502997,
+      "status": "OPTIMAL",
+      "censored": false,
+      "first_native_verified_U_seconds": null,
+      "best_verified_U_seconds": 2.0826693,
+      "T_cert": null,
+      "certified": false,
+      "rows": 23334,
+      "columns": 9729,
+      "nonzeros": 164317,
+      "binaries": 4390,
+      "integers": 140,
+      "continuous": 5199,
+      "presolved_rows": 19707,
+      "presolved_columns": 9536,
+      "presolved_nonzeros": 152321,
+      "min_coefficient": 0.00754049775127276,
+      "max_coefficient": 14439.6968749914,
+      "trajectory": [
+        {
+          "time": 2.0826693,
+          "J": 0.4246498451636405,
+          "event": 2
+        }
+      ]
+    },
+    {
+      "role": "R-X35-S-T2",
+      "formulation": "RN",
+      "mode": "LP",
+      "physical_U": 0.4246498451636405,
+      "raw_lower": 0.12086889701376323,
+      "qualified_lower": 0.12086889701376323,
+      "global_transported_floor": 0.12086889701376323,
+      "absolute_gap": 0.3037809481498773,
+      "relative_gap": 0.7153680888140065,
+      "T_outer": 2.95147560024634,
+      "T_cpp": 2.901165,
+      "Native_Runtime": 0.7720000743865967,
+      "Work": 2.1057117391593287,
+      "nodes": 0,
+      "T_build_convert_Start_and_registry": 1.9660335,
+      "T_other_environment_read_Start_return": 0.21344202585974337,
+      "root_gap": 0.7153680888140066,
+      "status": "OPTIMAL",
+      "censored": false,
+      "first_native_verified_U_seconds": null,
+      "best_verified_U_seconds": 1.9673945,
+      "T_cert": null,
+      "certified": false,
+      "rows": 22732,
+      "columns": 9729,
+      "nonzeros": 140668,
+      "binaries": 4390,
+      "integers": 140,
+      "continuous": 5199,
+      "presolved_rows": 19485,
+      "presolved_columns": 9514,
+      "presolved_nonzeros": 129905,
+      "min_coefficient": 0.00754049775127276,
+      "max_coefficient": 14439.6968749914,
+      "trajectory": [
+        {
+          "time": 1.9673945,
+          "J": 0.4246498451636405,
+          "event": 2
+        }
+      ]
+    },
+    {
+      "role": "R-X35-S-T2",
+      "formulation": "RN-P",
+      "mode": "LP",
+      "physical_U": 0.4246498451636405,
+      "raw_lower": 0.12467672883945341,
+      "qualified_lower": 0.12467672883945341,
+      "global_transported_floor": 0.12467672883945341,
+      "absolute_gap": 0.2999731163241871,
+      "relative_gap": 0.7064010966696368,
+      "T_outer": 2.95643479982391,
+      "T_cpp": 2.9065514,
+      "Native_Runtime": 0.7799999713897705,
+      "Work": 2.258225644863698,
+      "nodes": 0,
+      "T_build_convert_Start_and_registry": 1.9732108,
+      "T_other_environment_read_Start_return": 0.20322402843413956,
+      "root_gap": 0.7064010966696369,
+      "status": "OPTIMAL",
+      "censored": false,
+      "first_native_verified_U_seconds": null,
+      "best_verified_U_seconds": 1.9741663,
+      "T_cert": null,
+      "certified": false,
+      "rows": 22732,
+      "columns": 9729,
+      "nonzeros": 140668,
+      "binaries": 4390,
+      "integers": 140,
+      "continuous": 5199,
+      "presolved_rows": 19485,
+      "presolved_columns": 9514,
+      "presolved_nonzeros": 129905,
+      "min_coefficient": 0.00754049775127276,
+      "max_coefficient": 14439.6968749914,
+      "trajectory": [
+        {
+          "time": 1.9741663,
+          "J": 0.4246498451636405,
+          "event": 2
+        }
+      ]
+    },
+    {
+      "role": "R-X35-S-T2",
+      "formulation": "OLD",
+      "mode": "MIP",
+      "physical_U": 0.40113978843811804,
+      "raw_lower": 0.2107519649410718,
+      "qualified_lower": 0.2107519649410718,
+      "global_transported_floor": 0.2107519649410718,
+      "absolute_gap": 0.19038782349704625,
+      "relative_gap": 0.47461715088982376,
+      "T_outer": 898.0821921997704,
+      "T_cpp": 898.0338361,
+      "Native_Runtime": 895.7440001964569,
+      "Work": 2252.8906915001667,
+      "nodes": 716,
+      "T_build_convert_Start_and_registry": 2.0842167,
+      "T_other_environment_read_Start_return": 0.2539753033134957,
+      "root_gap": null,
+      "status": "TIME_LIMIT",
+      "censored": true,
+      "first_native_verified_U_seconds": 2.2711548,
+      "best_verified_U_seconds": 481.38882,
+      "T_cert": null,
+      "certified": false,
+      "rows": 23334,
+      "columns": 9729,
+      "nonzeros": 164317,
+      "binaries": 4390,
+      "integers": 140,
+      "continuous": 5199,
+      "presolved_rows": 19520,
+      "presolved_columns": 9590,
+      "presolved_nonzeros": 178973,
+      "min_coefficient": 0.00754049775127276,
+      "max_coefficient": 14439.6968749914,
+      "trajectory": [
+        {
+          "time": 2.0851848,
+          "J": 0.4246498451636405,
+          "event": 2
+        },
+        {
+          "time": 190.0241929,
+          "J": 0.41894335767206864,
+          "event": 59
+        },
+        {
+          "time": 190.0290727,
+          "J": 0.41793242582390117,
+          "event": 60
+        },
+        {
+          "time": 190.0447957,
+          "J": 0.4160684410261792,
+          "event": 61
+        },
+        {
+          "time": 272.7675452,
+          "J": 0.40766057172988196,
+          "event": 63
+        },
+        {
+          "time": 272.7717419,
+          "J": 0.40721887686464336,
+          "event": 64
+        },
+        {
+          "time": 301.8528865,
+          "J": 0.4040719601332627,
+          "event": 65
+        },
+        {
+          "time": 307.8850769,
+          "J": 0.4038916793543708,
+          "event": 66
+        },
+        {
+          "time": 308.9784759,
+          "J": 0.4036139807208958,
+          "event": 67
+        },
+        {
+          "time": 318.9478168,
+          "J": 0.40350939661341034,
+          "event": 68
+        },
+        {
+          "time": 351.3291236,
+          "J": 0.403504001585749,
+          "event": 69
+        },
+        {
+          "time": 351.3524185,
+          "J": 0.4033748346249065,
+          "event": 70
+        },
+        {
+          "time": 353.9403539,
+          "J": 0.40327199886285475,
+          "event": 72
+        },
+        {
+          "time": 435.0216324,
+          "J": 0.40270979454020983,
+          "event": 74
+        },
+        {
+          "time": 447.234425,
+          "J": 0.4011634908708714,
+          "event": 75
+        },
+        {
+          "time": 481.38882,
+          "J": 0.40113978843811804,
+          "event": 76
+        }
+      ]
+    },
+    {
+      "role": "R-X35-S-T2",
+      "formulation": "RN",
+      "mode": "MIP",
+      "physical_U": 0.4155480568870448,
+      "raw_lower": 0.17946616458374168,
+      "qualified_lower": 0.17946616458374168,
+      "global_transported_floor": 0.17946616458374168,
+      "absolute_gap": 0.23608189230330315,
+      "relative_gap": 0.5681217572567676,
+      "T_outer": 898.0968117001466,
+      "T_cpp": 898.0481323,
+      "Native_Runtime": 895.896999835968,
+      "Work": 2269.492637823764,
+      "nodes": 975,
+      "T_build_convert_Start_and_registry": 1.9614424,
+      "T_other_environment_read_Start_return": 0.23836946417861782,
+      "root_gap": null,
+      "status": "TIME_LIMIT",
+      "censored": true,
+      "first_native_verified_U_seconds": 2.1225067,
+      "best_verified_U_seconds": 574.6777586,
+      "T_cert": null,
+      "certified": false,
+      "rows": 22732,
+      "columns": 9729,
+      "nonzeros": 140668,
+      "binaries": 4390,
+      "integers": 140,
+      "continuous": 5199,
+      "presolved_rows": 19309,
+      "presolved_columns": 9589,
+      "presolved_nonzeros": 171431,
+      "min_coefficient": 0.00754049775127276,
+      "max_coefficient": 14439.6968749914,
+      "trajectory": [
+        {
+          "time": 1.9625172,
+          "J": 0.4246498451636405,
+          "event": 2
+        },
+        {
+          "time": 144.4365975,
+          "J": 0.4187521573805622,
+          "event": 39
+        },
+        {
+          "time": 226.466113,
+          "J": 0.41841456574097696,
+          "event": 41
+        },
+        {
+          "time": 314.8209084,
+          "J": 0.41573290717645534,
+          "event": 42
+        },
+        {
+          "time": 574.6777586,
+          "J": 0.4155480568870448,
+          "event": 74
+        }
+      ]
+    },
+    {
+      "role": "R-X35-S-T2",
+      "formulation": "RN-P",
+      "mode": "MIP",
+      "physical_U": 0.406923269363301,
+      "raw_lower": 0.17345623904503926,
+      "qualified_lower": 0.17345623904503926,
+      "global_transported_floor": 0.17345623904503926,
+      "absolute_gap": 0.23346703031826171,
+      "relative_gap": 0.5737372322884352,
+      "T_outer": 898.0789838000201,
+      "T_cpp": 898.0222516,
+      "Native_Runtime": 895.8719999790192,
+      "Work": 2308.246021383084,
+      "nodes": 1001,
+      "T_build_convert_Start_and_registry": 1.9757604,
+      "T_other_environment_read_Start_return": 0.231223421000891,
+      "root_gap": null,
+      "status": "TIME_LIMIT",
+      "censored": true,
+      "first_native_verified_U_seconds": 2.1346022,
+      "best_verified_U_seconds": 620.1015791,
+      "T_cert": null,
+      "certified": false,
+      "rows": 22732,
+      "columns": 9729,
+      "nonzeros": 140668,
+      "binaries": 4390,
+      "integers": 140,
+      "continuous": 5199,
+      "presolved_rows": 19309,
+      "presolved_columns": 9589,
+      "presolved_nonzeros": 171431,
+      "min_coefficient": 0.00754049775127276,
+      "max_coefficient": 14439.6968749914,
+      "trajectory": [
+        {
+          "time": 1.9771441,
+          "J": 0.4246498451636405,
+          "event": 2
+        },
+        {
+          "time": 490.1020352,
+          "J": 0.42203433876013147,
+          "event": 47
+        },
+        {
+          "time": 492.9765202,
+          "J": 0.4144739377629527,
+          "event": 48
+        },
+        {
+          "time": 502.7766343,
+          "J": 0.4140098452989076,
+          "event": 49
+        },
+        {
+          "time": 502.7996138,
+          "J": 0.4106332004785051,
+          "event": 50
+        },
+        {
+          "time": 544.8046805,
+          "J": 0.40887858266126137,
+          "event": 55
+        },
+        {
+          "time": 544.8240564,
+          "J": 0.40869862474923474,
+          "event": 56
+        },
+        {
+          "time": 606.1827708,
+          "J": 0.40831528226488395,
+          "event": 57
+        },
+        {
+          "time": 620.0911286,
+          "J": 0.40815706917023037,
+          "event": 58
+        },
+        {
+          "time": 620.1015791,
+          "J": 0.406923269363301,
+          "event": 59
+        }
+      ]
+    },
+    {
+      "role": "N-B35-S",
+      "formulation": "OLD",
+      "mode": "LP",
+      "physical_U": 0.5772179446388801,
+      "raw_lower": 0.327833772177116,
+      "qualified_lower": 0.327833772177116,
+      "global_transported_floor": 0.327833772177116,
+      "absolute_gap": 0.2493841724617641,
+      "relative_gap": 0.43204507894809846,
+      "T_outer": 3.1249706000089645,
+      "T_cpp": 3.0760822,
+      "Native_Runtime": 0.8070001602172852,
+      "Work": 2.7207639306545124,
+      "nodes": 0,
+      "T_build_convert_Start_and_registry": 2.0725238,
+      "T_other_environment_read_Start_return": 0.24544663979167947,
+      "root_gap": 0.43204507894809824,
+      "status": "OPTIMAL",
+      "censored": false,
+      "first_native_verified_U_seconds": null,
+      "best_verified_U_seconds": 2.0736601,
+      "T_cert": null,
+      "certified": false,
+      "rows": 23608,
+      "columns": 10003,
+      "nonzeros": 165467,
+      "binaries": 4527,
+      "integers": 140,
+      "continuous": 5336,
+      "presolved_rows": 19743,
+      "presolved_columns": 9812,
+      "presolved_nonzeros": 152259,
+      "min_coefficient": 0.024,
+      "max_coefficient": 15425.95956212902,
+      "trajectory": [
+        {
+          "time": 2.0736601,
+          "J": 0.5772179446388801,
+          "event": 2
+        }
+      ]
+    },
+    {
+      "role": "N-B35-S",
+      "formulation": "RN",
+      "mode": "LP",
+      "physical_U": 0.5772179446388801,
+      "raw_lower": 0.2690257142857142,
+      "qualified_lower": 0.2690257142857142,
+      "global_transported_floor": 0.2690257142857142,
+      "absolute_gap": 0.3081922303531659,
+      "relative_gap": 0.5339269737117711,
+      "T_outer": 3.2459577000699937,
+      "T_cpp": 3.1974025,
+      "Native_Runtime": 1.0529999732971191,
+      "Work": 3.146732314707183,
+      "nodes": 0,
+      "T_build_convert_Start_and_registry": 1.9758615,
+      "T_other_environment_read_Start_return": 0.21709622677287466,
+      "root_gap": 0.533926973711771,
+      "status": "OPTIMAL",
+      "censored": false,
+      "first_native_verified_U_seconds": null,
+      "best_verified_U_seconds": 1.9767743,
+      "T_cert": null,
+      "certified": false,
+      "rows": 23006,
+      "columns": 10003,
+      "nonzeros": 141955,
+      "binaries": 4527,
+      "integers": 140,
+      "continuous": 5336,
+      "presolved_rows": 19669,
+      "presolved_columns": 9801,
+      "presolved_nonzeros": 130040,
+      "min_coefficient": 0.024,
+      "max_coefficient": 15425.95956212902,
+      "trajectory": [
+        {
+          "time": 1.9767743,
+          "J": 0.5772179446388801,
+          "event": 2
+        }
+      ]
+    },
+    {
+      "role": "N-B35-S",
+      "formulation": "RN-P",
+      "mode": "LP",
+      "physical_U": 0.5772179446388801,
+      "raw_lower": 0.301013209510885,
+      "qualified_lower": 0.301013209510885,
+      "global_transported_floor": 0.301013209510885,
+      "absolute_gap": 0.2762047351279951,
+      "relative_gap": 0.47851030567110087,
+      "T_outer": 3.4564634999260306,
+      "T_cpp": 3.4074631,
+      "Native_Runtime": 1.258000135421753,
+      "Work": 3.643443252541001,
+      "nodes": 0,
+      "T_build_convert_Start_and_registry": 1.9922654,
+      "T_other_environment_read_Start_return": 0.20619796450427774,
+      "root_gap": 0.47851030567110064,
+      "status": "OPTIMAL",
+      "censored": false,
+      "first_native_verified_U_seconds": null,
+      "best_verified_U_seconds": 1.9930276,
+      "T_cert": null,
+      "certified": false,
+      "rows": 23006,
+      "columns": 10003,
+      "nonzeros": 141955,
+      "binaries": 4527,
+      "integers": 140,
+      "continuous": 5336,
+      "presolved_rows": 19669,
+      "presolved_columns": 9801,
+      "presolved_nonzeros": 130040,
+      "min_coefficient": 0.024,
+      "max_coefficient": 15425.95956212902,
+      "trajectory": [
+        {
+          "time": 1.9930276,
+          "J": 0.5772179446388801,
+          "event": 2
+        }
+      ]
+    },
+    {
+      "role": "N-B35-S",
+      "formulation": "OLD",
+      "mode": "MIP",
+      "physical_U": 0.46342619047619055,
+      "raw_lower": 0.3887645241327327,
+      "qualified_lower": 0.3887645241327327,
+      "global_transported_floor": 0.3887645241327327,
+      "absolute_gap": 0.07466166634345783,
+      "relative_gap": 0.16110799924091412,
+      "T_outer": 898.0939084002748,
+      "T_cpp": 898.0448818,
+      "Native_Runtime": 895.7430000305176,
+      "Work": 2208.942608549279,
+      "nodes": 1046,
+      "T_build_convert_Start_and_registry": 2.0800095,
+      "T_other_environment_read_Start_return": 0.27089886975727495,
+      "root_gap": null,
+      "status": "TIME_LIMIT",
+      "censored": true,
+      "first_native_verified_U_seconds": 2.2691976,
+      "best_verified_U_seconds": 370.9010801,
+      "T_cert": null,
+      "certified": false,
+      "rows": 23608,
+      "columns": 10003,
+      "nonzeros": 165467,
+      "binaries": 4527,
+      "integers": 140,
+      "continuous": 5336,
+      "presolved_rows": 19643,
+      "presolved_columns": 9915,
+      "presolved_nonzeros": 183883,
+      "min_coefficient": 0.024,
+      "max_coefficient": 15425.95956212902,
+      "trajectory": [
+        {
+          "time": 2.080949,
+          "J": 0.5772179446388801,
+          "event": 2
+        },
+        {
+          "time": 11.3276429,
+          "J": 0.5532514587483646,
+          "event": 15
+        },
+        {
+          "time": 11.3360811,
+          "J": 0.5521077316354428,
+          "event": 16
+        },
+        {
+          "time": 19.9461208,
+          "J": 0.5517140248313155,
+          "event": 25
+        },
+        {
+          "time": 20.1011908,
+          "J": 0.5252804743289649,
+          "event": 26
+        },
+        {
+          "time": 20.5816909,
+          "J": 0.5249953066147028,
+          "event": 27
+        },
+        {
+          "time": 24.756518,
+          "J": 0.5237647428523996,
+          "event": 30
+        },
+        {
+          "time": 48.8586267,
+          "J": 0.5231977708866311,
+          "event": 38
+        },
+        {
+          "time": 49.2189168,
+          "J": 0.5226805957697405,
+          "event": 39
+        },
+        {
+          "time": 62.8763698,
+          "J": 0.47147752060611114,
+          "event": 49
+        },
+        {
+          "time": 64.5636351,
+          "J": 0.47101716401500077,
+          "event": 50
+        },
+        {
+          "time": 70.102559,
+          "J": 0.47100456756965997,
+          "event": 51
+        },
+        {
+          "time": 87.9498499,
+          "J": 0.47097308834225626,
+          "event": 52
+        },
+        {
+          "time": 96.3920527,
+          "J": 0.4696041408356264,
+          "event": 53
+        },
+        {
+          "time": 107.7537081,
+          "J": 0.46666520803414796,
+          "event": 54
+        },
+        {
+          "time": 109.6984607,
+          "J": 0.4663903152964791,
+          "event": 55
+        },
+        {
+          "time": 340.3290462,
+          "J": 0.4656529068510915,
+          "event": 58
+        },
+        {
+          "time": 341.7845064,
+          "J": 0.4641005589594755,
+          "event": 59
+        },
+        {
+          "time": 359.7570897,
+          "J": 0.4638971678727777,
+          "event": 60
+        },
+        {
+          "time": 370.9010801,
+          "J": 0.46342619047619055,
+          "event": 61
+        }
+      ]
+    },
+    {
+      "role": "N-B35-S",
+      "formulation": "RN",
+      "mode": "MIP",
+      "physical_U": 0.46680591542410177,
+      "raw_lower": 0.36578460293578396,
+      "qualified_lower": 0.36578460293578396,
+      "global_transported_floor": 0.36578460293578396,
+      "absolute_gap": 0.1010213124883178,
+      "relative_gap": 0.21640966652390872,
+      "T_outer": 898.1019942997955,
+      "T_cpp": 898.0517416,
+      "Native_Runtime": 895.8830001354218,
+      "Work": 2174.2418441812433,
+      "nodes": 1150,
+      "T_build_convert_Start_and_registry": 1.9688957,
+      "T_other_environment_read_Start_return": 0.2500984643737638,
+      "root_gap": null,
+      "status": "TIME_LIMIT",
+      "censored": true,
+      "first_native_verified_U_seconds": 2.1309227,
+      "best_verified_U_seconds": 588.6164626,
+      "T_cert": null,
+      "certified": false,
+      "rows": 23006,
+      "columns": 10003,
+      "nonzeros": 141955,
+      "binaries": 4527,
+      "integers": 140,
+      "continuous": 5336,
+      "presolved_rows": 19543,
+      "presolved_columns": 9912,
+      "presolved_nonzeros": 180828,
+      "min_coefficient": 0.024,
+      "max_coefficient": 15425.95956212902,
+      "trajectory": [
+        {
+          "time": 1.9697325,
+          "J": 0.5772179446388801,
+          "event": 2
+        },
+        {
+          "time": 18.6321811,
+          "J": 0.5622698063072513,
+          "event": 18
+        },
+        {
+          "time": 30.2543312,
+          "J": 0.5579436555766533,
+          "event": 20
+        },
+        {
+          "time": 30.2731594,
+          "J": 0.5570746342672949,
+          "event": 21
+        },
+        {
+          "time": 32.7425428,
+          "J": 0.5327536951953558,
+          "event": 22
+        },
+        {
+          "time": 32.9919612,
+          "J": 0.516742430651017,
+          "event": 23
+        },
+        {
+          "time": 43.0424601,
+          "J": 0.5151182492181919,
+          "event": 26
+        },
+        {
+          "time": 45.4430631,
+          "J": 0.512731627874221,
+          "event": 27
+        },
+        {
+          "time": 49.6287042,
+          "J": 0.512691237626662,
+          "event": 28
+        },
+        {
+          "time": 51.5298566,
+          "J": 0.512008597720577,
+          "event": 29
+        },
+        {
+          "time": 72.725968,
+          "J": 0.5119634953870698,
+          "event": 30
+        },
+        {
+          "time": 75.8498126,
+          "J": 0.5079240434171942,
+          "event": 31
+        },
+        {
+          "time": 75.8604121,
+          "J": 0.507742942773858,
+          "event": 32
+        },
+        {
+          "time": 75.9053198,
+          "J": 0.5071486389957435,
+          "event": 33
+        },
+        {
+          "time": 127.1278322,
+          "J": 0.5060505312287451,
+          "event": 34
+        },
+        {
+          "time": 127.1485584,
+          "J": 0.5054053724053725,
+          "event": 35
+        },
+        {
+          "time": 128.4640221,
+          "J": 0.4821253389203846,
+          "event": 36
+        },
+        {
+          "time": 128.9272928,
+          "J": 0.4791625106527044,
+          "event": 37
+        },
+        {
+          "time": 131.2878604,
+          "J": 0.47161336919705127,
+          "event": 38
+        },
+        {
+          "time": 141.2081097,
+          "J": 0.4714061744825413,
+          "event": 39
+        },
+        {
+          "time": 148.2331611,
+          "J": 0.4707428955922962,
+          "event": 40
+        },
+        {
+          "time": 229.9012312,
+          "J": 0.47072407669209837,
+          "event": 41
+        },
+        {
+          "time": 248.1571689,
+          "J": 0.4706384144414138,
+          "event": 42
+        },
+        {
+          "time": 261.2946324,
+          "J": 0.4695811347302418,
+          "event": 43
+        },
+        {
+          "time": 407.6284214,
+          "J": 0.46858758708486875,
+          "event": 58
+        },
+        {
+          "time": 451.8981742,
+          "J": 0.4684939489607999,
+          "event": 62
+        },
+        {
+          "time": 464.0060511,
+          "J": 0.4676193125899009,
+          "event": 63
+        },
+        {
+          "time": 588.6164626,
+          "J": 0.46680591542410177,
+          "event": 64
+        }
+      ]
+    },
+    {
+      "role": "N-B35-S",
+      "formulation": "RN-P",
+      "mode": "MIP",
+      "physical_U": 0.4974250873242434,
+      "raw_lower": 0.378710952495425,
+      "qualified_lower": 0.378710952495425,
+      "global_transported_floor": 0.378710952495425,
+      "absolute_gap": 0.11871413482881837,
+      "relative_gap": 0.23865731313916486,
+      "T_outer": 898.0815972001292,
+      "T_cpp": 898.0308712,
+      "Native_Runtime": 895.8770000934601,
+      "Work": 2147.6570686878053,
+      "nodes": 1711,
+      "T_build_convert_Start_and_registry": 1.9783735,
+      "T_other_environment_read_Start_return": 0.226223606669123,
+      "root_gap": null,
+      "status": "TIME_LIMIT",
+      "censored": true,
+      "first_native_verified_U_seconds": 2.1331593,
+      "best_verified_U_seconds": 349.615895,
+      "T_cert": null,
+      "certified": false,
+      "rows": 23006,
+      "columns": 10003,
+      "nonzeros": 141955,
+      "binaries": 4527,
+      "integers": 140,
+      "continuous": 5336,
+      "presolved_rows": 19543,
+      "presolved_columns": 9912,
+      "presolved_nonzeros": 180828,
+      "min_coefficient": 0.024,
+      "max_coefficient": 15425.95956212902,
+      "trajectory": [
+        {
+          "time": 1.9798369,
+          "J": 0.5772179446388801,
+          "event": 2
+        },
+        {
+          "time": 14.236008,
+          "J": 0.5640186930651362,
+          "event": 11
+        },
+        {
+          "time": 27.1089491,
+          "J": 0.5620017343004794,
+          "event": 17
+        },
+        {
+          "time": 35.0449781,
+          "J": 0.5610379337844653,
+          "event": 21
+        },
+        {
+          "time": 41.9620113,
+          "J": 0.5388101329040295,
+          "event": 23
+        },
+        {
+          "time": 49.2196145,
+          "J": 0.5381906683450783,
+          "event": 24
+        },
+        {
+          "time": 90.554599,
+          "J": 0.5379546861081158,
+          "event": 25
+        },
+        {
+          "time": 117.9140685,
+          "J": 0.5372628317960995,
+          "event": 26
+        },
+        {
+          "time": 148.4317219,
+          "J": 0.5094627191438429,
+          "event": 28
+        },
+        {
+          "time": 212.0556505,
+          "J": 0.5082657889178344,
+          "event": 30
+        },
+        {
+          "time": 319.739687,
+          "J": 0.5047506660693656,
+          "event": 31
+        },
+        {
+          "time": 319.7619171,
+          "J": 0.5020258990432201,
+          "event": 32
+        },
+        {
+          "time": 319.7751668,
+          "J": 0.4984111134766873,
+          "event": 33
+        },
+        {
+          "time": 327.3606392,
+          "J": 0.4980093525349749,
+          "event": 34
+        },
+        {
+          "time": 349.615895,
+          "J": 0.4974250873242434,
+          "event": 39
+        }
+      ]
+    }
+  ],
+  "pairs": [
+    {
+      "role": "R-X35-S-T2",
+      "mode": "LP",
+      "candidate": "RN",
+      "OLD_U": 0.4246498451636405,
+      "RN_U": 0.4246498451636405,
+      "OLD_L": 0.18609979544714436,
+      "RN_L": 0.12086889701376323,
+      "U_gain": 0.0,
+      "L_gain": -0.06523089843338113,
+      "OLD_Work": 2.7899207209366677,
+      "RN_Work": 2.1057117391593287,
+      "OLD_nodes": 0,
+      "RN_nodes": 0,
+      "OLD_outer": 3.2026108000427485,
+      "RN_outer": 2.95147560024634,
+      "OLD_status": "OPTIMAL",
+      "RN_status": "OPTIMAL",
+      "same_PE": true,
+      "reused_paid_OLD_control": false
+    },
+    {
+      "role": "R-X35-S-T2",
+      "mode": "LP",
+      "candidate": "RN-P",
+      "OLD_U": 0.4246498451636405,
+      "RN_U": 0.4246498451636405,
+      "OLD_L": 0.18609979544714436,
+      "RN_L": 0.12467672883945341,
+      "U_gain": 0.0,
+      "L_gain": -0.06142306660769095,
+      "OLD_Work": 2.7899207209366677,
+      "RN_Work": 2.258225644863698,
+      "OLD_nodes": 0,
+      "RN_nodes": 0,
+      "OLD_outer": 3.2026108000427485,
+      "RN_outer": 2.95643479982391,
+      "OLD_status": "OPTIMAL",
+      "RN_status": "OPTIMAL",
+      "same_PE": false,
+      "reused_paid_OLD_control": true
+    },
+    {
+      "role": "R-X35-S-T2",
+      "mode": "MIP",
+      "candidate": "RN",
+      "OLD_U": 0.40113978843811804,
+      "RN_U": 0.4155480568870448,
+      "OLD_L": 0.2107519649410718,
+      "RN_L": 0.17946616458374168,
+      "U_gain": -0.014408268448926786,
+      "L_gain": -0.03128580035733011,
+      "OLD_Work": 2252.8906915001667,
+      "RN_Work": 2269.492637823764,
+      "OLD_nodes": 716,
+      "RN_nodes": 975,
+      "OLD_outer": 898.0821921997704,
+      "RN_outer": 898.0968117001466,
+      "OLD_status": "TIME_LIMIT",
+      "RN_status": "TIME_LIMIT",
+      "same_PE": true,
+      "reused_paid_OLD_control": false
+    },
+    {
+      "role": "R-X35-S-T2",
+      "mode": "MIP",
+      "candidate": "RN-P",
+      "OLD_U": 0.40113978843811804,
+      "RN_U": 0.406923269363301,
+      "OLD_L": 0.2107519649410718,
+      "RN_L": 0.17345623904503926,
+      "U_gain": -0.005783480925182938,
+      "L_gain": -0.03729572589603253,
+      "OLD_Work": 2252.8906915001667,
+      "RN_Work": 2308.246021383084,
+      "OLD_nodes": 716,
+      "RN_nodes": 1001,
+      "OLD_outer": 898.0821921997704,
+      "RN_outer": 898.0789838000201,
+      "OLD_status": "TIME_LIMIT",
+      "RN_status": "TIME_LIMIT",
+      "same_PE": false,
+      "reused_paid_OLD_control": true
+    },
+    {
+      "role": "N-B35-S",
+      "mode": "LP",
+      "candidate": "RN",
+      "OLD_U": 0.5772179446388801,
+      "RN_U": 0.5772179446388801,
+      "OLD_L": 0.327833772177116,
+      "RN_L": 0.2690257142857142,
+      "U_gain": 0.0,
+      "L_gain": -0.05880805789140181,
+      "OLD_Work": 2.7207639306545124,
+      "RN_Work": 3.146732314707183,
+      "OLD_nodes": 0,
+      "RN_nodes": 0,
+      "OLD_outer": 3.1249706000089645,
+      "RN_outer": 3.2459577000699937,
+      "OLD_status": "OPTIMAL",
+      "RN_status": "OPTIMAL",
+      "same_PE": true,
+      "reused_paid_OLD_control": false
+    },
+    {
+      "role": "N-B35-S",
+      "mode": "LP",
+      "candidate": "RN-P",
+      "OLD_U": 0.5772179446388801,
+      "RN_U": 0.5772179446388801,
+      "OLD_L": 0.327833772177116,
+      "RN_L": 0.301013209510885,
+      "U_gain": 0.0,
+      "L_gain": -0.026820562666231007,
+      "OLD_Work": 2.7207639306545124,
+      "RN_Work": 3.643443252541001,
+      "OLD_nodes": 0,
+      "RN_nodes": 0,
+      "OLD_outer": 3.1249706000089645,
+      "RN_outer": 3.4564634999260306,
+      "OLD_status": "OPTIMAL",
+      "RN_status": "OPTIMAL",
+      "same_PE": false,
+      "reused_paid_OLD_control": true
+    },
+    {
+      "role": "N-B35-S",
+      "mode": "MIP",
+      "candidate": "RN",
+      "OLD_U": 0.46342619047619055,
+      "RN_U": 0.46680591542410177,
+      "OLD_L": 0.3887645241327327,
+      "RN_L": 0.36578460293578396,
+      "U_gain": -0.0033797249479112224,
+      "L_gain": -0.02297992119694875,
+      "OLD_Work": 2208.942608549279,
+      "RN_Work": 2174.2418441812433,
+      "OLD_nodes": 1046,
+      "RN_nodes": 1150,
+      "OLD_outer": 898.0939084002748,
+      "RN_outer": 898.1019942997955,
+      "OLD_status": "TIME_LIMIT",
+      "RN_status": "TIME_LIMIT",
+      "same_PE": true,
+      "reused_paid_OLD_control": false
+    },
+    {
+      "role": "N-B35-S",
+      "mode": "MIP",
+      "candidate": "RN-P",
+      "OLD_U": 0.46342619047619055,
+      "RN_U": 0.4974250873242434,
+      "OLD_L": 0.3887645241327327,
+      "RN_L": 0.378710952495425,
+      "U_gain": -0.03399889684805285,
+      "L_gain": -0.01005357163730769,
+      "OLD_Work": 2208.942608549279,
+      "RN_Work": 2147.6570686878053,
+      "OLD_nodes": 1046,
+      "RN_nodes": 1711,
+      "OLD_outer": 898.0939084002748,
+      "RN_outer": 898.0815972001292,
+      "OLD_status": "TIME_LIMIT",
+      "RN_status": "TIME_LIMIT",
+      "same_PE": false,
+      "reused_paid_OLD_control": true
+    }
+  ]
+}

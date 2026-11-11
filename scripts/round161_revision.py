@@ -42,7 +42,11 @@ def qualify():
         child([PE,source/'instance.txt',100,2,3,.1,source/'parent.txt',dest,'RN-P','MIP',30,-1],root,'tiny_'+tag)
         value=read(dest/'outcome.json');exact=read(source/'enumeration.json')['minimum']
         assert abs(value['physical_U']-exact)<1e-7 and value['bound_available'] and abs(value['qualified_lower']-exact)<1e-7
-        tiny.append(dict(case=tag,outcome=value,matrix=matrix(dest)))
+        fresh=root/'tiny_current_exports'/tag
+        child([PE,source/'instance.txt',100,2,3,.1,source/'parent.txt',fresh,'RN-P','export',30,-1],root,'tiny_current_'+tag)
+        assert rows(fresh,'actual')==rows(dest,'actual') and cols(fresh,'actual')==cols(dest,'actual') and read(fresh/'start.json')==read(dest/'start.json')
+        tiny.append(dict(case=tag,outcome=value,matrix=matrix(fresh),current_model_matches_paid_v5_optimum=True,
+            paid_optimum_PE_SHA=read(OUT/'build_v5.json')['research_PE_SHA'],current_model_SHA=sha(fresh/'model.lp')))
     probe=root/'scaled_zero'
     if probe.exists():
         rejected=root/'scaled_zero_rejected_integer_target';assert probe.resolve().is_relative_to(OUT.resolve()) and rejected.resolve().is_relative_to(OUT.resolve())

@@ -1,0 +1,222 @@
+{
+  "PASS": true,
+  "UTC": "2026-11-11T00:35:34.289748+00:00",
+  "reviewer": "same Codex agent, separate saved-evidence script; no independent personnel",
+  "physical_verifier_source_SHA": "21d4beb9e862c5cd0f7c5f6d03a52ec7e5c35fdab4c122434a6b889eda4625a8",
+  "checks": [
+    {
+      "label": "R-X35-S-T2_OLD_LP_v1",
+      "verified_fleets": 1,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 1.1102230246251565e-16,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23334,
+      "actual_rows": 23334
+    },
+    {
+      "label": "R-X35-S-T2_RN_LP_v1",
+      "verified_fleets": 1,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 1.1102230246251565e-16,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23334,
+      "actual_rows": 22732
+    },
+    {
+      "label": "R-X35-S-T2_RNP_LP_v2",
+      "verified_fleets": 1,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 1.1102230246251565e-16,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23334,
+      "actual_rows": 22732
+    },
+    {
+      "label": "R-X35-S-T2_OLD_MIP_v1",
+      "verified_fleets": 17,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 1.1102230246251565e-16,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23334,
+      "actual_rows": 23334
+    },
+    {
+      "label": "R-X35-S-T2_RN_MIP_v1",
+      "verified_fleets": 6,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 1.1102230246251565e-16,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23334,
+      "actual_rows": 22732
+    },
+    {
+      "label": "R-X35-S-T2_RNP_MIP_v2",
+      "verified_fleets": 11,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 1.1102230246251565e-16,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23334,
+      "actual_rows": 22732
+    },
+    {
+      "label": "N-B35-S_OLD_LP_v1",
+      "verified_fleets": 1,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 1.155742168634788e-13,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23608,
+      "actual_rows": 23608
+    },
+    {
+      "label": "N-B35-S_RN_LP_v1",
+      "verified_fleets": 1,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 3.991598718222633e-15,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23608,
+      "actual_rows": 23006
+    },
+    {
+      "label": "N-B35-S_RNP_LP_v2",
+      "verified_fleets": 1,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 3.991598718222633e-15,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23608,
+      "actual_rows": 23006
+    },
+    {
+      "label": "N-B35-S_OLD_MIP_v1",
+      "verified_fleets": 21,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 1.155742168634788e-13,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23608,
+      "actual_rows": 23608
+    },
+    {
+      "label": "N-B35-S_RN_MIP_v1",
+      "verified_fleets": 29,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 3.991598718222633e-15,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23608,
+      "actual_rows": 23006
+    },
+    {
+      "label": "N-B35-S_RNP_MIP_v2",
+      "verified_fleets": 16,
+      "rejected_candidates_not_consumed": 0,
+      "Start_max_violation": 3.991598718222633e-15,
+      "full_scope": true,
+      "original_penalty": true,
+      "common_original_rows": 23608,
+      "actual_rows": 23006
+    }
+  ],
+  "failed_receipts_preserved": [
+    {
+      "label": "compile_v4_round161_research_main",
+      "exit_code": 1,
+      "seconds": 0.6452185004018247
+    },
+    {
+      "label": "new_interfaces",
+      "exit_code": 1,
+      "seconds": 0.6556381997652352
+    },
+    {
+      "label": "new_interfaces_fix",
+      "exit_code": 1,
+      "seconds": 0.7107906001619995
+    },
+    {
+      "label": "revision_interfaces",
+      "exit_code": 1,
+      "seconds": 10.454842299688607
+    },
+    {
+      "label": "revision_interfaces_fix",
+      "exit_code": 1,
+      "seconds": 1.0999664003029466
+    },
+    {
+      "label": "setup",
+      "exit_code": 1,
+      "seconds": 0.5874307998456061
+    },
+    {
+      "label": "trajectory_plot",
+      "exit_code": 1,
+      "seconds": 0.09817140037193894
+    }
+  ],
+  "protected_initial_hashes_unchanged": true,
+  "zero_positive_qualification": true,
+  "common_block_review": true,
+  "decision": {
+    "status": "STOP_CURRENT_RN_REPLACEMENT_RESEARCH_ONLY_DEFAULT_OFF",
+    "conclusion": "The complete physical RN objective is integer/objective preserving, but neither RN-core nor the sole uniform RN-P revision is competitive with the declared OLD whole-native control on these two sources. Keep the research entry default off and stop this finite study without entering the conditional complete E+/N-RN panel.",
+    "reason": "All six finite MIPs execute meaningful integer search under the same 4096-node capacity and 900s outer allowance, each ending TIME_LIMIT. OLD dominates both RN versions in final verified physical U and qualified L on RX35 and NB35. RN-P raises both continuous LP bounds, but its integer outcomes remain inferior: RX35 U/L=.406923269363301/.173456239045039 versus OLD .401139788438118/.210751964941072; NB35 U/L=.497425087324243/.378710952495425 versus OLD .463426190476191/.388764524132733. Auxiliary column counts are equal and the smaller matrix does not provide a compensating useful cost/search tradeoff. Lower Native Work on NB35 is reported, not treated as a win when both endpoints are worse. The decision uses full finite integer-search evidence, not root weakness alone.",
+    "next_question": "Stop investing in this RN-core/RN-P expression on the present evidence. A future structural study would first need a useful quantitative bound on reciprocal covariance/distortion implied jointly by the original stock, e-penalty and physical scope. The fixed-denominator limit and elementary distortion bound identify a falsifiable condition; merely having a new factor t does not justify a split controller. The present penalty-only tightening excludes saved LP points and raises roots but does not yield competitive whole-native outcomes. No automatic S/t buckets, old+RN cut intersection, route-flow replacement, larger R160 blocks, passive archive or late-feedback project is started.",
+    "major_revisions_used": 1,
+    "further_recipe_revision": false,
+    "complete_panel_entered": false,
+    "complete_method_candidate_frozen": false,
+    "complete_method_H_calls": 0,
+    "complete_method_helper_calls": 0,
+    "fresh_Eplus_runs": 0,
+    "historical_main_comparison_CSV_changed": false,
+    "stable_GI_TBC_B_default_unchanged": true,
+    "scope": "Two existing own-H/R83 sources, one Gurobi Seed, matched complete-root Native development. RN-P reuses this round's paid unchanged OLD controls with verified model/Start and Native object equality; it is not a new same-PE panel.",
+    "not_claimed": [
+      "universal RN impossibility",
+      "stable promotion",
+      "independent confirmation",
+      "P-GRB superiority",
+      "complete Eplus versus N-RN performance"
+    ]
+  },
+  "Optimize": 0,
+  "complete_method_panel_not_inferred_from_development": true,
+  "scientific_account_before_this_receipt": {
+    "G1_seconds": 5452.259387911297,
+    "remaining_G1_seconds": 80947.7406120887,
+    "by_category": {
+      "research": 0.15191649971529841,
+      "verification": 42.07228171126917,
+      "native": 5410.035189700313
+    },
+    "limits": {
+      "research": 86400.0,
+      "verification": 86400.0,
+      "native": 86400.0
+    },
+    "category_remaining": {
+      "research": 86399.84808350028,
+      "verification": 86357.92771828873,
+      "native": 80989.96481029969
+    },
+    "separately_reported_seconds": 280.67454330064356,
+    "unclosed": [
+      {
+        "label": "final_saved_evidence_audit",
+        "kind": "verification",
+        "reservation": 300.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round161\\results\\unified_exact_round161\\fees\\final_saved_evidence_audit\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  }
+}

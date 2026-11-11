@@ -58,14 +58,18 @@ def events(folder):
         event['outer_observation_seconds']=float(receipt[2]);out.append(event)
     return out
 
+def label_for(role,form,mode):
+    return f'{role}_RNP_{mode}_v2' if form=='RN-P' else f'{role}_{form}_{mode}_v1'
+
 def analyze():
     output=[];fleets=[];diagnostics=[];audits=[];identities=[];changes=[]
     for role in ('R-X35-S-T2','N-B35-S'):
         d=instance(role)
         for mode in ('LP','MIP'):
             original_old=None
-            for form in ('OLD','RN'):
-                label=f'{role}_{form}_{mode}_v1';folder=OUT/'runs'/label
+            forms=['OLD','RN']+(['RN-P'] if (OUT/'runs'/label_for(role,'RN-P',mode)/'outcome.json').exists() else [])
+            for form in forms:
+                label=label_for(role,form,mode);folder=OUT/'runs'/label
                 value=read(folder/'outcome.json');e=events(folder);ad=read(folder/'admission.json')
                 call=next(x for x in e if x['kind']=='call');parameters=read(folder/'native.log.round161_parameters.json')
                 assert call['model_sha256']==sha(folder/'model.lp')
@@ -106,6 +110,8 @@ def analyze():
                 output.append(dict(role=role,formulation=form,mode=mode,physical_U=U,raw_lower=raw_final,
                     qualified_lower=lower,global_transported_floor=lower,absolute_gap=gap,relative_gap=gap/U,
                     T_outer=fee['outer_seconds'],T_cpp=value['outer_seconds'],Native_Runtime=value['runtime'],Work=value['work'],nodes=value['nodes'],
+                    T_build_convert_Start_and_registry=ad['build_seconds'],
+                    T_other_environment_read_Start_return=fee['outer_seconds']-ad['build_seconds']-value['runtime'],
                     root_gap=(ad['parent_J']-lower)/ad['parent_J'] if mode=='LP' else None,
                     status=value['status'],censored=value['status']=='TIME_LIMIT',first_native_verified_U_seconds=first,
                     best_verified_U_seconds=trajectory[-1]['time'],T_cert=None,certified=False,
@@ -117,11 +123,15 @@ def analyze():
     for role in ('R-X35-S-T2','N-B35-S'):
         for mode in ('LP','MIP'):
             old=next(x for x in output if x['role']==role and x['mode']==mode and x['formulation']=='OLD')
-            rn=next(x for x in output if x['role']==role and x['mode']==mode and x['formulation']=='RN')
-            pairs.append(dict(role=role,mode=mode,OLD_U=old['physical_U'],RN_U=rn['physical_U'],
-                OLD_L=old['qualified_lower'],RN_L=rn['qualified_lower'],U_gain=old['physical_U']-rn['physical_U'],L_gain=rn['qualified_lower']-old['qualified_lower'],
-                OLD_Work=old['Work'],RN_Work=rn['Work'],OLD_nodes=old['nodes'],RN_nodes=rn['nodes'],
-                OLD_outer=old['T_outer'],RN_outer=rn['T_outer'],OLD_status=old['status'],RN_status=rn['status']))
+            for candidate in ('RN','RN-P'):
+                candidates=[x for x in output if x['role']==role and x['mode']==mode and x['formulation']==candidate]
+                if not candidates:continue
+                rn=candidates[0]
+                pairs.append(dict(role=role,mode=mode,candidate=candidate,OLD_U=old['physical_U'],RN_U=rn['physical_U'],
+                    OLD_L=old['qualified_lower'],RN_L=rn['qualified_lower'],U_gain=old['physical_U']-rn['physical_U'],L_gain=rn['qualified_lower']-old['qualified_lower'],
+                    OLD_Work=old['Work'],RN_Work=rn['Work'],OLD_nodes=old['nodes'],RN_nodes=rn['nodes'],
+                    OLD_outer=old['T_outer'],RN_outer=rn['T_outer'],OLD_status=old['status'],RN_status=rn['status'],
+                    same_PE=candidate=='RN',reused_paid_OLD_control=candidate=='RN-P'))
     write(OUT/'reports/bridge.json',dict(samples=output,pairs=pairs));write(OUT/'reports/fleets.json',fleets)
     write(OUT/'reports/LP_product_diagnostics.json',diagnostics);write(OUT/'reports/matrix_audits.json',dict(PASS=True,audits=audits))
     write(OUT/'reports/model_identities.json',identities);write(OUT/'reports/physical_changes.json',changes)

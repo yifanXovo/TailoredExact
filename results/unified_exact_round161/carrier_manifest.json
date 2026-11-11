@@ -1,0 +1,33 @@
+{
+  "UTC": "2026-11-11T00:42:19.016591+00:00",
+  "new_only": true,
+  "archives": [
+    {
+      "path": "results/unified_exact_round161/artifacts/new_evidence.zip",
+      "SHA256": "cc6fb46ef1c5e34de6d28e928241a4bcd3df5ffe392cfe90ab27f751378d680d",
+      "bytes": 48720855,
+      "members": 2035,
+      "uncompressed_bytes": 517542378,
+      "index": "results/unified_exact_round161/artifacts/new_evidence.members.json"
+    }
+  ],
+  "reused_inputs": [
+    {
+      "commit": "53e5c62fbcf6bc24898b7d5d3ecb755e4331ab0b",
+      "path": "results/unified_exact_round137/inputs/R-X35-S.txt",
+      "SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "destination": "results/unified_exact_round161/inputs/R-X35-S-T2/instance.txt"
+    },
+    {
+      "commit": "53e5c62fbcf6bc24898b7d5d3ecb755e4331ab0b",
+      "path": "results/unified_exact_round137/inputs/N-B35-S.txt",
+      "SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "destination": "results/unified_exact_round161/inputs/N-B35-S/instance.txt"
+    }
+  ],
+  "offline_parent_reference": "input_manifest.json fixed R160 archive/member/SHA; same fleet is in new journal witness events",
+  "runtime": "Measured PE retained locally; commercial Gurobi runtime/licence/credentials excluded",
+  "private_excluded": [
+    "infra/protected_initial.json"
+  ]
+}

@@ -37,13 +37,15 @@ def exact_witnesses():
         assert sum(ws)==t
         for mass,val in zip([1-x,x],ws):assert L*mass<=val<=U*mass
     assert sum(ws[1] for ws in w)==1 and w[0][1]==w[1][1]
-    for x in m:assert 0<=g<=U*x and 0<=g-g<=U*(1-x)
+    for x in m:assert 0<=g<=F(1,2)*x and 0<=g-g<=F(1,2)*(1-x)
+    assert F(1)<=sum(m)<=2 and g<=sum([g,g])<=2*g
     assert F(1,4)==2*(g+g)
     # R143's other direction; all state mass/product bounds explicitly checked.
     g2=F(1,3);mass=[F(1),F(1,2),F(0)];prod=[g2,g2,F(0)]
     for x,z in zip(mass,prod):
         assert 0<=z<=g2 and 0<=g2-z<=F(2,3)*(1-x) and z<=F(2,3)*x
     assert sum(abs(x-y) for i,x in enumerate(mass) for y in mass[i+1:])==3*sum(prod)
+    assert F(1)<=sum(mass)<=2 and g2<=sum(prod)<=2*g2
     t2=F(5,8);w2=[[0,t2],[F(1,4),F(3,8)],[t2,0]]
     for x,ws in zip(mass,w2):
         assert sum(ws)==t2

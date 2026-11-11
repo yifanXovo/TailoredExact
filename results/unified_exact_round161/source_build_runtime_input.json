@@ -1,0 +1,20 @@
+{
+  "base": "53e5c62fbcf6bc24898b7d5d3ecb755e4331ab0b",
+  "branch": "codex/round161-full-physical-rn",
+  "original_goal_SHA256": "88fa91f901823b3ea05464476ed6e790e8265ab02f0fd0cefe678dae2fdd88a6",
+  "original_goal_archive_member": "results/unified_exact_round161/engineering/intake_goal_original.txt",
+  "core_manifest": "measured_manifest.json",
+  "revised_manifest": "measured_manifest_RNP.json",
+  "measured_core_CPP": "1fafb6e2a4a3569cbb312a2f94738f822d2da500",
+  "measured_revised_CPP": "006103fa7a3f5f7a09ff3621ee54c2c1ad7bab9f",
+  "actual_runtime_bindings": [
+    "results/unified_exact_round161/infra/runtime_binding_OLD_NB35.json",
+    "results/unified_exact_round161/infra/runtime_binding_OLD_RX35.json",
+    "results/unified_exact_round161/infra/runtime_binding_RNP_NB35.json",
+    "results/unified_exact_round161/infra/runtime_binding_RN_RX35.json"
+  ],
+  "input_manifest": "input_manifest.json",
+  "actual_models": "reports/model_identities.json",
+  "full_method_panel": "conditional_complete_results.json",
+  "commercial_runtime_published": false
+}

@@ -5,6 +5,8 @@ import ast,re
 
 def review():
     report=read(OUT/'reports/bridge.json');manifest=read(OUT/'measured_manifest.json')
+    from round161_qualify import exact_witnesses
+    assert exact_witnesses()['PASS']
     assert sha(manifest['research_PE'])==manifest['research_PE_SHA'] and sha(DLL)==DLL_SHA
     # Use the separately established R157 physical verifier's AST only. Imports
     # and its old producer / budget are not evaluated.
@@ -13,8 +15,10 @@ def review():
     namespace={'math':math};exec(compile(ast.Module(body=[fn],type_ignores=[]),str(source),'exec'),namespace)
     physical=namespace['verify'];checks=[]
     for sample in report['samples']:
-        role=sample['role'];label=f"{role}_{sample['formulation']}_{sample['mode']}_v1";folder=OUT/'runs'/label
-        launch=read(OUT/'launches'/f'{label}.json');assert launch['PE_SHA']==manifest['research_PE_SHA']
+        role=sample['role'];form=sample['formulation'];mode=sample['mode']
+        label=f'{role}_RNP_{mode}_v2' if form=='RN-P' else f'{role}_{form}_{mode}_v1';folder=OUT/'runs'/label
+        measured=read(OUT/'measured_manifest_RNP.json') if form=='RN-P' else manifest
+        launch=read(OUT/'launches'/f'{label}.json');assert launch['PE_SHA']==measured['research_PE_SHA']
         assert launch['DLL_SHA']==DLL_SHA and sha(launch['command'][1])==launch['input_SHA']
         assert sha(launch['command'][6])==launch['parent_SHA']
         assert launch['outer_cap']==(300 if sample['mode']=='LP' else 900)
@@ -48,7 +52,7 @@ def review():
         assert call and count>0 and max(bounds)<=sample['physical_U']+1e-7
         assert abs(min(max(bounds),ad['cutoff'])-sample['global_transported_floor'])<1e-9
         block=read(folder/'block.json')
-        if sample['formulation']=='RN':
+        if form in ('RN','RN-P'):
             supports={i:[] for i in range(1,d['n']+1)}
             for c in columns:
                 m=re.fullmatch(r'state_(\d+)_(\d+)',c['name'])
@@ -61,6 +65,10 @@ def review():
                     take=min(left,max(supports[i])-min(supports[i]));value+=c[i]*take;left-=take
                 assert left==0;return value
             exactlo,exacthi=extremum(lo,False),extremum(hi,True)
+            if block.get('penalty_envelope'):
+                diagnostic=next(x for x in read(OUT/'reports/envelope_diagnostic.json')['results'] if x['role']==role)
+                exactlo=max(exactlo,F(diagnostic['exact_sl']))
+                exacthi=min(exacthi,F(diagnostic['exact_su']))
             assert F(block['S_lower'])<=exactlo and F(block['S_upper'])>=exacthi
             assert F(block['t_lower'])<=1/exacthi and F(block['t_upper'])>=1/exactlo
             assert block['zero_possible']==(B<=Q and all(0 in ys for ys in supports.values()))
