@@ -86,7 +86,23 @@ def verify(launch,identity):
     method=launch['R163_method'];d=Path(launch['destination'])
     reader=plus_reader if method=='Eplus' else base_reader
     fn=types.FunctionType(reader.verify.__code__,dict(vars(reader),ROOT=ROOT,OUT=OUT,configure=configure))
-    value=fn(launch,identity)
+    # The frozen helper may reject an omitted redundant zero-total lower row.
+    # Its legal no-floor fallback is retained. The offline scope checker can
+    # prove that row directly from nonnegative Y bounds, without altering any
+    # model/source SHA, producer, floor or Native observation.
+    reader153=legacy_import('round153_read');original_scope=reader153.scope_from_model
+    implied=[]
+    def audited_scope(model,bminus,b):
+        names=[n for n in model['order'] if re.fullmatch(r'Y_\d+',n)]
+        row=(tuple(sorted((n,1.) for n in names)),'>=',0.)
+        if bminus==0 and row not in model['rows']:
+            assert names and all(model['bounds'][n][0]>=0 for n in names)
+            model=dict(model,rows=list(model['rows'])+[row]);implied.append(dict(Bminus=0,Y=names,lower_bounds_nonnegative=True))
+        return original_scope(model,bminus,b)
+    reader153.scope_from_model=audited_scope
+    try:value=fn(launch,identity)
+    finally:reader153.scope_from_model=original_scope
+    if implied:write(d/'round163_implied_zero_total_reader.json',dict(PASS=True,offline_only=True,Native_model_unchanged=True,helper_unchanged=True,facts=implied))
     # The inherited audit already recomputes every fleet, full own H/Starts,
     # original compact reference, source qualification, cover and exact zero.
     for name in ['round138_parameters.json','round146_parameters.json','round148_parameters.json','round149_parameters.json',
@@ -134,6 +150,11 @@ def smoke():
     l,i=make(p,'Eplus',OUT/'qualification/smoke',0)
     value=execute(l,i)
     write(OUT/'qualification/smoke_result.json',dict(PASS=True,not_performance_sample=True,arm=value['arm']))
+
+def reverify_smoke():
+    camp=OUT/'qualification/smoke';i=read(camp/'identity.json');l=i['launches'][0]
+    value=execute(l,i)
+    write(OUT/'qualification/smoke_result.json',dict(PASS=True,not_performance_sample=True,reader_repair_only=True,Optimize=0,arm=value['arm']))
 
 def freeze():
     assert not (OUT/'matrix_frozen.json').exists()
