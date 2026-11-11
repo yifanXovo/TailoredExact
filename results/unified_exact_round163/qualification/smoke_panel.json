@@ -1,0 +1,35 @@
+{
+  "id": "qualification-tiny-transfer",
+  "V": 2,
+  "M": 1,
+  "Q_vector": [
+    20
+  ],
+  "T_seconds": 5400,
+  "cap_seconds": 120,
+  "pickup_seconds": 60,
+  "drop_seconds": 60,
+  "lambda": 0.15,
+  "input_path": "tests/data/round61_transfer.txt",
+  "instance_path": "tests/data/round61_transfer.txt",
+  "input_sha256": "ca68263bde36e387058eaa0ed1d0fa79ca0aaf17615db660610c8075c9689ecc",
+  "gurobi_seed": 0,
+  "total_initial": 10,
+  "total_target": 40,
+  "total_capacity": 40,
+  "Omega": 2.0,
+  "round137_delete_ab": false,
+  "panel_kind": "qualification",
+  "source": "synthetic",
+  "inventory": "shortage",
+  "geometry": "tiny",
+  "replicate": 1,
+  "reference": {
+    "optimizer_calls": 0,
+    "canonical_sha256": "4f25211223252bb27b3df026d42dacf52bec69a6f009f5430a8fc31227933d5e",
+    "rows": 83,
+    "columns": 48,
+    "nonzeros": 233,
+    "fingerprint": -1785595889
+  }
+}
