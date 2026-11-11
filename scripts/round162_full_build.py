@@ -29,6 +29,7 @@ def build(version='v1'):
     m=dict(UTC=utc(),source_commit=git('rev-parse','HEAD').decode().strip(),base=BASE,
         source_hashes=source_hashes,
         flags=flags,compiler=str(COMPILER),compiler_SHA=sha(COMPILER),production_PE=str(executable),production_PE_SHA=sha(executable),
+        research_PE=str(executable),research_PE_SHA=sha(executable),
         DLL=str(DLL),DLL_SHA=DLL_SHA,objects={p:sha(p) for p in reused},added_objects={str(target/f'{s}.o'):sha(target/f'{s}.o') for s in stems},
         archive=old['archive'],link_command=list(map(str,command)),measured_source_bytes=snapshots,
         all_three_same_PE=True,default_off=True,no_development_NodeLimit=True,source_once=True,source_lower_diagnostic_only=True)

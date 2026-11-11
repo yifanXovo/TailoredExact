@@ -59,7 +59,7 @@ def exact_dual(folder,columns,rows):
     if F(rounded)>bound:rounded=math.nextafter(rounded,-math.inf)
     return dict(exact_lower=str(bound),lower_down=rounded,row_aggregate=float(lower),box_compensation=float(box),
         sign_repairs=repaired,nonzero_duals=used,exact_binary64_rational=True,
-        max_stationarity_residual=float(max(map(abs,residual.values()))),Optimize=0)
+        max_reduced_cost_box_coefficient=float(max(map(abs,residual.values()))),Optimize=0)
 
 def primal(folder,columns,rows):
     x=point(folder);worst=0.;rowname=None
