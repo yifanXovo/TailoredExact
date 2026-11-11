@@ -1,0 +1,278 @@
+[
+  {
+    "label": "R-X35-S-T2_S_MIP_v1",
+    "PE_SHA256": "441848fc0aad422c45c066e0952202104e55c6e5ee824a539faf58179f35bc8b",
+    "DLL": {
+      "OS_loaded_DLL": "D:/gurobi1302/win64/bin/gurobi130.dll",
+      "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+    },
+    "input_SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+    "parent_SHA256": "98183933c357b4b4e2d854a16fd8866e3202b187017554902851814a62e42440",
+    "model_SHA256": "6881392b71f2854dbcecd605813dda21bf77bdbf30b2b3478eef86a01e959e19",
+    "columns_SHA256": "120d4b8de6b17bd763a5713025200147607b48e17e5de629ea86ee50acb8644d",
+    "rows_SHA256": "ff19af6c7e2322f19312c43d61a7df77ae356f23fe7d1ac18f8a2225b745ef7b",
+    "scope": {
+      "schema": 1,
+      "sequence": 3,
+      "kind": "call",
+      "call": 1,
+      "full_original": 0,
+      "native_preconditions": 1,
+      "precondition_reason": "",
+      "leaf": "R162_complete_root",
+      "model_sha256": "6881392b71f2854dbcecd605813dda21bf77bdbf30b2b3478eef86a01e959e19",
+      "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\runs\\R-X35-S-T2_S_MIP_v1\\model.lp",
+      "model_scope": "full_original_J_inclusive_improvement_domain",
+      "native_log_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\runs\\R-X35-S-T2_S_MIP_v1\\native.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPFocus": 0,
+        "Cuts": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "expected": {
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPFocus": 0,
+          "Cuts": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "qualification_reason": ""
+      },
+      "lower_g": 0,
+      "upper_g": 0.42464984516364074,
+      "cutoff": 0.42464984516364074,
+      "gmax": 0.9714285714285715,
+      "cover": [
+        {
+          "id": "R162_complete_root",
+          "source": "same_matrix_complete_native",
+          "lower_g": 0,
+          "upper_g": 0.42464984516364074,
+          "lower": 0,
+          "cutoff": 0.42464984516364074
+        }
+      ],
+      "outer_observation_seconds": 3.7574688
+    },
+    "Start_SHA256": "eb8b027b0578d2b895fb7062e9b60569dd04987b75145231053f3018d142ef2d"
+  },
+  {
+    "label": "R-X35-S-T2_C_MIP_v1",
+    "PE_SHA256": "441848fc0aad422c45c066e0952202104e55c6e5ee824a539faf58179f35bc8b",
+    "DLL": {
+      "OS_loaded_DLL": "D:/gurobi1302/win64/bin/gurobi130.dll",
+      "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+    },
+    "input_SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+    "parent_SHA256": "98183933c357b4b4e2d854a16fd8866e3202b187017554902851814a62e42440",
+    "model_SHA256": "ef378541042bf14df065046f3dbb23b06a8b217cd543f7f2970d810bbdee0f19",
+    "columns_SHA256": "120d4b8de6b17bd763a5713025200147607b48e17e5de629ea86ee50acb8644d",
+    "rows_SHA256": "de44cfaf4ef127c848ff727cc69239ea986078f007e2143385dc791cd9762f70",
+    "scope": {
+      "schema": 1,
+      "sequence": 3,
+      "kind": "call",
+      "call": 1,
+      "full_original": 0,
+      "native_preconditions": 1,
+      "precondition_reason": "",
+      "leaf": "R162_complete_root",
+      "model_sha256": "ef378541042bf14df065046f3dbb23b06a8b217cd543f7f2970d810bbdee0f19",
+      "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\runs\\R-X35-S-T2_C_MIP_v1\\model.lp",
+      "model_scope": "full_original_J_inclusive_improvement_domain",
+      "native_log_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\runs\\R-X35-S-T2_C_MIP_v1\\native.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPFocus": 0,
+        "Cuts": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "expected": {
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPFocus": 0,
+          "Cuts": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "qualification_reason": ""
+      },
+      "lower_g": 0,
+      "upper_g": 0.42464984516364074,
+      "cutoff": 0.42464984516364074,
+      "gmax": 0.9714285714285715,
+      "cover": [
+        {
+          "id": "R162_complete_root",
+          "source": "same_matrix_complete_native",
+          "lower_g": 0,
+          "upper_g": 0.42464984516364074,
+          "lower": 0,
+          "cutoff": 0.42464984516364074
+        }
+      ],
+      "outer_observation_seconds": 25.0666262
+    },
+    "Start_SHA256": "eb8b027b0578d2b895fb7062e9b60569dd04987b75145231053f3018d142ef2d"
+  },
+  {
+    "label": "N-B35-S_S_MIP_v1",
+    "PE_SHA256": "441848fc0aad422c45c066e0952202104e55c6e5ee824a539faf58179f35bc8b",
+    "DLL": {
+      "OS_loaded_DLL": "D:/gurobi1302/win64/bin/gurobi130.dll",
+      "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+    },
+    "input_SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+    "parent_SHA256": "cc69473faed767614c64d73f2a1174c30a2108c90997ae7f50ff5b1a6d61431c",
+    "model_SHA256": "5b37cf66392ea2b64dd79291c7ca87534e54254b68533bf4bdd0613e6ece7baf",
+    "columns_SHA256": "12ed5e1f986a62d028e3b8adcc6194eda886a8e81b6846ad0996c3cce6a0acb2",
+    "rows_SHA256": "3577199c1cf343d1371a89f3997d14b0353de7f843a4dad31ec6812fa052af41",
+    "scope": {
+      "schema": 1,
+      "sequence": 3,
+      "kind": "call",
+      "call": 1,
+      "full_original": 0,
+      "native_preconditions": 1,
+      "precondition_reason": "",
+      "leaf": "R162_complete_root",
+      "model_sha256": "5b37cf66392ea2b64dd79291c7ca87534e54254b68533bf4bdd0613e6ece7baf",
+      "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\runs\\N-B35-S_S_MIP_v1\\model.lp",
+      "model_scope": "full_original_J_inclusive_improvement_domain",
+      "native_log_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\runs\\N-B35-S_S_MIP_v1\\native.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPFocus": 0,
+        "Cuts": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "expected": {
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPFocus": 0,
+          "Cuts": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "qualification_reason": ""
+      },
+      "lower_g": 0,
+      "upper_g": 0.57721794463888,
+      "cutoff": 0.57721794463888,
+      "gmax": 0.9714285714285715,
+      "cover": [
+        {
+          "id": "R162_complete_root",
+          "source": "same_matrix_complete_native",
+          "lower_g": 0,
+          "upper_g": 0.57721794463888,
+          "lower": 0,
+          "cutoff": 0.57721794463888
+        }
+      ],
+      "outer_observation_seconds": 3.8048214
+    },
+    "Start_SHA256": "5b02235f40817be3f54e774299db6731cdb0bc3e7db202fbc45dd743a492fe98"
+  },
+  {
+    "label": "N-B35-S_C_MIP_v1",
+    "PE_SHA256": "441848fc0aad422c45c066e0952202104e55c6e5ee824a539faf58179f35bc8b",
+    "DLL": {
+      "OS_loaded_DLL": "D:/gurobi1302/win64/bin/gurobi130.dll",
+      "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+    },
+    "input_SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+    "parent_SHA256": "cc69473faed767614c64d73f2a1174c30a2108c90997ae7f50ff5b1a6d61431c",
+    "model_SHA256": "8861e1ad15188e8105eb1bf6573ce5335185e8e5100a6a41f452700a7a3bee03",
+    "columns_SHA256": "12ed5e1f986a62d028e3b8adcc6194eda886a8e81b6846ad0996c3cce6a0acb2",
+    "rows_SHA256": "3696c37c74e9bbeb07ea95f71a81f7cc88c25a6e45a60cf19bb35a350c90281d",
+    "scope": {
+      "schema": 1,
+      "sequence": 3,
+      "kind": "call",
+      "call": 1,
+      "full_original": 0,
+      "native_preconditions": 1,
+      "precondition_reason": "",
+      "leaf": "R162_complete_root",
+      "model_sha256": "8861e1ad15188e8105eb1bf6573ce5335185e8e5100a6a41f452700a7a3bee03",
+      "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\runs\\N-B35-S_C_MIP_v1\\model.lp",
+      "model_scope": "full_original_J_inclusive_improvement_domain",
+      "native_log_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\runs\\N-B35-S_C_MIP_v1\\native.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPFocus": 0,
+        "Cuts": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "expected": {
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPFocus": 0,
+          "Cuts": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "qualification_reason": ""
+      },
+      "lower_g": 0,
+      "upper_g": 0.57721794463888,
+      "cutoff": 0.57721794463888,
+      "gmax": 0.9714285714285715,
+      "cover": [
+        {
+          "id": "R162_complete_root",
+          "source": "same_matrix_complete_native",
+          "lower_g": 0,
+          "upper_g": 0.57721794463888,
+          "lower": 0,
+          "cutoff": 0.57721794463888
+        }
+      ],
+      "outer_observation_seconds": 42.8663419
+    },
+    "Start_SHA256": "5b02235f40817be3f54e774299db6731cdb0bc3e7db202fbc45dd743a492fe98"
+  }
+]

@@ -8,7 +8,7 @@ def close():
         launch=read(p.parent/'launch.json');r=read(p)
         receipts.append(dict(label=p.parent.name,kind=launch['kind'],**r))
     calls=[]
-    for root in ('runs','qualification'):
+    for root in ('runs','qualification','complete_panel'):
         for p in sorted((OUT/root).rglob('native.log')):
             text=p.read_text(encoding='utf-8',errors='replace')
             if 'Optimize a model' in text:calls.append(dict(path=p.relative_to(ROOT).as_posix(),SHA256=sha(p),LP='Iteration    Objective' in text or 'Iteration    Primal Obj' in text))
@@ -17,6 +17,7 @@ def close():
         receipts=receipts,failed=[r for r in receipts if r['exit_code']],all_fees_closed=True,
         native_logs=calls,observed_native_Optimize_calls=len(calls),old_producer_starts=0,
         nested_Runtime_Work_callback_validation_not_added_twice=True,capacity_is_not_minimum_spend=True,
+        native_log_count_scope='files literally named native.log only; complete formal and helper call counts are separately reported in complete.json and each paid helper audit',
         ordinary_editing_unmetered=True,packaging_and_public_IO='publication_costs.json',
         prelaunch_scripting_error=dict(description='CLI cap was initially a string; no scientific child was launched, then corrected',scientific_child_starts=0)))
     print(json.dumps({k:value[k] for k in ('G1_seconds','remaining_G1_seconds','separately_reported_seconds')}),flush=True)

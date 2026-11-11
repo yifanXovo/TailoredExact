@@ -1,0 +1,90 @@
+{
+  "role": "R-X20-S-T1",
+  "panel": {
+    "id": "R-X20-S-T1",
+    "base_id": "R-X20-S",
+    "V": 20,
+    "M": 2,
+    "source": "DIVVY",
+    "inventory": "shortage",
+    "geometry": "compact",
+    "replicate": 2,
+    "Q_vector": [
+      30,
+      30
+    ],
+    "input_path": "results/unified_exact_round160/inputs/R-X20-S-T1/instance.txt",
+    "instance_path": "results/unified_exact_round160/inputs/R-X20-S-T1/instance.txt",
+    "input_sha256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+    "source_identity_SHA": "abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324",
+    "known": true,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "cap_seconds": 1200,
+    "gurobi_seed": 0,
+    "Omega": 7.888886,
+    "sum_weights": 7.888886,
+    "total_initial": 65,
+    "total_target": 85,
+    "total_capacity": 164,
+    "lambda": 0.12676060979965992,
+    "rho": 1.0,
+    "panel_kind": "Round160 fresh paid complete Eplus / EplusR",
+    "selection_path": "results/unified_exact_round137/inputs/R-X20-S_selection.json",
+    "module": "B2",
+    "T_seconds": 4800,
+    "positive_objective_floor": 0.12676060979965992,
+    "T_design_base": 6197.175567270119,
+    "shortage": 20,
+    "reference": {
+      "optimizer_calls": 0,
+      "canonical_sha256": "43af27491695c76f8abc4d2d68f94b16130e801b798cb106bbdc7e0e87883dbe",
+      "rows": 3500,
+      "columns": 1465,
+      "nonzeros": 15883,
+      "fingerprint": -1759873801
+    },
+    "round137_delete_ab": false,
+    "round154_method": "E",
+    "round156_method": "Eplus",
+    "round160_method": "Eplus",
+    "round138_stock_rlt": false,
+    "round146_gd": false,
+    "round149_penalty_feedback": false,
+    "exposed": true
+  },
+  "parent_J": 0.7530539180896818,
+  "parent_stage": "own H + R83, before root scope/helper; R160 Eplus control",
+  "parent_SHA256": "6fe89096646d296adc5275352405094485847681fba25471106b0bd3c0416c1d",
+  "H_seed": 20260626,
+  "production_PE_SHA256": "dd39a3671c114a9e60d1d169bf6ffb533595f1a632cdd5876fe03f08d0e4da08",
+  "fixed_commit": "695ea68caad088a54ebed45b7d49360d12bd0e8d",
+  "delivery_commit": "53e5c62fbcf6bc24898b7d5d3ecb755e4331ab0b",
+  "archive": {
+    "path": "results/unified_exact_round160/artifacts/complete_007.zip",
+    "SHA256": "edc8c2b786e5e788f1122af97efdffe9d83a3b522937c55dffda06770cda32c4",
+    "bytes": 785155,
+    "members": 790,
+    "uncompressed_bytes": 4399659,
+    "index": "results/unified_exact_round160/artifacts/complete_007.members.json"
+  },
+  "members": [
+    {
+      "member": "results/unified_exact_round160/campaign_confirmation/007/raw/R160_007_R-X20-S-T1_S0_Eplus/external/initial_witness.json",
+      "SHA256": "df45a7e7736820275cfacb83f17b58871cb52eff010000f63e316fdd6767ab71",
+      "bytes": 574
+    },
+    {
+      "member": "results/unified_exact_round160/campaign_confirmation/007/raw/R160_007_R-X20-S-T1_S0_Eplus/hga.csv.exchange/final.json",
+      "SHA256": "53c093e8aaa86529d3176a0086558cc810eb3aec9324969355eef46f0e11a690",
+      "bytes": 534
+    },
+    {
+      "member": "results/unified_exact_round160/campaign_confirmation/007/identity.json",
+      "SHA256": "8367fb1d427c4243ac7d286f68113038de2efb4318a19543044458a3fc52a17b",
+      "bytes": 37419
+    }
+  ],
+  "offline_development_only": true,
+  "old_producers": 0
+}

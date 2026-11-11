@@ -11,7 +11,8 @@ def package():
     tick=time.perf_counter();archive_dir=OUT/'artifacts';archive_dir.mkdir(exist_ok=True)
     assert not list(archive_dir.glob('new_evidence_*.zip')),'carrier already exists'
     sources=[]
-    for name in ('runs','qualification','fees','launches','engineering/measured_source_bytes'):
+    for name in ('runs','qualification','fees','launches','complete_panel',
+                 'engineering/measured_source_bytes','engineering/complete_source_bytes','engineering/review_source_bytes'):
         sources.extend(p for p in (OUT/name).rglob('*') if p.is_file())
     sources=sorted(set(sources));pieces=[];chunk=[];size=0
     for p in sources:
@@ -45,7 +46,7 @@ def manifest():
     records=[]
     for name in paths:
         if name.endswith('/public_manifest.json'):continue
-        assert name.startswith(('results/unified_exact_round162/','scripts/round162_','src/','include/','docs/')) or name in ('CMakeLists.txt','.gitattributes'),name
+        assert name.startswith(('results/unified_exact_round162/','scripts/round162_','src/','include/','docs/','tests/round162_')) or name in ('CMakeLists.txt','.gitattributes'),name
         raw=git('show',':'+name)
         records.append(dict(path=name,bytes=len(raw),SHA256=hashlib.sha256(raw).hexdigest()))
     assert any(v['path'].endswith('goal.md') for v in records)

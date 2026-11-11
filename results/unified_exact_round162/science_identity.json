@@ -1,0 +1,25 @@
+{
+  "UTC": "2026-11-11T14:09:15.949006+00:00",
+  "base": "dd75d7a2445dafdcd9b9c443a107a0c3ca4a15f3",
+  "branch": "codex/round162-physical-g-completion",
+  "development_CPP_commit": "8bbffa3c4dab04ffa9cfe71e4ab7d754b08d7b2b",
+  "complete_CPP_commit": "e920b92e199e825ec89a2932f701861ff158e0d4",
+  "frozen_orchestration_commit": "d6cbfb462ac7e0dbd8ef67d7ed121d00fa4ad4ff",
+  "Native_manifest_SHA256": "f04f240db80ab43525dc3e1984e4446821509afb4316bec0eee963a0bc360334",
+  "complete_manifest_SHA256": "4c7dc062d8701ddc4b7aa6397cd81a7b0205338d6656f680ac5f1c66f03946b2",
+  "matrix_SHA256": "11a26a9a53989ecf796f139f00cfa82f245347829e2c1f214e91020fe829a114",
+  "development_PE_SHA256": "441848fc0aad422c45c066e0952202104e55c6e5ee824a539faf58179f35bc8b",
+  "complete_PE_SHA256": "fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93",
+  "DLL_SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "late_source_inventory_exception": {
+    "path": "src\\Round160PhysicalNeighborhoodStub.cpp",
+    "before_SHA256": "8709412ab1ed4be6c41ff3dc8cda2519191a8096a2ed71c62e73e41e8532adc3",
+    "frozen_source_inventory_SHA256": "8709412ab1ed4be6c41ff3dc8cda2519191a8096a2ed71c62e73e41e8532adc3",
+    "compiled_by_measured_Gurobi_PE": false,
+    "failure_fee": "cmake_delivery_1",
+    "reason": "Inherited no-Gurobi stub lacks the closing namespace brace; measured Gurobi build excludes this translation unit.",
+    "after_SHA256": "3a940efc100fed4d6a5d468cdec7393ab39c92ad5073a27465fdcf6d56c54661"
+  },
+  "science_snapshot": "The later normal Git science commit fixes these records without trying to contain its own commit SHA.",
+  "delivery_metadata": "A separate later publication record binds the science commit and Draft PR; measured PE is unchanged."
+}

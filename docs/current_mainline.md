@@ -1,5 +1,16 @@
 # Current mainline and Round137 paper branch
 
+The [Round162 shared-G physical-completion study](round162_physical_completion.md)
+retains OLD and tests complete bounded physical endpoints beyond STOCK. NB35
+has a qualified free original-J LP increment and one row retains about 87%
+in its development scope; RX35 freely remixes to the same LP objective.
+After four paid Native development calls, six fresh E+/STOCK/PC complete arms
+show worse PC U against both controls on both main roles, equal proof L and
+no certificate. The predeclared adverse-role stop leaves the four small-role
+arms unstarted. Its [report](../results/unified_exact_round162/final_report.md)
+retains the structural finding and cost failure; the candidate stays default
+off and historical main comparisons are unchanged.
+
 The [Round161 full physical RN study](round161_native_rn.md) replaces the
 old G-products on the original carrier. Six continuous LPs and six limited
 whole-native MIPs include one uniform penalty-implied reciprocal-bound

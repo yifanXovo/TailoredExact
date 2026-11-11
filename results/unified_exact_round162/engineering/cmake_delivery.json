@@ -1,0 +1,72 @@
+{
+  "PASS": true,
+  "UTC": "2026-11-11T14:07:25.570173+00:00",
+  "commands": [
+    [
+      "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "-S",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\round162",
+      "-B",
+      "E:\\codes\\ExactEBRP-work\\build-cache\\round162\\cmake_default",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe",
+      "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+      "-DCMAKE_BUILD_TYPE=",
+      "-DEXACT_EBRP_ENABLE_GUROBI=OFF",
+      "-DEXACT_EBRP_BUILD_ROUND162_RESEARCH=OFF"
+    ],
+    [
+      "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "--build",
+      "E:\\codes\\ExactEBRP-work\\build-cache\\round162\\cmake_default",
+      "--target",
+      "ExactEBRP",
+      "--parallel",
+      "1"
+    ],
+    [
+      "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "-S",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\round162",
+      "-B",
+      "E:\\codes\\ExactEBRP-work\\build-cache\\round162\\cmake_delivery",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe",
+      "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+      "-DCMAKE_BUILD_TYPE=",
+      "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+      "-DEXACT_EBRP_BUILD_ROUND162_RESEARCH=ON",
+      "-DGUROBI_ROOT=D:/gurobi1302/win64"
+    ],
+    [
+      "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "--build",
+      "E:\\codes\\ExactEBRP-work\\build-cache\\round162\\cmake_delivery",
+      "--target",
+      "ExactEBRP",
+      "Round162Research",
+      "Round162ScopeTests",
+      "--parallel",
+      "1"
+    ]
+  ],
+  "CMake_SHA256": "76129878fe6dc5a2246415d442de8bc01688ff9a48eb5d9498ea374de8b5a086",
+  "CMakeLists_SHA256": "cfe763142b5bf07cf1a6b2e5e26d9eb51744db0ecbfd68478f09ac5003dc6f70",
+  "delivery_research_PE_SHA256": "f3de34623be9c9326d95dc92f5247a56acbea87f7fbc088cd16529987a807414",
+  "default_no_solver_PE_SHA256": "3bf21fd4b046fe2fbb4ac654d55afc8d865fd09259d8ac1fadb4c806bb03fe76",
+  "gurobi_production_PE_SHA256": "fc30308afb61aa0092094252ec7756f086f544e4f7a558e77018c60bfd16d92b",
+  "scope_test_PE_SHA256": "7762ded5cf1ff155611708de6f38c9c4e57056ef35360204a214bfa4aa4a09fa",
+  "Optimize": 0,
+  "performance_sample": false,
+  "measured_PE_unchanged": true,
+  "stable_entry_byte_checks": [
+    "scripts/paper_s2.py",
+    "config/gi_tbc_round137.json",
+    "config/paper_s2.json"
+  ],
+  "inherited_GNU_policy": true,
+  "parallel_build_jobs": 1,
+  "default_off": "EXACT_EBRP_BUILD_ROUND162_RESEARCH defaults OFF; stable CLI has no new enabled path"
+}

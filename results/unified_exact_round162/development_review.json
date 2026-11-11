@@ -1,0 +1,218 @@
+{
+  "PASS": true,
+  "UTC": "2026-11-11T05:07:08.474388+00:00",
+  "reviewer": "same Codex agent, separate saved-evidence script; not independent personnel",
+  "source_verifier_SHA256": "21d4beb9e862c5cd0f7c5f6d03a52ec7e5c35fdab4c122434a6b889eda4625a8",
+  "checks": [
+    {
+      "label": "R-X35-S-T2_S_MIP_v1",
+      "fleets_rechecked": 24,
+      "Start_max_violation": 1.1102230246251565e-16,
+      "verification_seconds": 0.1737987999804318
+    },
+    {
+      "label": "R-X35-S-T2_C_MIP_v1",
+      "fleets_rechecked": 10,
+      "Start_max_violation": 1.1102230246251565e-16,
+      "verification_seconds": 1.0220244000665843,
+      "source_primal": {
+        "max_residual": 4.7265802383122946e-12,
+        "worst_row": "pc162_qL_c4525",
+        "objective_up": 0.1931361142188393,
+        "G": 0.004991778247592196,
+        "max_state_product_residual": 0.004933099667211665,
+        "max_inventory_product_residual": 0.04492600422832977,
+        "qualifies_under_inherited_1e_6": true
+      },
+      "source_exact_dual_box": {
+        "exact_lower": "2005640078256188868927595620768887/10384593717069655257060992658440192",
+        "lower_down": 0.19313611421883764,
+        "row_aggregate": 0.19313611421883942,
+        "box_compensation": -1.7598393614102024e-15,
+        "sign_repairs": 0,
+        "nonzero_duals": 835,
+        "exact_binary64_rational": true,
+        "max_reduced_cost_box_coefficient": 0.02573635425234022,
+        "Optimize": 0
+      },
+      "source_calls": 1,
+      "source_Runtime_not_added_twice": true,
+      "source_lower_diagnostic_only": true,
+      "source_handle_released": true,
+      "new_formal_columns": 0
+    },
+    {
+      "label": "N-B35-S_S_MIP_v1",
+      "fleets_rechecked": 13,
+      "Start_max_violation": 1.155742168634788e-13,
+      "verification_seconds": 0.14654539991170168
+    },
+    {
+      "label": "N-B35-S_C_MIP_v1",
+      "fleets_rechecked": 25,
+      "Start_max_violation": 1.155742168634788e-13,
+      "verification_seconds": 1.072903800290078,
+      "source_primal": {
+        "max_residual": 1.3539472197376892e-07,
+        "worst_row": "c6621",
+        "objective_up": 0.3828211594449766,
+        "G": 0.024765603889420878,
+        "max_state_product_residual": 0.023703032738083364,
+        "max_inventory_product_residual": 0.25499399560218516,
+        "qualifies_under_inherited_1e_6": true
+      },
+      "source_exact_dual_box": {
+        "exact_lower": "31801460005766952595945001159370141/83076749736557242056487941267521536",
+        "lower_down": 0.3827961506271228,
+        "row_aggregate": 0.3828211594449765,
+        "box_compensation": -2.5008817853716335e-05,
+        "sign_repairs": 3,
+        "nonzero_duals": 9869,
+        "exact_binary64_rational": true,
+        "max_reduced_cost_box_coefficient": 0.01833348237238505,
+        "Optimize": 0
+      },
+      "source_calls": 1,
+      "source_Runtime_not_added_twice": true,
+      "source_lower_diagnostic_only": true,
+      "source_handle_released": true,
+      "new_formal_columns": 0
+    }
+  ],
+  "tiny_checks": [
+    {
+      "fixture": "loaded_return",
+      "form": "S",
+      "fleets": 3
+    },
+    {
+      "fixture": "loaded_return",
+      "form": "F",
+      "fleets": 3
+    },
+    {
+      "fixture": "zero_inventory",
+      "form": "S",
+      "fleets": 2
+    },
+    {
+      "fixture": "zero_inventory",
+      "form": "F",
+      "fleets": 2
+    }
+  ],
+  "protected_dirty_count": 47,
+  "protected_unchanged": true,
+  "failed_receipts_preserved": [
+    {
+      "label": "audit_NB35",
+      "exit_code": 1,
+      "outer_seconds": 2.556461100000888,
+      "G1_seconds": 2.556461100000888,
+      "separately_reported_seconds": 0.0,
+      "start_unix": 1794369426.6444564,
+      "end_unix": 1794369429.2048104,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "verification"
+    },
+    {
+      "label": "R-X35-S-T2_F_completion_v1",
+      "exit_code": 2,
+      "outer_seconds": 9.393846299964935,
+      "G1_seconds": 9.393846299964935,
+      "separately_reported_seconds": 0.0,
+      "start_unix": 1794369181.7524173,
+      "end_unix": 1794369191.1457794,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "native"
+    },
+    {
+      "label": "tiny_loaded_return_S",
+      "exit_code": 1,
+      "outer_seconds": 0.6611527996137738,
+      "G1_seconds": 0.6611527996137738,
+      "separately_reported_seconds": 0.0,
+      "start_unix": 1794368995.8664973,
+      "end_unix": 1794368996.5242085,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "native"
+    },
+    {
+      "label": "tiny_v2_zero_inventory_S",
+      "exit_code": 1,
+      "outer_seconds": 0.0672679003328085,
+      "G1_seconds": 0.0672679003328085,
+      "separately_reported_seconds": 0.0,
+      "start_unix": 1794369096.3068635,
+      "end_unix": 1794369096.3763158,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "native"
+    }
+  ],
+  "science_account_before_this_receipt": {
+    "G1_seconds": 3766.111114300322,
+    "remaining_G1_seconds": 82633.88888569968,
+    "by_category": {
+      "research": 0.0,
+      "verification": 17.39166140044108,
+      "native": 3748.7194528998807
+    },
+    "limits": {
+      "research": 86400.0,
+      "verification": 86400.0,
+      "native": 86400.0
+    },
+    "category_remaining": {
+      "research": 86400.0,
+      "verification": 86382.60833859956,
+      "native": 82651.28054710012
+    },
+    "separately_reported_seconds": 114.76785089960322,
+    "unclosed": [
+      {
+        "label": "development_review",
+        "kind": "verification",
+        "reservation": 300.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round162\\results\\unified_exact_round162\\fees\\development_review\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "decision": {
+    "status": "ADVANCE_TO_CONDITIONAL_COMPLETE_PANEL_AFTER_INTERFACE_QUALIFICATION",
+    "branch": "primary-positive: ten-arm branch, mutually exclusive with K20-only branch",
+    "source_positive": "N-B35-S",
+    "reason": "The qualified one-row retained original-J increment survives free reoptimization. Paid Native NB35 improves verified U by 0.04585609549218134 and reduces absolute gap despite a 0.0021891606731151425 weaker lower. RX35 regresses in both U/L. The source-dependent tradeoff merits the predeclared complete-method attribution with fresh E+, STOCK and PC controls.",
+    "Native_pairs_complete": 2,
+    "Native_arms_complete": 4,
+    "all_TIME_LIMIT": true,
+    "new_certificates": 0,
+    "mechanism_revisions_used": 0,
+    "new_mechanisms_allowed": false,
+    "complete_panel_order": "RX35 three arms, NB35 three arms; assess the permitted early-stop gate, then the four small-role arms if justified",
+    "complete_recipe": "own H/R83; own unchanged E+ RN16384 proof-only helper; OLD+STOCK once-root full-Q source; one qualified projected original-variable row; original GI-TBC controller and Native",
+    "formal_NodeLimit": "inherited unlimited; the D4 development 4096-node capacity is not inherited",
+    "complete_results_claimed_now": false,
+    "basis": [
+      "reports/native.json",
+      "reports/native.csv",
+      "reports/N-B35-S_C_LP_v1_projection_audit.json"
+    ]
+  },
+  "Optimize": 0,
+  "qualification": true,
+  "positive_free_J_and_projection": true,
+  "no_fresh_H_helper_or_GI_claim_from_Native_development": true
+}

@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-11-11T04:05:29.771905+00:00",
+  "positive_roles": [
+    "N-B35-S"
+  ],
+  "branch": "at least one primary positive",
+  "roles": [
+    "R-X35-S-T2",
+    "N-B35-S"
+  ],
+  "order": [
+    {
+      "role": "R-X35-S-T2",
+      "form": "S",
+      "label": "R-X35-S-T2_S_MIP_v1"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "form": "C",
+      "label": "R-X35-S-T2_C_MIP_v1"
+    },
+    {
+      "role": "N-B35-S",
+      "form": "S",
+      "label": "N-B35-S_S_MIP_v1"
+    },
+    {
+      "role": "N-B35-S",
+      "form": "C",
+      "label": "N-B35-S_C_MIP_v1"
+    }
+  ],
+  "cap": 900,
+  "NodeLimit": 4096,
+  "Seed": 0,
+  "Threads": 1,
+  "MIPFocus": 0,
+  "one_deadline": true,
+  "C_source": "fresh C++ full Q once; remaining global deadline, no RN source; finite-box projected one row",
+  "source_lower_only_diagnostic": true,
+  "parent": "own-H/R83 offline development source",
+  "completed_H_in_this_study": false,
+  "formal_GI": false,
+  "source_cost_inside_cap": true,
+  "PE_SHA256": "441848fc0aad422c45c066e0952202104e55c6e5ee824a539faf58179f35bc8b",
+  "stop_rule": "After both pairs, stop before complete panel if positive source has no useful paid U/L progress or cost tradeoff; otherwise freeze one full candidate",
+  "directions_or_revisions": 0,
+  "source_per_arm": 1,
+  "automatic_additional_mechanisms": false
+}
