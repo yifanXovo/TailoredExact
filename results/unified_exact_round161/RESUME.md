@@ -39,7 +39,24 @@ main comparison data unchanged. Retain the active tree, unique raw evidence,
 failures and actual runtime assets. No merge, force push, branch deletion,
 old-round deletion or global configuration change is authorized.
 
-Delivery is being completed as normal commits/push, one English Open Draft
-PR, one bounded anonymous new-artifact recovery and current-only metadata
-screening. The delivery metadata commit records publication.json,
-public_restore_receipt.json, cleanup_record.json and publication_costs.json.
+Delivery: [English Open Draft PR #223](https://github.com/yifanXovo/TailoredExact/pull/223),
+base `codex/round160-physical-neighborhood`; fixed science snapshot
+`fcd83fdf4d8980cbfdd6a860d5fe44fb7aa98158`. PR base/head/Open/Draft and body links
+were read back. The normal metadata delivery commit is the commit containing
+publication.json; final pushed-head readback is retained locally to avoid
+committing a file containing its own head.
+
+One bounded anonymous public recovery: **PASS**, 68 downloads /
+51022954 bytes and all 2035 archive members; zero old archives,
+commercial runtime, compilation or Optimize. See public_restore_receipt.json.
+Post-PR current-only metadata screening: 8384 files /
+1676573021 bytes; **zero deletion**, zero observed free-space
+change, all 47 protected initially dirty tracked-file hashes unchanged.
+See cleanup_record.json. Unique raw evidence, failures, actual PE/runtime,
+public recovery and the active worktree remain available locally.
+
+publication.json, publication_costs.json and PR_description.md record the
+concrete delivery. Final metadata commit/push and PR-head readback receipts
+are local at `E:/codes/ExactEBRP-work/temp/round161_delivery_local_close.json`.
+Only that final normal push/readback remains at creation of this metadata
+commit; it changes no scientific result and requires no further recovery.
