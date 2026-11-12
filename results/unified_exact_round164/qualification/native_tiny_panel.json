@@ -1,0 +1,36 @@
+{
+  "id": "qualification-existing-native-tiny",
+  "V": 2,
+  "M": 1,
+  "Q_vector": [
+    1
+  ],
+  "T_seconds": 5400,
+  "cap_seconds": 120,
+  "pickup_seconds": 60,
+  "drop_seconds": 60,
+  "lambda": 0.15,
+  "input_path": "results/unified_exact_round133/qualification/small_native01/input.txt",
+  "instance_path": "results/unified_exact_round133/qualification/small_native01/input.txt",
+  "input_sha256": "b6769eac46ba93b346ff91b96948ec13a92f8185dfb05a5e116f51021f6984fc",
+  "total_initial": 1,
+  "total_target": 2,
+  "total_capacity": 4,
+  "Omega": 2.0,
+  "round137_delete_ab": false,
+  "panel_kind": "qualification",
+  "source": "synthetic",
+  "inventory": "shortage",
+  "geometry": "tiny",
+  "replicate": 1,
+  "exposed": true,
+  "known": true,
+  "reference": {
+    "optimizer_calls": 0,
+    "canonical_sha256": "527189213f0917326e946e7e2ba3f01bf2b7b8e8e30f746332c2bdb6ba0a4aff",
+    "rows": 65,
+    "columns": 36,
+    "nonzeros": 173,
+    "fingerprint": 451376994
+  }
+}

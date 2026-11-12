@@ -1,0 +1,77 @@
+{
+  "UTC": "2026-11-12T08:49:33.344415+00:00",
+  "before_any_new_Optimize": true,
+  "qualification_tolerance": 1e-07,
+  "rule": "min of the two qualified full-precision R163 Seed0 physical U",
+  "targets": [
+    {
+      "id": "R163-C20-S",
+      "u_ref": 0.191280592282812,
+      "U_B_Seed0": 0.191280592282812,
+      "U_P_Seed0": 0.191280592282812,
+      "known_feasible_target_not_optimum": true,
+      "source_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "path": "results/unified_exact_round163/reports/complete_arms.json",
+      "offline_only": true,
+      "production_Start_cutoff_stopping_condition": false
+    },
+    {
+      "id": "R163-B20-B",
+      "u_ref": 0.42323218169431764,
+      "U_B_Seed0": 0.42323218169431764,
+      "U_P_Seed0": 0.42323218169431764,
+      "known_feasible_target_not_optimum": true,
+      "source_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "path": "results/unified_exact_round163/reports/complete_arms.json",
+      "offline_only": true,
+      "production_Start_cutoff_stopping_condition": false
+    },
+    {
+      "id": "R163-X20-S",
+      "u_ref": 0.4477476265860282,
+      "U_B_Seed0": 0.4477476265860282,
+      "U_P_Seed0": 0.4609477662220225,
+      "known_feasible_target_not_optimum": true,
+      "source_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "path": "results/unified_exact_round163/reports/complete_arms.json",
+      "offline_only": true,
+      "production_Start_cutoff_stopping_condition": false
+    },
+    {
+      "id": "R163-C35-U",
+      "u_ref": 0.09331934374779818,
+      "U_B_Seed0": 0.12956638965196035,
+      "U_P_Seed0": 0.09331934374779818,
+      "known_feasible_target_not_optimum": true,
+      "source_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "path": "results/unified_exact_round163/reports/complete_arms.json",
+      "offline_only": true,
+      "production_Start_cutoff_stopping_condition": false
+    },
+    {
+      "id": "R163-B35-S",
+      "u_ref": 0.19429031110944756,
+      "U_B_Seed0": 0.19429031110944756,
+      "U_P_Seed0": 0.24925301346485335,
+      "known_feasible_target_not_optimum": true,
+      "source_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "path": "results/unified_exact_round163/reports/complete_arms.json",
+      "offline_only": true,
+      "production_Start_cutoff_stopping_condition": false
+    },
+    {
+      "id": "R163-X35-S",
+      "u_ref": 0.45747531701601785,
+      "U_B_Seed0": 0.45747531701601785,
+      "U_P_Seed0": 0.5415306804981086,
+      "known_feasible_target_not_optimum": true,
+      "source_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "path": "results/unified_exact_round163/reports/complete_arms.json",
+      "offline_only": true,
+      "production_Start_cutoff_stopping_condition": false
+    }
+  ],
+  "first_saved_verifiable_witness_only": true,
+  "no_interpolation_or_postverification_backdating": true,
+  "unavailable_event_clocks": "retain interval, upper bound, or unknown; never fabricate an exact first time"
+}

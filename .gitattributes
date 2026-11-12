@@ -563,3 +563,11 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round163/artifacts/** -text -diff -whitespace
 /results/unified_exact_round163/**/*.log -whitespace
 /docs/round163_stage_confirmation.md -text whitespace=cr-at-eol
+
+# Round164 preserves frozen protocols, Seed parameters and evidence bytes.
+/scripts/round164* -text whitespace=cr-at-eol
+/results/unified_exact_round164/** -text whitespace=cr-at-eol
+/results/unified_exact_round164/goal.md -whitespace
+/results/unified_exact_round164/artifacts/** -text -diff -whitespace
+/results/unified_exact_round164/**/*.log -whitespace
+/docs/round164_seed_confirmation.md -text whitespace=cr-at-eol
