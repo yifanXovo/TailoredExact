@@ -103,6 +103,15 @@ primal advantage is not consistent across all three Seeds; B's higher L is
 observed on all three. This does not identify a causal operator or a new
 certificate. The complete final readback is still deferred to panel close.
 
+Observed checkpoint after position20: B35's new Seed1/2 B/P pairs are both
+OPEN. Their ΔU values are -0.10171597732307722 and -0.13296000719798723,
+and ΔL values are +0.004661458116366382 and +0.004752414015974982.
+Together with the historical Seed0 endpoints, B has lower U and higher L
+on this one input at all three Seeds; no certificate is supplied. The sole
+driver has entered the four remaining X35 positions. Closed scientific
+fees through position20 are 25250.63787179906/57600 seconds, excluding the
+then-active position21; no new seed, method or healthy replay is authorized.
+
 The offline target-arrival clock conversion was corrected before any final
 analysis: journal availability is relative to the supervisor `started`
 window. Its conservative paid offset is T_produce minus wrapper_wall_seconds,
