@@ -134,8 +134,9 @@ def history_arms(history,new_arms):
             comparison_new_Seeds=comparisons,eligible_for_descriptive_three_Seed_contract=True))
     assert len(result)==12
     write(OUT/'Seed0_reuse_qualification.json',dict(PASS=True,UTC=utc(),historical_arms=12,facts=facts,
-        environment_basis='same retained PE/DLL/Windows host, i7-12700KF 20 logical CPUs and mask4; original runtime paths and live module bindings agree',
-        system_environment_frozen='environment_freeze.json',statistical_exchangeability_claim=False,
+        environment_basis='matching documented Windows/i7-12700KF hardware with 20 logical CPUs and mask4; retained PE/DLL and runtime paths, live module bindings and numerical/deadline contracts agree',
+        system_environment_frozen='environment_freeze.json',actual_hardware_observation='infra/environment_observation.json',
+        incidental_OS_load_equality_claimed=False,statistical_exchangeability_claim=False,
         original_environment_not_rebuilt=True,old_logical_sample_not_new_performance=True,Seed0_repeated=False,
         grouping='six mathematical inputs, three within-input Seed observations each; no IID or population claim'))
     return result

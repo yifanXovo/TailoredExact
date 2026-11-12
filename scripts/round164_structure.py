@@ -54,6 +54,30 @@ def target_on_saved_skeleton(p,witness):
         is_restricted_domain_lower_or_optimum=False,does_not_prove_target_unattainable_on_skeleton=True,
         optimization_oracle_calls=0)
 
+def fleet_difference(b,p):
+    """Describe simultaneous saved-fleet changes; this is not an operator test."""
+    bo=b['station_owners'];po=p['station_owners'];common=set(bo)&set(po)
+    reassigned=sorted(i for i in common if bo[i]!=po[i])
+    def service(fleet):
+        return {o['station']:(o['pickup'],o['drop']) for r in fleet['vehicles'] for o in r['operations']}
+    bs,ps=service(b),service(p)
+    changed=sorted(i for i in common if bs[i]!=ps[i])
+    inversions=[]
+    for br in b['vehicles']:
+        k=br['vehicle'];pr=next(r for r in p['vehicles'] if r['vehicle']==k)
+        shared=[i for i in br['nodes'][1:-1] if i in common and bo[i]==po[i]==k]
+        order={i:j for j,i in enumerate(pr['nodes'][1:-1])}
+        for index,i in enumerate(shared):
+            for j in shared[index+1:]:
+                if order[i]>order[j]:inversions.append(dict(vehicle=k,stations=[i,j]))
+    return dict(B_only_served=sorted(set(bo)-set(po)),P_only_served=sorted(set(po)-set(bo)),
+        reassigned_common_stations=reassigned,changed_quantity_or_direction_common_stations=changed,
+        same_owner_relative_order_reversals=inversions,
+        ownership_changed=bool(reassigned),service_amounts_changed=bool(changed),
+        relative_order_changed=bool(inversions),
+        delta_G=b['G']-p['G'],delta_weighted_penalty=b['weighted_penalty']-p['weighted_penalty'],
+        delta_physical_F=b['F']-p['F'],causal_operator_attribution=False)
+
 def run():
     from round164_analyze import History
     from round108_reader import full_fleet
@@ -92,9 +116,17 @@ def run():
         assert abs(counterfactual['unserved_fixed_weighted_penalty']-.0114025534)<1e-9
         assert abs(counterfactual['all_saved_served_stations_at_target_inventory_objective']['F']-.0335925462)<1e-9
         assert not counterfactual['counterfactual_is_physical']
+        differences=[]
+        for seed in (0,1,2):
+            b=next(v['final_fleet'] for v in values if v['seed']==seed and v['method']=='B')
+            p=next(v['final_fleet'] for v in values if v['seed']==seed and v['method']=='P')
+            differences.append(dict(seed=seed,**fleet_difference(b,p)))
+        # Verify the supplied Seed0 structural statement from the original
+        # saved fleets, while allowing new Seed comparisons to differ.
+        assert all(differences[0][name] for name in ('ownership_changed','service_amounts_changed','relative_order_changed'))
         write(OUT/'structural_synthesis.json',dict(UTC=utc(),scope='C35 complete saved H/B/P fleets and native trajectories only',
             runs=values,Seed0_skeleton_counterfactual=counterfactual,primal_and_proof_deficits_distinct=True,
-            route_differences_simultaneously_change_ownership_order_quantities=True,
+            per_Seed_saved_fleet_differences=differences,
             single_operator_causality_established=False,route_feedback_complete_benefit_established=False,
             R96_R97_prior_mixed_feedback_evidence_retained=True,restricted_MIP_oracle_new_producer_calls=0))
     finally:
