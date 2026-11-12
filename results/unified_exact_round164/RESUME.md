@@ -71,6 +71,17 @@ The original prelaunch observer failure is already fully dispositioned; do
 not restart position1. The active driver automatically advances through
 all remaining positions. Monitor metadata before considering any resume.
 
+Static paper cleanup is already committed at `2a69f4864`: the E+ time-scale
+description distinguishes C20's substantive increase from the two smaller
+numerical increases; §6.4 separates scoped inventory information from
+physical service and complete-method value; the former §7.1 task list has
+been moved into research navigation. §3.5 explicitly limits E+ evidence to
+its actual runs. Mathematical conventions for within-input Seed differences,
+medians and target-arrival bounds are added without a new theorem. The whole
+old §5.4 was compared against the fixed R163 source and is unchanged. Final
+Round164 data tables, §6.5 consolidation and outcome-dependent §7/abstract
+conclusions are still pending and must use the completed panel.
+
 All new work/raw/temp/restore remains under ExactEBRP-work. Protected user
 files and prior active trees are retained. Postdelivery cleanup may delete
 zero files; unique evidence, failures and necessary runtimes stay protected.
