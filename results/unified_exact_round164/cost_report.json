@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-11-12T18:54:20.559291+00:00",
+  "UTC": "2026-11-12T19:17:35.463483+00:00",
   "scientific_seconds": 35115.220947325695,
   "scientific_hours": 9.754228040923804,
   "scientific_capacity_seconds": 57600.0,
@@ -483,9 +483,24 @@
       "source": "main_table_update.json",
       "seconds": 0.009333199821412563,
       "category": "ordinary authoring/transport I/O, outside science"
+    },
+    {
+      "source": "carrier_manifest.json",
+      "seconds": 627.1150417998433,
+      "category": "ordinary authoring/transport I/O, outside science"
+    },
+    {
+      "source": "public_restore_receipt.json",
+      "seconds": 10.25303340004757,
+      "category": "ordinary authoring/transport I/O, outside science"
+    },
+    {
+      "source": "recovery_failures.json",
+      "seconds": 0.9643931,
+      "category": "failed anonymous transport ordinary I/O, outside science"
     }
   ],
-  "separate_measured_ordinary_IO_seconds": 0.8463843998214124,
+  "separate_measured_ordinary_IO_seconds": 639.1788526997123,
   "ordinary_preparation_and_writing": "ordinary_work_record.json; enclosing wall intervals are not exact I/O or Optimize seconds",
   "published_timing_scope": "producer-close T_cert only on own qualified certificates; no OPEN cap imputation"
 }

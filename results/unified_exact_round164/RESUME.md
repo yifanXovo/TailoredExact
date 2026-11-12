@@ -1,40 +1,44 @@
-# Round164 continuation record
+# Round164 delivery record
 
-Status: READY_FOR_DRAFT_DELIVERY. All24 preregistered producers and the
-complete three-Seed endpoint/identity/target/C35 readback are closed and
-qualified. The maintained R137 body/math/supplement and current navigation
-contain scoped conclusions; historical section5.4 is unchanged. Actual
-CSV fallback is complete:12-row increment and103-row byte-prefix-preserving
-working master, with original91-row user files intact and three historical
-N/A-P rows pending union. See final_report.md and main_table_reconciliation.md.
+Status: SCIENCE_AND_PUBLISHED_DRAFT_CLOSEOUT_COMPLETE.
 
-Worktree E:/codes/ExactEBRP-work/worktrees/round164, branch
-codex/round164-seed-confirmation, baseR163 delivery8ae25cbcbb88caa283d345b1b143ff0da6e5c0eb.
-Preproduction commit bb69cb2f5e7d48ef71dd974edf32744728340c27.
-Immutable numerical source b93a8a01ff1b7f3cbee67807be3ac6591db4767f.
-Original measured C++ e920b92e199e825ec89a2932f701861ff158e0d4 and common
-R162 complete_v2 PE/DLL are unchanged. No rebuild, extra Seed, E+ run,
-restricted MIP, oracle or healthy producer replay is authorized.
+All 24 registered new B/P producers complete. Twelve new pairs plus six
+historical Seed0 pairs describe six mathematical inputs. At each Seed B
+certifies 3/6 and P 1/6; all n35 runs remain OPEN. B35/X35 have favorable B
+U/L throughout; C35 primal signs are +/−/− and proof signs +/+/+.
+The maintained R137 body/math/supplement and navigation contain the scoped
+conclusions; historical §5.4 is unchanged and the old PDF is historical.
 
-Closed scientific fees before independent review are34749.89784079837/57600s.
-Two retained failures are prelaunch-only arm001 and an overstrong offline
-order assertion in final_readback01. The complete analysis had passed; only
-post-analysis structure/identity/source/table presentation resumes in
-final_readback02. Actual co-served order changes and same-owner absences are
-reported separately; no scientific endpoint or producer is altered.
+Three actual independent final agents PASS; see review/identities.json.
+Science is 35115.220947325695/57600 s, including both retained scientific
+failures and one 365.3231065273285 s parallel review window. No healthy
+producer or successful endpoint analysis is replayed. No spare-budget study.
 
-All three actual final agents PASS with no conclusion-changing findings:
-/root/review_math_paper, /root/review_execution_data,
-/root/review_research_direction. See review/identities.json and their full
-reports. Their parallel outer window is365.3231065273285s, charged once.
-Final closed science is35115.220947325695/57600s. The remainder is unused.
+The two real 91-row GB18030 user masters remain unchanged. Deliverables are
+an exact 12-pair increment and 103-row working master with original 28 columns
+and byte prefix. The three historical N/A-P records specified by the goal
+remain pending union into the unavailable 94-row user version; no 106-row
+file is falsely claimed updated. See main_table_reconciliation.md.
 
-Remaining: package new-only evidence via round164_carrier.py, normal commit
-and push the immutable carrier, create the English Open Draft PR on
-codex/round163-stage-confirmation (refreshed main lacks the R163 dependency;
-PR225 remains Open Draft/unmerged), and read back actual state/base/head.
-Run bounded anonymous recovery of that fixed carrier and old metadata/member
-index; then zero-delete cleanup, protected hashes and final normal delivery
-receipts/requirement audit. No new scientific study, merge, force push,
-branch deletion or global settings change. Only after all remaining evidence
-and publication close may the active goal complete.
+Open Draft PR226: https://github.com/yifanXovo/TailoredExact/pull/226
+Base: codex/round163-stage-confirmation, predecessor225 Open Draft/unmerged.
+Original C++: e920b92e199e825ec89a2932f701861ff158e0d4; unchanged qualified PE/DLL and defaults.
+Preproduction: bb69cb2f5e7d48ef71dd974edf32744728340c27.
+Immutable new numerical source: b93a8a01ff1b7f3cbee67807be3ac6591db4767f.
+Science/carrier: a29a70d132ecc17e18bc48a660225a6380722f45.
+Worktree: E:/codes/ExactEBRP-work/worktrees/round164.
+Branch: codex/round164-seed-confirmation.
+
+Public anonymous recovery PASS: 51931501 bytes /82561
+members, four bounded old metadata files, 102 old access references and 70
+old reference bindings; no old raw archive, runtime or Optimize. The initial
+MSYS TLS failure is preserved and normal Windows CPython verification passes.
+Cleanup PASS: 0 files/0 bytes deleted, free-space delta 0, three protected trees
+and three dirty tracked-file hashes unchanged. Unique evidence and runtimes
+remain. No merge, force push, branch deletion or global settings change.
+
+This normal receipt commit is the later delivery identity. Its literal HEAD
+is read back after push in the PR body and the local file
+E:/codes/ExactEBRP-work/temp/round164/final_delivery_observation.json;
+do not add a self-referential commit solely to write its own hash.
+No further solve, source replay or historical restore is needed.

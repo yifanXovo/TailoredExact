@@ -77,8 +77,10 @@ def download(url,destination):
         assert response.status==200
         shutil.copyfileobj(response,stream,1024*1024)
 
-def restore(commit):
-    tick=time.perf_counter();target=WORK/'restore'/f'round164-public-{commit[:12]}'
+def restore(commit,attempt=None):
+    assert attempt is None or re.fullmatch('[a-z0-9_-]{1,32}',attempt)
+    suffix='-'+attempt if attempt else ''
+    tick=time.perf_counter();target=WORK/'restore'/f'round164-public-{commit[:12]}{suffix}'
     target.mkdir(parents=True,exist_ok=False);manifest=read(OUT/'carrier_manifest.json');downloads=[];members=0
     for archive in manifest['archives']:
         url=f"https://raw.githubusercontent.com/yifanXovo/TailoredExact/{commit}/{archive['path']}"
@@ -153,5 +155,5 @@ def cleanup():
     print(json.dumps(dict(PASS=True,deleted_files=0,deleted_bytes=0,observed_free_space_delta=after-before)))
 
 if __name__=='__main__':
-    if sys.argv[1]=='restore':restore(sys.argv[2])
+    if sys.argv[1]=='restore':restore(sys.argv[2],sys.argv[3] if len(sys.argv)>3 else None)
     else:globals()[sys.argv[1]]()

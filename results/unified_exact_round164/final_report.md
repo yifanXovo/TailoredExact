@@ -178,6 +178,49 @@ respective scopes. The enclosing parallel review window is
 
 All scientific work is closed at **35115.220947325695 / 57600 s**
 (9.754228040923804 h), with 22484.779052674305 s unused. All process and
-review windows are nonoverlapping. The remaining work is normal Draft
-publication, new-only carrier/member hashes, bounded anonymous public
-recovery and zero-delete cleanup; those later states are not claimed yet.
+review windows are nonoverlapping. Actual publication, recovery and cleanup evidence is closed below.
+
+## Actual publication and delivery closeout
+
+[English Open Draft PR226](https://github.com/yifanXovo/TailoredExact/pull/226)
+is observed open/draft on base `codex/round163-stage-confirmation`, whose
+head remains `8ae25cbcbb88caa283d345b1b143ff0da6e5c0eb`. Main still lacks that dependency and predecessor
+PR225 remains Open Draft/unmerged. The normal science/carrier push and
+actual API readback observe head `a29a70d132ecc17e18bc48a660225a6380722f45`. Later normal delivery
+commits record these receipts; no merge, force push or branch deletion occurs.
+
+The [new-only carrier](carrier_manifest.json) has 51931501 bytes and
+82561 members, SHA256 `69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71`.
+All 210 Git-tracked payload members match the science commit bytes; new raw
+is held in the indexed archive. Seventy old reference duplicates are bound
+by the fixed R163 commit/member/SHA, with the four new tiny-qualification
+reference files retained as new. Packaging takes
+627.1150417998433 s of ordinary I/O, outside science.
+
+[Anonymous public recovery](public_restore_receipt.json) is PASS against
+immutable `a29a70d132ecc17e18bc48a660225a6380722f45`: all 51931501 bytes and all
+82561 members match; four bounded old public metadata
+files, 102 historical access references and 70 excluded old reference bindings
+are checked against the fixed public index. Recovery takes
+10.25303340004757 s of separate ordinary I/O. No old raw
+archive, commercial runtime, compile or Optimize is downloaded/executed.
+This is byte/member recovery, not a licensed semantic/performance rerun.
+The initial MSYS Python TLS-chain failure is retained in
+[recovery failures](recovery_failures.json), including 0 downloaded bytes and
+0.9643931 s of ordinary failed transport. Existing Windows CPython succeeds
+with normal certificate verification in a new explicit attempt directory;
+global certificates, proxy, credentials and permissions are unchanged.
+
+[Current-only cleanup](cleanup_record.json) deletes 0 files/0 bytes and
+observes free bytes 152416825344 before/after,
+delta 0. Protected checks pass for three trees and three originally dirty
+tracked files. Unique science, failures, user files, active worktree,
+runtime dependencies and recovery assets remain intact.
+
+[Completion audit](completion_audit.json) maps every goal requirement to
+actual evidence and hashes. Measured C++ `e920b92e199e825ec89a2932f701861ff158e0d4`, preregistration
+`bb69cb2f5e7d48ef71dd974edf32744728340c27`, numerical source `b93a8a01ff1b7f3cbee67807be3ac6591db4767f`,
+science/carrier `a29a70d132ecc17e18bc48a660225a6380722f45`, and the normal later delivery head are distinct.
+The final literal delivery HEAD is read back after its push and recorded in
+the PR body and local post-push observation, avoiding commit self-reference.
+The finite scientific study is closed with no additional Seed or mechanism.

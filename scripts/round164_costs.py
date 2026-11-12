@@ -30,6 +30,10 @@ def run():
         ('main_table_update.json','ordinary_transport_IO_seconds'),('carrier_manifest.json','packaging_IO_seconds'),
         ('public_restore_receipt.json','recovery_IO_seconds')]:
         if (OUT/name).exists():ordinary.append(dict(source=name,seconds=read(OUT/name)[key],category='ordinary authoring/transport I/O, outside science'))
+    if (OUT/'recovery_failures.json').exists():
+        for attempt in read(OUT/'recovery_failures.json')['attempts']:
+            ordinary.append(dict(source='recovery_failures.json',seconds=attempt['ordinary_outer_seconds'],
+                category='failed anonymous transport ordinary I/O, outside science'))
     arms=read(OUT/'reports/complete_arms.json') if (OUT/'reports/complete_arms.json').exists() else []
     write(OUT/'cost_report.json',dict(UTC=utc(),scientific_seconds=value['G1_seconds'],scientific_hours=value['G1_seconds']/3600,
         scientific_capacity_seconds=TOTAL,remaining_scientific_seconds=value['remaining_G1_seconds'],

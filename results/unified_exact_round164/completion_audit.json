@@ -1,0 +1,600 @@
+{
+  "UTC": "2026-11-12T19:18:47.687071+00:00",
+  "all_goal_requirements_proved": true,
+  "requirement_count": 23,
+  "incomplete_required_science": 0,
+  "missing_formal_positions": 0,
+  "conclusion_changing_findings": 0,
+  "proofs": [
+    {
+      "requirement": "Isolated work and protected user content",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/science_identity.json",
+          "SHA256": "658cf71f72fdd5cf6a312ff356dc11e5866df3f31c813c13294efca3ffd648ba",
+          "bytes": 27538
+        },
+        {
+          "path": "results/unified_exact_round164/cleanup_record.json",
+          "SHA256": "239aed86717cd062e997c5b6a5b0dc5cf5729881397af4379761bed2609183f5",
+          "bytes": 1311
+        },
+        {
+          "path": "results/unified_exact_round164/infra/protected_workspace_summary.json",
+          "SHA256": "67a26cc109973bdf443310bc08b5d0cbdf915a658013f3fe33c35f1e8e54c64f",
+          "bytes": 673
+        },
+        {
+          "path": "results/unified_exact_round164/publication_base_qualification.json",
+          "SHA256": "76c60713c2a34b3a52a1756687a33b2e0163742b1f78d9c9518f9b785839908e",
+          "bytes": 561
+        }
+      ]
+    },
+    {
+      "requirement": "Historical increment and boundaries",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/historical_increment.md",
+          "SHA256": "2354ac85edd0385148e5a8625a1f8151564e54fab16d20dd813432f3261289ec",
+          "bytes": 2974
+        },
+        {
+          "path": "results/unified_exact_round164/historical_source_map.json",
+          "SHA256": "6f2c79a0d70a8d500577dec546a8b3dc503c04e59674f381df52aec584c4fcfe",
+          "bytes": 16002
+        },
+        {
+          "path": "results/unified_exact_round164/review/research_direction.md",
+          "SHA256": "8760da8aa7989f0b10483663c3c4da8b3a6a39fd323b8773a43cfbd4ea6c6bb3",
+          "bytes": 7191
+        }
+      ]
+    },
+    {
+      "requirement": "Exactly six old inputs",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/input_references.json",
+          "SHA256": "93bee5ca737b1e990f640a81bfe167687ed478162f32cda9234b6fdf4868c027",
+          "bytes": 11044
+        },
+        {
+          "path": "results/unified_exact_round164/matrix_frozen.json",
+          "SHA256": "53736926ad8c335293812793a9bc3d1e5ab3d2510ccc43314c9e19c921955f82",
+          "bytes": 186696
+        },
+        {
+          "path": "results/unified_exact_round164/pre_panel_admission.json",
+          "SHA256": "1197d5c3d5025a18ba2b8313c73a79d15c8d3c157fe4fd6e8557b0ca6aae5b4c",
+          "bytes": 6347
+        }
+      ]
+    },
+    {
+      "requirement": "Same frozen B and cold P",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/method_freeze.json",
+          "SHA256": "9089ba6201a56ccd48925e33fb98767a1e7e6b241d87a9854eac399742b7f7d9",
+          "bytes": 5944
+        },
+        {
+          "path": "results/unified_exact_round164/candidate_manifest.json",
+          "SHA256": "22b379dba03f1d161e01b1865526d5877df140d8fbb7f5fb7ecaeffa18d44a6a",
+          "bytes": 52655
+        },
+        {
+          "path": "results/unified_exact_round164/review/execution_data.md",
+          "SHA256": "b11373f0861847f619ce2ea8c30e8b80e51dc10348fa40de5895883c4eadda15",
+          "bytes": 6451
+        }
+      ]
+    },
+    {
+      "requirement": "Seed reaches every Native call",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/science_identity.json",
+          "SHA256": "658cf71f72fdd5cf6a312ff356dc11e5866df3f31c813c13294efca3ffd648ba",
+          "bytes": 27538
+        },
+        {
+          "path": "results/unified_exact_round164/matrix_frozen.json",
+          "SHA256": "53736926ad8c335293812793a9bc3d1e5ab3d2510ccc43314c9e19c921955f82",
+          "bytes": 186696
+        },
+        {
+          "path": "results/unified_exact_round164/qualification/result.json",
+          "SHA256": "e6714b2fdea84150d9238e7e1710e83ab1f6c33317487d342afed025ee0b6f87",
+          "bytes": 22066
+        },
+        {
+          "path": "results/unified_exact_round164/review/execution_data.md",
+          "SHA256": "b11373f0861847f619ce2ea8c30e8b80e51dc10348fa40de5895883c4eadda15",
+          "bytes": 6451
+        }
+      ]
+    },
+    {
+      "requirement": "Finite qualification and before-production freeze",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/qualification/result.json",
+          "SHA256": "e6714b2fdea84150d9238e7e1710e83ab1f6c33317487d342afed025ee0b6f87",
+          "bytes": 22066
+        },
+        {
+          "path": "results/unified_exact_round164/qualification/native_tiny_panel.json",
+          "SHA256": "27ff7c378523ac778dc30d6e05f04b3327dfa7499563924846849dbefb81745d",
+          "bytes": 969
+        },
+        {
+          "path": "results/unified_exact_round164/pre_panel_admission.json",
+          "SHA256": "1197d5c3d5025a18ba2b8313c73a79d15c8d3c157fe4fd6e8557b0ca6aae5b4c",
+          "bytes": 6347
+        },
+        {
+          "path": "results/unified_exact_round164/science_identity.json",
+          "SHA256": "658cf71f72fdd5cf6a312ff356dc11e5866df3f31c813c13294efca3ffd648ba",
+          "bytes": 27538
+        }
+      ]
+    },
+    {
+      "requirement": "All 24 fixed positions",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/panel_complete.json",
+          "SHA256": "e5fc6ff75959491a65af78ea5100b47dafb35d12c6bb8dfa13981b847d93bfb8",
+          "bytes": 756
+        },
+        {
+          "path": "results/unified_exact_round164/matrix_frozen.json",
+          "SHA256": "53736926ad8c335293812793a9bc3d1e5ab3d2510ccc43314c9e19c921955f82",
+          "bytes": 186696
+        },
+        {
+          "path": "results/unified_exact_round164/science_identity.json",
+          "SHA256": "658cf71f72fdd5cf6a312ff356dc11e5866df3f31c813c13294efca3ffd648ba",
+          "bytes": 27538
+        },
+        {
+          "path": "results/unified_exact_round164/execution_dispositions.json",
+          "SHA256": "1ebbeca8157c46d02fbad0f15885c45408d0b717ca323508e6791be6d1785840",
+          "bytes": 1652
+        }
+      ]
+    },
+    {
+      "requirement": "Production and scientific time",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/protocol.json",
+          "SHA256": "d0e9c2c29f0519eb6495167dbc414c6d230bfb2a012471c16586dffa6b784a88",
+          "bytes": 1400
+        },
+        {
+          "path": "results/unified_exact_round164/cost_report.json",
+          "SHA256": "defb35344c34f8b6ea4e47309a2076990dd115f470a5979371bc73ee75868361",
+          "bytes": 15920
+        },
+        {
+          "path": "results/unified_exact_round164/execution_dispositions.json",
+          "SHA256": "1ebbeca8157c46d02fbad0f15885c45408d0b717ca323508e6791be6d1785840",
+          "bytes": 1652
+        },
+        {
+          "path": "results/unified_exact_round164/review/execution_data.md",
+          "SHA256": "b11373f0861847f619ce2ea8c30e8b80e51dc10348fa40de5895883c4eadda15",
+          "bytes": 6451
+        }
+      ]
+    },
+    {
+      "requirement": "Own endpoints and original coverage",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/reports/three_seed_arms.json",
+          "SHA256": "1b03665a8034c22bbc78a3f7d2a78f15507a2e4da4c181376a917df8a13fcd84",
+          "bytes": 189003
+        },
+        {
+          "path": "results/unified_exact_round164/science_identity.json",
+          "SHA256": "658cf71f72fdd5cf6a312ff356dc11e5866df3f31c813c13294efca3ffd648ba",
+          "bytes": 27538
+        },
+        {
+          "path": "results/unified_exact_round164/review/math_paper.md",
+          "SHA256": "23543db580b6518a6f8102faf02262380b5ad9db2080df084379a22add7345af",
+          "bytes": 6778
+        },
+        {
+          "path": "results/unified_exact_round164/review/execution_data.md",
+          "SHA256": "b11373f0861847f619ce2ea8c30e8b80e51dc10348fa40de5895883c4eadda15",
+          "bytes": 6451
+        }
+      ]
+    },
+    {
+      "requirement": "New complete within-Seed comparisons",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/reports/complete_arms.json",
+          "SHA256": "38be0ba91fe4f0e834902bb5ab8873a8ab2109878232003d756c9e9beca2430a",
+          "bytes": 121734
+        },
+        {
+          "path": "results/unified_exact_round164/reports/comparisons.json",
+          "SHA256": "11732e6e9a60083a219b680beb3b1469fda1138f5e71a097bcd2bdbfd9f4d8f5",
+          "bytes": 10250
+        },
+        {
+          "path": "results/unified_exact_round164/reports/summary.json",
+          "SHA256": "5d81b20e5f2345fd34bac2acaaa4ac18741e1cbb6eadedc3033b1d7ac40821d8",
+          "bytes": 6133
+        }
+      ]
+    },
+    {
+      "requirement": "Conditional certificate times",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/reports/three_seed_comparisons.json",
+          "SHA256": "bd20570ecf8606f366c42b0be3b11885271dc76ece6fad8336a48dab33f3e3be",
+          "bytes": 15363
+        },
+        {
+          "path": "results/unified_exact_round164/reports/seed_evidence.md",
+          "SHA256": "3a88672d358656f9ac24e484cd435004043c3b8ef5bc9ed613bcbd2129cc9c13",
+          "bytes": 22239
+        },
+        {
+          "path": "results/unified_exact_round164/review/math_paper.md",
+          "SHA256": "23543db580b6518a6f8102faf02262380b5ad9db2080df084379a22add7345af",
+          "bytes": 6778
+        }
+      ]
+    },
+    {
+      "requirement": "Historical Seed0 reuse",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/Seed0_reuse_qualification.json",
+          "SHA256": "6f4c3450b501edede997d0a2ec55e3349af47aa21813a72f75d2d325bc7a1cc2",
+          "bytes": 17065
+        },
+        {
+          "path": "results/unified_exact_round164/historical_member_access.json",
+          "SHA256": "cbafec1a01e4cbce5dfb1176147ebda15b7265234a5335b31a84f347ec80b073",
+          "bytes": 35199
+        },
+        {
+          "path": "results/unified_exact_round164/review/execution_data.md",
+          "SHA256": "b11373f0861847f619ce2ea8c30e8b80e51dc10348fa40de5895883c4eadda15",
+          "bytes": 6451
+        }
+      ]
+    },
+    {
+      "requirement": "Three-Seed finite interpretation",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/reports/within_configuration.json",
+          "SHA256": "4da79b0aecee7836edbcf5fb00c1e780cfd25de652d0a379c4d0bcc82a534f93",
+          "bytes": 22906
+        },
+        {
+          "path": "results/unified_exact_round164/reports/summary.json",
+          "SHA256": "5d81b20e5f2345fd34bac2acaaa4ac18741e1cbb6eadedc3033b1d7ac40821d8",
+          "bytes": 6133
+        },
+        {
+          "path": "results/unified_exact_round164/review/research_direction.md",
+          "SHA256": "8760da8aa7989f0b10483663c3c4da8b3a6a39fd323b8773a43cfbd4ea6c6bb3",
+          "bytes": 7191
+        }
+      ]
+    },
+    {
+      "requirement": "Uniform offline primal diagnostic",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/primal_targets_frozen.json",
+          "SHA256": "3d614320b4452f44e4a4bd5ab45babff1861af11126dd9496008a42389304304",
+          "bytes": 3012
+        },
+        {
+          "path": "results/unified_exact_round164/target_clock_contract.json",
+          "SHA256": "2480114cea9d0fa99c4c2f429bdc85432728516f3920932c6eeb6e4dd3494205",
+          "bytes": 1640
+        },
+        {
+          "path": "results/unified_exact_round164/reports/primal_target_arrival.json",
+          "SHA256": "10abe2c8afcfa124d43e0b1bc8d8652965c197a9d2d67493ee06ad4b87284b44",
+          "bytes": 47161
+        },
+        {
+          "path": "results/unified_exact_round164/review/math_paper.md",
+          "SHA256": "23543db580b6518a6f8102faf02262380b5ad9db2080df084379a22add7345af",
+          "bytes": 6778
+        }
+      ]
+    },
+    {
+      "requirement": "Bounded C35 structure",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/structural_synthesis.json",
+          "SHA256": "eb4558f828d2a2e1d32156dfe90c80602be122c8369d67989dea397dc77cbcb9",
+          "bytes": 282387
+        },
+        {
+          "path": "results/unified_exact_round164/structural_member_sources.json",
+          "SHA256": "681b0f62dd5d4748eb57bf9d48ae0fccb5e711c03c85c1f4a5b67417d2770a8b",
+          "bytes": 2270
+        },
+        {
+          "path": "results/unified_exact_round164/review/math_paper.md",
+          "SHA256": "23543db580b6518a6f8102faf02262380b5ad9db2080df084379a22add7345af",
+          "bytes": 6778
+        }
+      ]
+    },
+    {
+      "requirement": "One maintained paper",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round137/paper_body.md",
+          "SHA256": "90a8016a47f2194320f6bbc01b7bfeb14bd649776f96593cf59cf05cb5591f9d",
+          "bytes": 80705
+        },
+        {
+          "path": "results/unified_exact_round137/mathematical_analysis.md",
+          "SHA256": "32c15b7709c2b82e7ba64a0bee4f8156b91f30a8820df5c0b17a3463e416be2a",
+          "bytes": 23599
+        },
+        {
+          "path": "results/unified_exact_round137/supplement.md",
+          "SHA256": "65b849b34ffff1f4772493be5a80f5ed991d62cefa00f11880e0ee2af91454e6",
+          "bytes": 136065
+        },
+        {
+          "path": "results/unified_exact_round164/research_navigation.md",
+          "SHA256": "8320c1367c38756016df7a49c7210875a9f1c9e4f5300072f9d854e0d2f0410b",
+          "bytes": 2593
+        },
+        {
+          "path": "results/unified_exact_round164/review/research_direction.md",
+          "SHA256": "8760da8aa7989f0b10483663c3c4da8b3a6a39fd323b8773a43cfbd4ea6c6bb3",
+          "bytes": 7191
+        }
+      ]
+    },
+    {
+      "requirement": "Accurate B/E+ scope and time",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round137/paper_body.md",
+          "SHA256": "90a8016a47f2194320f6bbc01b7bfeb14bd649776f96593cf59cf05cb5591f9d",
+          "bytes": 80705
+        },
+        {
+          "path": "results/unified_exact_round137/supplement.md",
+          "SHA256": "65b849b34ffff1f4772493be5a80f5ed991d62cefa00f11880e0ee2af91454e6",
+          "bytes": 136065
+        },
+        {
+          "path": "results/unified_exact_round164/review/math_paper.md",
+          "SHA256": "23543db580b6518a6f8102faf02262380b5ad9db2080df084379a22add7345af",
+          "bytes": 6778
+        }
+      ]
+    },
+    {
+      "requirement": "Honest maintained formats",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round137/paper_body.md",
+          "SHA256": "90a8016a47f2194320f6bbc01b7bfeb14bd649776f96593cf59cf05cb5591f9d",
+          "bytes": 80705
+        },
+        {
+          "path": "results/unified_exact_round137/supplement.md",
+          "SHA256": "65b849b34ffff1f4772493be5a80f5ed991d62cefa00f11880e0ee2af91454e6",
+          "bytes": 136065
+        },
+        {
+          "path": "results/unified_exact_round164/review/research_direction.md",
+          "SHA256": "8760da8aa7989f0b10483663c3c4da8b3a6a39fd323b8773a43cfbd4ea6c6bb3",
+          "bytes": 7191
+        }
+      ]
+    },
+    {
+      "requirement": "Correct master CSV or authorized fallback",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/main_table_update.json",
+          "SHA256": "781f7f603d31408db30227e8c9b175b9132b8c0ed7c5634e5b13787be89e9c04",
+          "bytes": 1396
+        },
+        {
+          "path": "results/unified_exact_round164/main_table_reconciliation.md",
+          "SHA256": "bf7321c9c112da3d3094dbb2dbb311cc76a8056bb96fc533ec44b5e4f8588a14",
+          "bytes": 2456
+        },
+        {
+          "path": "results/unified_exact_round164/table_source_binding.json",
+          "SHA256": "c09274231f4e04650ec934d462d6bc56d8161dfcf44b2b137b1f5dfee28aae76",
+          "bytes": 678
+        },
+        {
+          "path": "results/unified_exact_round164/reports/GI_TBC_vs_P_GRB_Round164_Increment.csv",
+          "SHA256": "10695be7c992d469d9882bbf1aebcc27c3276d5cc834b044067d68038ed2d64c",
+          "bytes": 8338
+        },
+        {
+          "path": "results/unified_exact_round164/reports/GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+          "SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+          "bytes": 32685
+        },
+        {
+          "path": "results/unified_exact_round164/review/execution_data.md",
+          "SHA256": "b11373f0861847f619ce2ea8c30e8b80e51dc10348fa40de5895883c4eadda15",
+          "bytes": 6451
+        }
+      ]
+    },
+    {
+      "requirement": "Extra independent review",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/review/identities.json",
+          "SHA256": "27d155cec0d1a12aacafec82af3e2348105a24db600493cb838949c6e5ee6cfd",
+          "bytes": 1841
+        },
+        {
+          "path": "results/unified_exact_round164/review/math_paper.md",
+          "SHA256": "23543db580b6518a6f8102faf02262380b5ad9db2080df084379a22add7345af",
+          "bytes": 6778
+        },
+        {
+          "path": "results/unified_exact_round164/review/execution_data.md",
+          "SHA256": "b11373f0861847f619ce2ea8c30e8b80e51dc10348fa40de5895883c4eadda15",
+          "bytes": 6451
+        },
+        {
+          "path": "results/unified_exact_round164/review/research_direction.md",
+          "SHA256": "8760da8aa7989f0b10483663c3c4da8b3a6a39fd323b8773a43cfbd4ea6c6bb3",
+          "bytes": 7191
+        }
+      ]
+    },
+    {
+      "requirement": "New-only evidence and public recovery",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/carrier_manifest.json",
+          "SHA256": "257342e0ae47077ea72375aeb1332f381c2cddfcf5e662feaf7850ae997d1693",
+          "bytes": 40741
+        },
+        {
+          "path": "results/unified_exact_round164/public_restore_receipt.json",
+          "SHA256": "3f5607a6c1d153f3295f850728ed89f1fb8739dfb02fdc7eb3f2ee5cb96b9d3a",
+          "bytes": 3018
+        },
+        {
+          "path": "results/unified_exact_round164/recovery_failures.json",
+          "SHA256": "9e2667cedb5db3eb0d0d0bbf608fa1a01f9ca5deefee67fc24bf161ae45477d3",
+          "bytes": 770
+        },
+        {
+          "path": "results/unified_exact_round164/infra/publication_exclusion_scan.json",
+          "SHA256": "1c9e6541051046f1429c6eaf22e10f3a48a5015dcc1a39a3db1edfae6b9aba55",
+          "bytes": 359
+        }
+      ]
+    },
+    {
+      "requirement": "Actual Draft publication",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/publication.json",
+          "SHA256": "c60b4b20fd0bd416c9d9e88c4543c45b172d67ed4de53363070c80d00f227554",
+          "bytes": 1480
+        },
+        {
+          "path": "results/unified_exact_round164/publication_base_qualification.json",
+          "SHA256": "76c60713c2a34b3a52a1756687a33b2e0163742b1f78d9c9518f9b785839908e",
+          "bytes": 561
+        },
+        {
+          "path": "results/unified_exact_round164/public_restore_receipt.json",
+          "SHA256": "3f5607a6c1d153f3295f850728ed89f1fb8739dfb02fdc7eb3f2ee5cb96b9d3a",
+          "bytes": 3018
+        }
+      ]
+    },
+    {
+      "requirement": "Closeout and cleanup",
+      "status": "proved",
+      "evidence": [
+        {
+          "path": "results/unified_exact_round164/final_report.md",
+          "SHA256": "ba6ac238709a71c61e85b043cdffb10e7d24096822609c14514ab757535f5f7d",
+          "bytes": 13919
+        },
+        {
+          "path": "results/unified_exact_round164/decision.json",
+          "SHA256": "e5850cf4ef47e3519438c8f8f82cfe0b064829a57e5ae5b5663049a07d13d373",
+          "bytes": 1419
+        },
+        {
+          "path": "results/unified_exact_round164/RESUME.md",
+          "SHA256": "18715be90383925b10ffe12957352b53e8383f035e82cbf2bf560ab8c05b6f26",
+          "bytes": 2574
+        },
+        {
+          "path": "results/unified_exact_round164/cost_report.json",
+          "SHA256": "defb35344c34f8b6ea4e47309a2076990dd115f470a5979371bc73ee75868361",
+          "bytes": 15920
+        },
+        {
+          "path": "results/unified_exact_round164/cleanup_record.json",
+          "SHA256": "239aed86717cd062e997c5b6a5b0dc5cf5729881397af4379761bed2609183f5",
+          "bytes": 1311
+        },
+        {
+          "path": "results/unified_exact_round164/public_restore_receipt.json",
+          "SHA256": "3f5607a6c1d153f3295f850728ed89f1fb8739dfb02fdc7eb3f2ee5cb96b9d3a",
+          "bytes": 3018
+        }
+      ]
+    }
+  ],
+  "mathematical_inputs": 6,
+  "new_formal_arms": 24,
+  "new_pairs": 12,
+  "total_within_input_pairs": 18,
+  "scientific_seconds": 35115.220947325695,
+  "scientific_capacity_seconds": 57600.0,
+  "unused_scientific_seconds": 22484.779052674305,
+  "numeric_science_commit": "b93a8a01ff1b7f3cbee67807be3ac6591db4767f",
+  "science_carrier_commit": "a29a70d132ecc17e18bc48a660225a6380722f45",
+  "PR": 226,
+  "state": "open",
+  "draft": true,
+  "observed_published_science_head": "a29a70d132ecc17e18bc48a660225a6380722f45",
+  "master_fallback": "91 originals preserved; exact12 increment/103 working copy; three unavailable historical records pending union, as goal authorizes",
+  "protected_workspace": {
+    "PASS": true,
+    "trees": 3,
+    "dirty_files": 3
+  },
+  "final_delivery_identity": "containing normal receipt commit, final post-push PR head recorded outside Git to avoid self-reference",
+  "goal_may_complete_only_after_final_normal_push_and_matching_PR_HEAD_readback": true,
+  "no_new_Optimize_or_licensed_performance_rerun": true
+}
