@@ -1,0 +1,30 @@
+{
+  "UTC": "2026-11-12T20:47:51.213654+00:00",
+  "kind": "three actually spawned independent agents",
+  "human_review": false,
+  "licensed_replication": false,
+  "agents": [
+    {
+      "returned_canonical_task": "/root/math_review",
+      "tool": "collaboration.spawn_agent",
+      "report": "review/math_implementation.md",
+      "post_correction": "PASS",
+      "SHA256": "8bcb54d068b6379bc91215f9335c2ec0764a7fd6da617f9767e67b971e0dc7ec"
+    },
+    {
+      "returned_canonical_task": "/root/data_review",
+      "tool": "collaboration.spawn_agent",
+      "report": "review/data_reproducibility.md",
+      "post_correction": "PASS",
+      "SHA256": "f9289fad4029b654ed5a12b8578526c586e808497340714a11237edf4cb4a125"
+    },
+    {
+      "returned_canonical_task": "/root/contribution_review",
+      "tool": "collaboration.spawn_agent",
+      "report": "review/research_manuscript.md",
+      "post_correction": "PASS",
+      "SHA256": "2ae8a2191b136bfad9215a9f4d9924af5078acbb2fc0ba00f3e75cdfc4ca60bb"
+    }
+  ],
+  "parallel_time_accounting": "included once in the shared parent work window; agent durations not added"
+}
