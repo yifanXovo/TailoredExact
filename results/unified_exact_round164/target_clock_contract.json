@@ -1,0 +1,30 @@
+{
+  "UTC": "2026-11-12T11:25:20.220895+00:00",
+  "Optimize": 0,
+  "sources": [
+    {
+      "path": "src/NativeEvidenceJournal.cpp",
+      "current_SHA256": "4812130dff0c605102a4bedca94632684d65ff2bff283c314136578afc49de0d",
+      "measured_CPP_Git_SHA256": "4812130dff0c605102a4bedca94632684d65ff2bff283c314136578afc49de0d"
+    },
+    {
+      "path": "src/ProcessPhaseLedger.cpp",
+      "current_SHA256": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+      "measured_CPP_Git_SHA256": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302"
+    },
+    {
+      "path": "src/main.cpp",
+      "current_SHA256": "290c505269d6a8604b8a1eafba6172c350022dbfe0763acd98f63b51365d05c8",
+      "measured_CPP_Git_SHA256": "290c505269d6a8604b8a1eafba6172c350022dbfe0763acd98f63b51365d05c8"
+    }
+  ],
+  "Cpp_clock": "steady_clock origin set on main entry, after paid wrapper creation",
+  "receipt_order": "close data, compute hash, stamp processElapsedSeconds, close receipt",
+  "supervisor_clock": "record observation seconds relative to started marker; wrapper_wall_seconds is the matching observed window",
+  "paid_upper": "effective_available_seconds + T_produce - wrapper_wall_seconds, capped at producer close",
+  "journal_receipt_availability_lower": "original C++ precommit timestamp; not native find time",
+  "earliest_any_saved_fleet_lower": "unknown, conservatively zero; other full-witness emitters may precede the first qualifying receipt",
+  "endpoint_only": "producer-close upper bound; no backdated verifier clock",
+  "producer_or_T_cert_changed": false,
+  "numerical_objective_threshold_changed": false
+}

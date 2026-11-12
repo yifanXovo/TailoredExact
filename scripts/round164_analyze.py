@@ -181,9 +181,18 @@ def target_arrival(arm,launch,observations,result,producer,completion,target):
         physical=full_fleet(ROOT,launch['panel'],witness)
         if physical['F']<=target+TOL:
             upper=min(producer['T_produce'],record['effective_available_seconds']+excluded)
+            # The C++ receipt timestamp is taken after the data file closes,
+            # before the receipt closes. It lower-bounds this receipt-qualified
+            # journal availability on the paid clock because main starts after
+            # the paid wrapper origin. Earlier unclocked full-witness emitters
+            # can still exist, so the global earliest-save lower stays unknown.
+            journal_lower=record['data_close_seconds']
+            assert 0<=journal_lower<=upper+1e-6
             events.append(dict(sequence=record['sequence'],source=witness['source'],F=physical['F'],
                 event_data_close_seconds=record['data_close_seconds'],
                 supervisor_first_observed_seconds=record['first_observed_seconds'],
+                receipt_qualified_journal_availability_lower_seconds=journal_lower,
+                receipt_qualified_journal_availability_upper_seconds=upper,
                 paid_clock_interval_lower_seconds=0.,paid_clock_interval_upper_seconds=upper,
                 exact_first_find=False,full_fleet_replayed=True))
     final=full_fleet(ROOT,launch['panel'],result);endpoint_hit=final['F']<=target+TOL
@@ -196,6 +205,8 @@ def target_arrival(arm,launch,observations,result,producer,completion,target):
         paid_clock_upper_seconds=upper,window_end_T_produce=producer['T_produce'],
         unseparated_wrapper_offset_upper_seconds=excluded,qualifying_saved_events=len(events),
         final_F=final['F'],final_witness_hits=endpoint_hit,exact_first_discovery_time_known=False,
+        earliest_qualifying_journal_sequence=first['sequence'] if first else None,
+        journal_availability_is_not_proven_earliest_other_saved_fleet_time=True,
         clocks='committed journal availability plus all producer time outside the matching supervisor window, including prelaunch; no interpolation or verification-clock backfill',
         production_target_used=False)
 
