@@ -88,8 +88,20 @@ been moved into research navigation. §3.5 explicitly limits E+ evidence to
 its actual runs. Mathematical conventions for within-input Seed differences,
 medians and target-arrival bounds are added without a new theorem. The whole
 old §5.4 was compared against the fixed R163 source and is unchanged. Final
-Round164 data tables, §6.5 consolidation and outcome-dependent §7/abstract
+Round164 data tables and outcome-dependent §7/abstract
 conclusions are still pending and must use the completed panel.
+The historical portion of §6.5 has now been consolidated: one Seed0 table,
+one certificate/endpoint synthesis, scoped E+ time evidence and unresolved
+inventory widths. Detailed helper/aggregate cost numbers remain in the
+existing supplement. Its new full-cohort Seed tables are still pending.
+
+Observed checkpoint after position16: C35's new Seed1/2 B/P pairs are both
+OPEN. Their ΔU values are -0.05019444614122501 and -0.03868051944646218,
+and ΔL values are +0.013474334563162379 and +0.009334377692335702.
+Seed0 retained P's better feasible U and B's stronger L. Therefore P's C35
+primal advantage is not consistent across all three Seeds; B's higher L is
+observed on all three. This does not identify a causal operator or a new
+certificate. The complete final readback is still deferred to panel close.
 
 The offline target-arrival clock conversion was corrected before any final
 analysis: journal availability is relative to the supervisor `started`
