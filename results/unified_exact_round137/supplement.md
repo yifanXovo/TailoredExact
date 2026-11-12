@@ -257,7 +257,7 @@ Complete panel observations accompany the compact question-led main text. Shared
 | 119 /D2-mechanism | UC-B20-B /1 | minus \(C_R\) | C | 0.577333 | 0.577333 | 4.60284 /2.24667 /6.8495 |
 | 120 /D2-mechanism | UC-B20-B /1 | minus \(C_G\) | C | 0.577333 | 0.577333 | 2.95877 /1.70396 /4.66273 |
 
-## Current stage analysis
+## Historical Round137 stage analysis
 
 ### Round137 GI-TBC scientific stage report
 
@@ -621,7 +621,9 @@ Observed Seed0 mechanism decisions are recorded separately from native solver no
 
 In particular A/B deletion on K-15-S/K-20-S reaches only the no-strict terminal, whereas full/C_R-deleted/C_G-deleted versions also have a finite native-target gate. The same configured policy may therefore realize different actions after a formulation change. No same-trajectory or MIP-only causal interpretation is inferred from a single-group switch.
 
-#### Stage decision and next research
+#### Historical Round137 stage decision and research priorities
+
+The following three priorities are preserved historical Round137 text. They are superseded as current next-stage instructions by the single Round163 question and prerequisites in [paper body section 7.1](paper_body.md#71-one-next-research-question) and the [Round163 decision](../unified_exact_round163/decision.json).
 
 Retain the accepted GI-TBC configuration, tau=.08, pair-only and AP off. This finite consolidation does not select a new mechanism or per-instance setting. Earlier R132 breadth, R134 confirmation and R135 mixed/negative AP results remain scientifically usable with their original identities. The fixed-denominator R133 original-objective gap precludes attributing all hard cases to a changing denominator; R132 strict service-coordinate evidence and R134 TC/AP comparisons are prior results, not unstudied gaps.
 
@@ -1174,3 +1176,54 @@ The independent checker reconstructs these combinations with exact rational arit
 The research default-off writer and original E3 produce identical complete canonical LP bytes on the qualified small and medium fixtures, at a root interval and a positive lower endpoint. Actual S12 CLI runs bridge original E3 to research default-off, and validate independent H and full Start submission for both candidates. Each uses the legal inclusive-root LP then restored-integer MIP workflow. Default-off equivalence is a semantic/matrix bridge; the two executable byte strings are different and are never described as identical.
 
 All 24 admitted C workflows are now sealed. Geometry deletion gives 2 Win, 4 Lose and 2 UNDETERMINED; full W projection gives 3 Win, 3 Lose and 2 UNDETERMINED against the same-build inclusive-root baseline. All 16 candidate/baseline comparisons have identical complete realized H, matching root intervals/cutoffs and actual native exposure. The continuous root objectives agree within the original numerical policy, while Work/nodes and complete costs vary in both directions. This supports mixed expression costs, not a stronger ideal relaxation or automatic production replacement. D remains the original frozen algorithm and its measurements do not come from this research build.
+
+
+## Round163 structural-stage evidence and prospective protocol
+
+The original R132/R134/R137 observations above retain their measured versions,
+Seeds, budgets and denominators. They are not concatenated with Round163 as
+independent samples. The frozen B/E+/P comparison has six new configurations,
+18 separately paid arms, one Gurobi Seed and no result-dependent redraw or
+candidate switch. It is prospective confirmation on archived-source station
+data with synthetic inventories/targets/weights, not new cities or independent
+observed-demand validation. All six become exposed after this study.
+
+The [fixed recipe](../unified_exact_round163/source_recipe.json),
+[six-input identities](../unified_exact_round163/input_manifest.json),
+[source overlap disclosure](../unified_exact_round163/source_overlap.json) and
+[18 complete commands](../unified_exact_round163/matrix_frozen.json) preserve
+the pre-performance protocol. The [stage synthesis](../unified_exact_round163/structural_synthesis.md)
+gives the inherited-conclusion/evidence/new-increment/inference-boundary table;
+its [source map](../unified_exact_round163/historical_source_map.json) binds all
+25 directly read files to fixed commits and byte hashes. The expanded
+[mathematical analysis](mathematical_analysis.md) states the actual helper
+epigraph objective, nested-domain premises, coverage/cutoff contracts and gap
+identity. No previous producer or full historical raw carrier is replayed.
+
+The three methods share the actually hashed R162 complete_v2 C++ executable
+and Gurobi 13.0.2. E+ additionally invokes the unchanged historical Python
+RN16384 inventory helper on its own canonical root; its mixed implementation
+and complete paid cost are explicit. Every arm has one production deadline.
+The ordinary C++ methods, helper, stable profiles, complete physical objective,
+loaded-return convention and numerical qualification remain fixed.
+The final tables and algorithm choice are appended only after all 18 arms
+and their original-objective audits close.
+
+
+## Round163 completed configuration evidence
+
+All six first-valid inputs and all 18 qualified endpoints are retained. The [complete table](../unified_exact_round163/reports/complete.csv), [binary64 endpoints](../unified_exact_round163/reports/complete_arms.json), [three comparisons](../unified_exact_round163/reports/comparisons.csv) and [helper/fee interpretation](../unified_exact_round163/final_report.md) give the full denominator, original gap policy, T_cert/T_produce/T_verify/T_total, actual Native Work/nodes, own-H and helper costs. [Stage choice](../unified_exact_round163/decision.json), [closed fees](../unified_exact_round163/cost_report.json) and [science identities](../unified_exact_round163/science_identity.json) separate the paper algorithm, frozen research implementation and released main.
+
+Retain uniform GI-TBC/B as the paper's main algorithm. Keep uniform E+ as a separately named, limited proof enhancement, with its genuine X35 gain and earlier qualified R154/R156 gains preserved. This complete panel does not justify replacing B as the main recommendation; the current broad-promotion attempt ends here. No per-input best-of-B/E+ method or released-default change is made.
+
+Both B and E+ certify 3/6 configurations, versus cold P 1/6. B/E+ have identical verified physical U on all six. E+ raises X35's final qualified L from B's .3949882559151472 to .42319954961578576 at U=.45747531701601785; the original relative gap falls from 13.659110945800548% to 7.492375244155952%. The other five final proof endpoints are equal. E+'s X35 raw search L is .39492875817006656, slightly below B's; the improvement is the separate qualified proof source, not an improved raw AM/Native bound. No additional certificate or primal improvement is observed.
+
+The three both-certified E+/B paid T_cert ratios are 1.130665945756784, 1.3357446355323432 and 1.0515856109492556. E+ pays 256.7365551 helper seconds inside its original deadlines, replacing some Native opportunity on capped runs. Aggregate audit-inclusive T_total is 7506.416129835416 seconds for E+ and 7451.303745185491 for B, a 55.112384649924934-second increase; helper time is not added again. Uniform E+ is a serious alternative when stronger proof information on an OPEN case is valued more than these certificate-time costs: its one material proof gain comes with no U or certificate loss and only about .74% more aggregate cost here. We nevertheless retain B as main under the fixed certificate/paid-time/endpoints criteria: certificate count does not increase, all three joint-CERT paid times worsen, and the final proof benefit occurs on one of six configurations. This is a scoped tradeoff, not a claim that E+ is generally ineffective or that every instance must improve.
+
+B and E+ each have lower U than P on three configurations, higher U on C35-U, and equal U on two. Each has substantively higher proof L than P on five configurations and equal qualified endpoints on the remaining certified B20 case. On C35-U, P's U=.09331934374779818 is strictly better than B/E+'s .12956638965196035, while B/E+ have stronger L; this opposition is retained. The one joint-CERT B/P or E+/P time ratio conditions on B20 alone. No full-panel time superiority or universal P-GRB dominance is inferred from a single Seed.
+
+C20, B20 and X20 finish with search L beyond their qualified inventory value uppers. C35's inventory result is numerically near zero, not an exact-zero physical proof. B35 and X35 prices stop at RN16384 with widths .014387103336740467 and .02295563610060769. B35's returned floor is below final search L but its inventory upper is above it; X35's floor contributes to the final proof while its price remains unresolved. Old R156's small same-domain remainder therefore cannot be generalized to these new prices. No larger capacity, alternate price, Seed or candidate is tried.
+
+The [master-table receipt](../unified_exact_round163/main_table_update.json) appends only verified B/P pairs to the existing CSV copies; E+ is separately labelled throughout. The [final report](../unified_exact_round163/final_report.md) and [delivery/recovery status](../unified_exact_round163/RESUME.md) link independent review identities and the bounded new-only public recovery. Original source-row overlaps and retrospective master-table reconciliation are disclosed without changing the frozen generation or selecting on outcomes.
+
+Maintained Markdown body/math/supplement are authoritative for this revision. The pre-existing R137 manuscript PDF is an earlier historical snapshot; no TeX source was substantively changed, so no updated PDF is claimed.

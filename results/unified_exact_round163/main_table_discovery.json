@@ -108,5 +108,12 @@
   "replicas_equal": true,
   "preserve_existing_bytes_and_encoding": true,
   "classification_policy": "Do not infer unconfirmed Win/Lose thresholds; leave new classification blank and state certificate/U/L facts",
-  "prospective_ids_absent": true
+  "prospective_ids_absent": true,
+  "raw_schema_readback": "main_table_schema_readback.json",
+  "raw_columns": 28,
+  "source_header_cells": [
+    "",
+    ""
+  ],
+  "clarification": "The initial dict-key view has 27 unique keys because two source header cells are empty; actual CSV has 28 fields in every row. Original bytes are retained."
 }

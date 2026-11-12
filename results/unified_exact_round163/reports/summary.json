@@ -1,0 +1,99 @@
+{
+  "methods": {
+    "B": {
+      "n": 6,
+      "CERT": 3,
+      "OPEN": 3,
+      "T_produce": 7438.697116414551,
+      "T_verify": 12.606628770940006,
+      "T_total": 7451.303745185491,
+      "H_seconds": 22.949673800000003,
+      "helper_seconds": 0.0,
+      "Native_Work": 17941.227251288434,
+      "Native_nodes": 43301
+    },
+    "Eplus": {
+      "n": 6,
+      "CERT": 3,
+      "OPEN": 3,
+      "T_produce": 7472.606805494055,
+      "T_verify": 33.80932434136048,
+      "T_total": 7506.416129835416,
+      "H_seconds": 23.2267352,
+      "helper_seconds": 256.7365551,
+      "Native_Work": 17394.294114943845,
+      "Native_nodes": 42932
+    },
+    "P": {
+      "n": 6,
+      "CERT": 1,
+      "OPEN": 5,
+      "T_produce": 9692.865923624486,
+      "T_verify": 4.6896135518327355,
+      "T_total": 9697.555537176318,
+      "H_seconds": 0,
+      "helper_seconds": 0.0,
+      "Native_Work": 20482.326007245792,
+      "Native_nodes": 293200
+    }
+  },
+  "pairs": {
+    "B_vs_P": {
+      "n": 6,
+      "candidate_CERT": 3,
+      "control_CERT": 1,
+      "joint_CERT": 1,
+      "paid_cert_ratios": [
+        0.0214465738525656
+      ],
+      "lower_U": 3,
+      "higher_U": 1,
+      "higher_proof_L": 5,
+      "lower_proof_L": 0,
+      "total_cost_delta": -2246.2517919908278,
+      "original_gap_policy_retained": true
+    },
+    "Eplus_vs_B": {
+      "n": 6,
+      "candidate_CERT": 3,
+      "control_CERT": 3,
+      "joint_CERT": 3,
+      "paid_cert_ratios": [
+        1.130665945756784,
+        1.3357446355323432,
+        1.0515856109492556
+      ],
+      "lower_U": 0,
+      "higher_U": 0,
+      "higher_proof_L": 1,
+      "lower_proof_L": 0,
+      "total_cost_delta": 55.112384649924934,
+      "original_gap_policy_retained": true
+    },
+    "Eplus_vs_P": {
+      "n": 6,
+      "candidate_CERT": 3,
+      "control_CERT": 1,
+      "joint_CERT": 1,
+      "paid_cert_ratios": [
+        0.02864714597411272
+      ],
+      "lower_U": 3,
+      "higher_U": 1,
+      "higher_proof_L": 5,
+      "lower_proof_L": 0,
+      "total_cost_delta": -2191.139407340903,
+      "original_gap_policy_retained": true
+    }
+  },
+  "complete_arms": 18,
+  "configurations": 6,
+  "Seed": 0,
+  "archived_source_prospective_confirmation": true,
+  "independent_cities_or_IID": false,
+  "no_OPEN_dropped_for_global_time_claim": true,
+  "raw_runner_reporting_corrections": [
+    "actual helper_process_seconds field",
+    "post-reader trailer included through outer exit"
+  ]
+}

@@ -4,6 +4,8 @@
 
 Static bicycle redistribution couples integer station stocks with routes, prefix loads and handling time. We develop GI-TBC (Gini-interval tailored branch-and-cut), sharing finite inventory states between service and objective information, retaining valid supply/support inequalities and complete objective-interval coverage. The formulation preserves empty departure, loaded return and unique nonzero one-way service; we establish implicit service integrality and the physical embedding and termination conditions. In a prospectively registered twelve-input Seed 0 breadth panel, GI-TBC obtains 9/12 qualified certificates, versus 7/12 cold compact and 7/12 independently paid-start compact. A separately designed four-base/eight-configuration positive-objective resource panel, within-configuration weights, three AM thresholds, four mechanism contrasts and a limited second Seed distinguish complete-method performance from mathematical strengthening. All adverse and open outcomes are retained. Earlier multi-source validation and fixed-denominator objective-gap evidence remain separately identified. The evidence supports a finite stage conclusion, while positive-objective scale and conditional mechanism effects delimit generalization.
 
+ The separately frozen B/E+/P confirmation then completes all 18 arms on six archived-source new configurations. B and E+ certify 3/6 and cold compact P 1/6. E+ retains every B physical upper and raises one final proof lower, but delays all three paired certificates; we retain B as main and E+ as a limited proof supplement.
+
 ## 1. Introduction
 
 Redistribution vehicles can improve station availability only when the chosen inventory vector can be realized by feasible routes and loading operations. Supply must be collected before it is delivered, capacity applies at every route prefix, and handling consumes the same time budget as travel. When equity is measured by inventory-to-target ratios, the final inventory vector also determines both the numerator and denominator of the Gini coefficient. These dependencies make routing and inventory allocation inseparable.
@@ -175,6 +177,42 @@ This proposition does not turn floating-point native calculations into exact rat
 **Proof.** For every original physical solution, \(F\ge0\). The verified fleet gives \(F^*\le0\), so \(0\le F^*\le0\). With positive \(\lambda\) and positive weights, integer equality \(Y_i=D_i\) for every station is a sufficient exact-zero condition. More generally equal exact ratios give zero Gini, and every positive-weight penalized station must meet its target. The implementation checks these conditions using integer stock arithmetic, then repeats the complete physical-fleet verification. A merely small positive floating objective does not establish exact zero. \(\square\)
 
 The numerical \(\varepsilon\)-certificate policy is separate. A source-rejected positive solution without a sufficient independent bound remains open. Certification cost includes the verification needed to establish the proof, normal native cleanup and required output. A later offline audit cannot backdate a production proof.
+
+### 3.5 A separately paid proof-only inventory source
+
+The frozen enhancement E+ augments GI-TBC/B with an independently computed,
+qualified inventory lower bound. It uses the run's own first canonical root,
+actual supported inventories and valid final-stock total bounds. On an
+epigraph interval \([\gamma_L,\gamma_U]\), its objective and domain are
+
+\[
+ \min_Y\;\max\{\gamma_L,G_{\rm true}(Y)\}
+       +\lambda\sum_i\omega_i|Y_i/D_i-1|,
+ \qquad G_{\rm true}(Y)\le\gamma_U.
+\]
+
+The lower interval endpoint constrains the epigraph; it does not impose
+\(G_{\rm true}\ge\gamma_L\). At \(S=0\), \(G_{\rm true}=0\).
+The inherited exact hard-total dynamic program and one uniform RN16384
+producer retain their original absolute price gap, zero/fallback handling,
+scope qualification and global deadline. This is an application of established
+integer-inventory, normalization and proof-ledger techniques, not a new general
+fractional-programming or convex-hull theorem.
+
+Only an applicable proof ledger consumes the returned floor. Formal Native
+rows, raw AM bounds, hints, Starts and branching inputs keep their intended B
+design. On a common domain, independent bounds combine by maximum; complete
+covering regions combine by minimum, including each source's cutoff
+complement. Helper rejection supplies no new floor and retains the independent
+B information. Every E+ run pays its own H, root, DP/RN work and qualification.
+That cost changes remaining search time, and legitimate early certification
+can change the finite trajectory. Preserving the formal expression therefore
+does not guarantee identical B/E+ physical incumbents or solve times.
+
+The C++ complete-method implementation and the historical Python inventory
+helper are separately identified in the supplement. No per-instance, source,
+scale, machine-speed or elapsed-time enhancement switch is used. Stable B and
+the paper recommendation remain separate from released defaults.
 
 ## 4. Computational design
 
@@ -486,15 +524,99 @@ The saved initial domain/objective/cutoff and independently paid H determine whi
 
 These rows summarize the observed conditional findings. The full Seed 0 and separately identified Seed 1 tables retain every selected role, and the accompanying paired/root and cost reports determine where numerical root attribution is actually exposed. Shared inventory-state/core products are retained throughout the current mechanism study, so they have no isolated runtime effect assigned here.
 
+### 6.4 Structural information and complete algorithm value
+
+The later structural studies separate five questions: exclusion of an old
+point, improvement of a freely reoptimized same-scope LP, improvement of a
+paid Native call, improvement of the complete own-H method, and confirmation
+on configurations outside candidate development. These evidence levels are
+not interchangeable. Existing STOCK certificate gains, selected reciprocal
+normalization and GD improvements, and inventory-hull/proof-floor increments
+remain positive evidence. Their adverse and mixed complete outcomes limit
+uniform adoption; they are not erased by the stage choice.
+
+The physical projection, an integer resource necessary domain and an inventory
+necessary domain can be ordered only with a proved common objective/scope
+embedding. A continuous expression replacement does not acquire an ordering
+from integer equivalence alone. The retained four-station example has an exact
+\(1/4\) original-objective gap on its fixed-positive-total slice even with the
+complete joint service hull. At the loaded coefficient the inherited proof
+also minimizes over all legal loaded-return totals; the physical problem is
+not newly restricted to that slice. It distinguishes service compatibility from the integer
+objective epigraph without needing a changing Gini denominator. Shared-state
+movement/visit links strengthen the fractional representation; they remain
+unnecessary as premises of the implicit-integrality lemma.
+
+The full-physical shared-G completion study illustrates the same distinction
+on real saved sources. Both old points fail the fixed completion diagnostic,
+but RX35 freely remixes to the same qualified LP value. NB35 gains about
+\(.00018725\); one projected row retains about 87% on that fixed scope, with
+5348 original-column terms. Removing the complete duration rows removes the
+gain conditional on the remaining Q; it does not prove time alone sufficient
+or separate travel from handling. In six complete primary-role arms PC has
+worse U than both fresh controls, equal proof L and no certificate. The
+permitted stop leaves four positions unstarted, not four-role confirmation.
+
+For one common global inventory relaxation and original physical problem,
+\(L_I\le f_I^*\le U_I\) and \(f_I^*\le f_P^*\le U_P\) give
+
+\[
+ U_P-L_I=(U_P-f_P^*)+(f_P^*-f_I^*)+(f_I^*-L_I).
+\]
+
+Only the last term is controlled by \(U_I-L_I\). The small same-scope R156
+inventory remainder limits further precision of that scalar floor, while
+incumbent suboptimality may still contribute to the remaining complete gap.
+Local interval/cutoff bounds require the coverage contract before any global
+interpretation. A small continuous-Q increment is not an upper bound on the
+integer physical gap. The supplement pins the inherited proofs, positive and
+negative experiments, domains and numerical qualifications. These observations
+close the current finite continuation, not every possible future structural
+mechanism.
+
+### 6.5 Frozen prospective configuration confirmation
+
+The recipe and methods were committed before once-only generation; the six-input seal preceded the single tiny qualification smoke, and all 18 commands were committed before the first formal run. The balanced/surplus and shortage selections were retained regardless of observed difficulty or floor value. No performance-dependent redraw, seed grid, role-dependent algorithm or early panel stop was used. Three archived sources, two sizes and three compact/three regional selections provide finite configuration coverage. Synthetic inventories, targets and weights are not observed demand. This is prospective confirmation on archived sources, not new-city or IID validation. All six configurations are now exposed.
+
+Each configuration has independently paid B, E+ and cold P runs under one common PE/DLL, original physical T, actual lambda and cap. The n20 cap is 1200 s and n35 cap 2400 s, including startup and helper. P has NumStart=0; B/E+ each execute their own H. Original complete fleets are independently recomputed. Qualified proof endpoints and the inherited signed/near-zero certificate policy determine state. OPEN cap values are not certificate times.
+
+**Table 13. New configuration confirmation, separate from the previous panels.** Each entry is state, physical U / qualified proof L, then paid T_cert for CERT (seconds). Full binary64 values, verification costs, Work/nodes and source identities are in the supplement.
+
+| Configuration | B | E+ | P |
+|---|---|---|---|
+| R163-C20-S | CERT; 0.1912805923 / 0.1912805923; T_cert=199.7793504 | CERT; 0.1912805923 / 0.1912805923; T_cert=225.8837082 | OPEN; 0.1912805923 / 0.1602342164 |
+| R163-B20-B | CERT; 0.4232321817 / 0.4232321817; T_cert=5.058292441 | CERT; 0.4232321817 / 0.4232321817; T_cert=6.756586993 | CERT; 0.4232321817 / 0.4232321815; T_cert=235.8555019 |
+| R163-X20-S | CERT; 0.4477476266 / 0.4477476266; T_cert=119.7493879 | CERT; 0.4477476266 / 0.4477476266; T_cert=125.9267332 | OPEN; 0.4609477662 / 0.2616496512 |
+| R163-C35-U | OPEN; 0.1295663897 / 0.01983750282 | OPEN; 0.1295663897 / 0.01983750282 | OPEN; 0.09331934375 / 0.008286772138 |
+| R163-B35-S | OPEN; 0.1942903111 / 0.1202340026 | OPEN; 0.1942903111 / 0.1202340026 | OPEN; 0.2492530135 / 0.1139794085 |
+| R163-X35-S | OPEN; 0.457475317 / 0.3949882559 | OPEN; 0.457475317 / 0.4231995496 | OPEN; 0.5415306805 / 0.362971432 |
+
+The all-six certificate counts are B 3/6, Eplus 3/6, P 1/6. B/P tests the integrated stable method; E+/B tests the enhancement and E+/P its complete competitiveness. Both-certified time ratios are conditioned on their reported intersection; every OPEN endpoint and its paid cost remains in the full panel. Single-Seed timing differences are observations, not runtime-distribution estimates. No result is formed by choosing B or E+ per configuration.
+
+Both B and E+ certify 3/6 configurations, versus cold P 1/6. B/E+ have identical verified physical U on all six. E+ raises X35's final qualified L from B's .3949882559151472 to .42319954961578576 at U=.45747531701601785; the original relative gap falls from 13.659110945800548% to 7.492375244155952%. The other five final proof endpoints are equal. E+'s X35 raw search L is .39492875817006656, slightly below B's; the improvement is the separate qualified proof source, not an improved raw AM/Native bound. No additional certificate or primal improvement is observed.
+
+The three both-certified E+/B paid T_cert ratios are 1.130665945756784, 1.3357446355323432 and 1.0515856109492556. E+ pays 256.7365551 helper seconds inside its original deadlines, replacing some Native opportunity on capped runs. Aggregate audit-inclusive T_total is 7506.416129835416 seconds for E+ and 7451.303745185491 for B, a 55.112384649924934-second increase; helper time is not added again. Uniform E+ is a serious alternative when stronger proof information on an OPEN case is valued more than these certificate-time costs: its one material proof gain comes with no U or certificate loss and only about .74% more aggregate cost here. We nevertheless retain B as main under the fixed certificate/paid-time/endpoints criteria: certificate count does not increase, all three joint-CERT paid times worsen, and the final proof benefit occurs on one of six configurations. This is a scoped tradeoff, not a claim that E+ is generally ineffective or that every instance must improve.
+
+B and E+ each have lower U than P on three configurations, higher U on C35-U, and equal U on two. Each has substantively higher proof L than P on five configurations and equal qualified endpoints on the remaining certified B20 case. On C35-U, P's U=.09331934374779818 is strictly better than B/E+'s .12956638965196035, while B/E+ have stronger L; this opposition is retained. The one joint-CERT B/P or E+/P time ratio conditions on B20 alone. No full-panel time superiority or universal P-GRB dominance is inferred from a single Seed.
+
+C20, B20 and X20 finish with search L beyond their qualified inventory value uppers. C35's inventory result is numerically near zero, not an exact-zero physical proof. B35 and X35 prices stop at RN16384 with widths .014387103336740467 and .02295563610060769. B35's returned floor is below final search L but its inventory upper is above it; X35's floor contributes to the final proof while its price remains unresolved. Old R156's small same-domain remainder therefore cannot be generalized to these new prices. No larger capacity, alternate price, Seed or candidate is tried.
+
+The proof-only helper changes applicable proof information without adding its floor to Native rows or raw AM. The detailed return-time/floor/search-L ledger distinguishes dominated inventory values, zero optima, rejected sources and capacity-limited pricing. It also discloses the unchanged historical Python helper and its real paid process duration. A tighter inventory proof source is not a physical incumbent and does not imply net complete-method improvement.
+
 ## 7. Conclusions and implications
 
-GI-TBC retains the accepted shared inventory/service representation, pair-only resource strengthening, complete own startup and Gini-interval coverage. On the twelve-input current breadth panel it certifies 9/12, versus P 7/12 and PS 7/12; the independent positive-resource panel certifies 4/8, versus P 0/8 and PS 0/8. Substantive comparator reversals, opposing primal/dual endpoints, finite AM/Seed exposure and any open positive-objective 35-station results delimit the conclusion. The bounded conditional mechanism results include reversals of all three K-15-S deletion-time directions in the preselected second Seed; they do not justify per-instance settings, additive speed-up attribution or a new default. We retain \(\tau_{\mathrm{AM}}=.08\) and AP off. The next study should target an actual positive-objective bottleneck and the established integer-stock/original-epigraph gap, rather than purchase a generic stability grid or relabel previous negative candidates.
+The established physical equivalence, shared-state formulation and coverage proof remain the algorithmic foundation. The separately registered historical panels retain their own versions, Seeds and denominators: the twelve-input breadth panel certifies 9/12 versus P 7/12 and PS 7/12, and the independent positive-resource panel certifies 4/8 versus P 0/8 and PS 0/8. The mechanism, AM and limited Seed studies retain their adverse results and conditional interpretation; Round163 is not appended to them as an IID sample.
 
-### 7.1 Research priorities
+Retain uniform GI-TBC/B as the paper's main algorithm. Keep uniform E+ as a separately named, limited proof enhancement, with its genuine X35 gain and earlier qualified R154/R156 gains preserved. This complete panel does not justify replacing B as the main recommendation; the current broad-promotion attempt ends here. No per-input best-of-B/E+ method or released-default change is made.
 
-1. **Positive-objective primal/dual bottlenecks under physical resources.** Witnesses: R-X20-S-T1 has the same verified U=0.64532503 for all three methods, but only GI-TBC certifies; K-35-U has P U/L=0.6647466/0.33555562 and GI-TBC 0.69285436/0.56576568; R-X35-S-T2 remains open for GI-TBC at U/L=0.403272/0.21088702, and its saved \(\rho=1\) incumbent is dominated in \(G/P_{\mathrm{avg}}\) by the saved \(\rho=2\) feasible plan at the same physical input/T (0.14845888/0.18804694 versus 0.18254959/0.22072241). The first is a dual-proof gap without a missing best feasible objective, the second is an opposed primal/dual endpoint result, and the third retains both a substantial positive-resource gap and an offline witness that its own saved incumbent can improve. These post hoc comparisons do not replace production endpoints or transfer starts. Hypothesis: uniformly valid inventory/service/resource information can improve proof progress while a separate incumbent-search deficit persists on some hard configurations. Minimal next step: inspect saved root-to-final bound and route progress on one retained \(n=35\) dual-T pair and K-35-U; separate a primal deficit from a dual deficit before formulating one uniform structural modification. These are research witnesses chosen from the completed study, not new validation positions or a reason for immediate long convergence runs.
+This recommendation combines correctness and evidence completeness, certificate counts, paid times on both-certified configurations, and both endpoints plus actual costs on OPEN configurations. The frozen research configuration, paper recommendation and released main/defaults are distinct. This study changes no released default and merges no predecessor PR. The earlier R161/R162 continuous-Q continuation is closed at its tested scope. The old R156 near-tight inventory remainder does not apply to the new B35/X35 capacity-limited prices; these remain interval-valued results, without a capacity increase in this study. No claim rules out all future structural progress.
 
-2. **Integer inventory and original-objective epigraph information.** The fixed-denominator four-station reference, preserved in the supplement, retains a 1/4 original-objective gap at fixed S=3 even with the complete tiny joint-service hull; The previously tested threshold-count (TC) extension of that reference closes 3/16 on its stated reference but leaves 1/16; its two saved real roots show no reliable further objective increment. Hypothesis: joint integer stock/epigraph/resource information can matter beyond marginal state penalties and labelled service compatibility. Minimal next step: one full-universe valid witness/extension on the saved tiny reference, followed by an explicit real-domain validity interface before production. Do not transplant a four-station support bound after deleting outside suppliers.
+### 7.1 One next research question
 
-3. **AM child information versus complete proof cost.** Witness: K-35-U has decision-state U=0.7674566, parent bound 0.20017766 and child bounds 0.20017766/0.54526678. The weaker side gives no strict minimum-bound improvement, so the rule schedules exact-close before a finite threshold comparison; the three Seed 0 thresholds retain this terminal class and the final runs remain open. This is not a failed tau crossing. Together with the paired complete-cost records and prior AM construction and threshold-validation evidence, preserved in the supplement, it motivates the hypothesis that structural child asymmetry can distinguish proof effort beyond a scalar two-sided improvement summary. Minimal next step: one bounded saved-state comparison using the same valid child information and exact coverage, explicitly separating eligibility/no-strict terminal logic from a proposed structural score or continuation. Do not use elapsed machine time to switch algorithm or leaf policy.
+On exposed R163-C35-U, can the saved B fleet's entire ownership/visit-order skeleton attain the already verified P objective .09331934374779818 when all legal integer service quantities, directions and activations within that skeleton are jointly optimized, or is a qualified restricted-domain lower strictly above that target? The saved B U=.12956638965196035 and P feasible fleet establish at least .03624704590416217 of B incumbent suboptimality; the question localizes this witnessed deficit without assigning the whole remaining proof gap to physical coupling.
 
+First reconcile the already existing R96 full fixed-order quantity diagnostic (scripts/round96_fixed_route.py). Its whole-skeleton domain and one-hot-Gini formulation are inherited, not a new value object or mechanism; only C35 target-attainability would be new configuration-specific information here. Reuse what is faithful and establish the current complete restricted-domain contract before any new solve. The value V(Pi_B) must contain the saved parent fleet: keep its assigned vehicle and relative visit order, allow legal zero-service visit deletion and every legal integer service/direction choice for its stations, and retain all other stations at their original inventories. Prove objective-preserving expansion/contraction at the actual travel coefficients, with original inventory supports, unique one-way nonzero service, empty departure, every prefix capacity, loaded return/unloading, physical T and loaded lambda. Preserve the true-Gini/epigraph distinction and S=0 convention. A complete restricted-domain objective-level certificate or an independently checkable feasible fleet is needed; UNKNOWN remains UNKNOWN.
+
+Before execution, justify an explicit completeness argument, bounded computational/state cost and affordable additional information beyond the existing R96 diagnostic and already known P domination; otherwise stop at the prerequisite. Local quantity descent, the R159 restriction/fixed-combination diagnostics, a larger R160 block/pass/node budget, generic master-oracle work and another continuous-Q/product or RN-capacity variation do not meet this gate. A feasible result addresses this saved skeleton only; a lower above the target requires an ownership/order/station-set change to reach that target but supplies no global physical lower. Neither result is a complete-method benefit or permission to transfer P's fleet into production. Any later candidate requires a genuinely new uniform own-state computation and complete paid evidence. This round executes no R96 query or other next-stage work.
+
+No next-stage producer, mechanism or parameter expansion is part of this study.
