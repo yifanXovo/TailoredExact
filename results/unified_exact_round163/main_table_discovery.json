@@ -1,0 +1,119 @@
+{
+  "UTC": "2026-11-11T18:23:37.713050+00:00",
+  "tables": [
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "SHA256": "0648bdc3b297fbb1c34de3cbc9bede5718c0c8cdfa2656462bcff457b0ab8718",
+      "bytes": 21230,
+      "encoding": "gb18030",
+      "columns": [
+        "实例",
+        "站点数_不含仓库",
+        "车辆数",
+        "场景",
+        "场景代码",
+        "数据来源",
+        "空间分布",
+        "路线时限_T_秒",
+        "目标权重_lambda",
+        "权重倍数_lambda相对0.15",
+        "Gurobi_Seed",
+        "重复序号",
+        "数据轮次",
+        "求解时限_秒",
+        "GI_TBC_状态",
+        "GI_TBC_收敛时间_秒",
+        "GI_TBC_未收敛Gap_百分比",
+        "GI_TBC_LB",
+        "GI_TBC_UB",
+        "P_GRB_状态",
+        "P_GRB_收敛时间_秒",
+        "P_GRB_未收敛Gap_百分比",
+        "P_GRB_LB",
+        "P_GRB_UB",
+        "对比结果",
+        "对比说明",
+        ""
+      ],
+      "rows": 85,
+      "local_backup": "E:\\codes\\ExactEBRP-work\\temp\\round163\\main_table_before_0.csv",
+      "last_instance": "X-35-U",
+      "last_data_round": "134",
+      "status_labels": [
+        "已收敛",
+        "未收敛"
+      ],
+      "classification_labels": [
+        "Lose≈",
+        "Mixed",
+        "N/A",
+        "Win",
+        "Win*",
+        "Win≈"
+      ]
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\Research\\docs\\tempfiles\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "SHA256": "0648bdc3b297fbb1c34de3cbc9bede5718c0c8cdfa2656462bcff457b0ab8718",
+      "bytes": 21230,
+      "encoding": "gb18030",
+      "columns": [
+        "实例",
+        "站点数_不含仓库",
+        "车辆数",
+        "场景",
+        "场景代码",
+        "数据来源",
+        "空间分布",
+        "路线时限_T_秒",
+        "目标权重_lambda",
+        "权重倍数_lambda相对0.15",
+        "Gurobi_Seed",
+        "重复序号",
+        "数据轮次",
+        "求解时限_秒",
+        "GI_TBC_状态",
+        "GI_TBC_收敛时间_秒",
+        "GI_TBC_未收敛Gap_百分比",
+        "GI_TBC_LB",
+        "GI_TBC_UB",
+        "P_GRB_状态",
+        "P_GRB_收敛时间_秒",
+        "P_GRB_未收敛Gap_百分比",
+        "P_GRB_LB",
+        "P_GRB_UB",
+        "对比结果",
+        "对比说明",
+        ""
+      ],
+      "rows": 85,
+      "local_backup": "E:\\codes\\ExactEBRP-work\\temp\\round163\\main_table_before_1.csv",
+      "last_instance": "X-35-U",
+      "last_data_round": "134",
+      "status_labels": [
+        "已收敛",
+        "未收敛"
+      ],
+      "classification_labels": [
+        "Lose≈",
+        "Mixed",
+        "N/A",
+        "Win",
+        "Win*",
+        "Win≈"
+      ]
+    }
+  ],
+  "primary_path": "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+  "replicas_equal": true,
+  "preserve_existing_bytes_and_encoding": true,
+  "classification_policy": "Do not infer unconfirmed Win/Lose thresholds; leave new classification blank and state certificate/U/L facts",
+  "prospective_ids_absent": true,
+  "raw_schema_readback": "main_table_schema_readback.json",
+  "raw_columns": 28,
+  "source_header_cells": [
+    "",
+    ""
+  ],
+  "clarification": "The initial dict-key view has 27 unique keys because two source header cells are empty; actual CSV has 28 fields in every row. Original bytes are retained."
+}

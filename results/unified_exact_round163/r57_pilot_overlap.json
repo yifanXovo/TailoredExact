@@ -1,0 +1,207 @@
+{
+  "PASS": true,
+  "pilot_facts": [
+    {
+      "id": "cb443_V08_compact_r1_shortage_M01_Q20",
+      "n": 8,
+      "M": 1,
+      "Q": [
+        20
+      ],
+      "file_retained": "False",
+      "mathematical_base_separated_by_n_M_Q": true
+    },
+    {
+      "id": "cb443_V08_regional_r2_surplus_M02_Q30",
+      "n": 8,
+      "M": 2,
+      "Q": [
+        30,
+        30
+      ],
+      "file_retained": "False",
+      "mathematical_base_separated_by_n_M_Q": true
+    },
+    {
+      "id": "cb443_V20_compact_r2_balanced_M02_Q20",
+      "n": 20,
+      "M": 2,
+      "Q": [
+        20,
+        20
+      ],
+      "file_retained": "False",
+      "mathematical_base_separated_by_n_M_Q": true
+    },
+    {
+      "id": "cb443_V20_regional_r1_shortage_M03_Q30",
+      "n": 20,
+      "M": 3,
+      "Q": [
+        30,
+        30,
+        30
+      ],
+      "file_retained": "False",
+      "mathematical_base_separated_by_n_M_Q": true
+    },
+    {
+      "id": "cb443_V50_compact_r1_balanced_M04_Q20",
+      "n": 50,
+      "M": 4,
+      "Q": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "file_retained": "False",
+      "mathematical_base_separated_by_n_M_Q": true
+    },
+    {
+      "id": "cb443_V50_regional_r2_surplus_M07_Q30",
+      "n": 50,
+      "M": 7,
+      "Q": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "file_retained": "False",
+      "mathematical_base_separated_by_n_M_Q": true
+    }
+  ],
+  "overlap": [
+    {
+      "id": "R163-C20-S",
+      "old_id": "cb443_V08_compact_r1_shortage_M01_Q20",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C35-U",
+      "old_id": "cb443_V08_compact_r1_shortage_M01_Q20",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C20-S",
+      "old_id": "cb443_V08_regional_r2_surplus_M02_Q30",
+      "source": "CITI",
+      "overlap_rows": [
+        243
+      ],
+      "overlap_count": 1,
+      "fraction_of_new": 0.05,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C35-U",
+      "old_id": "cb443_V08_regional_r2_surplus_M02_Q30",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C20-S",
+      "old_id": "cb443_V20_compact_r2_balanced_M02_Q20",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C35-U",
+      "old_id": "cb443_V20_compact_r2_balanced_M02_Q20",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C20-S",
+      "old_id": "cb443_V20_regional_r1_shortage_M03_Q30",
+      "source": "CITI",
+      "overlap_rows": [
+        246,
+        275,
+        295
+      ],
+      "overlap_count": 3,
+      "fraction_of_new": 0.15,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C35-U",
+      "old_id": "cb443_V20_regional_r1_shortage_M03_Q30",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C20-S",
+      "old_id": "cb443_V50_compact_r1_balanced_M04_Q20",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C35-U",
+      "old_id": "cb443_V50_compact_r1_balanced_M04_Q20",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C20-S",
+      "old_id": "cb443_V50_regional_r2_surplus_M07_Q30",
+      "source": "CITI",
+      "overlap_rows": [
+        234,
+        243,
+        246,
+        254,
+        263,
+        275,
+        286,
+        295
+      ],
+      "overlap_count": 8,
+      "fraction_of_new": 0.4,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    },
+    {
+      "id": "R163-C35-U",
+      "old_id": "cb443_V50_regional_r2_surplus_M07_Q30",
+      "source": "CITI",
+      "overlap_rows": [],
+      "overlap_count": 0,
+      "fraction_of_new": 0.0,
+      "old_evidence": "R57 ephemeral zero-solve structural pilot; not full-method performance"
+    }
+  ],
+  "source_manifest": "results/data_generation_citibike_round57/structural_pilot_manifest.csv",
+  "source_SHA256": "1c86ffe5f3ebda3c8ea78196789129b1bc7aeaaf875e77127becee33424a4694",
+  "all_six_new_bases_separated": true,
+  "no_old_input_or_raw_reconstruction": true
+}

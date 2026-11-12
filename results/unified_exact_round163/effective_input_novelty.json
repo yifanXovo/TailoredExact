@@ -1,0 +1,561 @@
+{
+  "PASS": true,
+  "UTC": "2026-11-12T01:15:06.565627+00:00",
+  "old_inputs": 87,
+  "new_keys": {
+    "R163-C20-S": {
+      "base": "7ccb876487b8c956b61bea84647319a1ee2e2bce574da20027b342d48dbc5e8b",
+      "full": "f6295601ba416b5370ef4a9323adfb22b012aac238cc13bca9a240aaec02d238"
+    },
+    "R163-B20-B": {
+      "base": "bcfd5c8228f3b76929087f14ac1c05000c674f180c786cabba8fa4f0bebd3ac5",
+      "full": "352e520f817c7bded96efb4efe1bb46bea86522a325b3bdeb100aff75f5ccf00"
+    },
+    "R163-X20-S": {
+      "base": "d370bedcbb208fffa042cce2f865ca239011285df277349cde55a3b3d7a4cd58",
+      "full": "259768ac18d34a24d090ddf4504f2bee0ead29ce9a962228837f560b860a3d4a"
+    },
+    "R163-C35-U": {
+      "base": "5e20d78fd539db9481303643dc10bb445604fe7e082b6596302780296028c43b",
+      "full": "2e4147e036402315aeaba2f0e9146efa007e7b634226ad301f5eb95734673de9"
+    },
+    "R163-B35-S": {
+      "base": "3fd919f29d1bde5b0ebd643def4e53d7c82f4794438eef9b17be560ffe5528ae",
+      "full": "499f387bf6cdda0698c190c621041a3971e99151a763d1fffecc80b9c8b02d64"
+    },
+    "R163-X35-S": {
+      "base": "788f6382218c6a9a70f30f9be80a1d2ec45b6c568440ca7b938d02da97863c20",
+      "full": "adc6caf63376b3b1c378ac2872ed4e45fe4f8489782b44ccb155805d44f83d24"
+    }
+  },
+  "old": [
+    {
+      "input": "reference/round100_confirmation/H100.txt",
+      "input_SHA256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+      "base_key": "48711938aca212191fc6ea41ec0e2afcf6dbafb73b20339dce1d6e25a4bad37d",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round106_confirmation/N36.txt",
+      "input_SHA256": "52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea",
+      "base_key": "495f241cbf0d0402270f0fa8298d0ada367ca7864e632342df35340768409651",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round106_confirmation/S12.txt",
+      "input_SHA256": "475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f",
+      "base_key": "33c283b92c421145684495d954f50bee71b05c65d2e0189ec29774de42d4c589",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round108_confirmation/B24.txt",
+      "input_SHA256": "068cbb4edc3f851f8c16e234dad6aa99aa14da8734d8ae22ff76cfd7133ae8ca",
+      "base_key": "9382cff93d1742aebd50f4f34afc73b5e9b80fa068374bf7ae74882a66d21868",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round108_confirmation/L48.txt",
+      "input_SHA256": "8ce2bceb8de415a1ff62ea78790456ee54e3542ce57714a7a53505d30ea54755",
+      "base_key": "e164dbefa0dcebb0d945f7611115665bf8cf27f91b2fea32d31072344b8d074d",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G100-C1.txt",
+      "input_SHA256": "f70d9de06929576b62195f2df75c4394e9fd7b5eb8b2bfd20cc09a456101ef27",
+      "base_key": "4a20538a44758aeb4d620a321f093924c38171afc932d0facc9f2e4df9a1d1b3",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G100-C2.txt",
+      "input_SHA256": "757ca48de0e7990a349a84c657a8164a2d56dff890741c8a98612960f3c7b454",
+      "base_key": "8e2366b4b74fac9c9aba3a0d1557be5fceab4b5b814f352867dd8c2f087ebbab",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G100-R1.txt",
+      "input_SHA256": "5187c21b92ee3ec98757d08fa5481bee266657c616d0479b406c1d989698b94f",
+      "base_key": "45610960945cea9538e8d49f81b875bd1e7db2819b9ec338cb4aa7ccfec1ab1c",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G100-R2.txt",
+      "input_SHA256": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "base_key": "e5fa2e98fef74ad8e22d506a9039110916d7ff255c2eb739f1e9f902305cf0d3",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G20-C1.txt",
+      "input_SHA256": "27b5e90ef70a1bf574bcb860ac33a0365920d8f832cad809ca2a6621b93cad09",
+      "base_key": "960f5693415b32ce9bc419f098fe58d48355468042a20ac5831dcbfd4b8fc5e7",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G20-C2.txt",
+      "input_SHA256": "180c30ab2e70a9c6afdc9c34744e50e86d09a234ceb55fdc2f52eb391e82aa1e",
+      "base_key": "cac3ac2b4b11f24a2a924ab036368a5151a71bac272762023ab7131950c4246e",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G20-R1.txt",
+      "input_SHA256": "8e65808b3ccdb07f099a42a8c075cf28d0858d25b228dfba1fc19ceeea0526ff",
+      "base_key": "f24774a83ba1e7eb17780d165e40496859bb589d19150a2eadb8e0eeeeaeeb33",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G20-R2.txt",
+      "input_SHA256": "5848338342898969c94d4391f4bfcb83c3a57ee227b8d2fd3db185693e8c8716",
+      "base_key": "7de8d2bd06c08025d1ed28fa66e8e95da21a7ca24fa94f7548dbc1ecd64e7a3a",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G50-C1.txt",
+      "input_SHA256": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+      "base_key": "63448a44520231e0aea7d27233d7a81192c6a60f584357050b43c72e89d324e2",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G50-C2.txt",
+      "input_SHA256": "64d70f9b0a932594bb5cb81430e33fe40e207f60d34d5d594748c04ebdf4cdc3",
+      "base_key": "37d5dec2eed21d6673a58f1d52c91c60b80315951875f74991f9b85dcf1c94ff",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G50-R1.txt",
+      "input_SHA256": "c7a5200b5a93095304ffc82f404e6a3e9548962d2cf5cd60ab34d64327b71f47",
+      "base_key": "b711fd3d093bd512dbc887215f402e09da5410b027b8a1ef0dcbeccc5cbd16ec",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round109_geographic/G50-R2.txt",
+      "input_SHA256": "596886779e57c67b99d70385d59806b2e2d04619e2a07bf011e6d0fc5bdfc394",
+      "base_key": "fe46fd6eda7bb3bfb6e35d4b0f390ad3f65ae37abb2bf2edca92e7ab7331f5d4",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round116_external/E100-C1.txt",
+      "input_SHA256": "e53a3710d4f80db49f67211d9776416d12ce4f07db63851b385fe8327e8f3c28",
+      "base_key": "7c63f823278b7c664bcb1defddd561567c3508a9c4eafb0262c77b565aac16ad",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round116_external/E100-R2.txt",
+      "input_SHA256": "4e18ac981bcef1627585c6823b51de4b8ae5f203c4172b616d05329e1715361b",
+      "base_key": "2de02f039fa8b431be15ee878a1ff38321f0c47e3f26e4d6d6b39b5724cc14fd",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round116_external/E20-C1.txt",
+      "input_SHA256": "e323bfab7cff339f30b804df5d996d92e88b84d1671326d93dcd0c5f464ca521",
+      "base_key": "3997b1e27f66e8dfe4772f22392eb2a8e40a1d668caae69ab32f2aa6ce2b7298",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round116_external/E20-R2.txt",
+      "input_SHA256": "b7ab93b8decfac48f93581be4c96cc2da71bd2498d39fc7c9f49dd157523680e",
+      "base_key": "1268fde7f7c3b55459c24647660c100b5d082b138ba829b6be526aebcf0b733b",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round116_external/E50-C1.txt",
+      "input_SHA256": "9de25da5486b956bad260bdb9c9ab50065eaf448ec271336e9eb75a1ba784b4f",
+      "base_key": "b678a77a34652e7566fbb4ec49ad9df565c891d433b106dcb9ef51b8d37827db",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round116_external/E50-R2.txt",
+      "input_SHA256": "d6db5a271111dd7bd8560781c4b26a934dae1fb0da0a24ab4fe01fc45daa1f92",
+      "base_key": "0b79867bec39b6c15c05f2c908510c6804794a148c2df742f551a7eb8949a22f",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round118_positive/N40-R1-S.txt",
+      "input_SHA256": "cdbbadbb6fd4e1742cb063001003686e55ba2b5045f584b84d2fd238ba616c7a",
+      "base_key": "971718398e148dd7f637076ae8a543841f1c32cbe18c58e7b601a843a5552df1",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round119_qualification/micro_chain.txt",
+      "input_SHA256": "a9809930d8c005bb16a3c99c2b6033c9a45ff9bdc1dcc8612d7c271cfb08dc28",
+      "base_key": "31045994ec49220b4cc65c73e4374d31129511c52163654ebf12df2ac84d9cfa",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round119_qualification/micro_enumeration.txt",
+      "input_SHA256": "8a87a02ffa13091f127db3e17b36ffb62014ce9a221622d4969643c034505cb4",
+      "base_key": "df969b3ddddfa89676091f20355ab2e8b3d7b1b5b329fe2ab6c95dbcae8f0f1e",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round121_confirmation/Q30-C2-B.txt",
+      "input_SHA256": "9d9737dc36819cf8648aec820b456504bc7f26bf3cde474de351da2e0d34596c",
+      "base_key": "8cc8f06e8139bdeab2669a504f89a890076b6a17eeeb76ee8b2505fc6bf5991f",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round121_confirmation/Q40-R2-S.txt",
+      "input_SHA256": "ca501c5b72642336ec252c78204fd9b1db25523f1f5a08027abb1ab496f10d84",
+      "base_key": "b5f499793f7068eb1624f51f741584994eb51675b45ee0eec8c85426f9143203",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round121_confirmation/Q50-C2-U.txt",
+      "input_SHA256": "b2a1910b9f07820d0c60ba596ab5afa31f066bfe265b8535c948b67c6ddce119",
+      "base_key": "527bffd502efc5f43f5d84aa397b65882b1e89a82419666bf24918866227f337",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round122_paper_benchmark/PB-B20-S.txt",
+      "input_SHA256": "3aa535245e6475f791d50d8be26e8165c6f83371d9dbebac76728b9cc36eebbc",
+      "base_key": "864e2b5bb2bbc5ed10521ba1134ffe32bf11857994b5d063244a5bfed0be8691",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round122_paper_benchmark/PB-B35-B.txt",
+      "input_SHA256": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+      "base_key": "75dd77f9e6c8acf89dcaf63c5e3de4acba64336dabc610fd69702679b63da8a9",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round122_paper_benchmark/PB-B50-U.txt",
+      "input_SHA256": "172096bf5f76d5c58ce5d6600628368e9550d0cc28bdc112ae300dddd96529da",
+      "base_key": "b8452410c97323c4dd9b54e6cd385cce62603f125a6c407b16a399b49805ccd9",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round122_paper_benchmark/PB-C20-B.txt",
+      "input_SHA256": "b04a721313ebc18c4a3bc4cd4b9f6b69b74e3fce53897fce9a6cc8c32fc7babd",
+      "base_key": "43beb07f4161f47c91bc222f4ba9b320e73e1f14b6db8367c559599c95de4b2d",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round122_paper_benchmark/PB-C35-U.txt",
+      "input_SHA256": "67fa5712962980350c0b7be00abbcc4866af0fe376d0395b565ec082d36842e5",
+      "base_key": "e3dafdef11430657b7ac4aa9171880af54e1d800cac07def45c293bae10ab0c6",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round122_paper_benchmark/PB-C50-S.txt",
+      "input_SHA256": "3e17bd07ae0abbfebfd8264540e6f5bd737a0d4506c4b6e96950936153db9992",
+      "base_key": "ba0fed01ca4038b4a7e24440872e6634f49e1784ddfde27f632db362e0433434",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_SHA256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "base_key": "db229bada0cc0dbbe9381b4d4db607596b84efa0efadb139ce5c6d2b89964b27",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round86_unadapted_confirmation/F5.txt",
+      "input_SHA256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "base_key": "e641329f60fdcc6560998fd7c5b15146bf3041d066fb0ebe581bf714c3a5b770",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "reference/round98_confirmation/C2.txt",
+      "input_SHA256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "base_key": "3b4d3a72ee0a055adbbf116e447be521d0bc319da346cfbc0bd87e38802e46de",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round126/inputs/SC-B15-S.txt",
+      "input_SHA256": "b87de1a37e60cc2e7cbbf7885bac1155ac4c0b14356de7c5af92e402555474de",
+      "base_key": "cc245a532c4e96a0b1e090b119b044b87704a015e79ad44096b3af1cecfe8444",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round126/inputs/SC-B20-S.txt",
+      "input_SHA256": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "base_key": "a1ced6069ed5bc5e3cc276092910ee81e362f555e952578316eb82a9704a5f11",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round126/inputs/SC-B20-U.txt",
+      "input_SHA256": "c688de15fc31612b83885efe2e86e60f50ba57a5c5119f7e7801bf240a096bab",
+      "base_key": "9a0f3a566b797a71a497d39f757a8739bc539c53b4504eba94e8b95053349b0e",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round126/inputs/SC-C15-B.txt",
+      "input_SHA256": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea",
+      "base_key": "04780d12808545908a2e8d2c7b1e376f1abef52e496fb77b71fb4de984bb7eb4",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round126/inputs/SC-C15-S.txt",
+      "input_SHA256": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+      "base_key": "0bab0688aac2e143a55e4623a8f045509a5025407f0b80d80b97d4277b7265dd",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round126/inputs/SC-C20-S.txt",
+      "input_SHA256": "5729b59070d5451750e8e0b2446b08381e5c001e96d3c3f247e57801f6dcde11",
+      "base_key": "f48569b8eb592de9b438173de8f1072219d6dd206fde4ba4566fb885acee3a40",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round127/inputs/SM-B10-B.txt",
+      "input_SHA256": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f",
+      "base_key": "a9cdc7a3ab11c179b52bed6b09c68d851cf7a2bb4eccb364bcc6dd203738956f",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round127/inputs/SM-C8-S.txt",
+      "input_SHA256": "cd0c04a81c0096147d1c365eb4da02ad85397bbef2987d0b13be00628a6b3be0",
+      "base_key": "edd5774337b67c39ba759434f3ee73e5a9092a1b2b136489fd6d2aaabc0bab53",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round129/inputs/UC-B20-B.txt",
+      "input_SHA256": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "base_key": "d662ba67b5e78bd7afcafc453db087b27456752b988eb954f13a32ada8495b9c",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round129/inputs/UC-B30-S.txt",
+      "input_SHA256": "e8ed0a8859b6704ee167e356e740dddd5804112167209403734bb032d5b7e1b0",
+      "base_key": "0b720dc37a7b1edc3cd78a9ae6dba013bbd12c12c0dd099a621701199df00a6e",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round129/inputs/UC-C15-S.txt",
+      "input_SHA256": "426136b712e008670775c879b7fe149eb4569eba5c3ab5e12cbc0856dc176695",
+      "base_key": "544fbd1740cc9f7854746a4eecd8f7007a647786a4c778c461ae00311a4bede1",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round129/inputs/UC-C20-U.txt",
+      "input_SHA256": "e4de3620f2eba0c9c91a18fddbc5db26700914c280e614c37d3c159417f61df5",
+      "base_key": "b73fd312e62962a0ef35d385cc2f07294f784ef0d19a6040b800fe14d9ebba61",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round130/inputs/UC-B20-B.txt",
+      "input_SHA256": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "base_key": "d662ba67b5e78bd7afcafc453db087b27456752b988eb954f13a32ada8495b9c",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round130/inputs/UC-B30-S.txt",
+      "input_SHA256": "e8ed0a8859b6704ee167e356e740dddd5804112167209403734bb032d5b7e1b0",
+      "base_key": "0b720dc37a7b1edc3cd78a9ae6dba013bbd12c12c0dd099a621701199df00a6e",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round130/inputs/UC-C20-U.txt",
+      "input_SHA256": "e4de3620f2eba0c9c91a18fddbc5db26700914c280e614c37d3c159417f61df5",
+      "base_key": "b73fd312e62962a0ef35d385cc2f07294f784ef0d19a6040b800fe14d9ebba61",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/PB-B35-B.txt",
+      "input_SHA256": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+      "base_key": "75dd77f9e6c8acf89dcaf63c5e3de4acba64336dabc610fd69702679b63da8a9",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/PB-C35-U.txt",
+      "input_SHA256": "67fa5712962980350c0b7be00abbcc4866af0fe376d0395b565ec082d36842e5",
+      "base_key": "e3dafdef11430657b7ac4aa9171880af54e1d800cac07def45c293bae10ab0c6",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/SC-B15-S.txt",
+      "input_SHA256": "b87de1a37e60cc2e7cbbf7885bac1155ac4c0b14356de7c5af92e402555474de",
+      "base_key": "cc245a532c4e96a0b1e090b119b044b87704a015e79ad44096b3af1cecfe8444",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/SC-B20-S.txt",
+      "input_SHA256": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "base_key": "a1ced6069ed5bc5e3cc276092910ee81e362f555e952578316eb82a9704a5f11",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/SC-B20-U.txt",
+      "input_SHA256": "c688de15fc31612b83885efe2e86e60f50ba57a5c5119f7e7801bf240a096bab",
+      "base_key": "9a0f3a566b797a71a497d39f757a8739bc539c53b4504eba94e8b95053349b0e",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/SC-C15-B.txt",
+      "input_SHA256": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea",
+      "base_key": "04780d12808545908a2e8d2c7b1e376f1abef52e496fb77b71fb4de984bb7eb4",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/SC-C15-S.txt",
+      "input_SHA256": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+      "base_key": "0bab0688aac2e143a55e4623a8f045509a5025407f0b80d80b97d4277b7265dd",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/SC-C20-S.txt",
+      "input_SHA256": "5729b59070d5451750e8e0b2446b08381e5c001e96d3c3f247e57801f6dcde11",
+      "base_key": "f48569b8eb592de9b438173de8f1072219d6dd206fde4ba4566fb885acee3a40",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/SM-B10-B.txt",
+      "input_SHA256": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f",
+      "base_key": "a9cdc7a3ab11c179b52bed6b09c68d851cf7a2bb4eccb364bcc6dd203738956f",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round131/inputs/SM-C8-S.txt",
+      "input_SHA256": "cd0c04a81c0096147d1c365eb4da02ad85397bbef2987d0b13be00628a6b3be0",
+      "base_key": "edd5774337b67c39ba759434f3ee73e5a9092a1b2b136489fd6d2aaabc0bab53",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/K-15-B.txt",
+      "input_SHA256": "274cd13f7f1140a8fcf6515e05b4bbf4093d1561a13e5a43450f97e6fc5db954",
+      "base_key": "2073db4f700c57f8b3effd793d58f89979a63dcaaea71bd90819e61dc6e10478",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/K-15-S.txt",
+      "input_SHA256": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "base_key": "7e685c68333261a2f04fce9108b5bfaa2050b3660613fed3648b6b2932660fd1",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/K-20-S.txt",
+      "input_SHA256": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "base_key": "61f28e6ca4f8149a3bc1a5353b10166cb10f58bd3a93b5502cdec42999aa9a93",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/K-20-U.txt",
+      "input_SHA256": "f1757e81671889f1dbcaa83f0780a049ef321dff6855a80f0ea4eb80514f3ea7",
+      "base_key": "8bc1aa779cb09c2ea2870ad91870c43876b9732679f5b7612bee0335297e3452",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/K-35-B.txt",
+      "input_SHA256": "f208424eb05eb54cb60e85db6969443b07c1e80763a964c50980dd6b80bcd52b",
+      "base_key": "b190a57ebda912925a2bdf430f833d3e0cf3f044915c9a3614525922f52f9f2b",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/K-35-U.txt",
+      "input_SHA256": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "base_key": "46eacbe45e9ff19559859d1e3c49a1985120daa7adb8a5344490b42a000a5af2",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/X-15-B.txt",
+      "input_SHA256": "c62fdf9dba207a161add1579cd8274d9a66988c4c50db151751eef80435c142c",
+      "base_key": "319a2abcb4ec811ebedb53d931e1936cf542fb7233e66d2c7ad53f9527680576",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/X-15-S.txt",
+      "input_SHA256": "bdc3eadb559b5e97f601f0cdc1c62150b5a53aafa0e76dad74b6ef9c9d295999",
+      "base_key": "cf4797701233cd076bd3214ad765d2d7f567c8e5be04ea7b6e4d51ef3d5d1075",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/X-20-S.txt",
+      "input_SHA256": "ed520ce851838681ff94ab1a4b982d67f49a16cc9e063435984c3f8c2d43d77f",
+      "base_key": "95d5137ae5483fcdf11c135627c9f9fcbd6e081e42c39c026dbaf51e8b2da6b2",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/X-20-U.txt",
+      "input_SHA256": "eb9a8a2947ae45b7634acfd4ae2528e6a7d16c13204ff563eb8d827ca036bb0c",
+      "base_key": "2c1287c1d6b0c51a74a0fe28b23abcbdaabef63f111ba3ab6eaec2beb592bfcf",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/X-35-B.txt",
+      "input_SHA256": "2e66f0e144f3950633aa8d9e4b490ef7fc3f838e4cdc477f1daf9dc4df1f27a1",
+      "base_key": "ef4b3dcd1cdce4230e1fc149c384e3b6aeecb3fd58a5364ff49b533b32d2b0e9",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round132/inputs/X-35-U.txt",
+      "input_SHA256": "6a040c2d36b40f833cf083eab2aac3bde37185e85d7e66c415a98e2cbf59fe68",
+      "base_key": "ea1ccbdddc38c552a2adb83588f4566c71c6f1c0a95b1ea4e19add8be2ea8f2c",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/N-B15-B.txt",
+      "input_SHA256": "be69ab8b5dfda82294d7a4c997e8e9e8d483a2e800ab3da057b93dbe15f3a860",
+      "base_key": "3dcc6f43664cc13d1f7b42c37ca777757b613faaa1c90f4af4f91fc97e9d2fbf",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/N-B35-S.txt",
+      "input_SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "base_key": "69a4ebbbcbe0a28e75520dbf7af4ba135acc65d7872c31ad0c4cbfd48176b29d",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/N-C20-U.txt",
+      "input_SHA256": "93b93b6abed55cf97f8ee21ddd85fb8501554b8e4c35bb997ae75782f1f98e16",
+      "base_key": "0cdc0f33836bc9b5a456aa0adb6b8a9eb3f1769b5a624874bc5550751cbd58a3",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/N-C35-B.txt",
+      "input_SHA256": "23dc726c169de65d73ee4e3019371533c89b3468732b60b92a0b098c1f6c8565",
+      "base_key": "15bb254a0106a23b7347008527b6884bd2581c9177c1abaa9e3afb6a331d0dac",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/N-X15-S.txt",
+      "input_SHA256": "773f919eac35a74d02377b30c531d0021617362a9d0ea2bc0252c02221aa34d3",
+      "base_key": "50455cffbdc58297a87a1908614462cf70c8082e2c590811cf72cba63a5d1894",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/N-X20-B.txt",
+      "input_SHA256": "c211a1139db85152fbdf2a7362a43a7389d25e865119debd0878c0e7fea81684",
+      "base_key": "c1cf5e466006d70f0982b98eb94ced03a7cbfdfb738c0e7b3750f9ff2be9455a",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/R-B20-S.txt",
+      "input_SHA256": "d80b5af16dbf828b90f2ff20b248c0bb3756fab1124233b5e4a984a951889143",
+      "base_key": "d9bd612be47c775de46c1bc26b8bc323de0a4cbc1a25a7d6fcd240cbfc75709a",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/R-B35-S.txt",
+      "input_SHA256": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+      "base_key": "ca1afa2c647187ef5194d2c2bdd590e4ae1259cfbd1f9e0eb99e6cd48fb988ca",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/R-X20-S.txt",
+      "input_SHA256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "base_key": "77fed9c645ead13356c2805f968b2447867fe62e8b53eb3d87bc3ef03e22a214",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "results/unified_exact_round137/inputs/R-X35-S.txt",
+      "input_SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "base_key": "125b7b6ed146fbc8a4a0150fe607a44f5ff02ec7cc376ab6950f36e66e710012",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "tests/data/round24_toy_V2_M1.txt",
+      "input_SHA256": "297623332fb58e7f62a7c86e976c8e875ec2cea59b9169d6bb29328c15cdb141",
+      "base_key": "2651a8d9961a6515b7ee4d68996acfa1614be9bb0546f4da3a282f6e77c9cc30",
+      "legacy_max10_weight_downgrade": false
+    },
+    {
+      "input": "tests/data/round59_tiny.txt",
+      "input_SHA256": "40e14b51c421d1166d41aaa3c26ab36ba9aa54b20e8e1f346cd5203bc5325549",
+      "base_key": "86d63ccd148a703fc873c6df7ee577151c2b64054ae4bb6716e20300b581bf8c",
+      "legacy_max10_weight_downgrade": false
+    }
+  ],
+  "zero_sign_canonicalized": true,
+  "weight_policy": "actual Parser.cpp downgradeLegacyWeights: station max within 1e-6 of 10 divided by 10; no depot weight in key",
+  "no_base_or_full_collision": true,
+  "full_collision_excluded_by_distinct_base": true,
+  "audit_timing": "post-panel static strengthening of pre-panel raw serialized key; no regeneration or production change",
+  "Optimize": 0
+}
