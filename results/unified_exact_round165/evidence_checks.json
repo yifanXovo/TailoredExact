@@ -1,0 +1,79 @@
+{
+  "UTC": "2026-11-12T20:29:05.047303+00:00",
+  "passed": true,
+  "new_Optimize": 0,
+  "new_performance_arms": 0,
+  "six_inputs": 6,
+  "pairs": 18,
+  "method_observations": 36,
+  "new_in_R164": 24,
+  "Eplus_Seed0_observations": 6,
+  "R137_breadth": [
+    9,
+    7,
+    7
+  ],
+  "R137_resource": [
+    4,
+    0,
+    0
+  ],
+  "B_CERT_per_Seed": [
+    3,
+    3,
+    3
+  ],
+  "P_CERT_per_Seed": [
+    1,
+    1,
+    1
+  ],
+  "C35_absolute_P_Seed0_better_than_all_B": true,
+  "C35_relative_U_signs": [
+    1,
+    -1,
+    -1
+  ],
+  "arrival_records": 36,
+  "arrival_exact_first_find": false,
+  "Eplus_new_Seed_robustness": false,
+  "inputs": [
+    {
+      "path": "results/unified_exact_round164/reports/three_seed_comparisons.json",
+      "bytes": 15363,
+      "SHA256": "bd20570ecf8606f366c42b0be3b11885271dc76ece6fad8336a48dab33f3e3be"
+    },
+    {
+      "path": "results/unified_exact_round164/reports/primal_target_arrival.json",
+      "bytes": 47161,
+      "SHA256": "10abe2c8afcfa124d43e0b1bc8d8652965c197a9d2d67493ee06ad4b87284b44"
+    },
+    {
+      "path": "results/unified_exact_round137/reports/summary.json",
+      "bytes": 13028,
+      "SHA256": "b7cdf57f865d6aae83260263a448278ea89ab1d84c48d11e0ce4b6925c0403ab"
+    },
+    {
+      "path": "results/unified_exact_round163/reports/summary.json",
+      "bytes": 2453,
+      "SHA256": "1ffdfba70b593278c8e7ce4760014473d70307f287d32dfc77adbeffdd139f63"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "results/unified_exact_round165/analysis/three_seed_endpoints.csv",
+      "bytes": 2912,
+      "SHA256": "af907e40f2f20a6596c2ab88650868724628754b8a5799a1e9d4b20648a168cb"
+    },
+    {
+      "path": "results/unified_exact_round165/analysis/target_availability.md",
+      "bytes": 1187,
+      "SHA256": "2ffe6992c7dfa237df03d4b76bdc4641b2268a6c0fe18660eb7ac7505e38c26d"
+    },
+    {
+      "path": "results/unified_exact_round137/figures/three_seed_endpoints.png",
+      "bytes": 260720,
+      "SHA256": "d13d9b41d03fd291ba9e2b307115ab7a126456ac15513faafab3f661291f4fa6"
+    }
+  ]
+}

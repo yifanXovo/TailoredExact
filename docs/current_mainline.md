@@ -1,4 +1,33 @@
-# Current mainline and Round137 paper branch
+# Current manuscript and research mainline
+
+The Round165 current manuscript reconciles evidence through R164 into one
+readable [main + Appendix A/B PDF](../results/unified_exact_round137/manuscript.pdf),
+with a separate [supplement PDF](../results/unified_exact_round137/supplement.pdf).
+The sole maintained component directory remains `results/unified_exact_round137/`.
+The [review packet](paper_review.md), [contribution map](../results/unified_exact_round165/contribution_positioning.md)
+and [author memo](../results/unified_exact_round165/author_decision_memo.md) explain
+the integrated contribution and the unresolved independent value of outer
+control. B remains main; E+ is a separately named finite proof extension.
+No new Optimize, performance sample, production build or released-default
+change is part of R165.
+
+Use `scripts/round165_documents.py assemble`, `pdf`, then `qa`. The old
+R137 generator is historical and refuses direct invocation. The current
+build reads body, complete appendices, supplement, bibliography and figures;
+`method_and_model_source.md` is excluded. Document generation identities,
+historical measured C++/PE identities and source-line snapshots are separate
+in [source_manifest.json](../results/unified_exact_round165/source_manifest.json).
+
+The requested `paper-current` entry was dirty at R155, so R165 uses the isolated
+`E:\codes\ExactEBRP-work\worktrees\round165` from verified R164 delivery
+`de01e8fb27a954d031abac5fe99442d6c8d29d44`. The original entry and all user
+changes are protected. The new Draft stacks on R164 while main lacks the
+dependency; it does not merge the research chain.
+
+## Historical stage records
+
+The following dated-stage descriptions preserve their then-current artifact
+and delivery status. The current paper/PDF authority is the R165 mapping above.
 
 The completed [Round164 finite solver-Seed confirmation](round164_seed_confirmation.md)
 adds24 frozen B/P arms at Seeds1/2 on the six exposed R163 inputs. Each of

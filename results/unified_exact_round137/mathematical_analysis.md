@@ -1,8 +1,6 @@
-# GI-TBC: stage definitions and mechanism interpretation
+# GI-TBC: mathematical objects and mechanism interpretation
 
-This is a consolidation of the accepted method and the precise Round137
-comparisons. It introduces no TC/AP, joint-support or route-oracle candidate.
-The production source, PE and complete argv identities are frozen separately.
+This maintained companion explains the physical, inventory, relaxation and complete-method objects used in the current paper. It preserves the earlier exact arguments and integrates the archived-source three-Seed evidence. Production source/PE identities and document-build identities are separate in the [source manifest](../unified_exact_round165/source_manifest.json).
 
 ## Physical model and effective objective weight
 
@@ -156,7 +154,7 @@ the actual values, with the intersection denominator stated explicitly.
 This synthesis uses the maintained R137 physical model and numerical policy.
 It is an explanation of existing results and the R163 confirmation, not a new
 general hull theorem or a claim that all future structural strengthening fails.
-The exact fixed-commit/member/SHA identities are in `historical_source_map.json`.
+The exact fixed-commit/member/SHA identities are in [the inherited source map](../unified_exact_round164/historical_source_map.json).
 
 | Existing conclusion | Evidence identity | R163 increment | What does not follow |
 |---|---|---|---|
@@ -236,7 +234,7 @@ equivalence alone supplies no inclusion arrow between its continuous
 relaxation and OLD. Values from unrelated old LPs cannot order these domains.
 An objective-value interval is likewise not a polyhedral inclusion.
 
-The existing R133 four-station example is enough to distinguish the objects.
+The existing [four-station derivation](https://github.com/yifanXovo/TailoredExact/blob/de01e8fb27a954d031abac5fe99442d6c8d29d44/results/unified_exact_round133/joint_objective_gap_note.md) distinguishes the objects. It has initial stock (2,1,0,0), equal targets/weights 1, capacities 2, vehicle capacities (1,2), coincident points and 60-second pickup/drop. Its 240/360-second horizons define two complete tiny domains. Here `lambda_hat=5404319552844595/36028797018963968` is the exactly loaded binary64 coefficient near .15, without division of the penalty by four.
 Its full service hull has LP value `lambda_hat`; its original integer optimum
 is `1/4+lambda_hat` at the actually loaded coefficient. The exact gap is `1/4`
 on the fixed positive total `sum Y=3`. At the loaded coefficient R133 also
@@ -264,9 +262,7 @@ qualification, inside that arm's one total deadline. Paid helper time,
 remaining Native time and legitimate earlier certification can alter finite
 trajectories and physical U even when the intended formal expressions agree.
 
-If a source is rejected, dependent closures are revoked and the unresolved
-physical domain is restored with the independent nonnegative bound and its
-own verified U. An exact zero physical fleet can independently certify; a
+If a native source is rejected, actual final qualification discards its dependent proof conclusions and conservatively restores the unresolved physical domain with the independent nonnegative bound and its own verified U. This is the implemented global fallback, not a generic online revocation/resumption mechanism; the frozen scheduler itself accumulates same-unit bounds monotonically. An exact zero physical fleet can independently certify; a
 small positive floating objective cannot. Positive Native/outer certificates
 retain the actual floating-point source and numerical qualification contract;
 they are not all exact rational certificates.

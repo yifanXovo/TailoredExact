@@ -1,0 +1,1438 @@
+{
+  "UTC": "2026-11-12T20:21:17.731669+00:00",
+  "status": "RENDERED_PENDING_VISUAL_REVIEW",
+  "documents": [
+    {
+      "path": "results/unified_exact_round137/manuscript.pdf",
+      "SHA256": "36e42223ab2ee6e45e2ff9d612dd7dfcd38ef438c331ed2a901ccaf03adb1fd0",
+      "page_count": 53,
+      "pages": [
+        {
+          "page": 1,
+          "width": 612,
+          "height": 792,
+          "characters": 1567,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "Abstract",
+            "B.0"
+          ],
+          "opening": "GI-TBC: a Gini-interval tailored branch-and-cut algorithm for\nequitable bicycle redistribution\n13November2026\nContents\nAbstract . . . . . . "
+        },
+        {
+          "page": 2,
+          "width": 612,
+          "height": 792,
+          "characters": 3146,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "Abstract",
+            "References"
+          ],
+          "opening": "B.4Nativerequests,Startsandreturnedactions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44\nB.5Teachingstatesandaseparatelysourc"
+        },
+        {
+          "page": 3,
+          "width": 612,
+          "height": 792,
+          "characters": 3621,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "answerit. First,thesamestockstatelinkstheGiniproducttomovementandvisits. Weestablishtheconditional\ninteger-service implication and physical "
+        },
+        {
+          "page": 4,
+          "width": 612,
+          "height": 792,
+          "characters": 2239,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "2. Physicalmodelandobjective\nLet N contain n stations and let 0 be the depot. Station i has integer initial inventory b , capacity C , posit"
+        },
+        {
+          "page": 5,
+          "width": 612,
+          "height": 792,
+          "characters": 2364,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "3. SharedinventorystatesandGI-TBC\n3.1Discretestatesandimplicitserviceintegrality\nForthelegalfiniteinventorydomainY ,binaryselectorss andcont"
+        },
+        {
+          "page": 6,
+          "width": 612,
+          "height": 792,
+          "characters": 2092,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Proposition1(orderedsupplycompatibility). Everyphysicalfleetwithemptydeparturesatisfies\nX\nd ≤ p .\nkj ki\ni∈C\nkj\nProof. Label the units collec"
+        },
+        {
+          "page": 7,
+          "width": 612,
+          "height": 792,
+          "characters": 3550,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "Algorithm 1",
+            "Appendix B.",
+            "B.0"
+          ],
+          "opening": "Algorithm 1 GI‐TBC (B)\nInput: physical instance, lambda/weights, common deadline; fixed .08 AM rule,\ndepth 8, minimum width 1e‐4, numerical "
+        },
+        {
+          "page": 8,
+          "width": 612,
+          "height": 792,
+          "characters": 3046,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "3.4Numericalqualificationandtermination\nIndependentzerotermination. Underthestatednonnegativeobjectivepremises,acompletephysicallyverified\nf"
+        },
+        {
+          "page": 9,
+          "width": 612,
+          "height": 792,
+          "characters": 3104,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "orStartcrossesmethods,Seeds,objectiveweightsorphysicalconfigurations. Gurobi13.0.2usesonethreadand\nfixedprocessoraffinityonanInteli7-12700KF"
+        },
+        {
+          "page": 10,
+          "width": 612,
+          "height": 792,
+          "characters": 2538,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Study Configurations/observations Purpose\nExposed-cohortSeeds1/2 24newB/Parms,plus12historicalSeed0 Sixinputs;threewithin-inputpaired\nB/Parm"
+        },
+        {
+          "page": 11,
+          "width": 612,
+          "height": 792,
+          "characters": 3108,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "costandrejectionrecordsremain. Thiscurrent-policyindependent-zerocertificatedoesnotretroactivelychange\ntheseparatelypreservedhistoricalexclu"
+        },
+        {
+          "page": 12,
+          "width": 612,
+          "height": 792,
+          "characters": 2257,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Table5. Strictresource-valueimprovementsfromseparatedqualifiedendpoints.\nBase GI-TBCL(T1) FeasibleU(T2)/owner L(T1)-U(T2) SourcestatusT1/T2\n"
+        },
+        {
+          "page": 13,
+          "width": 612,
+          "height": 792,
+          "characters": 296,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Figure 1: Original-objective endpoints at the two physical horizons. Solid lines join feasible U circles; dashed\nlinesjoinqualifiedLtriangle"
+        },
+        {
+          "page": 14,
+          "width": 612,
+          "height": 792,
+          "characters": 2901,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "5.3Objectiveweights\nTable6. Within-configurationweights;Cdenotesanownqualifiedcertificate.\nPhysicalconfiguration ρ P:U/L PS:U/L GI-TBC:U/L\nR"
+        },
+        {
+          "page": 15,
+          "width": 612,
+          "height": 792,
+          "characters": 3217,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "5.4LimitedpreselectedsecondSeed\nTable7. Certificatesinthefourpreselectedsecond-Seedconfigurations.\nMethod SelectedSeed0certificates/4 Seed1c"
+        },
+        {
+          "page": 16,
+          "width": 612,
+          "height": 792,
+          "characters": 3424,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "difficulty or inventory-floor value. Synthetic inventories, targets and weights are not observed demand. This\nsuppliesfiniteconfigurationcov"
+        },
+        {
+          "page": 17,
+          "width": 612,
+          "height": 792,
+          "characters": 2690,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "Table 9."
+          ],
+          "opening": "The proof-only helper adds no floor to Native rows or raw AM. Its separate return-time/floor/search-L ledger\ndistinguishesdominatedinventory"
+        },
+        {
+          "page": 18,
+          "width": 612,
+          "height": 792,
+          "characters": 389,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "Three-Seed"
+          ],
+          "opening": "Figure 2: Three-Seed original-objective endpoints on the six archived-source inputs. Colours identify B and\ncold P; circles are physical U a"
+        },
+        {
+          "page": 19,
+          "width": 612,
+          "height": 792,
+          "characters": 1528,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "are−230.7972095/−298.0697328/−261.5235357s. Eachexceedsthe10ssubstantivescaleinB’sfavor. These\nconditionalcomparisonssupplynofull-panelspeed"
+        },
+        {
+          "page": 20,
+          "width": 612,
+          "height": 792,
+          "characters": 2236,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "6. Mechanisms,AMandstageinterpretation\n6.1AMruleandexperimentalinterpretation\nForfinitevalidchildLPevidence,theactualcontrolleruses\n∆ = max{"
+        },
+        {
+          "page": 21,
+          "width": 612,
+          "height": 792,
+          "characters": 3257,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "actions, including runs without a child decision exposure. Logical infeasibility has no finite score/margin and\nis independent of tau. Diffe"
+        },
+        {
+          "page": 22,
+          "width": 612,
+          "height": 792,
+          "characters": 3372,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Table12. ObservedSeed0initialLPoptimafortheconditionalmechanismcontrols.\nRole Full Rootonly MinusA/B MinusC MinusC\nR G\nK-15-S 0.167137 0.167"
+        },
+        {
+          "page": 23,
+          "width": 612,
+          "height": 792,
+          "characters": 3497,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "two Seeds therefore support conditional mixed effects, not a stable runtime ranking or an additive component\nshare.\nAll five UC-B20-B method"
+        },
+        {
+          "page": 24,
+          "width": 612,
+          "height": 792,
+          "characters": 2181,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "the same U with slightly higher final L. The strengthened root already sufficesfor the two easier certificates in\nthis panel. Thus visible o"
+        },
+        {
+          "page": 25,
+          "width": 612,
+          "height": 792,
+          "characters": 3161,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "6.3Mechanismsynthesisandboundaries\nTable15. Mechanisms,mathematicalroles,supportingevidenceandboundaries.\nCorresponding\nMechanism Mathematic"
+        },
+        {
+          "page": 26,
+          "width": 612,
+          "height": 792,
+          "characters": 3630,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "theinheritedproofalsominimizesoveralllegalloaded-returntotals;thephysicalproblemisnotnewlyrestricted\ntothatslice. Itdistinguishesservicecomp"
+        },
+        {
+          "page": 27,
+          "width": 612,
+          "height": 792,
+          "characters": 851,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "7.1Remainingscientificlimits\nA suboptimal feasible incumbent and an unresolved proof lower are different shortcomings. C35’s historical\nP fl"
+        },
+        {
+          "page": 28,
+          "width": 612,
+          "height": 792,
+          "characters": 3247,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "Appendix A."
+          ],
+          "opening": "Appendix A. Complete model, scoped strengthening and proof obligations\nThecompletephysicalformulationandstrengtheningproofsbelowareretainedf"
+        },
+        {
+          "page": 29,
+          "width": 612,
+          "height": 792,
+          "characters": 1980,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Variable Domainandboundintheactiveformulation\ne Continuousin[0,max(1,C /D −1)]\ni i i\nH ,i<j Continuousin[0,C /D +C /D ]\nij i i j j\ng,Z Conti"
+        },
+        {
+          "page": 30,
+          "width": 612,
+          "height": 792,
+          "characters": 1616,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "The first pair is not silently dropped even where implied by direction rows. Zero directional bounds cause no\ndivision. Unique service, a bi"
+        },
+        {
+          "page": 31,
+          "width": 612,
+          "height": 792,
+          "characters": 2706,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "X X\nY = 2tbbit, Z = 2tw , 0 ≤ w , w ≤ g, w ≤ bbit, w ≥ g+bbit−1. (A14)\ni it i it it it it it it it\nt t\nThe capacity bound removes unused bit"
+        },
+        {
+          "page": 32,
+          "width": 612,
+          "height": 792,
+          "characters": 2144,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "P\nFor n > 1, triangle inequalities give A := |r − r | ≤ (n − 1)S, so G ≤ (n − 1)/n. For S > 0,\ni<j i j true\nG = 0 means every ratio is equal"
+        },
+        {
+          "page": 33,
+          "width": 612,
+          "height": 792,
+          "characters": 2592,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "PropositionA5(budgetandreachability). EveryphysicalpointinI,F ≤ csatisfiestheidealversionsof(A19)-\n(A20). IndeedF = G+λP,G ≥ α,andnonnegativ"
+        },
+        {
+          "page": 34,
+          "width": 612,
+          "height": 792,
+          "characters": 2080,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "A.5.3Orderedsupplycompatibility(P5)\nForeveryvehiclek andreceivingstationj,define\nX\nC = {i ∈ N \\{j} : τ +τ +τ +h ≤ T +10 −9}. d ≤ p . (A24)\nk"
+        },
+        {
+          "page": 35,
+          "width": 612,
+          "height": 792,
+          "characters": 2891,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "PropositionA8(bothbranches). Thecoverbranchfollowsfrom(A8),(A25),(A26). Intheconditionalbranch,\nP\nif every station is served, cancel M |W|. "
+        },
+        {
+          "page": 36,
+          "width": 612,
+          "height": 792,
+          "characters": 2230,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "and signed-difference rows constrain different auxiliary completions even though they preserve the same tight\nphysicalembedding.\nA.5.6Requir"
+        },
+        {
+          "page": 37,
+          "width": 612,
+          "height": 792,
+          "characters": 2796,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "The bound on S is the rectangular upper estimate (A21), not a new optimum of S. Tight H/e complete every\nP\nphysical point. If S = 0, then A "
+        },
+        {
+          "page": 38,
+          "width": 612,
+          "height": 792,
+          "characters": 3304,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "A.6Cutoffandcoverageproof\nLemma A3 (cutoff complement). Suppose a returned lower bound ℓ is qualified for a model containing\nobjective-prese"
+        },
+        {
+          "page": 39,
+          "width": 612,
+          "height": 792,
+          "characters": 1938,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "The source-rejected zero observations in R132/R133 keep their historical unqualified certificate/performance\ndecisions. Theyaredistinctfromt"
+        },
+        {
+          "page": 40,
+          "width": 612,
+          "height": 792,
+          "characters": 2460,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "Algorithm 1",
+            "Appendix B.",
+            "B.0"
+          ],
+          "opening": "Appendix B. Executable method specification\nCurrentfrozenmethod. GI-TBC(historicalS2,configurationms2)usestheunchangedHandcontrollerspec-\nif"
+        },
+        {
+          "page": 41,
+          "width": 612,
+          "height": 792,
+          "characters": 2989,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Algorithm 3 FinalizeAndUpdateCover\nInput: ProcessLeaf outcome, current cover, own witness/epoch/runtime caches\n1 For native outcomes require"
+        },
+        {
+          "page": 42,
+          "width": 612,
+          "height": 792,
+          "characters": 3349,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Item Frozenactivevalue/interpretation\nDomainoptionvsexecution Requestediterative/2;operativeonebudgetintersectionplus\nreachabilityintersecti"
+        },
+        {
+          "page": 43,
+          "width": 612,
+          "height": 792,
+          "characters": 3507,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "‐‐progress‐log OUT/progress.csv ‐‐native‐evidence‐dir OUT/journal\n‐‐round98‐state‐service m‐binary ‐‐round127‐mode ms2\nB.2State,identityando"
+        },
+        {
+          "page": 44,
+          "width": 612,
+          "height": 792,
+          "characters": 3206,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "competitorseventhoughtheirfloorsremaininproofcoverage. Thusaloneclosedunitat.40doesnotsupplya\nNEXTtargettoanopenunitat.20. Source-cutoffmeta"
+        },
+        {
+          "page": 45,
+          "width": 612,
+          "height": 792,
+          "characters": 3567,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "minimizationandnounexpectednonlinearstructure. ThensubmitacompleteStartandreaditback. Submission,\nnative-logacceptance,integer-vectorobserva"
+        },
+        {
+          "page": 46,
+          "width": 612,
+          "height": 792,
+          "characters": 3333,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Anindependentlyvalidfull-domainnonnegativefloormayproveazerofleetevenafternative-sourcerejection.\nThe rejected native journal and conservati"
+        },
+        {
+          "page": 47,
+          "width": 612,
+          "height": 792,
+          "characters": 3197,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "repeat generate guided candidates (B.10), order by proxy fitness\nfully decode candidates in that order\naccept first fitness improvement >1e‐"
+        },
+        {
+          "page": 48,
+          "width": 612,
+          "height": 792,
+          "characters": 3309,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "b −C −a ≤ t ≤ b −a ; a −b ≤ t ≤ a −b +C (b ̸= 0). (B3)\na a a a a b b b b b\nIntersect these with every affected prefix load 0 ≤ L+χt ≤ Q , wh"
+        },
+        {
+          "page": 49,
+          "width": 612,
+          "height": 792,
+          "characters": 3850,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "list, append candidates until size K (K = 8 atoms or K = 6 local candidates), maintaining a max heap with\ncomparatora.objective<b.objective."
+        },
+        {
+          "page": 50,
+          "width": 612,
+          "height": 792,
+          "characters": 3761,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "The proxy fully runs the single-route incremental decoder with other-route operations fixed. For a two-route\nchangetrybothroutedecodingorder"
+        },
+        {
+          "page": 51,
+          "width": 612,
+          "height": 792,
+          "characters": 141,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "The separately evaluated inclusive-root, support and equivalent-expression controls are documented in Supple-\nmentS11withtheiroriginaleviden"
+        },
+        {
+          "page": 52,
+          "width": 612,
+          "height": 792,
+          "characters": 2513,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "References"
+          ],
+          "opening": "References\nBoyd, Stephen, and Lieven Vandenberghe. 2004. Convex Optimization. Cambridge University Press. https:\n//web.stanford.edu/~boyd/cv"
+        },
+        {
+          "page": 53,
+          "width": 612,
+          "height": 792,
+          "characters": 1318,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Matl,Piotr,RichardF.Hartl,andThibautVidal. 2018. “WorkloadEquityinVehicleRoutingProblems: ASurvey\nandAnalysis.” TransportationScience52(2): "
+        }
+      ],
+      "contact_sheets": [
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_manuscript_36e42223ab2e\\contact-01.png",
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_manuscript_36e42223ab2e\\contact-02.png",
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_manuscript_36e42223ab2e\\contact-03.png",
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_manuscript_36e42223ab2e\\contact-04.png",
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_manuscript_36e42223ab2e\\contact-05.png"
+      ],
+      "actual_visual_inspection_complete": false,
+      "render_root": "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_manuscript_36e42223ab2e",
+      "blank_pages": [],
+      "outside_page_characters": 0,
+      "replacement_characters": 0
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.pdf",
+      "SHA256": "f09ca0004d918918db5dda04244528864266c0c9e148e90e21ee255143ab4b9e",
+      "page_count": 48,
+      "pages": [
+        {
+          "page": 1,
+          "width": 612,
+          "height": 792,
+          "characters": 1616,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "References"
+          ],
+          "opening": "Supplement: complete observations, mathematical comparisons and\nreproducibility\n13November2026\nContents\nReadingandsourcemap . . . . . . . . "
+        },
+        {
+          "page": 2,
+          "width": 612,
+          "height": 792,
+          "characters": 1727,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Readingandsourcemap\nThe main paper and complete model/algorithm appendices are assembled from paper_body.md and model_\nand_algorithm_appendi"
+        },
+        {
+          "page": 3,
+          "width": 612,
+          "height": 792,
+          "characters": 45,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Objectiveweights: allmethodsanddecompositions\n3"
+        },
+        {
+          "page": 4,
+          "width": 792,
+          "height": 612,
+          "characters": 980,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Configuration ρ Method G/P U/L Certificate\navg\nR-B20-S-T1 1 P 0.239416/0.300668 0.540085/0.358158 open\nR-B20-S-T1 1 PS 0.222348/0.264291 0.4"
+        },
+        {
+          "page": 5,
+          "width": 612,
+          "height": 792,
+          "characters": 34,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "LimitedSeed1: completemaintriplets\n5"
+        },
+        {
+          "page": 6,
+          "width": 792,
+          "height": 612,
+          "characters": 540,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Role Method Status OwnT (s) U/L Production(s)\ncert\nK-15-S P open n/a 0.592265/0.529115 571.412\nK-15-S PS open n/a 0.592265/0.53228 571.362\nK"
+        },
+        {
+          "page": 7,
+          "width": 612,
+          "height": 792,
+          "characters": 1488,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "LimitedSeed1AMobservations\nSeed1limitedAMrepeat\nRole τ Maxgatescore Actions Production(s)\nAM\nK-15-S 0.04 0.000356687 native-target:1, 114.93"
+        },
+        {
+          "page": 8,
+          "width": 612,
+          "height": 792,
+          "characters": 76,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Contrast Role RootLPoptimum Production(s) Status\nminusC UC-B20-B 0.479076 2.95877 C\nG\n8"
+        },
+        {
+          "page": 9,
+          "width": 792,
+          "height": 612,
+          "characters": 1154,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Production/\nPosition/study Input/Seed Method Status U L verification/totals\n1/B1 K-15-S/0 P O 0.592265 0.527663 571.702/142.568\n/714.27\n2/B1"
+        },
+        {
+          "page": 10,
+          "width": 792,
+          "height": 612,
+          "characters": 1206,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Production/\nPosition/study Input/Seed Method Status U L verification/totals\n22/B1 N-X15-S/0 PS C 0.628986 0.628986 401.931/3.09583\n/405.027\n"
+        },
+        {
+          "page": 11,
+          "width": 792,
+          "height": 612,
+          "characters": 1350,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Production/\nPosition/study Input/Seed Method Status U L verification/totals\n43/B2 R-X20-S-T1/0 GI-TBC C 0.645325 0.645325 20.5065/1.08205\n/2"
+        },
+        {
+          "page": 12,
+          "width": 792,
+          "height": 612,
+          "characters": 1365,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Production/\nPosition/study Input/Seed Method Status U L verification/totals\n64/B3 R-B20-S-T1-rho2/0 P O 0.756988 0.610312 1171.15/1.29992\n/1"
+        },
+        {
+          "page": 13,
+          "width": 792,
+          "height": 612,
+          "characters": 1375,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Production/\nPosition/study Input/Seed Method Status U L verification/totals\n85/C2 UC-B20-B/0 minusA/B C 0.577333 0.577333 4.18619/2.24829\n/6"
+        },
+        {
+          "page": 14,
+          "width": 792,
+          "height": 612,
+          "characters": 1079,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Production/\nPosition/study Input/Seed Method Status U L verification/totals\n106/D2-main K-35-U/1 P O 0.758852 0.330574 2371.17/0.731285\n/237"
+        },
+        {
+          "page": 15,
+          "width": 612,
+          "height": 792,
+          "characters": 767,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Historicalbreadth/resourcestudy: detailedinterpretation\nAll120registeredmethodobservationsappearabove. Theoriginalfixedreportretainsthestudy"
+        },
+        {
+          "page": 16,
+          "width": 792,
+          "height": 612,
+          "characters": 1518,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Position/problem Seed/repeat method proof U L productionseconds\nC01SM-B10-B 0/1 P native/outer 0.5358911 0.5358911 1.641208\nC02SM-B10-B 0/1 "
+        },
+        {
+          "page": 17,
+          "width": 612,
+          "height": 792,
+          "characters": 1150,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "S2. R134completecostandpairedoutcomes\nPosition production postverification total certification\nC01 1.641208 46.64563 48.28684 1.641208\nC02 0"
+        },
+        {
+          "page": 18,
+          "width": 792,
+          "height": 612,
+          "characters": 982,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Problem/Seed/repeat comparison class direction substantive S2/controlcertseconds\nSM-B10-B/0/1 S2/P BOTH_CERTIFIED Win False 0.8573348/1.6412"
+        },
+        {
+          "page": 19,
+          "width": 612,
+          "height": 792,
+          "characters": 361,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Everyadversedirectionisretained. InparticularX-35-Bfavorsindependentlypaid-startcompactatbothSeeds.\nR134 C01 had one failed postreader metad"
+        },
+        {
+          "page": 20,
+          "width": 792,
+          "height": 612,
+          "characters": 417,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Problem lambda effectiverho G Paverage F U-L certificate\nK-15-S 0.075 0.7105028 0.2023697 0.276702 0.3989673 5.551115e-16 True\nK-15-S 0.15 1"
+        },
+        {
+          "page": 21,
+          "width": 612,
+          "height": 792,
+          "characters": 1083,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "The same-feasible-set relations use accepted original-objective errors. Station inventories, target-\nunder/equal/over counts, every vehicle "
+        },
+        {
+          "page": 22,
+          "width": 792,
+          "height": 612,
+          "characters": 1546,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Position/problem Seed/repeat variant C/O U L U-L production\nC01SM-B10-B 0/1 S2 C 0.5358911 0.5358911 0 1.188632\nC02SM-B10-B 0/1 AP C 0.53589"
+        },
+        {
+          "page": 23,
+          "width": 792,
+          "height": 612,
+          "characters": 1462,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "rootLP/childLP/\nPosition postverification total Work nodes MIPseconds splits/targetMIP\nC01 0.2379024 1.426535 0.001649864 0 0.001999855/0/0 "
+        },
+        {
+          "page": 24,
+          "width": 792,
+          "height": 612,
+          "characters": 475,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "rootLP/childLP/\nPosition postverification total Work nodes MIPseconds splits/targetMIP\nD15 3.648402 21.2371 27.01372 1 0.4000001/0.7619998 0"
+        },
+        {
+          "page": 25,
+          "width": 792,
+          "height": 612,
+          "characters": 776,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Problem/Seed/repeat class AP-S2certseconds AP-S2U AP-S2L AP-S2gap\nSM-B10-B/0/1 BOTH_CERTIFIED -0.3764262 0 0 0\nSM-B10-B/0/2 BOTH_CERTIFIED -"
+        },
+        {
+          "page": 26,
+          "width": 612,
+          "height": 792,
+          "characters": 1537,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "All32preregisteredpositionscompleted,with10/16certificatesforeachmethod. K-20-Sremainsopenwiththe\nsameUatbothSeeds;APreducesthegapsbyabout7%"
+        },
+        {
+          "page": 27,
+          "width": 792,
+          "height": 612,
+          "characters": 238,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "APconstruction/LP rows/columns/\nRoot S2reused INDreused APnew AP-IND seconds nonzeros\nK-20-S 0.1951492 0.3187585 0.3187585 -5.551115e-17 0.0"
+        },
+        {
+          "page": 28,
+          "width": 792,
+          "height": 612,
+          "characters": 160,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Root APslack primalrowviolation boundviolation dualviolation maxrowresidual\nK-20-S -6.279699e-16 0 0 4.57967e-16 7.275958e-12\nK-35-U 7.80625"
+        },
+        {
+          "page": 29,
+          "width": 612,
+          "height": 792,
+          "characters": 2228,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "EachLPaddsonlytheproduction-auditedAProwtotheinheriteddomain,freesallintegertypesandreoptimizes\nallauxiliaries. TheoldS2/INDoptimaarereused."
+        },
+        {
+          "page": 30,
+          "width": 612,
+          "height": 792,
+          "characters": 3468,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "P\nNow0 ≤ t ≤ 1,ϕ ≤ e ′ ≤ M ,and ω e ′ = P . Alloriginallocallowerboundsholdbyassumption; every\ni i i i i i e\n′\nother row and the objective s"
+        },
+        {
+          "page": 31,
+          "width": 612,
+          "height": 792,
+          "characters": 2907,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "5. Finitedecision ExactlytwonewcontinuousLPscompareAPtoreusedS2/INDvalues. Thewhole-method\nplan freezes 10 first-stage arms (8,760 cap-secon"
+        },
+        {
+          "page": 32,
+          "width": 612,
+          "height": 792,
+          "characters": 3195,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "6.2Strictincrementontwocompletetinyreferences J2andJ3havefourstations,unittargetsandweights,\nstockstates0,1,2,budgetB = 3,andactualg-interva"
+        },
+        {
+          "page": 33,
+          "width": 612,
+          "height": 792,
+          "characters": 1137,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "notthepositivestock-deficittheorem. Thesupplementmapstheexactreadsourcesandthelimitedcomparisons;\nnoclaimofdominanceoverallhistoricalDPorjoi"
+        },
+        {
+          "page": 34,
+          "width": 792,
+          "height": 612,
+          "characters": 212,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Problem L0 Lold Lold+TC TCincrement U/remaininggap LPseconds0/old/TC\nK-20-S 0.1951492 0.3187585 0.3187585 0 0.716807/0.398048 0.131/0.165/0."
+        },
+        {
+          "page": 35,
+          "width": 612,
+          "height": 792,
+          "characters": 330,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Figure1: Exacttiny-referenceimprovementandtheseparatenumericalreal-rootcomparison. Oldstatepenalty\nisretainedbeforeTCisassessedontherealroot"
+        },
+        {
+          "page": 36,
+          "width": 612,
+          "height": 792,
+          "characters": 3527,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Generatedfieldsand\nSource Actualarchivedauthority Coordinatesandcapacities experimentaluse\nCITI R57source_station_table.csv, Row-aligned443-"
+        },
+        {
+          "page": 37,
+          "width": 612,
+          "height": 792,
+          "characters": 3535,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Public source material is attributed through the providers’ system-data and license links and is used within the\nnoncommercialresearchstudy."
+        },
+        {
+          "page": 38,
+          "width": 612,
+          "height": 792,
+          "characters": 1359,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "B.13 Uniform support candidate confirmation (Round129) Round129 changes no production source, H,\nmodel generator, numerical policy or contro"
+        },
+        {
+          "page": 39,
+          "width": 612,
+          "height": 792,
+          "characters": 2161,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "AppendixC.Equivalent-expressionproofsandactual-modelconditions\nC.3. Projectionofthethreegeometryrowfamilies DeleteonlyH-spread,variable-S ce"
+        },
+        {
+          "page": 40,
+          "width": 612,
+          "height": 792,
+          "characters": 3132,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "∗ ′ ′\ndenominator vanishes, T = A and H = d suffices. If C = 0, all c,r,S,A,L vanish and H = 0. If S = 0,\n′\nnonnegative ratios vanish and H "
+        },
+        {
+          "page": 41,
+          "width": 612,
+          "height": 792,
+          "characters": 3660,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "retainH ≤ ncS andeveryW-feasibilitycompatibilityrow;removingthewholeblockwouldagainchangeits\nΣ\nprojection. Zero-widthP andsimultaneousdegene"
+        },
+        {
+          "page": 42,
+          "width": 612,
+          "height": 792,
+          "characters": 3586,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "qualification remain fixed. The final tables and algorithm choice are appended only after all 18 arms and their\noriginal-objectiveauditsclos"
+        },
+        {
+          "page": 43,
+          "width": 612,
+          "height": 792,
+          "characters": 2428,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "ResearchnavigationforsavedC35skeletons\nTheformermain-body§7.1diagnosticworklistisretainedinresearchnavigation. Itreconcilestheexistingcom-\np"
+        },
+        {
+          "page": 44,
+          "width": 792,
+          "height": 612,
+          "characters": 169,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Seed B20BT_cert B20PT_cert ΔT=B−P/s B/P Substantivescale/s\n0 5.058292 235.8555 -230.7972 0.02144657 10\n1 4.963643 303.0334 -298.0697 0.01637"
+        },
+        {
+          "page": 45,
+          "width": 612,
+          "height": 792,
+          "characters": 2815,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Offlinesaved-feasibletargetsandclocks\nThesixtargetswerefrozenbeforeanynewOptimizefrommin(twohistoricalqualifiedphysicalU).Theyenter\nnoargv,S"
+        },
+        {
+          "page": 46,
+          "width": 612,
+          "height": 792,
+          "characters": 509,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Allpre-frozenfeasible-targetavailabilityintervals\nThese are the original 36 primal_target_arrival records, displayed at six significant digi"
+        },
+        {
+          "page": 47,
+          "width": 792,
+          "height": 612,
+          "characters": 795,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [],
+          "opening": "Configuration Method Frozenu_ref Seed0(s) Seed1(s) Seed2(s)\nR163-C20-S B 0.1912806 [0,94.4044] [0,109.373] [0,143.294]\nR163-C20-S P 0.191280"
+        },
+        {
+          "page": 48,
+          "width": 612,
+          "height": 792,
+          "characters": 395,
+          "outside_page": [],
+          "replacements": 0,
+          "topics": [
+            "References"
+          ],
+          "opening": "References\nYitzhaki, Shlomo, and Edna Schechtman. 2013. “More Than a Dozen Alternative Ways of Spelling Gini.” In\nTheGiniMethodology,vol. 27"
+        }
+      ],
+      "contact_sheets": [
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_supplement_f09ca0004d91\\contact-01.png",
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_supplement_f09ca0004d91\\contact-02.png",
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_supplement_f09ca0004d91\\contact-03.png",
+        "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_supplement_f09ca0004d91\\contact-04.png"
+      ],
+      "actual_visual_inspection_complete": false,
+      "render_root": "E:\\codes\\ExactEBRP-work\\temp\\round165\\pdf\\QA_supplement_f09ca0004d91",
+      "blank_pages": [],
+      "outside_page_characters": 0,
+      "replacement_characters": 0
+    }
+  ],
+  "source_checks": {
+    "UTC": "2026-11-12T20:21:17.758670+00:00",
+    "errors": [],
+    "warnings": [],
+    "local_links": [
+      {
+        "source": "paper_body.md",
+        "target": "reports/operations.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "paper_body.md",
+        "target": "figures/resource_endpoints.png",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "paper_body.md",
+        "target": "figures/three_seed_endpoints.png",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "model_and_algorithm_appendices.md",
+        "target": "candidate_manifest.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "model_and_algorithm_appendices.md",
+        "target": "matrix_frozen.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "model_and_algorithm_appendices.md",
+        "target": "experiment_plan.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "model_and_algorithm_appendices.md",
+        "target": "../unified_exact_round164/method_freeze.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "model_and_algorithm_appendices.md",
+        "target": "../unified_exact_round164/science_identity.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "model_and_algorithm_appendices.md",
+        "target": "../unified_exact_round165/source_manifest.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "mathematical_analysis.md",
+        "target": "../unified_exact_round165/source_manifest.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "mathematical_analysis.md",
+        "target": "../unified_exact_round164/historical_source_map.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "mathematical_analysis.md",
+        "target": "../unified_exact_round164/reports/seed_evidence.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "mathematical_analysis.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round165/source_manifest.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round165/document_build.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round135/figures/count_bound_scope.png",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round135/input_provenance.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round165/literature_review.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/source_recipe.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/input_manifest.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/source_overlap.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/matrix_frozen.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/structural_synthesis.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/historical_source_map.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "mathematical_analysis.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/reports/complete.csv",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/reports/complete_arms.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/reports/comparisons.csv",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/final_report.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/decision.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/cost_report.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/science_identity.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/main_table_update.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/final_report.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round163/RESUME.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/research_navigation.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/reports/seed_evidence.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/reports/complete.csv",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/reports/three_seed_comparisons.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/reports/within_configuration.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/final_report.md",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/Seed0_reuse_qualification.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/science_identity.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/primal_targets_frozen.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/reports/primal_target_arrival.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/target_clock_contract.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/structural_synthesis.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/historical_member_access.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/historical_source_map.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/execution_dispositions.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/cost_report.json",
+        "exists_in_worktree_or_fixed_source": true
+      },
+      {
+        "source": "supplement.md",
+        "target": "../unified_exact_round164/reports/primal_target_arrival.json",
+        "exists_in_worktree_or_fixed_source": true
+      }
+    ],
+    "defined_citations": [
+      "benchmark122",
+      "boydVandenberghe2004",
+      "bruck2019",
+      "bruck2025",
+      "bulhoes2018",
+      "cabiData",
+      "caggiani2026",
+      "chemla2013",
+      "citiData",
+      "divvyData",
+      "erdogan2014",
+      "erdogan2015",
+      "frozenImplementation",
+      "gupte2013",
+      "gurobiCallbackCodes",
+      "gurobiIllConditioning",
+      "gurobiNumericParameters",
+      "gurobiToleranceScaling",
+      "hgaTgbcManuscript",
+      "ikonen2025",
+      "koppe2008",
+      "matl2018",
+      "mccormick1976",
+      "proof123",
+      "qiao2026",
+      "raviv2013",
+      "schuijbroek2017",
+      "yitzhakiSchechtman2013",
+      "yuAhmed2017",
+      "yue2013"
+    ],
+    "main_tables": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ],
+    "appendix_equation_tags": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "A6",
+      "A7",
+      "A8",
+      "A9",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A19",
+      "A20",
+      "A21",
+      "A22",
+      "A23",
+      "A24",
+      "A25",
+      "A26",
+      "A27",
+      "A28",
+      "A29",
+      "A30",
+      "A31",
+      "A32",
+      "A33",
+      "A34",
+      "A17",
+      "A35",
+      "A18",
+      "B1",
+      "B2",
+      "B3"
+    ]
+  },
+  "evidence_checks_SHA256": "0b0d87d8d4835a5065efd27309c166dcb77a8aa7d0068d0f663f430bf88e441c",
+  "new_Optimize": 0,
+  "visual_acceptance_not_inferred_from_file_existence": true
+}

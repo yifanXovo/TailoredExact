@@ -1,5 +1,16 @@
 # GI-TBC release and paper-S2 run guide
 
+The current paper is the [R165 manuscript](../results/unified_exact_round137/manuscript.pdf)
+and [supplement](../results/unified_exact_round137/supplement.pdf), built from
+the maintained R137 component directory with `scripts/round165_documents.py`.
+See the [current review packet](paper_review.md). The release/runtime commands
+below retain their historical R137 contract; R165 performs no new solver call,
+production compilation or default promotion. The later R163/R164 measured
+C++ source is `e920b92e199e825ec89a2932f701861ff158e0d4`, with PE SHA256
+`fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93`.
+The [source manifest](../results/unified_exact_round165/source_manifest.json)
+keeps that identity separate from the older source/PE below and the document build.
+
 Round160's optional physical-neighborhood research is documented in
 [the mathematical section](round160_physical_neighborhood.md). Its new
 switch is default-off and does not redefine the stable GI-TBC/S2 profile.
@@ -16,10 +27,10 @@ Round136 mainline and all historical observations remain separately pinned.
 |---|---|
 | Formal method | **GI-TBC - Gini-interval tailored branch-and-cut** |
 | Implementation | Historical S2, configuration `ms2`; the thin public entry keeps the name `paper_s2.py` |
-| Current production source | `779713ad9a0b01edc538ecb64df9438739127be3`; actual frozen source/PE hashes are in the [candidate manifest](../results/unified_exact_round137/candidate_manifest.json) |
+| Historical R137 measured source | `779713ad9a0b01edc538ecb64df9438739127be3`; actual frozen source/PE hashes are in the [candidate manifest](../results/unified_exact_round137/candidate_manifest.json) |
 | Current Round137 profile | [gi_tbc_round137.json](../config/gi_tbc_round137.json), normalized against all 28 actual default vectors in the frozen 120-position matrix; actual guarded promotion and all 28 CLI checks passed with six refusal cases and zero native execution |
 | Compatibility identities | Bare executable default remains ENS-C; immutable [paper_s2.json](../config/paper_s2.json) preserves the accepted R135 profile and its 16-vector provenance |
-| Current paper | Maintained R135 lineage, now with Round137 question-led experiments, complete model/algorithm appendices and original bibliography |
+| Current paper | R165 revision of the maintained R137 components, including evidence through R164; complete model/algorithm appendices and bibliography |
 
 GI-TBC independently pays complete own H, keeps M-B shared inventory/service
 states, VD-P, uniform pair-only support, the current interval controller and
@@ -104,15 +115,21 @@ Start with the [advisor/coauthor reading packet](paper_review.md), then the
 [manuscript source](../results/unified_exact_round137/manuscript.md),
 [supplement](../results/unified_exact_round137/supplement.md),
 [bibliography](../results/unified_exact_round137/references.bib) and
-[stage report](../results/unified_exact_round137/final_report.md).
+[current report](../results/unified_exact_round165/final_report.md).
 
-The registered study comprises 120 method positions, 16 base inputs, 20 physical
+The historical R137 study comprises 120 method positions, 16 base inputs, 20 physical
 configurations and 24 objective configurations. Seeds, weights, AM and mechanism
 variants are not independent new inputs. Main Seed0 breadth gives GI-TBC 9/12
 certificates versus P 7/12 and PS 7/12; positive-resource pairs give 4/8 versus 0/8
 and 0/8. Open certificate times are null. PS's substantive X-35-B reversal, K-35-U's opposed
 P/GI-TBC endpoints, all n35 resource open results, mixed conditional mechanism
 costs and material descriptive Seed shifts remain visible.
+
+The later six-input archived-source cohort has 18 Seed0 B/E+/P observations,
+then 24 additional B/P observations at Seeds1/2. Its 18 paired B/P observations
+are repeats within six inputs. Each Seed gives B3/6 versus P1/6, with all n35
+OPEN; E+'s six Seed0 results stay separate. Current paper and figure identities
+are in the R165 document manifest rather than the historical 120-position receipt.
 
 Historical R132, R134 and R135 retain their original source, policy and
 counts. The [research index](unified_exact_research_index.md) pins those studies;
@@ -122,7 +139,7 @@ Historical S2 counts are R132 17/24 versus P 9/24 and PS 4/12, and R134
 AP stays off after its mixed/negative accepted study. Same-domain ideal LP
 strengthening need not improve capped endpoints or complete certificate time.
 
-The [finite recovery policy](../results/unified_exact_round137/reproducibility.md)
+The historical [finite recovery policy](../results/unified_exact_round137/reproducibility.md)
 specifies one fixed commit; only a passed actual
 [public restore receipt](../results/unified_exact_round137/public_restore_receipt.json)
 establishes completion of that recovery. Recovery is a bounded anonymous
@@ -133,5 +150,7 @@ owned root; never repeat a passed recovery or R135's accepted recovery.
 The [continuation record](../results/unified_exact_round137/RESUME.md) identifies
 actual completion, PR readback and bounded cleanup when those steps occur. Stable historical refs and
 old branches are retained. No automatic merge, force-push, old-PR cleanup,
-email or submission is part of this delivery. Author facts and three concrete
-next research questions are in the reading packet and stage report.
+email or submission is part of this delivery. Current author decisions and
+the conditional architecture question are in the [author memo](../results/unified_exact_round165/author_decision_memo.md).
+R165 performs only new/changed-paper byte recovery, recorded in its own
+public_restore_receipt.json; it does not repeat the historical 120-position replay.

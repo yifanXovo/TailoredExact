@@ -52,4 +52,5 @@ def main():
         replacements=sum(p['replacement_characters'] for p in pages),contact_sheets=[r['path'] for r in sheets],
         topic_pages=[dict(page=p['page'],topics=p['topics']) for p in pages if p['topics']])))
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    raise SystemExit('Historical R137 120-arm gate: use scripts/round165_documents.py qa for the current PDFs.')

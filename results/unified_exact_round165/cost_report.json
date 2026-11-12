@@ -1,0 +1,36 @@
+{
+  "UTC": "2026-11-12T20:47:51.567654+00:00",
+  "work_start_UTC": "2026-11-12T20:05:40+00:00",
+  "science_document_end_UTC": "2026-11-12T20:49:31.739442+00:00",
+  "conservative_shared_work_window_seconds": 2631.739442,
+  "capacity_seconds": 21600,
+  "within_capacity": true,
+  "accounting": "shared outer reading/writing/offline/build/QA/review window, counted once; no sum of parallel agent durations. Preliminary task-file read preceded the measured goal window and was not precision-metered. Ordinary publication/transfer I/O is recorded separately.",
+  "target_hours": "2–4 target, 6 maximum; finish when complete, no waiting to exhaust it",
+  "new_Optimize": 0,
+  "new_formal_arms": 0,
+  "production_compile": 0,
+  "new_seed": 0,
+  "monetary_cost": "not exposed by tools",
+  "failures_retained": [
+    "initial missing matplotlib import resolved with existing local R137 dependency directory",
+    "source-check generated-link/heading matcher repaired before assembly",
+    "first supplement export old remote image path repaired",
+    "bounded old R62 path assumption corrected from fixed source map",
+    "local command quoting/encoding typos repaired; no healthy solver rerun"
+  ],
+  "ordinary_Git_transfer_IO": "entry/ref checks in tool transcript; timed publication commands/public_restore below; not historical C++ timing",
+  "ordinary_publication_push": {
+    "UTC": "2026-11-12T20:50:45.055899+00:00",
+    "command": "git push -u origin codex/round165-current-manuscript",
+    "return_code": 0,
+    "seconds": 8.935031900182366,
+    "stdout": "branch 'codex/round165-current-manuscript' set up to track 'origin/codex/round165-current-manuscript'.\n",
+    "stderr": "remote: \nremote: Create a pull request for 'codex/round165-current-manuscript' on GitHub by visiting:        \nremote:      https://github.com/yifanXovo/TailoredExact/pull/new/codex/round165-current-manuscript        \nremote: \nTo https://github.com/yifanXovo/TailoredExact.git\n * [new branch]          codex/round165-current-manuscript -> codex/round165-current-manuscript\n",
+    "commit": "88f3e33a4a88e5691f3e54eb46ccf1242e455e7d",
+    "ordinary_Git_IO": true
+  },
+  "ordinary_public_restore_seconds": 6.319981900043786,
+  "ordinary_public_restore_bytes": 2960171,
+  "delivery_receipt_push": "final normal receipt push is read back after commit; later self-SHA not embedded"
+}

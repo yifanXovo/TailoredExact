@@ -1,0 +1,2724 @@
+{
+  "UTC": "2026-11-12T20:11:38.936718+00:00",
+  "tables": [
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 25180,
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3",
+      "encoding": "gb18030",
+      "UTF8_BOM": false,
+      "rows": 91,
+      "columns": 28,
+      "header": [
+        "实例",
+        "站点数_不含仓库",
+        "车辆数",
+        "场景",
+        "场景代码",
+        "数据来源",
+        "空间分布",
+        "路线时限_T_秒",
+        "目标权重_lambda",
+        "权重倍数_lambda相对0.15",
+        "Gurobi_Seed",
+        "重复序号",
+        "数据轮次",
+        "求解时限_秒",
+        "GI_TBC_状态",
+        "GI_TBC_收敛时间_秒",
+        "GI_TBC_未收敛Gap_百分比",
+        "GI_TBC_LB",
+        "GI_TBC_UB",
+        "P_GRB_状态",
+        "P_GRB_收敛时间_秒",
+        "P_GRB_未收敛Gap_百分比",
+        "P_GRB_LB",
+        "P_GRB_UB",
+        "对比结果",
+        "对比说明",
+        "",
+        ""
+      ],
+      "result_keys": [
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "2",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "2",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "K-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.075",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.3",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "600"
+        },
+        {
+          "input": "N-B15-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "N-X15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B15-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B15-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "UC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "129",
+          "cap": "600"
+        },
+        {
+          "input": "UC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "129",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "N-C20-U",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "N-X20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "PB-C20-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "129",
+          "cap": "900"
+        },
+        {
+          "input": "PB-C20-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "129",
+          "cap": "900"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.03711952487008166",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.07423904974016332",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.07423904974016332",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.14847809948032664",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T2",
+          "T": "5100",
+          "lambda": "0.07423904974016332",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-X20-S-T1",
+          "T": "4800",
+          "lambda": "0.12676060979965992",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-X20-S-T2",
+          "T": "7200",
+          "lambda": "0.12676060979965992",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R55-D13",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "135",
+          "cap": "600"
+        },
+        {
+          "input": "R55-D13",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "135",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-C20-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-C20-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.075",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.3",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-C20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-C20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B30-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B30-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "K-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "N-B35-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "N-C35-B",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "PB-B35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "2400"
+        },
+        {
+          "input": "PB-C35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "2400"
+        },
+        {
+          "input": "R-B35-S-T1",
+          "T": "4800",
+          "lambda": "0.055125275219827186",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-B35-S-T2",
+          "T": "7200",
+          "lambda": "0.055125275219827186",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T1",
+          "T": "4200",
+          "lambda": "0.0754049775127276",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.0377024887563638",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.0754049775127276",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.1508099550254552",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-C20-S",
+          "T": "5400",
+          "lambda": "0.10787606377934943",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-B20-B",
+          "T": "7200",
+          "lambda": "0.10176615156032952",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-X20-S",
+          "T": "5400",
+          "lambda": "0.13297872340425532",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-C35-U",
+          "T": "10800",
+          "lambda": "0.11068496171019777",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-B35-S",
+          "T": "7200",
+          "lambda": "0.10810343336504369",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-X35-S",
+          "T": "10800",
+          "lambda": "0.09288824383164006",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\Research\\docs\\tempfiles\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 25180,
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3",
+      "encoding": "gb18030",
+      "UTF8_BOM": false,
+      "rows": 91,
+      "columns": 28,
+      "header": [
+        "实例",
+        "站点数_不含仓库",
+        "车辆数",
+        "场景",
+        "场景代码",
+        "数据来源",
+        "空间分布",
+        "路线时限_T_秒",
+        "目标权重_lambda",
+        "权重倍数_lambda相对0.15",
+        "Gurobi_Seed",
+        "重复序号",
+        "数据轮次",
+        "求解时限_秒",
+        "GI_TBC_状态",
+        "GI_TBC_收敛时间_秒",
+        "GI_TBC_未收敛Gap_百分比",
+        "GI_TBC_LB",
+        "GI_TBC_UB",
+        "P_GRB_状态",
+        "P_GRB_收敛时间_秒",
+        "P_GRB_未收敛Gap_百分比",
+        "P_GRB_LB",
+        "P_GRB_UB",
+        "对比结果",
+        "对比说明",
+        "",
+        ""
+      ],
+      "result_keys": [
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "2",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "2",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "K-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.075",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.3",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "600"
+        },
+        {
+          "input": "N-B15-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "N-X15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B15-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B15-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "UC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "129",
+          "cap": "600"
+        },
+        {
+          "input": "UC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "129",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "N-C20-U",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "N-X20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "PB-C20-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "129",
+          "cap": "900"
+        },
+        {
+          "input": "PB-C20-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "129",
+          "cap": "900"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.03711952487008166",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.07423904974016332",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.07423904974016332",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.14847809948032664",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T2",
+          "T": "5100",
+          "lambda": "0.07423904974016332",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-X20-S-T1",
+          "T": "4800",
+          "lambda": "0.12676060979965992",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-X20-S-T2",
+          "T": "7200",
+          "lambda": "0.12676060979965992",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R55-D13",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "135",
+          "cap": "600"
+        },
+        {
+          "input": "R55-D13",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "135",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-C20-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-C20-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.075",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.3",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-C20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-C20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B30-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B30-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "K-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "N-B35-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "N-C35-B",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "PB-B35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "2400"
+        },
+        {
+          "input": "PB-C35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "2400"
+        },
+        {
+          "input": "R-B35-S-T1",
+          "T": "4800",
+          "lambda": "0.055125275219827186",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-B35-S-T2",
+          "T": "7200",
+          "lambda": "0.055125275219827186",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T1",
+          "T": "4200",
+          "lambda": "0.0754049775127276",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.0377024887563638",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.0754049775127276",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.1508099550254552",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-C20-S",
+          "T": "5400",
+          "lambda": "0.10787606377934943",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-B20-B",
+          "T": "7200",
+          "lambda": "0.10176615156032952",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-X20-S",
+          "T": "5400",
+          "lambda": "0.13297872340425532",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-C35-U",
+          "T": "10800",
+          "lambda": "0.11068496171019777",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-B35-S",
+          "T": "7200",
+          "lambda": "0.10810343336504369",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-X35-S",
+          "T": "10800",
+          "lambda": "0.09288824383164006",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        }
+      ]
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round165\\results\\unified_exact_round164\\reports\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 32685,
+      "SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+      "encoding": "gb18030",
+      "UTF8_BOM": false,
+      "rows": 103,
+      "columns": 28,
+      "header": [
+        "实例",
+        "站点数_不含仓库",
+        "车辆数",
+        "场景",
+        "场景代码",
+        "数据来源",
+        "空间分布",
+        "路线时限_T_秒",
+        "目标权重_lambda",
+        "权重倍数_lambda相对0.15",
+        "Gurobi_Seed",
+        "重复序号",
+        "数据轮次",
+        "求解时限_秒",
+        "GI_TBC_状态",
+        "GI_TBC_收敛时间_秒",
+        "GI_TBC_未收敛Gap_百分比",
+        "GI_TBC_LB",
+        "GI_TBC_UB",
+        "P_GRB_状态",
+        "P_GRB_收敛时间_秒",
+        "P_GRB_未收敛Gap_百分比",
+        "P_GRB_LB",
+        "P_GRB_UB",
+        "对比结果",
+        "对比说明",
+        "",
+        ""
+      ],
+      "result_keys": [
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-C8-S",
+          "T": "2400",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "2",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "2",
+          "round": "134",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "1",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "SM-B10-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "2",
+          "repeat": "2",
+          "round": "131",
+          "cap": "90"
+        },
+        {
+          "input": "K-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.075",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "K-15-S",
+          "T": "3600",
+          "lambda": "0.3",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "600"
+        },
+        {
+          "input": "N-B15-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "N-X15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B15-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B15-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "SC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "600"
+        },
+        {
+          "input": "UC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "129",
+          "cap": "600"
+        },
+        {
+          "input": "UC-C15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "129",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-B",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "X-15-S",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "600"
+        },
+        {
+          "input": "K-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "K-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "N-C20-U",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "N-X20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "PB-C20-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "129",
+          "cap": "900"
+        },
+        {
+          "input": "PB-C20-B",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "129",
+          "cap": "900"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.03711952487008166",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.07423904974016332",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.07423904974016332",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T1",
+          "T": "3300",
+          "lambda": "0.14847809948032664",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-B20-S-T2",
+          "T": "5100",
+          "lambda": "0.07423904974016332",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-X20-S-T1",
+          "T": "4800",
+          "lambda": "0.12676060979965992",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R-X20-S-T2",
+          "T": "7200",
+          "lambda": "0.12676060979965992",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "R55-D13",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "135",
+          "cap": "600"
+        },
+        {
+          "input": "R55-D13",
+          "T": "3600",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "135",
+          "cap": "600"
+        },
+        {
+          "input": "SC-B20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-B20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-C20-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "SC-C20-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "131",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.075",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B20-B",
+          "T": "7200",
+          "lambda": "0.3",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-C20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-C20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-S",
+          "T": "5400",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "X-20-U",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B30-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "UC-B30-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "130",
+          "cap": "1200"
+        },
+        {
+          "input": "K-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "132",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "132",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "K-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "N-B35-S",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "N-C35-B",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "PB-B35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "2400"
+        },
+        {
+          "input": "PB-C35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "131",
+          "cap": "2400"
+        },
+        {
+          "input": "R-B35-S-T1",
+          "T": "4800",
+          "lambda": "0.055125275219827186",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-B35-S-T2",
+          "T": "7200",
+          "lambda": "0.055125275219827186",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T1",
+          "T": "4200",
+          "lambda": "0.0754049775127276",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.0377024887563638",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.0754049775127276",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "R-X35-S-T2",
+          "T": "6300",
+          "lambda": "0.1508099550254552",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "137",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-B",
+          "T": "7200",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "0",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "X-35-U",
+          "T": "10800",
+          "lambda": "0.15",
+          "seed": "1",
+          "repeat": "1",
+          "round": "134",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-C20-S",
+          "T": "5400",
+          "lambda": "0.10787606377934943",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-B20-B",
+          "T": "7200",
+          "lambda": "0.10176615156032952",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-X20-S",
+          "T": "5400",
+          "lambda": "0.13297872340425532",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-C35-U",
+          "T": "10800",
+          "lambda": "0.11068496171019777",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-B35-S",
+          "T": "7200",
+          "lambda": "0.10810343336504369",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-X35-S",
+          "T": "10800",
+          "lambda": "0.09288824383164006",
+          "seed": "0",
+          "repeat": "1",
+          "round": "163",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-C20-S",
+          "T": "5400",
+          "lambda": "0.10787606377934943",
+          "seed": "1",
+          "repeat": "1",
+          "round": "164",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-C20-S",
+          "T": "5400",
+          "lambda": "0.10787606377934943",
+          "seed": "2",
+          "repeat": "1",
+          "round": "164",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-B20-B",
+          "T": "7200",
+          "lambda": "0.10176615156032952",
+          "seed": "1",
+          "repeat": "1",
+          "round": "164",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-B20-B",
+          "T": "7200",
+          "lambda": "0.10176615156032952",
+          "seed": "2",
+          "repeat": "1",
+          "round": "164",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-X20-S",
+          "T": "5400",
+          "lambda": "0.13297872340425532",
+          "seed": "1",
+          "repeat": "1",
+          "round": "164",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-X20-S",
+          "T": "5400",
+          "lambda": "0.13297872340425532",
+          "seed": "2",
+          "repeat": "1",
+          "round": "164",
+          "cap": "1200"
+        },
+        {
+          "input": "R163-C35-U",
+          "T": "10800",
+          "lambda": "0.11068496171019777",
+          "seed": "1",
+          "repeat": "1",
+          "round": "164",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-C35-U",
+          "T": "10800",
+          "lambda": "0.11068496171019777",
+          "seed": "2",
+          "repeat": "1",
+          "round": "164",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-B35-S",
+          "T": "7200",
+          "lambda": "0.10810343336504369",
+          "seed": "1",
+          "repeat": "1",
+          "round": "164",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-B35-S",
+          "T": "7200",
+          "lambda": "0.10810343336504369",
+          "seed": "2",
+          "repeat": "1",
+          "round": "164",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-X35-S",
+          "T": "10800",
+          "lambda": "0.09288824383164006",
+          "seed": "1",
+          "repeat": "1",
+          "round": "164",
+          "cap": "2400"
+        },
+        {
+          "input": "R163-X35-S",
+          "T": "10800",
+          "lambda": "0.09288824383164006",
+          "seed": "2",
+          "repeat": "1",
+          "round": "164",
+          "cap": "2400"
+        }
+      ]
+    }
+  ],
+  "full_106_exact_found": false,
+  "R164_increment": {
+    "path": "results/unified_exact_round164/reports/GI_TBC_vs_P_GRB_Round164_Increment.csv",
+    "bytes": 8338,
+    "SHA256": "10695be7c992d469d9882bbf1aebcc27c3276d5cc834b044067d68038ed2d64c"
+  },
+  "R164_increment_pairs": 12,
+  "all_12_already_present": true,
+  "missing_historical_rows": [
+    {
+      "round": 138,
+      "input": "R-B35-S-T2",
+      "seed": 1,
+      "cap": 2400
+    },
+    {
+      "round": 155,
+      "input": "N-B35-S",
+      "seed": 0,
+      "cap": 7200
+    },
+    {
+      "round": 156,
+      "input": "R-X35-S-T2",
+      "seed": 0,
+      "cap": 7200
+    }
+  ],
+  "new_performance_rows": 0,
+  "external_files_modified": false,
+  "reconstruction": "No original 94-row/106-row source found; absent original descriptive/source fields are not fabricated. Keep existing 103-row working copy explicitly incomplete."
+}

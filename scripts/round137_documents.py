@@ -803,4 +803,4 @@ def pdf():
     write(OUT/'pdf_export.json',receipt)
 
 if __name__=='__main__':
-    globals()[sys.argv[1]]()
+    raise SystemExit('Historical generator: use scripts/round165_documents.py assemble, pdf or qa for the current maintained components. The old generator is retained in Git history and must not overwrite current prose.')

@@ -1,3 +1,9 @@
+<!-- HISTORICAL SOURCE: not an input to the current document build. -->
+> Historical derivation snapshot used by the old R137 generator. The current
+> authoritative model is model_and_algorithm_appendices.md and current prose
+> is paper_body.md. Use scripts/round165_documents.py; the old prepare/assemble
+> actions must not overwrite these maintained components.
+
 # GI-TBC: a Gini-interval tailored branch-and-cut algorithm for equitable bicycle redistribution
 
 ## Abstract
