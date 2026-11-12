@@ -1,6 +1,22 @@
 # Current mainline and Round137 paper branch
 
-The current [Round163 stage confirmation](round163_stage_confirmation.md) completes all 18 frozen B/E+/P arms on six new configurations from archived CITI/CABI/DIVVY sources. Retain uniform GI-TBC/B as the paper's main algorithm. Keep uniform E+ as a separately named, limited proof enhancement, with its genuine X35 gain and earlier qualified R154/R156 gains preserved. This complete panel does not justify replacing B as the main recommendation; the current broad-promotion attempt ends here. No per-input best-of-B/E+ method or released-default change is made. The [complete report](../results/unified_exact_round163/final_report.md) retains all certificates, two-sided endpoints, helper timing and paid costs. The maintained [paper body](../results/unified_exact_round137/paper_body.md), [mathematical analysis](../results/unified_exact_round137/mathematical_analysis.md) and [supplement](../results/unified_exact_round137/supplement.md) now integrate the structural-stage evidence and one next research question. Their Markdown sources are current; the existing R137 PDF is an earlier snapshot. Frozen research implementation and paper recommendation do not change released main/defaults.
+The completed [Round164 finite solver-Seed confirmation](round164_seed_confirmation.md)
+adds24 frozen B/P arms at Seeds1/2 on the six exposed R163 inputs. Each of
+the three qualified Seeds gives B3/6 and cold P1/6 certificates. All n35
+observations remain OPEN; B35/X35 retain better B U/L, while C35's primal
+ordering reverses and B's L stays stronger. These are six mathematical
+inputs with eighteen within-input pairs, without a population or constant-time
+claim. B is the paper's main method; E+ retains its genuine historical proof
+gain and cost, without new E+ robustness evidence. The maintained R137
+[body](../results/unified_exact_round137/paper_body.md),
+[math](../results/unified_exact_round137/mathematical_analysis.md) and
+[supplement](../results/unified_exact_round137/supplement.md) are current
+Markdown. The existing R137 PDF is historical; released defaults and prior
+PRs are unchanged. Full identities, fees, CSV reconciliation and delivery
+receipts are in the [report](../results/unified_exact_round164/final_report.md).
+
+
+The preceding [Round163 stage confirmation](round163_stage_confirmation.md) completes all 18 frozen B/E+/P arms on six new configurations from archived CITI/CABI/DIVVY sources. Retain uniform GI-TBC/B as the paper's main algorithm. Keep uniform E+ as a separately named, limited proof enhancement, with its genuine X35 gain and earlier qualified R154/R156 gains preserved. This complete panel does not justify replacing B as the main recommendation; the current broad-promotion attempt ends here. No per-input best-of-B/E+ method or released-default change is made. The [complete report](../results/unified_exact_round163/final_report.md) retains all certificates, two-sided endpoints, helper timing and paid costs. The maintained [paper body](../results/unified_exact_round137/paper_body.md), [mathematical analysis](../results/unified_exact_round137/mathematical_analysis.md) and [supplement](../results/unified_exact_round137/supplement.md) retain the historical structural-stage evidence; the later Seed results above distinguish observed limits from the unexecuted research navigation. Their Markdown sources are current; the existing R137 PDF is an earlier snapshot. Frozen research implementation and paper recommendation do not change released main/defaults.
 
 The [Round162 shared-G physical-completion study](round162_physical_completion.md)
 retains OLD and tests complete bounded physical endpoints beyond STOCK. NB35

@@ -1,0 +1,112 @@
+{
+  "UTC": "2026-11-12T08:49:34.276796+00:00",
+  "tables": [
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3",
+      "bytes": 25180,
+      "encoding": "gb18030",
+      "rows": 91,
+      "header": [
+        "实例",
+        "站点数_不含仓库",
+        "车辆数",
+        "场景",
+        "场景代码",
+        "数据来源",
+        "空间分布",
+        "路线时限_T_秒",
+        "目标权重_lambda",
+        "权重倍数_lambda相对0.15",
+        "Gurobi_Seed",
+        "重复序号",
+        "数据轮次",
+        "求解时限_秒",
+        "GI_TBC_状态",
+        "GI_TBC_收敛时间_秒",
+        "GI_TBC_未收敛Gap_百分比",
+        "GI_TBC_LB",
+        "GI_TBC_UB",
+        "P_GRB_状态",
+        "P_GRB_收敛时间_秒",
+        "P_GRB_未收敛Gap_百分比",
+        "P_GRB_LB",
+        "P_GRB_UB",
+        "对比结果",
+        "对比说明",
+        "",
+        ""
+      ],
+      "local_backup": "E:\\codes\\ExactEBRP-work\\temp\\round164\\master_before_0.csv"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\Research\\docs\\tempfiles\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3",
+      "bytes": 25180,
+      "encoding": "gb18030",
+      "rows": 91,
+      "header": [
+        "实例",
+        "站点数_不含仓库",
+        "车辆数",
+        "场景",
+        "场景代码",
+        "数据来源",
+        "空间分布",
+        "路线时限_T_秒",
+        "目标权重_lambda",
+        "权重倍数_lambda相对0.15",
+        "Gurobi_Seed",
+        "重复序号",
+        "数据轮次",
+        "求解时限_秒",
+        "GI_TBC_状态",
+        "GI_TBC_收敛时间_秒",
+        "GI_TBC_未收敛Gap_百分比",
+        "GI_TBC_LB",
+        "GI_TBC_UB",
+        "P_GRB_状态",
+        "P_GRB_收敛时间_秒",
+        "P_GRB_未收敛Gap_百分比",
+        "P_GRB_LB",
+        "P_GRB_UB",
+        "对比结果",
+        "对比说明",
+        "",
+        ""
+      ],
+      "local_backup": "E:\\codes\\ExactEBRP-work\\temp\\round164\\master_before_1.csv"
+    }
+  ],
+  "inspected_roots": [
+    "C:/Users/Administrator",
+    "E:/codes/ExactEBRP-work"
+  ],
+  "supplied_94_row_version_found": false,
+  "available_rows": [
+    91,
+    91
+  ],
+  "preserve_existing_bytes": true,
+  "classification_policy": "retain existing labels; new classification blank, with endpoint facts",
+  "pending_historical_union": [
+    {
+      "round": 138,
+      "id": "R-B35-S-T2",
+      "seed": 1,
+      "cap": 2400
+    },
+    {
+      "round": 155,
+      "id": "N-B35-S",
+      "cap": 7200
+    },
+    {
+      "round": 156,
+      "id": "R-X35-S-T2",
+      "cap": 7200
+    }
+  ],
+  "expected_qualified_increment_pairs": 12,
+  "no_invented_94_row_file": true
+}

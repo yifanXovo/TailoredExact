@@ -1,0 +1,661 @@
+{
+  "schema": "round164-new-only-carrier-v1",
+  "UTC": "2026-11-12T19:08:07.799479+00:00",
+  "archives": [
+    {
+      "path": "results/unified_exact_round164/artifacts/new_evidence_01.zip",
+      "SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "bytes": 51931501,
+      "members": 82561,
+      "uncompressed_bytes": 258889610,
+      "index": "results/unified_exact_round164/evidence/new_evidence_01.members.json.gz",
+      "index_SHA256": "a5593361e799f4d5818b2de16c174441a436a7a1e89ec49d6c6362e296683621"
+    }
+  ],
+  "bytes": 51931501,
+  "members": 82561,
+  "inherited_reference_duplicates_excluded": [
+    {
+      "path": "results/unified_exact_round164/campaign/001/reference/R163-C20-S/build.json",
+      "SHA256": "3284e8ce3f83ab6da53343c4f0f26c9efe7e1bc4cf8b7631ecc37ee210b5daf1",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/reference/R163-C20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/001/reference/R163-C20-S/original.lp",
+      "SHA256": "9a59563ff5b5c51ea8f01b7bac2808c5a5eced20c9897df4ae2560074ece20f8",
+      "bytes": 284814,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/raw/R163_001_R163-C20-S_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/002/reference/R163-C20-S/build.json",
+      "SHA256": "3284e8ce3f83ab6da53343c4f0f26c9efe7e1bc4cf8b7631ecc37ee210b5daf1",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/reference/R163-C20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/002/reference/R163-C20-S/original.lp",
+      "SHA256": "9a59563ff5b5c51ea8f01b7bac2808c5a5eced20c9897df4ae2560074ece20f8",
+      "bytes": 284814,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/raw/R163_001_R163-C20-S_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/003/reference/R163-C20-S/build.json",
+      "SHA256": "3284e8ce3f83ab6da53343c4f0f26c9efe7e1bc4cf8b7631ecc37ee210b5daf1",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/reference/R163-C20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/003/reference/R163-C20-S/original.lp",
+      "SHA256": "9a59563ff5b5c51ea8f01b7bac2808c5a5eced20c9897df4ae2560074ece20f8",
+      "bytes": 284814,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/raw/R163_001_R163-C20-S_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/004/reference/R163-C20-S/build.json",
+      "SHA256": "3284e8ce3f83ab6da53343c4f0f26c9efe7e1bc4cf8b7631ecc37ee210b5daf1",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/reference/R163-C20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/004/reference/R163-C20-S/original.lp",
+      "SHA256": "9a59563ff5b5c51ea8f01b7bac2808c5a5eced20c9897df4ae2560074ece20f8",
+      "bytes": 284814,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/raw/R163_001_R163-C20-S_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/005/reference/R163-B20-B/build.json",
+      "SHA256": "a3a5fd95c7da4e5fd48358a9afc3ab9fed6a10c947bf4598b41bc0f84c939554",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/005/reference/R163-B20-B/original.lp",
+      "SHA256": "8e35c30da52ffc44e8f3d65c7b5620e4f69bc09c17898f8866a9cd31a84f1a19",
+      "bytes": 281775,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/006/reference/R163-B20-B/build.json",
+      "SHA256": "a3a5fd95c7da4e5fd48358a9afc3ab9fed6a10c947bf4598b41bc0f84c939554",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/006/reference/R163-B20-B/original.lp",
+      "SHA256": "8e35c30da52ffc44e8f3d65c7b5620e4f69bc09c17898f8866a9cd31a84f1a19",
+      "bytes": 281775,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/007/reference/R163-B20-B/build.json",
+      "SHA256": "a3a5fd95c7da4e5fd48358a9afc3ab9fed6a10c947bf4598b41bc0f84c939554",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/007/reference/R163-B20-B/original.lp",
+      "SHA256": "8e35c30da52ffc44e8f3d65c7b5620e4f69bc09c17898f8866a9cd31a84f1a19",
+      "bytes": 281775,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/008/reference/R163-B20-B/build.json",
+      "SHA256": "a3a5fd95c7da4e5fd48358a9afc3ab9fed6a10c947bf4598b41bc0f84c939554",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/008/reference/R163-B20-B/original.lp",
+      "SHA256": "8e35c30da52ffc44e8f3d65c7b5620e4f69bc09c17898f8866a9cd31a84f1a19",
+      "bytes": 281775,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/009/reference/R163-X20-S/build.json",
+      "SHA256": "db95759d366314fdb51819592525dce1c9911a10bdd74daf37c081195b51b05c",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/009/reference/R163-X20-S/original.lp",
+      "SHA256": "c370e4c4fa528fbc5a49fd1c1b42b7db1f9aaea196ec501caac149c6b579cbf1",
+      "bytes": 278239,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/010/reference/R163-X20-S/build.json",
+      "SHA256": "db95759d366314fdb51819592525dce1c9911a10bdd74daf37c081195b51b05c",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/010/reference/R163-X20-S/original.lp",
+      "SHA256": "c370e4c4fa528fbc5a49fd1c1b42b7db1f9aaea196ec501caac149c6b579cbf1",
+      "bytes": 278239,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/011/reference/R163-X20-S/build.json",
+      "SHA256": "db95759d366314fdb51819592525dce1c9911a10bdd74daf37c081195b51b05c",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/011/reference/R163-X20-S/original.lp",
+      "SHA256": "c370e4c4fa528fbc5a49fd1c1b42b7db1f9aaea196ec501caac149c6b579cbf1",
+      "bytes": 278239,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/012/reference/R163-X20-S/build.json",
+      "SHA256": "db95759d366314fdb51819592525dce1c9911a10bdd74daf37c081195b51b05c",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/012/reference/R163-X20-S/original.lp",
+      "SHA256": "c370e4c4fa528fbc5a49fd1c1b42b7db1f9aaea196ec501caac149c6b579cbf1",
+      "bytes": 278239,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/013/reference/R163-C35-U/build.json",
+      "SHA256": "188607d887ebe2494799847b0c1692d5762ac92c43fabebf20a2d6dead64b3f8",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/reference/R163-C35-U/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/013/reference/R163-C35-U/original.lp",
+      "SHA256": "dc6de8cf50fd191a66fe2eca9045f9a7b620aaf7775561056dd664292945479b",
+      "bytes": 1188636,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/raw/R163_010_R163-C35-U_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/014/reference/R163-C35-U/build.json",
+      "SHA256": "188607d887ebe2494799847b0c1692d5762ac92c43fabebf20a2d6dead64b3f8",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/reference/R163-C35-U/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/014/reference/R163-C35-U/original.lp",
+      "SHA256": "dc6de8cf50fd191a66fe2eca9045f9a7b620aaf7775561056dd664292945479b",
+      "bytes": 1188636,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/raw/R163_010_R163-C35-U_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/015/reference/R163-C35-U/build.json",
+      "SHA256": "188607d887ebe2494799847b0c1692d5762ac92c43fabebf20a2d6dead64b3f8",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/reference/R163-C35-U/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/015/reference/R163-C35-U/original.lp",
+      "SHA256": "dc6de8cf50fd191a66fe2eca9045f9a7b620aaf7775561056dd664292945479b",
+      "bytes": 1188636,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/raw/R163_010_R163-C35-U_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/016/reference/R163-C35-U/build.json",
+      "SHA256": "188607d887ebe2494799847b0c1692d5762ac92c43fabebf20a2d6dead64b3f8",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/reference/R163-C35-U/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/016/reference/R163-C35-U/original.lp",
+      "SHA256": "dc6de8cf50fd191a66fe2eca9045f9a7b620aaf7775561056dd664292945479b",
+      "bytes": 1188636,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/raw/R163_010_R163-C35-U_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/017/reference/R163-B35-S/build.json",
+      "SHA256": "a9f181088707296372ea312c4e3f79d4d59bd492355422bb89b833fd9718ea52",
+      "bytes": 180,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/017/reference/R163-B35-S/original.lp",
+      "SHA256": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb",
+      "bytes": 1186941,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/018/reference/R163-B35-S/build.json",
+      "SHA256": "a9f181088707296372ea312c4e3f79d4d59bd492355422bb89b833fd9718ea52",
+      "bytes": 180,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/018/reference/R163-B35-S/original.lp",
+      "SHA256": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb",
+      "bytes": 1186941,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/019/reference/R163-B35-S/build.json",
+      "SHA256": "a9f181088707296372ea312c4e3f79d4d59bd492355422bb89b833fd9718ea52",
+      "bytes": 180,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/019/reference/R163-B35-S/original.lp",
+      "SHA256": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb",
+      "bytes": 1186941,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/020/reference/R163-B35-S/build.json",
+      "SHA256": "a9f181088707296372ea312c4e3f79d4d59bd492355422bb89b833fd9718ea52",
+      "bytes": 180,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/020/reference/R163-B35-S/original.lp",
+      "SHA256": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb",
+      "bytes": 1186941,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/021/reference/R163-X35-S/build.json",
+      "SHA256": "d8e36d4d2eaf99cdefaf3dc82b3a36c518314db5f970289a7a2171a83e1ff9ae",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/021/reference/R163-X35-S/original.lp",
+      "SHA256": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4",
+      "bytes": 1164392,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/022/reference/R163-X35-S/build.json",
+      "SHA256": "d8e36d4d2eaf99cdefaf3dc82b3a36c518314db5f970289a7a2171a83e1ff9ae",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/022/reference/R163-X35-S/original.lp",
+      "SHA256": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4",
+      "bytes": 1164392,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/023/reference/R163-X35-S/build.json",
+      "SHA256": "d8e36d4d2eaf99cdefaf3dc82b3a36c518314db5f970289a7a2171a83e1ff9ae",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/023/reference/R163-X35-S/original.lp",
+      "SHA256": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4",
+      "bytes": 1164392,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/024/reference/R163-X35-S/build.json",
+      "SHA256": "d8e36d4d2eaf99cdefaf3dc82b3a36c518314db5f970289a7a2171a83e1ff9ae",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/campaign/024/reference/R163-X35-S/original.lp",
+      "SHA256": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4",
+      "bytes": 1164392,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/qualification-tiny-transfer/build.json",
+      "SHA256": "f27e5cd34e8c4f9ff78db79a2b8e1dba289df9dfa4965b3378115f3731aee9c7",
+      "bytes": 173,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/qualification-tiny-transfer/original.lp",
+      "SHA256": "4f25211223252bb27b3df026d42dacf52bec69a6f009f5430a8fc31227933d5e",
+      "bytes": 4587,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-B20-B/build.json",
+      "SHA256": "a3a5fd95c7da4e5fd48358a9afc3ab9fed6a10c947bf4598b41bc0f84c939554",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-B20-B/original.lp",
+      "SHA256": "8e35c30da52ffc44e8f3d65c7b5620e4f69bc09c17898f8866a9cd31a84f1a19",
+      "bytes": 281775,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/004/reference/R163-B20-B/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-B35-S/build.json",
+      "SHA256": "a9f181088707296372ea312c4e3f79d4d59bd492355422bb89b833fd9718ea52",
+      "bytes": 180,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-B35-S/original.lp",
+      "SHA256": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb",
+      "bytes": 1186941,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/013/reference/R163-B35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-C20-S/build.json",
+      "SHA256": "3284e8ce3f83ab6da53343c4f0f26c9efe7e1bc4cf8b7631ecc37ee210b5daf1",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/reference/R163-C20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-C20-S/original.lp",
+      "SHA256": "9a59563ff5b5c51ea8f01b7bac2808c5a5eced20c9897df4ae2560074ece20f8",
+      "bytes": 284814,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/001/raw/R163_001_R163-C20-S_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-C35-U/build.json",
+      "SHA256": "188607d887ebe2494799847b0c1692d5762ac92c43fabebf20a2d6dead64b3f8",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/reference/R163-C35-U/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-C35-U/original.lp",
+      "SHA256": "dc6de8cf50fd191a66fe2eca9045f9a7b620aaf7775561056dd664292945479b",
+      "bytes": 1188636,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/010/raw/R163_010_R163-C35-U_S0_P/compact.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-X20-S/build.json",
+      "SHA256": "db95759d366314fdb51819592525dce1c9911a10bdd74daf37c081195b51b05c",
+      "bytes": 177,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-X20-S/original.lp",
+      "SHA256": "c370e4c4fa528fbc5a49fd1c1b42b7db1f9aaea196ec501caac149c6b579cbf1",
+      "bytes": 278239,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/007/reference/R163-X20-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-X35-S/build.json",
+      "SHA256": "d8e36d4d2eaf99cdefaf3dc82b3a36c518314db5f970289a7a2171a83e1ff9ae",
+      "bytes": 179,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/references/R163-X35-S/original.lp",
+      "SHA256": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4",
+      "bytes": 1164392,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/campaign/016/reference/R163-X35-S/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/smokes/transfer_S1_B/reference/qualification-tiny-transfer/build.json",
+      "SHA256": "f27e5cd34e8c4f9ff78db79a2b8e1dba289df9dfa4965b3378115f3731aee9c7",
+      "bytes": 173,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/smokes/transfer_S1_B/reference/qualification-tiny-transfer/original.lp",
+      "SHA256": "4f25211223252bb27b3df026d42dacf52bec69a6f009f5430a8fc31227933d5e",
+      "bytes": 4587,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/smokes/transfer_S1_P/reference/qualification-tiny-transfer/build.json",
+      "SHA256": "f27e5cd34e8c4f9ff78db79a2b8e1dba289df9dfa4965b3378115f3731aee9c7",
+      "bytes": 173,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/smokes/transfer_S1_P/reference/qualification-tiny-transfer/original.lp",
+      "SHA256": "4f25211223252bb27b3df026d42dacf52bec69a6f009f5430a8fc31227933d5e",
+      "bytes": 4587,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/smokes/transfer_S2_B/reference/qualification-tiny-transfer/build.json",
+      "SHA256": "f27e5cd34e8c4f9ff78db79a2b8e1dba289df9dfa4965b3378115f3731aee9c7",
+      "bytes": 173,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/smokes/transfer_S2_B/reference/qualification-tiny-transfer/original.lp",
+      "SHA256": "4f25211223252bb27b3df026d42dacf52bec69a6f009f5430a8fc31227933d5e",
+      "bytes": 4587,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/smokes/transfer_S2_P/reference/qualification-tiny-transfer/build.json",
+      "SHA256": "f27e5cd34e8c4f9ff78db79a2b8e1dba289df9dfa4965b3378115f3731aee9c7",
+      "bytes": 173,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/build.json",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    },
+    {
+      "path": "results/unified_exact_round164/qualification/smokes/transfer_S2_P/reference/qualification-tiny-transfer/original.lp",
+      "SHA256": "4f25211223252bb27b3df026d42dacf52bec69a6f009f5430a8fc31227933d5e",
+      "bytes": 4587,
+      "old_commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+      "old_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "old_member": "results/unified_exact_round163/qualification/references/qualification-tiny-transfer/original.lp",
+      "reason": "old canonical reference, retained by fixed R163 archive/member/SHA instead"
+    }
+  ],
+  "old_raw_carriers_included": 0,
+  "old_reference_index": {
+    "commit": "f7083ace21ad2a8bd54bed71711ceebcb97c9e8c",
+    "path": "results/unified_exact_round163/evidence/new_evidence_01.members.json.gz",
+    "SHA256": "e98002a6465a6c311764d0b3a2f7f5102630a54704e5399e44ce3242c4307487"
+  },
+  "unique_new_science_and_failures_retained": true,
+  "commercial_runtime_credentials_or_licenses_included": false,
+  "measured_PE_published": false,
+  "measured_PE_SHA256": "fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93",
+  "packaging_IO_seconds": 627.1150417998433,
+  "recovery_scope": "new byte/member integrity and finite old public metadata bindings; no licensed semantic or performance rerun"
+}

@@ -313,3 +313,71 @@ R138–162 reach different levels, with positive and negative results retained.
 R163 supplies the fifth level for frozen E+ against B and cold P, on six new
 configurations from already archived sources. All six become exposed after
 this study. They are neither new cities nor independent observed demand.
+
+## Within-input solver-Seed evidence
+
+The later Seed confirmation repeats frozen B and cold P on those six exposed
+mathematical inputs. Gurobi Seeds1/2 are additional observations; the qualified
+R163 Seed0 runs retain their historical measured identities. The H seed stays
+20260626, and every B run recomputes and pays its own complete startup. A
+common Gurobi Seed label does not couple two different models to an identical
+random trajectory.
+
+For configuration \(i\) and Seed \(s\), report
+
+\[
+ \Delta U_{i,s}=U_{B,i,s}-U_{P,i,s},\qquad
+ \Delta L_{i,s}=L_{B,i,s}-L_{P,i,s}.
+\]
+
+Negative \(\Delta U\) and positive \(\Delta L\) favor B on different
+endpoints. The existing numerical qualification scale applies; retaining a
+signed gap does not remove the obligation to report both directions. Each
+U still requires that run's complete physical fleet, and each L or certificate
+requires that run's applicable original-problem source/coverage. No cross-Seed
+minimum U and maximum L are assembled into a new run or certificate.
+
+Medians and ranges of the three paired differences describe within-input
+observations. They are neither additional endpoint observations nor a sample
+of eighteen independent new inputs. No general success probability,
+significance statement or best-Seed method follows. Certificate-time
+differences remain restricted to the explicitly counted same-input,
+same-Seed joint-CERT intersection; OPEN budget use is not a certificate time.
+E+ has no new Seed runs in this confirmation, so its earlier gains retain
+their measured scope rather than inheriting B/P robustness.
+
+The preregistered offline primal target is
+\(u_{\rm ref}(i)=\min\{U_{B,i,0},U_{P,i,0}\}\), using the two original
+qualified physical upper endpoints. It is a known feasible target and need
+not be optimal. It enters no model, Start, cutoff or stopping rule. Saved
+journal fleets can show target attainment only at their trustworthy saved
+availability clocks; the original wrapper overhead gives conservative paid
+clock bounds when it is not isolated. A final witness without a saved first
+event supplies only an upper bound. No observed attainment within the window
+is right-censored evidence, not a proof of unattainability, and later
+verification cannot be used as the production discovery clock.
+
+Saved C35 fleets distinguish witnessed incumbent suboptimality from the
+unresolved global proof gap. Assignment, relative order and service amounts
+can all differ at once. A fixed unserved-station penalty is only a necessary
+objective term, and a target inventory point must still satisfy the original
+route time, empty departure, every prefix capacity and loaded-return rules.
+Neither observation supplies a restricted-domain optimum, single-operator
+causality or a complete-method feedback benefit. These are evidence and
+interpretation conventions; no additional general theorem or optimizer is
+introduced.
+
+## Completed finite-Seed interpretation
+
+The completed six-input readback gives eighteen within-input B/P pairs,
+including six historical Seed0 pairs. C35 has ΔU signs +/−/− and ΔL signs
++/+/+; its median ΔU is descriptive and cannot erase the adverse Seed0
+fleet. B35/X35 have ΔU<0 and ΔL>0 in all three observations but no own
+certificate. B20's differences within the frozen 1e-7 scale are equivalent
+endpoints, with three independently paid joint-CERT comparisons.
+
+These are numerical observations under the original source, exact-zero and
+inclusive-cutoff qualification; they change no physical equivalence,
+epigraph/S=0 convention or coverage theorem. The complete own-run values
+and all target-availability intervals are in the
+[finite evidence tables](../unified_exact_round164/reports/seed_evidence.md).

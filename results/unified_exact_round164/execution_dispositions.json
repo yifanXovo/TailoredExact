@@ -1,0 +1,43 @@
+{
+  "UTC": "2026-11-12T08:54:54.852962+00:00",
+  "failures": [
+    {
+      "position": 1,
+      "fee_label": "arm_001",
+      "reason": "read-only watcher interpreter pathname matched inherited old-optimizer regex",
+      "Native_started": false,
+      "producer_destination_created": false,
+      "scientific_seconds": 1.1666751001030207,
+      "original_evidence_preserved": true
+    }
+  ],
+  "healthy_producers_repeated": 0,
+  "algorithm_or_producer_changed": false,
+  "matrix_changed": false,
+  "resolution": "use existing D:/msys64/ucrt64/bin/python.exe for metadata-only observer",
+  "qualified_fee_by_position": {
+    "1": "arm_001_retry01"
+  },
+  "offline_readback_failures": [
+    {
+      "fee_label": "final_readback_01",
+      "scientific_seconds": 3.3629244999028742,
+      "reason": "analysis-only assertion incorrectly required a Seed0 relative-order reversal among stations retaining the same vehicle label",
+      "completed_before_failure": [
+        "24 new and 12 historical physical endpoint replays",
+        "Seed0 Native environment qualification",
+        "18 within-input pairs",
+        "36 offline primal target records"
+      ],
+      "producer_or_algorithm_error": false,
+      "healthy_producers_repeated": 0,
+      "original_failure_retained": true,
+      "repair": "report same-owner and co-served pair order separately, retain actual observed absences; no forced structural conclusion",
+      "resumed_fee": "final_readback_02",
+      "resumed_exit_code": 0,
+      "successful_analysis_replayed": false
+    }
+  ],
+  "all_formal_positions_qualified": 24,
+  "latest_disposition_UTC": "2026-11-12T18:36:33.552752+00:00"
+}

@@ -1,0 +1,49 @@
+{
+  "UTC": "2026-11-12T18:54:20.446079+00:00",
+  "all_three_final_reviews": "PASS",
+  "reviewers": [
+    {
+      "agent_id": "/root/review_math_paper",
+      "report": "review/math_paper.md",
+      "SHA256": "23543db580b6518a6f8102faf02262380b5ad9db2080df084379a22add7345af",
+      "result": "PASS",
+      "reviewed_commit": "8498e056564deee97adcbf4c41b8d4abe2c27300"
+    },
+    {
+      "agent_id": "/root/review_execution_data",
+      "report": "review/execution_data.md",
+      "SHA256": "b11373f0861847f619ce2ea8c30e8b80e51dc10348fa40de5895883c4eadda15",
+      "result": "PASS",
+      "reviewed_commit": "8498e056564deee97adcbf4c41b8d4abe2c27300"
+    },
+    {
+      "agent_id": "/root/review_research_direction",
+      "report": "review/research_direction.md",
+      "SHA256": "8760da8aa7989f0b10483663c3c4da8b3a6a39fd323b8773a43cfbd4ea6c6bb3",
+      "result": "PASS",
+      "reviewed_commit": "8498e056564deee97adcbf4c41b8d4abe2c27300"
+    }
+  ],
+  "identities_from_actual_spawn_tool": true,
+  "independent_agents_not_humans": true,
+  "self_check_scripts_counted_as_reviewers": false,
+  "numeric_science_commit": "b93a8a01ff1b7f3cbee67807be3ac6591db4767f",
+  "parallel_review_outer": {
+    "label": "final_independent_review_01",
+    "kind": "verification",
+    "start_unix": 1794509295.1065762,
+    "end_unix": 1794509660.4296827,
+    "outer_seconds": 365.3231065273285,
+    "all_three_final_reports_observed": true,
+    "agents": [
+      "/root/review_math_paper",
+      "/root/review_execution_data",
+      "/root/review_research_direction"
+    ],
+    "scope": "one actual enclosing wall window for the three parallel final agents and parent review coordination; not sum of agent durations",
+    "Optimize": 0,
+    "Native_producers_repeated": 0
+  },
+  "conclusion_changing_findings": 0,
+  "licensed_performance_replication": false
+}
