@@ -161,11 +161,23 @@ existing R137 PDF is historical; no TeX update or new PDF is claimed.
 The immutable numerical source for new CSV rows is `b93a8a01ff1b7f3cbee67807be3ac6591db4767f`.
 Original metadata remains at the fixed R163 manifest. The
 [master update receipt](main_table_update.json), exact twelve-row increment
-and pending three-row historical union explanation retain actual local
+and [pending three-row historical union explanation](main_table_reconciliation.md) retain actual local
 source counts,28 columns, encoding, precision and historical bytes.
 No inaccessible 106-row master is claimed updated.
 
-Extra independent reviews, publication, new-only archive/member hashes,
-bounded anonymous public recovery and zero-delete cleanup are recorded
-separately before final completion. Their status is pending at this
-manuscript-authoring checkpoint; no Draft publication is claimed yet.
+The three additional independent final agent reviews are **PASS**, with no
+conclusion-changing finding: [math/paper](review/math_paper.md),
+[execution/data](review/execution_data.md), and
+[research direction](review/research_direction.md). Their
+[actual identities](review/identities.json) are separate spawned agents, not
+independent humans or self-check scripts. They independently checked all
+18 pairs, 74 new Native calls, selected 37 historical Native calls, complete
+fleets, clocks, sources, CSV and the bounded interpretation within their
+respective scopes. The enclosing parallel review window is
+365.3231065273285 s, charged once rather than summing three durations.
+
+All scientific work is closed at **35115.220947325695 / 57600 s**
+(9.754228040923804 h), with 22484.779052674305 s unused. All process and
+review windows are nonoverlapping. The remaining work is normal Draft
+publication, new-only carrier/member hashes, bounded anonymous public
+recovery and zero-delete cleanup; those later states are not claimed yet.

@@ -1,13 +1,13 @@
 {
-  "UTC": "2026-11-12T18:36:33.660002+00:00",
-  "scientific_seconds": 34749.89784079837,
-  "scientific_hours": 9.652749400221769,
+  "UTC": "2026-11-12T18:54:20.559291+00:00",
+  "scientific_seconds": 35115.220947325695,
+  "scientific_hours": 9.754228040923804,
   "scientific_capacity_seconds": 57600.0,
-  "remaining_scientific_seconds": 22850.102159201633,
+  "remaining_scientific_seconds": 22484.779052674305,
   "measured_by_category": {
     "qualification": 11.829855800140649,
     "panel": 34730.49012889853,
-    "verification": 3.3629244999028742,
+    "verification": 368.68603102723137,
     "repair": 4.214931599795818
   },
   "original_reservation_plan": {
@@ -411,7 +411,24 @@
       "exit_observed": true
     }
   ],
-  "external_nonoverlapping_scientific_segments": [],
+  "external_nonoverlapping_scientific_segments": [
+    {
+      "label": "final_independent_review_01",
+      "kind": "verification",
+      "start_unix": 1794509295.1065762,
+      "end_unix": 1794509660.4296827,
+      "outer_seconds": 365.3231065273285,
+      "all_three_final_reports_observed": true,
+      "agents": [
+        "/root/review_math_paper",
+        "/root/review_execution_data",
+        "/root/review_research_direction"
+      ],
+      "scope": "one actual enclosing wall window for the three parallel final agents and parent review coordination; not sum of agent durations",
+      "Optimize": 0,
+      "Native_producers_repeated": 0
+    }
+  ],
   "technical_failures": [
     {
       "label": "arm_001",
@@ -450,13 +467,25 @@
   "formal_scientific_outer_sum": 34729.323453798424,
   "all_recorded_fees_closed": true,
   "nested_Runtime_Work_H_helper_not_added": true,
+  "all_scientific_process_and_review_windows_nonoverlapping": true,
   "helper_Optimize_or_processes": 0,
   "production_rebuilds": 0,
   "reservation_margin_is_not_added_Native_runtime": true,
   "fault_timeout_policy_unchanged": "cap+900, bounded by remaining science",
   "qualification_batch": "six tiny nonperformance lifecycles; paid once at the enclosing outer, never compared as formal sample clocks",
-  "separately_observed_ordinary_work": [],
-  "separate_measured_ordinary_IO_seconds": 0,
+  "separately_observed_ordinary_work": [
+    {
+      "source": "table_authoring.json",
+      "seconds": 0.8370511999999999,
+      "category": "ordinary authoring/transport I/O, outside science"
+    },
+    {
+      "source": "main_table_update.json",
+      "seconds": 0.009333199821412563,
+      "category": "ordinary authoring/transport I/O, outside science"
+    }
+  ],
+  "separate_measured_ordinary_IO_seconds": 0.8463843998214124,
   "ordinary_preparation_and_writing": "ordinary_work_record.json; enclosing wall intervals are not exact I/O or Optimize seconds",
   "published_timing_scope": "producer-close T_cert only on own qualified certificates; no OPEN cap imputation"
 }
