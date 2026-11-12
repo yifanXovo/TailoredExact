@@ -78,3 +78,18 @@ recovery roots, never follows dependency junctions, and verifies protected
 workspace hashes. Zero deletion is permitted; unique science, active trees,
 failures and actual runtime dependencies remain retained. Actual screening,
 actions and observed volume-space changes are recorded after they occur.
+
+## Actual delivery closeout
+
+English [Open Draft PR #225](https://github.com/yifanXovo/TailoredExact/pull/225) is open on the verified
+R162 dependency branch. The fixed science/carrier snapshot is
+`f7083ace21ad2a8bd54bed71711ceebcb97c9e8c`; the immutable numeric CSV source is
+`4d09e6fc9ed1c34dacd11aa8c7b7d22ae9f8ebbc`. The public receipt reports PASS for
+39888556 bytes and all 50601 indexed members.
+This is anonymous transport/integrity I/O only, not licensed solver execution.
+Current-only screening deletes zero files/bytes and observes a free-space delta
+of 0 bytes. Protected workspace hashes pass.
+The packaged index binds its exact historical bytes; final delivery receipts
+and their presentation may advance in normal Git commits without changing the
+carrier or scientific endpoints. Final pushed HEAD/PR readback stays local at
+`E:/codes/ExactEBRP-work/temp/round163/final_delivery_readback.json` to avoid commit self-reference.

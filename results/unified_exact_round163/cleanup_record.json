@@ -1,0 +1,44 @@
+{
+  "PASS": true,
+  "UTC": "2026-11-12T01:41:36.992735+00:00",
+  "screening": "bounded current-round metadata only",
+  "roots": [
+    {
+      "root": "E:\\codes\\ExactEBRP-work\\worktrees\\round163\\results\\unified_exact_round163",
+      "files": 50584,
+      "bytes": 260823819,
+      "reparse_points_not_followed": []
+    },
+    {
+      "root": "E:\\codes\\ExactEBRP-work\\temp\\round163",
+      "files": 2889,
+      "bytes": 93155397,
+      "reparse_points_not_followed": [
+        "E:\\codes\\ExactEBRP-work\\temp\\round163\\tables\\node_modules"
+      ]
+    },
+    {
+      "root": "E:\\codes\\ExactEBRP-work\\restore\\round163-public-f7083ace21ad",
+      "files": 1,
+      "bytes": 39888556,
+      "reparse_points_not_followed": []
+    }
+  ],
+  "deleted_files": 0,
+  "deleted_bytes": 0,
+  "observed_free_bytes_before": 153845268480,
+  "observed_free_bytes_after": 153845268480,
+  "observed_free_space_delta": 0,
+  "protected_workspace": {
+    "PASS": true,
+    "trees": 2,
+    "dirty_files": 3
+  },
+  "active_worktree_retained": true,
+  "reused_PE_and_runtime_retained": true,
+  "unique_science_and_failures_retained": true,
+  "public_recovery_assets_retained": true,
+  "old_rounds_screened_or_deleted": false,
+  "global_settings_changed": false,
+  "reason": "no current-only completed duplicate selected for deletion; all retained roots support this delivery/recovery"
+}

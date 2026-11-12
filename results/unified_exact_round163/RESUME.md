@@ -1,56 +1,72 @@
-# Round163 science and review complete; delivery pending
+# Round163 delivered: science complete, Open Draft PR
 
-All18 formal arms and all core/independent readbacks pass. No producer remains active and no healthy producer may be rerun. Independent math/method, execution/data+CSV and stage-direction agents have closed PASS. B remains paper main; E+ is a limited, uniformly defined proof supplement. The actual two GB18030 masters now each contain91 rows, with exactly6 B/P additions and the original85-row byte prefix preserved. Numeric source commit is 4d09e6fc9ed1c34dacd11aa8c7b7d22ae9f8ebbc. Artifact operation marker has run exactly once. All scientific fees are closed at24697.709828344174s; no further science or next-stage query is requested.
+All **18/18** formal arms and required readbacks pass. All scientific fees close at
+**24697.709828344174 / 72000s** (6.860475h).
+No producer is active and no healthy producer should be rerun. Three fresh
+independent agents close math/method, execution/data+CSV and stage direction
+PASS; these are agent reviews, not human peer review.
 
-Pending only normal new-only carrier, commit/push, English Open Draft PR on verified R162 base, bounded anonymous new-only byte recovery, current-only metadata screening/zero-deletion closeout, final metadata commit/push and PR readback. Actual PR/recovery/cleanup receipts are not yet claimed.
+Paper choice: **B remains main; E+ is a limited, uniformly defined proof
+supplement**. E+ gives the real X35 final-L gain, with no extra certificate or
+physical-U improvement. The finite costs, opposing C35 primal witness and
+reasonable uniform-E+ alternative remain explicit. Only one next question is
+identified, with R96 prior art/reuse and certification prerequisites; it has
+not been executed. Released main defaults remain unchanged.
 
-The preregistration and qualification history below remains provenance.
+## Actual delivery and recovery
 
-Active worktree: `E:/codes/ExactEBRP-work/worktrees/round163`.
-Branch: `codex/round163-stage-confirmation`, stacked on R162 delivery
-`faa22ce4804f925081fd05322262b4f7261db51f`; R162 #224 remains Open Draft,
-unmerged, and main remains `b2b940c1e517a72e226ec60fc49ff19651737632`.
+- English [Open Draft PR #225](https://github.com/yifanXovo/TailoredExact/pull/225), base
+  `codex/round162-physical-g-completion` at `faa22ce4804f925081fd05322262b4f7261db51f`.
+- Fixed science/carrier: `f7083ace21ad2a8bd54bed71711ceebcb97c9e8c`.
+- Immutable numeric CSV source: `4d09e6fc9ed1c34dacd11aa8c7b7d22ae9f8ebbc`.
+- Measured C++: `e920b92e199e825ec89a2932f701861ff158e0d4`; PE/DLL identities are in
+  [science identity](science_identity.json). No production rebuild occurred.
+- Two actual GB18030 master CSVs each advance **85 to 91 rows**, with exactly
+  six qualified B/P additions and the original byte prefix/header preserved.
+  E+ is not substituted for B. [Actual writes](main_table_update.json),
+  [full copied master](reports/GI_TBC_vs_P_GRB_All_Tested_Instances.csv),
+  [named 28-column increment](reports/GI_TBC_vs_P_GRB_Round163_Increment.csv).
+- [Anonymous public recovery](public_restore_receipt.json): PASS,
+  39888556 bytes / all 50601 indexed new members.
+  It checks byte/member integrity without old archive, licensed runtime,
+  compilation or Optimize; it is not a semantic/performance rerun.
+- [Current-only metadata screening](cleanup_record.json): PASS, zero deletion,
+  actual free-space delta 0 bytes. Both protected
+  trees and their three actual initially dirty tracked files pass hash checks.
+  Active worktree, unique science/failures, actual runtime dependencies and
+  public recovery assets are retained. No old round or global setting is changed.
 
-Method/recipe preregistration: `9d8836101`. Six-input seal: `5d1e10f1a`.
-18-arm matrix/admission commit: `830e92cc9`.
-The running `scripts/round163_campaign.py panel` follows all 18 positions,
-unconditionally, with one fee and one own producer per position. Monitor
-`active_position.json`, `runtime_status.json`, `fees/*/{launch,PID,receipt}.json`
-and `scripts/round163_monitor.py`. Never launch an old panel, rerun a healthy
-producer, reuse another arm's H/helper, or change the frozen method/recipe.
-An existing fee without a closeout requires inspecting its original PID/birth
-and logs, not a second launch. A pure reader repair uses the sealed producer.
+Later normal commits contain delivery receipts. The actual final local HEAD,
+remote head and PR state/base/head readback is kept at
+`E:/codes/ExactEBRP-work/temp/round163/final_delivery_readback.json` to avoid making a commit contain its own
+hash. The indexed carrier retains its fixed packaged bytes; Git delivery
+metadata can advance without repackaging or rerunning science.
 
-The shared PE is the measured R162 complete_v2 executable, SHA256
-`fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93`.
-Measured C++ is `e920b92e199e825ec89a2932f701861ff158e0d4`. The inherited
-uncompiled no-Gurobi stub difference is explicitly recorded. No production
-C++, helper, library, numeric parameter or stable profile was changed.
+## Freeze and disclosed chronology
 
-All six new input first attempts were retained; canonical history keys do not
-collide and same-source new selections are disjoint. The 34-manifest history
-index includes 74 canonical base keys; four missing small-input aliases resolve
-by their own recorded input SHA to already indexed inputs, without old raw
-recovery. Main table discovery located two byte-identical GB18030 copies with
-85 historical rows and two legacy unnamed trailing source headers. Both remain unchanged
-until six complete verified B/P pairs can be appended. An exact 28-column
-increment and explicit source mapping will also be delivered.
+Active worktree: `E:/codes/ExactEBRP-work/worktrees/round163`; branch
+`codex/round163-stage-confirmation`. Main remains `b2b940c1e517a72e226ec60fc49ff19651737632`;
+R162 #224 remains Open Draft/unmerged at `faa22ce4804f925081fd05322262b4f7261db51f`.
+Recipe/method `9d8836101`, six-input seal `5d1e10f1a` and matrix/admission
+`830e92cc9` precede their dependent generation/qualification/formal work.
+All six first valid draws are retained; no historical mathematical-key collision
+or within-source overlap between the two new selections is found.
 
-Qualification includes six independent parses, seven Optimize=0 compact
-references (six formal, one tiny), static clean method vectors and original
-objective/type checks. The sole tiny E+ producer returned normally and was
-not rerun. Its unchanged helper rejects an omitted redundant zero-total lower
-row and legally returns no floor; B information still certifies. A pure scope
-reader repair recognizes that redundant inequality from nonnegative Y bounds.
-All failed qualifications and expenses are preserved. The initial unmetered
-history I/O is conservatively charged using its enclosing preparation interval,
-as disclosed in `infra/external_costs.json`.
+The actual primary master was located and new IDs checked before the panel.
+Its additional detailed row-to-input crosswalk was inspected after the first
+arm started and completed in the final static readback. Effective legacy-weight
+normalization and R57 ephemeral-pilot audit also strengthen the post-panel
+history check. This ordering departure is disclosed, with no redraw or method
+change; those supplementary checks are not called preregistered.
 
-After all 18 arms: complete the original-objective/route/coverage and method
-readbacks, report all three comparisons and costs, choose the paper algorithm,
-update maintained R137 body/math/supplement and current navigation, append only
-qualified B/P rows, and perform the goal's three independent review lines.
-Then package new-only evidence, commit/push, create/read back an English Open
-Draft PR on the verified dependency base, do bounded anonymous new-only public
-recovery, and current-only metadata screening/cleanup (zero deletion allowed).
-Do not mark the goal complete or stop merely because the long panel is running.
+The sole tiny E+ producer was not rerun. Its unchanged helper legally falls
+back when a redundant zero-total lower row is omitted; a pure scope reader
+repair recognizes the implication from nonnegative Y bounds. Qualification
+and independent-reader failed attempts/costs are preserved. All actual routes,
+own-H/helper evidence, proof ledgers, launch/OS/fee receipts and failures are
+indexed in the new-only carrier.
+
+[Final report](final_report.md), [decision](decision.json),
+[three independent reviews](review/identities.json), [publication](publication.json),
+[scientific and ordinary I/O costs](cost_report.json),
+[recovery scope](reproducibility.md). No further scientific work is pending.
