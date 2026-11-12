@@ -37,6 +37,10 @@ Prepared post-panel work (not yet executed and not yet accepted as results):
 - `round164_analyze.py` pairs on input/Seed/method/repeat, replays physical
   endpoints, qualifies the historical Seed0 contract, and preserves target
   arrival intervals/censoring without manufacturing discovery timestamps.
+  Its prepared environment qualification also reads each selected old live
+  OS PE/DLL/affinity binding and the original native log header; it compares
+  Gurobi/Windows, CPU topology and single-thread headers against both new
+  Seeds. These finite old members are included in the fixed SHA access map.
 - `round164_structure.py` reads the selected C35 old members and new saved
   fleets only. It recomputes objective/operations and the infeasible target
   counterfactual; no R96 model, Gurobi binding or oracle is run.

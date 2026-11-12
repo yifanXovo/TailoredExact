@@ -77,12 +77,13 @@ class History:
         self.path=ROOT/'results/unified_exact_round163/artifacts/new_evidence_01.zip'
         assert sha(self.path)=='365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512'
         self.zip=zipfile.ZipFile(self.path);self.access=[]
-    def read(self,member):
+    def read_bytes(self,member):
         info=self.zip.getinfo(member);assert info.file_size<15000000,('bounded historical member',member,info.file_size)
         raw=self.zip.read(member)
         self.access.append(dict(commit=R163_SCIENCE,archive=self.path.relative_to(ROOT).as_posix(),
             member=member,SHA256=hashlib.sha256(raw).hexdigest(),bytes=len(raw)))
-        return json.loads(raw)
+        return raw
+    def read(self,member):return json.loads(self.read_bytes(member))
     def close(self):
         self.zip.close();write(OUT/'historical_member_access.json',dict(UTC=utc(),
             accesses=self.access,full_archive_expanded=False,old_producers_or_Optimize=0))
@@ -105,6 +106,21 @@ def history_arms(history,new_arms):
         assert a['PE_SHA']==PE_SHA and a['DLL_SHA']==DLL_SHA and a['seed']==0
         member=f"results/unified_exact_round163/{group['group']}/raw/{launch['arm_id']}"
         raw=history.read(member+'/result.json');observations=history.read(member+'/observations.json')
+        binding_member=f"results/unified_exact_round163/{group['group']}/runtime_os_binding.json"
+        binding=history.read(binding_member)
+        assert binding['PrelaunchSHA']==PE_SHA and Path(binding['PE'])==PE
+        assert binding['ProcessorAffinity']==4 and not binding['HashingDuringTimedSolve']
+        assert len(binding['DLL'])==1 and Path(binding['DLL'][0]['FileName'])==Path(DLL)
+        log_relative='external/native_logs/L0_lp.gurobi.log' if method=='B' else 'native.log'
+        old_log_member=member+'/'+log_relative
+        def runtime_header(text):
+            prefixes=('Gurobi Optimizer version ','CPU model: ','Thread count: ')
+            header=[next(line for line in text.splitlines() if line.startswith(prefix)) for prefix in prefixes]
+            assert '13.0.2' in header[0] and 'Windows 10.0 (19045.2)' in header[0]
+            assert 'i7-12700KF' in header[1]
+            assert '12 physical cores, 20 logical processors, using up to 1 threads' in header[2]
+            return header
+        old_runtime=runtime_header(history.read_bytes(old_log_member).decode('utf-8-sig'))
         physical=full_fleet(ROOT,launch['panel'],raw);assert abs(physical['F']-a['U'])<=TOL
         calls=[o['payload'] for o in observations if o['payload']['kind']=='call']
         assert calls and all(c['settings']['Seed']==0 and c['settings']['expected']['Seed']==0 for c in calls)
@@ -114,6 +130,7 @@ def history_arms(history,new_arms):
             assert other['input_SHA']==a['input_SHA']
             fresh=next(g['launch'] for g in read(OUT/'matrix_frozen.json')['groups']
                 if g['launch']['id']==a['id'] and g['launch']['R164_method']==method and g['launch']['seed']==seed)
+            assert runtime_header((Path(fresh['destination'])/log_relative).read_text(encoding='utf-8-sig'))==old_runtime
             assert all(fresh['panel'][k]==launch['panel'][k] for k in
                 ['input_path','input_sha256','lambda','T_seconds','pickup_seconds','drop_seconds','Q_vector','cap_seconds'])
             oldc=launch['command'];newc=fresh['command']
@@ -130,6 +147,8 @@ def history_arms(history,new_arms):
             source_commit=R163_SCIENCE,source_report='results/unified_exact_round163/reports/complete_arms.json',
             source_science_identity_SHA256=sha(ROOT/'results/unified_exact_round163/science_identity.json'),
             physical_endpoint_replayed=True,all_Seed0_calls_checked=len(calls),same_PE_DLL=True,
+            old_live_OS_binding_member=binding_member,old_native_environment_log_member=old_log_member,
+            matching_old_and_both_new_native_environment_headers=old_runtime,
             same_physical_parameters_and_caps=True,same_deadline_shutdown_and_paid_clock_policy=True,
             comparison_new_Seeds=comparisons,eligible_for_descriptive_three_Seed_contract=True))
     assert len(result)==12
