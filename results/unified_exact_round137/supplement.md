@@ -1218,7 +1218,7 @@ Retain uniform GI-TBC/B as the paper's main algorithm. Keep uniform E+ as a sepa
 
 Both B and E+ certify 3/6 configurations, versus cold P 1/6. B/E+ have identical verified physical U on all six. E+ raises X35's final qualified L from B's .3949882559151472 to .42319954961578576 at U=.45747531701601785; the original relative gap falls from 13.659110945800548% to 7.492375244155952%. The other five final proof endpoints are equal. E+'s X35 raw search L is .39492875817006656, slightly below B's; the improvement is the separate qualified proof source, not an improved raw AM/Native bound. No additional certificate or primal improvement is observed.
 
-The three both-certified E+/B paid T_cert ratios are 1.130665945756784, 1.3357446355323432 and 1.0515856109492556. E+ pays 256.7365551 helper seconds inside its original deadlines, replacing some Native opportunity on capped runs. Aggregate audit-inclusive T_total is 7506.416129835416 seconds for E+ and 7451.303745185491 for B, a 55.112384649924934-second increase; helper time is not added again. Uniform E+ is a serious alternative when stronger proof information on an OPEN case is valued more than these certificate-time costs: its one material proof gain comes with no U or certificate loss and only about .74% more aggregate cost here. We nevertheless retain B as main under the fixed certificate/paid-time/endpoints criteria: certificate count does not increase, all three joint-CERT paid times worsen, and the final proof benefit occurs on one of six configurations. This is a scoped tradeoff, not a claim that E+ is generally ineffective or that every instance must improve.
+The three both-certified E+/B paid T_cert ratios are 1.130665945756784, 1.3357446355323432 and 1.0515856109492556. The absolute increases are about 26.10 s, 1.70 s and 6.18 s on C20, B20 and X20. Only C20 meets the existing substantive scale max(10 s, 10% of the faster time); the two other numerical directions remain recorded as nonmaterial. E+ pays 256.7365551 helper seconds inside the original deadlines. Aggregate audit-inclusive T_total is 7506.416129835416 s for E+ and 7451.303745185491 s for B, a 55.112384649924934 s increase; helper time is already included. The genuine X35 proof gain and all equal physical upper endpoints make uniform E+ a reasonable alternative when proof information is prioritized. The paper's choice of B balances certificate count, paid time and both endpoints; it is not a dominance theorem or a requirement that every input improve.
 
 B and E+ each have lower U than P on three configurations, higher U on C35-U, and equal U on two. Each has substantively higher proof L than P on five configurations and equal qualified endpoints on the remaining certified B20 case. On C35-U, P's U=.09331934374779818 is strictly better than B/E+'s .12956638965196035, while B/E+ have stronger L; this opposition is retained. The one joint-CERT B/P or E+/P time ratio conditions on B20 alone. No full-panel time superiority or universal P-GRB dominance is inferred from a single Seed.
 
@@ -1227,3 +1227,15 @@ C20, B20 and X20 finish with search L beyond their qualified inventory value upp
 The [master-table receipt](../unified_exact_round163/main_table_update.json) appends only verified B/P pairs to the existing CSV copies; E+ is separately labelled throughout. The [final report](../unified_exact_round163/final_report.md) and [delivery/recovery status](../unified_exact_round163/RESUME.md) link independent review identities and the bounded new-only public recovery. Original source-row overlaps and retrospective master-table reconciliation are disclosed without changing the frozen generation or selecting on outcomes.
 
 Maintained Markdown body/math/supplement are authoritative for this revision. The pre-existing R137 manuscript PDF is an earlier historical snapshot; no TeX source was substantively changed, so no updated PDF is claimed.
+
+## Research navigation for saved C35 skeletons
+
+The former main-body §7.1 diagnostic work list is retained in
+[research navigation](../unified_exact_round164/research_navigation.md).
+It reconciles the existing complete R96 fixed-ownership/relative-order
+quantity object, parent containment and full physical/epigraph qualifications.
+No such restricted model, route oracle, feedback candidate or new producer
+is executed in the solver-Seed confirmation. The known feasible P target,
+an unserved-station penalty floor and an inventory-only target vector do not
+by themselves determine the complete saved-skeleton optimum. R62/R96/R97/R160
+retain their original positive, mixed and adverse evidence.
