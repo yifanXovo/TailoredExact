@@ -56,9 +56,14 @@ review is counted once, with ordinary publication/transfer I/O separate.
 The dirty R155 paper-current entry, original repository and R164 tree are
 protected. All new work is inside ExactEBRP-work; there is no old-round cleanup.
 
-Normal commit/push, English Open Draft PR, new/changed-only public recovery
-and zero-delete cleanup are recorded by publication.json,
-public_restore_receipt.json and cleanup_record.json after their actual completion.
+Normal science commit 88f3e33a4a88e5691f3e54eb46ccf1242e455e7d is pushed.
+[English Open Draft PR227](https://github.com/yifanXovo/TailoredExact/pull/227)
+is read back open/draft on base codex/round164-seed-confirmation. Anonymous
+new/changed-only public byte recovery passes all57 files/2,960,171 bytes
+in6.319981900043786 seconds of ordinary I/O. Zero-delete cleanup and protected
+tree/CSV readbacks pass. publication.json, public_restore_receipt.json and
+cleanup_record.json retain the actual receipts; later normal delivery commits
+carry bookkeeping while paper bytes remain pinned to the science commit.
 
 Read [contribution map](contribution_positioning.md), [author memo](author_decision_memo.md),
 [current main PDF](../unified_exact_round137/manuscript.pdf),
