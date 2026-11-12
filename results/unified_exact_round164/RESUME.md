@@ -82,6 +82,13 @@ old §5.4 was compared against the fixed R163 source and is unchanged. Final
 Round164 data tables, §6.5 consolidation and outcome-dependent §7/abstract
 conclusions are still pending and must use the completed panel.
 
+The offline target-arrival clock conversion was corrected before any final
+analysis: journal availability is relative to the supervisor `started`
+window. Its conservative paid offset is T_produce minus wrapper_wall_seconds,
+which includes prelaunch. Subtracting fully_observed_end_to_end_seconds would
+omit that prelaunch part. This is an analysis-only correction; no producer,
+frozen helper, argv, numerical threshold, endpoint or run was changed/repeated.
+
 All new work/raw/temp/restore remains under ExactEBRP-work. Protected user
 files and prior active trees are retained. Postdelivery cleanup may delete
 zero files; unique evidence, failures and necessary runtimes stay protected.

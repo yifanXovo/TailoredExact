@@ -163,11 +163,16 @@ def pair(b,p):
 def target_arrival(arm,launch,observations,result,producer,completion,target):
     from round108_reader import full_fleet
     events=[]
-    # The inherited producer did not isolate all startup/trailer overhead on
-    # the journal's relative clock. Conservatively add its entire excluded
-    # nonnegative duration, as the accepted R108 policy does. A zero lower
-    # bound avoids converting an availability observation into exact discovery.
-    excluded=producer['T_produce']-completion['fully_observed_end_to_end_seconds']
+    # Journal availability is relative to run_one's `started` marker, whereas
+    # fully_observed_end_to_end_seconds also contains prelaunch_seconds.
+    # Subtract only wrapper_wall_seconds: all producer time outside that exact
+    # journal window (including prelaunch) must be in the conservative offset.
+    # Subtracting the end-to-end duration would undercount the prelaunch part.
+    # A zero lower bound avoids claiming exact first discovery from saved
+    # availability and an unseparated startup/trailer envelope.
+    assert abs(completion['fully_observed_end_to_end_seconds']-
+        completion['prelaunch_seconds']-completion['wrapper_wall_seconds'])<1e-6
+    excluded=producer['T_produce']-completion['wrapper_wall_seconds']
     assert excluded>=-1e-6;excluded=max(0.,excluded)
     for record in observations:
         witness=record['payload']
@@ -190,7 +195,7 @@ def target_arrival(arm,launch,observations,result,producer,completion,target):
         paid_clock_upper_seconds=upper,window_end_T_produce=producer['T_produce'],
         unseparated_wrapper_offset_upper_seconds=excluded,qualifying_saved_events=len(events),
         final_F=final['F'],final_witness_hits=endpoint_hit,exact_first_discovery_time_known=False,
-        clocks='inherited committed journal availability plus conservative paid wrapper bound; no interpolation or verification-clock backfill',
+        clocks='committed journal availability plus all producer time outside the matching supervisor window, including prelaunch; no interpolation or verification-clock backfill',
         production_target_used=False)
 
 def arrival_analysis(arms,history):
