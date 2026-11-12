@@ -10,14 +10,18 @@ producer, old archive recovery, or the independent numerical checker.
 
 ## Current disposition
 
-The science portion is **PASS**. Static inspection and the independently
+The final execution/data review is **PASS**, including science and the actual
+six-pair master CSV append. Static inspection and the independently
 computed readback find no conclusion-changing execution/data defect in the
 frozen 18-arm panel. Root serially metered `review/check_execution.py` v3;
 `review/execution_readback.json` reports PASS for six actual input parses and
 all 18 complete raw fleet reconstructions, own startup fleets, execution
-identities/counts, q0/cold P, raw/proof cover composition and expenses. The
-actual master CSV append is still pending and requires a separate CSV-only
-follow-up. This review does not describe that append as completed.
+identities/counts, q0/cold P, raw/proof cover composition and expenses. Root
+then completed the actual append to both masters and serially metered the
+separate CSV-only checker. `review/csv_readback.json` is PASS. The reviewer
+read that result, its actual observed-exit receipt, the append receipt,
+immutable source binding, canonical increment and current actual-file hashes.
+No fleet replay was repeated for this CSV follow-up.
 
 The first root-metered checker attempt stopped before fleet arithmetic because
 the program compared the raw launch object to the frozen launch as a whole.
@@ -197,7 +201,7 @@ closeout must include the actual observed checker exit.
 That invocation is now complete as recorded above; no repeat fleet check is
 requested for publication or CSV authoring.
 
-## Master-table contract to review after append
+## Master-table contract and completed CSV signoff
 
 Static inspection of `scripts/round163_tables.mjs`,
 `scripts/round163_table_append.py`, and `main_table_schema_readback.json`
@@ -214,16 +218,50 @@ come from the complete reports, and the unconfirmed comparison category is
 left blank with explicit certificate/U/L facts in the note. Existing category
 labels and historical source identities remain unchanged.
 
-The follow-up must inspect the actual two written master files, their exact
-original byte prefixes, 91-row totals, 28-field widths, six unique new keys,
-both source columns, and value correspondence to B and cold P. It must not
-repeat the completed fleet reconstruction merely for CSV transport.
+The root-metered follow-up inspected the actual two written master files,
+their exact original byte prefixes, 91-row totals, 28-field widths, six unique
+new keys, both source columns, and value correspondence to B and cold P.
+It did not repeat the completed fleet reconstruction for CSV transport.
 
-The independent CSV-only checker is prepared at
-`review/check_csv_transport.py`. After actual append, root can meter the same
-Python executable with this checker and `--root` as above. It writes only
-`review/csv_readback.json`, reads the completed independent fleet PASS, and
-checks the actual master prefix/suffix, both named/unnamed schemas, all six
-B/P value mappings, source identities, status/time/gap semantics and actual
-write receipts. It contains no fleet replay or project/solver imports. The
-reviewer has not executed it.
+The independent CSV-only checker at `review/check_csv_transport.py` writes
+only `review/csv_readback.json`, reads the completed independent fleet PASS,
+and checks the actual master prefix/suffix, both named/unnamed schemas, all
+six B/P value mappings, source identities, status/time/gap semantics and
+actual write receipts. It contains no fleet replay or project/solver imports.
+Root executed it; the reviewer did not execute it.
+
+Final CSV readback identities:
+
+| Artifact | Actual identity |
+|---|---|
+| Numeric results/input source commit | `4d09e6fc9ed1c34dacd11aa8c7b7d22ae9f8ebbc` |
+| CSV-only checker SHA256 | `76c792aaecec59b8a99c24977e54ed4e1fb88b73635985b48b0756a39d0035dc` |
+| Original 21230-byte master prefix SHA256 | `0648bdc3b297fbb1c34de3cbc9bede5718c0c8cdfa2656462bcff457b0ab8718` |
+| Both updated master files and repository master copy SHA256 | `2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3` |
+| Named 28-column increment SHA256 | `65457e68400aaab27a0482db75baf3a6fa46395f9ae2aee2b96fd4d31a5c4893` |
+
+The actual updated paths are
+`C:/Users/Administrator/Desktop/GI_TBC_vs_P_GRB_All_Tested_Instances.csv`
+and
+`C:/Users/Administrator/Desktop/Research/docs/tempfiles/GI_TBC_vs_P_GRB_All_Tested_Instances.csv`.
+Both are now 25180 bytes, byte-identical, GB18030, with 85 preserved historical
+records plus six new records and the original 28-field header, including its
+two unnamed source-header cells. `main_table_update.json` records the actual
+append at `2026-11-12T01:31:30.924598+00:00`; the independent CSV-only PASS is
+timestamped `2026-11-12T01:31:31.704292+00:00`.
+
+The increment contains exactly R163-C20-S, R163-B20-B, R163-X20-S,
+R163-C35-U, R163-B35-S and R163-X35-S, each once, from B and cold P only.
+In particular X35's GI-TBC lower is B's `.3949882559151472`, not E+'s
+`.42319954961578576`. C35 retains P's better physical U alongside B's stronger
+L. The status labels, OPEN blank convergence times, percentage gaps, actual
+lambda/.15 multipliers, blank new comparison categories and fixed-commit
+source URLs in positional columns27/28 match the verified endpoint/input
+sources. All historical labels and source identities remain unchanged.
+
+`fees/independent_CSV_readback/receipt.json` records observed exit0, no timeout
+and paid outer `.09534050012007356s`. Root reports closed science
+`24697.709828344174s` after this CSV-only verification, with no pending fees.
+Later publication/recovery/cleanup metadata must still receive its normal
+final accounting. This final execution/data signoff requests no additional
+scientific execution and has no remaining CSV or scientific blocker.

@@ -130,7 +130,7 @@ Native Work/nodes use inherited result counters, with individual Optimize ledger
 
 The same R162 complete_v2 C++ PE and Gurobi13.0.2 DLL serve all methods. E+ pays the unchanged historical Python helper with RN16384, original absolute price gap1e-4 and the original global-deadline/DP/fallback contract. This is explicitly a mixed C++/Python enhancement, with no new algorithm core. R138–162 noncandidate mechanisms stay off.
 
-The closed scientific charge is **24697.614487844 / 72000 seconds** (6.860448 h). Failed qualification and reader repair costs are retained. Per-arm outer fees pay startup/import, H/helper, model creation, Native calls, validation, trailers and observed exits; nested Runtime/Work are not added again. Initial metadata/history work has a separately disclosed conservative enclosing preparation charge. Ordinary documentation, packaging and public recovery I/O are separately recorded.
+The closed scientific charge is **24697.709828344 / 72000 seconds** (6.860475 h). Failed qualification and reader repair costs are retained. Per-arm outer fees pay startup/import, H/helper, model creation, Native calls, validation, trailers and observed exits; nested Runtime/Work are not added again. Initial metadata/history work has a separately disclosed conservative enclosing preparation charge. Ordinary documentation, packaging and public recovery I/O are separately recorded.
 
 ## Structural interpretation and the single next question
 

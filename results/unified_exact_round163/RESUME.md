@@ -1,28 +1,8 @@
-# Round163 execution status
+# Round163 science and review complete; delivery pending
 
-Current checkpoint (2026-11-12 UTC): all 18 formal positions completed normally
-and passed their original-objective/coverage readers. The panel and metadata
-watcher both exited 0. Three metered final readbacks (master/effective novelty,
-complete analysis, and source/runtime/serial identity) pass; scientific charge
-at this checkpoint is 24695.69584414363 seconds, with no open fee. Do not rerun
-any formal producer. Reports preserve all six configurations and three methods:
-B/E+ CERT3/6, P CERT1/6; E+ has identical physical U to B on all six, one final
-X35 proof gain .028211293700638573, equal other five proof endpoints, and
-55.112384649924934 seconds more aggregate T_total. All three joint-CERT E+/B
-paid T_cert ratios exceed one. E+ helpers total256.7365551 seconds inside the
-original deadlines. New B35/X35 prices hit RN16384 and remain interval-valued;
-do not apply old R156's small remainder to these new scopes.
+All18 formal arms and all core/independent readbacks pass. No producer remains active and no healthy producer may be rerun. Independent math/method, execution/data+CSV and stage-direction agents have closed PASS. B remains paper main; E+ is a limited, uniformly defined proof supplement. The actual two GB18030 masters now each contain91 rows, with exactly6 B/P additions and the original85-row byte prefix preserved. Numeric source commit is 4d09e6fc9ed1c34dacd11aa8c7b7d22ae9f8ebbc. Artifact operation marker has run exactly once. All scientific fees are closed at24697.709828344174s; no further science or next-stage query is requested.
 
-Independent extra reviewers are /root/round163_math_review,
-/root/round163_execution_review, and /root/round163_stage_review, with fresh
-self-contained contexts. Their reports/checkers live under review/. Only root
-runs scientific checkers through the serial shared meter. The main CSV copies
-are still unchanged. Pending: close extra review, finalize the stage choice and
-maintained manuscript/navigation, immutable numeric-source commit, Artifact
-CSV authoring/visual QA and actual six-pair append, CSV-only independent
-readback, final costs/carrier/normal push/English Open Draft PR, bounded new-only
-public byte recovery, current-only screening/zero-deletion closeout and final
-metadata commit/push/PR readback. The artifact operation marker has not run.
+Pending only normal new-only carrier, commit/push, English Open Draft PR on verified R162 base, bounded anonymous new-only byte recovery, current-only metadata screening/zero-deletion closeout, final metadata commit/push and PR readback. Actual PR/recovery/cleanup receipts are not yet claimed.
 
 The preregistration and qualification history below remains provenance.
 

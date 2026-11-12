@@ -1,13 +1,13 @@
 {
-  "UTC": "2026-11-12T01:30:13.870829+00:00",
+  "UTC": "2026-11-12T01:33:46.528929+00:00",
   "total_limit_seconds": 72000,
-  "scientific_seconds": 24697.614487844054,
-  "scientific_hours": 6.86044846884557,
-  "remaining_seconds": 47302.385512155946,
+  "scientific_seconds": 24697.709828344174,
+  "scientific_hours": 6.860474952317826,
+  "remaining_seconds": 47302.290171655826,
   "by_category": {
     "qualification": 34.20763624506071,
     "panel": 24655.617958898656,
-    "verification": 7.010299600660801,
+    "verification": 7.1056401007808745,
     "repair": 0.7785930996760726
   },
   "fees": [
@@ -210,6 +210,15 @@
       "receipt_SHA256": "99d90e9f4b2c78a96bae2b3b2c7263ce245b8be05e290e14c351c7141cc4313f"
     },
     {
+      "label": "independent_CSV_readback",
+      "kind": "verification",
+      "exit_code": 0,
+      "outer_seconds": 0.09534050012007356,
+      "scientific_seconds": 0.09534050012007356,
+      "timeout": false,
+      "receipt_SHA256": "7dc61ef8f94f3869f2d061fa5e9138eb891a02551c5f5709b36e665429394a49"
+    },
+    {
       "label": "independent_execution_readback",
       "kind": "verification",
       "exit_code": 1,
@@ -291,11 +300,21 @@
       "receipt_SHA256": "ce874285108493e7c222d56671a5e39901280f9601962eab3933a48a8eb5e058"
     }
   ],
-  "separate_engineering_or_IO_seconds": 11.526737899985164,
+  "separate_engineering_or_IO_seconds": 12.276361800176561,
   "separately_observed_engineering_IO": [
     {
       "receipt": "infra/plot_dependency_install.json",
       "seconds": 11.526737899985164,
+      "scientific_seconds": 0
+    },
+    {
+      "receipt": "table_authoring.json",
+      "seconds": 0.7203210000000001,
+      "scientific_seconds": 0
+    },
+    {
+      "receipt": "main_table_update.json",
+      "seconds": 0.029302900191396475,
       "scientific_seconds": 0
     }
   ],

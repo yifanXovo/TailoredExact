@@ -1,0 +1,16 @@
+{
+  "engine": "@oai/artifact-tool",
+  "outputs": "requested CSV, no unrequested XLSX",
+  "schema_columns": 28,
+  "new_pairs": 6,
+  "formula": "weight multiplier = actual lambda / 0.15",
+  "original_header_preserved_in_existing_files": true,
+  "duplicate_empty_source_headers_preserved": true,
+  "existing_records_reserialized": false,
+  "classification_left_blank": true,
+  "source_commit": "4d09e6fc9ed1c34dacd11aa8c7b7d22ae9f8ebbc",
+  "expected_new_row_start": 87,
+  "previews": "E:\\codes\\ExactEBRP-work\\temp\\round163\\tables\\master_before.png; E:\\codes\\ExactEBRP-work\\temp\\round163\\tables\\master_after.png",
+  "ordinary_document_IO_seconds": 0.7203210000000001,
+  "snapshot_source": "qualified B and cold P only; E+ retained solely in the separate 18-arm comparison"
+}

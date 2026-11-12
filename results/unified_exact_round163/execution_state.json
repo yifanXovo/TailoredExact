@@ -1,6 +1,6 @@
 {
-  "UTC": "2026-11-12T01:18:05.436833+00:00",
-  "status": "PANEL_AND_CORE_READBACK_CLOSED_EXTRA_REVIEW",
+  "UTC": "2026-11-12T01:33:46.482298+00:00",
+  "status": "SCIENCE_AND_REVIEW_COMPLETE_DELIVERY_PENDING",
   "worktree": "E:\\codes\\ExactEBRP-work\\worktrees\\round163",
   "branch": "codex/round163-stage-confirmation",
   "panel_tool_session": 63149,
@@ -9,11 +9,11 @@
   "no_automatic_producer_retry": true,
   "primary_science_followup": "Wait for all18; then metered master_novelty, final readback/analysis, choose decision, finish maintained paper and tables, independent3-agent review, carrier/push/OpenDraftPR/public recovery/cleanup",
   "artifact_tool_import_available": true,
-  "artifact_marker_invoked": false,
+  "artifact_marker_invoked": true,
   "artifact_temp": "E:\\codes\\ExactEBRP-work\\temp\\round163\\tables",
   "source_PE_unchanged": true,
   "all_first_nine_qualified": true,
-  "main_CSV_not_yet_changed": true,
+  "main_CSV_not_yet_changed": false,
   "last_known_closed_positions": [
     1,
     2,
@@ -26,9 +26,15 @@
     9,
     10,
     11,
-    12
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
   ],
-  "active_position": 13,
+  "active_position": null,
   "plot_environment_prepared": true,
   "post_panel_static_normalization_audit_prepared": true,
   "final_paper_finish_prepared": true,
@@ -40,5 +46,9 @@
   "panel_exit_code": 0,
   "metadata_watch_exit_code": 0,
   "independent_reviews_started": true,
-  "decision_pending": true
+  "decision_pending": false,
+  "independent_reviews_complete": true,
+  "main_CSV_files_updated": 2,
+  "new_B_P_pairs": 6,
+  "immutable_numeric_source_commit": "4d09e6fc9ed1c34dacd11aa8c7b7d22ae9f8ebbc"
 }
