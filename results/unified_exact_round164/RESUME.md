@@ -44,6 +44,11 @@ Prepared post-panel work (not yet executed and not yet accepted as results):
   historical source mapping. Execute it once under a new metered
   `verification` label (reservation/fault timeout 1800/1800) after panel close.
   Its independent agent reviews are still separate and pending.
+  The same readback writes `reports/seed_evidence.md` through
+  `round164_evidence_tables.py`: full-precision endpoints, paid clocks,
+  signed pairs, six descriptive summaries, joint-CERT time denominators
+  and all 36 offline target observations. This is readable qualified-data
+  presentation, not a new performance sample or a completed-paper claim.
 - After the semantic readback, revise the single maintained R137 body,
   mathematical analysis and supplement. Preserve §5.4 and historical
   evidence. Clean §3.5/§6.4/§6.5/§7, and move the old §7.1 task list into
