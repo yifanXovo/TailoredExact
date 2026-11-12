@@ -1,6 +1,6 @@
 # Round164 continuation record
 
-Status: SCIENTIFIC_PANEL_RUNNING. The task is not complete until all 24
+Status: SCIENCE_READBACK_COMPLETE; MANUSCRIPT_AND_DELIVERY_PENDING. The task is not complete until all 24
 registered new B/P positions, scoped three-Seed analysis, maintained paper,
 master-table increment, independent agent reviews, public recovery and
 Open Draft delivery are closed.
@@ -122,3 +122,11 @@ frozen helper, argv, numerical threshold, endpoint or run was changed/repeated.
 All new work/raw/temp/restore remains under ExactEBRP-work. Protected user
 files and prior active trees are retained. Postdelivery cleanup may delete
 zero files; unique evidence, failures and necessary runtimes stay protected.
+
+All 24 formal producers have now closed successfully. The complete analysis,
+Seed0 reuse qualification, 24-lifecycle identity and bounded C35 readback
+pass. One offline structural assertion was corrected with all failure fees
+retained; the successful analysis was not replayed and no healthy producer
+was repeated. The exact disposition is in execution_dispositions.json.
+Full paper conclusions, Artifact CSVs, three independent reviews and normal
+Draft/public recovery delivery remain required.

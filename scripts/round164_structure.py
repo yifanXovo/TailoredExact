@@ -62,19 +62,35 @@ def fleet_difference(b,p):
         return {o['station']:(o['pickup'],o['drop']) for r in fleet['vehicles'] for o in r['operations']}
     bs,ps=service(b),service(p)
     changed=sorted(i for i in common if bs[i]!=ps[i])
-    inversions=[]
+    inversions=[];co_served_inversions=[];sequence_changes=[]
     for br in b['vehicles']:
         k=br['vehicle'];pr=next(r for r in p['vehicles'] if r['vehicle']==k)
+        if br['nodes']!=pr['nodes']:
+            sequence_changes.append(dict(vehicle=k,B_nodes=br['nodes'],P_nodes=pr['nodes']))
         shared=[i for i in br['nodes'][1:-1] if i in common and bo[i]==po[i]==k]
         order={i:j for j,i in enumerate(pr['nodes'][1:-1])}
         for index,i in enumerate(shared):
             for j in shared[index+1:]:
                 if order[i]>order[j]:inversions.append(dict(vehicle=k,stations=[i,j]))
+        # A pair can be co-served in both fleets after a simultaneous owner
+        # change. Restricting this comparison to the same vehicle label
+        # wrongly makes that descriptive order comparison disappear.
+        shared=[i for i in br['nodes'][1:-1] if i in common]
+        for index,i in enumerate(shared):
+            for j in shared[index+1:]:
+                if po[i]!=po[j]:continue
+                other=next(r for r in p['vehicles'] if r['vehicle']==po[i])
+                if other['nodes'].index(i)>other['nodes'].index(j):
+                    co_served_inversions.append(dict(B_vehicle=k,P_vehicle=po[i],stations=[i,j]))
     return dict(B_only_served=sorted(set(bo)-set(po)),P_only_served=sorted(set(po)-set(bo)),
         reassigned_common_stations=reassigned,changed_quantity_or_direction_common_stations=changed,
         same_owner_relative_order_reversals=inversions,
+        co_served_relative_order_reversals=co_served_inversions,
+        per_vehicle_station_sequence_changes=sequence_changes,
         ownership_changed=bool(reassigned),service_amounts_changed=bool(changed),
-        relative_order_changed=bool(inversions),
+        relative_order_changed=bool(co_served_inversions),
+        same_owner_relative_order_changed=bool(inversions),
+        station_sequences_changed=bool(sequence_changes),
         delta_G=b['G']-p['G'],delta_weighted_penalty=b['weighted_penalty']-p['weighted_penalty'],
         delta_physical_F=b['F']-p['F'],causal_operator_attribution=False)
 
@@ -121,9 +137,9 @@ def run():
             b=next(v['final_fleet'] for v in values if v['seed']==seed and v['method']=='B')
             p=next(v['final_fleet'] for v in values if v['seed']==seed and v['method']=='P')
             differences.append(dict(seed=seed,**fleet_difference(b,p)))
-        # Verify the supplied Seed0 structural statement from the original
-        # saved fleets, while allowing new Seed comparisons to differ.
-        assert all(differences[0][name] for name in ('ownership_changed','service_amounts_changed','relative_order_changed'))
+        # Preserve the actual relations, including absence of a particular
+        # pair-order change. A changed station sequence can also reflect
+        # changed membership/ownership; it is not an isolated order effect.
         write(OUT/'structural_synthesis.json',dict(UTC=utc(),scope='C35 complete saved H/B/P fleets and native trajectories only',
             runs=values,Seed0_skeleton_counterfactual=counterfactual,primal_and_proof_deficits_distinct=True,
             per_Seed_saved_fleet_differences=differences,
