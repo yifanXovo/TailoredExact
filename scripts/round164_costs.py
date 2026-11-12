@@ -17,6 +17,13 @@ def run():
     chronological=sorted(fees,key=lambda r:r['start_unix'])
     assert all(a['end_unix']<=b['start_unix'] for a,b in zip(chronological,chronological[1:])), 'overlapping scientific outer fees'
     external=read(OUT/'infra/external_costs.json')['processes'] if (OUT/'infra/external_costs.json').exists() else []
+    intervals=[dict(start_unix=r['start_unix'],end_unix=r['end_unix'],label=r['label']) for r in fees]
+    for row in external:
+        assert row['end_unix']>=row['start_unix']
+        assert abs(row['outer_seconds']-(row['end_unix']-row['start_unix']))<1e-6
+        intervals.append(dict(start_unix=row['start_unix'],end_unix=row['end_unix'],label=row['label']))
+    intervals.sort(key=lambda r:r['start_unix'])
+    assert all(a['end_unix']<=b['start_unix'] for a,b in zip(intervals,intervals[1:])), 'review and process scientific windows overlap'
     assert abs(sum(r['scientific_seconds'] for r in fees)+sum(r['outer_seconds'] for r in external)-value['G1_seconds'])<1e-6
     ordinary=[]
     for name,key in [('table_authoring.json','ordinary_authoring_IO_seconds'),
@@ -32,6 +39,7 @@ def run():
         T_produce_sum=sum(a['T_produce'] for a in arms),T_verify_sum=sum(a['T_verify'] for a in arms),
         T_total_sum=sum(a['T_total'] for a in arms),formal_scientific_outer_sum=sum(a['scientific_outer_seconds'] for a in arms),
         all_recorded_fees_closed=True,nested_Runtime_Work_H_helper_not_added=True,
+        all_scientific_process_and_review_windows_nonoverlapping=True,
         helper_Optimize_or_processes=0,production_rebuilds=0,
         reservation_margin_is_not_added_Native_runtime=True,fault_timeout_policy_unchanged='cap+900, bounded by remaining science',
         qualification_batch='six tiny nonperformance lifecycles; paid once at the enclosing outer, never compared as formal sample clocks',

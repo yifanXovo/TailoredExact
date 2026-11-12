@@ -366,3 +366,18 @@ Neither observation supplies a restricted-domain optimum, single-operator
 causality or a complete-method feedback benefit. These are evidence and
 interpretation conventions; no additional general theorem or optimizer is
 introduced.
+
+## Completed finite-Seed interpretation
+
+The completed six-input readback gives eighteen within-input B/P pairs,
+including six historical Seed0 pairs. C35 has ΔU signs +/−/− and ΔL signs
++/+/+; its median ΔU is descriptive and cannot erase the adverse Seed0
+fleet. B35/X35 have ΔU<0 and ΔL>0 in all three observations but no own
+certificate. B20's differences within the frozen 1e-7 scale are equivalent
+endpoints, with three independently paid joint-CERT comparisons.
+
+These are numerical observations under the original source, exact-zero and
+inclusive-cutoff qualification; they change no physical equivalence,
+epigraph/S=0 convention or coverage theorem. The complete own-run values
+and all target-availability intervals are in the
+[finite evidence tables](../unified_exact_round164/reports/seed_evidence.md).

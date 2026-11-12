@@ -25,7 +25,7 @@ def run():
     primary=max(facts,key=lambda f:(f['all_three_specified_rows_present'],f['rows']))
     complete94=primary['rows']==94 and primary['all_three_specified_rows_present']
     assert primary['rows'] in (91,94),('inspect changed master; no blind overwrite',primary)
-    header=list(primary['header']);header[-2:]=['实验数据来源','实例元数据来源']
+    header=list(primary['header'])
     write(OUT/'main_table_final_discovery.json',dict(PASS=True,UTC=utc(),tables=facts,primary=primary,
         supplied_94_row_version_found=complete94,canonical_increment_header=header,
         expected_increment_pairs=12,expected_working_master_rows=primary['rows']+12,

@@ -1239,3 +1239,121 @@ is executed in the solver-Seed confirmation. The known feasible P target,
 an unserved-station penalty floor and an inventory-only target vector do not
 by themselves determine the complete saved-skeleton optimum. R62/R96/R97/R160
 retain their original positive, mixed and adverse evidence.
+
+## Round164 completed finite solver-Seed evidence
+
+All 24 registered new B/P positions complete at Seeds1/2, keyed on input,
+Seed, method and actual repeat1. Twelve new pairs and six qualified historical
+Seed0 pairs form six within-input groups. The
+[complete full-precision evidence tables](../unified_exact_round164/reports/seed_evidence.md)
+report all 36 own-run physical U, raw/qualified search L, final proof L,
+original gaps, certificate states, paid clocks, own-H and Native effort.
+The [new 24-arm CSV](../unified_exact_round164/reports/complete.csv),
+[paired differences](../unified_exact_round164/reports/three_seed_comparisons.json),
+[within-input summaries](../unified_exact_round164/reports/within_configuration.json)
+and [finite report](../unified_exact_round164/final_report.md) retain every
+OPEN observation and both endpoint directions. No E+ floor is included in B.
+
+Historical Seed0 reuses the same input/physical/method/PE/DLL/deadline and
+numerical contracts. Its selected original physical fleets and all Native
+Seed settings are reread; live OS module/affinity records and original native
+CPU/Windows/Gurobi headers match both new Seeds. The
+[reuse qualification](../unified_exact_round164/Seed0_reuse_qualification.json)
+does not assert identical incidental OS load or statistical exchangeability.
+The [identity audit](../unified_exact_round164/science_identity.json) binds
+all 24 fresh serial lifecycles and independently paid fixed-seed H.
+
+### Descriptive within-input summaries
+
+The medians and ranges below summarize three differences, not a new feasible
+solution, proof endpoint or independent sample. Full binary64 values and
+tolerance-qualified signs remain in the linked machine reports.
+
+| Input | Median ΔU [minimum, maximum] | Median ΔL [minimum, maximum] |
+| --- | --- | --- |
+| R163-C20-S | 0 [-0.05927392759, 0] | 0.0336984584 [0.03104637585, 0.03941157974] |
+| R163-B20-B | 0 [0, 0] | 3.885780586e-16 [5.551115123e-17, 2.090346785e-10] |
+| R163-X20-S | -0.01320013964 [-0.01721348367, -0.01320013964] | 0.1948245442 [0.1860979754, 0.1974955465] |
+| R163-C35-U | -0.03868051945 [-0.05019444614, 0.0362470459] | 0.01155073068 [0.009334377692, 0.01347433456] |
+| R163-B35-S | -0.1017159773 [-0.1329600072, -0.05496270236] | 0.004752414016 [0.004661458116, 0.006254594054] |
+| R163-X35-S | -0.06178785267 [-0.08405536348, -0.06065282897] | 0.04442013349 [0.03201682389, 0.04660158524] |
+
+### Joint-CERT paid time intersection
+
+The intersection is exactly B20, 1/6 inputs at each Seed (three within-input
+pairs overall). Every listed difference exceeds its 10 s substantive scale.
+OPEN observations supply no convergence time and are not removed to infer
+a full-panel acceleration.
+
+| Seed | B20 B T_cert | B20 P T_cert | ΔT=B−P /s | B/P | Substantive scale /s |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 5.058292441 | 235.8555019 | -230.7972095 | 0.02144657385 | 10 |
+| 1 | 4.963643252 | 303.0333761 | -298.0697328 | 0.01637985662 | 10 |
+| 2 | 5.277052939 | 266.8005886 | -261.5235357 | 0.01977901536 | 10 |
+
+### Offline saved-feasible targets and clocks
+
+The [six targets](../unified_exact_round164/primal_targets_frozen.json) were
+frozen before any new Optimize from min(two historical qualified physical U).
+They enter no argv, Start, cutoff or stop. The
+[all-36 records](../unified_exact_round164/reports/primal_target_arrival.json)
+apply one rule to every input/method/Seed. Each saved journal fleet is
+physically replayed. Its conservative paid upper is the observed availability
+plus T_produce minus the matching supervisor wrapper duration, including
+prelaunch. The global earliest-save lower is unknown and conservatively zero;
+receipt-qualified journal availability has a separately recorded lower bound.
+Other full-fleet emitters may precede a journal receipt, so these are not exact
+first-find times. Endpoint-only records would supply producer-close uppers;
+no attainment observed is right-censored at that run's own producer close.
+The [source clock contract](../unified_exact_round164/target_clock_contract.json)
+binds the original C++ receipt order and matching supervisor time origin.
+
+### Bounded C35 witness explanation
+
+All C35 H values equal .17449020363402973 with the same fixed H seed, each
+recomputed and paid. The six final fleets decompose as follows.
+
+| Seed | Method | G | Weighted penalty | Physical U |
+| --- | --- | --- | --- | --- |
+| 0 | P | 0.04494124627 | 0.04837809748 | 0.09331934375 |
+| 0 | B | 0.06783155406 | 0.06173483559 | 0.1295663897 |
+| 1 | P | 0.07730507608 | 0.08031923652 | 0.1576243126 |
+| 1 | B | 0.05218209886 | 0.05524776759 | 0.1074298665 |
+| 2 | B | 0.05487223551 | 0.05321170099 | 0.1080839365 |
+| 2 | P | 0.08498104579 | 0.06178341015 | 0.1467644559 |
+
+The [saved-fleet synthesis](../unified_exact_round164/structural_synthesis.json)
+retains routes, operations, travel/handling times, prefix peaks, loaded returns
+and native improvement events. In the Seed0 B/P comparison, 26 common stations
+change vehicle ownership, 15 common stations change service amount/direction
+and 15 co-served pairs reverse relative order. None of those reversals occurs
+among stations keeping the same vehicle label; the broader co-served comparison
+records simultaneous owner/order changes and does not isolate an order effect.
+
+The unserved station18 contributes .011402553447730399, below P's known feasible
+objective. Setting all other saved visited stocks to target gives the inventory
+objective .03359254619609878, but route0 peaks at32 against capacity20 and all
+three route times exceed10800 s (12501.7845/11130.8908/10939.8293 s). This point
+is infeasible, not a restricted-domain optimum or proof that every legal
+quantity choice fails. No R96 restricted MIP, route oracle or feedback producer
+is executed. Earlier R62/R96/R97/R160 evidence retains its actual mixed scope.
+
+### Reproduction and maintained format
+
+The immutable numeric source is `b93a8a01ff1b7f3cbee67807be3ac6591db4767f`; original instance metadata
+remains the fixed R163 manifest. The
+[historical member map](../unified_exact_round164/historical_member_access.json)
+and [source map](../unified_exact_round164/historical_source_map.json) bind
+finite old reads by commit/member/SHA. The
+[execution dispositions](../unified_exact_round164/execution_dispositions.json)
+retain a prelaunch-only idle-screen failure and an analysis-only overstrong
+order assertion; no healthy formal producer is repeated. The
+[cost report](../unified_exact_round164/cost_report.json) pays nonoverlapping
+outer processes and final independent review without adding nested Native/H
+counters. Main CSV reconciliation, real review identities and publication/
+new-only recovery are linked from the final report.
+
+Markdown body/math/supplement are current for this revision. No maintained
+TeX is changed; the existing R137 PDF remains a historical snapshot. The
+frozen B research configuration, paper recommendation and released main
+defaults are distinct, and this study changes no released default.

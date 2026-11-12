@@ -1,132 +1,35 @@
 # Round164 continuation record
 
-Status: SCIENCE_READBACK_COMPLETE; MANUSCRIPT_AND_DELIVERY_PENDING. The task is not complete until all 24
-registered new B/P positions, scoped three-Seed analysis, maintained paper,
-master-table increment, independent agent reviews, public recovery and
-Open Draft delivery are closed.
+Status: READY_FOR_INDEPENDENT_REVIEW. All24 preregistered producers and the
+complete three-Seed endpoint/identity/target/C35 readback are closed and
+qualified. The maintained R137 body/math/supplement and current navigation
+contain scoped conclusions; historical section5.4 is unchanged. Actual
+CSV fallback is complete:12-row increment and103-row byte-prefix-preserving
+working master, with original91-row user files intact and three historical
+N/A-P rows pending union. See final_report.md and main_table_reconciliation.md.
 
-Worktree: `E:/codes/ExactEBRP-work/worktrees/round164`.
-Branch: `codex/round164-seed-confirmation`, stacked on the verified unmerged
-R163 head `8ae25cbcbb88caa283d345b1b143ff0da6e5c0eb`.
-The preproduction matrix and qualification commit is
-`bb69cb2f5e7d48ef71dd974edf32744728340c27`.
+Worktree E:/codes/ExactEBRP-work/worktrees/round164, branch
+codex/round164-seed-confirmation, baseR163 delivery8ae25cbcbb88caa283d345b1b143ff0da6e5c0eb.
+Preproduction commit bb69cb2f5e7d48ef71dd974edf32744728340c27.
+Immutable numerical source b93a8a01ff1b7f3cbee67807be3ac6591db4767f.
+Original measured C++ e920b92e199e825ec89a2932f701861ff158e0d4 and common
+R162 complete_v2 PE/DLL are unchanged. No rebuild, extra Seed, E+ run,
+restricted MIP, oracle or healthy producer replay is authorized.
 
-The sole active production driver is `scripts/round164_resume.py`; it
-explicitly accounts for one prelaunch-only false-positive idle rejection,
-then follows the original 24-position matrix. See
-`execution_dispositions.json`, fee receipts and `active_position.json`.
-The failed attempt did not create a producer destination or start Native.
-No healthy producer is repeated. Read-only OS monitoring now uses the
-existing MSYS Python, outside the old optimization-interpreter regex.
+Closed scientific fees before independent review are34749.89784079837/57600s.
+Two retained failures are prelaunch-only arm001 and an overstrong offline
+order assertion in final_readback01. The complete analysis had passed; only
+post-analysis structure/identity/source/table presentation resumes in
+final_readback02. Actual co-served order changes and same-owner absences are
+reported separately; no scientific endpoint or producer is altered.
 
-Use `scripts/round164_monitor.py` for small active-position/log-tail reads.
-Do not start another campaign, rebuild the C++ core, change a frozen Seed,
-input, cap, method, order or helper, or run historical experiments.
-An existing raw destination requires inspection of its real process and
-seals; it never authorizes an automatic second producer.
-
-The actual available master files both have 91 rows. The supplied task's
-94-row variant was not found in the bounded local search. Preserve the
-available historical bytes and deliver exactly the qualified 12-pair
-increment, with the three specified historical N/A-P records still pending
-union into any unavailable 94-row user version. Never assert an inaccessible
-file was updated or invent those missing source fields.
-
-Prepared post-panel work (not yet executed and not yet accepted as results):
-
-- `round164_analyze.py` pairs on input/Seed/method/repeat, replays physical
-  endpoints, qualifies the historical Seed0 contract, and preserves target
-  arrival intervals/censoring without manufacturing discovery timestamps.
-  Its prepared environment qualification also reads each selected old live
-  OS PE/DLL/affinity binding and the original native log header; it compares
-  Gurobi/Windows, CPU topology and single-thread headers against both new
-  Seeds. These finite old members are included in the fixed SHA access map.
-- `round164_structure.py` reads the selected C35 old members and new saved
-  fleets only. It recomputes objective/operations and the infeasible target
-  counterfactual; no R96 model, Gurobi binding or oracle is run.
-- `round164_final_readback.py` runs analyze, structure, identity and finite
-  historical source mapping. Execute it once under a new metered
-  `verification` label (reservation/fault timeout 1800/1800) after panel close.
-  Its independent agent reviews are still separate and pending.
-  The same readback writes `reports/seed_evidence.md` through
-  `round164_evidence_tables.py`: full-precision endpoints, paid clocks,
-  signed pairs, six descriptive summaries, joint-CERT time denominators
-  and all 36 offline target observations. This is readable qualified-data
-  presentation, not a new performance sample or a completed-paper claim.
-- After the semantic readback, revise the single maintained R137 body,
-  mathematical analysis and supplement. Preserve §5.4 and historical
-  evidence. Clean §3.5/§6.4/§6.5/§7, and move the old §7.1 task list into
-  `research_navigation.md`. Do not claim a refreshed PDF.
-- Commit immutable numerical results before table authoring; bind that
-  actual SHA in `table_source_binding.json`. Then refresh accessible master
-  metadata with `round164_tables_prepare.py`, inspect an Artifact Tool
-  read-only preview, run the required edit marker exactly once, and author
-  the 12 rows with `round164_tables.mjs`. `round164_table_append.py` performs
-  only verified encoding/prefix transport. With 91 rows still available,
-  leave external user files intact and deliver the 103-row working copy,
-  exact 12-row increment and pending three-row union explanation.
-- Only after science and paper completion, spawn the three independent final
-  math/paper, execution/data and research-direction agents requested in §H.
-  Record real identities and nonoverlapping review fees; do not call a
-  self-check script an independent person. Fix their conclusion-changing
-  findings without replaying healthy producers.
-- Close costs and all manuscript/report requirements; package new evidence
-  with `round164_carrier.py`. Normal-commit/push the science/carrier, create
-  the English Open Draft stacked PR, read its true state/base/head, run the
-  bounded anonymous public recovery, then record zero-delete cleanup and
-  normal delivery receipts. Do not merge or force push.
-
-The original prelaunch observer failure is already fully dispositioned; do
-not restart position1. The active driver automatically advances through
-all remaining positions. Monitor metadata before considering any resume.
-
-Static paper cleanup is already committed at `2a69f4864`: the E+ time-scale
-description distinguishes C20's substantive increase from the two smaller
-numerical increases; §6.4 separates scoped inventory information from
-physical service and complete-method value; the former §7.1 task list has
-been moved into research navigation. §3.5 explicitly limits E+ evidence to
-its actual runs. Mathematical conventions for within-input Seed differences,
-medians and target-arrival bounds are added without a new theorem. The whole
-old §5.4 was compared against the fixed R163 source and is unchanged. Final
-Round164 data tables and outcome-dependent §7/abstract
-conclusions are still pending and must use the completed panel.
-The historical portion of §6.5 has now been consolidated: one Seed0 table,
-one certificate/endpoint synthesis, scoped E+ time evidence and unresolved
-inventory widths. Detailed helper/aggregate cost numbers remain in the
-existing supplement. Its new full-cohort Seed tables are still pending.
-
-Observed checkpoint after position16: C35's new Seed1/2 B/P pairs are both
-OPEN. Their ΔU values are -0.05019444614122501 and -0.03868051944646218,
-and ΔL values are +0.013474334563162379 and +0.009334377692335702.
-Seed0 retained P's better feasible U and B's stronger L. Therefore P's C35
-primal advantage is not consistent across all three Seeds; B's higher L is
-observed on all three. This does not identify a causal operator or a new
-certificate. The complete final readback is still deferred to panel close.
-
-Observed checkpoint after position20: B35's new Seed1/2 B/P pairs are both
-OPEN. Their ΔU values are -0.10171597732307722 and -0.13296000719798723,
-and ΔL values are +0.004661458116366382 and +0.004752414015974982.
-Together with the historical Seed0 endpoints, B has lower U and higher L
-on this one input at all three Seeds; no certificate is supplied. The sole
-driver has entered the four remaining X35 positions. Closed scientific
-fees through position20 are 25250.63787179906/57600 seconds, excluding the
-then-active position21; no new seed, method or healthy replay is authorized.
-
-The offline target-arrival clock conversion was corrected before any final
-analysis: journal availability is relative to the supervisor `started`
-window. Its conservative paid offset is T_produce minus wrapper_wall_seconds,
-which includes prelaunch. Subtracting fully_observed_end_to_end_seconds would
-omit that prelaunch part. This is an analysis-only correction; no producer,
-frozen helper, argv, numerical threshold, endpoint or run was changed/repeated.
-
-All new work/raw/temp/restore remains under ExactEBRP-work. Protected user
-files and prior active trees are retained. Postdelivery cleanup may delete
-zero files; unique evidence, failures and necessary runtimes stay protected.
-
-All 24 formal producers have now closed successfully. The complete analysis,
-Seed0 reuse qualification, 24-lifecycle identity and bounded C35 readback
-pass. One offline structural assertion was corrected with all failure fees
-retained; the successful analysis was not replayed and no healthy producer
-was repeated. The exact disposition is in execution_dispositions.json.
-Full paper conclusions, Artifact CSVs, three independent reviews and normal
-Draft/public recovery delivery remain required.
+Remaining: the three independent final agents explicitly requested in goal§H,
+real identities and nonoverlapping review-wall charge; fix conclusion-changing
+findings without new solves. Close final costs and requirement audit, then
+package new-only evidence via round164_carrier.py. Normal-commit/push the
+carrier, create English Open Draft PR on the refreshed eligible base and
+read back actual state/base/head. Run bounded anonymous public restore of
+that immutable carrier commit and finite old metadata/member index; then
+zero-delete cleanup, protected hashes and final normal delivery receipts.
+No merge, force push, branch deletion or global setting change. Only after
+all required evidence and publication close may the active goal complete.

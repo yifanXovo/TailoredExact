@@ -4,7 +4,7 @@
 
 Static bicycle redistribution couples integer station stocks with routes, prefix loads and handling time. We develop GI-TBC (Gini-interval tailored branch-and-cut), sharing finite inventory states between service and objective information, retaining valid supply/support inequalities and complete objective-interval coverage. The formulation preserves empty departure, loaded return and unique nonzero one-way service; we establish implicit service integrality and the physical embedding and termination conditions. In a prospectively registered twelve-input Seed 0 breadth panel, GI-TBC obtains 9/12 qualified certificates, versus 7/12 cold compact and 7/12 independently paid-start compact. A separately designed four-base/eight-configuration positive-objective resource panel, within-configuration weights, three AM thresholds, four mechanism contrasts and a limited second Seed distinguish complete-method performance from mathematical strengthening. All adverse and open outcomes are retained. Earlier multi-source validation and fixed-denominator objective-gap evidence remain separately identified. The evidence supports a finite stage conclusion, while positive-objective scale and conditional mechanism effects delimit generalization.
 
-The separately frozen one-Seed B/E+/P confirmation completes all 18 arms on six archived-source configurations. B and E+ certify 3/6 and cold compact P 1/6. E+ retains every B physical upper and raises one final proof lower, with one substantive paired certificate-time increase under the declared scale. These finite trade-offs support B as the paper's main method and E+ as a limited proof supplement.
+A separately frozen six-input archived-source cohort gives B/E+ 3/6 certificates versus cold P 1/6 at Seed0. E+ preserves B's physical upper endpoints and strengthens one proof lower, with one substantive certificate-time increase. Two additional solver Seeds supply 24 new B/P runs on the same exposed inputs: each Seed repeats B 3/6 versus P 1/6, with favorable B35/X35 endpoint directions but OPEN n35 outcomes. C35's primal ordering reverses while B's proof advantage persists. The finite evidence supports B as the main method and E+ as a limited proof supplement, without stable-runtime, universal-primal or population claims.
 
 ## 1. Introduction
 
@@ -225,7 +225,7 @@ The main comparisons use the same physical problem and original objective. P is 
 
 The fixed-source protocol was committed before once-only generation. Six known roles and six new draws form a twelve-input breadth panel (four each at \(n\in\{15,20,35\}\)); CITI, CABI and Divvy supply archived station geometry/capacity. Ten new draws in total include four additional shortage bases at \(n\in\{20,35\}\), each paired at two transparently designed route horizons. Targets, initial stock, weights and depot are synthetic or transformed; this is not observed demand, a new source, or independent population sampling. Every selected source row and serialized input is disclosed.
 
-Breadth retains \(\lambda=.15\). Resource pairs fix \(\rho=1\) and alter only T; the two extra weight levels \(\rho\in\{.5,2\}\) reuse the matching \(\rho=1\) baseline at two preselected physical configurations. AM and mechanism defaults share only exactly matching input/T/weight/Seed/cap/configuration runs. Main results use Seed 0; four preselected full-method triplets and small overlapping AM/mechanism blocks use Seed 1. They are finite repeated observations, not independent new inputs or an estimated runtime distribution.
+Breadth retains \(\lambda=.15\). Resource pairs fix \(\rho=1\) and alter only T; the two extra weight levels \(\rho\in\{.5,2\}\) reuse the matching \(\rho=1\) baseline at two preselected physical configurations. AM and mechanism defaults share only exactly matching input/T/weight/Seed/cap/configuration runs. The earlier main panels use Seed 0; four preselected full-method triplets and small overlapping AM/mechanism blocks use Seed 1. They are finite repeated observations, not independent new inputs or an estimated runtime distribution. The later six-input archived-source cohort uses Seed0 for its B/E+/P comparison and Seeds1/2 for the complete B/P confirmation in §6.5. The additional 24 commands and offline feasible targets are frozen together; this extends existing Seed research on exposed inputs rather than supplying new unseen inputs.
 
 For each new resource base, let \(d_{\max}\) be its maximum serialized station-to-depot distance and \(M\) its vehicle count. Before optimization, the route horizons were fixed by
 
@@ -250,7 +250,8 @@ Caps are 600/1200/2400 s by size; every open certificate time remains null. Actu
 | Weights | 2 physical configurations, 2 extra rho levels / 12 methods | Relative method dependence on objective weight |
 | AM | 4 roles, 2 extra thresholds / 8 methods | Observed gates/actions and complete cost |
 | Mechanisms | 4 roles, 4 contrasts / 16 methods | Conditional formulation/control effects |
-| Second Seed | 12 main+4 AM+8 mechanism methods | Preselected limited repeat check |
+| Earlier second Seed | 12 main+4 AM+8 mechanism methods | Preselected limited repeat check |
+| Exposed-cohort Seeds1/2 | 24 new B/P arms, plus 12 historical Seed0 B/P arms | Six inputs; three within-input paired observations |
 
 ## 5. Complete-method, resource and weight results
 
@@ -610,30 +611,130 @@ C20, B20 and X20 finish with search L above their qualified inventory value uppe
 
 The proof-only helper adds no floor to Native rows or raw AM. Its separate return-time/floor/search-L ledger distinguishes dominated inventory values, zero optima, rejected sources and unresolved prices. A tighter inventory proof source supplies neither a physical incumbent nor an automatic complete-method benefit. These E+ observations retain their one-Seed scope.
 
+#### Finite solver-Seed confirmation on the exposed cohort
+
+The same six inputs were subsequently registered together for Gurobi Seeds1/2,
+giving 24 additional B/P runs and twelve new paired comparisons. Historical
+Seed0 qualifies under the same input, physical, method, executable, numerical
+and paid-clock contracts, with matching documented runtime observations.
+Each new run starts a fresh lifecycle; B recomputes and pays its own H with
+seed20260626. These are six mathematical inputs with three within-input
+observations each, rather than eighteen independent new inputs. No best Seed,
+cross-Seed certificate, additional method or outcome-dependent stop is used.
+
+**Table 14. Within-input paired differences in Seed order 0/1/2.** Seed0 is
+historical; Seeds1/2 are new. ΔU=B−P is favorable to B when negative; ΔL=B−P
+is favorable when positive. Values within the frozen 1e-7 equivalence scale
+are displayed as 0. Full individual U/L, raw search bounds, paid costs,
+medians/ranges and binary64 values remain in the supplement.
+
+| Configuration | B CERT /3 | P CERT /3 | ΔU: S0 / S1 / S2 | ΔL: S0 / S1 / S2 |
+| --- | --- | --- | --- | --- |
+| R163-C20-S | 3 | 0 | 0 / 0 / -0.0592739276 | 0.0310463758 / 0.0336984584 / 0.0394115797 |
+| R163-B20-B | 3 | 3 | 0 / 0 / 0 | 0 / 0 / 0 |
+| R163-X20-S | 3 | 0 | -0.0132001396 / -0.0172134837 / -0.0132001396 | 0.186097975 / 0.194824544 / 0.197495547 |
+| R163-C35-U | 0 | 0 | 0.0362470459 / -0.0501944461 / -0.0386805194 | 0.0115507307 / 0.0134743346 / 0.00933437769 |
+| R163-B35-S | 0 | 0 | -0.0549627024 / -0.101715977 / -0.132960007 | 0.00625459405 / 0.00466145812 / 0.00475241402 |
+| R163-X35-S | 0 | 0 | -0.0840553635 / -0.060652829 / -0.0617878527 | 0.0320168239 / 0.0466015852 / 0.0444201335 |
+
+At each Seed, B certifies 3/6 inputs and P 1/6. The three n20 B certificate
+patterns persist, while cold P certifies only B20. B35 and X35 retain lower
+B U and higher B L at every Seed, but all eighteen n35 method observations
+remain OPEN. C35's primal ordering reverses: P is better at Seed0, whereas
+B is better at Seeds1/2. B's C35 L remains higher at all three Seeds.
+These input-specific consistencies do not establish a general success
+probability or a structural cause of the observed differences.
+
+**Table 15. Paid n20 certificate times, seconds.** A dash means OPEN, without
+an imputed convergence time.
+
+| Configuration | B T_cert: S0 / S1 / S2 | P T_cert: S0 / S1 / S2 |
+| --- | --- | --- |
+| R163-C20-S | 199.7793504 / 354.3877476 / 341.81022 | — / — / — |
+| R163-B20-B | 5.058292441 / 4.963643252 / 5.277052939 | 235.8555019 / 303.0333761 / 266.8005886 |
+| R163-X20-S | 119.7493879 / 136.9986099 / 131.8292042 | — / — / — |
+
+Certificate-status consistency does not imply constant complete cost. B's
+C20 and X20 times vary substantively across these observations under the
+declared scale; its B20 spread is below 10 s, whereas P's B20 range is
+235.8555019–303.0333761 s. Within each Seed, the joint-CERT B/P intersection
+contains only B20 (1/6). Its B/P time ratios at Seeds0/1/2 are
+.02144657385/.01637985662/.01977901536 and its signed paid differences are
+−230.7972095/−298.0697328/−261.5235357 s. Each exceeds the 10 s substantive
+scale in B's favor. These conditional comparisons supply no full-panel
+speedup, and an OPEN budget is never treated as a certificate time.
+
+The uniform offline target is the better qualified Seed0 U, frozen before
+any new Optimize and absent from production. B reaches the saved target on
+all three observations of each n20 input and B35; on C35 it reaches none,
+and on X35 only the historical Seed0 observation reaches it. P reaches it
+on all three B20 observations, two C20 observations and historical C35
+Seed0, with none observed on X20/B35/X35. In particular, B's new X35 U are
+both worse than its own Seed0 U while its L are stronger, despite favorable
+within-Seed B/P directions. Recorded availability intervals and censoring,
+not exact first-discovery times or impossible-target claims, support these
+statements.
+
+The C35 H value is .17449020363402973 at all three fixed-H-seed lifecycles.
+Native improves B's U to .12956638965196035/.10742986645444105/
+.10808393649972804; P's U are .09331934374779818/.15762431259566606/
+.14676445594619023. The historical P fleet therefore still supplies a known
+better feasible point for every B run. Its advantage is not a persistent
+within-Seed P-over-B ranking. Seed0's fleets differ in ownership, service
+amounts and co-served relative order simultaneously; no single operator or
+route-feedback benefit is isolated. The fixed unserved-station penalty
+.011402553447730399 cannot exclude attaining P's target. Setting the other
+visited inventories to target gives .03359254619609878, but exceeds the
+saved routes' time limits and one prefix capacity. It is neither a physical
+solution nor a certificate about every legal service choice on that skeleton.
+
 ## 7. Conclusions and implications
 
-The established physical equivalence, shared-state formulation and coverage proof remain the algorithmic foundation. The separately registered historical panels retain their own versions, Seeds and denominators: the twelve-input breadth panel certifies 9/12 versus P 7/12 and PS 7/12, and the independent positive-resource panel certifies 4/8 versus P 0/8 and PS 0/8. The mechanism, AM and limited Seed studies retain their adverse results and conditional interpretation; Round163 is not appended to them as an IID sample.
+Physical equivalence, the shared inventory-state formulation and complete
+interval coverage provide the algorithmic foundation. The historical breadth
+panel certifies 9/12 inputs versus cold P 7/12 and paid-start PS 7/12; the
+separate positive-resource panel certifies 4/8 versus 0/8 and 0/8. Their
+versions and denominators remain distinct from the exposed-cohort repeats.
+Conditional mechanism effects, time reversals and adverse endpoints remain
+part of the evidence, rather than additive component shares or new theorems.
 
-Retain uniform GI-TBC/B as the paper's main algorithm. Keep uniform E+ as a separately named, limited proof enhancement, with its genuine X35 gain and earlier qualified R154/R156 gains preserved. This complete panel does not justify replacing B as the main recommendation; the current broad-promotion attempt ends here. No per-input best-of-B/E+ method or released-default change is made.
+The completed three-Seed cohort supports a precise finite claim for uniform
+GI-TBC/B: the n20 certificate patterns repeat, B35/X35 retain favorable
+primal and proof directions, and B's C35 proof advantage persists. It does
+not support a universal primal ordering, constant certificate time or
+certification of the n35 inputs. C35 reverses the feasible-solution ranking,
+and the known-feasible-target diagnostic exposes unreproduced absolute
+primal values even where within-Seed B/P signs agree. These observations
+support B as the paper's main method within the tested scope, without a
+dominance theorem or population-level robustness claim.
 
-This recommendation combines correctness and evidence completeness, certificate counts, paid times on both-certified configurations, and both endpoints plus actual costs on OPEN configurations. The frozen research configuration, paper recommendation and released main/defaults are distinct. This study changes no released default and merges no predecessor PR. The earlier R161/R162 continuous-Q continuation is closed at its tested scope. The old R156 near-tight inventory remainder does not apply to the new B35/X35 capacity-limited prices; these remain interval-valued results, without a capacity increase in this study. No claim rules out all future structural progress.
+E+ remains a separately named limited proof enhancement. Its historical
+X35 lower-bound gain and earlier qualified inventory-proof gains are real;
+the six Seed0 physical upper endpoints equal B's. Only C20's paired
+certificate-time increase meets the substantive scale. The new B/P Seeds
+do not establish E+ robustness. The unresolved B35/X35 inventory widths
+also prevent transferring an earlier near-tight inventory remainder to this
+cohort. A valid relaxation, stronger local information and improved complete
+paid performance remain different conclusions.
+
+The studied algorithm is the frozen S2/ms2 B configuration. Its mathematical
+identity, the paper recommendation and released software defaults are
+separately specified in the reproducibility material. The finite study ends
+with these results; remaining capacity supplies no additional Seed or method.
 
 ### 7.1 Remaining scientific limits
 
-A weak feasible incumbent and a weak proof lower are different shortcomings.
-On the saved Seed0 C35 comparison, P's feasible fleet proves that B's incumbent
-is suboptimal by at least .03624704590416217, independently of the unresolved
-physical optimum. The two fleets differ simultaneously in assignment, visit
-order and integer service; their difference does not identify a single
-causal operator. Nor does a better saved route establish a benefit from
-feeding it into the complete algorithm.
+A suboptimal feasible incumbent and an unresolved proof lower are different
+shortcomings. C35's historical P fleet witnesses suboptimality of all three
+B incumbents, while the within-Seed P/B ordering changes. Joint ownership,
+relative order and integer service differences do not identify a causal
+operator. A weak necessary penalty or an infeasible target-inventory vector
+also cannot settle the whole fixed-skeleton value question.
 
-Finite Seed repeats can strengthen or weaken descriptive consistency on a
-fixed input. They cannot identify structural causality, estimate a general
-success probability from a few runs, or remove the need to establish both
-physical feasibility and original-problem proof coverage. The remaining
-scientific issue is which additional joint service information can improve
-the complete paid method, rather than merely a necessary relaxation or a
-saved local point. Detailed unexecuted fixed-skeleton diagnostic prerequisites
-are retained in the supplement's research navigation; no additional query
-or candidate is part of this study.
+Finite repeated endpoints cannot identify structural causality or an
+eventual proof-time ranking. Any future claim of improved joint service
+information requires its own physical-domain contract and complete paid
+evidence. Existing fixed-route quantity and route-feedback objects already
+address parts of that question; their positive, mixed and adverse evidence
+remains relevant. The archived diagnostic prerequisites are in the research
+navigation, rather than a new mechanism or an executed query in this study.
