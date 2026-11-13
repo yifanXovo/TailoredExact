@@ -1,0 +1,9 @@
+{
+  "kind": "independent offline reader classifier correction",
+  "Optimize": 0,
+  "failure": "Initial common-row classifier omitted the equivalent singleton-initial visit convention: old V+s_b=1 versus new V=0.",
+  "observed_scope": "R163-B20-B_child, ten singleton-initial stations",
+  "model_problem": false,
+  "correction": "Classify pure V=0/1 rows as the replaced joint block only after checking their actual state support and the original inventory-balance initial value.",
+  "solver_rerun": false
+}
