@@ -29,7 +29,9 @@ inline bool round98IsIsolatedENS(const SolveOptions& o) {
         !o.round88_constructive_only_descent&&!o.round89_native_ot_b1&&!o.round90_lp_g_split&&
         !o.round92_handling_activation&&!o.round96_route_order&&o.round97_native_closure=="off"&&
         o.round60_candidate_mode=="off"&&o.round61_candidate_mode=="off"&&
-        o.round62_threshold_mode=="off"&&o.external_gini_interval_mip_policy=="round55-vd-p"&&
+        o.round62_threshold_mode=="off"&&
+        (o.external_gini_interval_mip_policy=="round55-vd-p" ||
+         o.external_gini_interval_mip_policy=="round166-breakpoint-bit")&&
         o.external_gini_scheduling=="round31-nonblocking-native-bound";
 }
 }

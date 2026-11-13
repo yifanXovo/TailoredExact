@@ -971,7 +971,8 @@ bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
     try {
         if (!options.round68_verified_start || options.plain_baseline ||
             options.round65_budget || (out.lp_relaxation && !validation_only) ||
-            request.interval_mip_policy != "round55-vd-p")
+            (request.interval_mip_policy != "round55-vd-p" &&
+             request.interval_mip_policy != "round166-breakpoint-bit"))
             throw std::runtime_error("requires_isolated_vdp_mip");
         // An obsolete explicit Start must not silently survive an ineligible
         // replacement. Native reuse of a previous solution is separate.

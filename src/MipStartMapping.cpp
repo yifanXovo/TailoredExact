@@ -5,6 +5,7 @@
 #include "Round120NativeProof.hpp"
 #include "Round141Research.hpp"
 #include "Round143Research.hpp"
+#include "Round166Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -203,6 +204,21 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
     const double ratio_max = instance.V > 0
         ? *std::max_element(ratio.begin() + 1, ratio.end()) : 0.0;
     std::vector<int> indices;
+    std::vector<std::vector<int>> breakpoint_support(instance.V+1);
+    std::unordered_map<std::string,double> breakpoint_values;
+    for(const auto& name:domain.names) {
+        if(parseIndexedName(name,"r166_t_",2,indices)&&indices[0]>=1&&indices[0]<=instance.V)
+            breakpoint_support[indices[0]].push_back(indices[1]);
+    }
+    for(int i=1;i<=instance.V;++i)if(!breakpoint_support[i].empty()) {
+        auto& support=breakpoint_support[i];std::sort(support.begin(),support.end());
+        if(final_inventory[i]<support.front()||final_inventory[i]>support.back())
+            return finish("round166_start_outside_support");
+        for(const auto& item:round166Weights(support,final_inventory[i])) {
+            breakpoint_values[round166T(i,item.first)]=item.second;
+            breakpoint_values[round166Q(i,item.first)]=out.G*item.second;
+        }
+    }
     const bool rn_columns=std::find(domain.names.begin(),domain.names.end(),"rn_t")!=domain.names.end();
     double rn_t=0;std::vector<double> rn_y(instance.V+1),rn_v(instance.V+1);
     if(rn_columns) {
@@ -281,6 +297,9 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
                                                    "_" + std::to_string(indices[1]));
             value = served != route_values.end() && served->second == 1.0 &&
                 final_inventory[indices[1]] == indices[2] ? 1.0 : 0.0;
+        } else if (parseIndexedName(name,"r166_t_",2,indices) || parseIndexedName(name,"r166_q_",2,indices)) {
+            const auto found=breakpoint_values.find(name);
+            value=found==breakpoint_values.end()?0.0:found->second;
         } else if (parseIndexedName(name, "state_", 2, indices) &&
                    indices[0] >= 1 && indices[0] <= instance.V) {
             value = final_inventory[indices[0]] == indices[1] ? 1.0 : 0.0;
