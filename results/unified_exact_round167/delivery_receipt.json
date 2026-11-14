@@ -1,0 +1,128 @@
+{
+  "UTC": "2026-11-14T19:01:10.001358+00:00",
+  "status": "scientific delivery publicly recovered; subsequent metadata-only receipt commit",
+  "scientific_commit": "e2fce9c98324fefc5ce1b7bba06f7152f680c3bd",
+  "scientific_base": "d497052216d5ae55b6ae0139ea30910cee2e5865",
+  "repository": "yifanXovo/TailoredExact",
+  "PR_readback_at_science_publication": {
+    "number": 229,
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/229",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "head": "codex/round167-conditional-state",
+    "head_sha": "e2fce9c98324fefc5ce1b7bba06f7152f680c3bd",
+    "base": "codex/round166-structure-and-paper",
+    "base_sha": "d497052216d5ae55b6ae0139ea30910cee2e5865",
+    "mergeable": true
+  },
+  "source_publication": {
+    "path": "results/unified_exact_round167/source_publication.json",
+    "bytes": 18828,
+    "SHA256": "07be0c4fbe15934023788ce5f3cafc68aa9768ab7fe2e0dc39d43dac73591867"
+  },
+  "public_recovery": {
+    "path": "results/unified_exact_round167/public_recovery.json",
+    "bytes": 29715,
+    "SHA256": "6c6140fdb824d7c3d954ef60117aca1b64b4339170a6397287208de1223c6cdc"
+  },
+  "public_files": 96,
+  "public_bytes": 63593712,
+  "raw_members": 1378,
+  "anonymous_normal_TLS_all_PASS": true,
+  "actual_Optimize": 88,
+  "conservative_diagnostic_seconds": 2434.3935678385383,
+  "recorded_CPP_subprocess_seconds": 126.26165659772232,
+  "Native_Runtime": 31.346999168395996,
+  "all_three_actual_independent_reviews_PASS": true,
+  "science_window_start_unix": 1794678070,
+  "conservative_shared_outer_seconds_including_unsubtracted_IO": 4800.005358219147,
+  "science_limit_seconds": 36000,
+  "capacity_checked_on_conservative_including_IO_window": true,
+  "ordinary_IO": {
+    "push_attempts": [
+      {
+        "scientific_commit": "e2fce9c98324fefc5ce1b7bba06f7152f680c3bd",
+        "UTC": "2026-11-14T18:47:54.239267+00:00",
+        "ordinary_IO_only": true,
+        "push_seconds": 42.29070169990882,
+        "return_code": 1,
+        "push_log": "E:\\codes\\ExactEBRP-work\\temp\\round167\\push_science.log"
+      },
+      {
+        "UTC": "2026-11-14T18:51:02.553442+00:00",
+        "command": [
+          "git",
+          "-c",
+          "http.version=HTTP/1.1",
+          "-c",
+          "http.postBuffer=134217728",
+          "push",
+          "-u",
+          "origin",
+          "codex/round167-conditional-state"
+        ],
+        "seconds": 21.1334019000642,
+        "return_code": 128,
+        "push_log": "E:\\codes\\ExactEBRP-work\\temp\\round167\\push_science_retry.log",
+        "per_command_transport_settings_only": true
+      },
+      {
+        "UTC": "2026-11-14T18:55:07.548240+00:00",
+        "command": [
+          "git",
+          "-c",
+          "http.proxy=http://127.0.0.1:7900",
+          "-c",
+          "http.version=HTTP/1.1",
+          "-c",
+          "http.postBuffer=134217728",
+          "push",
+          "-u",
+          "origin",
+          "codex/round167-conditional-state"
+        ],
+        "seconds": 28.303616600111127,
+        "return_code": 0,
+        "push_log": "E:\\codes\\ExactEBRP-work\\temp\\round167\\push_science_existing_proxy.log",
+        "existing_local_proxy_process_used": true,
+        "global_proxy_or_app_settings_changed": false,
+        "normal_TLS": true
+      }
+    ],
+    "total_push_seconds": 91.72772020008415,
+    "public_recovery_seconds": 52.23162919981405,
+    "not_Optimize_or_new_performance": true,
+    "global_proxy_app_settings_changed": false,
+    "normal_recovery_used_existing_local_proxy_per_command": true
+  },
+  "new_complete_method_runs": 0,
+  "new_CSV_master_rows": 0,
+  "authoritative_112_master_obtained": false,
+  "paper": {
+    "body_words": 9003,
+    "main_pages": 53,
+    "supplement_pages": 55,
+    "QA": {
+      "path": "results/unified_exact_round167/document_qa.json",
+      "bytes": 58890,
+      "SHA256": "bc228b168020514dd7ea830dd58ddaae012bc09ae617f59b62abaf0a2a21abdc"
+    }
+  },
+  "B_retained": true,
+  "D167_default": false,
+  "D167_complete_integration": false,
+  "protected_tree_check": {
+    "path": "results/unified_exact_round167/protected_tree_check.json",
+    "bytes": 12724,
+    "SHA256": "c7647bd4d110b7197bfffb5a3b60fcf49a106684ff372b20d8f5ff1199ad4429"
+  },
+  "cleanup": {
+    "path": "results/unified_exact_round167/cleanup_record.json",
+    "bytes": 1228,
+    "SHA256": "54019943af6fcb58177dd3a4dd42c893211c8d7a49b77c081b0651d960071b3b"
+  },
+  "merge_or_force_push": false,
+  "ROUND168_started": false,
+  "self_commit_SHA_not_invented": true
+}

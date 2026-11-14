@@ -1,0 +1,71 @@
+{
+  "UTC": "2026-11-14T18:20:59.139228+00:00",
+  "reviewer": "/root/data_review",
+  "status": "PASS",
+  "scope": "offline C++ implementation and finite data; delivery/paper separate",
+  "Optimize": 0,
+  "actual_Optimize_independently_counted": 88,
+  "canonical_LP": 72,
+  "local_LP": 12,
+  "tiny_MIP": 4,
+  "LP_KKT": 84,
+  "complete_Starts": 45,
+  "graph_models": 619,
+  "paths": 10827,
+  "max_residuals": {
+    "bound_violation": 1.5543122344752192e-15,
+    "row_violation": 6.730260793119669e-11,
+    "integer_violation": 0.0,
+    "primal_dual_gap": 1.915134717478395e-15,
+    "stationarity": 3.039235529911366e-15,
+    "dual_sign_violation": 2.0122792321330962e-16
+  },
+  "report": "data_final.md",
+  "checks": "data_checks.json",
+  "findings": [
+    {
+      "id": "D1",
+      "location": "scripts/round167_diagnostics.py:139",
+      "issue": "local prepare ID overwrote frozen CSV position ID",
+      "status": "fixed and independently read back",
+      "solver_rerun": false
+    },
+    {
+      "id": "D2",
+      "location": "scripts/round167_diagnostics.py:129",
+      "issue": "subprocess sum was labelled complete diagnostic outer cost",
+      "status": "owner accepted; manuscript wording corrected; enclosing-window cost policy accepted; final receipt remains a delivery readback",
+      "solver_rerun": false
+    },
+    {
+      "id": "D3",
+      "location": "src/round167_research.cpp:61",
+      "issue": "raw common filter includes degenerate C166 V links",
+      "status": "all ten singleton equations independently checked; normalized common block 8/8; raw hashes retained",
+      "solver_rerun": false
+    },
+    {
+      "id": "D4",
+      "location": "src/round167_research.cpp:167",
+      "issue": "the offline wrapper first enumerates an old B carrier before replacing the representation",
+      "status": "explicit integration limit: graph builder and final block are log, complete prepare/time/peak temporary storage are not; parent accepted disclosure",
+      "solver_rerun": false
+    }
+  ],
+  "unresolved_model_or_numerical_blockers": 0,
+  "independent_offline_successful_check_seconds": 54.40256699966267,
+  "independent_offline_failed_reader_enclosing_seconds": 294.348392,
+  "independent_offline_unrounded_bounded_sum_seconds": 348.75095899966266,
+  "independent_offline_seconds_total_conservative": 360,
+  "independent_offline_cost_basis": "294.348392s bounded failed reviewer-reader window + 54.402567s successful full verification + small focal readbacks; rounded upward to 360s; zero Optimize",
+  "unmodified_raw_producers": true,
+  "CSV_new_master_rows": 0,
+  "CSV_112_master_available": false,
+  "source_hashes": {
+    "src\\round167_research.cpp": "1a47d2dc73b1f6da94d223dd7a4363a76c9c2d244d613277198a01b5889954c9",
+    "include\\Round167ConditionalState.hpp": "80ee27cf8a6a6cba803d26e2e2d79c1409003b6bf2f12ff391c86d99276adfbc"
+  },
+  "direct_graph_builder_enumerates_stocks": false,
+  "end_to_end_logarithmic_writer_validated": false,
+  "temporary_B_carrier_cost_is_linear_in_domain_size": true
+}

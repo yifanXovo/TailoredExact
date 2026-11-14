@@ -1,0 +1,69 @@
+{
+  "UTC": "2026-11-14T18:18:38.245174+00:00",
+  "scope": "offline representation diagnostics only",
+  "base_source": "d497052216d5ae55b6ae0139ea30910cee2e5865",
+  "sources": {
+    "src/round167_research.cpp": "1a47d2dc73b1f6da94d223dd7a4363a76c9c2d244d613277198a01b5889954c9",
+    "include/Round167ConditionalState.hpp": "80ee27cf8a6a6cba803d26e2e2d79c1409003b6bf2f12ff391c86d99276adfbc"
+  },
+  "frozen_core_sources": {
+    "src/CplexBaseline.cpp": "af6a763e8b21a4668058d881e4ebf81e89797ed2c651e272e11f6eb040a2be6a",
+    "src/GurobiBaseline.cpp": "1e7a6e146a65af95b75c32539a010d81a669b3c355905ff1d51ed06f5500a3c9",
+    "src/MipStartMapping.cpp": "dba8935f8cf86a60db327c354462a40e98c3c2c123b78bfbfdf51d66eb128728",
+    "src/IntervalRowFactory.cpp": "32913c222767fc65ad37bfa8a9df5c005168f3f20b1a82e590a2653e1caa5900",
+    "include/Round166Research.hpp": "9cbc99db3386f93004de8919932ae18091a5bd6535550b1df9566b5bf8654412"
+  },
+  "executable": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round167\\Round167Research.exe",
+    "bytes": 8804790,
+    "SHA256": "26fe2d74d92e0d998966f73085b3a321007e39ea674ff4e2b8655f8414515f12"
+  },
+  "DLL": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "bytes": 38766856,
+    "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+  },
+  "compiler": {
+    "path": "D:\\msys64\\ucrt64\\bin\\g++.exe",
+    "bytes": 2917234,
+    "SHA256": "8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1"
+  },
+  "compiler_version": "g++.exe (Rev2, Built by MSYS2 project) 14.2.0\r\nCopyright (C) 2024 Free Software Foundation, Inc.\r\nThis is free software; see the source for copying conditions.  There is NO\r\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\r\n\r\n",
+  "configure_command": [
+    "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+    "-S",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round167",
+    "-B",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round167",
+    "-G",
+    "Ninja",
+    "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+    "-DCMAKE_MAKE_PROGRAM=D:/PROGRA~1/MICROS~1/2022/PROFES~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe",
+    "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+    "-DEXACT_EBRP_BUILD_ROUND167_RESEARCH=ON",
+    "-DGUROBI_ROOT=D:/gurobi1302/win64",
+    "-DCMAKE_BUILD_TYPE=",
+    "-DCMAKE_CXX_FLAGS="
+  ],
+  "build_command": [
+    "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+    "--build",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round167",
+    "--target",
+    "Round167Research",
+    "-j",
+    "4"
+  ],
+  "CMake_cache": {
+    "path": "results/unified_exact_round167/build/CMakeCache.txt",
+    "bytes": 15979,
+    "SHA256": "51f85149c91eaea9a8e16614cd7f40e4f9cdfe4feb1e14acad0d7eb38fe8beae"
+  },
+  "full_rebuild_core": true,
+  "production_default_changed": false,
+  "prepare_v1": "build/preparation_v1.json",
+  "v1_repair": "guard receiver construction when b=u to avoid INT_MAX b+1; add parameter/dual evidence; no prepared mathematical matrix changed",
+  "final_PE_all_88_solves": true,
+  "prepared_models_individually_fingerprinted": true,
+  "commercial_DLL_published": false
+}

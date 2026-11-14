@@ -1,0 +1,86 @@
+{
+  "UTC": "2026-11-14T18:34:16.653568+00:00",
+  "base": "d497052216d5ae55b6ae0139ea30910cee2e5865",
+  "goal": {
+    "path": "results/unified_exact_round167/goal.md",
+    "bytes": 38912,
+    "SHA256": "463a358852452ca20d8f3a251491ea303306fc7614bc03c88546286a9b198630"
+  },
+  "R166_measured_CPP": "0298dd45fbc3645af927c4a4dd1d43ecbdb567a9",
+  "R166_measured_PE_SHA": "27e71873536bcd8e6001aee0c2514a5cc8122763728c62e6d467cd528b48daba",
+  "new_executable_scope": "offline diagnostics only; never a historical performance executable",
+  "schema": "round167-current-components-and-diagnostic-v1",
+  "authoritative_directory": "results/unified_exact_round137",
+  "document_base_commit": "d497052216d5ae55b6ae0139ea30910cee2e5865",
+  "components": [
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 64574,
+      "SHA256": "2034c1232013f0c90d538d9f7294409739fda2408cc62456ea13372c041aa5e8"
+    },
+    {
+      "path": "results/unified_exact_round137/model_and_algorithm_appendices.md",
+      "bytes": 98310,
+      "SHA256": "54a4dbcdf77143e87089b06e6ee5326c8424ee4db68ecd3e7ff6c39b3bbdd91c"
+    },
+    {
+      "path": "results/unified_exact_round137/mathematical_analysis.md",
+      "bytes": 30211,
+      "SHA256": "cec89b9a4185ab945d6194fef2e86fe429b30b2bda1e8e403a77216b1e680c83"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 141029,
+      "SHA256": "5243ed112824aadab3246e298ca6700e45ef6ea5f46181ace4c7b78c40f06891"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 12135,
+      "SHA256": "01cde0d6c25b3007930cafcba7b3d15335501c651b8e991c55b73c40f4b0f796"
+    }
+  ],
+  "figures": [
+    {
+      "path": "results/unified_exact_round137/figures/three_seed_endpoints.png",
+      "bytes": 260720,
+      "SHA256": "d13d9b41d03fd291ba9e2b307115ab7a126456ac15513faafab3f661291f4fa6"
+    },
+    {
+      "path": "results/unified_exact_round137/figures/resource_endpoints.png",
+      "bytes": 216985,
+      "SHA256": "10e4cb040861240184a6d1804bc56852031656be0acb708af24151b7bc49daca"
+    },
+    {
+      "path": "results/unified_exact_round137/figures/parameter_quality_bands.png",
+      "bytes": 237455,
+      "SHA256": "767b7512dc20d7a2efb8d8f4b59ed04b81fd229a0f9efccc19308371f58a24de"
+    },
+    {
+      "path": "results/unified_exact_round135/figures/count_bound_scope.png",
+      "bytes": 143293,
+      "SHA256": "0cd0a33e58d9a9e0b0d1d9270087985aa7fa165b6169451a759b709f17441d1e"
+    }
+  ],
+  "assembled_manuscript": {
+    "path": "results/unified_exact_round137/manuscript.md",
+    "bytes": 162897,
+    "SHA256": "0e0134c60f9e5866e367c624ed8ae2e0a92c2a3e78a8164c4ed9274a7d0ad4d1"
+  },
+  "generator": {
+    "path": "scripts/round167_documents.py",
+    "bytes": 6081,
+    "SHA256": "779b9f79cfa6eb93f321b0e660fba25c3a8190599b6763ce0e738740689d1128"
+  },
+  "inherited_exporter": {
+    "path": "scripts/round166_documents.py",
+    "bytes": 8207,
+    "SHA256": "401231f84805aefafc07dbc022cda5d99370142d8ae3377bc101e9e903ca7ffc"
+  },
+  "inherited_typography": {
+    "path": "scripts/round165_documents.py",
+    "bytes": 22962,
+    "SHA256": "9b16ef8f8e1e938f52c29020945e90b4c5ff19457f76690f3f88c737c24519f7"
+  },
+  "no_legacy_R137_generation": true,
+  "no_parameter_resource_recomputation": true
+}

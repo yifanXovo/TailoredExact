@@ -1,4 +1,13 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round167 measured offline source, manuscripts and new-only evidence.
+/scripts/round167* -text whitespace=cr-at-eol
+/src/round167_research.cpp -text
+/include/Round167ConditionalState.hpp -text
+/results/unified_exact_round167/** -text whitespace=cr-at-eol
+/results/unified_exact_round167/goal.md -whitespace
+/results/unified_exact_round167/artifacts/** -text -diff -whitespace
+/results/unified_exact_round167/**/*.log -whitespace
+/results/unified_exact_round167/build/CMakeCache.txt -whitespace
 # Round166 source, diagnostics and manuscript evidence keep measured bytes.
 /scripts/round166* -text whitespace=cr-at-eol
 /scripts/paper_c166_round166.py -text whitespace=cr-at-eol

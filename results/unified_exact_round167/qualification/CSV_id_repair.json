@@ -1,0 +1,15 @@
+{
+  "UTC": "2026-11-14T18:25:45.700991+00:00",
+  "Optimize": 0,
+  "solver_rerun": false,
+  "issue": "Local prepare id overwrote frozen position id in CSV only",
+  "resolution": "Explicitly retain p[id] after merging local prepare data",
+  "positions": {
+    "path": "results/unified_exact_round167/positions.csv",
+    "bytes": 20825,
+    "SHA256": "3fbac19c1dc711ffa3ddbec61ebdc628fc962a1d5280d2a16ec5dbd1b32051e4"
+  },
+  "positions_mtime_UTC": "2026-11-14T18:13:52.468034+00:00",
+  "unique_position_ids": 88,
+  "independent_readback": "review/data_final.json"
+}
