@@ -445,3 +445,9 @@ Uniform B remains default; C166 is a distinct default-off research mode.
 The primal gains are preserved rather than removed to support a negative
 adoption decision. The complete endpoints and costs are in
 [the six-pair table](../unified_exact_round166/reports/pairs.json).
+
+## Conditional absolute-code information
+
+Appendix A.11 augments the shared physical hull with absolute digits and their Gini products. The f/q formulation on one MSB-first interval graph is exactly the enumerated enhanced hull E(D), and fixing any subset of its digits yields E(D(F)). Its proof uses two conserved endpoint flows, with a direct fixed-g case. R_abs and D167 therefore preserve service/code mixture information that C166's independent bit layer can lose; their unconditioned physical hulls still agree. Legal donor/receiver extrema and the initial singleton generate H(D(F)) with at most five supports, even when the condition creates holes, but they do not generally generate E(D(F)).
+
+This is a local conditional statement with the full-model interface premise, not ideality of the routing problem or all possible Native child domains. The fixed diagnostic matrix has three strict original-objective conditioned LP increments, many zero increments and larger D167 matrices; no complete-method performance is inferred. The [full conditional proof](../unified_exact_round167/conditional_state_theory.md) states costs, coefficient encoding and sharp scope limits, and the [complete positions](../unified_exact_round167/positions.csv) retains every local, canonical and tiny observation.

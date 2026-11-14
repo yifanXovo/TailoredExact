@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-11-14T18:40:22.856013+00:00",
+  "reviewer": "/root/manuscript_review",
+  "PASS": true,
+  "Optimize": 0,
+  "scope": "targeted readback only after administrative/navigation edits; no repeated numerical/solver checks",
+  "elapsed_seconds": 0.02228779997676611,
+  "PDF_SHA256": {
+    "results/unified_exact_round137/manuscript.pdf": "f9e5cca5725b91433692af1d01328c509bae8b739fc2644f06fc2abe32e66de6",
+    "results/unified_exact_round137/supplement.pdf": "89ecf513f25577b8c57e68cbb82546d9bc9a021da0bdbc26e05aff858345cdf2"
+  },
+  "PDF_page_counts": {
+    "manuscript": 53,
+    "supplement": 55
+  },
+  "source_SHA256": {
+    "paper_body.md": "2034c1232013f0c90d538d9f7294409739fda2408cc62456ea13372c041aa5e8",
+    "model_and_algorithm_appendices.md": "54a4dbcdf77143e87089b06e6ee5326c8424ee4db68ecd3e7ff6c39b3bbdd91c",
+    "mathematical_analysis.md": "cec89b9a4185ab945d6194fef2e86fe429b30b2bda1e8e403a77216b1e680c83",
+    "supplement.md": "5243ed112824aadab3246e298ca6700e45ef6ea5f46181ace4c7b78c40f06891",
+    "references.bib": "01cde0d6c25b3007930cafcba7b3d15335501c651b8e991c55b73c40f4b0f796"
+  },
+  "all_current_build_bindings_match": true,
+  "numerical_body_unchanged_from_full_review": true,
+  "actual_final_pages_viewed": {
+    "manuscript": [
+      24,
+      43
+    ],
+    "supplement": [
+      54,
+      55
+    ]
+  },
+  "intermediate_pages_viewed": {
+    "main_bedef337fcc9": [
+      24,
+      43
+    ],
+    "supp_944f54ff46dd_contact_sheets": [
+      5
+    ]
+  },
+  "current_manifest_PDF_annotation": [
+    "https://github.com/yifanXovo/TailoredExact/blob/codex/round167-conditional-state/results/unified_exact_round167/source_manifest.json"
+  ],
+  "metadata_passages_moved_to_S167_4": true,
+  "temporary_onehot_preparation_cost_disclosed": true,
+  "two_reader_repairs_disclosed": true,
+  "MR3": "resolved: S167.3 intro and decision now accompany landscape table; later identity navigation fills final narrative page",
+  "MR4": "fixed: current document manifest now links Round167; source and actual PDF annotation checked",
+  "MR5": "fixed: old p24/p43 hash/compiler identity passages moved to supplementary version navigation",
+  "scientific_or_legibility_blockers": 0,
+  "previous_full_visual_review": "manuscript_pdf_readback_first.json"
+}

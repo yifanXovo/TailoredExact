@@ -1,5 +1,45 @@
 # Current manuscript and research mainline
 
+Round167 maintains the single current English manuscript in
+`results/unified_exact_round137/`: [assembled manuscript](../results/unified_exact_round137/manuscript.md),
+[main + complete appendices PDF](../results/unified_exact_round137/manuscript.pdf)
+and [supplement PDF](../results/unified_exact_round137/supplement.pdf).
+The body is reorganized into six claim-led sections, 13,505 to 9,003
+whitespace words. Historical positive/adverse B/P/PS, finite Seeds, all
+C166 endpoints, E+ gains/costs and the completed parameter/resource bounds
+remain; no old observation is counted as a new run.
+
+Uniform GI-TBC/B remains the main method. C166 and the new D167 are default
+off. D167 proves and implements the common absolute-code stock/service/
+product hull, preserving every partial bit fix and matching enumerated
+R_abs. In 88 frozen C++ diagnostics, three of sixteen canonical conditioned
+triples improve C166's LP objective and thirteen do not; D167 matrices are
+larger on all frames. The direct DAG is logarithmic, while the isolated
+preparation pipeline still uses a temporary one-hot B carrier. No full
+controller integration, complete acceleration or Native causal claim is made.
+
+[Scientific report](../results/unified_exact_round167/final_report.md),
+[theory](../results/unified_exact_round167/conditional_state_theory.md),
+[decision](../results/unified_exact_round167/decision.json),
+[full positions](../results/unified_exact_round167/positions.csv),
+[reproduction](../results/unified_exact_round167/reproducibility.md) and
+[current document identity](../results/unified_exact_round167/source_manifest.json)
+are the current entry. Build documents with `scripts/round167_documents.py`
+(`assemble`, `pdf`, `qa`), which explicitly inherits R166/R165 typography.
+New complete GI-TBC/P master rows: zero. The specified 112-row master was
+not found in the bounded search; reconciliation preserves the exact expected
+identity without replacing it with an older local copy.
+
+The worktree is `E:/codes/ExactEBRP-work/worktrees/round167`, branch
+`codex/round167-conditional-state`, stacked on verified R166 delivery
+`d497052216d5ae55b6ae0139ea30910cee2e5865` while main lacks dependencies.
+All new work stays under ExactEBRP-work; original and dirty paper-current
+remain protected. The three actual independent reviews, normal Open Draft,
+new-only public recovery and zero-delete closeout are recorded in this
+round's delivery receipt. No merge, force-push or new round is started.
+
+## Round166 baseline (retained historical record)
+
 Round166 maintains one current English manuscript in
 `results/unified_exact_round137/`, with a [main + complete Appendix A/B PDF](../results/unified_exact_round137/manuscript.pdf)
 and [supplement PDF](../results/unified_exact_round137/supplement.pdf).

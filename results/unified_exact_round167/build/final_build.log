@@ -1,0 +1,49 @@
+[1/2] Building CXX object CMakeFiles/Round167Research.dir/src/round167_research.cpp.obj
+In file included from E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:3:
+E:/codes/ExactEBRP-work/worktrees/round167/include/Round167ConditionalState.hpp: In member function 'std::vector<int> ebrp::Round167DAG::path(int) const':
+E:/codes/ExactEBRP-work/worktrees/round167/include/Round167ConditionalState.hpp:70:21: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   70 |                     if(chosen>=0)throw std::logic_error("nondeterministic path");chosen=j;
+      |                     ^~
+E:/codes/ExactEBRP-work/worktrees/round167/include/Round167ConditionalState.hpp:70:82: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   70 |                     if(chosen>=0)throw std::logic_error("nondeterministic path");chosen=j;
+      |                                                                                  ^~~~~~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp: In function 'std::string {anonymous}::common(Model&, const std::filesystem::__cxx11::path&)':
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:77:9: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+   77 |         for(auto t:terms)f<<' '<<t.first<<':'<<t.second;lines.push_back(f.str());
+      |         ^~~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:77:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+   77 |         for(auto t:terms)f<<' '<<t.first<<':'<<t.second;lines.push_back(f.str());
+      |                                                         ^~~~~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp: In function 'void {anonymous}::auditStart(Model&, const std::vector<double>&, double, const std::filesystem::__cxx11::path&)':
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:156:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  156 |         if(dom.variable_types[j]!='C')residual=std::max(residual,std::abs(x[j]-std::round(x[j])));objective+=x[j]*m.attr("Obj",j);}
+      |         ^~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:156:99: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  156 |         if(dom.variable_types[j]!='C')residual=std::max(residual,std::abs(x[j]-std::round(x[j])));objective+=x[j]*m.attr("Obj",j);}
+      |                                                                                                   ^~~~~~~~~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:160:9: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+  160 |         for(int t=0;t<nz;++t)lhs+=a[t]*x[ix[t]];residual=std::max(residual,sense=='='?std::abs(lhs-rhs):sense=='<'?lhs-rhs:rhs-lhs);
+      |         ^~~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:160:49: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+  160 |         for(int t=0;t<nz;++t)lhs+=a[t]*x[ix[t]];residual=std::max(residual,sense=='='?std::abs(lhs-rhs):sense=='<'?lhs-rhs:rhs-lhs);
+      |                                                 ^~~~~~~~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp: In function 'void {anonymous}::localPrepare(int, char**)':
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:275:74: warning: operation on 'n' may be undefined [-Wsequence-point]
+  275 |         int n=0;for(const auto& row:{mass,yl,ml,vl,gl,zl})m.row(row,'=',n++==0?1:0,"joint_"+std::to_string(n));
+      |                                                                         ~^~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:275:74: warning: operation on 'n' may be undefined [-Wsequence-point]
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp: In function 'void {anonymous}::tinyOracle(const std::filesystem::__cxx11::path&)':
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:322:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  322 |         if(!feasible)continue;double G=y1+y2?std::abs(y1-y2)/(2.*(y1+y2)):0,P=std::abs(y1/2.-1)+std::abs(y2/2.-1),F=G+.15*P;best=std::min(best,F);f<<y1<<','<<y2<<','<<G<<','<<P<<','<<F<<','<<R<<','<<time<<'\n';}
+      |         ^~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:322:31: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  322 |         if(!feasible)continue;double G=y1+y2?std::abs(y1-y2)/(2.*(y1+y2)):0,P=std::abs(y1/2.-1)+std::abs(y2/2.-1),F=G+.15*P;best=std::min(best,F);f<<y1<<','<<y2<<','<<G<<','<<P<<','<<F<<','<<R<<','<<time<<'\n';}
+      |                               ^~~~~~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp: In function 'int main(int, char**)':
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:328:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+  328 |     else if(mode=="algebra")algebra(argv[2]);else if(mode=="tiny-oracle")tinyOracle(argv[2]);else throw std::invalid_argument("unsupported command/extension");return 0;
+      |     ^~~~
+E:/codes/ExactEBRP-work/worktrees/round167/src/round167_research.cpp:328:160: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+  328 |     else if(mode=="algebra")algebra(argv[2]);else if(mode=="tiny-oracle")tinyOracle(argv[2]);else throw std::invalid_argument("unsupported command/extension");return 0;
+      |                                                                                                                                                                ^~~~~~
+[2/2] Linking CXX executable Round167Research.exe

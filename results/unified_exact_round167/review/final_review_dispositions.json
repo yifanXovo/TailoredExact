@@ -1,0 +1,290 @@
+{
+  "UTC": "2026-11-14T18:41:44.637696+00:00",
+  "actual_reviewers": [
+    "/root/math_review",
+    "/root/data_review",
+    "/root/manuscript_review"
+  ],
+  "proof_and_model_blockers": 0,
+  "data_numerical_blockers": 0,
+  "scientific_or_legibility_blockers": 0,
+  "dispositions": [
+    {
+      "id": "M1",
+      "issue": "coefficient bit length",
+      "action": "integer costs O(d), rational endpoints length L; full description O(r*d*(d+L))",
+      "readback": "review/math_final.json"
+    },
+    {
+      "id": "D1",
+      "issue": "local CSV position IDs",
+      "action": "retain frozen position id after prepare merge; all 88 IDs unique",
+      "readback": "review/data_final.json"
+    },
+    {
+      "id": "D2",
+      "issue": "subprocess fee versus outer cost",
+      "action": "126.262s accurately labeled; 2434.394s conservative management/review-inclusive diagnostic receipt includes later CSV readback",
+      "readback": "cost_report.json"
+    },
+    {
+      "id": "D3",
+      "issue": "degenerate C166 common hash",
+      "action": "all ten B20 singleton V=0 links independently verified; retain raw hashes and normalized 8/8 interface identity",
+      "readback": "review/data_checks.json"
+    },
+    {
+      "id": "D4",
+      "issue": "temporary onehot carrier",
+      "action": "disclose nonlogarithmic complete prepare/storage; graph itself compiled directly from bounds",
+      "readback": "review/data_final.json"
+    },
+    {
+      "id": "MR1",
+      "issue": "undefined D(F) first use",
+      "action": "explicit definition before proposition in body and A.11",
+      "readback": "review/manuscript_final.json"
+    },
+    {
+      "id": "MR2",
+      "issue": "methods versus runs",
+      "action": "Table1 labels method runs/observations",
+      "readback": "review/manuscript_final.json"
+    },
+    {
+      "id": "MR3",
+      "issue": "new supplementary sparse heading and tail",
+      "action": "group introduction/decision with landscape table; move identities into S167.4",
+      "readback": "review/manuscript_final.json"
+    },
+    {
+      "id": "MR4",
+      "issue": "current-manifest navigation",
+      "action": "S167.4 link corrected to current R167 manifest; remaining administrative identity paragraphs moved",
+      "readback": "review/manuscript_final.json"
+    }
+  ],
+  "no_Optimize_for_review_or_repairs": true,
+  "final_current_source": [
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 64574,
+      "SHA256": "2034c1232013f0c90d538d9f7294409739fda2408cc62456ea13372c041aa5e8"
+    },
+    {
+      "path": "results/unified_exact_round137/model_and_algorithm_appendices.md",
+      "bytes": 98310,
+      "SHA256": "54a4dbcdf77143e87089b06e6ee5326c8424ee4db68ecd3e7ff6c39b3bbdd91c"
+    },
+    {
+      "path": "results/unified_exact_round137/mathematical_analysis.md",
+      "bytes": 30211,
+      "SHA256": "cec89b9a4185ab945d6194fef2e86fe429b30b2bda1e8e403a77216b1e680c83"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 141029,
+      "SHA256": "5243ed112824aadab3246e298ca6700e45ef6ea5f46181ace4c7b78c40f06891"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 12135,
+      "SHA256": "01cde0d6c25b3007930cafcba7b3d15335501c651b8e991c55b73c40f4b0f796"
+    }
+  ],
+  "PDFs": [
+    {
+      "path": "results/unified_exact_round137/manuscript.pdf",
+      "bytes": 1094545,
+      "SHA256": "f9e5cca5725b91433692af1d01328c509bae8b739fc2644f06fc2abe32e66de6",
+      "source": {
+        "path": "results/unified_exact_round137/manuscript.md",
+        "bytes": 162897,
+        "SHA256": "0e0134c60f9e5866e367c624ed8ae2e0a92c2a3e78a8164c4ed9274a7d0ad4d1"
+      },
+      "intermediate_TeX": {
+        "path": "results/unified_exact_round137/manuscript_export.tex",
+        "bytes": 194865,
+        "SHA256": "7eb1b91c4c60d97ebbca46cfa7997cb3563f823fbb790287df6b339868e84413"
+      },
+      "commands": [
+        [
+          "pandoc",
+          "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\manuscript\\reading.md",
+          "-f",
+          "markdown+tex_math_single_backslash+tex_math_dollars+raw_tex+raw_attribute+fenced_divs",
+          "--standalone",
+          "--listings",
+          "--citeproc",
+          "--bibliography",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round167\\results\\unified_exact_round137\\references.bib",
+          "--toc",
+          "--toc-depth=2",
+          "--metadata",
+          "title=GI-TBC: a Gini-interval tailored branch-and-cut algorithm for equitable bicycle redistribution",
+          "--metadata",
+          "date=15 November 2026",
+          "--metadata",
+          "lang=en-US",
+          "--variable",
+          "fontsize=11pt",
+          "--variable",
+          "geometry=margin=22mm",
+          "--variable",
+          "mainfont=Times New Roman",
+          "--variable",
+          "sansfont=Arial",
+          "--variable",
+          "monofont=Consolas",
+          "--include-in-header",
+          "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\manuscript\\header.tex",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\manuscript\\reading.tex"
+        ],
+        [
+          "xelatex",
+          "-disable-installer",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-file-line-error",
+          "-output-directory=E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\manuscript",
+          "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\manuscript\\reading.tex"
+        ]
+      ],
+      "passes": [
+        {
+          "number": 1,
+          "seconds": 2.6998568000271916,
+          "return_code": 0
+        },
+        {
+          "number": 2,
+          "seconds": 2.8148056999780238,
+          "return_code": 0
+        },
+        {
+          "number": 3,
+          "seconds": 2.7687005000188947,
+          "return_code": 0
+        }
+      ],
+      "warnings": [
+        "Package hyperref Warning: Option `colorlinks' has already been used,"
+      ],
+      "log_root": "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\manuscript"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.pdf",
+      "bytes": 433238,
+      "SHA256": "89ecf513f25577b8c57e68cbb82546d9bc9a021da0bdbc26e05aff858345cdf2",
+      "source": {
+        "path": "results/unified_exact_round137/supplement.md",
+        "bytes": 141029,
+        "SHA256": "5243ed112824aadab3246e298ca6700e45ef6ea5f46181ace4c7b78c40f06891"
+      },
+      "intermediate_TeX": {
+        "path": "results/unified_exact_round137/supplement_export.tex",
+        "bytes": 187733,
+        "SHA256": "5fda12de69d8f106f940dc569bba75bf04ed03d2da2ecdbfebc86486a165d018"
+      },
+      "commands": [
+        [
+          "pandoc",
+          "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\supplement\\reading.md",
+          "-f",
+          "markdown+tex_math_single_backslash+tex_math_dollars+raw_tex+raw_attribute+fenced_divs",
+          "--standalone",
+          "--listings",
+          "--citeproc",
+          "--bibliography",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round167\\results\\unified_exact_round137\\references.bib",
+          "--toc",
+          "--toc-depth=2",
+          "--metadata",
+          "title=Supplement: complete observations, mathematical comparisons and reproducibility",
+          "--metadata",
+          "date=15 November 2026",
+          "--metadata",
+          "lang=en-US",
+          "--variable",
+          "fontsize=11pt",
+          "--variable",
+          "geometry=margin=22mm",
+          "--variable",
+          "mainfont=Times New Roman",
+          "--variable",
+          "sansfont=Arial",
+          "--variable",
+          "monofont=Consolas",
+          "--include-in-header",
+          "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\supplement\\header.tex",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\supplement\\reading.tex"
+        ],
+        [
+          "xelatex",
+          "-disable-installer",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-file-line-error",
+          "-output-directory=E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\supplement",
+          "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\supplement\\reading.tex"
+        ]
+      ],
+      "passes": [
+        {
+          "number": 1,
+          "seconds": 2.1595816002227366,
+          "return_code": 0
+        },
+        {
+          "number": 2,
+          "seconds": 2.317219200078398,
+          "return_code": 0
+        },
+        {
+          "number": 3,
+          "seconds": 2.223278900142759,
+          "return_code": 0
+        }
+      ],
+      "warnings": [
+        "Package hyperref Warning: Option `colorlinks' has already been used,",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 287--303",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 303--305",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 305--338",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 355--371",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 371--373",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 373--386",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 506--524",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 524--526",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 526--755",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 795--813",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 813--815",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 815--862",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 922--938",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 938--940",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 940--974",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 1165--1183",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 1183--1185",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 1185--1246",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 1260--1276",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 1276--1278",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 1278--1299",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1347--1365",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1365--1367",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1367--1372",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1771--1789",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1789--1791",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1791--1796",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2612--2628",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2628--2630",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2630--2655",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2915--2931",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2931--2933",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2933--2955"
+      ],
+      "log_root": "E:\\codes\\ExactEBRP-work\\temp\\round167\\pdf\\attempt03\\supplement"
+    }
+  ]
+}

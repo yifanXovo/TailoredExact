@@ -1,0 +1,218 @@
+{
+  "UTC": "2026-11-14T18:15:00.311907+00:00",
+  "PASS": true,
+  "reviewer": "/root/data_review",
+  "Optimize": 0,
+  "actual_Optimize": 88,
+  "kind_counts": {
+    "local": 12,
+    "canonical": 72,
+    "tiny": 4
+  },
+  "source_and_PE_checked": true,
+  "frozen_before_Optimize": true,
+  "parameter_readbacks": 88,
+  "LP_KKT_checked": 84,
+  "integer_physical_optima": [
+    {
+      "id": "nonzero_R_abs",
+      "Y": [
+        1,
+        1
+      ],
+      "route": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "return_load": 1.0,
+      "prefix_loads": [
+        2.0,
+        1.0
+      ],
+      "handling_seconds": 240.0,
+      "G": 0.0,
+      "P": 1.0,
+      "F": 0.15
+    },
+    {
+      "id": "nonzero_D167",
+      "Y": [
+        1,
+        1
+      ],
+      "route": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "return_load": 1.0,
+      "prefix_loads": [
+        2.0,
+        1.0
+      ],
+      "handling_seconds": 240.0,
+      "G": 0.0,
+      "P": 1.0,
+      "F": 0.15
+    },
+    {
+      "id": "S0_R_abs",
+      "Y": [
+        0,
+        0
+      ],
+      "route": [
+        0,
+        1,
+        0
+      ],
+      "return_load": 3.0,
+      "prefix_loads": [
+        3.0
+      ],
+      "handling_seconds": 360.0,
+      "G": 0,
+      "P": 2.0,
+      "F": 0.3
+    },
+    {
+      "id": "S0_D167",
+      "Y": [
+        0,
+        0
+      ],
+      "route": [
+        0,
+        1,
+        0
+      ],
+      "return_load": 3.0,
+      "prefix_loads": [
+        3.0
+      ],
+      "handling_seconds": 360.0,
+      "G": 0,
+      "P": 2.0,
+      "F": 0.3
+    }
+  ],
+  "Starts_checked": 45,
+  "common_blocks": 8,
+  "independently_recovered_station_graphs": 619,
+  "independently_recovered_paths": 10827,
+  "maximum_residuals": {
+    "bound_violation": 1.5543122344752192e-15,
+    "row_violation": 6.730260793119669e-11,
+    "integer_violation": 0.0,
+    "primal_dual_gap": 1.915134717478395e-15,
+    "stationarity": 3.039235529911366e-15,
+    "dual_sign_violation": 2.0122792321330962e-16
+  },
+  "records_subprocess_outer_seconds": 126.26165659772232,
+  "last_recorded_Optimize": 88,
+  "CSV_actual": [
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "records": 91,
+      "columns": 28,
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3"
+    },
+    {
+      "path": "results\\unified_exact_round164\\reports\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "records": 103,
+      "columns": 28,
+      "SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b"
+    }
+  ],
+  "complete_methods_run": 0,
+  "reader_repair_no_solver_rerun": true,
+  "check_seconds": 54.40256699966267,
+  "common_identity_details": [
+    {
+      "frame": "R163-C20-S_root",
+      "raw_common_equal": true,
+      "C166_singleton_visit_rows": [],
+      "normalized_common_equal": true
+    },
+    {
+      "frame": "R163-B20-B_root",
+      "raw_common_equal": false,
+      "C166_singleton_visit_rows": [
+        "ROW = 0 z_0_11:1 z_1_11:1",
+        "ROW = 0 z_0_12:1 z_1_12:1",
+        "ROW = 0 z_0_13:1 z_1_13:1",
+        "ROW = 0 z_0_17:1 z_1_17:1",
+        "ROW = 0 z_0_19:1 z_1_19:1",
+        "ROW = 0 z_0_1:1 z_1_1:1",
+        "ROW = 0 z_0_2:1 z_1_2:1",
+        "ROW = 0 z_0_4:1 z_1_4:1",
+        "ROW = 0 z_0_5:1 z_1_5:1",
+        "ROW = 0 z_0_9:1 z_1_9:1"
+      ],
+      "normalized_common_equal": true
+    },
+    {
+      "frame": "R163-X20-S_root",
+      "raw_common_equal": true,
+      "C166_singleton_visit_rows": [],
+      "normalized_common_equal": true
+    },
+    {
+      "frame": "R163-C35-U_root",
+      "raw_common_equal": true,
+      "C166_singleton_visit_rows": [],
+      "normalized_common_equal": true
+    },
+    {
+      "frame": "R163-B35-S_root",
+      "raw_common_equal": true,
+      "C166_singleton_visit_rows": [],
+      "normalized_common_equal": true
+    },
+    {
+      "frame": "R163-X35-S_root",
+      "raw_common_equal": true,
+      "C166_singleton_visit_rows": [],
+      "normalized_common_equal": true
+    },
+    {
+      "frame": "R163-C20-S_child",
+      "raw_common_equal": true,
+      "C166_singleton_visit_rows": [],
+      "normalized_common_equal": true
+    },
+    {
+      "frame": "R163-B20-B_child",
+      "raw_common_equal": false,
+      "C166_singleton_visit_rows": [
+        "ROW = 0 z_0_11:1 z_1_11:1",
+        "ROW = 0 z_0_12:1 z_1_12:1",
+        "ROW = 0 z_0_13:1 z_1_13:1",
+        "ROW = 0 z_0_17:1 z_1_17:1",
+        "ROW = 0 z_0_19:1 z_1_19:1",
+        "ROW = 0 z_0_1:1 z_1_1:1",
+        "ROW = 0 z_0_2:1 z_1_2:1",
+        "ROW = 0 z_0_4:1 z_1_4:1",
+        "ROW = 0 z_0_5:1 z_1_5:1",
+        "ROW = 0 z_0_9:1 z_1_9:1"
+      ],
+      "normalized_common_equal": true
+    }
+  ],
+  "notes": [
+    "Subprocess fee sum excludes wrapper/aggregation/reader-repair overhead; label or conservatively include management cost.",
+    "Native optimum/KKT evidence is numerical qualification, not a rational certificate.",
+    "S0 is a fixed-inventory physical MIP; unchanged outer zero-controller evidence is inherited."
+  ],
+  "maximum_sizes": {
+    "columns": 12749,
+    "rows": 28658,
+    "binaries": 4174,
+    "nonzeros": 176625
+  },
+  "normalized_common_block_same_across_all_representations": true,
+  "raw_common_identity_frames": 6
+}

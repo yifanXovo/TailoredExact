@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-11-14T17:46:13.772972+00:00",
+  "expected_records": 112,
+  "expected_columns": 28,
+  "expected_bytes": 64951,
+  "expected_SHA256": "b728f85512741779a8b066ae9c974ec60892360c3fe15fbf7b946fb0ab0a4878",
+  "bounded_candidates": [
+    "C:\\Users\\Administrator\\Downloads\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+    "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+    "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+    "results\\unified_exact_round164\\reports\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv"
+  ],
+  "found": [
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 25180,
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3",
+      "records": 91,
+      "columns": 28,
+      "encoding": "gb18030"
+    },
+    {
+      "path": "results\\unified_exact_round164\\reports\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 32685,
+      "SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+      "records": 103,
+      "columns": 28,
+      "encoding": "gb18030"
+    }
+  ],
+  "authoritative_112_available": false,
+  "new_complete_runs": 0,
+  "new_master_rows": 0,
+  "statement": "主表无新增运行数据",
+  "user_files_modified": false,
+  "R166_increment": "results/unified_exact_round166/reports/GI_TBC_R166_B_controls_increment_28col.csv",
+  "missing_master_policy": "If the 112/106-row master is absent, retain reconciliation without fabricating or overwriting it."
+}

@@ -1,0 +1,75 @@
+{
+  "UTC": "2026-11-14T18:41:27.601285+00:00",
+  "reviewer": "/root/manuscript_review",
+  "source_verdict": "PASS",
+  "overall_verdict": "PASS",
+  "Optimize": 0,
+  "checks": "manuscript_checks.json",
+  "successful_offline_check_seconds": 0.17687870003283024,
+  "source_SHA256": {
+    "paper_body.md": "2034c1232013f0c90d538d9f7294409739fda2408cc62456ea13372c041aa5e8",
+    "model_and_algorithm_appendices.md": "54a4dbcdf77143e87089b06e6ee5326c8424ee4db68ecd3e7ff6c39b3bbdd91c",
+    "mathematical_analysis.md": "cec89b9a4185ab945d6194fef2e86fe429b30b2bda1e8e403a77216b1e680c83",
+    "supplement.md": "5243ed112824aadab3246e298ca6700e45ef6ea5f46181ace4c7b78c40f06891",
+    "references.bib": "01cde0d6c25b3007930cafcba7b3d15335501c651b8e991c55b73c40f4b0f796"
+  },
+  "findings": [
+    {
+      "id": "MR1",
+      "priority": 3,
+      "location": "paper_body.md Section 2.4 and model_and_algorithm_appendices.md A.11",
+      "issue": "D(F) should be explicitly defined before use",
+      "disposition": "parent corrected and current body read back"
+    },
+    {
+      "id": "MR2",
+      "priority": 3,
+      "location": "paper_body.md Table 1",
+      "issue": "method counts should read method runs/observations",
+      "disposition": "parent corrected and relevant rows read back"
+    },
+    {
+      "id": "MR3",
+      "priority": 3,
+      "location": "supplement.pdf pp51/54, inspected b08e3474f910 version",
+      "issue": "New section introduction and final decision are on sparse portrait pages",
+      "disposition": "resolved: new S167.3 introduction/decision accompany the landscape table; final changed pages read back"
+    },
+    {
+      "id": "MR4",
+      "priority": 3,
+      "location": "supplement.md S167.4 current document manifest",
+      "issue": "Intermediate new navigation linked the predecessor source manifest",
+      "disposition": "fixed to Round167; current source and actual final PDF annotation URI verified"
+    },
+    {
+      "id": "MR5",
+      "priority": 3,
+      "location": "main PDF pp24/43 administrative implementation identity prose",
+      "issue": "Intended metadata relocation was not yet reflected in intermediate export",
+      "disposition": "fixed: concise model/policy connections in main, original identities preserved in S167.4; final pp24/43 and supplement pp54/55 actually viewed"
+    }
+  ],
+  "unresolved_source_blockers": 0,
+  "PDF_visual_review_complete": true,
+  "source_whitespace_words": 9003,
+  "PDF_readback": "manuscript_pdf_readback.json",
+  "PDF_SHA256": {
+    "results/unified_exact_round137/manuscript.pdf": "f9e5cca5725b91433692af1d01328c509bae8b739fc2644f06fc2abe32e66de6",
+    "results/unified_exact_round137/supplement.pdf": "89ecf513f25577b8c57e68cbb82546d9bc9a021da0bdbc26e05aff858345cdf2"
+  },
+  "PDF_page_counts": {
+    "manuscript": 53,
+    "supplement": 55
+  },
+  "offline_check_seconds": [
+    0.17687870003283024,
+    0.16572900023311377,
+    0.005353699903935194
+  ],
+  "PDF_render_seconds": 1.6930508,
+  "unresolved_scientific_or_legibility_blockers": 0,
+  "final_targeted_readback": "manuscript_targeted_final.json",
+  "final_targeted_readback_seconds": 0.02228779997676611,
+  "all_final_build_bindings_match": true
+}

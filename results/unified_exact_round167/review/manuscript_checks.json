@@ -1,0 +1,147 @@
+{
+  "UTC": "2026-11-14T18:25:44.683913+00:00",
+  "reviewer": "/root/manuscript_review",
+  "PASS": true,
+  "Optimize": 0,
+  "elapsed_seconds": 0.16572900023311377,
+  "scope": "independent read-only manuscript/source/data check; no historical recomputation or new optimization",
+  "whitespace_words_before": 13505,
+  "whitespace_words_after": 9003,
+  "source_SHA256": {
+    "paper_body.md": "2034c1232013f0c90d538d9f7294409739fda2408cc62456ea13372c041aa5e8",
+    "model_and_algorithm_appendices.md": "ed33f6609bdbc882049f8e4fdc99afb4a2ac86c2898ff2e9c3f066854d137766",
+    "mathematical_analysis.md": "cec89b9a4185ab945d6194fef2e86fe429b30b2bda1e8e403a77216b1e680c83",
+    "supplement.md": "4020f44dfbb60eebc9fd724d09fa6d47bfeeb3a2746374d0f22884171a3adb0f",
+    "references.bib": "01cde0d6c25b3007930cafcba7b3d15335501c651b8e991c55b73c40f4b0f796"
+  },
+  "main_sections": 6,
+  "main_tables": 10,
+  "retained_historical_seed_tables_exact": true,
+  "C166_six_rows": [
+    {
+      "input": "C20-S",
+      "states": [
+        "CERT",
+        "OPEN"
+      ],
+      "display_readback": true
+    },
+    {
+      "input": "B20-B",
+      "states": [
+        "CERT",
+        "CERT"
+      ],
+      "display_readback": true
+    },
+    {
+      "input": "X20-S",
+      "states": [
+        "CERT",
+        "CERT"
+      ],
+      "display_readback": true
+    },
+    {
+      "input": "C35-U",
+      "states": [
+        "OPEN",
+        "OPEN"
+      ],
+      "display_readback": true
+    },
+    {
+      "input": "B35-S",
+      "states": [
+        "OPEN",
+        "OPEN"
+      ],
+      "display_readback": true
+    },
+    {
+      "input": "X35-S",
+      "states": [
+        "OPEN",
+        "OPEN"
+      ],
+      "display_readback": true
+    }
+  ],
+  "resource_intervals": [
+    {
+      "base": "R-B20-S",
+      "outward_lower": "0.2822618761",
+      "outward_upper": "0.2822620892",
+      "guarded_original_source": true
+    },
+    {
+      "base": "R-X20-S",
+      "outward_lower": "0.2105292995",
+      "outward_upper": "0.2105295021",
+      "guarded_original_source": true
+    },
+    {
+      "base": "R-B35-S",
+      "outward_lower": "0.1112611656",
+      "outward_upper": "0.3725317852",
+      "guarded_original_source": true
+    },
+    {
+      "base": "R-X35-S",
+      "outward_lower": "0.0600858983",
+      "outward_upper": "0.3813035291",
+      "guarded_original_source": true
+    }
+  ],
+  "continuous_parameters": [
+    {
+      "family": "R134:K-15-S",
+      "display": "0.002356282",
+      "original_worst_gap": 0.0023562818631971206,
+      "upward": true
+    },
+    {
+      "family": "R134:UC-B20-B",
+      "display": "0.000000100002",
+      "original_worst_gap": 1.0000100032886562e-07,
+      "upward": true
+    },
+    {
+      "family": "R137:R-B20-S-T1",
+      "display": "0.015594269",
+      "original_worst_gap": 0.015594268604373972,
+      "upward": true
+    },
+    {
+      "family": "R137:R-X35-S-T2",
+      "display": "0.136115162",
+      "original_worst_gap": 0.13611516156427778,
+      "upward": true
+    }
+  ],
+  "D167_strict_conditions": [
+    {
+      "frame": "R163-X20-S_root",
+      "level": 2,
+      "delta": 0.0003584890002124863
+    },
+    {
+      "frame": "R163-B35-S_root",
+      "level": 1,
+      "delta": 6.9290393767684755e-06
+    },
+    {
+      "frame": "R163-B35-S_root",
+      "level": 2,
+      "delta": 2.081111748741815e-05
+    }
+  ],
+  "D167_R_abs_max_difference": 2.220446049250313e-16,
+  "existing_figures_byte_unchanged": [
+    "figures/three_seed_endpoints.png",
+    "figures/resource_endpoints.png",
+    "figures/parameter_quality_bands.png"
+  ],
+  "undefined_citations": [],
+  "PDF_review": "pending new Round167 PDF build; existing PDF not treated as current"
+}

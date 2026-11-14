@@ -2,7 +2,7 @@
 
 The complete physical formulation and strengthening proofs below are retained from the maintained manuscript. GI-TBC uses uniform pair support and no triple support. The GI-TBC termination rule includes the independent exact-zero proof in Section 3.4; native-source qualification and all normal positive-objective rules remain separate. Historical source pointers identify their own snapshots and are not claims that an old executable produced the final panel.
 
-This appendix is the single maintained model specification for the manuscript. It transcribes the frozen writer, including constraints sometimes redundant for integer solutions. It does not replace the implemented model by a different vehicle-routing formulation. Equations are mathematical real-arithmetic expressions; A.7 states the separate numerical implementation boundary. Historical source-line pointers retained in this derivation refer to snapshot 355eefd2be3fe5651195681faf7b3a63ee4032f8. That historical E3 source base and its binding belong to the earlier attribution controls [@frozenImplementation]. The current GI-TBC identity and the separately pinned historical R134/R135 studies are distinguished in B.1; source_publication.json provides the historical R137 source-byte capsule. The later measured C++ source is e920b92e199e825ec89a2932f701861ff158e0d4 (R163/R164), PE SHA256 fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93; the current document source manifest distinguishes these generations. Current state/service, own-H, pair-only and inclusive-domain conditions are checked against these final identities, rather than inferred from historical line numbers.
+This appendix is the single maintained model specification. It transcribes the frozen writer, including constraints redundant for some integer solutions, while preserving the physical vehicle-routing problem. Equations use ideal real arithmetic; A.7 states the numerical implementation boundary. Historical implementation identities and source-version navigation are retained in Supplement S167.4.
 
 ## A.1 Sets, data and variables
 
@@ -462,7 +462,7 @@ The total process deadline makes a run finite, rather than guaranteeing certific
 | M-B mode isolation | include/Round98StateService.hpp; no projected direction, linked direction, ENS-Q or other opt-in mode |
 | AM, targets, cover and lifecycle | PaperExternalGiniTree.cpp; GurobiBaseline.cpp; ProcessPhaseLedger.cpp; MipStartMapping.cpp |
 
-The linked [implementation snapshot](https://github.com/yifanXovo/TailoredExact/tree/355eefd2be3fe5651195681faf7b3a63ee4032f8) is the historical source authority for this unchanged formulation map. The final implementation and its exact byte capsule are identified by candidate_manifest.json and source_publication.json in the current reproduction entry. Line locations aid review; they do not replace derivations. This appendix supplies constraint groups and validity premises without claiming every engineering identifier as a mathematical contribution.
+The formulation map below identifies actual variable and row groups. Supplement S167.4 and the current reproduction record identify the archived implementation snapshots and exact-byte evidence; those identities do not replace the mathematical derivations.
 
 
 \clearpage
@@ -533,7 +533,60 @@ For a fixed physical domain and normalized weight vector, \(v(\rho)=\min_x\{G(x)
 
 All feasible-line intersections, overlapping lower-chord intersections and chord interval endpoints partition the covered parameter range into finitely many pieces on which both envelope expressions are affine. Using every distinct anchor pair also makes the maximum applicable-chord envelope continuous: at an interior anchor, starting/ending chords share its L value with an incoming/outgoing anchor chord, while spanning chords remain continuous. The gap therefore attains a maximum at a partition endpoint (or everywhere on a constant piece). Checking all such points proves the stated continuous-interval regret bounds; a grid would not suffice. Same-coordinate lowers combine by maximum, never by a zero-length chord. Outside a chord's endpoint interval no extrapolation is granted.
 
-The application reconstructs complete fleets, verifies fixed physical/normalized-weight identity and uses actual loaded lambda/omega values. Rational G/P/coordinate arithmetic supplements the inherited numerical lower qualifications; it does not turn native solves into rational proofs. Original lowers are conservatively reduced by 1e-7, and exact feasible objectives receive a 1e-12 upward guard. No source crossing is clipped. The original run objectives, statuses and clocks remain unchanged. Likewise, nested physical time domains give the two-sided difference interval in Table 5; this is an objective-value decision bound, not a monetary resource price.
+The application reconstructs complete fleets, verifies fixed physical/normalized-weight identity and uses actual loaded lambda/omega values. Rational G/P/coordinate arithmetic supplements the inherited numerical lower qualifications; it does not turn native solves into rational proofs. Original lowers are conservatively reduced by 1e-7, and exact feasible objectives receive a 1e-12 upward guard. No source crossing is clipped. The original run objectives, statuses and clocks remain unchanged. Likewise, nested physical time domains give the two-sided difference interval in Table 8; this is an objective-value decision bound, not a monetary resource price.
+
+\clearpage
+
+
+## A.11 Conditional joint stock, service, product and code hull
+
+Write \(D=[l,u]\cap\mathbb Z\), \(m(y)=|b-y|\), \(v(y)=\mathbf1[y\ne b]\), and let \(c(y)\) be the absolute d-bit stock code, \(d=\max\{1,\operatorname{bit\_width}(C)\}\). The enhanced hull is
+
+\[
+E(D)=\operatorname{conv}\{(y,m(y),v(y),g,gy,c(y),gc(y)):y\in D,\ g\in[\alpha,\beta]\}.
+\]
+
+The continuous enumerated reference R_abs uses the state/perspective equations (A15)-(A16), movement/visit links, and \(\delta_h=\sum_yc_h(y)s_y\), \(w_h=\sum_yc_h(y)q_y\). Its selectors remain continuous even when delta is declared binary. This is a common absolute code; the historical LOG offset code \(y-l\) is different. For fixed digits \(a_h\), define \(D(F)=\{y\in D:c_h(y)=a_h,\ h\in F\}\).
+
+Partition D into nonempty donor, initial singleton and receiver intervals. Each has a separate source entry and MSB-first bit DAG. At each layer at most four prefix states record tightness to that part's lower and upper bounds. A 0/1 edge is permitted exactly when consistent with its tight bounds; the next flags record equality. Every path reads all d bits and reaches the common sink. Prefix induction proves a bijection between paths and legal stocks. No graph nodes are shared between service parts before the sink. Bounds on nodes and arcs are \(n_G\le2+r(1+4d)\), \(a_G\le r(8d+5)\), \(r\le3\).
+
+Let \(A\) use tail +1 and head -1 and let \(e\) be source +1, sink -1. On this single graph use
+
+\[
+Af=e,\quad Aq=ge,\quad f\ge0,\quad \alpha f\le q\le\beta f.
+\tag{AD1}
+\]
+
+Every bit-one edge h has Y cost \(2^h\). On donor entries the M cost is b and donor digit-edge M cost is minus its Y cost; on receiver entries it is -b and receiver digit-edge cost is its Y cost. Initial-piece M costs are zero. Donor/receiver entries have V cost one; all others zero. Thus path totals are y, m(y), v(y). Denoting these costs by \(a_Y,a_M,a_V\), reconstruct
+
+\[
+Y=a_Y^\top f,\ M=a_M^\top f,\ V=a_V^\top f,\ Z=a_Y^\top q,
+\quad \delta_h=\sum_{e\in A_h^1}f_e,\quad w_h=\sum_{e\in A_h^1}q_e.
+\tag{AD2}
+\]
+
+Entry/terminal edges do not contribute to code coordinates. Both flows conserve at every internal node. Omitting each sink equation is equivalent because the incidence-column sums are zero. D167 adds no independent bit-product block.
+
+**Proposition A11 (enhanced projection and partial digits).** Equations (AD1)-(AD2) project exactly to E(D). After fixing any subset of absolute digits, the projection is \(E(D(F))\); its physical projection is \(H(D(F))\). Empty conditional domains are infeasible. Integer delta recovers the exact local stock/service/product object.
+
+**Proof.** For \(\alpha<\beta\), define nonnegative conserved endpoint flows
+
+\[
+f^\alpha=\frac{\beta f-q}{\beta-\alpha},\qquad
+f^\beta=\frac{q-\alpha f}{\beta-\alpha}.
+\]
+
+Their source masses are \((\beta-g)/(\beta-\alpha)\) and \((g-\alpha)/(\beta-\alpha)\), summing to one. Decompose each acyclic flow into nonnegative source-sink path flows by repeatedly subtracting the minimum positive flow along a complete path. No residual cycle or disconnected positive component can remain. Equations (AD2) give a convex combination of legal stock/code points at the two Gini endpoints. Conversely a legal stock/g uses f=1,q=g on its unique path, zero elsewhere; convex combinations extend all E(D) points. For \(\alpha=\beta=a\), the bounds imply q=af and g=a; decompose only f. The implementation uses the direct path map and never divides by the Gini width.
+
+Each unit path crosses each bit layer once. If \(\delta_h=0\), nonnegative one-edge flow vanishes; if \(\delta_h=1\), zero-edge flow vanishes because total layer mass is one. The q bounds eliminate the same inconsistent edges. Only compatible paths remain in the endpoint decomposition, exactly the stocks in D(F). Conversely all compatible paths extend. With all digits integer, the injective absolute code leaves one legal stock/path; conservation gives q=gf, and the desired M,V,Z,w follow. The empty, singleton and C=0 cases are included. The physical bidirectional mapping then uses the unchanged one-way service, unique assignment and integer balance premises of Lemmas A1-A2. \(\square\)
+
+Every E(D) point extends to C166: compress its physical graph terms to legal affine-piece endpoints at the same g, but retain the original full-mixture delta/w for the separate bit layer. Those coordinates satisfy its global and interval product inequalities by convexity. Thus D167 and R_abs have identical enhanced projections contained in C166's; partial fixed-bit physical inclusion follows. With no bit fixes all physical projections equal H(D). In D=0..4,b=2,g in [0,1/2], the C166 point t2=1,q2=1/4, delta=(1,1/2,0), w=(1/4,1/8,0) has M=V=0 while delta0=1 leaves legal stocks {1,3} and requires M=V=1 in the conditional hull. This proves local strictness, not a claim about a visited Native node.
+
+For any conditional domain, the minimum/maximum legal donor stocks, legal initial singleton, and minimum/maximum receiver stocks generate H with at most five supports: same-g affine interpolation preserves Y,M,V,Z on each side. Holes do not invalidate this physical-hull argument, but integer membership and E still need the compatible code/path set. Five supports do not generally represent E.
+
+The complete-model conclusion requires all outside rows to use the replaced state only through the declared interface. Actual B's e epigraph, H/S, original objective, physical route/service/time, cutoff and enabled valid rows meet that condition; AP/count/RN/CDF/theta/linked-direction/VD-J extensions are unsupported by the offline entry. The network's auxiliary counts are \(2a_G+2d\) columns, d binaries and \(2(n_G-1)+2a_G+4+2d\) rows, excluding unchanged physical rows. Nonzero counts scale likewise; integer path-cost coefficients have O(d) bits. If rational Gini endpoints have encoding length L, total coefficient description length is O(r*d*(d+L)). The research note gives exact nonzero counts and actual full-model dimensions.
+
+Path-flow projection and endpoint disjunction are established methods [@behle2007; @balas2005; @vanhoeve2024]; bounded ideal base-2 encodings are established as well [@muldoon2013]. This local guarantee concerns the specified partial digits. Adding an arbitrary stock inequality or a narrower g bound to an old model does not rebuild the hull for the new domain; actual new bounds must be used in (AD1) and path legality. Local ideality does not imply the full BRP hull or effective branching [@huchetteVielma2023]. The default-off C++ entry verifies the frozen representation and physical interface, without integrating a complete controller or claiming a speedup.
 
 \clearpage
 
@@ -628,13 +681,9 @@ The inherited settings below originate in the saved R123 full-M-B command. The c
 | H orders | 24 shuffled chromosomes from mt19937 seed 20260626; appended constructive order; no genetic generations |
 | H decoder | Full compaction mode 1; cache limit 200000 complete decoded orders; no generation/stagnation quota in this active branch |
 
-The “interval-mip-core-no-exhaustive-subset-duration” policy is overridden by the VD-P preset to `round55-vd-p`, still excluding exhaustive subset duration. Compiler identity is the frozen MSYS2 UCRT64 g++ binary SHA256 `8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1`. Library shuffle and equivalent-key sort order are implementation-version details; the paper does not invent a canonical cross-library tie rule absent in the source.
+The interval-mip-core-no-exhaustive-subset-duration policy is overridden by the VD-P preset to `round55-vd-p`, retaining the exclusion of exhaustive subset duration. Shuffle and equivalent-key sorting follow the recorded implementation; no canonical cross-library tie rule is asserted.
 
 The historical breadth/resource study's GI-TBC source/PE and policy are fixed in [candidate_manifest.json](candidate_manifest.json); its 120 actual method vectors, inputs, physical horizons, weights, Seeds and caps are in [matrix_frozen.json](matrix_frozen.json), with the prospectively registered sharing and order in [experiment_plan.json](experiment_plan.json). The default vector below uses ms2, tau=.08 and AP off. The three AM values are .04/.08/.16; the explicit `--round137-am-threshold` overrides the actual first-class field after presets. The four research controls are `--round127-mode s2-root`, `--round137-delete-ab`, `--round137-delete-cr`, and `--round137-delete-cg`; each changes only the declared comparison. Actual threshold/deletion readback is checked before qualification closes. The accepted inclusive root is the post-R130 implementation, not the old MD workflow. P and PS use their own complete vectors in the matrix rather than an abbreviated derivation from the GI-TBC vector.
-
-For the later archived-source and three-Seed cohort, the measured C++ is `e920b92e199e825ec89a2932f701861ff158e0d4`; actual method freezes and PE/DLL bindings are in the [R164 method freeze](../unified_exact_round164/method_freeze.json) and [science identity](../unified_exact_round164/science_identity.json). Those observations were produced by the already measured PE, not by a manuscript build. The latest source includes default-off research paths; the main B vector does not enable them. Historical S2/ms2 and paper-S2 are implementation aliases of the specified main method. E+ remains separately named and off in B. The [current document manifest](../unified_exact_round166/source_manifest.json) binds the maintained sources and both study generations.
-
-Historical R135 is separately pinned: its [candidate manifest](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/candidate_manifest.json), [first-stage commands](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/C_matrix_frozen.json) and [conditional-stage commands](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/D_matrix_frozen.json) compare S2/AP at lambda=.15. Those observations remain historical; AP is not enabled in the current stage. R134 confirmation and weight observations likewise retain their original identities in the preserved supplement.
 
 INPUT, OUT, physical T, cap B, B_MINUS_6 and SEED take their registered values. H seed20260626 and native settings remain fixed. The zero-stop flag does not assert return before the native lifecycle: an own zero U can produce the degenerate [0,0] root, and the independent proof is finalized after resource release and complete physical verification. The supervisor starts the production clock before admission and seals required output; native Runtime alone is not T_cert.
 
