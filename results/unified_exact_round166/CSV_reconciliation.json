@@ -1,0 +1,63 @@
+{
+  "UTC": "2026-11-14T02:17:51.191255+00:00",
+  "requested_master": {
+    "rows": 106,
+    "columns": 28,
+    "encoding": "UTF-8 BOM",
+    "bytes": 60603,
+    "SHA256": "8f39e3a23b3b6df621139cb39b4db813ca3e992da091e97251ab8337fd2b0022",
+    "found": false
+  },
+  "bounded_entry_search": [
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 25180,
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3",
+      "BOM": false,
+      "rows": 91
+    },
+    {
+      "path": "results\\unified_exact_round164\\reports\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 32685,
+      "SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+      "BOM": false,
+      "rows": 103
+    }
+  ],
+  "local_working_copy": {
+    "path": "results/unified_exact_round164/reports/GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+    "bytes": 32685,
+    "SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+    "rows": 103,
+    "columns": 28,
+    "encoding": "GB18030; no BOM",
+    "unchanged": true
+  },
+  "missing_from_103": [
+    "R138 R-B35-S-T2 Seed1 cap2400 N/A-P",
+    "R155 N-B35-S Seed0 cap7200 N/A-P",
+    "R156 R-X35-S-T2 Seed0 cap7200 N/A-P"
+  ],
+  "no_missing_rows_fabricated": true,
+  "no_master_or_user_file_written": true,
+  "independent_increment": {
+    "path": "results/unified_exact_round166/reports/GI_TBC_R166_B_controls_increment_28col.csv",
+    "bytes": 4761,
+    "SHA256": "ab4608191612f94bb8d392bdbe4acac733021379fe40cd7bf85f9ca7fa033085",
+    "rows": 6,
+    "columns": 28,
+    "encoding": "UTF-8 BOM",
+    "B_controls": 6,
+    "new_B_P_pairs": 0,
+    "new_B_P_wins": 0,
+    "header_exactly_preserved": true,
+    "trailing_unnamed_fields": "original two source-link columns",
+    "merged_into_master": false
+  },
+  "C166": "six variant arms only in complete_arms/pairs; never called B",
+  "new_independent_physical_inputs": 0,
+  "new_Seed_values": 0,
+  "new_complete_runs": 12,
+  "new_B_C166_pairs": 6,
+  "note": "The existing N/A-P semantics serialize P status as 无配对结果 and comparison as N/A. Same-key old controls remain unchanged; round166, full run/build/SHA and mapping distinguish new repetitions."
+}

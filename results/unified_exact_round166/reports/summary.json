@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-11-14T02:17:29.335498+00:00",
+  "complete": true,
+  "positions": 12,
+  "executed_and_qualified": 12,
+  "paired_inputs": 6,
+  "CERT": {
+    "B": 3,
+    "C166": 2
+  },
+  "OPEN": {
+    "B": 3,
+    "C166": 4
+  },
+  "joint_CERT_pairs": 2,
+  "substantive_certificate_time_wins": {
+    "B": 1,
+    "C166": 0
+  },
+  "method_produce_seconds": {
+    "B": 7454.335378415883,
+    "C166": 8836.531013753265
+  },
+  "method_verify_seconds": {
+    "B": 16.20052749942988,
+    "C166": 20.726014599669725
+  },
+  "total_native_Optimize": 62,
+  "formal_nominal_caps": 21600,
+  "formal_reservation": 25200,
+  "actual_wrapper_outer_seconds": 16328.458215499762,
+  "actual_produce_plus_verify": 16327.792934268247,
+  "new_independent_physical_inputs": 0,
+  "new_Seed_values": 0,
+  "new_strict_B_P_pairs": 0,
+  "exposed": true,
+  "Seed": 0,
+  "replications_per_input_method": 1,
+  "source_commit": "0298dd45fbc3645af927c4a4dd1d43ecbdb567a9",
+  "PE_SHA": "27e71873536bcd8e6001aee0c2514a5cc8122763728c62e6d467cd528b48daba",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "matrix": {
+    "path": "results/unified_exact_round166/matrix_frozen.json",
+    "bytes": 90416,
+    "SHA256": "5af05e13ad90d439371786ee2dfb05964323e04636884c089fb9104f69915322"
+  },
+  "analysis_Optimize": 0,
+  "timing_policy": "T_produce includes own H/import/models/native/online qualification/close; T_verify is necessary post-production verification. Native/H counters are nested explanatory costs, not additive fees.",
+  "schema_note": "Legacy raw arm=M-B and method=S2 are service/schema fields. R166_method and qualified endpoint method identify B versus C166. Legacy formal_performance=false is superseded by the explicit qualified protocol/performance eligibility fields, all checked here."
+}

@@ -1,0 +1,61 @@
+{
+  "UTC": "2026-11-14T02:18:13.203Z",
+  "PASS": true,
+  "operation": "read-only CSV import and endpoint/schema audit",
+  "tool": "bundled @oai/artifact-tool; public Workbook.fromCSV/range.values/inspect APIs",
+  "rows": 6,
+  "columns": 28,
+  "blank_trailing_reference_headers_preserved": true,
+  "UTF8_BOM": true,
+  "original_working_copy_encoding": "GB18030; unchanged",
+  "P_numeric_fields_empty": true,
+  "new_B_P_pairs": 0,
+  "exact_qualified_endpoint_numbers": true,
+  "OPEN_T_cert_blank": true,
+  "read_only": true,
+  "workbook_edits": 0,
+  "workbook_exports": 0,
+  "source_CSV_SHA256": "ab4608191612f94bb8d392bdbe4acac733021379fe40cd7bf85f9ca7fa033085",
+  "reference_SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+  "checks": [
+    {
+      "row": 2,
+      "id": "R163-C20-S",
+      "position": 1,
+      "passed": true
+    },
+    {
+      "row": 3,
+      "id": "R163-B20-B",
+      "position": 4,
+      "passed": true
+    },
+    {
+      "row": 4,
+      "id": "R163-X20-S",
+      "position": 5,
+      "passed": true
+    },
+    {
+      "row": 5,
+      "id": "R163-C35-U",
+      "position": 8,
+      "passed": true
+    },
+    {
+      "row": 6,
+      "id": "R163-B35-S",
+      "position": 9,
+      "passed": true
+    },
+    {
+      "row": 7,
+      "id": "R163-X35-S",
+      "position": 12,
+      "passed": true
+    }
+  ],
+  "compact_inspection": "{\"kind\":\"region\",\"sheet\":\"B controls\",\"address\":\"O1:Y7\",\"rows\":7,\"cols\":11,\"nonEmpty\":47,\"blank\":30,\"text\":47,\"maxTextLength\":20,\"preview\":[[\"GI_TBC_状态\",\"GI_TBC_收敛时间_秒\",\"GI_TBC_未收敛Gap_百分比\",\"GI_TBC_LB\",\"GI_TBC_UB\",\"P_GRB_状态\",\"P_GRB_收敛时间_秒\",\"P_GRB_未收敛Gap_百分比\",\"P_GRB_LB\",\"P_GRB_UB\",\"对比结果\"],[\"已收敛\",\"210.41450014011934\",null,\"0.19128059228281274\",\"0.191280592282812\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"已收敛\",\"5.096442225854844\",null,\"0.4232321816943161\",\"0.42323218169431764\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"已收敛\",\"125.29991797590628\",null,\"0.44774762658601525\",\"0.4477476265860282\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"84.68931420073731\",\"0.019837502821060043\",\"0.12956638965196035\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"38.116315786717145\",\"0.12023400258397535\",\"0.19429031110944756\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"13.659110945800549\",\"0.3949882559151472\",\"0.45747531701601785\",\"无配对结果\",null,null,null,null,\"N/A\"]],\"previewAddress\":\"O1:Y7\",\"previewRows\":7,\"previewCols\":11}",
+  "Optimization": 0,
+  "authoritative_serialization": "The user-required28-column CSV and full binary64 values are preserved; no XLSX variant is produced."
+}

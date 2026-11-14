@@ -1,6 +1,6 @@
 # GI-TBC: mathematical objects and mechanism interpretation
 
-This maintained companion explains the physical, inventory, relaxation and complete-method objects used in the current paper. It preserves the earlier exact arguments and integrates the archived-source three-Seed evidence. Production source/PE identities and document-build identities are separate in the [source manifest](../unified_exact_round165/source_manifest.json).
+This maintained companion explains the physical, inventory, relaxation and complete-method objects used in the current paper. It preserves the earlier exact arguments and integrates the archived-source three-Seed evidence. Production source/PE identities and document-build identities are separate in the [source manifest](../unified_exact_round166/source_manifest.json).
 
 ## Physical model and effective objective weight
 
@@ -377,3 +377,71 @@ inclusive-cutoff qualification; they change no physical equivalence,
 epigraph/S=0 convention or coverage theorem. The complete own-run values
 and all target-availability intervals are in the
 [finite evidence tables](../unified_exact_round164/reports/seed_evidence.md).
+
+
+## Compact shared-state graph and embedding
+
+The current representation study characterizes the joint graph of integer inventory,
+absolute movement, nonzero visits and a common Gini product. Legal donor/initial/
+receiver pieces give at most five continuous perspective supports. A separate
+absolute-Y binary product layer keeps integer Z=gY exact; integer Y plus continuous
+supports alone fails, while binary supports remove legal internal stocks. Since
+the relaxed bit block contains the true product graph hull and shares no auxiliaries
+with the joint support block, the common raw LP projection is unchanged. Current
+B's unchanged e epigraph and outside-row interface make the full embedding valid.
+Appendix A.9 proves both directions, scope and scale. Holed domains and additional
+exact state functions require additional restrictions/supports. This result applies
+standard disjunction/product tools; it is not an ideality or route-hull claim.
+
+The C++ implementation uses a distinct default-off mode and complete Start mapping.
+Finite diagnostics compare all six fixed roots, two child scopes, 64 local LPs and
+hand-enumerable native boundary examples. The local/full common LP result does not
+predict native branch trajectories. Complete paired costs remain a separate test,
+with B and C166 independently paying H and receiving no archive information.
+
+## Certified parameter and physical-resource decisions
+
+For a fixed physical domain and normalized omega vector, v(rho)=min_x(G+rho*p)
+is concave. Every reconstructed physical fleet gives an affine upper line; chords
+between qualified global lower anchors give lower bounds only inside their anchor
+intervals. The maximum applicable chord and minimum archive line form a quality
+band. Rational evaluation at every true line/chord intersection and endpoint yields
+continuous interval guarantees, without new optimization or a grid. The source
+coordinate is actual loaded lambda times the exact loaded weight sum, not its
+rounded display. Appendix A.10 gives the argument and numerical safety policy.
+
+The four whole-range archive regret upper bounds are .002356282, .000000100002,
+.015594269 and .136115162 for K15, UC-B20, resource B20-T1 and X35-T2 respectively
+(upward rounded). The first exhibits three supported component choices, the second
+has one stable component line, and the last remains substantially unproved despite
+one known fleet supporting its entire archive envelope. The higher-weight X35 fleet
+is feasible at the original unit weight with objective .3365058165, improving the
+old incumbent by .06676618239 offline; it does not backfill production U or timing.
+
+All four T-pairs have strict optimal-objective improvement under the existing source
+qualifications. The new two-sided intervals quantify remaining magnitude uncertainty:
+the small pairs have widths about 2.13e-7/2.02e-7 after safety guards, while the open
+B35/X35 widths remain .261270620/.321217631. All four displayed larger-horizon fleets
+have better G/P and more pickup, but B35 returns more stock (2 to3) while X35 returns
+less (1 to0). Route utilization describes these witnesses and does not prove which
+time constraint binds an unknown optimum. Full fleets, every owner, exact intersections
+and both original/safe resource endpoints are in the
+[decision record](../unified_exact_round166/decision_analysis.md).
+
+## Completed compact-representation comparison
+
+The sole fresh same-build Seed0 matrix completes all12 positions on six
+exposed inputs. B certifies3/6 and C1662/6. All n35 runs remain OPEN;
+C166 improves C35/B35 physical U by .0085231196665/.0150006843103 but has
+weaker L on all three n35 inputs, and X35 has worse U as well. C20 loses
+a certificate; X20's joint-CERT C166/B cost ratio is4.3487828154. B20's
+1.1108187640 ratio has only.5647814283s difference and stays below the
+max(10s,.1 times faster) material scale. OPEN T_cert is null.
+
+The eight scoped LP comparisons differ by at most3.33e-16 and all new
+integer/Start/type/native contracts qualify. Thus the representation result
+holds in its stated interface domain, while the complete outcome is mixed.
+Uniform B remains default; C166 is a distinct default-off research mode.
+The primal gains are preserved rather than removed to support a negative
+adoption decision. The complete endpoints and costs are in
+[the six-pair table](../unified_exact_round166/reports/pairs.json).

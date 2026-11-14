@@ -145,7 +145,7 @@
 \title{GI-TBC: a Gini-interval tailored branch-and-cut algorithm for
 equitable bicycle redistribution}
 \author{}
-\date{13 November 2026}
+\date{14 November 2026}
 
 \begin{document}
 \maketitle
@@ -159,29 +159,27 @@ equitable bicycle redistribution}
 \subsection{Abstract}\label{abstract}
 
 Static bicycle redistribution must realize an equitable final inventory
-by routes that respect empty departure, intermediate vehicle capacity
-and paid handling, including loaded returns. We develop GI-TBC, an exact
-method that links finite inventory states to objective products,
-movement and visits, and controls complete regions of the true Gini
-coefficient. Under unique nonzero one-way service, integer final
-inventories imply integer service quantities; objective-preserving
-embeddings and cutoff-complement accounting establish the method's
-coverage conditions. Against independent cold and fully paid-start
-compact controls, the integrated method obtains 9/12 qualified
-certificates versus 7/12 and 7/12 in a registered breadth panel, and 4/8
-versus 0/8 and 0/8 in a separately designed positive-objective resource
-panel. A later six-input archived-source cohort gives 3/6 GI-TBC
-certificates versus 1/6 cold compact at each of three solver Seeds; all
-35-station observations remain open, and one input reverses its primal
-ranking. Conditional controls show small shared-state root gains and
-mixed complete costs, with no substantive certificate-time advantage
-over the strengthened root-only control in the tested roles. A
-separately paid inventory-proof extension raises one final lower bound
-without changing six physical upper endpoints or adding a certificate.
-The results establish finite competitiveness of the complete package and
-distinguish stronger inventory information from physical realization and
-net computational benefit; they do not isolate an independent speed gain
-from outer interval scheduling.
+through routes with empty departures, prefix capacity and paid handling,
+including loaded returns. We develop GI-TBC, an exact method connecting
+shared inventory states, objective products, movement and nonzero visits
+with complete true-Gini interval coverage. A compact alternative
+preserves the joint local hull with at most five legal stock supports
+and a separate binary-product layer, under an explicit full-model
+interface condition. The historical breadth panel gives GI-TBC 9/12
+certificates versus 7/12 for each compact control; a positive-resource
+panel gives 4/8 versus 0/8. In a new same-build six-input representation
+comparison, B certifies 3/6 and compact C166 2/6. C166 improves two open
+primal endpoints but weakens all three large-instance proof endpoints,
+so B remains the main method. Reconstructed physical fleets and global
+lower bounds also give continuous-weight quality guarantees: one fixed
+fleet is within an absolute objective tolerance of 1.00002e-7 throughout
+its covered range, while other families exhibit supported plan switches
+or wide unresolved bands. Two-sided route-time bounds establish strict
+optimal-objective improvement even for open instances. These finite,
+numerically qualified results distinguish information-preserving
+representations, complete computational value and useful bounded
+decisions; the controls do not establish an independent speed advantage
+from external interval scheduling.
 
 \subsection{1. Introduction}\label{introduction}
 
@@ -204,39 +202,43 @@ Bike-Sharing Systems} 2026). Our exact method reuses its decoder within
 a finite startup procedure and supplies the bounds and complete coverage
 needed for certification.
 
-The research question is how finite inventory information can support a
-complete exact routing method, and how much of its observed
-competitiveness can be assigned to individual mechanisms. Three
-connected contributions answer it. First, the same stock state links the
-Gini product to movement and visits. We establish the conditional
-integer-service implication and physical embeddings, and derive
-ordered-supply and support/handling inequalities from the original
-operations. This identifies where the representation uses problem
-structure: an isolated product disjunction alone has the McCormick
-rectangle projection.
+The research question is how a common inventory representation can
+connect allocation and routing, support a complete exact method, and
+yield decisions whose quality can be bounded. Three connected
+contributions address it. First, a shared stock state represents the
+objective product, absolute movement and nonzero visits. Under the
+inherited unique one-way service rules, integer stock implies integer
+service quantities. We further characterize the joint local graph: at
+most five legal stock supports preserve its continuous convex hull,
+while a separate absolute-stock binary-product layer preserves integer
+exactness. The resulting common LP projection survives embedding only
+when all other state uses pass through the declared interface. This
+identifies both a compact representation and its precise boundary.
 
-Second, GI-TBC combines that formulation, a fully paid feasible startup
-and complete true-Gini interval control. An explicit main algorithm
-connects region selection, lower-bound targets, midpoint probes, exact
-continuation and termination; the appendices specify every rule. These
-coverage arguments establish correctness conditions. They do not
-identify which controller decisions save computational time. Custom
-valid rows are inserted statically when a canonical interval model is
-built; Gurobi performs native branch-and-cut inside it, while our
-controller manages Gini intervals outside the solver.
+Second, GI-TBC combines inventory/service connections and physical valid
+inequalities with an own feasible startup and complete true-Gini
+interval control. Objective-preserving physical extensions, cutoff
+complements and complete region coverage establish correctness. The
+implementation supplies the full method, including exact continuation at
+depth/width guards. Custom valid rows are static; Gurobi performs
+branch-and-cut inside each canonical model. P, own-start PS,
+strengthened root-only control, complete B and the separate proof
+extension answer different formulation, startup and architecture
+questions. The compact representation is evaluated as the separately
+named C166 candidate; it does not change B's definition.
 
-Third, complete-method comparisons separate physical upper bounds,
-qualified lower bounds and paid certificate cost. Breadth,
-positive-resource pairs, within-input weights and a later three-Seed
-cohort retain their own designs. Root-only and row-deletion controls, AM
-exposure and independent inventory-proof extensions distinguish
-representation strength from complete performance. The integrated
-package has finite certificate and endpoint advantages over the
-specified compact controls. Its full-over-root incremental speed benefit
-is unestablished in the tested roles, and stronger stock information
-need not yield better feasible routes or lower total cost. These
-distinctions are part of the contribution's scope, rather than separate
-claims of general-purpose reformulation or scheduling breakthroughs.
+Third, computational evidence and certified decision analysis use both
+feasible fleets and qualified problem bounds. The complete package
+improves finite certificate counts over the specified compact controls,
+with adverse endpoints and open cases retained. An offline archive of
+fully reconstructed physical fleets yields feasible upper envelopes and
+concavity-based lower bands over continuous objective-weight intervals.
+Controlled route-horizon pairs yield two-sided bounds on the improvement
+in the optimal objective, including pairs where neither optimum is
+certified. These decisions concern inventory-to-target ratio dispersion
+and target deviation. They do not imply demographic fairness, monetary
+benefit, a complete Pareto frontier or an independent speed gain from
+the outer controller.
 
 \subsubsection{1.1 Relation to previous
 work}\label{relation-to-previous-work}
@@ -273,11 +275,16 @@ reformulations and relaxations of integer-continuous single-product sets
 polyhedra and an aggregate representation (Köppe et al. 2008). Our
 connection is the use of one final-stock state across the objective,
 absolute movement and nonzero-service indicator, within this physical
-routing problem. Neither binary expansion, value disjunction nor spatial
-partitioning is claimed as new. The state-penalty comparison in
-Supplement S6 applies Jensen's inequality and a direct projection
-construction; the complete route model is not the hull of an isolated
-product block.
+routing problem. Embedding and piecewise-linear formulations provide
+established endpoint, encoding and convexification tools (Vielma 2018;
+Huchette and Vielma 2023). Our compact result applies these tools to the
+jointly visible movement, visit and product functions, including their
+discrete service jump, and establishes the interface needed to embed the
+replacement. Neither binary expansion, finite disjunction, endpoint
+convexification nor spatial partitioning is claimed as new. The
+state-penalty comparison in Supplement S6 applies Jensen's inequality
+and a direct projection construction; the complete route model is not
+the hull of an isolated product block.
 
 \subsection{2. Physical model and
 objective}\label{physical-model-and-objective}
@@ -430,6 +437,60 @@ one-way service occurs exactly when \(Y_i\ne b_i\). Hence the shared
 equations above reproduce the original operations without changing the
 physical problem. They also couple fractional inventory mixtures to the
 movement and visits that must support them.
+
+\paragraph{3.1.1 A compact shared-state
+representation}\label{a-compact-shared-state-representation}
+
+On a legal contiguous stock domain \(\mathcal Y_i=\{l_i,\ldots,u_i\}\),
+define \(m_i(y)=|b_i-y|\), \(v_i(y)=\mathbf1\{y\ne b_i\}\), and the
+common local object
+
+\[
+\mathcal H_i=\operatorname{conv}\{(y,m_i(y),v_i(y),g,gy):y\in\mathcal Y_i,\ g\in[\alpha,\beta]\}.
+\]
+
+The relevant physical coordinates are inventory, aggregate movement,
+aggregate visits, \(g\) and \(Z_i\). Balance linearly recovers aggregate
+pickup and delivery from inventory and movement. The relaxed VD-P block
+and A/B links represent this joint object; independently convexifying
+service and the product can instead use inconsistent inventory mixtures.
+
+\textbf{Compact joint-state proposition.} For
+\(0\le\alpha\le\beta\le1\), let
+
+\[
+\mathcal K_i=\{l_i,u_i\}\cup\bigl(\{b_i-1,b_i,b_i+1\}\cap\mathcal Y_i\bigr).
+\]
+
+Replacing \(\mathcal Y_i\) by these at most five legal supports
+preserves \(\mathcal H_i\). Continuous perspective weights on those
+supports, combined with an independent absolute-\(Y_i\) binary-product
+layer, preserve B's integer physical projection, original objective and
+common raw LP projection, provided every other deleted-state use passes
+through the common interface.
+
+\textbf{Proof sketch.} On the legal donor, initial singleton and
+receiver pieces, all three functions \(y,m_i(y),v_i(y)\) are affine. An
+interior integer stock is interpolated between its piece's legal
+endpoints at the same \(g\), preserving \(gy\) as well. The converse
+uses the legality of every retained support. The bit layer makes
+\(Z_i=gY_i\) exact at integer stocks. Its relaxed projection contains
+every true stock/product graph point, hence their convex hull; its
+disjoint auxiliary variables therefore do not change the breakpoint
+block's common LP projection. Intersecting with unchanged outside
+constraints preserves this equality under the stated interface
+condition. Appendix A.9 supplies the construction, both directions,
+sizes and failure cases. \(\square\)
+
+Continuous breakpoint weights and integer \(Y_i\) alone do not enforce
+the product, and binary breakpoint weights would delete legal interior
+stocks. B keeps its original \(e_i\) epigraph, so target deviation is
+not an additional shared-state function here. Exact state penalties,
+threshold counts, vehicle-state assignment or holed stock domains need
+additional supports or restrictions. The candidate C166 applies only
+this representation change, with the full B lifecycle and own startup.
+Equal raw LP projections do not imply identical presolve cuts, branch
+decisions or complete costs.
 
 \subsubsection{3.2 Ordered supply and support/handling
 information}\label{ordered-supply-and-supporthandling-information}
@@ -659,6 +720,19 @@ i7-12700KF Windows host. H seed 20260626 is held fixed; each study
 registers its Gurobi Seeds separately. Same Seed does not mean different
 models follow the same random trajectory.
 
+Each comparison answers a different question. P/PS measures the complete
+cost and benefit of an own feasible startup in the compact model. The
+strengthened root-only control retains shared-state and physical rows
+and its own startup, using native branch-and-cut on the unsplit root
+domain; its comparison with complete B tests the additional external
+control package. B/P and B/PS evaluate the integrated exact method. E+/B
+prices a separate inventory-proof source and its lower-bound
+contribution. C166/B keeps the complete flow and changes the
+shared-state representation, testing whether equal raw LP information
+can be carried at a better complete cost. The historical controls and
+the new representation comparison retain separate versions, inputs and
+denominators.
+
 The fixed-source protocol was committed before once-only generation. Six
 known roles and six new draws form a twelve-input breadth panel (four
 each at \(n\in\{15,20,35\}\)); CITI, CABI and Divvy supply archived
@@ -749,6 +823,9 @@ Archived-source Seed 0 cohort & 6 inputs / 18 B, E+, P method
 observations & Complete main method and separate proof extension \\
 Exposed-cohort Seeds1/2 & 24 new B/P arms, plus 12 historical Seed0 B/P
 arms & Six inputs; three within-input paired observations \\
+Compact shared-state comparison & 6 exposed inputs / 12 fresh same-build
+B/C166 Seed0 arms & Equivalent common LP information and complete-method
+costs \\
 \end{longtable}
 }
 
@@ -936,10 +1013,22 @@ plan is transferred into another production run. It establishes strict
 improvement for these four designed pairs without claiming that every
 increase in T must improve the optimum strictly.
 
-\Needspace{8\baselineskip}
+For fixed physical data and objective, let \([L_j,U_j]\) contain
+\(F^*(T_j)\), with \(T_2>T_1\). Feasible-set inclusion gives the
+complete improvement interval
 
-\textbf{Table 5. Strict resource-value improvements from separated
-qualified endpoints.}
+\[
+\max\{0,L_1-U_2\}\le F^*(T_1)-F^*(T_2)\le U_1-L_2.
+\]
+
+\Needspace{18\baselineskip}
+
+\textbf{Table 5. Two-sided resource-value improvement intervals.} The
+bounds use complete physical fleets and qualified global lower sources.
+Displayed interval endpoints are rounded outward after reducing each
+original lower by \(10^{-7}\) and adding \(10^{-12}\) to exactly
+recomputed feasible objectives; full original endpoints and arithmetic
+are retained in the decision data.
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -952,37 +1041,53 @@ qualified endpoints.}
 \begin{minipage}[b]{\linewidth}\raggedright
 Base
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-GI-TBC L(T1)
+T1 / T2 (s)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Feasible U(T2) / owner
+Improvement interval
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-L(T1) - U(T2)
+Interval width
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Source status T1 / T2
+B state T1 / T2
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-R-B20-S & 0.480735 & 0.198473 /GI-TBC & 0.282262 & C /C \\
-R-X20-S & 0.645325 & 0.434796 /GI-TBC & 0.210529 & C /C \\
-R-B35-S & 0.455904 & 0.344643 /GI-TBC & 0.111261 & open /open \\
-R-X35-S & 0.463358 & 0.403272 /GI-TBC & 0.060086 & open /open \\
+R-B20-S & 3300 / 5100 & {[}0.2822618761, 0.2822620892{]} & 0.0000002131
+& C / C \\
+R-X20-S & 4800 / 7200 & {[}0.2105292995, 0.2105295021{]} & 0.0000002026
+& C / C \\
+R-B35-S & 4800 / 7200 & {[}0.1112611656, 0.3725317852{]} & 0.2612706196
+& open / open \\
+R-X35-S & 4200 / 6300 & {[}0.0600858983, 0.3813035291{]} & 0.3212176308
+& open / open \\
 \end{longtable}
 }
 
-The T2 column identifies the owner of the lowest verified feasible upper
-endpoint among the three completed methods. A cross-method separation
-concerns the common problem value and does not certify either open
-source run.
+The two 35-station pairs prove a strictly positive optimal-objective
+improvement despite both runs remaining open, but leave substantial
+uncertainty about its magnitude. The two smaller pairs localize the
+improvement much more closely. These intervals measure the change in the
+specified objective, not monetary savings or a general marginal price of
+vehicle time. No source run acquires another run's certificate or clock.
 
+All four own-fleet comparisons show lower Gini and lower average target
+deviation at the larger horizon, accompanied by more cumulative pickup
+(B20-S 30 to 43; X20-S 16 to 22; B35-S 41 to 60; X35-S 29 to 42).
+Returns change from 0 to 0 on B20, 1 to 0 on X20, 2 to 3 on B35, and 1
+to 0 on X35. B35 therefore improves its objective while returning more
+stock. Its final station total decreases by one; X35 recovers one
+additional station unit. Counts of under-target, at-target and
+over-target stations and every route's travel/handling utilization are
+retained together in the supplement. These are descriptions of displayed
+feasible plans, not causal explanations of the unknown optimal fleets.
 The supplement reports operations of each verified own incumbent,
 including open configurations. The components and S distinguish changes
 in dispersion, target deviation and the inventory denominator. Duration
 utilization describes the displayed routes; a near-unit ratio alone does
 not establish a binding optimum. Full per-vehicle travel/handling,
 pickups/drops/returns and prefix peaks are retained in the
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round165-current-manuscript/results/unified_exact_round137/reports/operations.json}{operations
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round137/reports/operations.json}{operations
 data supplement}.
 
 Both G and \(P_{\mathrm{avg}}\) decrease between the saved GI-TBC plans
@@ -1029,8 +1134,8 @@ describe finite-budget observations, not an exact optimal-value curve.}
 
 \Needspace{8\baselineskip}
 
-\textbf{Table 6. Within-configuration weights; C denotes an own
-qualified certificate.}
+\textbf{Table 6. Objective-weight evidence. (a) Sampled complete-method
+outcomes; C denotes an own qualified certificate.}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1070,55 +1175,117 @@ R-X35-S-T2 & 2 & 0.620443 /0.36178 (open) & 0.611892 /0.363572 (open) &
 \end{longtable}
 }
 
-Certification depends on the weight even within the preselected \(n=20\)
-physical configuration. GI-TBC certifies R-B20-S-T1 at \(\rho=1\),
-whereas all three methods remain open at \(\rho=.5\). At \(\rho=.5\),
-GI-TBC and PS have the same verified U=0.347458, but their qualified L
-values are 0.331864/0.240479. This retains a finite-budget dual-progress
-advantage without a certificate-time claim at that weight.
+The sampled comparisons retain different search outcomes: B certifies
+R-B20-S-T1 at \(\rho=1,2\), while all methods remain open at
+\(\rho=.5\); all three methods remain open at every tested R-X35-S-T2
+weight. The table reports each original run's own U/L. Cross-weight
+information is used only for the following offline analysis.
 
-At \(\rho=2\), GI-TBC certifies F=0.744646 in 309.113 s, while P and PS
-remain open. PS attains the same verified feasible objective but has
-L=0.616106 instead of the GI-TBC lower endpoint 0.744646. Thus the
-\(n=20\) complete-proof advantage is observed at two tested weights, and
-the third retains a dual-endpoint advantage without closure. Each method
-retains its own proof status.
+We reconstruct every available complete fleet from the two
+configurations above and from the earlier K-15-S and UC-B20-B weight
+study: 32 run records, with all method/Seed owners retained. Routes,
+nonzero one-way operations, stock balance, empty departure, load
+prefixes, loaded returns and unloading time are independently checked.
+Each family has identical physical data and normalized station weights.
+True Gini and weighted penalty are recomputed from the full inventories
+and actual loaded weights; rounded table components are not used to
+manufacture fleets or certificates.
 
-At the fixed \(n=35\) horizon T=6300 s, all three methods remain open at
-\(\rho=.5\). GI-TBC reports U/L=0.255825/0.122332, with lower U and
-higher L than both controls. PS has the better feasible objective than
-cold P, while P has the higher qualified lower endpoint. This preserves
-an opposed-endpoint startup result alongside the finite GI-TBC endpoint
-advantages; no certificate-time ordering is assigned.
+For a fixed family, put \(p(x)=P(x)/\Omega\) and
 
-The \(n=35\) configuration remains open for every method at all three
-tested weights. GI-TBC has lower U and higher L than both controls
-within each weight. At \(\rho=2\), its U/L=0.524553/0.388438 compares
-with PS 0.611892/0.363572 and P 0.620443/0.36178. The feasible-objective
-advantage over PS is 0.0873392 at \(\rho=2\), compared with 0.00129523
-at \(\rho=1\). Thus the magnitude of the finite primal advantage varies
-with the weight, while the unresolved proof gap persists. These
-observations do not imply a monotone weight effect or
-complete-proof-time robustness.
+\[
+v(\rho)=\min_{x\in\mathcal F}\{G(x)+\rho p(x)\},\qquad
+U_{\mathcal A}(\rho)=\min_{x\in\mathcal A}\{G(x)+\rho p(x)\}.
+\]
 
-The saved \(n=20\) GI-TBC operating points show G increasing and
-\(P_{\mathrm{avg}}\) decreasing across \(\rho\in\{.5,1,2\}\); the
-low-weight run remains open. The \(n=35\) points expose a stronger
-finite-search limitation: at the same physical input and T, the
-\(\rho=2\) saved plan has \(G/P_{\mathrm{avg}}\)=0.148459/0.188047, both
-below the \(\rho=1\) saved plan values 0.18255/0.220722. Thus the
-\(\rho=1\) saved incumbent is dominated in the two objective components
-by another saved feasible plan. This is an offline comparison of
-completed observations that exposes a primal deficit in the retained
-\(\rho=1\) incumbent. Each run keeps its own U/L and proof status; no
-plan, Start or bound was transferred during production. It provides no
-exact optimal weight frontier and does not establish monotonic search
-behavior.
+The archive \(\mathcal A\) contains only verified physical fleets. Thus
+\(U_{\mathcal A}\) is an upper bound, not the algorithm's result at
+unrun weights. The value \(v\) is concave as an infimum of affine
+functions. For qualified global \(L_a\le v(\rho_a)\),
+\(L_b\le v(\rho_b)\), \(\rho_a<\rho_b\), concavity gives the lower chord
 
-Cross-weight values refer to different objectives, while method
-comparisons are made within each weight. Uncertified weights report
-feasible operating points and qualified bounds; they do not define an
-exact optimal trade-off curve.
+\[
+v(\rho)\ge\frac{\rho_b-\rho}{\rho_b-\rho_a}L_a+
+\frac{\rho-\rho_a}{\rho_b-\rho_a}L_b,\qquad \rho\in[\rho_a,\rho_b].
+\]
+
+Let \(L_C\) be the maximum of applicable chords. A repeated actual
+coordinate uses the greatest qualified lower and contributes no
+zero-length chord. Chords are never extrapolated. These standard
+parametric-optimization facts yield
+\(0\le U_{\mathcal A}(\rho)-v(\rho)\le U_{\mathcal A}(\rho)-L_C(\rho)\).
+We calculate the worst bound over the entire covered interval from all
+true affine-line intersections, active-chord intersections and domain
+endpoints using rational arithmetic. No dense grid or new solver is
+used. Actual binary64 lambda/weight coordinates are retained, including
+small differences from displayed .5/1/2. The numerical guards are those
+stated with Table 5.
+
+\Needspace{14\baselineskip}
+
+\textbf{Table 6, panel (b). Continuous-weight quality guarantees from
+the complete fleet archive.} Ranges below are display coordinates; the
+machine-readable data preserve exact loaded coordinates. Regret bounds
+are rounded upward.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Fixed physical family
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Covered rho range
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Runs / distinct G,p lines
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Supported archive lines
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Worst absolute regret bound
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+K-15-S & {[}0.710502825, 2.8420113{]} & 8 / 3 & 3 & 0.002356282 \\
+UC-B20-B & {[}0.88725, 3.549{]} & 6 / 1 & 1 & 0.000000100002 \\
+R-B20-S-T1 & {[}0.5, 2{]} & 9 / 7 & 3 & 0.015594269 \\
+R-X35-S-T2 & {[}0.5, 2{]} & 9 / 9 & 1 & 0.136115162 \\
+\end{longtable}
+}
+
+UC-B20-B has the same component line across the full historical range,
+with an essentially numerical-width bound for one fixed fleet. K-15-S
+exhibits three supported component choices; the largest archive regret
+bound occurs at \(\rho\approx1.217804157\), between sampled weights.
+R-B20-S-T1 has component tradeoffs but a wider low-weight search gap.
+R-X35-S-T2 has one archive line supported throughout, while its proof
+band remains wide. Dominated fleets and their owners remain in the
+archive. Stability among known fleets does not prove a complete optimal
+frontier.
+
+The R-X35-S-T2 fleet found at the higher sampled weight improves both
+components of the original unit-weight B incumbent. Re-evaluated at its
+actual original rho coordinate, its feasible objective is 0.3365058165
+instead of 0.4032719989, a known improvement of 0.06676618239. The old
+U, discovery time and certificate status are unchanged. This offline
+deficit diagnosis is not injected into the C166/B comparison's startup
+or treated as production acceleration.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Certified continuous-weight bands for four fixed physical families. Blue is the best verified archive objective; black dashed chords are applicable qualified lower bounds; shading is the remaining quality band. Pale lines retain other feasible component choices, circles mark original run incumbents, and triangles mark qualified lower anchors. These are upper/lower bounds, not a known exact optimum curve.}]{figures/parameter_quality_bands.png}}
+\caption{Certified continuous-weight bands for four fixed physical
+families. Blue is the best verified archive objective; black dashed
+chords are applicable qualified lower bounds; shading is the remaining
+quality band. Pale lines retain other feasible component choices,
+circles mark original run incumbents, and triangles mark qualified lower
+anchors. These are upper/lower bounds, not a known exact optimum curve.}
+\end{figure}
 
 \clearpage
 
@@ -1995,45 +2162,150 @@ the integer physical gap. The supplement preserves the exact domains,
 qualifications and both positive and negative complete results; none of
 these observations excludes all future structural progress.
 
+\subsubsection{6.5 Compact representation and complete
+costs}\label{compact-representation-and-complete-costs}
+
+The separately named C166 replaces only the shared-state representation
+in Section 3.1.1. Six exposed inputs are compared once at Seed0, with
+fresh B controls from the same new executable. Each arm independently
+pays its own complete startup; offline parameter fleets and bounds enter
+neither method. The original 1200 s n20 and 2400 s n35 caps, one thread,
+native defaults, requested gaps 0 and complete B lifecycle are common.
+
+Eight same-scope qualification LP pairs cover all six roots and two
+fixed children. Their largest signed objective difference in absolute
+value is 3.33e-16, consistent with the proved common raw LP projection.
+Columns fall in every pair, but rows and nonzeros can increase after
+retaining the exact bit layer. The supplement reports all sizes and
+pre-native construction pipeline costs. A smaller representation gives
+no root-bound improvement and need not improve native search.
+
+\Needspace{8\baselineskip}
+
+\Needspace{20\baselineskip}
+
+\textbf{Table 16. Same-build complete B/C166 comparison on the six
+exposed inputs.} Entries give qualified state and physical U / global L.
+The final column is T\_\allowbreak{}produce for B / C166, in seconds, including
+startup and close. It is a certificate time only for a CERT entry; OPEN
+has null T\_\allowbreak{}cert. Individual post-verification costs and full-precision
+endpoints are in the supplement.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Input
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+B: state; U / L
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+C166: state; U / L
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Paid production B / C166 (s)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+C20-S & CERT; 0.1912806 / 0.1912806 & OPEN; 0.1912806 / 0.186598 &
+210.415 / 1171.44 \\
+B20-B & CERT; 0.4232322 / 0.4232322 & CERT; 0.4232322 / 0.4232322 &
+5.09644 / 5.66122 \\
+X20-S & CERT; 0.4477476 / 0.4477476 & CERT; 0.4477476 / 0.4477476 &
+125.3 / 544.902 \\
+C35-U & OPEN; 0.1295664 / 0.0198375 & OPEN; 0.1210433 / 0.01420654 &
+2371.28 / 2371.2 \\
+B35-S & OPEN; 0.1942903 / 0.120234 & OPEN; 0.1792896 / 0.1160533 &
+2371.1 / 2372.23 \\
+X35-S & OPEN; 0.4574753 / 0.3949883 & OPEN; 0.4758712 / 0.3866997 &
+2371.14 / 2371.1 \\
+\end{longtable}
+}
+
+B certifies 3/6 and C166 certifies 2/6. The joint-CERT denominator is
+2/6; only those pairs have certificate-time ratios C166/B: B20-B: 1.1108
+(below the substantive scale); X20-S: 4.3488 (substantive). The
+predeclared material-difference scale is max(10 s, 0.1 times the faster
+certificate time). Native Runtime, Work and node counts describe nested
+work within the paid clock and are not added to it. All open/adverse
+endpoints remain in the table. This is one representation comparison on
+previously exposed inputs, with no new B/P test or independent Seed
+claim.
+
+The three n20 pairs have the same recorded AM action sequences and
+numerically equal initial raw LP values. On X20, accumulated native
+Runtime is 122.891 s for B and 542.289 s for C166, Work is 220.964
+versus 992.214, and returned nodes are 8842 versus 66425. Accumulated
+writer time is 0.721 s versus 0.724 s. The extra paid time is almost
+entirely inside native optimization. This observes the cost difference
+without identifying a particular presolve, cut or branching cause.
+Native MIP root processing can exploit the different integer extensions
+despite equal raw LP projections. Once own incumbents differ, cutoffs
+and reached paths may differ as well; the full comparison includes those
+consequences of the representation.
+
+The complete panel supports retaining B as the uniform main method and
+keeping C166 as a default-off research alternative. C166 loses C20's
+certificate and has the substantive X20 certificate-cost increase. Its
+C35 and B35 feasible objectives improve by about .00852312 and
+.01500068, but their proof lowers weaken; on X35 both endpoints are
+worse. These primal gains are retained as useful mixed evidence, without
+a per-input portfolio or a single-Seed generalization. Smaller state
+support preserves information at the declared interface, while its
+native integer search consequences remain an empirical question.
+
 \subsection{7. Conclusions and
 implications}\label{conclusions-and-implications}
 
-Physical equivalence, the shared inventory-state formulation and
-complete interval coverage provide the algorithmic foundation. The
-historical breadth panel certifies 9/12 inputs versus cold P 7/12 and
-paid-start PS 7/12; the separate positive-resource panel certifies 4/8
-versus 0/8 and 0/8. Their versions and denominators remain distinct from
-the exposed-cohort repeats. Conditional mechanism effects, time
-reversals and adverse endpoints remain part of the evidence, rather than
-additive component shares or new theorems.
+The inherited bicycle-redistribution operations and HGA-TGBC decoder
+lineage provide the problem setting. GI-TBC connects inventory
+allocation to objective products, movement and visits, and supplies a
+complete exact method through physical embeddings and improving-region
+coverage. The compact joint-state result identifies a transferable
+interface condition: legal affine-piece endpoints preserve the local
+continuous hull, and an independent product layer restores integer
+exactness. It applies standard disjunction and product tools; it
+establishes neither a routing hull nor general ideality or a
+capacity-independent integer encoding.
 
-The completed three-Seed cohort supports a precise finite claim for
-uniform GI-TBC/B: the n20 certificate patterns repeat, B35/X35 retain
-favorable primal and proof directions, and B's C35 proof advantage
-persists. It does not support a universal primal ordering, constant
-certificate time or certification of the n35 inputs. C35 reverses the
-feasible-solution ranking, and the known-feasible-target diagnostic
-exposes unreproduced absolute primal values even where within-Seed B/P
-signs agree. These observations support B as the paper's main method
-within the tested scope, without a dominance theorem or population-level
-robustness claim.
-
-E+ remains a separately named limited proof enhancement. Its historical
-X35 lower-bound gain and earlier qualified inventory-proof gains are
-real; the six Seed0 physical upper endpoints equal B's. Only C20's
-paired certificate-time increase meets the substantive scale. The new
-B/P Seeds do not establish E+ robustness. The unresolved B35/X35
-inventory widths also prevent transferring an earlier near-tight
-inventory remainder to this cohort. A valid relaxation, stronger local
-information and improved complete paid performance remain different
-conclusions.
-
-The studied main algorithm is uniform GI-TBC/B. Its mathematical
-definition, measured implementation and study-specific configurations
-are identified separately in the reproducibility material. The
-shared-state representation and complete coverage make an exact method
-for the stated operations; the current controls leave the outer
+The historical breadth panel certifies 9/12 configurations versus 7/12
+for each compact control, and the positive-resource panel gives 4/8
+versus 0/8. In the later six-input B/P cohort, the 3/6 versus 1/6
+certificate pattern repeats at three solver Seeds. C35 reverses its
+primal ordering, all n35 observations remain open, and fixed-target
+diagnostics expose incumbent deficits. E+ retains its genuine X35 proof
+gain without another certificate, together with its substantive C20 cost
+increase. These versioned results support finite competitiveness of the
+integrated method. The selected full/root controls leave the outer
 controller's independent computational value unresolved.
+
+The new same-build representation comparison gives B 3/6 certificates
+and C166 2/6. C166 reduces columns in all eight qualification LP pairs,
+with unchanged common LP information, but can add rows/nonzeros and
+alter native search. Two n35 primal improvements coexist with weaker
+proof endpoints; X35 worsens on both sides, and X20 costs substantially
+more to certify. Uniform B remains the main recommendation. The
+structural result and the mixed C166 evidence remain useful without
+changing released defaults or forming a best-of-two method.
+
+Complete physical plans also turn existing runs into bounded decisions
+between sampled weights. The four archive envelopes have whole-range
+absolute regret upper bounds of .002356282, .000000100002, .015594269
+and .136115162. They distinguish supported component choices, stability
+of one known fleet and unresolved quality. The X35 reweighting
+identifies a known feasible improvement of about .0667662 over the old
+unit-weight incumbent, without changing its discovery or certificate
+clock. All four physical time pairs have strictly positive
+optimal-objective improvement bounds; the two n35 magnitude intervals
+remain wide. Improved objectives can coexist with more loaded return, as
+on B35, while X35 returns less stock. These statements concern
+inventory-to-target ratio dispersion and the specified objective, rather
+than monetary gains, demographic fairness or causal claims about an
+unknown optimal route mechanism.
 
 \subsubsection{7.1 Remaining scientific
 limits}\label{remaining-scientific-limits}
@@ -2054,6 +2326,13 @@ already address parts of that question; their positive, mixed and
 adverse evidence remains relevant. The archived diagnostic prerequisites
 are in the research navigation, rather than a new mechanism or an
 executed query in this study.
+
+The compression result leaves a specific computational question: how
+native presolve, cuts and branching respond to equivalent integer
+extensions. The X35 continuous-weight guarantee still has a broad
+quality band, while the full/root attribution remains limited. These are
+separate unresolved questions rather than consequences settled by a
+smaller representation.
 
 \clearpage
 
@@ -3021,6 +3300,191 @@ mathematical contribution.
 
 \clearpage
 
+\subsection{A.9 Compact joint-state alternative
+C166}\label{a.9-compact-joint-state-alternative-c166}
+
+This separately named candidate changes only the inventory
+representation of B. Let \(M_i=\sum_k(p_{ki}+d_{ki})\),
+\(V_i=\sum_kz_{ki}\), and fix the legal integer interval
+\(\mathcal Y_i=\{l_i,\ldots,u_i\}\) and \(0\le\alpha\le\beta\le1\). Put
+\(m_i(y)=|b_i-y|\), \(v_i(y)=\mathbf1\{y\ne b_i\}\). The shared object
+is
+
+\[
+\mathcal H_i=\operatorname{conv}\{(y,m_i(y),v_i(y),g,gy):y\in\mathcal Y_i,\ g\in[\alpha,\beta]\}.
+\tag{AC1}
+\]
+
+The continuous relaxation of (A15)-(A16) projects to (AC1). Inventory
+balance recovers aggregate pickup/drop as \((M_i+b_i-Y_i)/2\) and
+\((M_i-b_i+Y_i)/2\). This assertion adds neither a linked-direction
+equation nor a vehicle-state product to B.
+
+\Needspace{8\baselineskip}
+
+\textbf{Proposition A9 (legal-piece compression).} Define
+\(\mathcal K_i=\{l_i,u_i\}\cup(\{b_i-1,b_i,b_i+1\}\cap\mathcal Y_i)\).
+Then (AC1) is unchanged when its stock support is restricted to
+\(\mathcal K_i\), which contains at most five values.
+
+\emph{Proof.} Partition the legal integers into their nonempty donor
+piece below b, initial singleton and receiver piece above b. On each
+piece, \((y,m_i(y),v_i(y))\) is affine. If a legal interior integer y
+lies between the legal endpoints a\textless c of its piece, choose
+\(\theta=(c-y)/(c-a)\). At the same g, \((y,m_i(y),v_i(y),g,gy)\) equals
+the \(\theta,1-\theta\) combination of the endpoint graph points.
+Singletons require no interpolation. All endpoints are in
+\(\mathcal K_i\), proving one inclusion for all convex mixtures. Every
+retained endpoint is legal, proving the reverse. \(\square\)
+
+Use continuous variables \(t_{ia},q_{ia}\) for a in \(\mathcal K_i\):
+
+\[
+\begin{aligned}
+&\sum_a t_{ia}=1,\quad Y_i=\sum_a a t_{ia},\quad
+M_i=\sum_a|b_i-a|t_{ia},\\
+&V_i=\sum_a\mathbf1\{a\ne b_i\}t_{ia},\quad
+\sum_a q_{ia}=g,\quad Z_i=\sum_a a q_{ia},\\
+&t_{ia}\ge0,\qquad\alpha t_{ia}\le q_{ia}\le\beta t_{ia}.
+\end{aligned}
+\tag{AC2}
+\]
+
+If \(t_{ia}>0\), set \(g_a=q_{ia}/t_{ia}\in[\alpha,\beta]\); zero t
+forces zero q. Hence (AC2) is a convex combination of legal graph
+points. Conversely collect any such combination into t/q. This proves
+its exact continuous projection without imposing adjacency or SOS2 on
+hull mixtures.
+
+Continuous (AC2) plus integer Y does not make the product exact. For
+b=0, domain \(\{1,2,3\}\), g=1/4, supports \(\{1,3\}\), weights 1/2 each
+and q=(0,1/4), it gives Y=2,Z=3/4 instead of gY=1/2. Making t binary
+excludes that legitimate interior stock. C166 therefore also keeps the
+independent absolute-Y binary layer (A14), with interval products
+
+\[
+\begin{aligned}
+&Y_i=\sum_h2^h b_{ih}^{\rm bit},\quad Z_i=\sum_h2^h w_{ih},\\
+&\alpha b_{ih}^{\rm bit}\le w_{ih}\le\beta b_{ih}^{\rm bit},\\
+&g-\beta(1-b_{ih}^{\rm bit})\le w_{ih}\le
+g-\alpha(1-b_{ih}^{\rm bit}),\quad b_{ih}^{\rm bit}\in\{0,1\}.
+\end{aligned}
+\tag{AC3}
+\]
+
+The implementation retains the three additional original {[}0,1{]}
+product rows in (A14) and all four factory interval rows in (AC3). It
+does not skip the bit family as VD-P does.
+
+\Needspace{8\baselineskip}
+
+\textbf{Proposition A10 (integer correspondence and common LP
+projection).} Under B's original unique nonzero one-way service, balance
+and integer inventory constraints, replacing (A15)-(A16) by (AC2)-(AC3)
+preserves the integer physical projection and original objective. Their
+raw LP projections in \((Y_i,M_i,V_i,g,Z_i)\) are equal. Global equality
+holds when every remaining row and the objective uses deleted state
+variables only through that common interface.
+
+\emph{Proof.} Extend an old integer physical point by the absolute bits
+of its legal stock, exact w=g*bit, and the same-g legal-piece
+interpolation of Proposition A9. It keeps all physical columns and the
+original g/e objective. Conversely (AC3) gives exact Z=gY; retained
+physical constraints and Lemma A1 give the original integer service. The
+old extension s\_\allowbreak{}Y=1,q\_\allowbreak{}Y=g reproduces that point. For the LP claim, the
+relaxed bit block is convex and contains an extension of every true
+legal (Y,g,gY) graph point, so its projection contains the projection of
+(AC1). More explicitly, for endpoint weights t and q, let B\_\allowbreak{}h(a) be the
+h-th absolute bit of a and choose the relaxed variables as
+\(\bar b_h=\sum_a B_h(a)t_a\), \(\bar w_h=\sum_a B_h(a)q_a\). Convexity
+gives every inherited bit inequality, while binary expansion recovers
+the same Y and Z. The two auxiliary blocks are disjoint, sharing only
+(Y,g,Z). Every point of (AC1) therefore still extends to their
+intersection. Equal projected local sets, intersected with the same
+outside system through their shared coordinates, give equal global
+projection, station by station. \(\square\)
+
+For actual B, r=Y/D and e retain (A10), H/S/Gini and physical/resource
+rows use common or route columns, and the objective uses G and weighted
+e. The computed state-penalty/ratio reconstructions are emitted only by
+VD-J, which is not active. Thus no target kink is missing from (AC2).
+AP, exact state penalties, threshold counts/CDF, theta, linked
+direction, RN and historical state-dependent resource/decomposition
+combinations are not silently extended; the research entry rejects
+unsupported combinations. Original domain-infeasibility flags and
+explicit contradiction rows remain authoritative even if storage bounds
+reset.
+
+Singleton and one-sided domains, b outside a tightened domain, b=0/C and
+fixed/zero g are covered by the same construction. Holes must remain
+separately enforced: on legal \(\{1,3\}\), integer Y=2 would otherwise
+be added by a breakpoint-plus-bit model. An additional exact state
+penalty \(|Y-2|\) with b=5 and domain {[}0,10{]} cannot use only
+\(\{0,4,5,6,10\}\), because its legitimate zero at Y=2 is absent.
+Additional state functions require their own common affine-piece
+endpoints.
+
+More generally, if an integer state is externally visible only through
+y,gy and a finite collection of functions affine on common legal integer
+pieces, retaining all legal piece endpoints preserves that local
+continuous graph hull. This is a standard disjunctive consequence,
+specialized here to the joint service interface (Vielma 2018; Huchette
+and Vielma 2023). When both sides of b have length at least two, the
+four V=1 endpoints are vertices of their quadrilateral and b is the
+unique V=0 graph point. Five supports are then necessary \emph{within
+legal graph-point generator representations}, not among arbitrary
+extended formulations.
+
+Let \(N_i=u_i-l_i+1\), \(k_i=|\mathcal K_i|\),
+\(d_i=\max\{1,\lceil\log_2(C_i+1)\rceil\}\). Excluding common physical
+columns/rows, B uses 2N columns, N binaries and 2N+6 rows. The
+implemented C166 uses 2k+2d columns, d binaries and 2k+8+7d rows. The
+continuous support is bounded by five; total exact encoding still
+depends logarithmically on capacity. Nonzero formulas and actual counts
+are retained with the implementation study. These are raw-model
+projection statements, not ideality of the combined extension,
+route/objective hull claims, or predictions of native cuts and branch
+trajectories. Fewer columns or binaries need not reduce complete cost.
+
+\subsection{A.10 Continuous decision bounds from existing physical
+fleets}\label{a.10-continuous-decision-bounds-from-existing-physical-fleets}
+
+For a fixed physical domain and normalized weight vector,
+\(v(\rho)=\min_x\{G(x)+\rho P(x)/\Omega\}\) is concave: for
+\(0\le\theta\le1\), every feasible x has
+\(G(x)+(\theta\rho_a+(1-\theta)\rho_b)p(x)=\theta F_{\rho_a}(x)+(1-\theta)F_{\rho_b}(x)\ge\theta v(\rho_a)+(1-\theta)v(\rho_b)\);
+minimize over x. Replacing endpoint values by qualified global lower
+bounds preserves the lower chord on its closed endpoint interval. Taking
+the maximum of applicable chords is safe. The minimum of the verified
+archive's objective lines is an upper bound. These facts require no
+assertion that the sampled incumbents are optimal or Pareto efficient.
+
+All feasible-line intersections, overlapping lower-chord intersections
+and chord interval endpoints partition the covered parameter range into
+finitely many pieces on which both envelope expressions are affine.
+Using every distinct anchor pair also makes the maximum applicable-chord
+envelope continuous: at an interior anchor, starting/ending chords share
+its L value with an incoming/outgoing anchor chord, while spanning
+chords remain continuous. The gap therefore attains a maximum at a
+partition endpoint (or everywhere on a constant piece). Checking all
+such points proves the stated continuous-interval regret bounds; a grid
+would not suffice. Same-coordinate lowers combine by maximum, never by a
+zero-length chord. Outside a chord's endpoint interval no extrapolation
+is granted.
+
+The application reconstructs complete fleets, verifies fixed
+physical/normalized-weight identity and uses actual loaded lambda/omega
+values. Rational G/P/coordinate arithmetic supplements the inherited
+numerical lower qualifications; it does not turn native solves into
+rational proofs. Original lowers are conservatively reduced by 1e-7, and
+exact feasible objectives receive a 1e-12 upward guard. No source
+crossing is clipped. The original run objectives, statuses and clocks
+remain unchanged. Likewise, nested physical time domains give the
+two-sided difference interval in Table 5; this is an objective-value
+decision bound, not a monetary resource price.
+
+\clearpage
+
 \section{Appendix B. Executable method
 specification}\label{appendix-b.-executable-method-specification}
 
@@ -3189,12 +3653,12 @@ absent in the source.
 
 The historical breadth/resource study's GI-TBC source/PE and policy are
 fixed in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round165-current-manuscript/results/unified_exact_round137/candidate_manifest.json}{candidate\_\allowbreak{}manifest.json};
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round137/candidate_manifest.json}{candidate\_\allowbreak{}manifest.json};
 its 120 actual method vectors, inputs, physical horizons, weights, Seeds
 and caps are in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round165-current-manuscript/results/unified_exact_round137/matrix_frozen.json}{matrix\_\allowbreak{}frozen.json},
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round137/matrix_frozen.json}{matrix\_\allowbreak{}frozen.json},
 with the prospectively registered sharing and order in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round165-current-manuscript/results/unified_exact_round137/experiment_plan.json}{experiment\_\allowbreak{}plan.json}.
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round137/experiment_plan.json}{experiment\_\allowbreak{}plan.json}.
 The default vector below uses ms2, tau=.08 and AP off. The three AM
 values are .04/.08/.16; the explicit
 \texttt{-\allowbreak{}-\allowbreak{}round137-\allowbreak{}am-\allowbreak{}threshold} overrides the actual
@@ -3212,15 +3676,15 @@ from the GI-TBC vector.
 For the later archived-source and three-Seed cohort, the measured C++ is
 \texttt{e920b92e\allowbreak{}199e825e\allowbreak{}c89a2932\allowbreak{}f701861f\allowbreak{}f158e0d4};
 actual method freezes and PE/DLL bindings are in the
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round165-current-manuscript/results/unified_exact_round164/method_freeze.json}{R164
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round164/method_freeze.json}{R164
 method freeze} and
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round165-current-manuscript/results/unified_exact_round164/science_identity.json}{science
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round164/science_identity.json}{science
 identity}. Those observations were produced by the already measured PE,
 not by a manuscript build. The latest source includes default-off
 research paths; the main B vector does not enable them. Historical
 S2/ms2 and paper-S2 are implementation aliases of the specified main
 method. E+ remains separately named and off in B. The
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round165-current-manuscript/results/unified_exact_round165/source_manifest.json}{current
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round166/source_manifest.json}{current
 document manifest} binds the maintained sources and both study
 generations.
 
@@ -3955,6 +4419,12 @@ Gupte, Akshay, Shabbir Ahmed, Myun Seok Cheon, and Santanu Dey. 2013.
 \emph{SIAM Journal on Optimization} 23 (2): 721--44.
 \url{https://doi.org/10.1137/110836183}.
 
+\bibitem[\citeproctext]{ref-huchetteVielma2023}
+Huchette, Joey, and Juan Pablo Vielma. 2023. {``Nonconvex Piecewise
+Linear Functions: Advanced Formulations and Simple Modeling Tools.''}
+\emph{Operations Research} 71 (5): 1835--56.
+\url{https://doi.org/10.1287/opre.2019.1973}.
+
 \bibitem[\citeproctext]{ref-ikonen2025}
 Ikonen, Teemu J., Keijo Heljanko, and Iiro Harjunkoski. 2025. {``A
 Generalized Disjunctive Programming Model for the Static Bike Sharing
@@ -4004,6 +4474,11 @@ TailoredExact project. 2026. \emph{Frozen Implementation of the
 Inventory--Gini Routing Model and Integrated Exact Methods}. Frozen E3
 production source base 7564a541\allowbreak{}5331b380\allowbreak{}e24d1ec0\allowbreak{}6936dcfd\allowbreak{}56557e67.
 \url{https://github.com/yifanXovo/TailoredExact/tree/7564a5415331b380e24d1ec06936dcfd56557e67}.
+
+\bibitem[\citeproctext]{ref-vielma2018embedding}
+Vielma, Juan Pablo. 2018. {``Embedding Formulations and Complexity for
+Unions of Polyhedra.''} \emph{Management Science} 64 (10): 4721--34.
+\url{https://doi.org/10.1287/mnsc.2017.2856}.
 
 \end{CSLReferences}
 

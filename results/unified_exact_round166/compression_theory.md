@@ -97,6 +97,15 @@ legal true (Y,G,GY) graph point. Its (Y,G,Z) projection consequently contains
 the projection of H. The breakpoint and bit auxiliary variables are
 disjoint and share only (Y,G,Z). Every point of H therefore has a bit
 extension, and their intersection still projects to H in (Y,M,V,G,Z).
+More explicitly, if a hull point has endpoint weights t_a and products
+q_a, let B_h(a) be the h-th absolute bit of legal endpoint a. The relaxed
+bit variables can be chosen as Bbar_h=sum_a B_h(a)t_a and
+Wbar_h=sum_a B_h(a)q_a. Each summand comes from a legal endpoint graph
+point with g_a=q_a/t_a; convexity gives all inherited interval and global
+bit-product inequalities, including zero-weight terms. Binary expansion
+gives sum_h 2^h Bbar_h=Y and sum_h 2^h Wbar_h=Z. This lift makes the
+containment constructive; it does not require the bit map itself to be
+affine in inventory.
 This proves equality with B's *original* LP projection. It does not imply
 ideality of the new combined extension, equal bounds after bit/selector
 branching, or equal presolve/native-cut/search trajectories.

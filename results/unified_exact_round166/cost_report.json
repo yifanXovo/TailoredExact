@@ -1,0 +1,143 @@
+{
+  "UTC": "2026-11-14T02:56:56.004389+00:00",
+  "work_start_UTC": "2026-11-13T21:10:00+00:00",
+  "science_cost_snapshot_UTC": "2026-11-14T02:56:56.003389+00:00",
+  "capacity_seconds": 57600,
+  "conservative_shared_outer_seconds": 20816.003389,
+  "capacity_remaining_lower_bound": 36783.996610999995,
+  "budget_policy": "Shared wall window counts parallel agent work once. Early mixed Git IO is conservatively included. All work through this snapshot fits capacity even without excluding ordinary IO.",
+  "diagnostic": {
+    "actual_native_Optimize": 96,
+    "limit_Optimize": 120,
+    "complete_outer_window_seconds": 539.0807707309723,
+    "limit_outer_seconds": 3600,
+    "driver_process_seconds": 20.981856799684465,
+    "native_cost_is_nested": true,
+    "healthy_reader_failures_preserved": true,
+    "producer_repeats_for_reader_errors": 0
+  },
+  "formal": {
+    "positions": 12,
+    "source_build": "0298dd45fbc3645af927c4a4dd1d43ecbdb567a9",
+    "PE_SHA": "27e71873536bcd8e6001aee0c2514a5cc8122763728c62e6d467cd528b48daba",
+    "actual_native_Optimize": 62,
+    "nominal_cap_sum": 21600,
+    "reservation_sum": 25200,
+    "watchdog": "producer cap+900 fault-only; never expands evaluation budget",
+    "actual_fresh_wrapper_outer_seconds": 16328.458215499762,
+    "actual_T_produce": {
+      "B": 7454.335378415883,
+      "C166": 8836.531013753265
+    },
+    "actual_T_verify": {
+      "B": 16.20052749942988,
+      "C166": 20.726014599669725
+    },
+    "actual_produce_plus_verify": 16327.792934268247,
+    "wrapper_management_difference": 0.6652812315151095,
+    "per_position": [
+      {
+        "position": 1,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 212.3858590000309,
+        "producer_cap": 1200,
+        "reservation": 1500,
+        "watchdog": 2100
+      },
+      {
+        "position": 2,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 1176.181654300075,
+        "producer_cap": 1200,
+        "reservation": 1500,
+        "watchdog": 2100
+      },
+      {
+        "position": 3,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 7.328834000043571,
+        "producer_cap": 1200,
+        "reservation": 1500,
+        "watchdog": 2100
+      },
+      {
+        "position": 4,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 6.556734200101346,
+        "producer_cap": 1200,
+        "reservation": 1500,
+        "watchdog": 2100
+      },
+      {
+        "position": 5,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 126.59971139999107,
+        "producer_cap": 1200,
+        "reservation": 1500,
+        "watchdog": 2100
+      },
+      {
+        "position": 6,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 550.666028900072,
+        "producer_cap": 1200,
+        "reservation": 1500,
+        "watchdog": 2100
+      },
+      {
+        "position": 7,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 2374.1927975001745,
+        "producer_cap": 2400,
+        "reservation": 2700,
+        "watchdog": 3300
+      },
+      {
+        "position": 8,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 2374.0751635995694,
+        "producer_cap": 2400,
+        "reservation": 2700,
+        "watchdog": 3300
+      },
+      {
+        "position": 9,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 2375.630695299711,
+        "producer_cap": 2400,
+        "reservation": 2700,
+        "watchdog": 3300
+      },
+      {
+        "position": 10,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 2375.1484278002754,
+        "producer_cap": 2400,
+        "reservation": 2700,
+        "watchdog": 3300
+      },
+      {
+        "position": 11,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 2374.0948764998466,
+        "producer_cap": 2400,
+        "reservation": 2700,
+        "watchdog": 3300
+      },
+      {
+        "position": 12,
+        "status": "COMPLETE",
+        "actual_wrapper_seconds": 2375.5974329998717,
+        "producer_cap": 2400,
+        "reservation": 2700,
+        "watchdog": 3300
+      }
+    ]
+  },
+  "total_new_native_Optimize": 158,
+  "offline_parameter_resource_Optimize": 0,
+  "figures_document_review_Optimize": 0,
+  "no_new_full_root_or_Eplus_or_Seed_study": true,
+  "explanatory_counters": "Runtime/Work/nodes/H/build/read are nested within paid outer work, not added again.",
+  "Git_and_public_transfer_IO": "Measured delivery operations are recorded separately in delivery_io.json; they do not replace solver fees. The conservative wall-cap test also includes them until the last cost snapshot."
+}

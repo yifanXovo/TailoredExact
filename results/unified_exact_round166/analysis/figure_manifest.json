@@ -1,0 +1,47 @@
+{
+  "UTC": "2026-11-14T02:17:56.319000+00:00",
+  "Optimize": 0,
+  "exact_finite_knot_plot": true,
+  "grid_optimization": false,
+  "data": {
+    "path": "results/unified_exact_round166/analysis/parameter_envelopes.json",
+    "bytes": 97518,
+    "SHA256": "bb155c44144748afaee0ab8bd2bc568f37314992b1148b352b9a73974ede42fb"
+  },
+  "archive": {
+    "path": "results/unified_exact_round166/review/data_physical_archive.json",
+    "bytes": 874307,
+    "SHA256": "0d2c0ac66587847a87b771b2cbc118464c45867844f61a60c9bb9d9b2dbaa226"
+  },
+  "outputs": [
+    {
+      "path": "results/unified_exact_round137/figures/parameter_quality_bands.png",
+      "bytes": 237455,
+      "SHA256": "767b7512dc20d7a2efb8d8f4b59ed04b81fd229a0f9efccc19308371f58a24de"
+    },
+    {
+      "path": "results/unified_exact_round166/analysis/parameter_quality_bands.pdf",
+      "bytes": 29012,
+      "SHA256": "3744d8ffefcac8b384017d1483aec8bc25453b9279c3b3a2b335c2374c39a77d"
+    }
+  ],
+  "generator": {
+    "path": "scripts/round166_figures.py",
+    "bytes": 4402,
+    "SHA256": "551ec403fa2dc067d1588f3bee2e1ed6a9ce13d7104c1fe46db7c725d2ebe245"
+  },
+  "Matplotlib": "3.11.2",
+  "seconds": 5.135484900325537,
+  "displayed_regret_upper_bounds": {
+    "R134:K-15-S": "0.0023563",
+    "R134:UC-B20-B": "1.0001e-7",
+    "R137:R-B20-S-T1": "0.015595",
+    "R137:R-X35-S-T2": "0.13612"
+  },
+  "annotation_rounding": "upward to five significant digits using exact rational source",
+  "rounding_helper": {
+    "path": "scripts/round166_result_text.py",
+    "bytes": 16409,
+    "SHA256": "481c85ff7a6d36871e5da193954b726e512911663779a1553bb5baaabb300f99"
+  }
+}

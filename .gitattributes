@@ -1,6 +1,8 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
 # Round166 source, diagnostics and manuscript evidence keep measured bytes.
 /scripts/round166* -text whitespace=cr-at-eol
+/scripts/paper_c166_round166.py -text whitespace=cr-at-eol
+/config/gi_tbc_c166_round166.json -text whitespace=cr-at-eol
 /include/Round166Research.hpp -text
 /include/Round98StateService.hpp -text
 /src/round166_qualification.cpp -text

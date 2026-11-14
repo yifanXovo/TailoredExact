@@ -1,33 +1,52 @@
 # Current manuscript and research mainline
 
-The Round165 current manuscript reconciles evidence through R164 into one
-readable [main + Appendix A/B PDF](../results/unified_exact_round137/manuscript.pdf),
-with a separate [supplement PDF](../results/unified_exact_round137/supplement.pdf).
-The sole maintained component directory remains `results/unified_exact_round137/`.
-The [review packet](paper_review.md), [contribution map](../results/unified_exact_round165/contribution_positioning.md)
-and [author memo](../results/unified_exact_round165/author_decision_memo.md) explain
-the integrated contribution and the unresolved independent value of outer
-control. B remains main; E+ is a separately named finite proof extension.
-No new Optimize, performance sample, production build or released-default
-change is part of R165.
+Round166 maintains one current English manuscript in
+`results/unified_exact_round137/`, with a [main + complete Appendix A/B PDF](../results/unified_exact_round137/manuscript.pdf)
+and [supplement PDF](../results/unified_exact_round137/supplement.pdf).
+The [report](../results/unified_exact_round166/final_report.md),
+[contribution map](../results/unified_exact_round166/contribution_positioning.md)
+and [author memo](../results/unified_exact_round166/author_decision_memo.md)
+state the current scientific conclusions.
 
-Use `scripts/round165_documents.py assemble`, `pdf`, then `qa`. The old
-R137 generator is historical and refuses direct invocation. The current
-build reads body, complete appendices, supplement, bibliography and figures;
-`method_and_model_source.md` is excluded. Document generation identities,
-historical measured C++/PE identities and source-line snapshots are separate
-in [source_manifest.json](../results/unified_exact_round165/source_manifest.json).
+Uniform GI-TBC/B remains the main method. The new C166 joint-state
+representation preserves integer physical points and the common raw LP
+projection under its declared interface condition, using at most five
+continuous supports plus the inherited absolute-Y binary product layer.
+All twelve same-build Seed0 arms are complete: B certifies3/6, C1662/6.
+C166 improves C35/B35 primal endpoints but weakens all n35 proof endpoints;
+C20 loses a certificate and X20 costs materially more. Keep C166 default off
+as a separately named mixed research alternative. Historical B/P and E+
+results retain their source identities and adverse/open evidence.
 
-The requested `paper-current` entry was dirty at R155, so R165 uses the isolated
-`E:\codes\ExactEBRP-work\worktrees\round165` from verified R164 delivery
-`de01e8fb27a954d031abac5fe99442d6c8d29d44`. The original entry and all user
-changes are protected. The new Draft stacks on R164 while main lacks the
-dependency; it does not merge the research chain.
+The four complete-fleet parameter families now have continuous-range
+quality guarantees from exact finite intersections. All four time pairs
+have two-sided optimal-objective improvement intervals, including positive
+lowers on open n35 cases. These are offline decision results and supply no
+free Start or bound to the formal matrix. The separate six-row28-column
+B-control increment contains no strict B/P pair; the requested106-row
+master was not found and the103-row working copy remains unchanged.
+
+Use `scripts/round166_documents.py assemble`, `pdf`, then `qa`.
+The builder explicitly inherits working R165 typography while binding date,
+header/template and actual toolchain in the cache identity. Components,
+figures, assembly and exports are identified in the
+[source manifest](../results/unified_exact_round166/source_manifest.json).
+`method_and_model_source.md` and the old R137 generator are historical.
+
+The isolated worktree is `E:/codes/ExactEBRP-work/worktrees/round166`, branch
+`codex/round166-structure-and-paper`, based on verified R165 delivery
+`239db6a80c944f1e7b5a55504ce5202ea35c2586`. Original/user dirty trees remain
+protected. The Draft stacks on `codex/round165-current-manuscript`; no merge,
+force push, historical deletion or released-default change is performed.
+The measured new C++ source is0298dd45fbc3645af927c4a4dd1d43ecbdb567a9;
+R163/R164 measurements retain their historical source/PE. See
+[reproduction](../results/unified_exact_round166/reproducibility.md) and the
+[decision](../results/unified_exact_round166/decision.json).
 
 ## Historical stage records
 
 The following dated-stage descriptions preserve their then-current artifact
-and delivery status. The current paper/PDF authority is the R165 mapping above.
+and delivery status. The current paper/PDF authority is the Round166 mapping above.
 
 The completed [Round164 finite solver-Seed confirmation](round164_seed_confirmation.md)
 adds24 frozen B/P arms at Seeds1/2 on the six exposed R163 inputs. Each of

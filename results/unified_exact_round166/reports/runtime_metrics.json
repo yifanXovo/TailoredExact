@@ -1,0 +1,1160 @@
+[
+  {
+    "position": 1,
+    "id": "R163-C20-S",
+    "method": "B",
+    "state": "CERT",
+    "T_produce": 210.41450014011934,
+    "T_verify": 1.9199338997714221,
+    "T_total": 212.33443403989077,
+    "H_seconds": 1.5503436,
+    "writer_build_seconds": 0.7682781,
+    "native_model_read_seconds": 0.0403299,
+    "native_runtime": 206.68099975585938,
+    "native_work": 356.9045669956754,
+    "native_nodes": 21388.0,
+    "native_calls": 4,
+    "first_raw_model": {
+      "rows": 6683,
+      "columns": 3142,
+      "nonzeros": 38618
+    },
+    "first_LP_lower": 0.11774637302664294,
+    "first_LP_work": 0.43263884539047254,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/001/raw/R166_001_R163-C20-S_S0_B/external/native_logs/L0_terminal_mip.gurobi.log",
+        "bytes": 11106,
+        "SHA256": "f0acea18f1d3a48795b06c11979211426b564ab08049788ff7f37ff24eabef30"
+      },
+      "original_model": {
+        "rows": 6683,
+        "columns": 3142,
+        "nonzeros": 38618
+      },
+      "presolved_model": {
+        "rows": 5299,
+        "columns": 3120,
+        "nonzeros": 38475
+      },
+      "root_relaxation": {
+        "objective": 0.1177464,
+        "iterations": 4012,
+        "seconds": 0.17
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 0.492999792098999,
+        "work": 1.4170596300134917,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 206.18799996376038,
+        "work": 355.4875073656619,
+        "nodes": 21388.0
+      }
+    ],
+    "models_checked": 4,
+    "Starts_checked": 1,
+    "max_Start_residual": 2.220446049250313e-16,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/001/raw/R166_001_R163-C20-S_S0_B/round166_endpoint.json",
+      "bytes": 3371,
+      "SHA256": "4594f8ef2714f6b300efd04c38881e84faabcab6a6dbcf0ebcb35a1bacd1d658"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/001/raw/R166_001_R163-C20-S_S0_B/audit.json",
+      "bytes": 2684659,
+      "SHA256": "bfc446d2870791b87d026c8e7d2bace91371fc330a942d1f8f464b6ef5a6c56a"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/001/raw/R166_001_R163-C20-S_S0_B/result.json",
+      "bytes": 97218,
+      "SHA256": "8e9d4c7e61579311e40e7f4b9d37d891ae3de564d36baff6c6b5528c517d8949"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/001/raw/R166_001_R163-C20-S_S0_B/external/paper_optimize_ledger.csv",
+      "bytes": 1767,
+      "SHA256": "edbdf206a98998c89e186b575f59196d45bf5da18027b16f660801e8242b0c24"
+    }
+  },
+  {
+    "position": 2,
+    "id": "R163-C20-S",
+    "method": "C166",
+    "state": "OPEN",
+    "T_produce": 1171.439048875589,
+    "T_verify": 4.675596899818629,
+    "T_total": 1176.1146457754076,
+    "H_seconds": 1.5500772,
+    "writer_build_seconds": 0.7223505,
+    "native_model_read_seconds": 0.0371658,
+    "native_runtime": 1167.5249998569489,
+    "native_work": 2213.987822358756,
+    "native_nodes": 82766.0,
+    "native_calls": 4,
+    "first_raw_model": {
+      "rows": 6682,
+      "columns": 2596,
+      "nonzeros": 37443
+    },
+    "first_LP_lower": 0.11774637302664298,
+    "first_LP_work": 0.35014021099936665,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/002/raw/R166_002_R163-C20-S_S0_C166/external/native_logs/L0_terminal_mip.gurobi.log",
+        "bytes": 23238,
+        "SHA256": "3610bfa8a6d9540ae2d414c7a1d1aee8a7c0ea65efb9ba072d721210b5d26bd4"
+      },
+      "original_model": {
+        "rows": 6682,
+        "columns": 2596,
+        "nonzeros": 37443
+      },
+      "presolved_model": {
+        "rows": 5288,
+        "columns": 2574,
+        "nonzeros": 37594
+      },
+      "root_relaxation": {
+        "objective": 0.1189427,
+        "iterations": 2664,
+        "seconds": 0.1
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 0.41499996185302734,
+        "work": 1.2358742482703817,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 1167.1099998950958,
+        "work": 2212.751948110486,
+        "nodes": 82766.0
+      }
+    ],
+    "models_checked": 4,
+    "Starts_checked": 1,
+    "max_Start_residual": 8.881784197001252e-16,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/002/raw/R166_002_R163-C20-S_S0_C166/round166_endpoint.json",
+      "bytes": 3440,
+      "SHA256": "7590ad93e8527aedb4d09c92022c9c026184b5b64b7f2c7a7bdbc811acaef53c"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/002/raw/R166_002_R163-C20-S_S0_C166/audit.json",
+      "bytes": 7833234,
+      "SHA256": "ad151b6bbc268de8feccf341eb0ac6bf22678570f843b83fdd239dac0809a283"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/002/raw/R166_002_R163-C20-S_S0_C166/result.json",
+      "bytes": 97180,
+      "SHA256": "b9bc8439d1ed4abebd013b033a1d523e871ff4ff924a8f0f8bedaa09f770d838"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/002/raw/R166_002_R163-C20-S_S0_C166/external/paper_optimize_ledger.csv",
+      "bytes": 1792,
+      "SHA256": "d64dd9ae1950785ccbf92ac3c7fa0639eb087db89369ac42dced0b3c5092f4b8"
+    }
+  },
+  {
+    "position": 3,
+    "id": "R163-B20-B",
+    "method": "C166",
+    "state": "CERT",
+    "T_produce": 5.661223654169589,
+    "T_verify": 1.6239632000215352,
+    "T_total": 7.285186854191124,
+    "H_seconds": 0.0227025,
+    "writer_build_seconds": 1.6638585,
+    "native_model_read_seconds": 0.0849502,
+    "native_runtime": 2.391000270843506,
+    "native_work": 3.417206761256799,
+    "native_nodes": 293.0,
+    "native_calls": 9,
+    "first_raw_model": {
+      "rows": 6513,
+      "columns": 2482,
+      "nonzeros": 35652
+    },
+    "first_LP_lower": 0.3488928157119196,
+    "first_LP_work": 0.04441956768183548,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/003/raw/R166_003_R163-B20-B_S0_C166/external/native_logs/L0.0.1_c6_1_child_disjunction_target_mip.gurobi.log",
+        "bytes": 2240,
+        "SHA256": "93daa9ec02e4460d7edf565e1786548d0100f573949977d5f6636769986a1049"
+      },
+      "original_model": {
+        "rows": 6513,
+        "columns": 2482,
+        "nonzeros": 35902
+      },
+      "presolved_model": {
+        "rows": 1679,
+        "columns": 802,
+        "nonzeros": 8884
+      },
+      "root_relaxation": {
+        "objective": 0.3917953,
+        "iterations": 1165,
+        "seconds": 0.03
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "native-target",
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "native-target": 1,
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "CHILD_BOUND_TARGET_MIP",
+        "calls": 1,
+        "runtime": 0.1809999942779541,
+        "work": 0.2804538589105756,
+        "nodes": 1.0
+      },
+      {
+        "kind": "LP",
+        "calls": 7,
+        "runtime": 0.196000337600708,
+        "work": 0.37424892944583327,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 2.0139999389648438,
+        "work": 2.76250397290039,
+        "nodes": 292.0
+      }
+    ],
+    "models_checked": 9,
+    "Starts_checked": 2,
+    "max_Start_residual": 5.1514348342607263e-14,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/003/raw/R166_003_R163-B20-B_S0_C166/round166_endpoint.json",
+      "bytes": 3415,
+      "SHA256": "1185fb006f1c00540d96913767af30e1b880189d7eab690a761122828a821bd6"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/003/raw/R166_003_R163-B20-B_S0_C166/audit.json",
+      "bytes": 191110,
+      "SHA256": "656046def7de2f09d33616478f590e5ca5215c51d304fb57fb5d7357ffa76918"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/003/raw/R166_003_R163-B20-B_S0_C166/result.json",
+      "bytes": 96202,
+      "SHA256": "a69180e409fb5a868e9e6f353eff21ad3043345d439545c2270e7d778faf3de1"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/003/raw/R166_003_R163-B20-B_S0_C166/external/paper_optimize_ledger.csv",
+      "bytes": 3769,
+      "SHA256": "d1a81727e18e8d2b46f1da1795485a28dad44bd20b2ddc7339f64c75ad2cfd49"
+    }
+  },
+  {
+    "position": 4,
+    "id": "R163-B20-B",
+    "method": "B",
+    "state": "CERT",
+    "T_produce": 5.096442225854844,
+    "T_verify": 1.4154419996775687,
+    "T_total": 6.5118842255324125,
+    "H_seconds": 0.0227777,
+    "writer_build_seconds": 1.6155936000000002,
+    "native_model_read_seconds": 0.0823967,
+    "native_runtime": 1.9219996929168701,
+    "native_work": 2.5243547423266195,
+    "native_nodes": 160.0,
+    "native_calls": 9,
+    "first_raw_model": {
+      "rows": 6049,
+      "columns": 2488,
+      "nonzeros": 34844
+    },
+    "first_LP_lower": 0.3488928157119196,
+    "first_LP_work": 0.03018906099803734,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/004/raw/R166_004_R163-B20-B_S0_B/external/native_logs/L0.0.1_c6_1_child_disjunction_target_mip.gurobi.log",
+        "bytes": 1940,
+        "SHA256": "357c1b5cc41acc494d7ece1fd00e41570580cdc531f6d76ecd16a3a6e25dd2f5"
+      },
+      "original_model": {
+        "rows": 6049,
+        "columns": 2488,
+        "nonzeros": 35011
+      },
+      "presolved_model": {
+        "rows": 1642,
+        "columns": 899,
+        "nonzeros": 10523
+      },
+      "root_relaxation": {
+        "objective": 0.4033865,
+        "iterations": 885,
+        "seconds": 0.02
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "native-target",
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "native-target": 1,
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "CHILD_BOUND_TARGET_MIP",
+        "calls": 1,
+        "runtime": 0.07800006866455078,
+        "work": 0.11599825847230692,
+        "nodes": 1.0
+      },
+      {
+        "kind": "LP",
+        "calls": 7,
+        "runtime": 0.2239997386932373,
+        "work": 0.4096368415068501,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 1.619999885559082,
+        "work": 1.9987196423474622,
+        "nodes": 159.0
+      }
+    ],
+    "models_checked": 9,
+    "Starts_checked": 2,
+    "max_Start_residual": 5.1514348342607263e-14,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/004/raw/R166_004_R163-B20-B_S0_B/round166_endpoint.json",
+      "bytes": 3403,
+      "SHA256": "e46f73fa55dd96d6e03830c6cca951db3a8510873708de77df8850cba6e2877b"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/004/raw/R166_004_R163-B20-B_S0_B/audit.json",
+      "bytes": 119542,
+      "SHA256": "7e43e99623991ada3e8c4237b9490b4f5840e03e5bab0efec0b104b277d5a356"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/004/raw/R166_004_R163-B20-B_S0_B/result.json",
+      "bytes": 96156,
+      "SHA256": "4bf7e21606d2c60e3445f187329cb73c2c56809a173e9c287794216929f5325b"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/004/raw/R166_004_R163-B20-B_S0_B/external/paper_optimize_ledger.csv",
+      "bytes": 3699,
+      "SHA256": "a7236dde44ee792f208547123fbf7b10cdb2b3749b6b690370dea05f90de6b9f"
+    }
+  },
+  {
+    "position": 5,
+    "id": "R163-X20-S",
+    "method": "B",
+    "state": "CERT",
+    "T_produce": 125.29991797590628,
+    "T_verify": 1.25496089970693,
+    "T_total": 126.55487887561321,
+    "H_seconds": 0.2370885,
+    "writer_build_seconds": 0.7213828,
+    "native_model_read_seconds": 0.0366268,
+    "native_runtime": 122.89100003242493,
+    "native_work": 220.96402377399366,
+    "native_nodes": 8842.0,
+    "native_calls": 5,
+    "first_raw_model": {
+      "rows": 6233,
+      "columns": 2692,
+      "nonzeros": 36686
+    },
+    "first_LP_lower": 0.1656085786377999,
+    "first_LP_work": 0.2713180571129132,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/005/raw/R166_005_R163-X20-S_S0_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+        "bytes": 2304,
+        "SHA256": "937ee6e22bb8fbd68d9ffb37f235732d81e4342ae0fa42a892621397a653a31b"
+      },
+      "original_model": {
+        "rows": 6233,
+        "columns": 2692,
+        "nonzeros": 36686
+      },
+      "presolved_model": {
+        "rows": 4938,
+        "columns": 2536,
+        "nonzeros": 32997
+      },
+      "root_relaxation": {
+        "objective": 0.1656086,
+        "iterations": 4256,
+        "seconds": 0.21
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "native-target",
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "native-target": 1,
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "CHILD_BOUND_TARGET_MIP",
+        "calls": 1,
+        "runtime": 0.9760000705718994,
+        "work": 1.6889014973456173,
+        "nodes": 1.0
+      },
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 0.3020000457763672,
+        "work": 0.8630554096043017,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 121.61299991607666,
+        "work": 218.41206686704373,
+        "nodes": 8841.0
+      }
+    ],
+    "models_checked": 5,
+    "Starts_checked": 2,
+    "max_Start_residual": 1.2989609388114332e-14,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/005/raw/R166_005_R163-X20-S_S0_B/round166_endpoint.json",
+      "bytes": 3402,
+      "SHA256": "e3921c9528ed96e8235e59247918cd6f2f98fe4825cce69320abc6e1af97a89e"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/005/raw/R166_005_R163-X20-S_S0_B/audit.json",
+      "bytes": 1105191,
+      "SHA256": "5b5a937dcd4648e516d871a9394d36c24698b9bcd6033853fdbbdc7bccd5cbaa"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/005/raw/R166_005_R163-X20-S_S0_B/result.json",
+      "bytes": 96645,
+      "SHA256": "f7002ee34ea5d15d4833b79a9dd8432c540820cbce4b53fb222039b714a3a124"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/005/raw/R166_005_R163-X20-S_S0_B/external/paper_optimize_ledger.csv",
+      "bytes": 2159,
+      "SHA256": "fef1b5a7b933e0583186189df68e429362b0b44fca4da8a6003a5b3051a0e739"
+    }
+  },
+  {
+    "position": 6,
+    "id": "R163-X20-S",
+    "method": "C166",
+    "state": "CERT",
+    "T_produce": 544.9021300603636,
+    "T_verify": 5.691091499757022,
+    "T_total": 550.5932215601206,
+    "H_seconds": 0.2087519,
+    "writer_build_seconds": 0.7238595,
+    "native_model_read_seconds": 0.037919,
+    "native_runtime": 542.2890000343323,
+    "native_work": 992.2140894719881,
+    "native_nodes": 66425.0,
+    "native_calls": 5,
+    "first_raw_model": {
+      "rows": 6505,
+      "columns": 2534,
+      "nonzeros": 36848
+    },
+    "first_LP_lower": 0.16560857863779985,
+    "first_LP_work": 0.23378779767013147,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/006/raw/R166_006_R163-X20-S_S0_C166/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+        "bytes": 1965,
+        "SHA256": "ff63f5f5121a3e09707b5cb3b19055b81f5f174ad1872e34793f1776fa9f003c"
+      },
+      "original_model": {
+        "rows": 6505,
+        "columns": 2534,
+        "nonzeros": 36848
+      },
+      "presolved_model": {
+        "rows": 5061,
+        "columns": 2364,
+        "nonzeros": 32296
+      },
+      "root_relaxation": {
+        "objective": 0.1721899,
+        "iterations": 2828,
+        "seconds": 0.08
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "native-target",
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "native-target": 1,
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "CHILD_BOUND_TARGET_MIP",
+        "calls": 1,
+        "runtime": 0.1979999542236328,
+        "work": 0.378758375767331,
+        "nodes": 1.0
+      },
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 0.2590000629425049,
+        "work": 0.7286370723053546,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 541.8320000171661,
+        "work": 991.1066940239155,
+        "nodes": 66424.0
+      }
+    ],
+    "models_checked": 5,
+    "Starts_checked": 2,
+    "max_Start_residual": 1.2989609388114332e-14,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/006/raw/R166_006_R163-X20-S_S0_C166/round166_endpoint.json",
+      "bytes": 3407,
+      "SHA256": "c175f6715195a3c10570f9d33237097cd3d24fef2863ccf4940d425d2e631a59"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/006/raw/R166_006_R163-X20-S_S0_C166/audit.json",
+      "bytes": 9164754,
+      "SHA256": "dd46a407e88cdcf69d24ad7ec54e7ceaa35e72d8843c373ad5605e793cd01791"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/006/raw/R166_006_R163-X20-S_S0_C166/result.json",
+      "bytes": 96686,
+      "SHA256": "84d18a53261daa4ae411498e09b740bfec3784c11b324c36865097f9b62505f0"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/006/raw/R166_006_R163-X20-S_S0_C166/external/paper_optimize_ledger.csv",
+      "bytes": 2171,
+      "SHA256": "a002503f4e56e09c8736e901b867117755c9abe0f6d0a47e9bab6d59fa46b007"
+    }
+  },
+  {
+    "position": 7,
+    "id": "R163-C35-U",
+    "method": "C166",
+    "state": "OPEN",
+    "T_produce": 2371.2041762145236,
+    "T_verify": 2.9298058999702334,
+    "T_total": 2374.133982114494,
+    "H_seconds": 10.2317226,
+    "writer_build_seconds": 3.2797585000000002,
+    "native_model_read_seconds": 0.159748,
+    "native_runtime": 2355.680999994278,
+    "native_work": 4844.834748756171,
+    "native_nodes": 2312.0,
+    "native_calls": 4,
+    "first_raw_model": {
+      "rows": 24238,
+      "columns": 9643,
+      "nonzeros": 165977
+    },
+    "first_LP_lower": 0.0,
+    "first_LP_work": 1.1965970089076488,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/007/raw/R166_007_R163-C35-U_S0_C166/external/native_logs/L0_terminal_mip.gurobi.log",
+        "bytes": 39923,
+        "SHA256": "3c625ba297f8b4509105428d87157ec7d9553de4a6f08cffe18312441eee2883"
+      },
+      "original_model": {
+        "rows": 24238,
+        "columns": 9643,
+        "nonzeros": 165977
+      },
+      "presolved_model": {
+        "rows": 19968,
+        "columns": 9608,
+        "nonzeros": 213700
+      },
+      "root_relaxation": {
+        "objective": 0.0,
+        "iterations": 4446,
+        "seconds": 0.35
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 1.2290000915527344,
+        "work": 4.038512638001693,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 2354.451999902725,
+        "work": 4840.79623611817,
+        "nodes": 2312.0
+      }
+    ],
+    "models_checked": 4,
+    "Starts_checked": 1,
+    "max_Start_residual": 2.942091015256665e-15,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/007/raw/R166_007_R163-C35-U_S0_C166/round166_endpoint.json",
+      "bytes": 3587,
+      "SHA256": "8227adb0045280bf4d1ed43760be6ac63672323c018b211ce537b048a49b86c4"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/007/raw/R166_007_R163-C35-U_S0_C166/audit.json",
+      "bytes": 279053,
+      "SHA256": "29f70bd4384b14c4a65fa2374f8f9703a48a59258595edcbea200d6f472af422"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/007/raw/R166_007_R163-C35-U_S0_C166/result.json",
+      "bytes": 98991,
+      "SHA256": "bc4da775e1d626dac94b77c3ed45fe5069981bf365ca69b4b3165d7c616cd043"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/007/raw/R166_007_R163-C35-U_S0_C166/external/paper_optimize_ledger.csv",
+      "bytes": 1786,
+      "SHA256": "58fe7bd394727e5d07ef1ef540d9ff0bb06dbc1f0402b4a0acd0fad2ec524187"
+    }
+  },
+  {
+    "position": 8,
+    "id": "R163-C35-U",
+    "method": "B",
+    "state": "OPEN",
+    "T_produce": 2371.2837796057574,
+    "T_verify": 2.7347559998743236,
+    "T_total": 2374.0185356056318,
+    "H_seconds": 9.8513676,
+    "writer_build_seconds": 3.2846953,
+    "native_model_read_seconds": 0.158911,
+    "native_runtime": 2356.052999973297,
+    "native_work": 5584.923796006808,
+    "native_nodes": 6616.0,
+    "native_calls": 4,
+    "first_raw_model": {
+      "rows": 24542,
+      "columns": 10937,
+      "nonzeros": 169324
+    },
+    "first_LP_lower": 0.0,
+    "first_LP_work": 1.5578303539156888,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/008/raw/R166_008_R163-C35-U_S0_B/external/native_logs/L0_terminal_mip.gurobi.log",
+        "bytes": 39090,
+        "SHA256": "ba44ec4469abd5dda23b6a3fb619a854c8a42b58843b6e378a33546f7ce91105"
+      },
+      "original_model": {
+        "rows": 24542,
+        "columns": 10937,
+        "nonzeros": 169324
+      },
+      "presolved_model": {
+        "rows": 20146,
+        "columns": 10906,
+        "nonzeros": 239293
+      },
+      "root_relaxation": {
+        "objective": 0.0,
+        "iterations": 3057,
+        "seconds": 0.2
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 1.4219999313354492,
+        "work": 4.705713352073772,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 2354.6310000419617,
+        "work": 5580.218082654734,
+        "nodes": 6616.0
+      }
+    ],
+    "models_checked": 4,
+    "Starts_checked": 1,
+    "max_Start_residual": 2.220446049250313e-16,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/008/raw/R166_008_R163-C35-U_S0_B/round166_endpoint.json",
+      "bytes": 3576,
+      "SHA256": "3ca6ec5729853b891b0a6cf0cea0cfcecefe457d9e8b2ad963a25289a5b71416"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/008/raw/R166_008_R163-C35-U_S0_B/audit.json",
+      "bytes": 130278,
+      "SHA256": "e383e46870284af1497de5745448d6c2fc52a111a438a5eaa5e5d0bcf9fd3151"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/008/raw/R166_008_R163-C35-U_S0_B/result.json",
+      "bytes": 98831,
+      "SHA256": "94e8b6b0233e6878df5a16cb26ffbf110d19bab9505b1b01127d7ebf7283c1f2"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/008/raw/R166_008_R163-C35-U_S0_B/external/paper_optimize_ledger.csv",
+      "bytes": 1774,
+      "SHA256": "bf8d0f4d84edb6535d49f36bc16fa12954408ebc056a6ff5105278abac6e778d"
+    }
+  },
+  {
+    "position": 9,
+    "id": "R163-B35-S",
+    "method": "B",
+    "state": "OPEN",
+    "T_produce": 2371.102426017169,
+    "T_verify": 4.471638400107622,
+    "T_total": 2375.5740644172765,
+    "H_seconds": 9.4785257,
+    "writer_build_seconds": 3.3112714,
+    "native_model_read_seconds": 0.15811730000000002,
+    "native_runtime": 2356.4590005874634,
+    "native_work": 5920.218137101252,
+    "native_nodes": 2659.0,
+    "native_calls": 4,
+    "first_raw_model": {
+      "rows": 24234,
+      "columns": 10629,
+      "nonzeros": 168063
+    },
+    "first_LP_lower": 0.10785911357549328,
+    "first_LP_work": 6.425686144383903,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/009/raw/R166_009_R163-B35-S_S0_B/external/native_logs/L0_terminal_mip.gurobi.log",
+        "bytes": 37427,
+        "SHA256": "86b90a21711762b855fc3fe36c1e2ce405556abe334e17164511799b8f37e075"
+      },
+      "original_model": {
+        "rows": 24234,
+        "columns": 10629,
+        "nonzeros": 168063
+      },
+      "presolved_model": {
+        "rows": 19976,
+        "columns": 10564,
+        "nonzeros": 234200
+      },
+      "root_relaxation": {
+        "objective": 0.1078591,
+        "iterations": 14180,
+        "seconds": 1.92
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 4.679000377655029,
+        "work": 14.797496927020253,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 2351.7800002098083,
+        "work": 5905.420640174232,
+        "nodes": 2659.0
+      }
+    ],
+    "models_checked": 4,
+    "Starts_checked": 1,
+    "max_Start_residual": 2.220446049250313e-16,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/009/raw/R166_009_R163-B35-S_S0_B/round166_endpoint.json",
+      "bytes": 3544,
+      "SHA256": "50b632788134bbe9f02d4df845f3552263e16ccea0e012e7d05783f157599163"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/009/raw/R166_009_R163-B35-S_S0_B/audit.json",
+      "bytes": 98388,
+      "SHA256": "da07e9079995f816989fe9387fbf26e793e6543da156b4e117a9c88298fe66e4"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/009/raw/R166_009_R163-B35-S_S0_B/result.json",
+      "bytes": 98840,
+      "SHA256": "bcde88c396378eeba53ef6ddc5c7e1b237089834495f9e947ca31bf627f61ed3"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/009/raw/R166_009_R163-B35-S_S0_B/external/paper_optimize_ledger.csv",
+      "bytes": 1768,
+      "SHA256": "5037b5994bfc7ee8800c0b62071db61ce562232d6b60e32c4287112a000a596a"
+    }
+  },
+  {
+    "position": 10,
+    "id": "R163-B35-S",
+    "method": "C166",
+    "state": "OPEN",
+    "T_produce": 2372.2252763174474,
+    "T_verify": 2.864774700254202,
+    "T_total": 2375.0900510177016,
+    "H_seconds": 9.4855357,
+    "writer_build_seconds": 3.1641479,
+    "native_model_read_seconds": 0.15246569999999998,
+    "native_runtime": 2356.616000175476,
+    "native_work": 5457.014586680102,
+    "native_nodes": 2318.0,
+    "native_calls": 4,
+    "first_raw_model": {
+      "rows": 24175,
+      "columns": 9615,
+      "nonzeros": 165766
+    },
+    "first_LP_lower": 0.10785911357549328,
+    "first_LP_work": 4.322704706390201,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/010/raw/R166_010_R163-B35-S_S0_C166/external/native_logs/L0_terminal_mip.gurobi.log",
+        "bytes": 36162,
+        "SHA256": "12258e5a3b71faf88723848f30d1c983f5153bc082a05e939d65998c05bc7b13"
+      },
+      "original_model": {
+        "rows": 24175,
+        "columns": 9615,
+        "nonzeros": 165766
+      },
+      "presolved_model": {
+        "rows": 19916,
+        "columns": 9538,
+        "nonzeros": 203858
+      },
+      "root_relaxation": {
+        "objective": 0.1078591,
+        "iterations": 18280,
+        "seconds": 2.04
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 3.0930001735687256,
+        "work": 9.709474533260206,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 2353.5230000019073,
+        "work": 5447.305112146842,
+        "nodes": 2318.0
+      }
+    ],
+    "models_checked": 4,
+    "Starts_checked": 1,
+    "max_Start_residual": 9.992007221626409e-16,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/010/raw/R166_010_R163-B35-S_S0_C166/round166_endpoint.json",
+      "bytes": 3569,
+      "SHA256": "0b3c5708e8d70eb8ab1e4eaf1d8913eb78ee55a29a01a1c96753ddf4dfa8c230"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/010/raw/R166_010_R163-B35-S_S0_C166/audit.json",
+      "bytes": 174295,
+      "SHA256": "b054b4a76979973d16701f7153b2e53d69bfe8e25ef7667c3f6bb0fa6cea0149"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/010/raw/R166_010_R163-B35-S_S0_C166/result.json",
+      "bytes": 98963,
+      "SHA256": "571f0c31cf10708922385191797d82e3d7df51b0ad09e943b7d5a13230bbd87e"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/010/raw/R166_010_R163-B35-S_S0_C166/external/paper_optimize_ledger.csv",
+      "bytes": 1785,
+      "SHA256": "6881d5a5c2315bd103b046b40687522df3e6b159c6aa626654cb5f0c19c469ec"
+    }
+  },
+  {
+    "position": 11,
+    "id": "R163-X35-S",
+    "method": "C166",
+    "state": "OPEN",
+    "T_produce": 2371.099158631172,
+    "T_verify": 2.9407823998481035,
+    "T_total": 2374.03994103102,
+    "H_seconds": 0.9802327,
+    "writer_build_seconds": 3.1467737,
+    "native_model_read_seconds": 0.1508996,
+    "native_runtime": 2365.075999736786,
+    "native_work": 5948.871843176039,
+    "native_nodes": 7752.0,
+    "native_calls": 5,
+    "first_raw_model": {
+      "rows": 23541,
+      "columns": 9381,
+      "nonzeros": 163909
+    },
+    "first_LP_lower": 0.3029770881667753,
+    "first_LP_work": 3.810730846660143,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/011/raw/R166_011_R163-X35-S_S0_C166/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+        "bytes": 2215,
+        "SHA256": "39b224cb567c41903c15cce9f0c609557010df7d3b7a6ea9f2184940dcd47dcb"
+      },
+      "original_model": {
+        "rows": 23541,
+        "columns": 9381,
+        "nonzeros": 163909
+      },
+      "presolved_model": {
+        "rows": 19358,
+        "columns": 9131,
+        "nonzeros": 183454
+      },
+      "root_relaxation": {
+        "objective": 0.3029806,
+        "iterations": 12873,
+        "seconds": 1.24
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "native-target",
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "native-target": 1,
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "CHILD_BOUND_TARGET_MIP",
+        "calls": 1,
+        "runtime": 16.34999990463257,
+        "work": 38.541842118294625,
+        "nodes": 1.0
+      },
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 2.7289998531341553,
+        "work": 8.605938108351271,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 2345.996999979019,
+        "work": 5901.724062949393,
+        "nodes": 7751.0
+      }
+    ],
+    "models_checked": 5,
+    "Starts_checked": 2,
+    "max_Start_residual": 6.106226635438361e-16,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/011/raw/R166_011_R163-X35-S_S0_C166/round166_endpoint.json",
+      "bytes": 3542,
+      "SHA256": "0eaa8fb0cd89b932843706038882d3df016aea91692317eb885aea8bafd28e01"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/011/raw/R166_011_R163-X35-S_S0_C166/audit.json",
+      "bytes": 232181,
+      "SHA256": "113ff096eed0d0cd91f81f39cc89786310bd6e6b311cfeda2b8c8e4fa80d25cd"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/011/raw/R166_011_R163-X35-S_S0_C166/result.json",
+      "bytes": 97808,
+      "SHA256": "46f61dd223125b18cf454181a4b3bb3f6c76b98ca773a7af4f72b77571b82046"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/011/raw/R166_011_R163-X35-S_S0_C166/external/paper_optimize_ledger.csv",
+      "bytes": 2191,
+      "SHA256": "b4b08fb1f46be47abd0a89a1f9232872b99409fcbdb67b20f142e833149d55e2"
+    }
+  },
+  {
+    "position": 12,
+    "id": "R163-X35-S",
+    "method": "B",
+    "state": "OPEN",
+    "T_produce": 2371.1383124510758,
+    "T_verify": 4.403796300292015,
+    "T_total": 2375.542108751368,
+    "H_seconds": 0.9846812,
+    "writer_build_seconds": 3.1347787,
+    "native_model_read_seconds": 0.15035379999999998,
+    "native_runtime": 2365.101999759674,
+    "native_work": 5733.542927707343,
+    "native_nodes": 3404.0,
+    "native_calls": 5,
+    "first_raw_model": {
+      "rows": 23050,
+      "columns": 9445,
+      "nonzeros": 163163
+    },
+    "first_LP_lower": 0.30297708816677527,
+    "first_LP_work": 2.7966716653944776,
+    "first_MIP": {
+      "log": {
+        "path": "results/unified_exact_round166/campaign/012/raw/R166_012_R163-X35-S_S0_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+        "bytes": 2227,
+        "SHA256": "26d227741e5a92df4e228f0ad342a16e82c9dee8be110fc16846b6902e1de2dd"
+      },
+      "original_model": {
+        "rows": 23050,
+        "columns": 9445,
+        "nonzeros": 163163
+      },
+      "presolved_model": {
+        "rows": 19127,
+        "columns": 9228,
+        "nonzeros": 188212
+      },
+      "root_relaxation": {
+        "objective": 0.3030105,
+        "iterations": 8772,
+        "seconds": 0.74
+      },
+      "precision": "Values transcribed from the printed Native log, not full-precision qualified endpoint sources.",
+      "absent_root_detail_reason": null
+    },
+    "AM_action_sequence": [
+      "native-target",
+      "exact-close"
+    ],
+    "AM_action_counts": {
+      "native-target": 1,
+      "exact-close": 1
+    },
+    "native_by_kind": [
+      {
+        "kind": "CHILD_BOUND_TARGET_MIP",
+        "calls": 1,
+        "runtime": 16.2979998588562,
+        "work": 38.83251970213459,
+        "nodes": 1.0
+      },
+      {
+        "kind": "LP",
+        "calls": 3,
+        "runtime": 2.185999870300293,
+        "work": 6.807165557436312,
+        "nodes": 0.0
+      },
+      {
+        "kind": "MIP",
+        "calls": 1,
+        "runtime": 2346.6180000305176,
+        "work": 5687.903242447772,
+        "nodes": 3403.0
+      }
+    ],
+    "models_checked": 5,
+    "Starts_checked": 2,
+    "max_Start_residual": 2.220446049250313e-16,
+    "endpoint": {
+      "path": "results/unified_exact_round166/campaign/012/raw/R166_012_R163-X35-S_S0_B/round166_endpoint.json",
+      "bytes": 3545,
+      "SHA256": "0709d08a6d113dc3c4044fa71766208d55010e85447e6e3bbace2ef60d3613cf"
+    },
+    "audit": {
+      "path": "results/unified_exact_round166/campaign/012/raw/R166_012_R163-X35-S_S0_B/audit.json",
+      "bytes": 136196,
+      "SHA256": "dbec49db3e458a812a25e9bf165feb045e3000f17eebbacad37fe1fb5f10fece"
+    },
+    "result": {
+      "path": "results/unified_exact_round166/campaign/012/raw/R166_012_R163-X35-S_S0_B/result.json",
+      "bytes": 98138,
+      "SHA256": "71db864a0d88ead1781abe98919d8cae3021c111676cdba23500c21150072f0c"
+    },
+    "ledger": {
+      "path": "results/unified_exact_round166/campaign/012/raw/R166_012_R163-X35-S_S0_B/external/paper_optimize_ledger.csv",
+      "bytes": 2182,
+      "SHA256": "243a35c4d9d7e274d27ad7a615d32c5bca5da820a90b7efbd943908efcf41296"
+    }
+  }
+]
