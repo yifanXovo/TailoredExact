@@ -1,0 +1,19 @@
+{
+  "UTC": "2026-11-14T02:59:05.583163+00:00",
+  "first_source_bundle_attempt": "failed before publication",
+  "reason": "The new reproduction config was staged before its -text attribute; cached Git index still held normalized LF while actual current config/QA bindings use CRLF.",
+  "affected_file": "config/gi_tbc_c166_round166.json",
+  "working_bytes": 3614,
+  "first_Git_blob_bytes": 3481,
+  "only_line_ending_difference": true,
+  "original_scientific_commit": "86d2008d1d0c930f218074ddfd054a9205e68a1e",
+  "failed_archive_preserved": {
+    "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\round166_source_paper_changes_incomplete_git_EOL.zip",
+    "bytes": 12852,
+    "SHA256": "d308a7bf4e0ec48fbe1acb8be383450269e9701a4daa302949296490f0a4478e"
+  },
+  "resolution": "Renormalize only the new config index under its explicit -text attribute and create a normal follow-up commit; current physical config bytes and QA identities remain unchanged. Check all changed Git blobs again before publication.",
+  "Optimize": 0,
+  "producer_repeats": 0,
+  "old_files_modified": 0
+}

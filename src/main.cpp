@@ -14,6 +14,7 @@
 #include "Round160PhysicalNeighborhood.hpp"
 #include "Round162PhysicalCompletion.hpp"
 #include "Round98StateService.hpp"
+#include "Round166Research.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
 #include "Bounds.hpp"
@@ -94,6 +95,7 @@ void usage() {
         << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
         << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event|cplex-algorithm-replica|round29-bound-gain-incremental|round30-dual-bound-target|round31-nonblocking-native-bound] "
         << "[--external-gini-interval-mip-policy <uniform-policy>] "
+        << "[--round166-breakpoint on|off] "
         << "[--round62-archive-mode off|passive-observe|passive-cert|outer|submit] "
         << "[--round102-service-cuts off|shell|shadow|submit] "
         << "[--round160-physical-neighborhood off|on] "
@@ -283,6 +285,7 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (ebrp::round166Breakpoint()) return "research-C166-breakpoint-bit";
     if (opt.round120_native_proof != "off")
         return opt.round120_qualification_empty_seed
             ? "qualification-round120-empty-seed-mb-"+opt.round120_native_proof
@@ -880,6 +883,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--global-gini-tree-mip-start-audit") opt.global_gini_tree_mip_start_audit_path = requireValue(i, argc, argv);
         else if (arg == "--gurobi-threads") opt.gurobi_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round166-breakpoint") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="on"&&value!="off")throw std::runtime_error("Round166 expects on|off");
+            ebrp::round166Breakpoint()=value=="on";
+        }
         else if (arg == "--round135-aggregate-penalty") ebrp::round135AggregatePenalty() = true;
         else if (arg == "--round138-stock-rlt") ebrp::round138().stock_rlt = true;
         else if (arg == "--round146-gd") {
@@ -2794,6 +2802,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     const bool explicit_tailored_bc_transfer_cutset =
         opt.tailored_bc_transfer_cutset;
     applyAlgorithmPreset(opt);
+    if(ebrp::round166Breakpoint())opt.external_gini_interval_mip_policy="round166-breakpoint-bit";
+    else if(opt.external_gini_interval_mip_policy=="round166-breakpoint-bit")
+        throw std::runtime_error("C166 policy requires explicit --round166-breakpoint on");
     if (opt.pricing_dominance_mode_explicit) {
         opt.pricing_dominance_mode = explicit_pricing_dominance_mode;
     }
@@ -3813,6 +3824,26 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (ebrp::round138().stock_rlt && ebrp::round127().mode != "ms2")
         throw std::runtime_error("Round138 stock RLT requires explicit ms2 research mode");
+    if(ebrp::round166Breakpoint()) {
+        if(ebrp::round127().mode!="ms2" || opt.round98_state_service!="m-binary" ||
+           !ebrp::round137EmitAB() || ebrp::round137().delete_cr || ebrp::round137().delete_cg ||
+           ebrp::round135AggregatePenalty() || ebrp::round138().stock_rlt || ebrp::round139().enabled() ||
+           ebrp::round140().enabled() || ebrp::round141().enabled() || ebrp::round142().enabled() ||
+           ebrp::round143().rn || ebrp::round144().enabled || ebrp::round145().enabled ||
+           ebrp::round146().enabled || ebrp::round148().enabled || ebrp::round149().enabled ||
+           ebrp::round151().mode!="off" || ebrp::round153().enabled || ebrp::round160::enabled() ||
+           ebrp::round162().enabled || ebrp::round162().stock_control ||
+           opt.round101_fleet_cuts!="off" || opt.round102_service_cuts!="off" ||
+           opt.round103_resource_hull!="off" || opt.round104_objective_resources!="off" ||
+           opt.round105_decomposition!="off" || opt.round106_events!="off" || opt.round107_frontier_struct)
+            throw std::runtime_error("C166 requires isolated frozen B; state-dependent and other research combinations are unsupported");
+        if(!opt.out_path.empty()) {
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round166_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"candidate\":\"C166\",\"policy\":\"round166-breakpoint-bit\",\"support\":\"legal endpoints and b-1,b,b+1\",\"exact_layer\":\"absolute Y binary product\",\"AP\":false,\"Seed\":"<<opt.gurobi_seed<<",\"H_seed\":"<<opt.primal_heuristic_seed<<"}\n";
+            if(!f)throw std::runtime_error("C166 parameter persistence failed");
+        }
+    }
     ebrp::round127Validate(opt);
     ebrp::round135Validate();
     if (ebrp::round138().stock_rlt && !opt.out_path.empty()) {

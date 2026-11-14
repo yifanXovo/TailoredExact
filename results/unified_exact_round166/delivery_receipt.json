@@ -1,0 +1,101 @@
+{
+  "UTC": "2026-11-14T03:03:23.992524+00:00",
+  "status": "PASS: reviewed science, public recovery, actual Open Draft snapshot and bounded cleanup",
+  "science_commit": "c0e263ed7eddba350a401dd83d81ef7048ee21cd",
+  "initial_scientific_results_commit": "86d2008d1d0c930f218074ddfd054a9205e68a1e",
+  "publication_commit": "32828227abffa719b3d07606a181d3bbccd51cd0",
+  "measured_CPP": "0298dd45fbc3645af927c4a4dd1d43ecbdb567a9",
+  "PE_SHA": "27e71873536bcd8e6001aee0c2514a5cc8122763728c62e6d467cd528b48daba",
+  "PR": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/228",
+    "number": 228,
+    "title": "Round166: study compact shared-state formulations and certified decision trade-offs",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round165-current-manuscript",
+    "base_sha": "239db6a80c944f1e7b5a55504ce5202ea35c2586",
+    "head": "codex/round166-structure-and-paper",
+    "head_sha": "32828227abffa719b3d07606a181d3bbccd51cd0",
+    "created_at": "2026-11-14T03:00:41Z",
+    "updated_at": "2026-11-14T03:00:41Z"
+  },
+  "PR_snapshot_scope": "Actual connector readback before this later delivery-receipt commit; this receipt does not invent its own future commit SHA.",
+  "PR_body_SHA256": "14b0b598af2dd035a43c7676c265487f6e8a89fa285bfeaf3b7512fde6481e87",
+  "current_paper_links": {
+    "manuscript": "https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round137/manuscript.md",
+    "main_PDF": "https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round137/manuscript.pdf",
+    "supplement_PDF": "https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round137/supplement.pdf",
+    "scientific_report": "https://github.com/yifanXovo/TailoredExact/blob/codex/round166-structure-and-paper/results/unified_exact_round166/final_report.md"
+  },
+  "current_PDF_bindings": {
+    "results/unified_exact_round137/manuscript.pdf": {
+      "path": "results/unified_exact_round137/manuscript.pdf",
+      "bytes": 1116278,
+      "SHA256": "c9d551a4598a616415c0a36a2b855904bb0ef36ac409e8c7f0098ae103a68d93"
+    },
+    "results/unified_exact_round137/supplement.pdf": {
+      "path": "results/unified_exact_round137/supplement.pdf",
+      "bytes": 394887,
+      "SHA256": "f6444cfb31c5b41e9213a1a98751e1ce205c5449531dff1974eb54dac5b30ae1"
+    }
+  },
+  "final_independent_reviews": {
+    "path": "results/unified_exact_round166/review/final_review_dispositions.json",
+    "bytes": 5325,
+    "SHA256": "ad27bb7eecc5c26e1540ff3a470178f21ab8b70912112428f17b43b9cfe81ba1"
+  },
+  "document_QA": {
+    "path": "results/unified_exact_round166/document_qa.json",
+    "bytes": 56551,
+    "SHA256": "d2b6427e1691becbea9d5793257ac6e5bb1d3f3d0e24eb17fd9c4b83c06dc273"
+  },
+  "actual_visual_review": {
+    "path": "results/unified_exact_round166/document_visual_review.json",
+    "bytes": 15981,
+    "SHA256": "0f0ac14c678c10d200253d9c10cf8cbfee6d3bb18d368e4eb78cf4f646c6c438"
+  },
+  "public_recovery": {
+    "path": "results/unified_exact_round166/public_recovery.json",
+    "bytes": 7118,
+    "SHA256": "cbabf6e0c64a0189b68bc55d083139621f8681eeec1fb4b78c6c6e445b4ea489"
+  },
+  "public_recovered_source_paper_members": 272,
+  "public_verified_new_raw_members": 63594,
+  "old_carrier_downloads": 0,
+  "commercial_DLL_or_credentials_or_private_antecedent_published": false,
+  "cleanup": {
+    "path": "results/unified_exact_round166/cleanup_record.json",
+    "bytes": 14256,
+    "SHA256": "aecd4580733da2f1a1ed6b66412b90ef913309e123d83ec41bf8e216cabfa23c"
+  },
+  "protected_trees": {
+    "path": "results/unified_exact_round166/protected_tree_check.json",
+    "bytes": 12278,
+    "SHA256": "de384422cb054332982c93549b0314e61dc46f15adb3fb9bfab606bd1e14e45f"
+  },
+  "deletions": 0,
+  "normal_delivery_IO": {
+    "path": "results/unified_exact_round166/delivery_io.json",
+    "bytes": 1397,
+    "SHA256": "a0d87ed2241b28e28d28fe5edcc35869c934cda96fafa82f34987e5174812559"
+  },
+  "conservative_shared_wall_through_this_receipt_seconds": 21203.987524,
+  "science_capacity_seconds": 57600,
+  "remaining_capacity_lower_bound": 36396.012476,
+  "cost_policy": "All shared wall through this receipt, even ordinary Git/public IO, fits capacity; actual solver costs remain separate and nested counters are not added twice.",
+  "source_publication": {
+    "path": "results/unified_exact_round166/source_publication.json",
+    "bytes": 2024,
+    "SHA256": "afc788ab4add3ab89116d2bbade2bcda0b3ee51bf818ce3e9027a6831d55c675"
+  },
+  "publication_byte_preparation": {
+    "path": "results/unified_exact_round166/publication_preparation.json",
+    "bytes": 1098,
+    "SHA256": "95d8d3d234e61cc720fadbbe6c6ec106697a95277b9823d41088ec2b69b7be49"
+  },
+  "terminal_postpush_readback_path": "E:\\codes\\ExactEBRP-work\\recovery\\round166_public_20261114T030058\\final_delivery_readback.json",
+  "terminal_readback_policy": "After normal receipt push, read actual latest PR head/base/open/draft and clean local state; record outside Git to avoid a fabricated self-SHA or an endless receipt-commit chain.",
+  "automatic_Round167": false,
+  "merge_or_force_push_performed": false
+}

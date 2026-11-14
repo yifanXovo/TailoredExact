@@ -1,0 +1,76 @@
+# Final independent mathematical/model review
+
+**Verdict: PASS. No unresolved mathematical/model blocker or new actionable finding.** This is the final H.1 review of the completed scientific artifacts, including the twelve completed formal arms and the current paper/PDF; it is distinct from the earlier preformal/admission reviews.
+
+Reviewer: `/root/math_review`, an actual independent agent. Review date: 14 November 2026, Asia/Shanghai. This reviewer made **zero Optimize calls**, started no producer, and modified no C++, frozen helper, paper component or delivered PDF. Exact input hashes and the check receipt are in `math_final.json` and `math_final_checks.json`.
+
+## What was actually read and checked
+
+I read the final `compression_theory.md`; maintained main paper sections 3.1/3.1.1, 5.2/5.3, 6.5 and 7; Appendix A.9/A.10; `decision_analysis.md`; all twelve records of `reports/complete_arms.json`, all six `reports/pairs.json` entries and the complete summary; the full exact envelope/resource data; and the recovered physical archive. I rechecked the mathematical interface against the actual writer/Start/native paths already independently read at admission, rather than inferring it from a mode name.
+
+I wrote a separate pure-reader/finite-algebra check, `math_final_checks.py`, and ran it successfully. It independently replays all 50 complete physical fleets, recomputes G/P/p/rho with exact rational inventory/weight arithmetic, verifies all four envelope families at every relevant exact intersection and both one-sided lower-envelope limits, recomputes all four resource intervals, and checks the twelve-arm/six-pair result identities and accounting fields. It imports no solver. It also verifies current PDF and assembled-source bytes against `document_build.json`.
+
+I actually viewed the high-resolution renders of main PDF pages **3, 7, 8, 18, 31, 45, 46, 48 and 59**: abstract/introduction, compact-state proof, complete method, parameter figure, complete C166 table/conclusion, new mathematical appendices, algorithm subprocedure and references. The new equations, table and figure are readable; no truncation or missing mathematical symbol was observed on those pages. Table 16's C35 C166 cell wraps onto a second line but remains within the column and unambiguous. This is a selective visual review, not a claim that I visually inspected all 104 pages.
+
+The main PDF actually viewed is 60 pages, SHA256 `2ef63b56ad25f179470e57ae6ec9230b8fcecd80d72b043556c0eac4aff1dd9a`; the separate 44-page supplement is SHA256 `f6444cfb31c5b41e9213a1a98751e1ce205c5449531dff1974eb54dac5b30ae1`. A subsequent link-only correction in Appendix B.1 changes the current-document-manifest destination from R165 to R166. I read that actual final link and verified the final main PDF bytes, SHA256 `c9d551a4598a616415c0a36a2b855904bb0ef36ac409e8c7f0098ae103a68d93`, against the updated build/QA. Restoring only that literal link in the final appendix and assembled manuscript exactly reproduces both previously reviewed source SHA values. I also independently compared all 60 old/new rendered page PNGs: every byte matches. The separate supplement remains byte-identical. The review retains the actually viewed scientific identity and the final navigation-only identity separately.
+
+## Compact joint-state mathematics
+
+**Location:** `compression_theory.md` sections 1-5; main section 3.1.1; Appendix A.9, (AC1)-(AC3), Propositions A9/A10.
+
+The common object is correctly specified as the hull of `(Y,|b-Y|,1[Y!=b],g,gY)` over the legal contiguous integer domain and `0<=alpha<=beta<=1`. It includes joint inventory mixing; an independent product hull and service hull can choose different mixtures. The retained counterexample correctly separates those objects without presenting the inherited A/B connection as a new discovery.
+
+The legal donor, initial singleton and receiver pieces have affine `(y,m(y),v(y))`. Interpolating an interior integer between legal endpoints at the same g preserves all five coordinates, including gy. Every retained support is legal, giving the reverse inclusion. The perspective proof uses `g_a=q_a/t_a` only for positive t and handles zero weights without division. No adjacency condition is needed for the continuous convex hull. These arguments prove the local proposition for every stated domain, not merely the fixed LP objectives.
+
+The separate absolute-stock bit/product block is essential and correctly retained. Continuous breakpoint weights and integer Y alone fail in the supplied `{1,2,3}` counterexample; binary breakpoint weights delete a legal interior inventory. At integral bits, the interval product inequalities give exact gY. The integer reverse map uses the unchanged original unique nonzero one-way service, binary assignment/direction, inventory balance and integer inventory; it recovers the old one-hot extension at the physical Y with the original g and objective. It does not incorrectly identify an arbitrary model g with the true Gini.
+
+The final LP proof now gives an explicit lift: for endpoint masses t/q, set relaxed bit values to `sum_a B_h(a)t_a` and products to `sum_a B_h(a)q_a`. Convexity of the inherited product inequalities and binary expansion recover the same `(Y,g,Z)`. Thus the independent bit auxiliary block contains every projected joint-hull point and does not strengthen that projection. The statement is expressly about common raw projections; it does not claim ideality of the combined extension or equal node/cut behavior.
+
+Global embedding correctly requires every deleted-state use to pass through the declared interface. In current B, the writer emits shared Y/G/Z/movement/visit equations, while the computed ratio/penalty reconstructions are emitted only for VD-J. The original r=Y/D relation and e epigraph remain, so a target-deviation kink is not missing from the deleted-state support. H, S, Gini/weighted-e objective, cutoff and physical/resource/SCF/MTZ constraints use common or route columns. The existing independent model readback established literal equality of those remaining rows/domains/types on all eight qualification pairs. Factory bit rows are retained in C166; actual Start mapping includes t/q and bits; VType restoration uses the complete captured original type array. No frozen source was changed during this final review.
+
+The claims about singletons, one-sided or tightened domains excluding b, b at 0/C, and fixed/zero g are correct. Empty-domain flags and their contradiction row remain authoritative despite reset storage bounds. The holed-domain `{1,3}` counterexample correctly shows why an exact bit layer alone can admit illegal integer Y=2. The additional exact `|Y-2|` function example correctly requires another breakpoint. Unsupported AP/count/CDF/theta/linked-direction/RN or historical state-dependent interfaces are not silently asserted compatible.
+
+The five-generator necessity claim is restricted to selecting legal graph-point generators: the four V=1 points form a quadrilateral when both sides contain at least two values, and b is the unique V=0 point. It is not an arbitrary extension-complexity lower bound. Counts `2N/N/(2N+6)` versus `2k+2d/d/(2k+8+7d)` correctly reflect the implemented 3+4 product-row convention. The distinction between the old short visit equation and the new direct visit reconstruction explains their different nonzero formulas. At most five continuous supports does not mean capacity-independent total exact encoding.
+
+Attribution remains appropriately bounded. Finite disjunctions, affine-piece endpoints and binary-continuous products retain standard-tool attribution; the literature comparison does not claim that a continuous PWL graph theorem automatically resolves the discrete visit jump. The contribution is the identified joint interface, its exact replacement and implementation boundary, together with the measured complete consequences. Existing routing/integer-objective gaps and the unestablished independent outer-controller speed benefit remain explicit.
+
+## Certified parameter analysis
+
+**Location:** main section 5.3 and Appendix A.10; `decision_analysis.md`; `analysis/parameter_envelopes.json`.
+
+The proof direction is correct: the infimum of affine feasible-plan objectives is concave, so a chord between qualified global lower anchors is a lower bound only on the closed interval joining their actual coordinates. Identical exact coordinates combine by maximum, not by a zero-length chord. The archive minimum is a feasible upper bound and is not presented as an algorithm result at unrun weights or a complete Pareto frontier.
+
+I independently parsed the included input texts and their SHA identities, recomputed every normalized omega vector, and recomputed each archived fleet's exact G/P/p and `rho=exact_loaded_lambda*exact_sum_loaded_weights`. All records in a family share the fixed physical data and loaded normalized weights. Tiny differences from displayed .5/1/2 remain in exact coordinates. In particular, RB20's exact loaded unit coordinate is slightly below 1 even when its binary64 display rounds to 1; the analysis preserves its fraction rather than merging by display. RX35's displayed endpoint deviations are likewise retained.
+
+All 50 fleets independently pass depot closure, unique nonzero one-way service, integer quantities, inventory capacities/balance, empty departures, load prefixes, loaded-return handling and route-time checks. There are 32 parameter-study owners; no missing fleet was synthesized. The accepted lower-source records retain full-original-domain qualification and reject no source used here. Cold compact bounds appropriately do not need an interval-cover object; their recorded scope is the complete original compact problem.
+
+The published finite critical sets exactly equal the independently recomputed sets of feasible-line intersections, overlapping chord intersections, chord endpoints and feasible-line/chord crossings. There are respectively **6, 3, 7 and 14** points for K15, UC-B20, RB20 and RX35. Every family uses all three distinct anchor pairs. I checked both one-sided limits of the maximum applicable-chord lower envelope at every interior critical point: they equal its value. Consequently a larger endpoint-limit gap cannot be lost when maximizing on closed partition endpoints. The active-line sets on every open partition interval match the published data. All fixed-plan maxima, the best fixed-plan choice and the archive maxima match as exact fractions; no grid or clipping is involved.
+
+The numerical policy is stated consistently: original accepted global L minus 1e-7, exact feasible objectives plus 1e-12, and outward display of the final upper bounds. This inherits the numerical source qualification and does not claim rational optimization certificates. Independent exact maxima are:
+
+| Family | Records / lines / supported | Archive regret bound | Best fixed-fleet regret bound |
+|---|---|---:|---:|
+| K-15-S | 8 / 3 / 3 | 0.0023562818631971206 | 0.0082385919783785 |
+| UC-B20-B | 6 / 1 / 1 | 0.00000010000100032886562 | same |
+| R-B20-S-T1 | 9 / 7 / 3 | 0.015594268604373972 | same |
+| R-X35-S-T2 | 9 / 9 / 1 | 0.13611516156427778 | same |
+
+The main paper's upward displays `.002356282/.000000100002/.015594269/.136115162` safely enclose these values. K15's worst band is correctly at its first genuine line intersection, rather than an original sample. The single UC-B20 line and fixed-fleet guarantee are distinguished from frontier completeness. RX35's wide remaining band is not disguised as optimal tradeoff knowledge. The higher-weight RX35 fleet's unit-coordinate reevaluation and improvement remain offline, with no backfilled original U or clock and no injection into the formal startup.
+
+## Resource-value bounds and complete C166 outcomes
+
+**Location:** main sections 5.2/6.5/7, Table 5/Table 16, and `analysis/resource_intervals.json`.
+
+For all four time pairs I checked physical identity apart from increasing T and identical actual objective weights. The lower/upper difference directions `max(0,L1-U2)` and `U1-L2` are correct. The guarded exact fractions match the published intervals, and every lower endpoint is strictly positive. The two n35 magnitude widths remain about .26127 and .32122; the paper therefore distinguishes proof of strict value improvement from precision about its magnitude. Recomputed return changes include B35 2 to 3 and X35 1 to 0. The text uses these as descriptions of verified fleets, not proof of an unknown optimal mechanism or a monetary time price.
+
+All twelve formal records are qualified and bound to the same measured source, PE and DLL; all six pairs have matching physical input and own-H semantic/fleet hashes. The certificate totals independently recompute to **B3/6 and C1662/6**. OPEN certificate times and non-joint ratios are null. Exactly two pairs have joint certificates; only X20 has a substantive certificate-time difference under the preregistered scale, favoring B. Native Optimize totals sum to 62; native explanatory time is not added again to the paid produce/verify clocks.
+
+C166's C35 and B35 upper objectives improve by `.008523119666503598` and `.015000684310331691` respectively, while their lowers weaken. X35 has worse U and L. The main text, Table 16, conclusion and abstract retain those positive primal observations alongside the certificate loss and X20 cost increase. The decision to retain uniform B and keep C166 default off is supported by the whole panel; it is not an instance portfolio or a universal single-Seed assertion. The numerical agreement of the raw LP projection is not used to infer equal presolve/root-MIP behavior or a particular cause for native search cost.
+
+## Findings, closures and remaining scientific limits
+
+No new revision finding is required by this final review. Earlier review observations are closed and read back: **M-R166-01**, manual new-policy selection could bypass the explicit C166 identity/combination guard; **M-R166-02**, the implementation's retained [0,1] product rows require beta<=1; **M-R166-03**, the tiny reference's actual T-domain description needed alignment with its final compiled oracle. These are historical closures, not unresolved final defects. The independent reader's singleton-visit classification correction is separately retained and did not rerun a solver.
+
+The following are disclosed scientific limits, not completion blockers: the local/common LP result is not a routing or integer-objective hull; floating native certificates remain numerical; extra state functions or holes require additional conditions; one Seed on six exposed inputs does not establish general cost robustness; the RX35 parameter band remains broad; and the outer-versus-strengthened-root independent computational value remains unresolved. No further solver experiment is required to complete this round on those grounds.
+
+Final disposition: the final mathematical/model claims, parameter/resource directions and finite-result interpretation are supported by the inspected artifacts. The new structural and continuous decision results have entered the current paper, with scope, adverse outcomes and standard-tool attribution preserved.

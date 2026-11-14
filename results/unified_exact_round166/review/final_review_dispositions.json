@@ -1,0 +1,130 @@
+{
+  "UTC": "2026-11-14T02:56:55.932842+00:00",
+  "status": "PASS",
+  "three_actual_independent_reviews": [
+    {
+      "role": "H1 mathematics/model",
+      "actual_agent": "/root/math_review",
+      "report": {
+        "path": "results/unified_exact_round166/review/math_final.md",
+        "bytes": 15226,
+        "SHA256": "20c166b2ff44f0dbc47abd9e18b348da49ce48d65df9e487591ca50d496bb34b"
+      },
+      "receipt": {
+        "path": "results/unified_exact_round166/review/math_final.json",
+        "bytes": 14600,
+        "SHA256": "25ed8bccd66dc7a0ade926916ca9933a533297c53e01561cf12de72b2948cb59"
+      },
+      "verdict": "PASS",
+      "new_Optimize": 0,
+      "new_producers": 0
+    },
+    {
+      "role": "H2 implementation/data",
+      "actual_agent": "/root/data_review",
+      "report": {
+        "path": "results/unified_exact_round166/review/data_final.md",
+        "bytes": 12118,
+        "SHA256": "0d16f89a5eef2e4d6dc0fc22d2ab48075e6bfa4a1377605407bc298d1310834f"
+      },
+      "receipt": {
+        "path": "results/unified_exact_round166/review/data_final.json",
+        "bytes": 15333,
+        "SHA256": "938319c23f081623ed0c66823ea5410ebfc7686f6e6ab9a5595a83811d79e0a5"
+      },
+      "verdict": "PASS",
+      "new_Optimize": 0,
+      "new_producers": 0
+    },
+    {
+      "role": "H3 research/manuscript",
+      "actual_agent": "/root/manuscript_review",
+      "report": {
+        "path": "results/unified_exact_round166/review/manuscript_final.md",
+        "bytes": 9150,
+        "SHA256": "546dd8d6482549e48336914690b6d97af027f8b0da6171e34e5c054296d555ee"
+      },
+      "receipt": {
+        "path": "results/unified_exact_round166/review/manuscript_final.json",
+        "bytes": 14448,
+        "SHA256": "c6c50ab5d30aa7e450e066a59ee379268a753810718a5007af0c2e1c93394c16"
+      },
+      "verdict": "PASS",
+      "new_Optimize": 0,
+      "new_producers": 0
+    }
+  ],
+  "unresolved_blockers": [],
+  "remaining_required_scientific_work": [],
+  "findings": [
+    {
+      "id": "R166-MF-01",
+      "severity": "P3",
+      "category": "reproducibility-navigation",
+      "status": "fixed",
+      "unresolved": false,
+      "location": {
+        "component": "results/unified_exact_round137/model_and_algorithm_appendices.md:635",
+        "assembled": "results/unified_exact_round137/manuscript.md:1541",
+        "final_PDF_page": 50
+      },
+      "issue": "The link labelled current document manifest pointed to R165/source_manifest.json.",
+      "impact": "A reader would obtain the previous source/document inventory. No model, numerical endpoint, attribution or scientific conclusion changed.",
+      "action": "Parent changed only the target to R166/source_manifest.json, reassembled and normally exported/QAed.",
+      "readback": "Component line635, assembled line1541, actual final PDF p50 URI and rendered p50 checked. Reverse-link-only hashes exactly reproduce prior appendix and assembled text hashes.",
+      "requires_new_experiments": false
+    }
+  ],
+  "closed_preformal_findings": [
+    {
+      "id": "M-R166-01",
+      "issue": "manual policy bypass of explicit C166 identity/combination guard",
+      "state": "CLOSED_READ_BACK"
+    },
+    {
+      "id": "M-R166-02",
+      "issue": "beta<=1 required by retained original product inequalities",
+      "state": "CLOSED_READ_BACK"
+    },
+    {
+      "id": "M-R166-03",
+      "issue": "final tiny oracle time-domain description",
+      "state": "CLOSED_READ_BACK"
+    }
+  ],
+  "data_observations": [
+    {
+      "id": "H2-O01",
+      "disposition": "Schema aliases are explicitly explained; actual identities and independent protocol qualifiers pass."
+    },
+    {
+      "id": "H2-O02",
+      "disposition": "Healthy producer reader failures retained, repaired read-only; zero repeated producers."
+    },
+    {
+      "id": "H2-O03",
+      "disposition": "Root performed actual visual review; independent data/manuscript follow-up bound the final PDFs and link-only rendered identity."
+    }
+  ],
+  "actual_visual_review": {
+    "path": "results/unified_exact_round166/document_visual_review.json",
+    "bytes": 15981,
+    "SHA256": "0f0ac14c678c10d200253d9c10cf8cbfee6d3bb18d368e4eb78cf4f646c6c438"
+  },
+  "document_QA": {
+    "path": "results/unified_exact_round166/document_qa.json",
+    "bytes": 56551,
+    "SHA256": "d2b6427e1691becbea9d5793257ac6e5bb1d3f3d0e24eb17fd9c4b83c06dc273"
+  },
+  "solver_reruns_due_to_final_review": 0,
+  "scientific_limits": [
+    "No routing or integer-objective hull/general ideality claim",
+    "Standard disjunctive/product/concavity tools retain attribution",
+    "One Seed and six exposed inputs do not establish universal performance robustness",
+    "C166 improves C35/B35 U but weakens all n35 L, loses C20 CERT and has the substantive X20 cost loss",
+    "X35 continuous quality band and n35 resource improvement magnitudes remain broad",
+    "Independent incremental value of outer interval scheduling remains unresolved",
+    "Requested106-row master unavailable in bounded entry; no source CSV overwrite or invented strict B/P pair"
+  ],
+  "delivery_scope": "Scientific review is complete; normal Draft and public-recovery/cleanup receipts follow in later commits."
+}

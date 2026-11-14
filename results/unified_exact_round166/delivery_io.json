@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-11-14T03:03:23.992524+00:00",
+  "scope": "actual completed publication operations through pre-receipt PR readback; final receipt push and terminal readback stored externally after they occur",
+  "normal_Git_pushes": [
+    {
+      "UTC": "2026-11-14T03:00:13.026998+00:00",
+      "operation": "initial normal branch push",
+      "seconds": 29.60450079990551,
+      "exit_code": 0,
+      "commit": "32828227abffa719b3d07606a181d3bbccd51cd0",
+      "force": false
+    }
+  ],
+  "connector_operations": [
+    {
+      "operation": "create English Open Draft PR",
+      "seconds": 3.032,
+      "PR": "https://github.com/yifanXovo/TailoredExact/pull/228",
+      "ordinary_delivery_IO": true
+    },
+    {
+      "operation": "read PR metadata before receipt commit",
+      "seconds": 2.623,
+      "ordinary_delivery_IO": true
+    }
+  ],
+  "public_network_transfer_seconds": 19.70117110060528,
+  "public_restore_and_byte_check_outer_seconds": 21.77261810004711,
+  "public_transfers": 9,
+  "network_cost_is_nested_in_restore_outer": true,
+  "initial_mixed_Git_IO": "conservatively included in scientific shared wall, not subtracted",
+  "scientific_cost_report": {
+    "path": "results/unified_exact_round166/cost_report.json",
+    "bytes": 4745,
+    "SHA256": "2ad8889bc24bc7f2b0abb92bfcebbce3a4c8f657450a076257e5b3b96339a972"
+  },
+  "new_Optimize": 0
+}

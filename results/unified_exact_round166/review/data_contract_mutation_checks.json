@@ -1,0 +1,42 @@
+{
+  "PASS": true,
+  "new_Optimize": 0,
+  "mutations": [
+    {
+      "mutation": "binary_t",
+      "rejected": true
+    },
+    {
+      "mutation": "continuous_bit",
+      "rejected": true
+    },
+    {
+      "mutation": "missing_product_row",
+      "rejected": true
+    },
+    {
+      "mutation": "wrong_mass_rhs",
+      "rejected": true
+    },
+    {
+      "mutation": "missing_e_epigraph",
+      "rejected": true
+    },
+    {
+      "mutation": "extra_support_column",
+      "rejected": true
+    },
+    {
+      "mutation": "changed_objective",
+      "rejected": true
+    },
+    {
+      "mutation": "changed_common_physical_row",
+      "rejected": true
+    }
+  ],
+  "local_rows": 64,
+  "all_local_residuals_within_original_1e_7": true,
+  "max_pair_abs_LP_delta": 3.3306690738754696e-16,
+  "max_Start_actual_row_residual": 3.765876499528531e-13
+}

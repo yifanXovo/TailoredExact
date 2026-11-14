@@ -1,0 +1,381 @@
+{
+  "UTC": "2026-11-14T02:52:15.167123+00:00",
+  "reviewer": "/root/math_review",
+  "review_kind": "H1 final completed-science review, separate from preformal admission",
+  "verdict": "PASS",
+  "new_Optimize": 0,
+  "producer_started": false,
+  "production_or_paper_files_modified": false,
+  "new_findings": [],
+  "unresolved_blockers": [],
+  "closed_prior_findings": [
+    {
+      "id": "M-R166-01",
+      "issue": "manual policy bypass of explicit C166 identity/combination guard",
+      "state": "CLOSED_READ_BACK"
+    },
+    {
+      "id": "M-R166-02",
+      "issue": "beta<=1 required by retained original product inequalities",
+      "state": "CLOSED_READ_BACK"
+    },
+    {
+      "id": "M-R166-03",
+      "issue": "final tiny oracle time-domain description",
+      "state": "CLOSED_READ_BACK"
+    }
+  ],
+  "exact_offline_checks": {
+    "receipt": "review/math_final_checks.json",
+    "PASS": true,
+    "physical_fleets": 50,
+    "parameter_families": [
+      {
+        "family": "R134:K-15-S",
+        "records": 8,
+        "lines": 3,
+        "exact_coordinates": [
+          "115285674569613130081303829846445/162259276829213363391578010288128",
+          "115285674569613130081303829846445/81129638414606681695789005144064",
+          "115285674569613130081303829846445/40564819207303340847894502572032"
+        ],
+        "anchor_pairs": 3,
+        "critical_points": 6,
+        "supported": 3,
+        "continuous_LC": true,
+        "worst_gap_exact": "1944680420322004257374303609072043545434724799629605480706752027/825317399711834504665061936740800166916513623443505152000000000000",
+        "worst_gap": 0.0023562818631971206,
+        "best_fixed_gap_exact": "570947016077109794854698389558970083216437860743/69301528413533871459294428812560826368000000000000",
+        "best_fixed_gap": 0.0082385919783785
+      },
+      {
+        "family": "R134:UC-B20-B",
+        "records": 6,
+        "lines": 1,
+        "exact_coordinates": [
+          "35991135841679888051527589725995/40564819207303340847894502572032",
+          "35991135841679888051527589725995/20282409603651670423947251286016",
+          "35991135841679888051527589725995/10141204801825835211973625643008"
+        ],
+        "anchor_pairs": 3,
+        "critical_points": 3,
+        "supported": 1,
+        "continuous_LC": true,
+        "worst_gap_exact": "3509747634254386586499301377393479572093/35097125255868930381888847471443968000000000000",
+        "worst_gap": 1.0000100032886562e-07,
+        "best_fixed_gap_exact": "3509747634254386586499301377393479572093/35097125255868930381888847471443968000000000000",
+        "best_fixed_gap": 1.0000100032886562e-07
+      },
+      {
+        "family": "R137:R-B20-S-T1",
+        "records": 9,
+        "lines": 7,
+        "exact_coordinates": [
+          "40564819207303338711660331886087/81129638414606681695789005144064",
+          "40564819207303338711660331886087/40564819207303340847894502572032",
+          "40564819207303338711660331886087/20282409603651670423947251286016"
+        ],
+        "anchor_pairs": 3,
+        "critical_points": 7,
+        "supported": 3,
+        "continuous_LC": true,
+        "worst_gap_exact": "1072418554637678291666924581121982452363523/68770045062381445031196148891648000000000000",
+        "worst_gap": 0.015594268604373972,
+        "best_fixed_gap_exact": "1072418554637678291666924581121982452363523/68770045062381445031196148891648000000000000",
+        "best_fixed_gap": 0.015594268604373972
+      },
+      {
+        "family": "R137:R-X35-S-T2",
+        "records": 9,
+        "lines": 9,
+        "exact_coordinates": [
+          "2596148429267413467847121079707595/5192296858534827628530496329220096",
+          "2596148429267413467847121079707595/2596148429267413814265248164610048",
+          "2596148429267413467847121079707595/1298074214633706907132624082305024"
+        ],
+        "anchor_pairs": 3,
+        "critical_points": 14,
+        "supported": 1,
+        "continuous_LC": true,
+        "worst_gap_exact": "38326883817362587164394992863592366498659769/281576889575695455807455199494144000000000000",
+        "worst_gap": 0.13611516156427778,
+        "best_fixed_gap_exact": "38326883817362587164394992863592366498659769/281576889575695455807455199494144000000000000",
+        "best_fixed_gap": 0.13611516156427778
+      }
+    ],
+    "resource_intervals": [
+      {
+        "base": "R-B20-S",
+        "strict": true,
+        "lower_exact": "368387178167674691461515923843839917042611947/1305125521097476433178449493884928000000000000",
+        "upper_exact": "2334439978820970651391023530672887259838146243/8270469428539025672714865887674368000000000000",
+        "width": 2.1298201172129965e-07,
+        "returned_stock": [
+          0,
+          0
+        ]
+      },
+      {
+        "base": "R-X20-S",
+        "strict": true,
+        "lower_exact": "18504424943487239101618510141157144035277298757/87894772755374684954226535975354368000000000000",
+        "upper_exact": "2144396881116071911583501759963564585395437457/10185731029158851769701197343096832000000000000",
+        "width": 2.0244049660372515e-07,
+        "returned_stock": [
+          1,
+          0
+        ]
+      },
+      {
+        "base": "R-B35-S",
+        "strict": true,
+        "lower_exact": "1738418458465008493907089430560123962066390229/15624665157600584281160395989712896000000000000",
+        "upper_exact": "13035421704071680485117840836370453664230548869/34991434887074901755539059841695744000000000000",
+        "width": 0.2612706195090717,
+        "returned_stock": [
+          2,
+          3
+        ]
+      },
+      {
+        "base": "R-X35-S",
+        "strict": true,
+        "lower_exact": "395016380830264648457872759132336681022360017/6574194469108626204837089910980608000000000000",
+        "upper_exact": "30651708260981212741416797062218675216579747367/80386636706547910737836749977812992000000000000",
+        "width": 0.3212176306197313,
+        "returned_stock": [
+          1,
+          0
+        ]
+      }
+    ],
+    "formal_positions": 12,
+    "CERT": {
+      "B": 3,
+      "C166": 2
+    },
+    "joint_CERT": 2,
+    "formal_deltas": [
+      {
+        "id": "R163-C20-S",
+        "U": 0.0,
+        "L": -0.004682542905556697
+      },
+      {
+        "id": "R163-B20-B",
+        "U": 0.0,
+        "L": 1.4988010832439613e-15
+      },
+      {
+        "id": "R163-X20-S",
+        "U": 0.0,
+        "L": 1.226796442210798e-14
+      },
+      {
+        "id": "R163-C35-U",
+        "U": -0.008523119666503598,
+        "L": -0.0056309621160054845
+      },
+      {
+        "id": "R163-B35-S",
+        "U": -0.015000684310331691,
+        "L": -0.0041807515499366205
+      },
+      {
+        "id": "R163-X35-S",
+        "U": 0.018395835734906385,
+        "L": -0.00828850697790301
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "path": "results/unified_exact_round166/compression_theory.md",
+      "bytes": 11732,
+      "SHA256": "dba15b0250b4092cca0e40a8eb144b2a6bcbe601f4c10b8ec0e3ca739929e9d0"
+    },
+    {
+      "path": "results/unified_exact_round166/decision_analysis.md",
+      "bytes": 9163,
+      "SHA256": "db9c9a81d2378644fdda21e8e5ff858c1a4de7a63b5f114306a9ff78b5eb5645"
+    },
+    {
+      "path": "results/unified_exact_round166/analysis/parameter_envelopes.json",
+      "bytes": 97518,
+      "SHA256": "bb155c44144748afaee0ab8bd2bc568f37314992b1148b352b9a73974ede42fb"
+    },
+    {
+      "path": "results/unified_exact_round166/analysis/resource_intervals.json",
+      "bytes": 53292,
+      "SHA256": "ee8d5f44efef32f2a6237a49988cc2ad982b87ced3000065f4ee35611569c403"
+    },
+    {
+      "path": "results/unified_exact_round166/analysis/X35_offline_improvement.json",
+      "bytes": 824,
+      "SHA256": "9adc91f2e46994c882953d81f0bd4d6765e46c319028e08f7e06c423c61d58e0"
+    },
+    {
+      "path": "results/unified_exact_round166/review/data_physical_archive.json",
+      "bytes": 874307,
+      "SHA256": "0d2c0ac66587847a87b771b2cbc118464c45867844f61a60c9bb9d9b2dbaa226"
+    },
+    {
+      "path": "results/unified_exact_round166/reports/complete_arms.json",
+      "bytes": 47707,
+      "SHA256": "fcd4624e6cad64e675d0a8f15707807a665a50c19de2b5fd9a91a2180af05275"
+    },
+    {
+      "path": "results/unified_exact_round166/reports/pairs.json",
+      "bytes": 4915,
+      "SHA256": "2f0f44cfc35d75813526d557fbb67f895dfc8e5468a63137040be5534aaab74a"
+    },
+    {
+      "path": "results/unified_exact_round166/reports/summary.json",
+      "bytes": 1850,
+      "SHA256": "46b6308c81736db4f25799ed50c3ad0db3c4377e36e694c38daf34e219fcb2fc"
+    },
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 95888,
+      "SHA256": "033f454dc2e470c1ca88e2cd30adb4a1d1bdb20c45e6a6498017f4dfa4adf099"
+    },
+    {
+      "path": "results/unified_exact_round137/model_and_algorithm_appendices.md",
+      "bytes": 95254,
+      "SHA256": "71958c6d2cc0bfe86ea7c1355c2b7bb36f993909da97ed70274a5d5cfaad9a8b"
+    },
+    {
+      "path": "results/unified_exact_round137/mathematical_analysis.md",
+      "bytes": 29356,
+      "SHA256": "e31a7ffed4f4fcf6220a6f4a5b40aa76a2ea7cc3f07f75f18c2683a9509959a4"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 108427,
+      "SHA256": "f586a2c1786596d1d7845d1cc6c5657260f537cf7d4fd5f000c195b05c2f3826"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 15364,
+      "SHA256": "b9693e8fc463814b506499d05b3acb29b28a4d3b0e75ebf24a3631494f163910"
+    },
+    {
+      "path": "results/unified_exact_round137/manuscript.md",
+      "bytes": 191158,
+      "SHA256": "dff3d98a1e06fb17dca37267cc86ed35576c52a8962f3966a4b3a13fdf4ee978"
+    },
+    {
+      "path": "results/unified_exact_round137/manuscript.pdf",
+      "bytes": 1116298,
+      "SHA256": "2ef63b56ad25f179470e57ae6ec9230b8fcecd80d72b043556c0eac4aff1dd9a"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.pdf",
+      "bytes": 394887,
+      "SHA256": "f6444cfb31c5b41e9213a1a98751e1ce205c5449531dff1974eb54dac5b30ae1"
+    }
+  ],
+  "PDF_pages": [
+    60,
+    44
+  ],
+  "actual_visual_review": [
+    {
+      "page": 3,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_003.png",
+      "SHA256": "9cbdccf056a15bab4ac47edcdf156de459e5ce5234464219e26e9bfddd1d7160",
+      "actually_viewed": true
+    },
+    {
+      "page": 7,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_007.png",
+      "SHA256": "91d92c094e4c26a33852469d0a3eee53489478f4eac0cd91325e7303c3a04f0b",
+      "actually_viewed": true
+    },
+    {
+      "page": 8,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_008.png",
+      "SHA256": "8bb155fe4647d3981b5551bb933d6e2a718b04e1c8ce52d91136b4f712855fa3",
+      "actually_viewed": true
+    },
+    {
+      "page": 18,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_018.png",
+      "SHA256": "d07f45a98125bb24071e45a60c4d2226f9fb40b968ffe6097419dfea615b6d7b",
+      "actually_viewed": true
+    },
+    {
+      "page": 31,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_031.png",
+      "SHA256": "6beed1709ceb6fa431a2551a823b50a9c64025fb86003c9792e872ae50882fba",
+      "actually_viewed": true
+    },
+    {
+      "page": 45,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_045.png",
+      "SHA256": "47125f8a905cfa530342e42b6f262500b5760ad86e32e11c3810d32cc2884c35",
+      "actually_viewed": true
+    },
+    {
+      "page": 46,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_046.png",
+      "SHA256": "cd6d954f86e5c657967efa78b873e829446552a3fc86fe121ab4a6c9019aedae",
+      "actually_viewed": true
+    },
+    {
+      "page": 48,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_048.png",
+      "SHA256": "e96d34286da0ce15aa9cbe91a54d075d9cf26485923cbef9e15fe40fd27907f6",
+      "actually_viewed": true
+    },
+    {
+      "page": 59,
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round166\\pdf\\visual_selected\\main_059.png",
+      "SHA256": "e4e0e5fa122c1179e1ffcb7437a14536b7d9387597ccafd1d28b5fc4c848663a",
+      "actually_viewed": true
+    }
+  ],
+  "scope_limits": [
+    "Real-arithmetic local/common projection result is not a route or integer-objective hull.",
+    "Numerical native qualifications are not rational optimization certificates.",
+    "Additional state-dependent functions and holes need their declared additional conditions.",
+    "Single Seed/exposed six-input complete costs are finite evidence.",
+    "RX35 continuous-parameter regret band remains broad.",
+    "Independent full-versus-strengthened-root computational benefit remains unresolved."
+  ],
+  "report": "review/math_final.md",
+  "final_link_only_readback": {
+    "UTC": "2026-11-14T02:53:57.966130+00:00",
+    "PASS": true,
+    "source_changes": [
+      {
+        "path": "results/unified_exact_round137/model_and_algorithm_appendices.md",
+        "only_exact_change": "current document manifest navigation R165 to R166",
+        "final_SHA256": "97c91b029bb40246369778ab2ac03accd98466c235b6fa8bf61b016c2be73865",
+        "previous_scientific_snapshot_SHA256": "71958c6d2cc0bfe86ea7c1355c2b7bb36f993909da97ed70274a5d5cfaad9a8b"
+      },
+      {
+        "path": "results/unified_exact_round137/manuscript.md",
+        "only_exact_change": "current document manifest navigation R165 to R166",
+        "final_SHA256": "171781aa64f293ee5a687d16b78e673732bc1a87e226439952913dee8ffc2b2e",
+        "previous_scientific_snapshot_SHA256": "dff3d98a1e06fb17dca37267cc86ed35576c52a8962f3966a4b3a13fdf4ee978"
+      }
+    ],
+    "PDFs": [
+      {
+        "path": "results/unified_exact_round137/manuscript.pdf",
+        "SHA256": "c9d551a4598a616415c0a36a2b855904bb0ef36ac409e8c7f0098ae103a68d93",
+        "bytes": 1116278
+      },
+      {
+        "path": "results/unified_exact_round137/supplement.pdf",
+        "SHA256": "f6444cfb31c5b41e9213a1a98751e1ce205c5449531dff1974eb54dac5b30ae1",
+        "bytes": 394887
+      }
+    ],
+    "all_60_rendered_page_PNGs_byte_identical": true,
+    "matching_pages": 60,
+    "supplement_changed": false,
+    "new_Optimize": 0
+  }
+}

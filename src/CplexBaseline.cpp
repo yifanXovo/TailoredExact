@@ -8,6 +8,7 @@
 #include "Round63TimeResource.hpp"
 #include "Round64SharedResource.hpp"
 #include "Round98StateService.hpp"
+#include "Round166Research.hpp"
 #include "CanonicalCompactModel.hpp"
 #include "ConnectivityFlow.hpp"
 #include "IntervalRowFactory.hpp"
@@ -813,6 +814,7 @@ void writeCompactLp(const Instance& instance,
     const std::string station_state_mode = canonical_spec
         ? canonical_spec->station_state_formulation : "bit-product";
     const bool station_state_vdp = station_state_mode == "vd-p";
+    const bool station_state_c166 = station_state_mode == "breakpoint-bit";
     const bool station_state_log = station_state_mode == "log-vd-p";
     const bool station_state_vdj = station_state_mode == "vd-j";
     const bool station_state_value_disaggregated =
@@ -824,13 +826,17 @@ void writeCompactLp(const Instance& instance,
     const bool continuous_quantities = options.round100_continuous_quantities ||
         round98ContinuousQuantities(options.round98_state_service);
     const bool linked_direction = round99LinksDirection(options.round98_state_service);
-    if ((state_service || options.round100_continuous_quantities) && (!strengthened || !station_state_vdp ||
+    if ((state_service || options.round100_continuous_quantities) && (!strengthened || !(station_state_vdp || station_state_c166) ||
         cutoff == nullptr || !cutoff->enabled || options.plain_baseline ||
         !round98KnownStateService(options.round98_state_service) ||
         (options.round100_continuous_quantities && state_service))) {
         throw std::runtime_error("round98_requires_complete_strengthened_vdp_interval");
     }
-    if (station_state_mode != "bit-product" && !aggregate_mc4 &&
+    if (station_state_c166 &&
+        (options.round98_state_service != "m-binary" || !round137EmitAB() ||
+         round135AggregatePenalty() || round140().enabled() || round143().rn))
+        throw std::runtime_error("Round166 requires the unchanged B movement/visit interface without state-dependent extensions");
+    if (station_state_mode != "bit-product" && !aggregate_mc4 && !station_state_c166 &&
         !station_state_value_disaggregated) {
         throw std::runtime_error("unknown_round55_station_state_formulation");
     }
@@ -950,6 +956,16 @@ void writeCompactLp(const Instance& instance,
             if (stats != nullptr) ++stats->tailored_low_gini_l1_vars;
         }
         vars.add(zprodName(i), 0, instance.capacity[i], "C");
+        if (station_state_c166) {
+            for (const int a : round166Support(y_lb[i],y_ub[i],instance.initial[i])) {
+                vars.add(round166T(i,a),0,1,"C");
+                vars.add(round166Q(i,a),0,g_ub,"C");
+                if(static_stats) {
+                    ++static_stats->station_state_selector_variables;
+                    ++static_stats->station_state_perspective_variables;
+                }
+            }
+        }
         if (station_state_value_disaggregated) {
             for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
                 vars.add(stateName(i, y), 0, 1, station_state_log ? "C" : "B");
@@ -2978,6 +2994,34 @@ void writeCompactLp(const Instance& instance,
     }
 
     for (int i = 1; i <= V; ++i) {
+        if (station_state_c166) {
+            // Continuous joint graph hull; integer gY is supplied independently
+            // by the original absolute-Y bit/product block below.
+            Expr mass,inventory,movement,visit,g_sum,product;
+            addTerm(inventory,yName(i),1.0);
+            addTerm(g_sum,"G",-1.0);
+            addTerm(product,zprodName(i),1.0);
+            for(int k=0;k<M;++k) {
+                addTerm(movement,pName(k,i),1.0);addTerm(movement,dName(k,i),1.0);
+                addTerm(visit,zName(k,i),1.0);
+            }
+            for(const int a:round166Support(y_lb[i],y_ub[i],instance.initial[i])) {
+                const auto t=round166T(i,a),q=round166Q(i,a);
+                addTerm(mass,t,1.0);addTerm(inventory,t,-static_cast<double>(a));
+                addTerm(movement,t,-std::fabs(static_cast<double>(instance.initial[i])-a));
+                addTerm(visit,t,a==instance.initial[i]?0.0:-1.0);
+                addTerm(g_sum,q,1.0);addTerm(product,q,-static_cast<double>(a));
+                Expr lo;addTerm(lo,q,1.0);addTerm(lo,t,-g_lb);
+                Expr hi;addTerm(hi,q,1.0);addTerm(hi,t,-g_ub);
+                writeConstraint(out,cid,lo,">=",0.0);writeConstraint(out,cid,hi,"<=",0.0);
+            }
+            writeConstraint(out,cid,mass,"=",1.0);
+            writeConstraint(out,cid,inventory,"=",0.0);
+            writeConstraint(out,cid,movement,"=",0.0);
+            writeConstraint(out,cid,visit,"=",0.0);
+            writeConstraint(out,cid,g_sum,"=",0.0);
+            writeConstraint(out,cid,product,"=",0.0);
+        }
         if (station_state_value_disaggregated) {
             Expr selector_sum;
             Expr inventory_link;
@@ -4666,6 +4710,7 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
                 "unsupported_round51_subset_duration_big_m_policy");
         }
         if (spec.station_state_formulation != "bit-product" &&
+            spec.station_state_formulation != "breakpoint-bit" &&
             spec.station_state_formulation != "aggregate-mc4" &&
             spec.station_state_formulation != "vd-p" &&
             spec.station_state_formulation != "log-vd-p" &&

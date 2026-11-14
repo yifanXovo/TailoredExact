@@ -9,8 +9,8 @@ The main paper and complete model/algorithm appendices are assembled from
 complete breadth/resource/weight/AM/mechanism observations, useful historical
 mathematical comparisons, source provenance and the later cohort evidence.
 The [mathematical companion](mathematical_analysis.md) distinguishes the
-relaxation objects and proof contracts. The [current source manifest](../unified_exact_round165/source_manifest.json)
-and [document build receipt](../unified_exact_round165/document_build.json)
+relaxation objects and proof contracts. The [current source manifest](../unified_exact_round166/source_manifest.json)
+and [document build receipt](../unified_exact_round166/document_build.json)
 bind the current PDF to those components. Administrative author decisions are
 kept in the internal memo and are not part of the technical manuscript.
 
@@ -1009,3 +1009,167 @@ retains full precision, receipt-specific availability bounds and provenance.
 | R163-B35-S | P | 0.1942903111 | censored at 2371.41 | censored at 2371.36 | censored at 2371.37 |
 | R163-X35-S | B | 0.457475317 | [0, 2023.1] | censored at 2371.32 | censored at 2371.26 |
 | R163-X35-S | P | 0.457475317 | censored at 2371.38 | censored at 2371.28 | censored at 2371.29 |
+
+## Round166 compact representation and certified decisions
+
+The new study changes the common inventory representation while retaining
+the complete GI-TBC/B algorithm, own H, physical rows, e epigraph and native
+parameters. Its mathematical object and exactness conditions appear in
+Appendix A.9; the full constructive proof, counterexamples and symbolic
+size formulas are in [compression_theory.md](../unified_exact_round166/compression_theory.md).
+It uses standard disjunction and product tools. C166 is default off and is
+never relabelled as B. Historical measurements retain their original source
+and executable identities.
+
+### Qualification and actual matrix sizes
+
+The C++ qualification has 96 actual Optimize calls within 539.080771 s:
+64 local fixed-objective LPs, 16 paired full-model LPs, 8 boundary/tiny calls
+and 8 nonzero complete-controller calls. Independent zero controllers,
+finite exact enumeration, algebra and export/readers add zero calls. The
+nonzero tiny optimum has inventory(1,1), one unit returned loaded, objective
+.15 and an interior non-breakpoint donor stock. Complete semantic Starts,
+LP-to-MIP type recovery, original rows/objective and incompatible-mode
+rejection are checked. Two reader failures retain their healthy raw runs;
+only the readers are repaired. The diagnostic and formal costs are separate.
+
+The eight LP pairs below use identical offline fixture incumbents/cutoffs
+within each pair. These fixtures enter no formal startup. "Build" is the
+qualification driver's pre-native pipeline from input/parent parsing and
+physical verification through writing the canonical model, not an isolated
+writer microbenchmark. Counts describe the emitted full model, before
+solver cuts; binary counts are the declared integer model types before
+relaxing the qualification LP.
+
+| Scope | B LP | C166−B LP | B cols / C166 | B binary / C166 | B rows / C166 | B nnz / C166 | Build B / C166 (s) |
+|---|---|---|---|---|---|---|---|
+| B20-B_child | 0.363828253 | -1.11e-16 | 2488 / 2482 | 1067 / 1006 | 6049 / 6513 | 34844 / 35652 | 0.23669 / 0.24327 |
+| B20-B_root | 0.348892816 | 0 | 2488 / 2482 | 1067 / 1006 | 6049 / 6513 | 34844 / 35652 | 0.23974 / 0.24281 |
+| B35-S_root | 0.107859114 | 1.388e-17 | 10629 / 9615 | 4840 / 4167 | 24234 / 24175 | 168063 / 165766 | 1.1698 / 1.1263 |
+| C20-S_child | 0.117746373 | 0 | 3142 / 2596 | 1394 / 1021 | 6683 / 6682 | 38618 / 37443 | 0.29408 / 0.25216 |
+| C20-S_root | 0.117746373 | 9.714e-17 | 3142 / 2596 | 1394 / 1021 | 6683 / 6682 | 38618 / 37443 | 0.2626 / 0.25748 |
+| C35-U_root | 0 | 0 | 10937 / 9643 | 4994 / 4174 | 24542 / 24238 | 169324 / 165977 | 1.1904 / 1.1262 |
+| X20-S_root | 0.165608579 | 0 | 2692 / 2534 | 1169 / 998 | 6233 / 6505 | 36686 / 36848 | 0.2502 / 0.24696 |
+| X35-S_root | 0.303344279 | -3.331e-16 | 9445 / 9381 | 4248 / 4087 | 23050 / 23541 | 163163 / 163909 | 1.1361 / 1.1075 |
+
+### All twelve complete endpoints and costs
+
+The order was frozen before the first launch and alternates the first
+method by input, independently of historical performance. All twelve
+positions finish with qualified numerical endpoints. T_cert is empty for
+OPEN; T_produce and T_verify retain their original meanings. Same-input
+own-H semantic and fleet hashes agree, with each run paying independently.
+
+| Position / input | Method | State | U | L | Signed U−L | T_cert (s) | T_produce (s) | T_verify (s) | Native calls |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 / C20-S | B | CERT | 0.191280592283 | 0.191280592283 | -7.49401e-16 | 210.4145 | 210.4145 | 1.919934 | 4 |
+| 2 / C20-S | C166 | OPEN | 0.191280592283 | 0.186598049377 | 0.00468254 | — | 1171.439 | 4.675597 | 4 |
+| 3 / B20-B | C166 | CERT | 0.423232181694 | 0.423232181694 | 5.55112e-17 | 5.6612237 | 5.6612237 | 1.623963 | 9 |
+| 4 / B20-B | B | CERT | 0.423232181694 | 0.423232181694 | 1.55431e-15 | 5.0964422 | 5.0964422 | 1.415442 | 9 |
+| 5 / X20-S | B | CERT | 0.447747626586 | 0.447747626586 | 1.29341e-14 | 125.29992 | 125.29992 | 1.254961 | 5 |
+| 6 / X20-S | C166 | CERT | 0.447747626586 | 0.447747626586 | 6.66134e-16 | 544.90213 | 544.90213 | 5.691091 | 5 |
+| 7 / C35-U | C166 | OPEN | 0.121043269985 | 0.0142065407051 | 0.106837 | — | 2371.2042 | 2.929806 | 4 |
+| 8 / C35-U | B | OPEN | 0.129566389652 | 0.0198375028211 | 0.109729 | — | 2371.2838 | 2.734756 | 4 |
+| 9 / B35-S | B | OPEN | 0.194290311109 | 0.120234002584 | 0.0740563 | — | 2371.1024 | 4.471638 | 4 |
+| 10 / B35-S | C166 | OPEN | 0.179289626799 | 0.116053251034 | 0.0632364 | — | 2372.2253 | 2.864775 | 4 |
+| 11 / X35-S | C166 | OPEN | 0.475871152751 | 0.386699748937 | 0.0891714 | — | 2371.0992 | 2.940782 | 5 |
+| 12 / X35-S | B | OPEN | 0.457475317016 | 0.394988255915 | 0.0624871 | — | 2371.1383 | 4.403796 | 5 |
+
+The next table is explanatory accounting inside those same paid clocks.
+"Writer" and "read" are accumulated canonical writer and native model-read
+seconds over the actual reached path, whose number of models can change.
+Runtime, Work and nodes sum returned native calls. These nested quantities
+are never added to T_produce/T_verify as extra scientific fees.
+
+| Input | Method | H (s) | Writer (s) | Read (s) | Native Runtime (s) | Native Work | Native nodes |
+|---|---|---|---|---|---|---|---|
+| C20-S | B | 1.55034 | 0.7682781 | 0.0403299 | 206.681 | 356.904567 | 21388 |
+| C20-S | C166 | 1.55008 | 0.7223505 | 0.0371658 | 1167.525 | 2213.987822 | 82766 |
+| B20-B | C166 | 0.0227025 | 1.663858 | 0.0849502 | 2.39100027 | 3.417206761 | 293 |
+| B20-B | B | 0.0227777 | 1.615594 | 0.0823967 | 1.92199969 | 2.524354742 | 160 |
+| X20-S | B | 0.237089 | 0.7213828 | 0.0366268 | 122.891 | 220.9640238 | 8842 |
+| X20-S | C166 | 0.208752 | 0.7238595 | 0.037919 | 542.289 | 992.2140895 | 66425 |
+| C35-U | C166 | 10.2317 | 3.279759 | 0.159748 | 2355.681 | 4844.834749 | 2312 |
+| C35-U | B | 9.85137 | 3.284695 | 0.158911 | 2356.053 | 5584.923796 | 6616 |
+| B35-S | B | 9.47853 | 3.311271 | 0.158117 | 2356.459 | 5920.218137 | 2659 |
+| B35-S | C166 | 9.48554 | 3.164148 | 0.152466 | 2356.616 | 5457.014587 | 2318 |
+| X35-S | C166 | 0.980233 | 3.146774 | 0.1509 | 2365.076 | 5948.871843 | 7752 |
+| X35-S | B | 0.984681 | 3.134779 | 0.150354 | 2365.102 | 5733.542928 | 3404 |
+
+The first continuous canonical LP below is distinct from the first Native
+MIP root after integer presolve. The latter is transcribed at the log's
+printed precision and is not used as a qualified global bound. Its presolved
+size/relaxation can differ between integer encodings with the same original
+continuous projection. An absent root line is retained as absent. AM actions
+are the actual decision sequence, not a claim that equal configured policy
+must realize equal paths.
+
+| Input | Method | First raw LP | First MIP root (log) | Presolved rows / cols / nnz | AM sequence |
+|---|---|---|---|---|---|
+| C20-S | B | 0.117746373 | 0.1177464 | 5299 / 3120 / 38475 | exact-close |
+| C20-S | C166 | 0.117746373 | 0.1189427 | 5288 / 2574 / 37594 | exact-close |
+| B20-B | C166 | 0.3488928157 | 0.3917953 | 1679 / 802 / 8884 | native-target, exact-close |
+| B20-B | B | 0.3488928157 | 0.4033865 | 1642 / 899 / 10523 | native-target, exact-close |
+| X20-S | B | 0.1656085786 | 0.1656086 | 4938 / 2536 / 32997 | native-target, exact-close |
+| X20-S | C166 | 0.1656085786 | 0.1721899 | 5061 / 2364 / 32296 | native-target, exact-close |
+| C35-U | C166 | 0 | 0 | 19968 / 9608 / 213700 | exact-close |
+| C35-U | B | 0 | 0 | 20146 / 10906 / 239293 | exact-close |
+| B35-S | B | 0.1078591136 | 0.1078591 | 19976 / 10564 / 234200 | exact-close |
+| B35-S | C166 | 0.1078591136 | 0.1078591 | 19916 / 9538 / 203858 | exact-close |
+| X35-S | C166 | 0.3029770882 | 0.3029806 | 19358 / 9131 / 183454 | native-target, exact-close |
+| X35-S | B | 0.3029770882 | 0.3030105 | 19127 / 9228 / 188212 | native-target, exact-close |
+
+There are 2 joint-CERT pairs. Their C166/B time ratios
+are B20-B: 1.1108 (below the substantive scale); X20-S: 4.3488 (substantive). The other pairs carry no certificate-time ratio. Aggregate
+T_produce is 7454.335378 s for B and
+8836.531014 s for C166; separate T_verify is
+16.200527 s and20.726015 s.
+The fresh-wrapper outer total is 16328.458215 s;
+its small management difference from summed produce/verify remains charged.
+Reservations of 25200 s and watchdog settings are not reported as consumed costs.
+
+### Continuous-weight archive and two-sided resource value
+
+All 50 complete fleet records are recovered and physically checked: 32 weight
+observations and 24 resource observations with six shared records. The
+four families preserve the exact physical domain and normalized weight
+vector. Every source owner, dominated fleet, original objective and clock
+remains available. Archive improvement is offline and supplies no free
+formal Start, bound or cutoff. Main Section 5.3 and Appendix A.10 explain
+the concavity/finite-intersection argument and safety margins.
+
+| Family | Actual covered rho (display) | Runs / distinct lines / supported | Max archive regret upper | Best fixed-plan regret upper |
+|---|---|---|---|---|
+| R134:K-15-S | 0.710502825 to 2.8420113 | 8 / 3 / 3 | 0.00235628186320 | 0.00823859197838 |
+| R134:UC-B20-B | 0.88725 to 3.549 | 6 / 1 / 1 | 0.000000100001000329 | 0.000000100001000329 |
+| R137:R-B20-S-T1 | 0.5 to 2 | 9 / 7 / 3 | 0.0155942686044 | 0.0155942686044 |
+| R137:R-X35-S-T2 | 0.5 to 2 | 9 / 9 / 1 | 0.136115161565 | 0.136115161565 |
+
+The parameter regret bounds above are rounded upward. The resource intervals below use qualified global lowers reduced by 1e-7 and exact feasible objectives increased by 1e-12, then round endpoints outward to ten decimal places. Width is the displayed interval width; exact rational arithmetic and original source endpoints remain in the machine-readable data.
+
+| Pair / T1→T2 (s) | Safe improvement lower | Safe improvement upper | Displayed width |
+|---|---|---|---|
+| R-B20-S / 3300→5100 | 0.2822618761 | 0.2822620892 | 0.0000002131 |
+| R-X20-S / 4800→7200 | 0.2105292995 | 0.2105295021 | 0.0000002026 |
+| R-B35-S / 4800→7200 | 0.1112611656 | 0.3725317852 | 0.2612706196 |
+| R-X35-S / 4200→6300 | 0.0600858983 | 0.3813035291 | 0.3212176308 |
+
+| Pair | Pickup units | Drop units | Loaded return units | Final station inventory |
+|---|---|---|---|---|
+| R-B20-S | 30→43 | 30→43 | 0→0 | 143→143 |
+| R-X20-S | 16→22 | 15→22 | 1→0 | 64→65 |
+| R-B35-S | 41→60 | 39→57 | 2→3 | 234→233 |
+| R-X35-S | 29→42 | 28→42 | 1→0 | 145→146 |
+
+All four larger-horizon witnesses improve both G and normalized penalty.
+B35's returned stock rises from 2 to 3 while X35 falls from 1 to 0. More pickup and a lower
+objective therefore do not imply less loaded return. Full route-level
+travel/handling/unloading, prefix loads, inventory distribution and duration
+utilization remain in the complete archive. These are physical descriptions,
+not proofs of a binding optimal time constraint or causal mechanism.
+
+The existing high-weight X35 fleet has feasible objective.3365058164688021
+at the original unit-weight coordinate, versus.40327199886285475 for the old
+unit-weight fleet, a known feasible improvement.06676618239405259. This
+changes no historical incumbent or certificate clock. The broad X35
+continuous quality band remains an explicit limitation.

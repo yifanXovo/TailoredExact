@@ -467,6 +467,76 @@ The linked [implementation snapshot](https://github.com/yifanXovo/TailoredExact/
 
 \clearpage
 
+## A.9 Compact joint-state alternative C166
+
+This separately named candidate changes only the inventory representation of B. Let \(M_i=\sum_k(p_{ki}+d_{ki})\), \(V_i=\sum_kz_{ki}\), and fix the legal integer interval \(\mathcal Y_i=\{l_i,\ldots,u_i\}\) and \(0\le\alpha\le\beta\le1\). Put \(m_i(y)=|b_i-y|\), \(v_i(y)=\mathbf1\{y\ne b_i\}\). The shared object is
+
+\[
+\mathcal H_i=\operatorname{conv}\{(y,m_i(y),v_i(y),g,gy):y\in\mathcal Y_i,\ g\in[\alpha,\beta]\}.
+\tag{AC1}
+\]
+
+The continuous relaxation of (A15)-(A16) projects to (AC1). Inventory balance recovers aggregate pickup/drop as \((M_i+b_i-Y_i)/2\) and \((M_i-b_i+Y_i)/2\). This assertion adds neither a linked-direction equation nor a vehicle-state product to B.
+
+**Proposition A9 (legal-piece compression).** Define
+\(\mathcal K_i=\{l_i,u_i\}\cup(\{b_i-1,b_i,b_i+1\}\cap\mathcal Y_i)\).
+Then (AC1) is unchanged when its stock support is restricted to \(\mathcal K_i\), which contains at most five values.
+
+*Proof.* Partition the legal integers into their nonempty donor piece below b, initial singleton and receiver piece above b. On each piece, \((y,m_i(y),v_i(y))\) is affine. If a legal interior integer y lies between the legal endpoints a<c of its piece, choose \(\theta=(c-y)/(c-a)\). At the same g,
+\((y,m_i(y),v_i(y),g,gy)\) equals the \(\theta,1-\theta\) combination of the endpoint graph points. Singletons require no interpolation. All endpoints are in \(\mathcal K_i\), proving one inclusion for all convex mixtures. Every retained endpoint is legal, proving the reverse. ∎
+
+Use continuous variables \(t_{ia},q_{ia}\) for a in \(\mathcal K_i\):
+
+\[
+\begin{aligned}
+&\sum_a t_{ia}=1,\quad Y_i=\sum_a a t_{ia},\quad
+M_i=\sum_a|b_i-a|t_{ia},\\
+&V_i=\sum_a\mathbf1\{a\ne b_i\}t_{ia},\quad
+\sum_a q_{ia}=g,\quad Z_i=\sum_a a q_{ia},\\
+&t_{ia}\ge0,\qquad\alpha t_{ia}\le q_{ia}\le\beta t_{ia}.
+\end{aligned}
+\tag{AC2}
+\]
+
+If \(t_{ia}>0\), set \(g_a=q_{ia}/t_{ia}\in[\alpha,\beta]\); zero t forces zero q. Hence (AC2) is a convex combination of legal graph points. Conversely collect any such combination into t/q. This proves its exact continuous projection without imposing adjacency or SOS2 on hull mixtures.
+
+Continuous (AC2) plus integer Y does not make the product exact. For b=0, domain \(\{1,2,3\}\), g=1/4, supports \(\{1,3\}\), weights 1/2 each and q=(0,1/4), it gives Y=2,Z=3/4 instead of gY=1/2. Making t binary excludes that legitimate interior stock. C166 therefore also keeps the independent absolute-Y binary layer (A14), with interval products
+
+\[
+\begin{aligned}
+&Y_i=\sum_h2^h b_{ih}^{\rm bit},\quad Z_i=\sum_h2^h w_{ih},\\
+&\alpha b_{ih}^{\rm bit}\le w_{ih}\le\beta b_{ih}^{\rm bit},\\
+&g-\beta(1-b_{ih}^{\rm bit})\le w_{ih}\le
+g-\alpha(1-b_{ih}^{\rm bit}),\quad b_{ih}^{\rm bit}\in\{0,1\}.
+\end{aligned}
+\tag{AC3}
+\]
+
+The implementation retains the three additional original [0,1] product rows in (A14) and all four factory interval rows in (AC3). It does not skip the bit family as VD-P does.
+
+**Proposition A10 (integer correspondence and common LP projection).** Under B's original unique nonzero one-way service, balance and integer inventory constraints, replacing (A15)-(A16) by (AC2)-(AC3) preserves the integer physical projection and original objective. Their raw LP projections in \((Y_i,M_i,V_i,g,Z_i)\) are equal. Global equality holds when every remaining row and the objective uses deleted state variables only through that common interface.
+
+*Proof.* Extend an old integer physical point by the absolute bits of its legal stock, exact w=g*bit, and the same-g legal-piece interpolation of Proposition A9. It keeps all physical columns and the original g/e objective. Conversely (AC3) gives exact Z=gY; retained physical constraints and Lemma A1 give the original integer service. The old extension s_Y=1,q_Y=g reproduces that point. For the LP claim, the relaxed bit block is convex and contains an extension of every true legal (Y,g,gY) graph point, so its projection contains the projection of (AC1). More explicitly, for endpoint weights t and q, let B_h(a) be the h-th absolute bit of a and choose the relaxed variables as \(\bar b_h=\sum_a B_h(a)t_a\), \(\bar w_h=\sum_a B_h(a)q_a\). Convexity gives every inherited bit inequality, while binary expansion recovers the same Y and Z. The two auxiliary blocks are disjoint, sharing only (Y,g,Z). Every point of (AC1) therefore still extends to their intersection. Equal projected local sets, intersected with the same outside system through their shared coordinates, give equal global projection, station by station. ∎
+
+For actual B, r=Y/D and e retain (A10), H/S/Gini and physical/resource rows use common or route columns, and the objective uses G and weighted e. The computed state-penalty/ratio reconstructions are emitted only by VD-J, which is not active. Thus no target kink is missing from (AC2). AP, exact state penalties, threshold counts/CDF, theta, linked direction, RN and historical state-dependent resource/decomposition combinations are not silently extended; the research entry rejects unsupported combinations. Original domain-infeasibility flags and explicit contradiction rows remain authoritative even if storage bounds reset.
+
+Singleton and one-sided domains, b outside a tightened domain, b=0/C and fixed/zero g are covered by the same construction. Holes must remain separately enforced: on legal \(\{1,3\}\), integer Y=2 would otherwise be added by a breakpoint-plus-bit model. An additional exact state penalty \(|Y-2|\) with b=5 and domain [0,10] cannot use only \(\{0,4,5,6,10\}\), because its legitimate zero at Y=2 is absent. Additional state functions require their own common affine-piece endpoints.
+
+More generally, if an integer state is externally visible only through y,gy and a finite collection of functions affine on common legal integer pieces, retaining all legal piece endpoints preserves that local continuous graph hull. This is a standard disjunctive consequence, specialized here to the joint service interface [@vielma2018embedding; @huchetteVielma2023]. When both sides of b have length at least two, the four V=1 endpoints are vertices of their quadrilateral and b is the unique V=0 graph point. Five supports are then necessary *within legal graph-point generator representations*, not among arbitrary extended formulations.
+
+Let \(N_i=u_i-l_i+1\), \(k_i=|\mathcal K_i|\), \(d_i=\max\{1,\lceil\log_2(C_i+1)\rceil\}\). Excluding common physical columns/rows, B uses 2N columns, N binaries and 2N+6 rows. The implemented C166 uses 2k+2d columns, d binaries and 2k+8+7d rows. The continuous support is bounded by five; total exact encoding still depends logarithmically on capacity. Nonzero formulas and actual counts are retained with the implementation study. These are raw-model projection statements, not ideality of the combined extension, route/objective hull claims, or predictions of native cuts and branch trajectories. Fewer columns or binaries need not reduce complete cost.
+
+## A.10 Continuous decision bounds from existing physical fleets
+
+For a fixed physical domain and normalized weight vector, \(v(\rho)=\min_x\{G(x)+\rho P(x)/\Omega\}\) is concave: for \(0\le\theta\le1\), every feasible x has
+\(G(x)+(\theta\rho_a+(1-\theta)\rho_b)p(x)=\theta F_{\rho_a}(x)+(1-\theta)F_{\rho_b}(x)\ge\theta v(\rho_a)+(1-\theta)v(\rho_b)\); minimize over x. Replacing endpoint values by qualified global lower bounds preserves the lower chord on its closed endpoint interval. Taking the maximum of applicable chords is safe. The minimum of the verified archive's objective lines is an upper bound. These facts require no assertion that the sampled incumbents are optimal or Pareto efficient.
+
+All feasible-line intersections, overlapping lower-chord intersections and chord interval endpoints partition the covered parameter range into finitely many pieces on which both envelope expressions are affine. Using every distinct anchor pair also makes the maximum applicable-chord envelope continuous: at an interior anchor, starting/ending chords share its L value with an incoming/outgoing anchor chord, while spanning chords remain continuous. The gap therefore attains a maximum at a partition endpoint (or everywhere on a constant piece). Checking all such points proves the stated continuous-interval regret bounds; a grid would not suffice. Same-coordinate lowers combine by maximum, never by a zero-length chord. Outside a chord's endpoint interval no extrapolation is granted.
+
+The application reconstructs complete fleets, verifies fixed physical/normalized-weight identity and uses actual loaded lambda/omega values. Rational G/P/coordinate arithmetic supplements the inherited numerical lower qualifications; it does not turn native solves into rational proofs. Original lowers are conservatively reduced by 1e-7, and exact feasible objectives receive a 1e-12 upward guard. No source crossing is clipped. The original run objectives, statuses and clocks remain unchanged. Likewise, nested physical time domains give the two-sided difference interval in Table 5; this is an objective-value decision bound, not a monetary resource price.
+
+\clearpage
+
 # Appendix B. Executable method specification
 
 **Current frozen method.** GI-TBC (historical S2, configuration ms2) uses the unchanged H and controller specified below with uniform pair-only support. Historical full-M-B traces and development variants retain their named identity. GI-TBC-R (implementation s2-root, historical S2R) is the diagnostic root-only control.
@@ -562,7 +632,7 @@ The “interval-mip-core-no-exhaustive-subset-duration” policy is overridden b
 
 The historical breadth/resource study's GI-TBC source/PE and policy are fixed in [candidate_manifest.json](candidate_manifest.json); its 120 actual method vectors, inputs, physical horizons, weights, Seeds and caps are in [matrix_frozen.json](matrix_frozen.json), with the prospectively registered sharing and order in [experiment_plan.json](experiment_plan.json). The default vector below uses ms2, tau=.08 and AP off. The three AM values are .04/.08/.16; the explicit `--round137-am-threshold` overrides the actual first-class field after presets. The four research controls are `--round127-mode s2-root`, `--round137-delete-ab`, `--round137-delete-cr`, and `--round137-delete-cg`; each changes only the declared comparison. Actual threshold/deletion readback is checked before qualification closes. The accepted inclusive root is the post-R130 implementation, not the old MD workflow. P and PS use their own complete vectors in the matrix rather than an abbreviated derivation from the GI-TBC vector.
 
-For the later archived-source and three-Seed cohort, the measured C++ is `e920b92e199e825ec89a2932f701861ff158e0d4`; actual method freezes and PE/DLL bindings are in the [R164 method freeze](../unified_exact_round164/method_freeze.json) and [science identity](../unified_exact_round164/science_identity.json). Those observations were produced by the already measured PE, not by a manuscript build. The latest source includes default-off research paths; the main B vector does not enable them. Historical S2/ms2 and paper-S2 are implementation aliases of the specified main method. E+ remains separately named and off in B. The [current document manifest](../unified_exact_round165/source_manifest.json) binds the maintained sources and both study generations.
+For the later archived-source and three-Seed cohort, the measured C++ is `e920b92e199e825ec89a2932f701861ff158e0d4`; actual method freezes and PE/DLL bindings are in the [R164 method freeze](../unified_exact_round164/method_freeze.json) and [science identity](../unified_exact_round164/science_identity.json). Those observations were produced by the already measured PE, not by a manuscript build. The latest source includes default-off research paths; the main B vector does not enable them. Historical S2/ms2 and paper-S2 are implementation aliases of the specified main method. E+ remains separately named and off in B. The [current document manifest](../unified_exact_round166/source_manifest.json) binds the maintained sources and both study generations.
 
 Historical R135 is separately pinned: its [candidate manifest](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/candidate_manifest.json), [first-stage commands](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/C_matrix_frozen.json) and [conditional-stage commands](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/D_matrix_frozen.json) compare S2/AP at lambda=.15. Those observations remain historical; AP is not enabled in the current stage. R134 confirmation and weight observations likewise retain their original identities in the preserved supplement.
 

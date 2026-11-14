@@ -1,0 +1,43 @@
+{
+  "UTC": "2026-11-13T21:31:37.407433+00:00",
+  "PASS": true,
+  "actual_Optimize": 96,
+  "local_LP": 64,
+  "global_LP": 16,
+  "boundary_tiny_native": 8,
+  "diagnostic_window_seconds": 539.0807707309723,
+  "same_raw_LP_projection": true,
+  "internal_nonbreak_inventory": [
+    1,
+    1
+  ],
+  "integer_type_restoration": true,
+  "complete_Start_actual_rows": true,
+  "zero_stock": true,
+  "loaded_return": true,
+  "independent_manual_oracle": true,
+  "independent_zero_controller": true,
+  "LP_pairs": {
+    "path": "results/unified_exact_round166/qualification/LP_pairs.json",
+    "bytes": 12487,
+    "SHA256": "62099f4426c8cff05d0022669c13cb69129aafd6295caaa93bb7ddaf5e8a4efa"
+  },
+  "algebra": {
+    "PASS": true,
+    "Optimize": 0,
+    "domains": 4550,
+    "graph_states": 77168,
+    "empty_domain": true,
+    "continuous_only_counterexample": true,
+    "binary_breakpoints_delete_internal_Y": true
+  },
+  "controller_Optimize": 8,
+  "full_own_H_nonzero": true,
+  "B_unchanged": true,
+  "unsupported_combinations_rejected": true,
+  "controller_reader_failure": {
+    "reason": "independent contract checker not yet present at first read",
+    "producer_rerun": false,
+    "preserved": true
+  }
+}

@@ -1,0 +1,2040 @@
+{
+  "schema": "round166-offline-parent-fleets-v1",
+  "format": "M; for every vehicle: vehicle n node_0 ... node_(n-1), followed by pickup-minus-drop for each interior node (whitespace separated)",
+  "records": [
+    {
+      "id": "R163-C20-S",
+      "parent_path": "results/unified_exact_round166/qualification/parents/R163-C20-S.txt",
+      "parent_SHA256": "b3cdf8dc394b54e20e776121c88251e865d343eb2af829093c4042221cf27c29",
+      "input_path": "results/unified_exact_round163/inputs/R163-C20-S/first/instance.txt",
+      "input_SHA256": "cdf6943983c8f2bbd932cb7a3bf3e6645d828b9f651806c4514b6d9a13b865ca",
+      "lambda_value": 0.10787606377934943,
+      "T_seconds": 5400,
+      "U": 0.191280592282812,
+      "physical_G": 0.07556576093183874,
+      "physical_P": 1.072664567995893,
+      "source_arm_id": "R163_002_R163-C20-S_S0_B",
+      "source_method": "B",
+      "source_seed": 0,
+      "source_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "source_archive_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "source_member": "results/unified_exact_round163/campaign/002/raw/R163_002_R163-C20-S_S0_B/audit.json",
+      "source_member_SHA256": "5784ad3c31840efda76eb628ef3c6f9f6d9e29c8263bb26439865bd31db04d83",
+      "physical_verified": true,
+      "full_fleet": {
+        "Y": [
+          50000,
+          11,
+          12,
+          17,
+          10,
+          7,
+          10,
+          9,
+          10,
+          7,
+          9,
+          12,
+          13,
+          7,
+          11,
+          6,
+          9,
+          13,
+          7,
+          11,
+          9
+        ],
+        "G": 0.07556576093183874,
+        "P": 1.072664567995893,
+        "F": 0.191280592282812,
+        "p": 0.11571483135097327,
+        "Omega": 9.269897,
+        "lambda_value": 0.10787606377934943,
+        "rho_binary64": 0.9999999999999999,
+        "exact": {
+          "G": "9562507/126545500",
+          "P": "3481691472337361624611/3245834323438463877120",
+          "p": "3481691472337361624611/30088549857339246513240",
+          "Omega": "83495809349925759/9007199254740992",
+          "lambda_value": "7773289610221983/72057594037927936",
+          "rho": "649037107316853406952988559760097/649037107316853453566312041152512"
+        },
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              3,
+              10,
+              19,
+              13,
+              7,
+              9,
+              16,
+              18,
+              11,
+              6,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 19,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 16,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 11,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 6
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              15,
+              17,
+              12,
+              14,
+              20,
+              8,
+              4,
+              2,
+              0
+            ],
+            "operations": [
+              {
+                "station": 5,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 17,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 14,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 8
+              }
+            ]
+          }
+        ],
+        "operations": [
+          {
+            "vehicle": 0,
+            "Q": 30,
+            "nodes": [
+              0,
+              1,
+              3,
+              10,
+              19,
+              13,
+              7,
+              9,
+              16,
+              18,
+              11,
+              6,
+              0
+            ],
+            "pickups": 30,
+            "drops": 30,
+            "return_load": 0,
+            "prefix_loads": [
+              5,
+              15,
+              8,
+              13,
+              8,
+              4,
+              0,
+              4,
+              0,
+              6,
+              0
+            ],
+            "peak_prefix_load": 15,
+            "travel_seconds": 1794.0969974705188,
+            "station_handling_seconds": 3600,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 3600,
+            "duration_seconds": 5394.0969974705185,
+            "time_utilization": 0.9989068513834294
+          },
+          {
+            "vehicle": 1,
+            "Q": 30,
+            "nodes": [
+              0,
+              5,
+              15,
+              17,
+              12,
+              14,
+              20,
+              8,
+              4,
+              2,
+              0
+            ],
+            "pickups": 28,
+            "drops": 28,
+            "return_load": 0,
+            "prefix_loads": [
+              5,
+              1,
+              8,
+              0,
+              5,
+              12,
+              16,
+              8,
+              0
+            ],
+            "peak_prefix_load": 16,
+            "travel_seconds": 2039.6478274234782,
+            "station_handling_seconds": 3360,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 3360,
+            "duration_seconds": 5399.647827423478,
+            "time_utilization": 0.9999347828561996
+          }
+        ],
+        "pickups": 58,
+        "drops": 58,
+        "returns": 0,
+        "total_inventory": 200,
+        "total_initial": 200,
+        "total_target": 227,
+        "maximum_duration": 5399.647827423478,
+        "target_under": 12,
+        "target_equal": 8,
+        "target_over": 0
+      },
+      "offline_only": true,
+      "formal_performance_start_forbidden": true
+    },
+    {
+      "id": "R163-B20-B",
+      "parent_path": "results/unified_exact_round166/qualification/parents/R163-B20-B.txt",
+      "parent_SHA256": "b9028799c78681abff742b06e738b2d71706b517692f3d12d2d029c3a7b692e8",
+      "input_path": "results/unified_exact_round163/inputs/R163-B20-B/first/instance.txt",
+      "input_SHA256": "1101972093cf4e0cfba3470236876048cb26e7e7b924439c7ade6e65a30a28c4",
+      "lambda_value": 0.10176615156032952,
+      "T_seconds": 7200,
+      "U": 0.42323218169431764,
+      "physical_G": 0.1709193230498591,
+      "physical_P": 2.47933968982684,
+      "source_arm_id": "R163_004_R163-B20-B_S0_B",
+      "source_method": "B",
+      "source_seed": 0,
+      "source_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "source_archive_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "source_member": "results/unified_exact_round163/campaign/004/raw/R163_004_R163-B20-B_S0_B/audit.json",
+      "source_member_SHA256": "dec83b25fa18cbbfa79c316e8e48e3a468d99574ac04d915adb83b6471a642bb",
+      "physical_verified": true,
+      "full_fleet": {
+        "Y": [
+          50000,
+          4,
+          8,
+          7,
+          4,
+          13,
+          4,
+          5,
+          8,
+          4,
+          6,
+          11,
+          8,
+          13,
+          7,
+          8,
+          7,
+          12,
+          8,
+          6,
+          7
+        ],
+        "G": 0.1709193230498591,
+        "P": 2.47933968982684,
+        "F": 0.42323218169431764,
+        "p": 0.25231285864445857,
+        "Omega": 9.82645,
+        "lambda_value": 0.10176615156032952,
+        "rho_binary64": 0.9999999999999999,
+        "exact": {
+          "G": "41973/245572",
+          "P": "14739058360262328989/5944751508129054720",
+          "p": "14739058360262328989/58415803457054750520",
+          "Omega": "44254396558374811/4503599627370496",
+          "lambda_value": "7333024035936471/72057594037927936",
+          "rho": "324518553658426728601000202631981/324518553658426726783156020576256"
+        },
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              6,
+              18,
+              10,
+              14,
+              0
+            ],
+            "operations": [
+              {
+                "station": 6,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 3
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              8,
+              20,
+              15,
+              3,
+              0
+            ],
+            "operations": [
+              {
+                "station": 8,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 15,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 2
+              }
+            ]
+          }
+        ],
+        "operations": [
+          {
+            "vehicle": 0,
+            "Q": 30,
+            "nodes": [
+              0,
+              6,
+              18,
+              10,
+              14,
+              0
+            ],
+            "pickups": 5,
+            "drops": 5,
+            "return_load": 0,
+            "prefix_loads": [
+              2,
+              5,
+              3,
+              0
+            ],
+            "peak_prefix_load": 5,
+            "travel_seconds": 6333.047711933519,
+            "station_handling_seconds": 600,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 600,
+            "duration_seconds": 6933.047711933519,
+            "time_utilization": 0.9629232933240999
+          },
+          {
+            "vehicle": 1,
+            "Q": 30,
+            "nodes": [
+              0,
+              8,
+              20,
+              15,
+              3,
+              0
+            ],
+            "pickups": 6,
+            "drops": 5,
+            "return_load": 1,
+            "prefix_loads": [
+              3,
+              0,
+              3,
+              1
+            ],
+            "peak_prefix_load": 3,
+            "travel_seconds": 4484.3533638836325,
+            "station_handling_seconds": 660,
+            "return_unloading_seconds": 60,
+            "handling_seconds": 720,
+            "duration_seconds": 5204.3533638836325,
+            "time_utilization": 0.722826856094949
+          }
+        ],
+        "pickups": 11,
+        "drops": 10,
+        "returns": 1,
+        "total_inventory": 150,
+        "total_initial": 151,
+        "total_target": 151,
+        "maximum_duration": 6933.047711933519,
+        "target_under": 7,
+        "target_equal": 7,
+        "target_over": 6
+      },
+      "offline_only": true,
+      "formal_performance_start_forbidden": true
+    },
+    {
+      "id": "R163-X20-S",
+      "parent_path": "results/unified_exact_round166/qualification/parents/R163-X20-S.txt",
+      "parent_SHA256": "c84f1e91fd7958d43f2d57ec8e4fd407d5cf15d5a333ac0e53c3b122d6b66fc6",
+      "input_path": "results/unified_exact_round163/inputs/R163-X20-S/first/instance.txt",
+      "input_SHA256": "749674d7000925c032a619ad1b067cbdcaef0b1cdfd3267228b5d9a379b4a0da",
+      "lambda_value": 0.13297872340425532,
+      "T_seconds": 5400,
+      "U": 0.4477476265860282,
+      "physical_G": 0.2487228038909928,
+      "physical_P": 1.4966666666666666,
+      "source_arm_id": "R163_009_R163-X20-S_S0_B",
+      "source_method": "B",
+      "source_seed": 0,
+      "source_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "source_archive_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "source_member": "results/unified_exact_round163/campaign/009/raw/R163_009_R163-X20-S_S0_B/audit.json",
+      "source_member_SHA256": "0736f131fa966f97375ef4f7e437a72e7a20094c9296a2bfe34770db7b0f6c1a",
+      "physical_verified": true,
+      "full_fleet": {
+        "Y": [
+          50000,
+          0,
+          7,
+          2,
+          4,
+          8,
+          8,
+          2,
+          8,
+          5,
+          7,
+          3,
+          10,
+          3,
+          3,
+          6,
+          3,
+          1,
+          5,
+          1,
+          8
+        ],
+        "G": 0.2487228038909928,
+        "P": 1.4966666666666666,
+        "F": 0.44774762658602824,
+        "p": 0.19902482269503546,
+        "Omega": 7.5200000000000005,
+        "lambda_value": 0.13297872340425532,
+        "rho_binary64": 1.0,
+        "exact": {
+          "G": "66991/269340",
+          "P": "4529540361224150087/3026418949592973312",
+          "p": "4529540361224150087/22758670500939159612",
+          "Omega": "270936553582609043/36028797018963968",
+          "lambda_value": "1197765858343217/9007199254740992",
+          "rho": "324518553658426725378416221911331/324518553658426726783156020576256"
+        },
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              6,
+              7,
+              11,
+              13,
+              14,
+              20,
+              16,
+              0
+            ],
+            "operations": [
+              {
+                "station": 6,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 11,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 2
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              8,
+              10,
+              12,
+              18,
+              15,
+              0
+            ],
+            "operations": [
+              {
+                "station": 5,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 10,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          }
+        ],
+        "operations": [
+          {
+            "vehicle": 0,
+            "Q": 30,
+            "nodes": [
+              0,
+              6,
+              7,
+              11,
+              13,
+              14,
+              20,
+              16,
+              0
+            ],
+            "pickups": 10,
+            "drops": 10,
+            "return_load": 0,
+            "prefix_loads": [
+              4,
+              2,
+              4,
+              7,
+              8,
+              2,
+              0
+            ],
+            "peak_prefix_load": 8,
+            "travel_seconds": 4187.83180151031,
+            "station_handling_seconds": 1200,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 1200,
+            "duration_seconds": 5387.83180151031,
+            "time_utilization": 0.9977466299093166
+          },
+          {
+            "vehicle": 1,
+            "Q": 30,
+            "nodes": [
+              0,
+              5,
+              8,
+              10,
+              12,
+              18,
+              15,
+              0
+            ],
+            "pickups": 14,
+            "drops": 14,
+            "return_load": 0,
+            "prefix_loads": [
+              4,
+              8,
+              14,
+              8,
+              4,
+              0
+            ],
+            "peak_prefix_load": 14,
+            "travel_seconds": 3681.360255844771,
+            "station_handling_seconds": 1680,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 1680,
+            "duration_seconds": 5361.360255844771,
+            "time_utilization": 0.9928444918231057
+          }
+        ],
+        "pickups": 24,
+        "drops": 24,
+        "returns": 0,
+        "total_inventory": 94,
+        "total_initial": 94,
+        "total_target": 114,
+        "maximum_duration": 5387.83180151031,
+        "target_under": 11,
+        "target_equal": 6,
+        "target_over": 3
+      },
+      "offline_only": true,
+      "formal_performance_start_forbidden": true
+    },
+    {
+      "id": "R163-C35-U",
+      "parent_path": "results/unified_exact_round166/qualification/parents/R163-C35-U.txt",
+      "parent_SHA256": "3af13cbd73a422714a499f334957132898b019d57a1b9cebd17254846af53549",
+      "input_path": "results/unified_exact_round163/inputs/R163-C35-U/first/instance.txt",
+      "input_SHA256": "fb9d881dba6d0d07c59c48a683d2b2543f3effeae593306e28d79875cdcc20d7",
+      "lambda_value": 0.11068496171019777,
+      "T_seconds": 10800,
+      "U": 0.12956638965196035,
+      "physical_G": 0.067831554064342,
+      "physical_P": 0.5577526940765117,
+      "source_arm_id": "R163_011_R163-C35-U_S0_B",
+      "source_method": "B",
+      "source_seed": 0,
+      "source_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "source_archive_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "source_member": "results/unified_exact_round163/campaign/011/raw/R163_011_R163-C35-U_S0_B/audit.json",
+      "source_member_SHA256": "1c5c491859b249fd63b312d796427291f5e987e4f8bbe40aba94d4ba430ec0dc",
+      "physical_verified": true,
+      "full_fleet": {
+        "Y": [
+          50000,
+          13,
+          9,
+          10,
+          10,
+          15,
+          21,
+          12,
+          9,
+          11,
+          29,
+          13,
+          15,
+          20,
+          11,
+          13,
+          17,
+          15,
+          20,
+          31,
+          12,
+          22,
+          11,
+          13,
+          29,
+          8,
+          19,
+          20,
+          14,
+          9,
+          12,
+          11,
+          26,
+          9,
+          11,
+          15
+        ],
+        "G": 0.067831554064342,
+        "P": 0.5577526940765117,
+        "F": 0.12956638965196035,
+        "p": 0.06173483558761835,
+        "Omega": 9.034651,
+        "lambda_value": 0.11068496171019777,
+        "rho_binary64": 1.0,
+        "exact": {
+          "G": "13941712/205534315",
+          "P": "109915493761445903875/197068512494478163968",
+          "p": "175864790018313446200/2848712373562799422107",
+          "Omega": "651015214032359665/72057594037927936",
+          "lambda_value": "7975692037017029/72057594037927936",
+          "rho": "5192296858534827778540244657735285/5192296858534827628530496329220096"
+        },
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              20,
+              35,
+              6,
+              24,
+              10,
+              25,
+              2,
+              19,
+              26,
+              27,
+              5,
+              0
+            ],
+            "operations": [
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 35,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 13
+              },
+              {
+                "station": 24,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 10,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 16
+              },
+              {
+                "station": 26,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 5,
+                "pickup": 10,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              11,
+              17,
+              32,
+              1,
+              13,
+              29,
+              21,
+              12,
+              31,
+              8,
+              22,
+              34,
+              0
+            ],
+            "operations": [
+              {
+                "station": 11,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 32,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 29,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 12,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 22,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              23,
+              15,
+              7,
+              30,
+              4,
+              33,
+              3,
+              16,
+              9,
+              14,
+              0
+            ],
+            "operations": [
+              {
+                "station": 23,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 33,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 9,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 9,
+                "drop": 0
+              }
+            ]
+          }
+        ],
+        "operations": [
+          {
+            "vehicle": 0,
+            "Q": 20,
+            "nodes": [
+              0,
+              28,
+              20,
+              35,
+              6,
+              24,
+              10,
+              25,
+              2,
+              19,
+              26,
+              27,
+              5,
+              0
+            ],
+            "pickups": 59,
+            "drops": 48,
+            "return_load": 11,
+            "prefix_loads": [
+              10,
+              4,
+              13,
+              0,
+              2,
+              20,
+              18,
+              16,
+              0,
+              10,
+              1,
+              11
+            ],
+            "peak_prefix_load": 20,
+            "travel_seconds": 3621.7845347150455,
+            "station_handling_seconds": 6420,
+            "return_unloading_seconds": 660,
+            "handling_seconds": 7080,
+            "duration_seconds": 10701.784534715045,
+            "time_utilization": 0.9909059754365782
+          },
+          {
+            "vehicle": 1,
+            "Q": 25,
+            "nodes": [
+              0,
+              11,
+              17,
+              32,
+              1,
+              13,
+              29,
+              21,
+              12,
+              31,
+              8,
+              22,
+              34,
+              0
+            ],
+            "pickups": 51,
+            "drops": 46,
+            "return_load": 5,
+            "prefix_loads": [
+              9,
+              2,
+              20,
+              13,
+              4,
+              11,
+              1,
+              10,
+              6,
+              1,
+              9,
+              5
+            ],
+            "peak_prefix_load": 20,
+            "travel_seconds": 4650.890794310364,
+            "station_handling_seconds": 5820,
+            "return_unloading_seconds": 300,
+            "handling_seconds": 6120,
+            "duration_seconds": 10770.890794310364,
+            "time_utilization": 0.9973047031768856
+          },
+          {
+            "vehicle": 2,
+            "Q": 30,
+            "nodes": [
+              0,
+              23,
+              15,
+              7,
+              30,
+              4,
+              33,
+              3,
+              16,
+              9,
+              14,
+              0
+            ],
+            "pickups": 48,
+            "drops": 22,
+            "return_load": 26,
+            "prefix_loads": [
+              8,
+              16,
+              25,
+              20,
+              15,
+              22,
+              17,
+              10,
+              17,
+              26
+            ],
+            "peak_prefix_load": 26,
+            "travel_seconds": 4939.829277632682,
+            "station_handling_seconds": 4200,
+            "return_unloading_seconds": 1560,
+            "handling_seconds": 5760,
+            "duration_seconds": 10699.829277632682,
+            "time_utilization": 0.9907249331141372
+          }
+        ],
+        "pickups": 158,
+        "drops": 116,
+        "returns": 42,
+        "total_inventory": 535,
+        "total_initial": 577,
+        "total_target": 515,
+        "maximum_duration": 10770.890794310364,
+        "target_under": 2,
+        "target_equal": 23,
+        "target_over": 10
+      },
+      "offline_only": true,
+      "formal_performance_start_forbidden": true
+    },
+    {
+      "id": "R163-B35-S",
+      "parent_path": "results/unified_exact_round166/qualification/parents/R163-B35-S.txt",
+      "parent_SHA256": "5591aa50bb83de103cd801c8033645ec180add57cc629f09e1c06d82c24936a9",
+      "input_path": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+      "input_SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1",
+      "lambda_value": 0.10810343336504369,
+      "T_seconds": 7200,
+      "U": 0.19429031110944756,
+      "physical_G": 0.08537146898987899,
+      "physical_P": 1.007542857142857,
+      "source_arm_id": "R163_013_R163-B35-S_S0_B",
+      "source_method": "B",
+      "source_seed": 0,
+      "source_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "source_archive_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "source_member": "results/unified_exact_round163/campaign/013/raw/R163_013_R163-B35-S_S0_B/audit.json",
+      "source_member_SHA256": "ea5159aa01a8403591400e0887dc269fb5dbe4b08453d3293271c0d0a4c5cd68",
+      "physical_verified": true,
+      "full_fleet": {
+        "Y": [
+          50000,
+          12,
+          9,
+          6,
+          6,
+          6,
+          15,
+          7,
+          6,
+          9,
+          25,
+          14,
+          7,
+          9,
+          7,
+          6,
+          6,
+          8,
+          10,
+          20,
+          12,
+          9,
+          13,
+          3,
+          20,
+          6,
+          13,
+          8,
+          21,
+          12,
+          14,
+          12,
+          11,
+          8,
+          9,
+          10
+        ],
+        "G": 0.08537146898987899,
+        "P": 1.007542857142857,
+        "F": 0.19429031110944758,
+        "p": 0.10891884211956858,
+        "Omega": 9.250399999999999,
+        "lambda_value": 0.10810343336504369,
+        "rho_binary64": 1.0,
+        "exact": {
+          "G": "555413178/6505840705",
+          "P": "444763137574737779238149/441433467987631087288320",
+          "p": "444763137574737779238149/4083436152272782535270040",
+          "Omega": "666561567888448567/72057594037927936",
+          "lambda_value": "243427291110141/2251799813685248",
+          "rho": "162259276829213382506443610617947/162259276829213363391578010288128"
+        },
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              20,
+              25,
+              11,
+              3,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 10,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 11,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 19,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 9
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              26,
+              29,
+              35,
+              21,
+              9,
+              2,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              0
+            ],
+            "operations": [
+              {
+                "station": 22,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 26,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 5,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              31,
+              12,
+              16,
+              33,
+              27,
+              18,
+              14,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 32,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 12,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 33,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          }
+        ],
+        "operations": [
+          {
+            "vehicle": 0,
+            "Q": 20,
+            "nodes": [
+              0,
+              10,
+              20,
+              25,
+              11,
+              3,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "pickups": 40,
+            "drops": 40,
+            "return_load": 0,
+            "prefix_loads": [
+              12,
+              16,
+              10,
+              14,
+              8,
+              18,
+              9,
+              19,
+              9,
+              0
+            ],
+            "peak_prefix_load": 19,
+            "travel_seconds": 2280.3208814286754,
+            "station_handling_seconds": 4800,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 4800,
+            "duration_seconds": 7080.320881428675,
+            "time_utilization": 0.9833779001984272
+          },
+          {
+            "vehicle": 1,
+            "Q": 25,
+            "nodes": [
+              0,
+              22,
+              26,
+              29,
+              35,
+              21,
+              9,
+              2,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              0
+            ],
+            "pickups": 36,
+            "drops": 36,
+            "return_load": 0,
+            "prefix_loads": [
+              6,
+              12,
+              17,
+              21,
+              15,
+              8,
+              2,
+              3,
+              8,
+              17,
+              11,
+              5,
+              0
+            ],
+            "peak_prefix_load": 21,
+            "travel_seconds": 2836.455757629419,
+            "station_handling_seconds": 4320,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 4320,
+            "duration_seconds": 7156.455757629419,
+            "time_utilization": 0.9939521885596415
+          },
+          {
+            "vehicle": 2,
+            "Q": 30,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              31,
+              12,
+              16,
+              33,
+              27,
+              18,
+              14,
+              7,
+              0
+            ],
+            "pickups": 30,
+            "drops": 30,
+            "return_load": 0,
+            "prefix_loads": [
+              6,
+              11,
+              15,
+              21,
+              25,
+              20,
+              25,
+              19,
+              11,
+              5,
+              0
+            ],
+            "peak_prefix_load": 25,
+            "travel_seconds": 3564.7887497029215,
+            "station_handling_seconds": 3600,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 3600,
+            "duration_seconds": 7164.788749702921,
+            "time_utilization": 0.9951095485698502
+          }
+        ],
+        "pickups": 106,
+        "drops": 106,
+        "returns": 0,
+        "total_inventory": 369,
+        "total_initial": 369,
+        "total_target": 419,
+        "maximum_duration": 7164.788749702921,
+        "target_under": 24,
+        "target_equal": 9,
+        "target_over": 2
+      },
+      "offline_only": true,
+      "formal_performance_start_forbidden": true
+    },
+    {
+      "id": "R163-X35-S",
+      "parent_path": "results/unified_exact_round166/qualification/parents/R163-X35-S.txt",
+      "parent_SHA256": "c12695af3181db9e63eab5a4a32194819d58b0806c61bc1ddf3839f1f6a94ccd",
+      "input_path": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+      "input_SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9",
+      "lambda_value": 0.09288824383164006,
+      "T_seconds": 10800,
+      "U": 0.45747531701601785,
+      "physical_G": 0.15210521541950114,
+      "physical_P": 3.2875,
+      "source_arm_id": "R163_018_R163-X35-S_S0_B",
+      "source_method": "B",
+      "source_seed": 0,
+      "source_archive": "results/unified_exact_round163/artifacts/new_evidence_01.zip",
+      "source_archive_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "source_member": "results/unified_exact_round163/campaign/018/raw/R163_018_R163-X35-S_S0_B/audit.json",
+      "source_member_SHA256": "608bc0e40997fd617a15fe523098684215de2fcea8b533a74730ef3f159745ee",
+      "physical_verified": true,
+      "full_fleet": {
+        "Y": [
+          50000,
+          8,
+          1,
+          4,
+          2,
+          2,
+          4,
+          1,
+          2,
+          1,
+          8,
+          1,
+          1,
+          1,
+          2,
+          1,
+          1,
+          5,
+          2,
+          1,
+          3,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          1,
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          4
+        ],
+        "G": 0.15210521541950114,
+        "P": 3.2875,
+        "F": 0.45747531701601785,
+        "p": 0.3053701015965167,
+        "Omega": 10.765625,
+        "lambda_value": 0.09288824383164006,
+        "rho_binary64": 1.0,
+        "exact": {
+          "G": "41924/275625",
+          "P": "118444670199844045/36028797018963968",
+          "p": "118444670199844045/387872517907283972",
+          "Omega": "96968129476820993/9007199254740992",
+          "lambda_value": "6693303364916383/72057594037927936",
+          "rho": "649037107316853457867078104028319/649037107316853453566312041152512"
+        },
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              24,
+              9,
+              35,
+              3,
+              34,
+              29,
+              17,
+              16,
+              8,
+              0
+            ],
+            "operations": [
+              {
+                "station": 24,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 3,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 16,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 2
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              19,
+              4,
+              11,
+              7,
+              21,
+              20,
+              1,
+              22,
+              33,
+              10,
+              0
+            ],
+            "operations": [
+              {
+                "station": 25,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 4,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 33,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 6
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              14,
+              30,
+              6,
+              31,
+              28,
+              2,
+              12,
+              5,
+              0
+            ],
+            "operations": [
+              {
+                "station": 14,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 28,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 5,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          }
+        ],
+        "operations": [
+          {
+            "vehicle": 0,
+            "Q": 20,
+            "nodes": [
+              0,
+              24,
+              9,
+              35,
+              3,
+              34,
+              29,
+              17,
+              16,
+              8,
+              0
+            ],
+            "pickups": 13,
+            "drops": 13,
+            "return_load": 0,
+            "prefix_loads": [
+              5,
+              4,
+              1,
+              8,
+              7,
+              4,
+              1,
+              2,
+              0
+            ],
+            "peak_prefix_load": 8,
+            "travel_seconds": 8890.469886759896,
+            "station_handling_seconds": 1560,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 1560,
+            "duration_seconds": 10450.469886759896,
+            "time_utilization": 0.9676361006259163
+          },
+          {
+            "vehicle": 1,
+            "Q": 25,
+            "nodes": [
+              0,
+              25,
+              19,
+              4,
+              11,
+              7,
+              21,
+              20,
+              1,
+              22,
+              33,
+              10,
+              0
+            ],
+            "pickups": 12,
+            "drops": 12,
+            "return_load": 0,
+            "prefix_loads": [
+              2,
+              1,
+              3,
+              2,
+              1,
+              0,
+              4,
+              8,
+              7,
+              6,
+              0
+            ],
+            "peak_prefix_load": 8,
+            "travel_seconds": 9014.059219157469,
+            "station_handling_seconds": 1440,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 1440,
+            "duration_seconds": 10454.059219157469,
+            "time_utilization": 0.9679684462182842
+          },
+          {
+            "vehicle": 2,
+            "Q": 30,
+            "nodes": [
+              0,
+              14,
+              30,
+              6,
+              31,
+              28,
+              2,
+              12,
+              5,
+              0
+            ],
+            "pickups": 9,
+            "drops": 9,
+            "return_load": 0,
+            "prefix_loads": [
+              9,
+              8,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ],
+            "peak_prefix_load": 9,
+            "travel_seconds": 8986.850951152594,
+            "station_handling_seconds": 1080,
+            "return_unloading_seconds": 0,
+            "handling_seconds": 1080,
+            "duration_seconds": 10066.850951152594,
+            "time_utilization": 0.9321158288104253
+          }
+        ],
+        "pickups": 34,
+        "drops": 34,
+        "returns": 0,
+        "total_inventory": 75,
+        "total_initial": 75,
+        "total_target": 110,
+        "maximum_duration": 10454.059219157469,
+        "target_under": 15,
+        "target_equal": 20,
+        "target_over": 0
+      },
+      "offline_only": true,
+      "formal_performance_start_forbidden": true
+    }
+  ],
+  "new_Optimize": 0,
+  "offline_only": true
+}
