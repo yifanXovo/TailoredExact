@@ -596,3 +596,11 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /scripts/round165* -text whitespace=cr-at-eol
 /results/unified_exact_round165/** -text whitespace=cr-at-eol
 /results/unified_exact_round165/goal.md -whitespace
+
+# Round168 scientific inputs, source and evidence preserve measured bytes.
+/src/round168_route_family.cpp -text whitespace=cr-at-eol
+/scripts/round168* -text whitespace=cr-at-eol
+/results/unified_exact_round168/** -text whitespace=cr-at-eol
+/results/unified_exact_round168/goal.md -whitespace
+/results/unified_exact_round168/**/*.fleet -whitespace
+/results/unified_exact_round168/artifacts/** -text -diff -whitespace

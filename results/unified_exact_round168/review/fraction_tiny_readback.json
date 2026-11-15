@@ -1,0 +1,91 @@
+{
+  "schema": "round168-independent-fraction-tiny-readback-v1",
+  "reviewer_kind": "independent agent, not human peer review",
+  "new_Optimize": 0,
+  "purpose": "offline recomputation only; C++ remains primary research implementation",
+  "arithmetic": "exact Fraction of frozen binary64 objective coefficients; integer distances/handling",
+  "enumeration_SHA256": "20ade816948c55668aa8e5ccf70d358621aa2671e3b631871cbecbb7458c2b80",
+  "reviewer_script_SHA256": "e5dd7ecb49464bd83072ad833be1f4416accd743d7754483c97f36ef66788497",
+  "records": [
+    {
+      "case": "A",
+      "scope": "order",
+      "candidates": 256,
+      "feasible": 71,
+      "optimum_fraction": "5404319552844595/36028797018963968",
+      "optimum_float": 0.15,
+      "primary_Cpp_enumeration_optimum": 0.15,
+      "native_physical_U": 0.15,
+      "PASS": true,
+      "parent_SHA256": "9b735ff871441e83f41dd2f30e912e85704ee0df77226ceb42516a3641aab71d",
+      "native_result_SHA256": "4e0f880c8d88bbe86025e6e553dd17b4b95a594afc2a6fdebe187c410b285bca"
+    },
+    {
+      "case": "A",
+      "scope": "owner",
+      "candidates": 2713,
+      "feasible": 196,
+      "optimum_fraction": "5404319552844595/36028797018963968",
+      "optimum_float": 0.15,
+      "primary_Cpp_enumeration_optimum": 0.15,
+      "native_physical_U": 0.15,
+      "PASS": true,
+      "parent_SHA256": "9b735ff871441e83f41dd2f30e912e85704ee0df77226ceb42516a3641aab71d",
+      "native_result_SHA256": "ba1eb998cdf3a840987ad3c898d7194094ebd923e3d0b4e3848c8133bb87bc0c"
+    },
+    {
+      "case": "A",
+      "scope": "eligible",
+      "candidates": 12661,
+      "feasible": 742,
+      "optimum_fraction": "5404319552844595/36028797018963968",
+      "optimum_float": 0.15,
+      "primary_Cpp_enumeration_optimum": 0.15,
+      "native_physical_U": 0.15,
+      "PASS": true,
+      "parent_SHA256": "9b735ff871441e83f41dd2f30e912e85704ee0df77226ceb42516a3641aab71d",
+      "native_result_SHA256": "c40edc8547ef330930f9f3f0370da13eaf507647277ffd7f5823126800c07f56"
+    },
+    {
+      "case": "B",
+      "scope": "order",
+      "candidates": 256,
+      "feasible": 63,
+      "optimum_fraction": "0",
+      "optimum_float": 0.0,
+      "primary_Cpp_enumeration_optimum": 0,
+      "native_physical_U": 0,
+      "PASS": true,
+      "parent_SHA256": "6c5f3401daa034abaccb638665d717867da6931e34a75c7a14b4f629e6f92861",
+      "native_result_SHA256": "e32362ecfa9e3307ce1f0fcabae3f1390f433c4dd4fe1f0313413f09775128cb"
+    },
+    {
+      "case": "B",
+      "scope": "owner",
+      "candidates": 625,
+      "feasible": 84,
+      "optimum_fraction": "0",
+      "optimum_float": 0.0,
+      "primary_Cpp_enumeration_optimum": 0,
+      "native_physical_U": 0,
+      "PASS": true,
+      "parent_SHA256": "6c5f3401daa034abaccb638665d717867da6931e34a75c7a14b4f629e6f92861",
+      "native_result_SHA256": "442b4b5a6a1b2dbdfabccf4fd3c76b6fc7465859d2f5f08fa1bda57b7d9765c6"
+    },
+    {
+      "case": "B",
+      "scope": "eligible",
+      "candidates": 12661,
+      "feasible": 545,
+      "optimum_fraction": "0",
+      "optimum_float": 0.0,
+      "primary_Cpp_enumeration_optimum": 0,
+      "native_physical_U": 0,
+      "PASS": true,
+      "parent_SHA256": "6c5f3401daa034abaccb638665d717867da6931e34a75c7a14b4f629e6f92861",
+      "native_result_SHA256": "fc69a756c4ad074d9ff2eb82568f31ca8bce1666f6bb7572087726e459646828"
+    }
+  ],
+  "PASS": true,
+  "limitation": "Does not turn substantive Native bounds into rational certificates"
+}

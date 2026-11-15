@@ -259,11 +259,21 @@ durations in a coordinated two-echelon rebalancing framework (Qiao et
 al. 2026). Caggiani et al.~consider free-floating electric
 micromobility, battery swapping and a modified Gini measure involving
 availability and state of charge, with zonal fair targets (Caggiani et
-al. 2026). Their accessible abstracts identify these equity objects and
-operation settings; the unread complete formulations do not support
-equivalence or dominance claims. Here zero Gini means equal proportional
-station inventory, which can still represent inadequate stock. The
-deviation term separately rewards approaching targets.
+al. 2026). These equity measures concern different service objects and
+operational decisions from the station inventory ratios studied here.
+Here zero Gini means equal proportional station inventory, which can
+still represent inadequate stock. The deviation term separately rewards
+approaching targets.
+
+Exact fixed-route loading has established precedents. Erdogan et
+al.~formulate a minimum-cost network for their single-vehicle
+demand-interval model, including handling costs (Erdoğan et al. 2014,
+sec. 2). Szeto and Shui derive loading strategies under
+demand-dissatisfaction and service-time priorities, with empty depot
+returns (Szeto and Shui 2018, secs. 2--3). Those objectives and depot
+rules differ from the present globally coupled Gini and target-deviation
+objective with paid loaded returns; their results do not imply
+vehicle-wise separability or greedy optimality here.
 
 McCormick envelopes and convex epigraphs are standard tools (McCormick
 1976; Boyd and Vandenberghe 2004). Gupte et al.~study unary/binary
@@ -1143,6 +1153,34 @@ target. Seed 0 is historical; Seeds 1/2 were added on these same exposed
 inputs. Lines connect repeated observations and imply neither
 independent inputs nor a performance distribution.}
 \end{figure}
+
+To localize the saved primal deficits, we examine complete nested route
+families rather than a finite exchange neighborhood. Each parent permits
+every legal integer inventory on its originally served stations,
+pickup/drop reversal and deletion of zero service, with true compressed
+travel, empty departure, prefix capacities and loaded-return unloading.
+The order family retains owner and relative order; the owner family
+releases order; the eligible family additionally releases ownership. All
+quantities share the original whole-system Gini-plus-penalty objective.
+A closed pool of six archived B/P final fleets defines one attainable
+target per physical input, with a frozen comparison allowance of 1e-7.
+Across three inputs and nine saved B parents, the two already attaining
+parents are direct HITs. Qualified lower bounds exclude all seven
+initially nonattaining order families. This does not rule out smaller
+quantity improvements: two X35 witnesses improve without reaching the
+target. On C35 Seed0, the order and owner lower bounds are respectively
+above 0.097021 and 0.093398, against a target threshold about
+0.09331944. Thus any target-reaching fleet must change an old served
+owner or serve an old ineligible station; arbitrary reordering at
+original ownership is insufficient. The eligible query remains UNKNOWN
+after its 300-second cap, so ownership release is not shown sufficient
+and station 18 is not proved necessary. The raw eligible lower fails the
+stricter frozen residual gate; only objective nonnegativity is retained
+as its safe lower, while the owner witness supplies a feasible upper of
+about 0.115129. These numerical restricted-domain conclusions neither
+certify the full problem nor establish online benefit. Supplement S168
+records every interval, witness and cost; no complete-method performance
+observation is added.
 
 \subsubsection{4.4 What the mechanism controls
 identify}\label{what-the-mechanism-controls-identify}
@@ -2403,9 +2441,9 @@ W&\le\underline S P+\bar P S-\underline S\bar P.
 \end{aligned}\tag{A17}
 \]
 
-These are the standard McCormick envelopes (McCormick 1976), derived
-here without attributing an unread theorem number. They are relaxations,
-not an exact continuous-product identity. The writer bounds \(W\) by
+These are the standard McCormick envelopes (McCormick 1976), stated here
+for the declared bounds. They are relaxations, not an exact
+continuous-product identity. The writer bounds \(W\) by
 \(w_l=\max(0,\underline S\underline P)\),
 \(w_u=\max(w_l,\bar S\bar P)\), and emits
 
@@ -3097,12 +3135,12 @@ tie rule is asserted.
 
 The historical breadth/resource study's GI-TBC source/PE and policy are
 fixed in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round167-conditional-state/results/unified_exact_round137/candidate_manifest.json}{candidate\_\allowbreak{}manifest.json};
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round168-route-family/results/unified_exact_round137/candidate_manifest.json}{candidate\_\allowbreak{}manifest.json};
 its 120 actual method vectors, inputs, physical horizons, weights, Seeds
 and caps are in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round167-conditional-state/results/unified_exact_round137/matrix_frozen.json}{matrix\_\allowbreak{}frozen.json},
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round168-route-family/results/unified_exact_round137/matrix_frozen.json}{matrix\_\allowbreak{}frozen.json},
 with the prospectively registered sharing and order in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round167-conditional-state/results/unified_exact_round137/experiment_plan.json}{experiment\_\allowbreak{}plan.json}.
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round168-route-family/results/unified_exact_round137/experiment_plan.json}{experiment\_\allowbreak{}plan.json}.
 The default vector below uses ms2, tau=.08 and AP off. The three AM
 values are .04/.08/.16; the explicit
 \texttt{-\allowbreak{}-\allowbreak{}round137-\allowbreak{}am-\allowbreak{}threshold} overrides the actual
@@ -3908,6 +3946,12 @@ Schuijbroek, Jasper, Robert C. Hampshire, and Willem-Jan van Hoeve.
 2017. {``Inventory Rebalancing and Vehicle Routing in Bike Sharing
 Systems.''} \emph{European Journal of Operational Research} 257 (3):
 992--1004. \url{https://doi.org/10.1016/j.ejor.2016.08.029}.
+
+\bibitem[\citeproctext]{ref-szetoShui2018}
+Szeto, W. Y., and C. S. Shui. 2018. {``Exact Loading and Unloading
+Strategies for the Static Multi-Vehicle Bike Repositioning Problem.''}
+\emph{Transportation Research Part B: Methodological} 109: 176--211.
+\url{https://doi.org/10.1016/j.trb.2018.01.007}.
 
 \bibitem[\citeproctext]{ref-vielma2018embedding}
 Vielma, Juan Pablo. 2018. {``Embedding Formulations and Complexity for
