@@ -1,0 +1,98 @@
+{
+  "UTC": "2026-11-15T03:40:20.559777+00:00",
+  "scope": "offline route-family only",
+  "base": "0da006b442ff7e59a2a63c6700138316611b2ce2",
+  "source": {
+    "path": "src/round168_route_family.cpp",
+    "bytes": 47642,
+    "SHA256": "1f065e3eef524af337c771395358d359a37119b2714c8f3e5939bcbda05ce030"
+  },
+  "inherited_sources": [
+    {
+      "path": "src/Parser.cpp",
+      "bytes": 8480,
+      "SHA256": "acc0897e687dde82355f2153272e2fb1c68c1ec5507a549894109dd51b4b4ccc"
+    },
+    {
+      "path": "src/Evaluator.cpp",
+      "bytes": 6239,
+      "SHA256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41"
+    },
+    {
+      "path": "src/Result.cpp",
+      "bytes": 250280,
+      "SHA256": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b"
+    },
+    {
+      "path": "src/FileSha256.cpp",
+      "bytes": 3709,
+      "SHA256": "f53636fafb00848a9cdff7c03c70dcf506f4080b1711869694608776789ac45a"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "bytes": 39287,
+      "SHA256": "e9e396495d431fbb00f412df00929470f9332d5ab57c5561ca0c98b0a456026e"
+    },
+    {
+      "path": "include/Result.hpp",
+      "bytes": 102235,
+      "SHA256": "3c18b79e6690e7156be912748b3f5cb1b7910c1aa3befa1f58f15ebd66d67c1a"
+    },
+    {
+      "path": "include/PhysicalDurationTolerance.hpp",
+      "bytes": 264,
+      "SHA256": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a"
+    }
+  ],
+  "executable": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round168\\Round168RouteFamily.exe",
+    "bytes": 1101566,
+    "SHA256": "d699f6d92e6a392d83d828bd015d13e9c79bf32fc35f8b61d654e9cf33024449"
+  },
+  "DLL": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "bytes": 38766856,
+    "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+  },
+  "compiler": {
+    "path": "D:\\msys64\\ucrt64\\bin\\g++.exe",
+    "bytes": 2917234,
+    "SHA256": "8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1"
+  },
+  "compiler_version": "g++.exe (Rev2, Built by MSYS2 project) 14.2.0\r\nCopyright (C) 2024 Free Software Foundation, Inc.\r\nThis is free software; see the source for copying conditions.  There is NO\r\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\r\n\r\n",
+  "configure_command": [
+    "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+    "-S",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round168",
+    "-B",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round168",
+    "-G",
+    "Ninja",
+    "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+    "-DCMAKE_MAKE_PROGRAM=D:/PROGRA~1/MICROS~1/2022/PROFES~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe",
+    "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+    "-DEXACT_EBRP_BUILD_ROUND168_RESEARCH=ON",
+    "-DGUROBI_ROOT=D:/gurobi1302/win64",
+    "-DCMAKE_BUILD_TYPE=Release"
+  ],
+  "build_command": [
+    "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+    "--build",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round168",
+    "--target",
+    "Round168RouteFamily",
+    "-j",
+    "4"
+  ],
+  "CMake_cache": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round168\\CMakeCache.txt",
+    "bytes": 16253,
+    "SHA256": "56b7ed5231376fdaa1521c5b6f7e10d2f0b57ce1a44d4de62b9c7d66ba99f895"
+  },
+  "production_default_changed": false,
+  "optimization_implementation_language": "C++",
+  "driver_language": "C++",
+  "no_Python_optimization": true,
+  "commercial_DLL_published": false,
+  "pre_Optimize_builds": 3
+}

@@ -395,7 +395,7 @@ W&\le\underline S P+\bar P S-\underline S\bar P.
 \end{aligned}\tag{A17}
 \]
 
-These are the standard McCormick envelopes [@mccormick1976], derived here without attributing an unread theorem number. They are relaxations, not an exact continuous-product identity. The writer bounds \(W\) by \(w_l=\max(0,\underline S\underline P)\), \(w_u=\max(w_l,\bar S\bar P)\), and emits
+These are the standard McCormick envelopes [@mccormick1976], stated here for the declared bounds. They are relaxations, not an exact continuous-product identity. The writer bounds \(W\) by \(w_l=\max(0,\underline S\underline P)\), \(w_u=\max(w_l,\bar S\bar P)\), and emits
 
 \[
 H_\Sigma+n\lambda W-nc\sum_i r_i\le0.

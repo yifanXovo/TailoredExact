@@ -1,0 +1,42 @@
+{
+  "UTC": "2026-11-15T03:53:32.783398+00:00",
+  "PASS": true,
+  "actual_calls": 15,
+  "actual_tiny": 6,
+  "actual_substantive": 9,
+  "unique_position_ids": 11,
+  "verdicts": {
+    "EXCLUDED": 8,
+    "UNKNOWN": 1,
+    "HIT": 2
+  },
+  "final_PE_and_CPP_match_frozen_candidate": true,
+  "all_actual_models_ledger_Start_parameters_checked": true,
+  "core_default_sources_unchanged": [
+    "src/CplexBaseline.cpp",
+    "src/GurobiBaseline.cpp",
+    "src/MipStartMapping.cpp",
+    "src/IntervalRowFactory.cpp",
+    "include/Round166Research.hpp",
+    "include/Round167ConditionalState.hpp",
+    "config/gi_tbc_round137.json",
+    "config/gi_tbc_c166_round166.json"
+  ],
+  "master_new_rows": 0,
+  "new_complete_method_runs": 0,
+  "target_and_family_manifest": {
+    "path": "results/unified_exact_round168/target_manifest.json",
+    "bytes": 158115,
+    "SHA256": "6e7c953342f478ec722c367fdcaedf9de6336a96e113105f8611c078e21034bf"
+  },
+  "positions": {
+    "path": "results/unified_exact_round168/route_family_results.csv",
+    "bytes": 7696,
+    "SHA256": "da19fe66eb54f3c9f139ef7ba0308e8690e3254505ebcd20e2589406945fbe8f"
+  },
+  "independent_objective_check": {
+    "path": "results/unified_exact_round168/independent_objective_readback.json",
+    "bytes": 4129,
+    "SHA256": "5da9fcc0ad69926441e4887073e332a6032f4c2cfb6caedf4c229a7d7cd9c24d"
+  }
+}

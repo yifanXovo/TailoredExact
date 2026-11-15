@@ -1,5 +1,36 @@
 # Current manuscript and research mainline
 
+Round168 completes the current archived-route target diagnosis while retaining
+uniform GI-TBC/B, with C166/D167 default off. All seven initially nonattaining
+fixed-order families are EXCLUDED from their fixed same-input archive targets;
+C35 Seed0 is also EXCLUDED after arbitrary reorder at its original owner.
+Its old eligible domain remains UNKNOWN, so only an owner-or-outside-service-set
+necessity is established, without a sufficient released action. Two self-target
+parents are free HITs. No new complete mechanism is recommended; this conditional
+MIP expansion closes, with no pilot, extra Seed/time or new round.
+
+The [report](../results/unified_exact_round168/final_report.md),
+[all eleven restricted positions](../results/unified_exact_round168/route_family_results.csv),
+[family proof](../results/unified_exact_round168/route_family_theory.md),
+[research decision](../results/unified_exact_round168/research_decision.md) and
+[costs](../results/unified_exact_round168/cost_report.json) bind 15 actual C++
+Optimize calls (six tiny, nine substantive), not new performance samples.
+The authoritative 112-row master is still absent in the bounded search;
+protected older copies remain unchanged and new master rows are zero.
+
+The single maintained [paper](../results/unified_exact_round137/manuscript.md)
+now has 9335 body words, a 53-page main+complete appendices PDF and 57-page
+supplement. The literature discussion is corrected, one 264-word diagnosis
+paragraph is added, and full family evidence is in Supplement S168. Build with
+`scripts/round168_documents.py assemble|pdf|qa`; its temp/manifests/identity
+are R168 and R167 evidence remains historical. The working tree is
+`E:/codes/ExactEBRP-work/worktrees/round168`, branch `codex/round168-route-family`,
+with an English Open Draft base `codex/round167-conditional-state` because main
+still lacks dependencies. Original and dirty paper-current are protected.
+
+## Round167 baseline (retained historical record)
+
+
 Round167 maintains the single current English manuscript in
 `results/unified_exact_round137/`: [assembled manuscript](../results/unified_exact_round137/manuscript.md),
 [main + complete appendices PDF](../results/unified_exact_round137/manuscript.pdf)

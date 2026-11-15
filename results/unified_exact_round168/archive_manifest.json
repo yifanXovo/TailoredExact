@@ -1,0 +1,5566 @@
+{
+  "UTC": "2026-11-15T03:28:58.501634+00:00",
+  "records": [
+    {
+      "run": "R163_010_R163-C35-U_S0_P",
+      "input_id": "R163-C35-U",
+      "seed": 0,
+      "method": "P",
+      "position": 10,
+      "round": 163,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-C35-U/first/instance.txt",
+        "bytes": 2145,
+        "SHA256": "fb9d881dba6d0d07c59c48a683d2b2543f3effeae593306e28d79875cdcc20d7"
+      },
+      "T": 10800,
+      "lambda_value": 0.11068496171019777,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.09331934374779818,
+      "members": [
+        {
+          "member": "results/unified_exact_round163/campaign/010/raw/R163_010_R163-C35-U_S0_P/result.json",
+          "path": "results/unified_exact_round168/archive/R163_010_R163-C35-U_S0_P/result.json",
+          "bytes": 88894,
+          "SHA256": "c42c0e193f92f3070eafadcf2d3449e48e78e3bed628cfe88db2e237618edfb2"
+        },
+        {
+          "member": "results/unified_exact_round163/campaign/010/raw/R163_010_R163-C35-U_S0_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R163_010_R163-C35-U_S0_P/audit.json",
+          "bytes": 13428,
+          "SHA256": "bd29c2e070c58e9f9bacdb48738e1d7da9876728b8d9f231b40a97e8aa537754"
+        }
+      ],
+      "carrier_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R163_010_R163-C35-U_S0_P/fleet.txt",
+        "bytes": 217,
+        "SHA256": "cf78251ea96e1805fddcbfe9471cd35f363245d731bfa63b36bc7f7609425423"
+      },
+      "historical_physical": {
+        "G": 0.044941246270899286,
+        "P": 0.437079226747762,
+        "F": 0.09331934374779818,
+        "Y": [
+          50000,
+          13,
+          14,
+          11,
+          5,
+          15,
+          21,
+          13,
+          10,
+          12,
+          29,
+          12,
+          16,
+          20,
+          12,
+          13,
+          19,
+          15,
+          12,
+          31,
+          12,
+          22,
+          11,
+          13,
+          21,
+          12,
+          19,
+          20,
+          14,
+          10,
+          13,
+          11,
+          26,
+          10,
+          11,
+          19
+        ],
+        "maximum_duration": 10791.364924468064,
+        "pickups": [
+          56,
+          52,
+          57
+        ],
+        "return_loads": [
+          20,
+          9,
+          11
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              14,
+              30,
+              7,
+              33,
+              3,
+              16,
+              9,
+              22,
+              8,
+              26,
+              27,
+              5,
+              0
+            ],
+            "operations": [
+              {
+                "station": 14,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 7,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 33,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 9,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 22,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 26,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 5,
+                "pickup": 10,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              15,
+              28,
+              20,
+              12,
+              2,
+              25,
+              10,
+              19,
+              31,
+              18,
+              34,
+              0
+            ],
+            "operations": [
+              {
+                "station": 15,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 12,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 10,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 16
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 18,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              11,
+              23,
+              17,
+              1,
+              32,
+              13,
+              6,
+              24,
+              35,
+              21,
+              29,
+              0
+            ],
+            "operations": [
+              {
+                "station": 11,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 23,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 32,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 13
+              },
+              {
+                "station": 24,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 29,
+                "pickup": 6,
+                "drop": 0
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R163_011_R163-C35-U_S0_B",
+      "input_id": "R163-C35-U",
+      "seed": 0,
+      "method": "B",
+      "position": 11,
+      "round": 163,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-C35-U/first/instance.txt",
+        "bytes": 2145,
+        "SHA256": "fb9d881dba6d0d07c59c48a683d2b2543f3effeae593306e28d79875cdcc20d7"
+      },
+      "T": 10800,
+      "lambda_value": 0.11068496171019777,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.12956638965196035,
+      "members": [
+        {
+          "member": "results/unified_exact_round163/campaign/011/raw/R163_011_R163-C35-U_S0_B/result.json",
+          "path": "results/unified_exact_round168/archive/R163_011_R163-C35-U_S0_B/result.json",
+          "bytes": 98823,
+          "SHA256": "6503209e2aaeb3bda1d5ade6f44870351d53d6fba55facdd2c09ff6fd2a4f144"
+        },
+        {
+          "member": "results/unified_exact_round163/campaign/011/raw/R163_011_R163-C35-U_S0_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R163_011_R163-C35-U_S0_B/audit.json",
+          "bytes": 130150,
+          "SHA256": "1c5c491859b249fd63b312d796427291f5e987e4f8bbe40aba94d4ba430ec0dc"
+        }
+      ],
+      "carrier_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R163_011_R163-C35-U_S0_B/fleet.txt",
+        "bytes": 215,
+        "SHA256": "edced7cd3e4f22cae7b7e449b96c67acb7bdb683e98dc0b0199902d6fde02342"
+      },
+      "historical_physical": {
+        "G": 0.067831554064342,
+        "P": 0.5577526940765116,
+        "F": 0.12956638965196035,
+        "Y": [
+          50000,
+          13,
+          9,
+          10,
+          10,
+          15,
+          21,
+          12,
+          9,
+          11,
+          29,
+          13,
+          15,
+          20,
+          11,
+          13,
+          17,
+          15,
+          20,
+          31,
+          12,
+          22,
+          11,
+          13,
+          29,
+          8,
+          19,
+          20,
+          14,
+          9,
+          12,
+          11,
+          26,
+          9,
+          11,
+          15
+        ],
+        "maximum_duration": 10770.890794310364,
+        "pickups": [
+          59,
+          51,
+          48
+        ],
+        "return_loads": [
+          11,
+          5,
+          26
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              20,
+              35,
+              6,
+              24,
+              10,
+              25,
+              2,
+              19,
+              26,
+              27,
+              5,
+              0
+            ],
+            "operations": [
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 35,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 13
+              },
+              {
+                "station": 24,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 10,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 16
+              },
+              {
+                "station": 26,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 5,
+                "pickup": 10,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              11,
+              17,
+              32,
+              1,
+              13,
+              29,
+              21,
+              12,
+              31,
+              8,
+              22,
+              34,
+              0
+            ],
+            "operations": [
+              {
+                "station": 11,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 32,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 29,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 12,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 22,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              23,
+              15,
+              7,
+              30,
+              4,
+              33,
+              3,
+              16,
+              9,
+              14,
+              0
+            ],
+            "operations": [
+              {
+                "station": 23,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 33,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 9,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 9,
+                "drop": 0
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R163_013_R163-B35-S_S0_B",
+      "input_id": "R163-B35-S",
+      "seed": 0,
+      "method": "B",
+      "position": 13,
+      "round": 163,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+        "bytes": 2131,
+        "SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1"
+      },
+      "T": 7200,
+      "lambda_value": 0.10810343336504369,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.19429031110944756,
+      "members": [
+        {
+          "member": "results/unified_exact_round163/campaign/013/raw/R163_013_R163-B35-S_S0_B/result.json",
+          "path": "results/unified_exact_round168/archive/R163_013_R163-B35-S_S0_B/result.json",
+          "bytes": 98833,
+          "SHA256": "63795df621cd0fd734b3f923f38d5c008fb99f8eea78b1ae48e987ed8f46f090"
+        },
+        {
+          "member": "results/unified_exact_round163/campaign/013/raw/R163_013_R163-B35-S_S0_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R163_013_R163-B35-S_S0_B/audit.json",
+          "bytes": 98426,
+          "SHA256": "ea5159aa01a8403591400e0887dc269fb5dbe4b08453d3293271c0d0a4c5cd68"
+        }
+      ],
+      "carrier_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R163_013_R163-B35-S_S0_B/fleet.txt",
+        "bytes": 210,
+        "SHA256": "6cec85acbe72bc4548a2bb5fae6d76c79aa4aae74ff1396c9afb90ff279b87fe"
+      },
+      "historical_physical": {
+        "G": 0.08537146898987899,
+        "P": 1.007542857142857,
+        "F": 0.19429031110944756,
+        "Y": [
+          50000,
+          12,
+          9,
+          6,
+          6,
+          6,
+          15,
+          7,
+          6,
+          9,
+          25,
+          14,
+          7,
+          9,
+          7,
+          6,
+          6,
+          8,
+          10,
+          20,
+          12,
+          9,
+          13,
+          3,
+          20,
+          6,
+          13,
+          8,
+          21,
+          12,
+          14,
+          12,
+          11,
+          8,
+          9,
+          10
+        ],
+        "maximum_duration": 7164.788749702921,
+        "pickups": [
+          40,
+          36,
+          30
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              20,
+              25,
+              11,
+              3,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 10,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 11,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 19,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 9
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              26,
+              29,
+              35,
+              21,
+              9,
+              2,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              0
+            ],
+            "operations": [
+              {
+                "station": 22,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 26,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 5,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              31,
+              12,
+              16,
+              33,
+              27,
+              18,
+              14,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 32,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 12,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 33,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R163_015_R163-B35-S_S0_P",
+      "input_id": "R163-B35-S",
+      "seed": 0,
+      "method": "P",
+      "position": 15,
+      "round": 163,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+        "bytes": 2131,
+        "SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1"
+      },
+      "T": 7200,
+      "lambda_value": 0.10810343336504369,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.24925301346485335,
+      "members": [
+        {
+          "member": "results/unified_exact_round163/campaign/015/raw/R163_015_R163-B35-S_S0_P/result.json",
+          "path": "results/unified_exact_round168/archive/R163_015_R163-B35-S_S0_P/result.json",
+          "bytes": 88849,
+          "SHA256": "0214b92e82e55aafe8475c86a4e828a9b8c7f669d5a9294880d198e7a995e828"
+        },
+        {
+          "member": "results/unified_exact_round163/campaign/015/raw/R163_015_R163-B35-S_S0_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R163_015_R163-B35-S_S0_P/audit.json",
+          "bytes": 13381,
+          "SHA256": "6cca99bb70f84f77af0174dee2f96ecb442738023ef05d52f695f2909ad69d8d"
+        }
+      ],
+      "carrier_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R163_015_R163-B35-S_S0_P/fleet.txt",
+        "bytes": 211,
+        "SHA256": "74fca2f3c64c9e0b8776acf8cc83f2e9412100f54be57e4bca01b647193a347a"
+      },
+      "historical_physical": {
+        "G": 0.11543949497607754,
+        "P": 1.2378285714285713,
+        "F": 0.24925301346485335,
+        "Y": [
+          50000,
+          13,
+          11,
+          5,
+          5,
+          6,
+          14,
+          7,
+          7,
+          8,
+          25,
+          10,
+          8,
+          7,
+          7,
+          5,
+          5,
+          11,
+          10,
+          20,
+          11,
+          8,
+          15,
+          7,
+          20,
+          6,
+          13,
+          7,
+          21,
+          12,
+          12,
+          10,
+          12,
+          7,
+          14,
+          10
+        ],
+        "maximum_duration": 7199.120934367843,
+        "pickups": [
+          32,
+          35,
+          34
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              11,
+              14,
+              19,
+              7,
+              23,
+              31,
+              33,
+              27,
+              18,
+              16,
+              0
+            ],
+            "operations": [
+              {
+                "station": 11,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 19,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 23,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 31,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 33,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              24,
+              17,
+              8,
+              1,
+              21,
+              26,
+              29,
+              35,
+              20,
+              9,
+              3,
+              6,
+              0
+            ],
+            "operations": [
+              {
+                "station": 5,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 26,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 9
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              10,
+              4,
+              12,
+              13,
+              15,
+              32,
+              30,
+              28,
+              22,
+              2,
+              25,
+              0
+            ],
+            "operations": [
+              {
+                "station": 10,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 12,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 32,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 22,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 6
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R163_017_R163-X35-S_S0_P",
+      "input_id": "R163-X35-S",
+      "seed": 0,
+      "method": "P",
+      "position": 17,
+      "round": 163,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+        "bytes": 2068,
+        "SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9"
+      },
+      "T": 10800,
+      "lambda_value": 0.09288824383164006,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.5415306804981086,
+      "members": [
+        {
+          "member": "results/unified_exact_round163/campaign/017/raw/R163_017_R163-X35-S_S0_P/result.json",
+          "path": "results/unified_exact_round168/archive/R163_017_R163-X35-S_S0_P/result.json",
+          "bytes": 87799,
+          "SHA256": "4ccf437862a10eaba8b9fc636c4426a435d6368188d1a0ad12440ed809ce3b0c"
+        },
+        {
+          "member": "results/unified_exact_round163/campaign/017/raw/R163_017_R163-X35-S_S0_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R163_017_R163-X35-S_S0_P/audit.json",
+          "bytes": 12243,
+          "SHA256": "9f39fd23ba86defb7f821e1a13aad6960906e0cc55dfcf3c7e9ee8333171aec0"
+        }
+      ],
+      "carrier_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R163_017_R163-X35-S_S0_P/fleet.txt",
+        "bytes": 157,
+        "SHA256": "7201f2b9290926016e9cc3fcc56ad3c27ce33c44373044379ecbd50674a43e32"
+      },
+      "historical_physical": {
+        "G": 0.2480618851425208,
+        "P": 3.1593750000000003,
+        "F": 0.5415306804981086,
+        "Y": [
+          50000,
+          6,
+          0,
+          5,
+          2,
+          1,
+          8,
+          1,
+          2,
+          0,
+          6,
+          1,
+          0,
+          1,
+          4,
+          1,
+          1,
+          6,
+          1,
+          1,
+          3,
+          2,
+          1,
+          1,
+          3,
+          2,
+          1,
+          1,
+          0,
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "maximum_duration": 10760.124868150644,
+        "pickups": [
+          7,
+          13,
+          13
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              20,
+              18,
+              11,
+              4,
+              8,
+              29,
+              30,
+              0
+            ],
+            "operations": [
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 4,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              19,
+              34,
+              3,
+              16,
+              35,
+              24,
+              6,
+              0
+            ],
+            "operations": [
+              {
+                "station": 25,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 3,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 16,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 24,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 7
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              14,
+              31,
+              10,
+              33,
+              22,
+              1,
+              21,
+              17,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 14,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 33,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 1,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R163_018_R163-X35-S_S0_B",
+      "input_id": "R163-X35-S",
+      "seed": 0,
+      "method": "B",
+      "position": 18,
+      "round": 163,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+        "bytes": 2068,
+        "SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9"
+      },
+      "T": 10800,
+      "lambda_value": 0.09288824383164006,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.45747531701601785,
+      "members": [
+        {
+          "member": "results/unified_exact_round163/campaign/018/raw/R163_018_R163-X35-S_S0_B/result.json",
+          "path": "results/unified_exact_round168/archive/R163_018_R163-X35-S_S0_B/result.json",
+          "bytes": 98188,
+          "SHA256": "0f20a1c5a2b06a562f3bce91a47b2e24261ccba60e9d69509c5b753c3a4f2c4b"
+        },
+        {
+          "member": "results/unified_exact_round163/campaign/018/raw/R163_018_R163-X35-S_S0_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R163_018_R163-X35-S_S0_B/audit.json",
+          "bytes": 136861,
+          "SHA256": "608bc0e40997fd617a15fe523098684215de2fcea8b533a74730ef3f159745ee"
+        }
+      ],
+      "carrier_SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R163_018_R163-X35-S_S0_B/fleet.txt",
+        "bytes": 180,
+        "SHA256": "b7f3c0c3cbc2979c87655a101cf1f99ddd2edc223011024db79adae53be293c1"
+      },
+      "historical_physical": {
+        "G": 0.15210521541950114,
+        "P": 3.2875,
+        "F": 0.45747531701601785,
+        "Y": [
+          50000,
+          8,
+          1,
+          4,
+          2,
+          2,
+          4,
+          1,
+          2,
+          1,
+          8,
+          1,
+          1,
+          1,
+          2,
+          1,
+          1,
+          5,
+          2,
+          1,
+          3,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          1,
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          4
+        ],
+        "maximum_duration": 10454.059219157469,
+        "pickups": [
+          13,
+          12,
+          9
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              24,
+              9,
+              35,
+              3,
+              34,
+              29,
+              17,
+              16,
+              8,
+              0
+            ],
+            "operations": [
+              {
+                "station": 24,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 3,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 16,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 2
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              19,
+              4,
+              11,
+              7,
+              21,
+              20,
+              1,
+              22,
+              33,
+              10,
+              0
+            ],
+            "operations": [
+              {
+                "station": 25,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 4,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 33,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 6
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              14,
+              30,
+              6,
+              31,
+              28,
+              2,
+              12,
+              5,
+              0
+            ],
+            "operations": [
+              {
+                "station": 14,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 28,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 5,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_013_R163-C35-U_S1_P",
+      "input_id": "R163-C35-U",
+      "seed": 1,
+      "method": "P",
+      "position": 13,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-C35-U/first/instance.txt",
+        "bytes": 2145,
+        "SHA256": "fb9d881dba6d0d07c59c48a683d2b2543f3effeae593306e28d79875cdcc20d7"
+      },
+      "T": 10800,
+      "lambda_value": 0.11068496171019777,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.15762431259566606,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/013/raw/R164_013_R163-C35-U_S1_P/result.json",
+          "path": "results/unified_exact_round168/archive/R164_013_R163-C35-U_S1_P/result.json",
+          "bytes": 88783,
+          "SHA256": "c97f15b7ef677947aaec650c823902832919ee69cdae5b8374db36198891a22a"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/013/raw/R164_013_R163-C35-U_S1_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_013_R163-C35-U_S1_P/audit.json",
+          "bytes": 13328,
+          "SHA256": "edd1f217e30705546481beb71b6bf23ee6a7d78f0b55976a39e8f66d570bd1d8"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_013_R163-C35-U_S1_P/fleet.txt",
+        "bytes": 209,
+        "SHA256": "4a7afc064fd0360f128470b49a6e60189ae59a332567a4ea387ca52cea0e1df4"
+      },
+      "historical_physical": {
+        "G": 0.07730507607915346,
+        "P": 0.7256562705131471,
+        "F": 0.15762431259566606,
+        "Y": [
+          50000,
+          13,
+          11,
+          10,
+          5,
+          14,
+          21,
+          14,
+          9,
+          12,
+          29,
+          14,
+          16,
+          20,
+          13,
+          14,
+          17,
+          15,
+          15,
+          31,
+          12,
+          22,
+          11,
+          14,
+          31,
+          12,
+          20,
+          20,
+          14,
+          10,
+          12,
+          11,
+          26,
+          10,
+          11,
+          20
+        ],
+        "maximum_duration": 10775.280319095855,
+        "pickups": [
+          52,
+          47,
+          46
+        ],
+        "return_loads": [
+          1,
+          23,
+          4
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              22,
+              27,
+              5,
+              19,
+              2,
+              10,
+              25,
+              18,
+              21,
+              20,
+              0
+            ],
+            "operations": [
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 22,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 5,
+                "pickup": 11,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 16
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 10,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 18,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 6
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              14,
+              30,
+              7,
+              33,
+              3,
+              16,
+              9,
+              11,
+              29,
+              17,
+              23,
+              0
+            ],
+            "operations": [
+              {
+                "station": 14,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 7,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 33,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 9,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 23,
+                "pickup": 7,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              26,
+              8,
+              31,
+              12,
+              34,
+              15,
+              1,
+              32,
+              13,
+              6,
+              35,
+              0
+            ],
+            "operations": [
+              {
+                "station": 26,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 12,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 15,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 32,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 13
+              },
+              {
+                "station": 35,
+                "pickup": 4,
+                "drop": 0
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_014_R163-C35-U_S1_B",
+      "input_id": "R163-C35-U",
+      "seed": 1,
+      "method": "B",
+      "position": 14,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-C35-U/first/instance.txt",
+        "bytes": 2145,
+        "SHA256": "fb9d881dba6d0d07c59c48a683d2b2543f3effeae593306e28d79875cdcc20d7"
+      },
+      "T": 10800,
+      "lambda_value": 0.11068496171019777,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.10742986645444105,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/014/raw/R164_014_R163-C35-U_S1_B/result.json",
+          "path": "results/unified_exact_round168/archive/R164_014_R163-C35-U_S1_B/result.json",
+          "bytes": 98850,
+          "SHA256": "03886f47d59c33e47ab592ff9108707a8d30ecc7bec5dff59faa439f2c6109a3"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/014/raw/R164_014_R163-C35-U_S1_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_014_R163-C35-U_S1_B/audit.json",
+          "bytes": 130992,
+          "SHA256": "ca9ced1ccc6a004d3be0612dbe2bd4c00a5888afc474f55d93573e9bea3b7394"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_014_R163-C35-U_S1_B/fleet.txt",
+        "bytes": 213,
+        "SHA256": "32cdd13f2412a01f5233678f5901fd0741c3ab815d3ddde0948b24110d0b60d1"
+      },
+      "historical_physical": {
+        "G": 0.05218209886171664,
+        "P": 0.4991442987293752,
+        "F": 0.10742986645444105,
+        "Y": [
+          50000,
+          13,
+          11,
+          10,
+          10,
+          14,
+          21,
+          12,
+          9,
+          11,
+          29,
+          13,
+          18,
+          20,
+          12,
+          12,
+          17,
+          15,
+          13,
+          31,
+          12,
+          22,
+          10,
+          14,
+          23,
+          12,
+          20,
+          20,
+          15,
+          10,
+          12,
+          11,
+          26,
+          9,
+          11,
+          24
+        ],
+        "maximum_duration": 10787.921962967705,
+        "pickups": [
+          57,
+          49,
+          51
+        ],
+        "return_loads": [
+          14,
+          1,
+          20
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              12,
+              18,
+              6,
+              24,
+              25,
+              10,
+              2,
+              19,
+              26,
+              34,
+              28,
+              0
+            ],
+            "operations": [
+              {
+                "station": 12,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 13
+              },
+              {
+                "station": 24,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 10,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 16
+              },
+              {
+                "station": 26,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 28,
+                "pickup": 9,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              8,
+              31,
+              11,
+              23,
+              17,
+              1,
+              32,
+              13,
+              29,
+              21,
+              20,
+              0
+            ],
+            "operations": [
+              {
+                "station": 22,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 11,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 23,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 32,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 29,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 6
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              15,
+              14,
+              30,
+              7,
+              4,
+              33,
+              3,
+              16,
+              9,
+              27,
+              5,
+              0
+            ],
+            "operations": [
+              {
+                "station": 15,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 7,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 33,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 9,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 5,
+                "pickup": 11,
+                "drop": 0
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_015_R163-C35-U_S2_B",
+      "input_id": "R163-C35-U",
+      "seed": 2,
+      "method": "B",
+      "position": 15,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-C35-U/first/instance.txt",
+        "bytes": 2145,
+        "SHA256": "fb9d881dba6d0d07c59c48a683d2b2543f3effeae593306e28d79875cdcc20d7"
+      },
+      "T": 10800,
+      "lambda_value": 0.11068496171019777,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.10808393649972804,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/015/raw/R164_015_R163-C35-U_S2_B/result.json",
+          "path": "results/unified_exact_round168/archive/R164_015_R163-C35-U_S2_B/result.json",
+          "bytes": 98876,
+          "SHA256": "98bf9aa04d4bd80262f45a0555d30f9859ab77df088e949fc7758dba1d92600a"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/015/raw/R164_015_R163-C35-U_S2_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_015_R163-C35-U_S2_B/audit.json",
+          "bytes": 118350,
+          "SHA256": "368833cce59aa484a75241df858af52a9c51e14765d6c476e1370b3ee4e367f0"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_015_R163-C35-U_S2_B/fleet.txt",
+        "bytes": 214,
+        "SHA256": "29dc1e670ce9e46fc7ad814a554bc77c7e9e807c9d5b533535f78433ac6934e3"
+      },
+      "historical_physical": {
+        "G": 0.05487223551067517,
+        "P": 0.4807491475524475,
+        "F": 0.10808393649972804,
+        "Y": [
+          50000,
+          13,
+          15,
+          10,
+          5,
+          16,
+          21,
+          12,
+          9,
+          11,
+          29,
+          13,
+          18,
+          20,
+          11,
+          12,
+          17,
+          15,
+          13,
+          31,
+          12,
+          22,
+          10,
+          13,
+          29,
+          13,
+          17,
+          20,
+          14,
+          9,
+          12,
+          11,
+          26,
+          9,
+          11,
+          18
+        ],
+        "maximum_duration": 10789.335583516737,
+        "pickups": [
+          58,
+          51,
+          53
+        ],
+        "return_loads": [
+          20,
+          9,
+          11
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              5,
+              12,
+              2,
+              25,
+              10,
+              24,
+              6,
+              35,
+              18,
+              34,
+              20,
+              28,
+              0
+            ],
+            "operations": [
+              {
+                "station": 5,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 12,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 10,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 13
+              },
+              {
+                "station": 35,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              11,
+              23,
+              17,
+              1,
+              32,
+              13,
+              29,
+              21,
+              31,
+              8,
+              22,
+              0
+            ],
+            "operations": [
+              {
+                "station": 11,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 23,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 32,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 29,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 22,
+                "pickup": 9,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              15,
+              7,
+              14,
+              30,
+              33,
+              3,
+              16,
+              9,
+              27,
+              26,
+              19,
+              0
+            ],
+            "operations": [
+              {
+                "station": 15,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 33,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 9,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 26,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 16
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_016_R163-C35-U_S2_P",
+      "input_id": "R163-C35-U",
+      "seed": 2,
+      "method": "P",
+      "position": 16,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-C35-U/first/instance.txt",
+        "bytes": 2145,
+        "SHA256": "fb9d881dba6d0d07c59c48a683d2b2543f3effeae593306e28d79875cdcc20d7"
+      },
+      "T": 10800,
+      "lambda_value": 0.11068496171019777,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.14676445594619023,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/016/raw/R164_016_R163-C35-U_S2_P/result.json",
+          "path": "results/unified_exact_round168/archive/R164_016_R163-C35-U_S2_P/result.json",
+          "bytes": 88577,
+          "SHA256": "e6d1ba64b8c2094ddbe28eee713b61adb9c929ee13ccfcdbbc268a5484e5592a"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/016/raw/R164_016_R163-C35-U_S2_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_016_R163-C35-U_S2_P/audit.json",
+          "bytes": 13119,
+          "SHA256": "17a2b5b8efa4cd0c4586f57af40d2460d0ca7ad78e575b73fd7238b97e205d00"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_016_R163-C35-U_S2_P/fleet.txt",
+        "bytes": 201,
+        "SHA256": "00633f3b793f8f4336aadf171b2157910ba9f48df1193b646d938b997af73a2d"
+      },
+      "historical_physical": {
+        "G": 0.08498104579195562,
+        "P": 0.5581915483333659,
+        "F": 0.14676445594619023,
+        "Y": [
+          50000,
+          13,
+          14,
+          5,
+          5,
+          16,
+          21,
+          21,
+          9,
+          12,
+          29,
+          13,
+          16,
+          20,
+          12,
+          13,
+          17,
+          15,
+          12,
+          31,
+          12,
+          22,
+          10,
+          13,
+          19,
+          13,
+          19,
+          20,
+          14,
+          10,
+          12,
+          11,
+          26,
+          16,
+          12,
+          17
+        ],
+        "maximum_duration": 10789.643149162808,
+        "pickups": [
+          57,
+          47,
+          50
+        ],
+        "return_loads": [
+          20,
+          14,
+          3
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              11,
+              21,
+              35,
+              6,
+              29,
+              13,
+              18,
+              12,
+              34,
+              5,
+              0
+            ],
+            "operations": [
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 35,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 13
+              },
+              {
+                "station": 29,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 18,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 12,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 5,
+                "pickup": 9,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              15,
+              20,
+              10,
+              25,
+              24,
+              2,
+              31,
+              27,
+              22,
+              0
+            ],
+            "operations": [
+              {
+                "station": 15,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 10,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 24,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 22,
+                "pickup": 9,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              1,
+              17,
+              23,
+              14,
+              30,
+              16,
+              9,
+              8,
+              26,
+              19,
+              0
+            ],
+            "operations": [
+              {
+                "station": 32,
+                "pickup": 18,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 23,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 9,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 26,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 16
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_017_R163-B35-S_S1_B",
+      "input_id": "R163-B35-S",
+      "seed": 1,
+      "method": "B",
+      "position": 17,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+        "bytes": 2131,
+        "SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1"
+      },
+      "T": 7200,
+      "lambda_value": 0.10810343336504369,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.167746351588456,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/017/raw/R164_017_R163-B35-S_S1_B/result.json",
+          "path": "results/unified_exact_round168/archive/R164_017_R163-B35-S_S1_B/result.json",
+          "bytes": 98900,
+          "SHA256": "e0a8e1578c95b6aec15a31ea9f58a56bdaae7afd35ef34cad1293ce9baac3074"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/017/raw/R164_017_R163-B35-S_S1_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_017_R163-B35-S_S1_B/audit.json",
+          "bytes": 90250,
+          "SHA256": "fb0d97462bc14b201c0ffe15b6e01d8be511aeb8606614bc15fe9d1925cedb96"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_017_R163-B35-S_S1_B/fleet.txt",
+        "bytes": 217,
+        "SHA256": "18e1960dcaa61ce87fdcae29a8c7982ca169a53ba6a1d092ef06705cd6cf3e3e"
+      },
+      "historical_physical": {
+        "G": 0.07070241423491039,
+        "P": 0.8976952380952381,
+        "F": 0.167746351588456,
+        "Y": [
+          50000,
+          10,
+          10,
+          6,
+          6,
+          5,
+          18,
+          7,
+          6,
+          8,
+          25,
+          13,
+          7,
+          8,
+          7,
+          5,
+          6,
+          8,
+          10,
+          20,
+          11,
+          9,
+          13,
+          8,
+          20,
+          6,
+          12,
+          8,
+          21,
+          11,
+          15,
+          13,
+          11,
+          8,
+          9,
+          9
+        ],
+        "maximum_duration": 7193.253707544207,
+        "pickups": [
+          42,
+          38,
+          31
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              14,
+              11,
+              25,
+              20,
+              30,
+              28,
+              19,
+              6,
+              2,
+              0
+            ],
+            "operations": [
+              {
+                "station": 10,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 11,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 20,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 13
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 7
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              12,
+              7,
+              35,
+              29,
+              21,
+              26,
+              9,
+              3,
+              0
+            ],
+            "operations": [
+              {
+                "station": 5,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 12,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 35,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 26,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 6
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              22,
+              32,
+              34,
+              8,
+              31,
+              23,
+              33,
+              27,
+              18,
+              16,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 22,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 32,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 23,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 33,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 7
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_018_R163-B35-S_S1_P",
+      "input_id": "R163-B35-S",
+      "seed": 1,
+      "method": "P",
+      "position": 18,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+        "bytes": 2131,
+        "SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1"
+      },
+      "T": 7200,
+      "lambda_value": 0.10810343336504369,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.2694623289115332,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/018/raw/R164_018_R163-B35-S_S1_P/result.json",
+          "path": "results/unified_exact_round168/archive/R164_018_R163-B35-S_S1_P/result.json",
+          "bytes": 88378,
+          "SHA256": "71256e1ed48c2924acf32216be34ec2c638105876a0858475f3843d92e7f8107"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/018/raw/R164_018_R163-B35-S_S1_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_018_R163-B35-S_S1_P/audit.json",
+          "bytes": 12979,
+          "SHA256": "95a5c298f2c0cff0bc6227069e59ca49de3c7ffb5025166fc50adb8464b9741e"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_018_R163-B35-S_S1_P/fleet.txt",
+        "bytes": 191,
+        "SHA256": "2478024f0bddf446d20e71bddb6ed47a7181724e0466d730e5670d08434f76a9"
+      },
+      "historical_physical": {
+        "G": 0.13295754971022197,
+        "P": 1.2627238095238094,
+        "F": 0.2694623289115332,
+        "Y": [
+          50000,
+          13,
+          9,
+          6,
+          6,
+          5,
+          15,
+          10,
+          6,
+          2,
+          25,
+          11,
+          8,
+          9,
+          8,
+          6,
+          7,
+          7,
+          11,
+          20,
+          11,
+          3,
+          11,
+          11,
+          20,
+          7,
+          13,
+          2,
+          21,
+          11,
+          15,
+          18,
+          11,
+          13,
+          9,
+          9
+        ],
+        "maximum_duration": 7193.39275506017,
+        "pickups": [
+          36,
+          36,
+          32
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              25,
+              20,
+              26,
+              14,
+              10,
+              16,
+              23,
+              12,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 20,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 26,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 10,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 23,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 12,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 8
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              19,
+              6,
+              8,
+              4,
+              5,
+              18,
+              35,
+              11,
+              3,
+              2,
+              0
+            ],
+            "operations": [
+              {
+                "station": 22,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 5,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 9
+              },
+              {
+                "station": 35,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 6
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              17,
+              15,
+              24,
+              13,
+              34,
+              32,
+              30,
+              29,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 17,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 24,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 34,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 32,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 29,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 10
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_019_R163-B35-S_S2_P",
+      "input_id": "R163-B35-S",
+      "seed": 2,
+      "method": "P",
+      "position": 19,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+        "bytes": 2131,
+        "SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1"
+      },
+      "T": 7200,
+      "lambda_value": 0.10810343336504369,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.30723665936246247,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/019/raw/R164_019_R163-B35-S_S2_P/result.json",
+          "path": "results/unified_exact_round168/archive/R164_019_R163-B35-S_S2_P/result.json",
+          "bytes": 88568,
+          "SHA256": "d03aa2dc9c37896415558a9d424e114024b0d4aa5e1eaea88daacca85e713fcc"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/019/raw/R164_019_R163-B35-S_S2_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_019_R163-B35-S_S2_P/audit.json",
+          "bytes": 13190,
+          "SHA256": "f610d37fa035ccd38d0086233959b4e1ecc2cd02ae0c31eb9ed29e43a3261142"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_019_R163-B35-S_S2_P/fleet.txt",
+        "bytes": 200,
+        "SHA256": "673325936bcab1e7a0036246c15aa7a1d7d74cbcad4a82bdcdf88bfffd9004d0"
+      },
+      "historical_physical": {
+        "G": 0.1400655100067589,
+        "P": 1.5463999999999998,
+        "F": 0.30723665936246247,
+        "Y": [
+          50000,
+          12,
+          7,
+          5,
+          6,
+          6,
+          12,
+          7,
+          6,
+          7,
+          25,
+          13,
+          7,
+          7,
+          7,
+          5,
+          5,
+          9,
+          9,
+          20,
+          11,
+          7,
+          15,
+          9,
+          20,
+          5,
+          11,
+          9,
+          21,
+          12,
+          9,
+          18,
+          12,
+          13,
+          14,
+          8
+        ],
+        "maximum_duration": 7192.887816505807,
+        "pickups": [
+          35,
+          24,
+          33
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              24,
+              15,
+              30,
+              28,
+              22,
+              9,
+              3,
+              10,
+              18,
+              16,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 24,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 22,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 10,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              17,
+              32,
+              8,
+              27,
+              14,
+              20,
+              29,
+              23,
+              5,
+              4,
+              0
+            ],
+            "operations": [
+              {
+                "station": 17,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 32,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 20,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 23,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 5,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              19,
+              26,
+              21,
+              25,
+              35,
+              2,
+              6,
+              13,
+              12,
+              11,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 19,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 26,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 35,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 12,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 9
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_020_R163-B35-S_S2_B",
+      "input_id": "R163-B35-S",
+      "seed": 2,
+      "method": "B",
+      "position": 20,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+        "bytes": 2131,
+        "SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1"
+      },
+      "T": 7200,
+      "lambda_value": 0.10810343336504369,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.17427665216447524,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/020/raw/R164_020_R163-B35-S_S2_B/result.json",
+          "path": "results/unified_exact_round168/archive/R164_020_R163-B35-S_S2_B/result.json",
+          "bytes": 98895,
+          "SHA256": "2cff26e9490a9c594a0684f91acce1d0db1379b3b1ffde2c4aa4ea67bb845f7c"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/020/raw/R164_020_R163-B35-S_S2_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_020_R163-B35-S_S2_B/audit.json",
+          "bytes": 250278,
+          "SHA256": "914166730ce86c6cf8b8765df75e9948c31ecb720cc280c6398e4883b4f89383"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_020_R163-B35-S_S2_B/fleet.txt",
+        "bytes": 217,
+        "SHA256": "bee1253f98b7c9dd4c939aa51544359639c53aa119e9fc055846aced7100f9d4"
+      },
+      "historical_physical": {
+        "G": 0.07679824196445298,
+        "P": 0.9017142857142857,
+        "F": 0.17427665216447524,
+        "Y": [
+          50000,
+          12,
+          8,
+          6,
+          6,
+          6,
+          16,
+          7,
+          6,
+          8,
+          25,
+          13,
+          7,
+          8,
+          7,
+          5,
+          6,
+          8,
+          10,
+          20,
+          11,
+          8,
+          13,
+          8,
+          20,
+          5,
+          13,
+          8,
+          21,
+          12,
+          15,
+          13,
+          12,
+          8,
+          9,
+          9
+        ],
+        "maximum_duration": 7186.241183311951,
+        "pickups": [
+          42,
+          36,
+          29
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              14,
+              20,
+              11,
+              3,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 10,
+                "pickup": 12,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 20,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 28,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 19,
+                "pickup": 10,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 11
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 9
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              26,
+              29,
+              21,
+              9,
+              2,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              12,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 22,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 26,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 5,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 4,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 12,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              31,
+              23,
+              33,
+              16,
+              18,
+              27,
+              35,
+              25,
+              0
+            ],
+            "operations": [
+              {
+                "station": 32,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 23,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 33,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 16,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 27,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 35,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_021_R163-X35-S_S1_P",
+      "input_id": "R163-X35-S",
+      "seed": 1,
+      "method": "P",
+      "position": 21,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+        "bytes": 2068,
+        "SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9"
+      },
+      "T": 10800,
+      "lambda_value": 0.09288824383164006,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.5291030183702629,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/021/raw/R164_021_R163-X35-S_S1_P/result.json",
+          "path": "results/unified_exact_round168/archive/R164_021_R163-X35-S_S1_P/result.json",
+          "bytes": 87808,
+          "SHA256": "efd4e17c3d617b0700f252339b3e5f393672bd7ecf907389360a12823bed88a4"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/021/raw/R164_021_R163-X35-S_S1_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_021_R163-X35-S_S1_P/audit.json",
+          "bytes": 12255,
+          "SHA256": "96e509f4d2a78c2642fb5c0ee37db080d866934482d0e3e6ef8b2a72be0980ef"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_021_R163-X35-S_S1_P/fleet.txt",
+        "bytes": 156,
+        "SHA256": "60c2983418dc14036a00bbd44322b3dd37fc6177aad3b0130b23f16bd63d9abf"
+      },
+      "historical_physical": {
+        "G": 0.21763712577229474,
+        "P": 3.353125,
+        "F": 0.5291030183702629,
+        "Y": [
+          50000,
+          8,
+          0,
+          5,
+          2,
+          3,
+          5,
+          1,
+          2,
+          1,
+          3,
+          1,
+          1,
+          1,
+          5,
+          1,
+          1,
+          5,
+          2,
+          1,
+          3,
+          1,
+          0,
+          1,
+          3,
+          2,
+          1,
+          1,
+          1,
+          5,
+          1,
+          0,
+          1,
+          1,
+          1,
+          5
+        ],
+        "maximum_duration": 10682.565762562135,
+        "pickups": [
+          11,
+          10,
+          8
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              3,
+              34,
+              16,
+              8,
+              25,
+              19,
+              4,
+              17,
+              29,
+              0
+            ],
+            "operations": [
+              {
+                "station": 3,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 16,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 25,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 4,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              20,
+              11,
+              7,
+              33,
+              10,
+              14,
+              9,
+              30,
+              6,
+              0
+            ],
+            "operations": [
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 33,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 14,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              1,
+              5,
+              12,
+              28,
+              24,
+              35,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 5,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 28,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 24,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_022_R163-X35-S_S1_B",
+      "input_id": "R163-X35-S",
+      "seed": 1,
+      "method": "B",
+      "position": 22,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+        "bytes": 2068,
+        "SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9"
+      },
+      "T": 10800,
+      "lambda_value": 0.09288824383164006,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.46845018939924166,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/022/raw/R164_022_R163-X35-S_S1_B/result.json",
+          "path": "results/unified_exact_round168/archive/R164_022_R163-X35-S_S1_B/result.json",
+          "bytes": 97880,
+          "SHA256": "829dbfb40cc06be3525ba62974d15cbebf8959dc8d0fde41fdf55e20b84e0cf5"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/022/raw/R164_022_R163-X35-S_S1_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_022_R163-X35-S_S1_B/audit.json",
+          "bytes": 155587,
+          "SHA256": "e4b546ffbc000882a13bd42c25c860fc71e89ed611a3a74f3598fab557f7e2c7"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_022_R163-X35-S_S1_B/fleet.txt",
+        "bytes": 164,
+        "SHA256": "a3a99063a76c32900939e7650e2afb4ead48a0f89cafb7f20036c38dd397e603"
+      },
+      "historical_physical": {
+        "G": 0.17498139404365384,
+        "P": 3.159375,
+        "F": 0.46845018939924166,
+        "Y": [
+          50000,
+          8,
+          1,
+          5,
+          1,
+          1,
+          8,
+          1,
+          0,
+          1,
+          6,
+          1,
+          1,
+          1,
+          4,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          2,
+          1,
+          1,
+          3,
+          2,
+          1,
+          1,
+          1,
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          4
+        ],
+        "maximum_duration": 10778.685991499078,
+        "pickups": [
+          14,
+          6,
+          11
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              3,
+              29,
+              34,
+              21,
+              20,
+              1,
+              22,
+              33,
+              6,
+              0
+            ],
+            "operations": [
+              {
+                "station": 3,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 33,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 7
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              19,
+              4,
+              11,
+              7,
+              16,
+              9,
+              30,
+              0
+            ],
+            "operations": [
+              {
+                "station": 25,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 4,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 16,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              14,
+              24,
+              35,
+              31,
+              28,
+              2,
+              12,
+              10,
+              0
+            ],
+            "operations": [
+              {
+                "station": 14,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 28,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_023_R163-X35-S_S2_B",
+      "input_id": "R163-X35-S",
+      "seed": 2,
+      "method": "B",
+      "position": 23,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+        "bytes": 2068,
+        "SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9"
+      },
+      "T": 10800,
+      "lambda_value": 0.09288824383164006,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.4606676342525399,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/023/raw/R164_023_R163-X35-S_S2_B/result.json",
+          "path": "results/unified_exact_round168/archive/R164_023_R163-X35-S_S2_B/result.json",
+          "bytes": 98020,
+          "SHA256": "6c862d00de860cfaddecb862952e55c682dfe321b934772b19439f5109c47103"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/023/raw/R164_023_R163-X35-S_S2_B/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_023_R163-X35-S_S2_B/audit.json",
+          "bytes": 173720,
+          "SHA256": "3eee22c075bc8bb22bcd4112a93876260a023b7abfeb3379434769df7ab919cd"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_023_R163-X35-S_S2_B/fleet.txt",
+        "bytes": 168,
+        "SHA256": "cda62bf948cae62c6442a1ec02377d7997067d0efd2de7d9a085f11ed3b3e467"
+      },
+      "historical_physical": {
+        "G": 0.15384615384615385,
+        "P": 3.303125,
+        "F": 0.4606676342525399,
+        "Y": [
+          50000,
+          7,
+          1,
+          5,
+          2,
+          1,
+          6,
+          1,
+          2,
+          1,
+          6,
+          1,
+          1,
+          1,
+          4,
+          1,
+          1,
+          2,
+          2,
+          1,
+          3,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          1,
+          5,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "maximum_duration": 10754.963163624298,
+        "pickups": [
+          14,
+          9,
+          9
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              14,
+              8,
+              16,
+              29,
+              3,
+              34,
+              33,
+              22,
+              10,
+              21,
+              0
+            ],
+            "operations": [
+              {
+                "station": 14,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 16,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 3,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 33,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              19,
+              4,
+              11,
+              7,
+              30,
+              24,
+              9,
+              35,
+              0
+            ],
+            "operations": [
+              {
+                "station": 25,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 4,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 24,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              20,
+              1,
+              12,
+              2,
+              28,
+              31,
+              6,
+              0
+            ],
+            "operations": [
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 28,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    },
+    {
+      "run": "R164_024_R163-X35-S_S2_P",
+      "input_id": "R163-X35-S",
+      "seed": 2,
+      "method": "P",
+      "position": 24,
+      "round": 164,
+      "input": {
+        "path": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+        "bytes": 2068,
+        "SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9"
+      },
+      "T": 10800,
+      "lambda_value": 0.09288824383164006,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "expected_F": 0.5224554869179032,
+      "members": [
+        {
+          "member": "results/unified_exact_round164/campaign/024/raw/R164_024_R163-X35-S_S2_P/result.json",
+          "path": "results/unified_exact_round168/archive/R164_024_R163-X35-S_S2_P/result.json",
+          "bytes": 87770,
+          "SHA256": "0f4196db15097751951fc818fe7c4331116e14861783df124dfde64dc2a5f5e6"
+        },
+        {
+          "member": "results/unified_exact_round164/campaign/024/raw/R164_024_R163-X35-S_S2_P/audit.json",
+          "path": "results/unified_exact_round168/archive/R164_024_R163-X35-S_S2_P/audit.json",
+          "bytes": 12246,
+          "SHA256": "b3c22ca82c8a1e2abf78974c8014bd3fb39d757567f730d1e75d4c15f5fa91d2"
+        }
+      ],
+      "carrier_SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "fleet": {
+        "path": "results/unified_exact_round168/archive/R164_024_R163-X35-S_S2_P/fleet.txt",
+        "bytes": 158,
+        "SHA256": "0e658f11c9d623ca8dfc3d9c9222d471042c8d05d95a3d5f1add4fdccb2772bc"
+      },
+      "historical_physical": {
+        "G": 0.21273124889177847,
+        "P": 3.334375,
+        "F": 0.5224554869179032,
+        "Y": [
+          50000,
+          5,
+          0,
+          5,
+          2,
+          1,
+          5,
+          1,
+          2,
+          1,
+          6,
+          1,
+          0,
+          1,
+          4,
+          1,
+          1,
+          7,
+          2,
+          2,
+          3,
+          2,
+          1,
+          1,
+          3,
+          2,
+          1,
+          1,
+          0,
+          5,
+          1,
+          1,
+          1,
+          1,
+          1,
+          4
+        ],
+        "maximum_duration": 10552.365089719562,
+        "pickups": [
+          11,
+          12,
+          10
+        ],
+        "return_loads": [
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              20,
+              11,
+              7,
+              35,
+              30,
+              6,
+              31,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 30,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 31,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              14,
+              9,
+              24,
+              10,
+              33,
+              8,
+              16,
+              29,
+              0
+            ],
+            "operations": [
+              {
+                "station": 14,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 24,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 33,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 8,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 16,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              3,
+              34,
+              17,
+              4,
+              19,
+              25,
+              21,
+              22,
+              0
+            ],
+            "operations": [
+              {
+                "station": 3,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 34,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 4,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 0,
+                "drop": 2
+              },
+              {
+                "station": 25,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 21,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 3,
+        "empty_vehicles_added": 0
+      },
+      "source_commit": "e920b92e199e825ec89a2932f701861ff158e0d4"
+    }
+  ],
+  "carriers": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round163\\results\\unified_exact_round163\\artifacts\\new_evidence_01.zip",
+      "bytes": 39888556,
+      "SHA256": "365d892c8d3593ddcf8c98f88fa220d96f7afb889b0b6f47ba86f09006aa3512",
+      "source_round": 163,
+      "carrier_delivery_commit": "8ae25cbcbb88caa283d345b1b143ff0da6e5c0eb",
+      "public_carrier": "https://raw.githubusercontent.com/yifanXovo/TailoredExact/8ae25cbcbb88caa283d345b1b143ff0da6e5c0eb/results/unified_exact_round163/artifacts/new_evidence_01.zip"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round164\\results\\unified_exact_round164\\artifacts\\new_evidence_01.zip",
+      "bytes": 51931501,
+      "SHA256": "69a5fbb42cf13c5ac557c2663228c659416d92d82366d1f81d90fa649e6eaa71",
+      "source_round": 164,
+      "carrier_delivery_commit": "de01e8fb27a954d031abac5fe99442d6c8d29d44",
+      "public_carrier": "https://raw.githubusercontent.com/yifanXovo/TailoredExact/de01e8fb27a954d031abac5fe99442d6c8d29d44/results/unified_exact_round164/artifacts/new_evidence_01.zip"
+    }
+  ],
+  "extraction_seconds": 0.7703631999902427,
+  "ordinary_recovery_IO": true,
+  "no_new_Optimize": true,
+  "physical_qualification": "all18 PASS via C++ preflight plus independent data review",
+  "new_raw_only_policy": "historical members referenced, not repackaged"
+}
