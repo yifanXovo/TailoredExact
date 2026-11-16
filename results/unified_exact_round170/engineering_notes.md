@@ -17,3 +17,15 @@ R169's selection `necessary_H_complete` is a five-path diagnostic-only
 field. Ordinary B/M/C qualification uses actual required path count and
 per-path completeness/physical verification, recorded separately as
 `complete_arm_initialization`. The exact layer never consumes that label.
+
+The explicit task permits Python/Node for CSV/log/report orchestration and
+requires the established flat CSV with exact historical bytes. Accordingly
+the machine-readable CSV is emitted by the thin experiment aggregator and
+independently imported read-only using Artifact Tool. No workbook redesign,
+formulas, extra XLSX or spreadsheet re-export is introduced.
+
+No additional qualification H/Optimize is run. The first actual C20 B
+position supplies Native Seed1/clock/Start/proof readback; its original fleet,
+random-order identity, objective and deterministic H workload match R169.
+Subsequent completed positions receive the same required checks. The P
+qualification uses its actual Seed1 cold position, not a separate screen.
