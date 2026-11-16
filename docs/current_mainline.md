@@ -1,5 +1,33 @@
 # Current manuscript and research mainline
 
+Round169 tests paid objective-diversified complete-H initialization against
+matched original-weight restarts. All35 H paths complete and four of six
+current roles trigger the full eighteen-position short-cap Seed0 panel.
+C improves all three n35 final primal endpoints beyond B/M, with a slight
+B35 lower gain and weaker C35/X35 lowers. All n20 roles certify, while
+C20-C costs more. Recommend only future independent limited confirmation;
+uniform GI-TBC/B stays main and C166/D167/C169 remain default off.
+
+The [report](../results/unified_exact_round169/final_report.md),
+[all paid arms](../results/unified_exact_round169/complete_arms.csv),
+[H decomposition](../results/unified_exact_round169/h_results.csv),
+[decision](../results/unified_exact_round169/research_decision.md) and
+[costs](../results/unified_exact_round169/cost_report.json) distinguish
+35 H-only calls from93 actual complete Optimize calls. The authoritative
+112-row attachment is absent; six qualified unpaired B controls are delivered
+separately, with zero new P pairs and protected older files unchanged.
+
+The same maintained [paper](../results/unified_exact_round137/manuscript.md),
+[main PDF](../results/unified_exact_round137/manuscript.pdf) and
+[supplement PDF](../results/unified_exact_round137/supplement.pdf) are built
+through `scripts/round169_documents.py assemble|pdf|qa`. The isolated
+worktree is `E:/codes/ExactEBRP-work/worktrees/round169`, branch
+`codex/round169-primal-reweight`, with Open Draft base R168 while main lacks
+dependencies. Historical performance source/PE identities remain historical.
+
+## Round168 baseline (retained historical record)
+
+
 Round168 completes the current archived-route target diagnosis while retaining
 uniform GI-TBC/B, with C166/D167 default off. All seven initially nonattaining
 fixed-order families are EXCLUDED from their fixed same-input archive targets;
@@ -117,7 +145,7 @@ R163/R164 measurements retain their historical source/PE. See
 ## Historical stage records
 
 The following dated-stage descriptions preserve their then-current artifact
-and delivery status. The current paper/PDF authority is the Round166 mapping above.
+and delivery status. The current paper/PDF authority is the Round169 mapping above.
 
 The completed [Round164 finite solver-Seed confirmation](round164_seed_confirmation.md)
 adds24 frozen B/P arms at Seeds1/2 on the six exposed R163 inputs. Each of

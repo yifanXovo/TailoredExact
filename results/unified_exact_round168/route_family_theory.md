@@ -181,8 +181,11 @@ F<=theta. A MIPSOL vector is independently physically decoded before
 requesting an evidence stop; an unphysical candidate is ignored. EXCLUDED
 requires final qualified L>theta. A tentative callback bound stop must
 still pass the final gate. Otherwise the result is UNKNOWN, including an
-improvement short of target or a 300s limit. An API/mapping/qualification
-failure is an error, never silently converted into a scientific UNKNOWN.
+improvement short of target or a 300s limit. A model/API/mapping failure is
+an error, never silently converted into a scientific UNKNOWN. In a valid
+model, failure to numerically accept a particular Native lower instead
+leaves any independently valid physical U and mathematical L available,
+with that rejection explicitly recorded and the result honestly UNKNOWN.
 
 For j=order,owner,eligible, L_j<=v_j<=U_j<=F_p, while
 v_order>=v_owner>=v_eligible>=F*_full. Larger-domain lower bounds may

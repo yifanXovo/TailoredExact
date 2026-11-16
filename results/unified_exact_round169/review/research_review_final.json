@@ -1,10 +1,10 @@
 {
   "schema": "round169-independent-research-review-final-v1",
-  "UTC": "2026-11-16T02:41:19.732174+00:00",
+  "UTC": "2026-11-16T02:55:15.472182+00:00",
   "reviewer": "/root/research_review",
-  "status": "PASS_RESEARCH_AND_TEXT_TARGETED_PDF_PENDING",
+  "status": "PASS",
   "blocking_findings": [],
-  "scope": "All 18 actual endpoint rows, raw results and qualified audit outputs; tables in body/final report/S169; H path/pool costs; decision and limitations; corrected historic timing and CSV increment. Targeted new PDF review follows separately.",
+  "scope": "All 18 actual endpoint rows, raw results and qualified audit outputs; tables in body/final report/S169; H path/pool costs; decision and limitations; corrected historic timing and CSV increment. Targeted PDF evidence, when available, is embedded below.",
   "Optimize": 0,
   "H_calls": 0,
   "all_18_endpoint_and_fee_rows_match_raw_and_audit": true,
@@ -455,12 +455,121 @@
     "no_112_to_118_fabrication": true,
     "increment": {
       "path": "results/unified_exact_round169/GI_TBC_R169_B_controls_increment_28col.csv",
-      "bytes": 4691,
-      "SHA256": "7214c7606c909e62b0219217df4da2cf5d7eb8c5dee5bc18d11d4597a35e6c0b"
+      "bytes": 4811,
+      "SHA256": "91a000abe33c84276de84fe1d677421c90d3de39467f657cfda232790c0f2048"
     }
   },
-  "pending_delivery_check": "At read time final_report mentions CSV_QA.json; root was notified to create it or correct that reference before final delivery. PDF generation/visual review pending root paths.",
-  "seconds": 0.12656049989163876,
+  "pending_delivery_check": null,
+  "CSV_QA_reference_resolved": true,
+  "PDF_visual_review": {
+    "schema": "round169-independent-research-PDF-final-v1",
+    "reviewer": "/root/research_review",
+    "UTC": "2026-11-16T02:55:15.272556+00:00",
+    "status": "PASS",
+    "Optimize": 0,
+    "H_calls": 0,
+    "actual_visual_inspection": true,
+    "documents": [
+      {
+        "document": "results/unified_exact_round137/manuscript.pdf",
+        "SHA256": "84658a802fd087909ee7b6e45d71894302f0b9f69eb0d58dac0700231fae18b9",
+        "page_count": 53,
+        "viewed_PNGs": [
+          {
+            "page": 22,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-022.png",
+            "bytes": 227012,
+            "SHA256": "1fc3eccc08a31a5df8c5cbb51f610fe3e0eb746a8aaa230bf3e684b41889e31e"
+          },
+          {
+            "page": 23,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-023.png",
+            "bytes": 335977,
+            "SHA256": "a05e936b2991a3ba3897c560e5e9f963a0771ac30e141312241f613dc7d12461"
+          },
+          {
+            "page": 24,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-024.png",
+            "bytes": 284624,
+            "SHA256": "e65d996fdcad2881ac01a7f891af013c6ca65b67b38df7ab6d33411907ca45cf"
+          },
+          {
+            "page": 52,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-052.png",
+            "bytes": 289593,
+            "SHA256": "94df70f64152b722dcf68045fa8e799daf2033534774cd59a5b2e6a198609eb0"
+          },
+          {
+            "page": 53,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-053.png",
+            "bytes": 269236,
+            "SHA256": "02aad7cb0b7b9d8c651bd90060a4d9ac9311564118cc2cd02ed86d15032fb601"
+          }
+        ]
+      },
+      {
+        "document": "results/unified_exact_round137/supplement.pdf",
+        "SHA256": "c26599a1412278410f6834bb2eddc9729efb9c2f9ca8b66c033b76194100f3e4",
+        "page_count": 59,
+        "viewed_PNGs": [
+          {
+            "page": 55,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-055.png",
+            "bytes": 319363,
+            "SHA256": "156129f1637814b45099fe80d6efb0f76ccd3bd0ae9356e5f1a2b98ed6479929"
+          },
+          {
+            "page": 56,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-056.png",
+            "bytes": 236607,
+            "SHA256": "d6608794005bcd0c92db479a176985358264a185f039ea7f73af5a48ac853b0d"
+          },
+          {
+            "page": 57,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-057.png",
+            "bytes": 164688,
+            "SHA256": "ac58e078f5ee375699b3a86885f5792a544bb132b80a2df6bfc91d93b0fc321f"
+          },
+          {
+            "page": 58,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-058.png",
+            "bytes": 140329,
+            "SHA256": "9e312de1757903d26262293c09edb855bedbf6564cfbed525228c737451be982"
+          },
+          {
+            "page": 59,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-059.png",
+            "bytes": 95536,
+            "SHA256": "4abd3b0799e0e654a69586bf895a35d39f683fbdf18f66e4bfbee94b666b241e"
+          }
+        ]
+      }
+    ],
+    "findings": [],
+    "main_readback": "Page23 retains the paid comparison and full Table11 with all six rows on one page. The reduced paragraph preserves C/M interpretation, weaker C35/X35 L, B35 L increase, all n35 OPEN, retained n20 certification and slower C20-C, default-off recommendation and known-role/single-Seed/no-new-P limits. Pages22/24 show clean adjacent section/appendix transitions.",
+    "supplement_readback": "Pages56/57/58 contain S169 and the complete seven H rows, seven path/pool cost rows, all18 paid endpoints and all18 cost rows. Each caption and full table share a page. Pages55/59 show intact adjacent R168 evidence and references. Table figures match the independently reconciled source tables at displayed rounding.",
+    "bibliography_readback": "Paquete and Stutzle 2003 title, year and author-hosted PDF URL render normally in main53 and supplement59; author diacritics render correctly. Main52/53 references stay inside margins.",
+    "layout_checks": {
+      "overlap": false,
+      "clipping": false,
+      "replacement_glyphs": false,
+      "blank_pages_in_reviewed_set": false,
+      "orphaned_R169_table_captions": false,
+      "split_Table11_last_row": false
+    },
+    "CSV_QA_followup": {
+      "reference_now_exists": true,
+      "PASS": true,
+      "records": 6,
+      "columns": 28,
+      "UTF8_BOM": true,
+      "SHA256": "91a000abe33c84276de84fe1d677421c90d3de39467f657cfda232790c0f2048",
+      "data_commit_exists_locally": "c9fcb1f1ee8a2ea07004ad6162831f4bcf01443a",
+      "no_self_SHA": true
+    },
+    "limitations": "This independent review covers actual targeted PNGs and source/data reconciliation, not human peer review or new optimization. Public delivery/recovery remains the root delivery step."
+  },
+  "seconds": 0.13855780009180307,
   "evidence": [
     {
       "path": "results/unified_exact_round169/complete_arms.json",
@@ -474,8 +583,8 @@
     },
     {
       "path": "results/unified_exact_round169/final_report.md",
-      "bytes": 13382,
-      "SHA256": "a991d890f0573ad47b2bb19f0bcf52522bfaffebe081ccf63b9853697ef5cec8"
+      "bytes": 13823,
+      "SHA256": "f242762f931706fe70236ae22297c04f4a67c7b17f01ba6c03efa4f39349b611"
     },
     {
       "path": "results/unified_exact_round169/research_decision.md",
@@ -494,13 +603,13 @@
     },
     {
       "path": "results/unified_exact_round137/paper_body.md",
-      "bytes": 69677,
-      "SHA256": "dcc900d22082809b607bd499c51a48ccde639fc1d46d0c0e8a147b7216c0c9cd"
+      "bytes": 69315,
+      "SHA256": "47454137aac80617e5da6fbc4884ab7ba02206852ef342745b1045d225488d97"
     },
     {
       "path": "results/unified_exact_round137/supplement.md",
-      "bytes": 154723,
-      "SHA256": "a7473c181e0d696b676325ac34e71a6bfe551645a595b68416ce1afe7106d67e"
+      "bytes": 154719,
+      "SHA256": "bc0f41b936722c43a13385b813cd770927838e5f3de6c21a104b86ea1defef45"
     },
     {
       "path": "results/unified_exact_round137/references.bib",
@@ -515,7 +624,7 @@
     {
       "path": "results/unified_exact_round169/CSV_reconciliation.json",
       "bytes": 3073,
-      "SHA256": "8c74d74d90b421151b7ef1a9b41d5528a0a7d1fddae52c7d7596c935e02e40d9"
+      "SHA256": "761da68f4da7a5da755bd50dc8e903e384f372c4072b49b887aa9a6732ce1b9b"
     }
   ]
 }

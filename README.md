@@ -3,8 +3,9 @@
 Exact solvers for the Equity-aware Bike Repositioning Problem.
 
 The main paper algorithm is **GI-TBC/B** (historical S2/ms2), with AP disabled
-and a uniform pair-support configuration. The current R165 manuscript includes
-evidence through R164; its measured source/PE identities remain distinct from
+and a uniform pair-support configuration. The current R169 manuscript includes
+the paid objective-diversified initialization study; C166/D167/C169 stay off.
+Historical and new measured source/PE identities remain distinct from
 document generation. Start with the
 [paper-S2 release and run guide](docs/paper_s2_release.md), then the
 [advisor/coauthor review packet](docs/paper_review.md).
@@ -26,9 +27,10 @@ Read the [current complete manuscript](results/unified_exact_round137/manuscript
 [main + Appendix A/B PDF](results/unified_exact_round137/manuscript.pdf), and
 [supplement PDF](results/unified_exact_round137/supplement.pdf).
 The [contribution map](results/unified_exact_round165/contribution_positioning.md)
-and [author memo](results/unified_exact_round165/author_decision_memo.md) explain
+and [current author memo](results/unified_exact_round169/author_decision_memo.md) explain
 the integrated method's finite evidence and the unestablished independent
-performance value of the outer controller. R165 adds no performance runs.
+performance value of the outer controller. The [R169 report](results/unified_exact_round169/final_report.md)
+separates paid n35 primal gains from mixed proof costs and the matched restart control.
 The bare executable retains its **ENS-C compatibility default**. AP and TC are
 closed research studies, with AP research-only and default off.
 
@@ -36,8 +38,8 @@ Round136 was merged into Git `main` by ordinary merge commit in
 [PR #198](https://github.com/yifanXovo/TailoredExact/pull/198). Its historical
 checkout disposition is in the
 [integration, PR disposition and local cleanup](results/unified_exact_round136/RESUME.md)
-record. R165 uses an isolated `ExactEBRP-work/worktrees/round165` checkout
-from verified R164, retaining the dirty R155 `paper-current` entry. The original `E:\codes\ExactEBRP` checkout retains
+record. R169 uses the isolated `ExactEBRP-work/worktrees/round169` checkout
+from verified R168, retaining the dirty R155 `paper-current` entry. The original `E:\codes\ExactEBRP` checkout retains
 user changes and the shared Git store. New work belongs under
 `E:\codes\ExactEBRP-work`; see [workspace policy](WORKSPACE_POLICY.md).
 

@@ -1,0 +1,637 @@
+{
+  "UTC": "2026-11-16T02:29:20.747210+00:00",
+  "records": [
+    {
+      "position": 1,
+      "role": "R163-C20-S",
+      "arm": "B",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T00:46:40.193136+00:00",
+        "started_epoch": 1794789788.710854,
+        "ended_epoch": 1794790000.1931365,
+        "process_outer_seconds": 211.4824220999144,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/01_R163-C20-S_B/result.json",
+          "bytes": 97270,
+          "SHA256": "bd9d4788c0fa4e67795642bdcb0e88460697b8548934505cc9d433bdcf2267b9"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.1912805922828121,
+        "G": 0.07556576093183882,
+        "P": 1.0726645679958933,
+        "upper_bound": 0.1912805922828121,
+        "lower_bound": 0.19128059228281274,
+        "gap": 0,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.308606526667351,
+        "final_process_wall_time_seconds": 211.3772576,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 2,
+      "role": "R163-C20-S",
+      "arm": "M",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T00:50:11.249452+00:00",
+        "started_epoch": 1794790000.198141,
+        "ended_epoch": 1794790211.249452,
+        "process_outer_seconds": 211.05195309966803,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/02_R163-C20-S_M/result.json",
+          "bytes": 97263,
+          "SHA256": "1a91511ccf426863811edd25e7e049634993c09b56b73e66225796730220ce8e"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.1912805922828121,
+        "G": 0.07556576093183882,
+        "P": 1.0726645679958933,
+        "upper_bound": 0.1912805922828121,
+        "lower_bound": 0.19128059228281274,
+        "gap": 0,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.308606526667351,
+        "final_process_wall_time_seconds": 210.9498548,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 3,
+      "role": "R163-C20-S",
+      "arm": "C",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T00:53:50.764822+00:00",
+        "started_epoch": 1794790211.2534485,
+        "ended_epoch": 1794790430.7648225,
+        "process_outer_seconds": 219.51179050002247,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/03_R163-C20-S_C/result.json",
+          "bytes": 97310,
+          "SHA256": "06394dabc52f9eaa6179cc03b54d7d75138a241ed6604c43492adac5d27ab1c2"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.1912805922828121,
+        "G": 0.07556576093183882,
+        "P": 1.0726645679958933,
+        "upper_bound": 0.1912805922828121,
+        "lower_bound": 0.19128059228281205,
+        "gap": 2.902079639589546e-16,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.2900336843130432,
+        "final_process_wall_time_seconds": 219.415209,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 4,
+      "role": "R163-B20-B",
+      "arm": "M",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T00:53:53.611141+00:00",
+        "started_epoch": 1794790430.7688231,
+        "ended_epoch": 1794790433.6111414,
+        "process_outer_seconds": 2.8423431999981403,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/04_R163-B20-B_M/result.json",
+          "bytes": 96208,
+          "SHA256": "b7945df58f3ea94305260d1a52616b7c24301274bea88bb221b7adcf2ebbc524"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.42323218169431764,
+        "G": 0.17091932304985905,
+        "P": 2.47933968982684,
+        "upper_bound": 0.42323218169431764,
+        "lower_bound": 0.4232321816943161,
+        "gap": 3.672481209375123e-15,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.43287983257650753,
+        "final_process_wall_time_seconds": 2.7440788,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 5,
+      "role": "R163-B20-B",
+      "arm": "C",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T00:53:56.437778+00:00",
+        "started_epoch": 1794790433.6181436,
+        "ended_epoch": 1794790436.437779,
+        "process_outer_seconds": 2.819448699709028,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/05_R163-B20-B_C/result.json",
+          "bytes": 96188,
+          "SHA256": "6ff69172fa698f0883df228e4c6221e0fe136bb5e29ee476c6388c37b18f8862"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.42323218169431764,
+        "G": 0.17091932304985905,
+        "P": 2.47933968982684,
+        "upper_bound": 0.42323218169431764,
+        "lower_bound": 0.4232321816943161,
+        "gap": 3.672481209375123e-15,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.43287983257650753,
+        "final_process_wall_time_seconds": 2.7130289,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 6,
+      "role": "R163-B20-B",
+      "arm": "B",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T00:53:59.291386+00:00",
+        "started_epoch": 1794790436.4407794,
+        "ended_epoch": 1794790439.2913864,
+        "process_outer_seconds": 2.8507301001809537,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/06_R163-B20-B_B/result.json",
+          "bytes": 96217,
+          "SHA256": "8c9d726e10a0719a97fcde250c27f35086d5b21006e19e5596744bb6c33717ba"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.42323218169431764,
+        "G": 0.17091932304985905,
+        "P": 2.47933968982684,
+        "upper_bound": 0.42323218169431764,
+        "lower_bound": 0.4232321816943161,
+        "gap": 3.672481209375123e-15,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.43287983257650753,
+        "final_process_wall_time_seconds": 2.7506636,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 7,
+      "role": "R163-X20-S",
+      "arm": "C",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T00:56:04.060183+00:00",
+        "started_epoch": 1794790439.294387,
+        "ended_epoch": 1794790564.0601835,
+        "process_outer_seconds": 124.76573250023648,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/07_R163-X20-S_C/result.json",
+          "bytes": 96699,
+          "SHA256": "37e47a4815709d1bc370e31ff5561bd58c91e07327b11770fae07d49923455e8"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.4477476265860286,
+        "G": 0.24872280389099316,
+        "P": 1.4966666666666666,
+        "upper_bound": 0.4477476265860286,
+        "lower_bound": 0.44774762658601525,
+        "gap": 2.987885731240766e-14,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.5268146619010788,
+        "final_process_wall_time_seconds": 124.6677039,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 8,
+      "role": "R163-X20-S",
+      "arm": "B",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T00:58:08.600193+00:00",
+        "started_epoch": 1794790564.0641906,
+        "ended_epoch": 1794790688.6001937,
+        "process_outer_seconds": 124.53611769992858,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/08_R163-X20-S_B/result.json",
+          "bytes": 96662,
+          "SHA256": "fecccad27d972c28ef373a192b5c4da85d19ba118e5079c1b2d890b4af624437"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.4477476265860286,
+        "G": 0.24872280389099316,
+        "P": 1.4966666666666666,
+        "upper_bound": 0.4477476265860286,
+        "lower_bound": 0.44774762658601525,
+        "gap": 2.987885731240766e-14,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.5268146619010788,
+        "final_process_wall_time_seconds": 124.440154,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 9,
+      "role": "R163-X20-S",
+      "arm": "M",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T01:00:13.330738+00:00",
+        "started_epoch": 1794790688.604193,
+        "ended_epoch": 1794790813.3307385,
+        "process_outer_seconds": 124.72628209972754,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/09_R163-X20-S_M/result.json",
+          "bytes": 96659,
+          "SHA256": "fd9184efe91b1b5913967a88303588171893f2581a6f74adf0345572bc195958"
+        }
+      },
+      "raw_endpoint": {
+        "status": "optimal",
+        "objective": 0.4477476265860286,
+        "G": 0.24872280389099316,
+        "P": 1.4966666666666666,
+        "upper_bound": 0.4477476265860286,
+        "lower_bound": 0.44774762658601525,
+        "gap": 2.987885731240766e-14,
+        "certificate": "Round 31 C6 engineering-exact certificate: complete range and atomic coverage, parameter-free strict-frontier native-bound targets, lazy current-bound child decisions, open-parent requeue without forced delayed splits, exact closures, monotone valid bounds, symmetric model lifecycle, and independently verified global incumbent.",
+        "initial_heuristic_UB": 0.5268146619010788,
+        "final_process_wall_time_seconds": 124.6184184,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 10,
+      "role": "R163-C35-U",
+      "arm": "B",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T01:10:07.488730+00:00",
+        "started_epoch": 1794790813.334368,
+        "ended_epoch": 1794791407.4887302,
+        "process_outer_seconds": 594.1540716001764,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/10_R163-C35-U_B/result.json",
+          "bytes": 98724,
+          "SHA256": "aed5fa320519f1f45eb73326999a2da0e632f0714d5ab151e05821dbc99cefa9"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.14802296326563258,
+        "G": 0.08225694621377627,
+        "P": 0.5941730117235705,
+        "upper_bound": 0.14802296326563258,
+        "lower_bound": 0.017120344246947146,
+        "gap": 0.8843399438219322,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.17449020363402978,
+        "final_process_wall_time_seconds": 594.0454315,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 11,
+      "role": "R163-C35-U",
+      "arm": "M",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T01:20:01.648205+00:00",
+        "started_epoch": 1794791407.493729,
+        "ended_epoch": 1794792001.648205,
+        "process_outer_seconds": 594.1548105003312,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/11_R163-C35-U_M/result.json",
+          "bytes": 98763,
+          "SHA256": "7cdc9fe93b95356f407740605dcaf1763c341ec69d9e41c582589900dd778544"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.14802296326563258,
+        "G": 0.08225694621377627,
+        "P": 0.5941730117235705,
+        "upper_bound": 0.14802296326563258,
+        "lower_bound": 0.017120344246947146,
+        "gap": 0.8843399438219322,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.17449020363402978,
+        "final_process_wall_time_seconds": 594.0498168,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 12,
+      "role": "R163-C35-U",
+      "arm": "C",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T01:29:55.803314+00:00",
+        "started_epoch": 1794792001.6517575,
+        "ended_epoch": 1794792595.803315,
+        "process_outer_seconds": 594.1518824002706,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/12_R163-C35-U_C/result.json",
+          "bytes": 98891,
+          "SHA256": "d159a8423fec2cda89fa6b0e4aa6e3df0027bf139c290dc494068225c77de453"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.12020124497854706,
+        "G": 0.05727373830614545,
+        "P": 0.56852806108532,
+        "upper_bound": 0.12020124497854706,
+        "lower_bound": 0.015427084585825845,
+        "gap": 0.8716561996626642,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.15516542546598344,
+        "final_process_wall_time_seconds": 594.0482098,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 13,
+      "role": "R163-B35-S",
+      "arm": "M",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T01:39:49.946527+00:00",
+        "started_epoch": 1794792595.8093202,
+        "ended_epoch": 1794793189.9465272,
+        "process_outer_seconds": 594.1375311999582,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/13_R163-B35-S_M/result.json",
+          "bytes": 98903,
+          "SHA256": "eacb9da74322856e0e248f3009eff08009284aff06d62d9dcafed4dba9df8d93"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.21972078756431687,
+        "G": 0.09420961275797643,
+        "P": 1.1610285714285715,
+        "upper_bound": 0.21972078756431687,
+        "lower_bound": 0.11865217498201656,
+        "gap": 0.45998657524707537,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.21972078756431687,
+        "final_process_wall_time_seconds": 594.0394921,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 14,
+      "role": "R163-B35-S",
+      "arm": "C",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T01:49:44.140013+00:00",
+        "started_epoch": 1794793189.954527,
+        "ended_epoch": 1794793784.140013,
+        "process_outer_seconds": 594.1860555000603,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/14_R163-B35-S_C/result.json",
+          "bytes": 98944,
+          "SHA256": "0bdee4bdfe7c69fd9e495d26e6e700f45d3ea979077d191b52e871c474de053f"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.1878611633900711,
+        "G": 0.08255194638838677,
+        "P": 0.9741523809523808,
+        "upper_bound": 0.1878611633900711,
+        "lower_bound": 0.11886486887948461,
+        "gap": 0.36727279478901126,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.20673909923575257,
+        "final_process_wall_time_seconds": 594.0781732,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 15,
+      "role": "R163-B35-S",
+      "arm": "B",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T01:59:38.285699+00:00",
+        "started_epoch": 1794793784.1440134,
+        "ended_epoch": 1794794378.2856991,
+        "process_outer_seconds": 594.1414286000654,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/15_R163-B35-S_B/result.json",
+          "bytes": 98886,
+          "SHA256": "5f320e61a64f157f18391d7d147ac2622d753e13d40480cd92997f878350295b"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.21972078756431687,
+        "G": 0.09420961275797643,
+        "P": 1.1610285714285715,
+        "upper_bound": 0.21972078756431687,
+        "lower_bound": 0.11865217498201656,
+        "gap": 0.45998657524707537,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.21972078756431687,
+        "final_process_wall_time_seconds": 594.0391371,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 16,
+      "role": "R163-X35-S",
+      "arm": "C",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T02:09:32.444892+00:00",
+        "started_epoch": 1794794378.2937005,
+        "ended_epoch": 1794794972.4448926,
+        "process_outer_seconds": 594.1505891000852,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/16_R163-X35-S_C/result.json",
+          "bytes": 98211,
+          "SHA256": "5b92afbb06624cac98ab3ba22819562fe12be98a085718d402a325859a36045d"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.466514934786982,
+        "G": 0.19278489124561768,
+        "P": 2.9468750000000004,
+        "upper_bound": 0.466514934786982,
+        "lower_bound": 0.3511829462176636,
+        "gap": 0.2472203566687116,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.5079988087626506,
+        "final_process_wall_time_seconds": 594.0350096,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 17,
+      "role": "R163-X35-S",
+      "arm": "B",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T02:19:26.591182+00:00",
+        "started_epoch": 1794794972.4529433,
+        "ended_epoch": 1794795566.5911822,
+        "process_outer_seconds": 594.1379945003428,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/17_R163-X35-S_B/result.json",
+          "bytes": 97685,
+          "SHA256": "8ef11444ae9a92b4e90babb3c449cf5f7795fbf9f9b209bca2ee2570b2c5c235"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.5183639026329352,
+        "G": 0.216477110180105,
+        "P": 3.25,
+        "upper_bound": 0.5183639026329352,
+        "lower_bound": 0.3576324299197946,
+        "gap": 0.31007458639911906,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.6008692809039473,
+        "final_process_wall_time_seconds": 594.0375628,
+        "process_wall_time_comparable": true
+      }
+    },
+    {
+      "position": 18,
+      "role": "R163-X35-S",
+      "arm": "M",
+      "status": "returned",
+      "receipt": {
+        "UTC": "2026-11-16T02:29:20.744225+00:00",
+        "started_epoch": 1794795566.5981877,
+        "ended_epoch": 1794796160.7442253,
+        "process_outer_seconds": 594.1460667001083,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true
+        },
+        "result": {
+          "path": "results/unified_exact_round169/complete_raw/18_R163-X35-S_M/result.json",
+          "bytes": 97816,
+          "SHA256": "48a3a1319ec0ad65e66ecdba68c82489e435d4293df93519c54cb8a6d30c5385"
+        }
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "objective": 0.5115464130968782,
+        "G": 0.20733741454825705,
+        "P": 3.275,
+        "upper_bound": 0.5115464130968782,
+        "lower_bound": 0.3576324299197946,
+        "gap": 0.3008798013953328,
+        "certificate": "Paper external-tree strict certificate rejected: relevant_leaf_open",
+        "initial_heuristic_UB": 0.6008692809039473,
+        "final_process_wall_time_seconds": 594.0426603,
+        "process_wall_time_comparable": true
+      }
+    }
+  ],
+  "positions_finished": 18,
+  "outer_seconds": 6372.036300399806
+}

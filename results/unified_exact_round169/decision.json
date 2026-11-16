@@ -1,0 +1,18 @@
+{
+  "UTC": "2026-11-16T02:36:05.344809+00:00",
+  "decision": "recommend_independent_limited_confirmation",
+  "default": "B",
+  "C166": false,
+  "D167": false,
+  "C169": false,
+  "headline": "Paid reweighting improves all three n35 primal endpoints beyond both controls, with mixed proof costs; keep it default off and recommend only future independent limited confirmation.",
+  "rationale": "The fixed C recipe improves true final U over both B and matched M on C35 (0.120201245 versus 0.148022963), B35 (0.187861163 versus 0.219720788) and X35 (0.466514935 versus B 0.518363903 and M 0.511546413). B35 also raises qualified L slightly. C35 and X35 instead lose lower-bound strength, and all n35 arms remain OPEN. All three methods certify the n20 roles, while C20-C takes about219.5s versus211.5/211.1s for B/M. Thus there is an end-to-end original-objective primal signal beyond restarting, not complete dominance or robust acceleration. Keep the fixed candidate as a research option for a future independently preregistered, finite confirmation with matched restart and protection roles; this task starts no such run.",
+  "paper_interpretation": "C improves final U beyond both controls on all three n35 roles, with a small B35 lower-bound gain and weaker C35/X35 lowers. All n35 runs remain open. All methods certify the n20 roles; C20-C takes about219.5s versus211.5/211.1s for B/M. Matched M also improves the paid X35 primal endpoint despite its unchanged H Start. These endpoint gains warrant only future independent limited confirmation of the fixed default-off recipe, not default promotion or a claim of uniform acceleration.",
+  "H_only_roles": 7,
+  "H_only_calls": 35,
+  "gate_current_roles": 4,
+  "full_positions": 18,
+  "actual_Optimize": 93,
+  "new_P_pairs": 0,
+  "no_Round170": true
+}

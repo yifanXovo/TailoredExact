@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-11-16T00:36:18.899046+00:00",
+  "UTC": "2026-11-16T03:03:03.457834+00:00",
   "base": "2301f9bf0a61d5fe74ee728704a820cb437d5cde",
   "goal": {
     "path": "results/unified_exact_round169/goal.md",
@@ -7,5 +7,103 @@
     "SHA256": "ad4a9988fa90d8540ebfd6aaab88145f61532dcef79168b860b953bc6f84e212"
   },
   "historical_measured_source": "e920b92e199e825ec89a2932f701861ff158e0d4",
-  "historical_measured_PE_SHA256": "fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93"
+  "historical_measured_PE_SHA256": "fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93",
+  "measured_CPP_commit": "781c548b410a2749190e3f0c4b149c2ad885c054",
+  "new_common_PE": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round169\\ExactEBRP.exe",
+    "bytes": 9884148,
+    "SHA256": "c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57"
+  },
+  "DLL": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "bytes": 38766856,
+    "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+  },
+  "candidate_manifest": {
+    "path": "results/unified_exact_round169/candidate_manifest.json",
+    "bytes": 28503,
+    "SHA256": "96230b6b9bae05f0296c073a26d89db4dfb040bb789655e3992de16e42f33b2d"
+  },
+  "source_byte_readback": {
+    "path": "results/unified_exact_round169/source_tree_readback.json",
+    "bytes": 195,
+    "SHA256": "939fc88b1de069b528660cbd2067c0c45eda4b0db541348c6d5b7528fce5a783"
+  },
+  "new_complete_positions": 18,
+  "default": "B",
+  "C169_default_off": true,
+  "schema": "round169-current-components-and-diagnostic-v1",
+  "authoritative_directory": "results/unified_exact_round137",
+  "document_base_commit": "2301f9bf0a61d5fe74ee728704a820cb437d5cde",
+  "components": [
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 68756,
+      "SHA256": "d6d512b2a83a7c5c0494893274b5d11e3cc43e4859e10324facacd0f923a3eee"
+    },
+    {
+      "path": "results/unified_exact_round137/model_and_algorithm_appendices.md",
+      "bytes": 98288,
+      "SHA256": "936c7bcc5796bbd2c3a3015ce9f7581017211b16031b63016d48497eb0160a5f"
+    },
+    {
+      "path": "results/unified_exact_round137/mathematical_analysis.md",
+      "bytes": 30211,
+      "SHA256": "cec89b9a4185ab945d6194fef2e86fe429b30b2bda1e8e403a77216b1e680c83"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 153202,
+      "SHA256": "68a4e6d8305e7cd25cfa67cc0a54f0e13fce3cdef047a2fbe7684dfd437fb0ed"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 12785,
+      "SHA256": "5e3fa7d349036ffc74b102b5b0836a63a94ec49a4771890afa0a917e8196b279"
+    }
+  ],
+  "figures": [
+    {
+      "path": "results/unified_exact_round137/figures/three_seed_endpoints.png",
+      "bytes": 260720,
+      "SHA256": "d13d9b41d03fd291ba9e2b307115ab7a126456ac15513faafab3f661291f4fa6"
+    },
+    {
+      "path": "results/unified_exact_round137/figures/resource_endpoints.png",
+      "bytes": 216985,
+      "SHA256": "10e4cb040861240184a6d1804bc56852031656be0acb708af24151b7bc49daca"
+    },
+    {
+      "path": "results/unified_exact_round137/figures/parameter_quality_bands.png",
+      "bytes": 237455,
+      "SHA256": "767b7512dc20d7a2efb8d8f4b59ed04b81fd229a0f9efccc19308371f58a24de"
+    },
+    {
+      "path": "results/unified_exact_round135/figures/count_bound_scope.png",
+      "bytes": 143293,
+      "SHA256": "0cd0a33e58d9a9e0b0d1d9270087985aa7fa165b6169451a759b709f17441d1e"
+    }
+  ],
+  "assembled_manuscript": {
+    "path": "results/unified_exact_round137/manuscript.md",
+    "bytes": 167057,
+    "SHA256": "a05f64a0c84b3894e92c3bf8d4c7107a15e921b8e0360217cc0b1c532fb11eb5"
+  },
+  "generator": {
+    "path": "scripts/round169_documents.py",
+    "bytes": 6584,
+    "SHA256": "b04f482726a22d6f0ed4fcecc66180bf62a5ee111819f5fe077870f98d4ffdac"
+  },
+  "inherited_exporter": {
+    "path": "scripts/round166_documents.py",
+    "bytes": 8207,
+    "SHA256": "401231f84805aefafc07dbc022cda5d99370142d8ae3377bc101e9e903ca7ffc"
+  },
+  "inherited_typography": {
+    "path": "scripts/round165_documents.py",
+    "bytes": 22962,
+    "SHA256": "9b16ef8f8e1e938f52c29020945e90b4c5ff19457f76690f3f88c737c24519f7"
+  },
+  "no_legacy_R137_generation": true,
+  "no_parameter_resource_recomputation": true
 }

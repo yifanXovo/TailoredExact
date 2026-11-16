@@ -451,11 +451,19 @@
     "separate_qualified_B_increment_rows": 6,
     "columns": 28,
     "UTF8_BOM": true,
-    "increment_SHA256": "7214c7606c909e62b0219217df4da2cf5d7eb8c5dee5bc18d11d4597a35e6c0b",
+    "increment_SHA256": "91a000abe33c84276de84fe1d677421c90d3de39467f657cfda232790c0f2048",
     "new_P_pairs": 0,
     "M_C_in_main_GI_TBC_columns": false,
     "old_91_103_copies_unchanged": true,
-    "bounded_missing_master_disclosed": true
+    "bounded_missing_master_disclosed": true,
+    "previous_increment_SHA256": "7214c7606c909e62b0219217df4da2cf5d7eb8c5dee5bc18d11d4597a35e6c0b",
+    "increment_bytes": 4811,
+    "immutable_evidence_commit": "c9fcb1f1ee8a2ea07004ad6162831f4bcf01443a",
+    "immutable_evidence_links": 12,
+    "link_only_update_numbers_statuses_unchanged": true,
+    "latest_link_update_review": "review/CSV_link_update_review.json",
+    "ArtifactTool_read_only_QA": "CSV_QA.json",
+    "ArtifactTool_QA_PASS": true
   },
   "evidence_refs": [
     "review/implementation_independent_H_readback.json",
@@ -466,8 +474,11 @@
     "complete_arms.json",
     "complete_comparisons.json",
     "cost_report.json",
-    "CSV_reconciliation.json"
+    "CSV_reconciliation.json",
+    "review/CSV_link_update_review.json",
+    "CSV_QA.json"
   ],
   "research_boundary": "All end-to-end numbers are six already-exposed roles and Native Seed0. B remains default. C35/X35 have weaker C lower bounds despite better C primal endpoints; these are retained, not converted into a uniform win.",
-  "pending_delivery_scope": "PDF visual QA and Draft/public-recovery receipts belong to the parent final delivery; this technical/data review does not claim those future actions complete."
+  "pending_delivery_scope": "PDF visual QA and Draft/public-recovery receipts belong to the parent final delivery; this technical/data review does not claim those future actions complete.",
+  "CSV_link_readback_UTC": "2026-11-16T02:49:36.364599+00:00"
 }

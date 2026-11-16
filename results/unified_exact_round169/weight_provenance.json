@@ -1,0 +1,1683 @@
+{
+  "UTC": "2026-11-16T02:36:05.507147+00:00",
+  "rows": [
+    {
+      "record_id": "R137:B3:68",
+      "rho": 0.49999999999999994,
+      "arm": "R137_068_R-X35-S-T2-rho0.5_S0_S2",
+      "search_lambda": 0.0377024887563638,
+      "evaluation_lambda": 0.0754049775127276,
+      "H_search_reported_F": 0.28833076496421317,
+      "H_original_reverified": {
+        "objective": 0.421918541547217,
+        "G": 0.15474298838120934,
+        "P": 3.5432084456349204
+      },
+      "full_H_audit": {
+        "complete": true,
+        "seed_ids": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "physical": {
+          "G": 0.15474298838120926,
+          "P": 3.543208445634921,
+          "F": 0.2883307649642131,
+          "Y": [
+            50000,
+            4,
+            7,
+            5,
+            7,
+            4,
+            4,
+            4,
+            7,
+            3,
+            3,
+            5,
+            5,
+            4,
+            4,
+            4,
+            8,
+            3,
+            5,
+            3,
+            5,
+            2,
+            3,
+            1,
+            8,
+            2,
+            4,
+            2,
+            3,
+            3,
+            4,
+            8,
+            2,
+            5,
+            2,
+            3
+          ],
+          "maximum_duration": 6241.689594846381,
+          "pickups": [
+            16,
+            10,
+            11
+          ],
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "routes": [
+            {
+              "vehicle": 0,
+              "duration": 6241.689594846381,
+              "nodes": [
+                0,
+                13,
+                11,
+                10,
+                8,
+                6,
+                5,
+                7,
+                9,
+                17,
+                18,
+                19,
+                20,
+                21,
+                25,
+                27,
+                22,
+                0
+              ],
+              "operations": [
+                [
+                  13,
+                  1,
+                  0
+                ],
+                [
+                  11,
+                  3,
+                  0
+                ],
+                [
+                  10,
+                  1,
+                  0
+                ],
+                [
+                  8,
+                  2,
+                  0
+                ],
+                [
+                  6,
+                  2,
+                  0
+                ],
+                [
+                  5,
+                  0,
+                  3
+                ],
+                [
+                  7,
+                  0,
+                  3
+                ],
+                [
+                  9,
+                  0,
+                  1
+                ],
+                [
+                  17,
+                  2,
+                  0
+                ],
+                [
+                  18,
+                  3,
+                  0
+                ],
+                [
+                  19,
+                  0,
+                  2
+                ],
+                [
+                  20,
+                  2,
+                  0
+                ],
+                [
+                  21,
+                  0,
+                  2
+                ],
+                [
+                  25,
+                  0,
+                  2
+                ],
+                [
+                  27,
+                  0,
+                  2
+                ],
+                [
+                  22,
+                  0,
+                  1
+                ]
+              ]
+            },
+            {
+              "vehicle": 1,
+              "duration": 6221.216748681219,
+              "nodes": [
+                0,
+                26,
+                33,
+                29,
+                28,
+                30,
+                24,
+                16,
+                0
+              ],
+              "operations": [
+                [
+                  26,
+                  1,
+                  0
+                ],
+                [
+                  33,
+                  3,
+                  0
+                ],
+                [
+                  29,
+                  0,
+                  2
+                ],
+                [
+                  28,
+                  0,
+                  2
+                ],
+                [
+                  30,
+                  1,
+                  0
+                ],
+                [
+                  24,
+                  5,
+                  0
+                ],
+                [
+                  16,
+                  0,
+                  6
+                ]
+              ]
+            },
+            {
+              "vehicle": 2,
+              "duration": 6028.735731669582,
+              "nodes": [
+                0,
+                15,
+                3,
+                2,
+                1,
+                4,
+                12,
+                14,
+                0
+              ],
+              "operations": [
+                [
+                  15,
+                  1,
+                  0
+                ],
+                [
+                  3,
+                  4,
+                  0
+                ],
+                [
+                  2,
+                  4,
+                  0
+                ],
+                [
+                  1,
+                  2,
+                  0
+                ],
+                [
+                  4,
+                  0,
+                  5
+                ],
+                [
+                  12,
+                  0,
+                  4
+                ],
+                [
+                  14,
+                  0,
+                  2
+                ]
+              ]
+            }
+          ],
+          "complete_fleet_vehicles": 3,
+          "empty_vehicles_added": 0
+        },
+        "fleet": [
+          {
+            "vehicle": 0,
+            "Q": 20,
+            "nodes": [
+              0,
+              13,
+              11,
+              10,
+              8,
+              6,
+              5,
+              7,
+              9,
+              17,
+              18,
+              19,
+              20,
+              21,
+              25,
+              27,
+              22,
+              0
+            ],
+            "operations": [
+              [
+                13,
+                1,
+                0
+              ],
+              [
+                11,
+                3,
+                0
+              ],
+              [
+                10,
+                1,
+                0
+              ],
+              [
+                8,
+                2,
+                0
+              ],
+              [
+                6,
+                2,
+                0
+              ],
+              [
+                5,
+                0,
+                3
+              ],
+              [
+                7,
+                0,
+                3
+              ],
+              [
+                9,
+                0,
+                1
+              ],
+              [
+                17,
+                2,
+                0
+              ],
+              [
+                18,
+                3,
+                0
+              ],
+              [
+                19,
+                0,
+                2
+              ],
+              [
+                20,
+                2,
+                0
+              ],
+              [
+                21,
+                0,
+                2
+              ],
+              [
+                25,
+                0,
+                2
+              ],
+              [
+                27,
+                0,
+                2
+              ],
+              [
+                22,
+                0,
+                1
+              ]
+            ]
+          },
+          {
+            "vehicle": 1,
+            "Q": 25,
+            "nodes": [
+              0,
+              26,
+              33,
+              29,
+              28,
+              30,
+              24,
+              16,
+              0
+            ],
+            "operations": [
+              [
+                26,
+                1,
+                0
+              ],
+              [
+                33,
+                3,
+                0
+              ],
+              [
+                29,
+                0,
+                2
+              ],
+              [
+                28,
+                0,
+                2
+              ],
+              [
+                30,
+                1,
+                0
+              ],
+              [
+                24,
+                5,
+                0
+              ],
+              [
+                16,
+                0,
+                6
+              ]
+            ]
+          },
+          {
+            "vehicle": 2,
+            "Q": 30,
+            "nodes": [
+              0,
+              15,
+              3,
+              2,
+              1,
+              4,
+              12,
+              14,
+              0
+            ],
+            "operations": [
+              [
+                15,
+                1,
+                0
+              ],
+              [
+                3,
+                4,
+                0
+              ],
+              [
+                2,
+                4,
+                0
+              ],
+              [
+                1,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                5
+              ],
+              [
+                12,
+                0,
+                4
+              ],
+              [
+                14,
+                0,
+                2
+              ]
+            ]
+          }
+        ]
+      },
+      "source": {
+        "archive": "results/unified_exact_round137/artifacts/campaign_068.zip",
+        "archive_SHA": "d3a37b3a45b06f170206e2f1c651e2a8a5d812921f8514c2c65c5ef418594e52",
+        "member_prefix": "results/unified_exact_round137/campaign/068/raw/R137_068_R-X35-S-T2-rho0.5_S0_S2",
+        "input_path": "results/unified_exact_round137/inputs/R-X35-S.txt",
+        "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2"
+      },
+      "no_new_run_Start": true
+    },
+    {
+      "record_id": "R137:B2:59",
+      "rho": 0.9999999999999999,
+      "arm": "R137_059_R-X35-S-T2_S0_S2",
+      "search_lambda": 0.0754049775127276,
+      "evaluation_lambda": 0.0754049775127276,
+      "H_search_reported_F": 0.4246498451636407,
+      "H_original_reverified": {
+        "objective": 0.4246498451636407,
+        "G": 0.189963560265481,
+        "P": 3.112344736904762
+      },
+      "full_H_audit": {
+        "complete": true,
+        "seed_ids": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "physical": {
+          "G": 0.18996356026548078,
+          "P": 3.112344736904762,
+          "F": 0.42464984516364046,
+          "Y": [
+            50000,
+            6,
+            6,
+            6,
+            5,
+            6,
+            3,
+            5,
+            6,
+            4,
+            3,
+            4,
+            5,
+            4,
+            2,
+            4,
+            8,
+            3,
+            5,
+            5,
+            5,
+            3,
+            4,
+            1,
+            8,
+            0,
+            3,
+            0,
+            2,
+            3,
+            3,
+            6,
+            6,
+            5,
+            2,
+            3
+          ],
+          "maximum_duration": 6237.003092045483,
+          "pickups": [
+            23,
+            10,
+            9
+          ],
+          "return_loads": [
+            2,
+            0,
+            0
+          ],
+          "routes": [
+            {
+              "vehicle": 0,
+              "duration": 6197.005021519601,
+              "nodes": [
+                0,
+                11,
+                10,
+                8,
+                6,
+                5,
+                7,
+                3,
+                4,
+                9,
+                13,
+                15,
+                17,
+                18,
+                19,
+                20,
+                21,
+                0
+              ],
+              "operations": [
+                [
+                  11,
+                  4,
+                  0
+                ],
+                [
+                  10,
+                  1,
+                  0
+                ],
+                [
+                  8,
+                  3,
+                  0
+                ],
+                [
+                  6,
+                  3,
+                  0
+                ],
+                [
+                  5,
+                  0,
+                  5
+                ],
+                [
+                  7,
+                  0,
+                  4
+                ],
+                [
+                  3,
+                  3,
+                  0
+                ],
+                [
+                  4,
+                  0,
+                  3
+                ],
+                [
+                  9,
+                  0,
+                  2
+                ],
+                [
+                  13,
+                  1,
+                  0
+                ],
+                [
+                  15,
+                  1,
+                  0
+                ],
+                [
+                  17,
+                  2,
+                  0
+                ],
+                [
+                  18,
+                  3,
+                  0
+                ],
+                [
+                  19,
+                  0,
+                  4
+                ],
+                [
+                  20,
+                  2,
+                  0
+                ],
+                [
+                  21,
+                  0,
+                  3
+                ]
+              ]
+            },
+            {
+              "vehicle": 1,
+              "duration": 6125.510264467307,
+              "nodes": [
+                0,
+                24,
+                2,
+                12,
+                16,
+                0
+              ],
+              "operations": [
+                [
+                  24,
+                  5,
+                  0
+                ],
+                [
+                  2,
+                  5,
+                  0
+                ],
+                [
+                  12,
+                  0,
+                  4
+                ],
+                [
+                  16,
+                  0,
+                  6
+                ]
+              ]
+            },
+            {
+              "vehicle": 2,
+              "duration": 6237.003092045483,
+              "nodes": [
+                0,
+                26,
+                31,
+                32,
+                33,
+                30,
+                29,
+                28,
+                22,
+                0
+              ],
+              "operations": [
+                [
+                  26,
+                  2,
+                  0
+                ],
+                [
+                  31,
+                  2,
+                  0
+                ],
+                [
+                  32,
+                  0,
+                  4
+                ],
+                [
+                  33,
+                  3,
+                  0
+                ],
+                [
+                  30,
+                  2,
+                  0
+                ],
+                [
+                  29,
+                  0,
+                  2
+                ],
+                [
+                  28,
+                  0,
+                  1
+                ],
+                [
+                  22,
+                  0,
+                  2
+                ]
+              ]
+            }
+          ],
+          "complete_fleet_vehicles": 3,
+          "empty_vehicles_added": 0
+        },
+        "fleet": [
+          {
+            "vehicle": 0,
+            "Q": 20,
+            "nodes": [
+              0,
+              11,
+              10,
+              8,
+              6,
+              5,
+              7,
+              3,
+              4,
+              9,
+              13,
+              15,
+              17,
+              18,
+              19,
+              20,
+              21,
+              0
+            ],
+            "operations": [
+              [
+                11,
+                4,
+                0
+              ],
+              [
+                10,
+                1,
+                0
+              ],
+              [
+                8,
+                3,
+                0
+              ],
+              [
+                6,
+                3,
+                0
+              ],
+              [
+                5,
+                0,
+                5
+              ],
+              [
+                7,
+                0,
+                4
+              ],
+              [
+                3,
+                3,
+                0
+              ],
+              [
+                4,
+                0,
+                3
+              ],
+              [
+                9,
+                0,
+                2
+              ],
+              [
+                13,
+                1,
+                0
+              ],
+              [
+                15,
+                1,
+                0
+              ],
+              [
+                17,
+                2,
+                0
+              ],
+              [
+                18,
+                3,
+                0
+              ],
+              [
+                19,
+                0,
+                4
+              ],
+              [
+                20,
+                2,
+                0
+              ],
+              [
+                21,
+                0,
+                3
+              ]
+            ]
+          },
+          {
+            "vehicle": 1,
+            "Q": 25,
+            "nodes": [
+              0,
+              24,
+              2,
+              12,
+              16,
+              0
+            ],
+            "operations": [
+              [
+                24,
+                5,
+                0
+              ],
+              [
+                2,
+                5,
+                0
+              ],
+              [
+                12,
+                0,
+                4
+              ],
+              [
+                16,
+                0,
+                6
+              ]
+            ]
+          },
+          {
+            "vehicle": 2,
+            "Q": 30,
+            "nodes": [
+              0,
+              26,
+              31,
+              32,
+              33,
+              30,
+              29,
+              28,
+              22,
+              0
+            ],
+            "operations": [
+              [
+                26,
+                2,
+                0
+              ],
+              [
+                31,
+                2,
+                0
+              ],
+              [
+                32,
+                0,
+                4
+              ],
+              [
+                33,
+                3,
+                0
+              ],
+              [
+                30,
+                2,
+                0
+              ],
+              [
+                29,
+                0,
+                2
+              ],
+              [
+                28,
+                0,
+                1
+              ],
+              [
+                22,
+                0,
+                2
+              ]
+            ]
+          }
+        ]
+      },
+      "source": {
+        "archive": "results/unified_exact_round137/artifacts/campaign_059.zip",
+        "archive_SHA": "546ebecac9fe3b58119e60f21b33457ddb9986340e77c275f784ae04235caa41",
+        "member_prefix": "results/unified_exact_round137/campaign/059/raw/R137_059_R-X35-S-T2_S0_S2",
+        "input_path": "results/unified_exact_round137/inputs/R-X35-S.txt",
+        "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2"
+      },
+      "no_new_run_Start": true
+    },
+    {
+      "record_id": "R137:B3:71",
+      "rho": 1.9999999999999998,
+      "arm": "R137_071_R-X35-S-T2-rho2_S0_S2",
+      "search_lambda": 0.1508099550254552,
+      "evaluation_lambda": 0.0754049775127276,
+      "H_search_reported_F": 0.6497055906824541,
+      "H_original_reverified": {
+        "objective": 0.4215823309964203,
+        "G": 0.19345907131038648,
+        "P": 3.025307707936508
+      },
+      "full_H_audit": {
+        "complete": true,
+        "seed_ids": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "physical": {
+          "G": 0.19345907131038642,
+          "P": 3.0253077079365083,
+          "F": 0.6497055906824541,
+          "Y": [
+            50000,
+            6,
+            7,
+            6,
+            5,
+            6,
+            3,
+            6,
+            6,
+            3,
+            2,
+            5,
+            4,
+            4,
+            2,
+            4,
+            8,
+            3,
+            5,
+            5,
+            5,
+            3,
+            5,
+            1,
+            8,
+            1,
+            2,
+            1,
+            1,
+            1,
+            5,
+            3,
+            7,
+            3,
+            5,
+            3
+          ],
+          "maximum_duration": 6297.296009884597,
+          "pickups": [
+            23,
+            9,
+            13
+          ],
+          "return_loads": [
+            2,
+            0,
+            0
+          ],
+          "routes": [
+            {
+              "vehicle": 0,
+              "duration": 6197.005021519601,
+              "nodes": [
+                0,
+                11,
+                10,
+                8,
+                6,
+                5,
+                7,
+                3,
+                4,
+                9,
+                13,
+                15,
+                17,
+                18,
+                19,
+                20,
+                21,
+                0
+              ],
+              "operations": [
+                [
+                  11,
+                  3,
+                  0
+                ],
+                [
+                  10,
+                  2,
+                  0
+                ],
+                [
+                  8,
+                  3,
+                  0
+                ],
+                [
+                  6,
+                  3,
+                  0
+                ],
+                [
+                  5,
+                  0,
+                  5
+                ],
+                [
+                  7,
+                  0,
+                  5
+                ],
+                [
+                  3,
+                  3,
+                  0
+                ],
+                [
+                  4,
+                  0,
+                  3
+                ],
+                [
+                  9,
+                  0,
+                  1
+                ],
+                [
+                  13,
+                  1,
+                  0
+                ],
+                [
+                  15,
+                  1,
+                  0
+                ],
+                [
+                  17,
+                  2,
+                  0
+                ],
+                [
+                  18,
+                  3,
+                  0
+                ],
+                [
+                  19,
+                  0,
+                  4
+                ],
+                [
+                  20,
+                  2,
+                  0
+                ],
+                [
+                  21,
+                  0,
+                  3
+                ]
+              ]
+            },
+            {
+              "vehicle": 1,
+              "duration": 6005.510264467307,
+              "nodes": [
+                0,
+                24,
+                2,
+                12,
+                16,
+                0
+              ],
+              "operations": [
+                [
+                  24,
+                  5,
+                  0
+                ],
+                [
+                  2,
+                  4,
+                  0
+                ],
+                [
+                  12,
+                  0,
+                  3
+                ],
+                [
+                  16,
+                  0,
+                  6
+                ]
+              ]
+            },
+            {
+              "vehicle": 2,
+              "duration": 6297.296009884597,
+              "nodes": [
+                0,
+                33,
+                32,
+                31,
+                34,
+                27,
+                25,
+                26,
+                22,
+                0
+              ],
+              "operations": [
+                [
+                  33,
+                  5,
+                  0
+                ],
+                [
+                  32,
+                  0,
+                  5
+                ],
+                [
+                  31,
+                  5,
+                  0
+                ],
+                [
+                  34,
+                  0,
+                  3
+                ],
+                [
+                  27,
+                  0,
+                  1
+                ],
+                [
+                  25,
+                  0,
+                  1
+                ],
+                [
+                  26,
+                  3,
+                  0
+                ],
+                [
+                  22,
+                  0,
+                  3
+                ]
+              ]
+            }
+          ],
+          "complete_fleet_vehicles": 3,
+          "empty_vehicles_added": 0
+        },
+        "fleet": [
+          {
+            "vehicle": 0,
+            "Q": 20,
+            "nodes": [
+              0,
+              11,
+              10,
+              8,
+              6,
+              5,
+              7,
+              3,
+              4,
+              9,
+              13,
+              15,
+              17,
+              18,
+              19,
+              20,
+              21,
+              0
+            ],
+            "operations": [
+              [
+                11,
+                3,
+                0
+              ],
+              [
+                10,
+                2,
+                0
+              ],
+              [
+                8,
+                3,
+                0
+              ],
+              [
+                6,
+                3,
+                0
+              ],
+              [
+                5,
+                0,
+                5
+              ],
+              [
+                7,
+                0,
+                5
+              ],
+              [
+                3,
+                3,
+                0
+              ],
+              [
+                4,
+                0,
+                3
+              ],
+              [
+                9,
+                0,
+                1
+              ],
+              [
+                13,
+                1,
+                0
+              ],
+              [
+                15,
+                1,
+                0
+              ],
+              [
+                17,
+                2,
+                0
+              ],
+              [
+                18,
+                3,
+                0
+              ],
+              [
+                19,
+                0,
+                4
+              ],
+              [
+                20,
+                2,
+                0
+              ],
+              [
+                21,
+                0,
+                3
+              ]
+            ]
+          },
+          {
+            "vehicle": 1,
+            "Q": 25,
+            "nodes": [
+              0,
+              24,
+              2,
+              12,
+              16,
+              0
+            ],
+            "operations": [
+              [
+                24,
+                5,
+                0
+              ],
+              [
+                2,
+                4,
+                0
+              ],
+              [
+                12,
+                0,
+                3
+              ],
+              [
+                16,
+                0,
+                6
+              ]
+            ]
+          },
+          {
+            "vehicle": 2,
+            "Q": 30,
+            "nodes": [
+              0,
+              33,
+              32,
+              31,
+              34,
+              27,
+              25,
+              26,
+              22,
+              0
+            ],
+            "operations": [
+              [
+                33,
+                5,
+                0
+              ],
+              [
+                32,
+                0,
+                5
+              ],
+              [
+                31,
+                5,
+                0
+              ],
+              [
+                34,
+                0,
+                3
+              ],
+              [
+                27,
+                0,
+                1
+              ],
+              [
+                25,
+                0,
+                1
+              ],
+              [
+                26,
+                3,
+                0
+              ],
+              [
+                22,
+                0,
+                3
+              ]
+            ]
+          }
+        ]
+      },
+      "source": {
+        "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+        "archive_SHA": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+        "member_prefix": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2",
+        "input_path": "results/unified_exact_round137/inputs/R-X35-S.txt",
+        "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2"
+      },
+      "no_new_run_Start": true
+    }
+  ],
+  "members": [
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_068.zip",
+      "archive_SHA256": "d3a37b3a45b06f170206e2f1c651e2a8a5d812921f8514c2c65c5ef418594e52",
+      "member": "results/unified_exact_round137/campaign/068/raw/R137_068_R-X35-S-T2-rho0.5_S0_S2/external/initial_witness.json",
+      "bytes": 1297,
+      "SHA256": "2ff48ad58c0afc32475885d0dfe1a4f2ce4579310a68cbdd7d5d37d1643010c2"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_068.zip",
+      "archive_SHA256": "d3a37b3a45b06f170206e2f1c651e2a8a5d812921f8514c2c65c5ef418594e52",
+      "member": "results/unified_exact_round137/campaign/068/raw/R137_068_R-X35-S-T2-rho0.5_S0_S2/audit.json",
+      "bytes": 92994,
+      "SHA256": "808ebc136f32c55058ecd9a06ab322fb0b87616c0c6135c279c293ecc4d818ee"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_059.zip",
+      "archive_SHA256": "546ebecac9fe3b58119e60f21b33457ddb9986340e77c275f784ae04235caa41",
+      "member": "results/unified_exact_round137/campaign/059/raw/R137_059_R-X35-S-T2_S0_S2/external/initial_witness.json",
+      "bytes": 1223,
+      "SHA256": "2f1c69dedfb6489670e0c24b814ef528e60202383679085a2709dae8e823b401"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_059.zip",
+      "archive_SHA256": "546ebecac9fe3b58119e60f21b33457ddb9986340e77c275f784ae04235caa41",
+      "member": "results/unified_exact_round137/campaign/059/raw/R137_059_R-X35-S-T2_S0_S2/audit.json",
+      "bytes": 123853,
+      "SHA256": "09c88f2fe43ea40553cf84df4d067e0ce12a04958badc20ebee32e8d870caeac"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/external/initial_witness.json",
+      "bytes": 1223,
+      "SHA256": "c39a20bcd5ac3bf3376ae2c70ffe825a424b87d0affe3056653e2581495b66b6"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/audit.json",
+      "bytes": 123861,
+      "SHA256": "039c398ff410f0ba0cf30bd06e5e0843a5f288ab8e388376a1f8e7164025d86e"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/result.json",
+      "bytes": 98583,
+      "SHA256": "43604c51d64b82961e8fffdfbc566da4ad73ebf890b4fb0823205bb0f3c186da"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/journal/event_123.json",
+      "bytes": 1461,
+      "SHA256": "9aa779bceee6db583f26df07861ebd4a952504be19948d09d647cb0919933e93"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/journal/event_123.commit",
+      "bytes": 98,
+      "SHA256": "30da3565865066ccb33464956ef0ad73a5757f1d5fbda4cf55796f8764b34016"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/observations.json",
+      "bytes": 166706,
+      "SHA256": "c62f79ee09b5193db0646b10c296a9f7ce4a319cc24de26c991683bec3c3bee4"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/journal/event_22.json",
+      "bytes": 1450,
+      "SHA256": "534148354d8b7c76d4c8e779fe85b9d34bb353679fa0a01b7db927237808bcce"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 35350,
+      "SHA256": "da69e9d6e15e375f215dc8feb312a95995376bd17e009c3922d6ca02788246b1"
+    },
+    {
+      "archive": "results/unified_exact_round137/artifacts/campaign_071.zip",
+      "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/external/global_bound_trace.csv",
+      "bytes": 20182,
+      "SHA256": "772e790e01b12fa287f5881903367341d730d7c23688e029bff959944a1cedb9"
+    }
+  ],
+  "final_first_hit": {
+    "final_F_search": 0.5245527536064684,
+    "first_exact_final_fleet_witness_member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/journal/event_123.json",
+    "sequence": 123,
+    "call": 5,
+    "source": "native_MIPSOL_verified_original_routes",
+    "call_native_log": "external/native_logs/L0_terminal_mip.gurobi.log",
+    "call_is_terminal_mip": true,
+    "witness_JSON_has_timestamp": false,
+    "commit_sidecar_has_process_timestamp": true,
+    "first_verified_witness_producer_publication_marker_seconds": 2311.5796264,
+    "first_external_observation_process_seconds": 2311.7349999998696,
+    "first_recorded_effective_availability_seconds": 2311.7349999998696,
+    "commit_member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/journal/event_123.commit",
+    "precise_internal_solver_discovery_seconds": null,
+    "rounded_native_incumbent_log_lines": [
+      "* 7428  3769             118       0.5245528    0.38805  26.0%   772 2298s"
+    ],
+    "rounded_native_solve_seconds": 2298,
+    "first_outer_acceptance_ledger": {
+      "process_elapsed_seconds": "2370.0371458999998",
+      "exact_phase_elapsed_seconds": "2368.5606023",
+      "event_type": "incumbent_improvement",
+      "active_leaf": "L0",
+      "active_leaf_valid_lower_bound": "0.38843769204319056",
+      "other_open_leaf_min_valid_lower_bound": "",
+      "valid_global_lower_bound": "0.38843769204319056",
+      "verified_global_upper_bound": "0.52455275360646836",
+      "open_relevant_leaf_count": "1",
+      "closed_relevant_leaf_count": "0",
+      "event_source": "independently_verified_native_incumbent"
+    },
+    "timing_scope": "The validated C++ NEJ1 sidecar records a producer publication/close marker sampled after JSON close/hash and before commit-sidecar writing. External observation records actual external availability. Neither is the unrecorded internal solver discovery instant; outer-store acceptance is after return.",
+    "producer_endpoint_not_used_as_first_hit": true
+  },
+  "original_input_SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+  "old_fleets_analysis_only": true,
+  "Optimize": 0,
+  "no_download_required": true,
+  "provenance_member_copies_excluded_from_new_raw_carrier": true
+}

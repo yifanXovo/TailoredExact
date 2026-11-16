@@ -96,8 +96,10 @@ d=read(OUT/'decision.json')
 assert d['decision']=='recommend_independent_limited_confirmation'
 assert d['default']=='B' and not any(d[k] for k in ['C166','D167','C169'])
 assert d['new_P_pairs']==0 and d['no_Round170']
-for phrase in ['Matched M also improves the paid X35 primal endpoint despite its unchanged H Start.',
-    'not default promotion or a claim of uniform acceleration.', 'small known-role panel supports no statistical or new P-GRB win-rate claim.']:
+for phrase in ['M also improves paid X35 despite an unchanged H Start.',
+    'Recommend only future independent limited confirmation.',
+    'B stays main and C166/D167/C169 stay off.',
+    'This known-role single-Seed panel adds no statistical or new P-GRB win-rate claim.']:
     assert phrase in body
 assert 'does not reject\nmultistart generally' in report
 assert 'not complete dominance or robust acceleration' in report and 'not complete dominance or robust acceleration' in note
@@ -127,9 +129,15 @@ assert prov['precise_internal_solver_discovery_seconds'] is None
 assert 'producer publication/close marker' in report and 'unrecorded internal solver discovery' in report
 assert '2370.0371459s after return' in report
 
+pdf_review_path=OUT/'review/research_pdf_review.json'
+pdf_review=read(pdf_review_path) if pdf_review_path.is_file() else None
+csv_qa=read(OUT/'CSV_QA.json') if (OUT/'CSV_QA.json').is_file() else None
+if csv_qa:
+    assert csv_qa['PASS'] and csv_qa['rows']==6 and csv_qa['columns']==28
+    assert csv_qa['source_CSV_SHA256']==hashlib.sha256(inc.read_bytes()).hexdigest()
 review=dict(schema='round169-independent-research-review-final-v1',UTC=datetime.now(timezone.utc).isoformat(),
-    reviewer='/root/research_review',status='PASS_RESEARCH_AND_TEXT_TARGETED_PDF_PENDING',blocking_findings=[],
-    scope='All 18 actual endpoint rows, raw results and qualified audit outputs; tables in body/final report/S169; H path/pool costs; decision and limitations; corrected historic timing and CSV increment. Targeted new PDF review follows separately.',
+    reviewer='/root/research_review',status='PASS' if pdf_review and csv_qa else 'PASS_RESEARCH_AND_TEXT_TARGETED_PDF_PENDING',blocking_findings=[],
+    scope='All 18 actual endpoint rows, raw results and qualified audit outputs; tables in body/final report/S169; H path/pool costs; decision and limitations; corrected historic timing and CSV increment. Targeted PDF evidence, when available, is embedded below.',
     Optimize=0,H_calls=0,all_18_endpoint_and_fee_rows_match_raw_and_audit=True,
     main_compact_table_rows_match=True,all_7_H_pool_expense_rows_match=True,
     actual_Optimize=93,LP=66,MIP=27,complete_H_calls=42,H_only_H_calls=35,
@@ -141,10 +149,11 @@ review=dict(schema='round169-independent-research-review-final-v1',UTC=datetime.
     weight_provenance_clock_correction='review/provenance_clock_update.json remains authoritative correction to preserved initial review; current report uses validated NEJ1 producer marker versus external availability, unrecorded internal discovery and later outer-store acceptance.',
     CSV_increment=dict(records=6,columns=28,UTF8_BOM=True,no_P_pairs=True,actual_master_available=False,
         actual_master_rows_added=0,no_112_to_118_fabrication=True,increment=bind(inc)),
-    pending_delivery_check='At read time final_report mentions CSV_QA.json; root was notified to create it or correct that reference before final delivery. PDF generation/visual review pending root paths.',
+    pending_delivery_check=None if pdf_review and csv_qa else 'Targeted PDF or CSV QA followup pending.',
+    CSV_QA_reference_resolved=bool(csv_qa),PDF_visual_review=pdf_review,
     seconds=time.perf_counter()-START,evidence=[bind(p) for p in [OUT/'complete_arms.json',OUT/'complete_arms.csv',
         OUT/'final_report.md',OUT/'research_decision.md',OUT/'decision.json',OUT/'author_decision_memo.md',
         ROOT/'results/unified_exact_round137/paper_body.md',ROOT/'results/unified_exact_round137/supplement.md',
         ROOT/'results/unified_exact_round137/references.bib',OUT/'weight_provenance.json',OUT/'CSV_reconciliation.json']])
 (OUT/'review/research_review_final.json').write_text(json.dumps(review,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-print('PASS 18 endpoints/fees, 6 compact rows, 7 H cost rows, 93 calls, claims and CSV; PDF pending')
+print('PASS 18 endpoints/fees, 6 compact rows, 7 H cost rows, 93 calls, claims and CSV; PDF reviewed:',bool(pdf_review))

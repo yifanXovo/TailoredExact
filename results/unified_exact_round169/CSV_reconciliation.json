@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-11-16T00:36:18.914048+00:00",
+  "UTC": "2026-11-16T02:46:54.112984+00:00",
   "bounded_candidates": [
     "C:\\Users\\Administrator\\Downloads\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
     "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
@@ -37,5 +37,59 @@
   "new_master_rows": 0,
   "new_P_pairs": 0,
   "protected_copies_unchanged": true,
-  "missing_policy": "Disclose absence; never fabricate rows or install older copy as master"
+  "missing_policy": "Disclose absence; never fabricate rows or install older copy as master",
+  "eligible_B_increment_rows": 6,
+  "increment": {
+    "path": "results/unified_exact_round169/GI_TBC_R169_B_controls_increment_28col.csv",
+    "bytes": 4811,
+    "SHA256": "91a000abe33c84276de84fe1d677421c90d3de39467f657cfda232790c0f2048"
+  },
+  "increment_mapping": [
+    {
+      "row": 1,
+      "position": 1,
+      "role": "R163-C20-S",
+      "run_id": "01_R163-C20-S_B",
+      "new_strict_P_pair": false
+    },
+    {
+      "row": 2,
+      "position": 6,
+      "role": "R163-B20-B",
+      "run_id": "06_R163-B20-B_B",
+      "new_strict_P_pair": false
+    },
+    {
+      "row": 3,
+      "position": 8,
+      "role": "R163-X20-S",
+      "run_id": "08_R163-X20-S_B",
+      "new_strict_P_pair": false
+    },
+    {
+      "row": 4,
+      "position": 10,
+      "role": "R163-C35-U",
+      "run_id": "10_R163-C35-U_B",
+      "new_strict_P_pair": false
+    },
+    {
+      "row": 5,
+      "position": 15,
+      "role": "R163-B35-S",
+      "run_id": "15_R163-B35-S_B",
+      "new_strict_P_pair": false
+    },
+    {
+      "row": 6,
+      "position": 17,
+      "role": "R163-X35-S",
+      "run_id": "17_R163-X35-S_B",
+      "new_strict_P_pair": false
+    }
+  ],
+  "M_C_in_master": false,
+  "actual_master": null,
+  "actual_records": null,
+  "missing_master_disposition": "112-row attachment absent in bounded lookup. Six qualified B rows delivered separately; cannot claim actual 112->118 append. Protected 91/103 versions unchanged."
 }
