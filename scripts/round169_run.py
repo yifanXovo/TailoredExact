@@ -111,5 +111,35 @@ def h_panel():
     m['E4_evidence_SHA256']=sha(OUT/'h_results.json');write(OUT/'matrix_frozen.json',m)
     print('H PANEL COMPLETE',actual,'calls',elapsed,'seconds; E4',triggered,flush=True)
 
+def complete():
+    assert read(OUT/'h_results.json')['E4_triggered']
+    m=read(OUT/'matrix_frozen.json');roles={p['id']:p for p in read(OUT/'h_panel_frozen.json')['roles'][:6]}
+    elapsed=time.time()-read(OUT/'entry_state.json')['science_start_epoch']
+    assert elapsed+8100+5400<28800,('insufficient 90min reserve',elapsed)
+    # Freeze all eighteen actual commands before the first Native call.
+    for p in m['positions']:
+        d=OUT/'complete_raw'/f"{p['position']:02}_{p['role']}_{p['arm']}"
+        p['directory']=str(d);p['argv'],cap=command(roles[p['role']],d,p['arm'])
+        assert cap==p['cap'];p['PE_SHA256']=sha(PE);p['source_commit']=git('rev-parse','HEAD')
+    write(OUT/'matrix_execution_frozen.json',dict(UTC=utc(),positions=m['positions'],
+        scientific_elapsed_before_panel=elapsed,reserved_analysis_seconds=5400,nominal_cap_sum=8100,
+        H_result_read_only_for_research_gate=True,actual_processes_read_no_H_diagnostic_files=True))
+    records=[];start=time.perf_counter()
+    for p in m['positions']:
+        d=Path(p['directory']);print('START',p['position'],p['role'],p['arm'],utc(),flush=True)
+        try:
+            receipt=launch(p['argv'],d,p['cap']+2)
+            r=result(d/'result.json')
+            summary={k:r.get(k) for k in ['status','objective','G','P','upper_bound','lower_bound','gap','certificate',
+                'initial_heuristic_UB','final_process_wall_time_seconds','process_wall_time_comparable']}
+            record=dict(position=p['position'],role=p['role'],arm=p['arm'],status='returned',receipt=receipt,raw_endpoint=summary)
+        except Exception as e:
+            record=dict(position=p['position'],role=p['role'],arm=p['arm'],status='error_preserved',error=str(e))
+        records.append(record);write(OUT/'complete_status.json',dict(UTC=utc(),records=records,
+            positions_finished=len(records),outer_seconds=time.perf_counter()-start))
+        print('END',json.dumps(record,ensure_ascii=False),flush=True)
+    m['status']='all_positions_attempted';write(OUT/'matrix_frozen.json',m)
+    print('ALL 18 POSITIONS ATTEMPTED',flush=True)
+
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('action',choices=['candidate','qualify','h_panel']);a=ap.parse_args();globals()[a.action]()
+    ap=argparse.ArgumentParser();ap.add_argument('action',choices=['candidate','qualify','h_panel','complete']);a=ap.parse_args();globals()[a.action]()
