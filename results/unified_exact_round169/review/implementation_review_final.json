@@ -1,0 +1,473 @@
+{
+  "schema": "round169-independent-implementation-review-final-v1",
+  "UTC": "2026-11-16T02:41:24.970759+00:00",
+  "reviewer": "independent agent /root/implementation_review",
+  "decision": "PASS",
+  "review_scope": "Actual C++ complete-H implementation,35 H-only fleets,18 paid full arms,source/PE/argv/Start/deadline/evidence/cost and six-row B-only CSV increment",
+  "reviewer_Optimize": 0,
+  "reviewer_H_calls": 0,
+  "no_successful_qualification_repeated_in_final_review": true,
+  "core_code_modified": false,
+  "raw_scientific_files_modified": false,
+  "final_review_performed": "Read back all18 passed derived audits, actual invocation/completion/selection metadata, full-arm/comparison/cost/CSV tables and current source/PE/DLL hashes. Existing successful model/physical/cover audits were not rerun.",
+  "CPP_source_commit": "781c548b410a2749190e3f0c4b149c2ad885c054",
+  "source_files_checked": 254,
+  "PE_SHA256": "c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57",
+  "DLL_SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "same_CPP_source_tree_and_runtime_bytes": true,
+  "totals": {
+    "H_only_calls": 35,
+    "H_only_Optimize": 0,
+    "H_inputs": 7,
+    "H_maximum_independent_G_P_F_difference": 4.440892098500626e-16,
+    "complete_positions": 18,
+    "complete_H_calls": 42,
+    "actual_Optimize": 93,
+    "LP": 66,
+    "MIP": 27,
+    "Native_seconds": 6321.1629986763,
+    "Native_Work": 13878.619482310669,
+    "Native_nodes": 101769.0,
+    "complete_process_outer_seconds": 6371.947250100784,
+    "nominal_process_cap_sum": 8100,
+    "complete_initialization_seconds": 32.066726100000004,
+    "successful_postreturn_audit_seconds": 39.205006699543446,
+    "same_cap_including_independent_successful_audit_all18": true,
+    "certificate_counts": {
+      "B": 3,
+      "M": 3,
+      "C": 3
+    }
+  },
+  "checks": [
+    {
+      "topic": "actual complete H",
+      "PASS": true,
+      "evidence": [
+        "src/main.cpp:8676",
+        "src/main.cpp:8795",
+        "src/main.cpp:8931",
+        "src/HgaTgbcRunner.cpp:132"
+      ],
+      "detail": "The one historical base primitive retains R73 joint insertion, 24 random orders plus constructed order, full finite interroute decoded descent and R83 physical closure. No recursive wrapper call."
+    },
+    {
+      "topic": "post-preset seeds and random orders",
+      "PASS": true,
+      "evidence": [
+        "src/Round169Primal.inc:53",
+        "src/HgaTgbcRunner.cpp:132",
+        "review/implementation_independent_H_readback.json"
+      ],
+      "detail": "Actual seeds20260626/27/28 recorded and RNG setter follows option copy; same s1/s2 M/C initial24 files are byte-identical, all contain each station once and M-1 separators."
+    },
+    {
+      "topic": "search versus original evaluation",
+      "PASS": true,
+      "evidence": [
+        "src/Round169Primal.inc:68",
+        "review/implementation_independent_H_readback.json"
+      ],
+      "detail": "All35 original and search G/P/F independently recomputed; maximum absolute numerical difference4.440892098500626e-16. Entire physical paths, prefix loads and loaded-return handling checked."
+    },
+    {
+      "topic": "global objective and caches",
+      "PASS": true,
+      "evidence": [
+        "src/Round169Primal.inc:3",
+        "src/Round169Primal.inc:13",
+        "src/hga_tgbc/HgaTgbcGreedy.cpp:524",
+        "include/hga_tgbc/HybridGA.h:377"
+      ],
+      "detail": "Child-call RAII restores saved greedy lambda/scaling; normal, intentional exception and early-return checks recorded. Each HybridGA decode cache is instance-local; persistent static cache holds unweighted ratio/penalty tables keyed by capacity/target/weight content, not weighted F."
+    },
+    {
+      "topic": "isolation, full costs and deadline",
+      "PASS": true,
+      "evidence": [
+        "src/Round169Primal.inc:54",
+        "src/ProcessPhaseLedger.cpp:54",
+        "src/PaperExternalGiniTree.cpp:1798",
+        "review/complete_audit_02.json",
+        "review/complete_audit_03.json"
+      ],
+      "detail": "All18 completed processes share the original300/600s deadline with6s shutdown margin. Merged root/child phase streams are continuous. All93 actual LP/MIP calls match committed model/settings/log/quality evidence. Each process, and each process plus its necessary successful read-only audit, remains within its nominal cap."
+    },
+    {
+      "topic": "H-only no Optimize",
+      "PASS": true,
+      "evidence": [
+        "src/main.cpp:20517",
+        "h_results.json",
+        "review/implementation_independent_H_readback.json"
+      ],
+      "detail": "H-only dispatch precedes exact-method selection; zero journal/native model files observed in all seven diagnostic runs. Reviewer invoked no solver."
+    },
+    {
+      "topic": "independently paid full arms and original Start",
+      "PASS": true,
+      "evidence": [
+        "scripts/round169_run.py",
+        "src/main.cpp:13048",
+        "src/PaperExternalGiniTree.cpp:3810",
+        "src/MipStartMapping.cpp:77",
+        "review/complete_audit_01.json",
+        "review/complete_audit_02.json",
+        "review/complete_audit_03.json"
+      ],
+      "detail": "All18 actual argv read only the original problem input and own output paths; none reads E3/H-only or another arm fleet. B6*1 and M/C12*3 produce42 paid H. Every initial committed witness equals the selected own paid original-objective H; complete native Start and qualified global interval cover checks pass."
+    },
+    {
+      "topic": "source/PE and frozen spending gate",
+      "PASS": true,
+      "evidence": [
+        "candidate_manifest.json",
+        "h_panel_frozen.json",
+        "matrix_execution_frozen.json"
+      ],
+      "detail": "Current C++ src/include/CMake hashes still equal the pre-experiment candidate manifest, and the common PE/DLL bytes still match. Four current H roles passed E4 before all18 rotated fixed positions; no result-dependent seed/multiplier/cap/neighbor revision occurred."
+    }
+  ],
+  "completed_positions": [
+    {
+      "position": 1,
+      "role": "R163-C20-S",
+      "arm": "B",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": true,
+      "actual_calls_expected_H": 1,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.308606526667351,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281274
+    },
+    {
+      "position": 2,
+      "role": "R163-C20-S",
+      "arm": "M",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": true,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.308606526667351,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281274
+    },
+    {
+      "position": 3,
+      "role": "R163-C20-S",
+      "arm": "C",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": true,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.29003368431304327,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281205
+    },
+    {
+      "position": 4,
+      "role": "R163-B20-B",
+      "arm": "M",
+      "passed": true,
+      "actual_Optimize": 9,
+      "LP": 7,
+      "MIP": 2,
+      "certificate": true,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.43287983257650764,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161
+    },
+    {
+      "position": 5,
+      "role": "R163-B20-B",
+      "arm": "C",
+      "passed": true,
+      "actual_Optimize": 9,
+      "LP": 7,
+      "MIP": 2,
+      "certificate": true,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.43287983257650764,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161
+    },
+    {
+      "position": 6,
+      "role": "R163-B20-B",
+      "arm": "B",
+      "passed": true,
+      "actual_Optimize": 9,
+      "LP": 7,
+      "MIP": 2,
+      "certificate": true,
+      "actual_calls_expected_H": 1,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.43287983257650764,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161
+    },
+    {
+      "position": 7,
+      "role": "R163-X20-S",
+      "arm": "C",
+      "passed": true,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "certificate": true,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525
+    },
+    {
+      "position": 8,
+      "role": "R163-X20-S",
+      "arm": "B",
+      "passed": true,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "certificate": true,
+      "actual_calls_expected_H": 1,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525
+    },
+    {
+      "position": 9,
+      "role": "R163-X20-S",
+      "arm": "M",
+      "passed": true,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "certificate": true,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525
+    },
+    {
+      "position": 10,
+      "role": "R163-C35-U",
+      "arm": "B",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": false,
+      "actual_calls_expected_H": 1,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.17449020363402973,
+      "U": 0.1480229632656324,
+      "L": 0.017120344246947146
+    },
+    {
+      "position": 11,
+      "role": "R163-C35-U",
+      "arm": "M",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": false,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.17449020363402973,
+      "U": 0.1480229632656324,
+      "L": 0.017120344246947146
+    },
+    {
+      "position": 12,
+      "role": "R163-C35-U",
+      "arm": "C",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": false,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.15516542546598344,
+      "U": 0.1202012449785469,
+      "L": 0.015427084585825845
+    },
+    {
+      "position": 13,
+      "role": "R163-B35-S",
+      "arm": "M",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": false,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.21972078756431676,
+      "U": 0.21972078756431676,
+      "L": 0.11865217498201656
+    },
+    {
+      "position": 14,
+      "role": "R163-B35-S",
+      "arm": "C",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": false,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.20673909923575226,
+      "U": 0.1878611633900712,
+      "L": 0.11886486887948461
+    },
+    {
+      "position": 15,
+      "role": "R163-B35-S",
+      "arm": "B",
+      "passed": true,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "certificate": false,
+      "actual_calls_expected_H": 1,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.21972078756431676,
+      "U": 0.21972078756431676,
+      "L": 0.11865217498201656
+    },
+    {
+      "position": 16,
+      "role": "R163-X35-S",
+      "arm": "C",
+      "passed": true,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "certificate": false,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.5079988087626508,
+      "U": 0.466514934786982,
+      "L": 0.3511829462176636
+    },
+    {
+      "position": 17,
+      "role": "R163-X35-S",
+      "arm": "B",
+      "passed": true,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "certificate": false,
+      "actual_calls_expected_H": 1,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.6008692809039471,
+      "U": 0.5183639026329353,
+      "L": 0.3576324299197946
+    },
+    {
+      "position": 18,
+      "role": "R163-X35-S",
+      "arm": "M",
+      "passed": true,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "certificate": false,
+      "actual_calls_expected_H": 3,
+      "complete_arm_initialization": true,
+      "initial_original_U": 0.6008692809039471,
+      "U": 0.5115464130968783,
+      "L": 0.3576324299197946
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "I169-HASH",
+      "severity": "metadata clarification",
+      "code": "src/Round169Primal.inc:86",
+      "detail": "Native initial_random_orders_SHA256 hashes LF-normalized in-memory text; Windows file bytes use CRLF. The native field is a semantic order-stream identity rather than raw byte SHA.",
+      "resolution": "Derived audits separately bind LF semantic SHA and actual file-byte SHA; M/C actual file bytes match. No PE change or experiment rerun required."
+    },
+    {
+      "id": "I169-COMPLETE",
+      "severity": "metadata clarification",
+      "code": "src/Round169Primal.inc:156",
+      "detail": "necessary_H_complete is the five-path H-panel gate; normal full M/C three-path runs emit false although all path complete/valid flags pass. Exact solver never reads that gate field.",
+      "resolution": "Derived full audit checks expected arm call count and every complete path, explicitly records complete_arm_initialization=True. Explain field in results metadata; no PE change/rerun."
+    },
+    {
+      "id": "I169-CLI",
+      "severity": "resolved pre-scientific-run error",
+      "evidence": "qualification/base_direct/completion.json",
+      "detail": "Initial orchestration used unknown --round166-joint-breakpoint. It failed before H/Optimize, was corrected to --round166-breakpoint, preserved, and charged to qualification receipt. No scientific position rerun."
+    },
+    {
+      "id": "I169-ADAPTER",
+      "severity": "resolved read-only adapter development",
+      "evidence": "review/implementation_review_development_cost.json",
+      "detail": "Old supervisor receipt schema/import assumptions were not fabricated; pure predicates now consume actual new commit/invocation/completion schema. Two adapter development errors retained and costs recorded; no optimization or raw rewrite."
+    },
+    {
+      "id": "I169-CLOCK-LABEL",
+      "severity": "human metadata precision",
+      "evidence": "review/commit_marker_clarification.json",
+      "resolution": "NEJ1 timestamp is now described as producer publication/close marker sampled after JSON close+hash and before commit-file write. Commit-file close/external first-seen were not separately measured.18 derived audit text labels refined only; all numbers,flags and qualifications unchanged. Endpoint certificate times use completed process/audit clocks, not marker first-hit estimates."
+    }
+  ],
+  "cost_reconciliation": {
+    "instrumented_audit_attempts_start_at_position": 3,
+    "instrumented_attempt_seconds": 36.0316373007372,
+    "initial_position1_2_and_development_failures": "review/implementation_review_development_cost.json",
+    "known_outer_reader_check_cost_seconds": 43.214506700737196,
+    "known_cost_scope": "All instrumented attempts plus separately recorded initial/manual/failure/H checks; positions03to06 overlap removed. Successful inner audit seconds are nested, not added again.",
+    "inner_success_times_not_added_to_enclosing_process_attempts": true,
+    "failed_adapter_attempts_and_failed_CLI_qualification_preserved": true,
+    "allNative_H_model_verification_costs_nested_in_process_totals_not_double_charged": true
+  },
+  "CSV": {
+    "authoritative_112_available": false,
+    "new_master_rows": 0,
+    "actual_112_to118_append_not_claimed": true,
+    "separate_qualified_B_increment_rows": 6,
+    "columns": 28,
+    "UTF8_BOM": true,
+    "increment_SHA256": "7214c7606c909e62b0219217df4da2cf5d7eb8c5dee5bc18d11d4597a35e6c0b",
+    "new_P_pairs": 0,
+    "M_C_in_main_GI_TBC_columns": false,
+    "old_91_103_copies_unchanged": true,
+    "bounded_missing_master_disclosed": true
+  },
+  "evidence_refs": [
+    "review/implementation_independent_H_readback.json",
+    "review/complete_audit_01.json through complete_audit_18.json",
+    "review/complete_audit_attempts.json",
+    "review/implementation_review_development_cost.json",
+    "review/commit_marker_clarification.json",
+    "complete_arms.json",
+    "complete_comparisons.json",
+    "cost_report.json",
+    "CSV_reconciliation.json"
+  ],
+  "research_boundary": "All end-to-end numbers are six already-exposed roles and Native Seed0. B remains default. C35/X35 have weaker C lower bounds despite better C primal endpoints; these are retained, not converted into a uniform win.",
+  "pending_delivery_scope": "PDF visual QA and Draft/public-recovery receipts belong to the parent final delivery; this technical/data review does not claim those future actions complete."
+}

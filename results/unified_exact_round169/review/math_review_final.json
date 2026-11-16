@@ -1,0 +1,260 @@
+{
+  "schema": "round169-independent-final-mathematics-review-v1",
+  "UTC": "2026-11-16T02:44:00.604678+00:00",
+  "reviewer": "/root/math_review",
+  "status": "PASS",
+  "blocking_findings": [],
+  "actual_review_scope": "Previously passed 35 H fleets retained; independent new recomputation of all 18 terminal physical fleets and 18 selected original-objective Start fleets, all actual Start vectors, all 93 actual model objective coefficients, and the complete scoped-bound interval cover. Actual final reports and changed manuscript paragraphs read.",
+  "Optimize_executed_by_reviewer": 0,
+  "H_executed_by_reviewer": 0,
+  "H_qualification_repeated": false,
+  "new_independent_readback": {
+    "path": "math_complete_readback.json",
+    "SHA256": "8a1aa39bb1a8d0c0302796dd0b25aefbaf2c2dd4ca593a6079cb03319c8307ed",
+    "runtime_seconds": 1.4901850996538997,
+    "final_fleets": 18,
+    "selected_Start_fleets": 18,
+    "actual_Start_vectors": 27,
+    "actual_calls": 93,
+    "LP": 66,
+    "MIP": 27,
+    "unique_actual_LP_files": 66,
+    "scoped_proofs_combined": 120,
+    "certificate_count": 9
+  },
+  "findings_and_resolution": [
+    {
+      "id": "M169-UNKNOWN-WORDING",
+      "initial_issue": "Inherited phrase treated all qualification failures as errors, overbroad for valid-model rejected numerical lower.",
+      "status": "RESOLVED",
+      "verified_fix": "The actual R168 theory now distinguishes model/API/mapping failures from numerical rejection of a particular Native lower in a valid model, preserving independent physical U/mathematical L and explicit UNKNOWN. Historical raw bound, residual gate and verdict are unchanged."
+    },
+    {
+      "id": "M169-BASE-DIAGNOSTICS",
+      "initial_issue": "Base hga/decoded fields must not be mistaken for M/C selected original Start.",
+      "status": "RESOLVED_IN_AUDIT",
+      "verified_fix": "The independent adapter full_paid_H selects using primal/selection.json; all 18 actual initial_witness fleets and all actual vectors match that selected physical inventory/G/original F. Historical base fields remain separate."
+    }
+  ],
+  "properties": [
+    {
+      "property": "unchanged physical feasibility",
+      "status": "PASS",
+      "evidence": "All 18 terminal fleets independently satisfy unique vehicles/stations, one signed nonzero operation per visit, original station stock bounds, all integer prefix Q loads, empty departure, direct compressed travel, station handling and loaded-return unloading within mathematical T. No input/physical parameter changed."
+    },
+    {
+      "property": "search/evaluation and exact objective isolation",
+      "status": "PASS",
+      "evidence": "All 18 original G/P/F values match Fraction recomputation at the frozen original binary64 lambda. Every actual model objective has G coefficient 1 and every e_i coefficient exactly equal to original lambda times parsed station weight, including C arms whose selected H searched half/double lambda. Actual Native identity/argv and original T match. No alternate-weight lower/cutoff/domain/tree is transferred."
+    },
+    {
+      "property": "selected Start mapping",
+      "status": "PASS",
+      "evidence": "All 18 selected fleet inventories/objectives are recomputed independently; 27 actual mapped/readback Start vectors have the same r_i, e_i, G and original F, and all existing actual-row residual checks are <=1e-7. Their original F defines the fresh original-model cutoff and G cover."
+    },
+    {
+      "property": "qualified global lower and certificate scope",
+      "status": "PASS_NUMERICAL_POLICY",
+      "evidence": "The lower envelope was recomputed independently over all proof interval endpoints, using F>=G and each scoped proof relaxed to min(L,cutoff); every reported L agrees within inherited 1e-7. All proof references bind to original-objective actual model calls, accepted lifecycle/qualities and complete original G coverage. Nine n20 arms close the qualified cover; all nine n35 arms stay open. Last-bit L>U at a few closed endpoints remains raw and is within policy. These are inherited engineering numerical certificates, not rational error-bound proofs."
+    },
+    {
+      "property": "initial UB inclusion and paid terminal limits",
+      "status": "PASS",
+      "evidence": "Each role has U_M_initial<=U_B_initial and U_C_initial<=U_B_initial. No terminal U/L/gap/time monotonicity is asserted: C20 certification is longer; C35/X35 L is weaker, while B35 L improves slightly. Matched M has its own X35 final-U gain despite identical initial Start. C beats both final-U controls on all three n35 roles in this finite panel; no complete dominance or statistical robustness follows."
+    },
+    {
+      "property": "R168 family scope",
+      "status": "PASS",
+      "evidence": "R169 base-H parents differ from the old R168 final-parent fleets. Both methods note and final report preserve that distinction and do not use old restricted-family exclusions as current-algorithm success or full-problem lower certificates."
+    },
+    {
+      "property": "R137 first witness time semantics",
+      "status": "PASS_WITH_CLOCK_SCOPE",
+      "evidence": "Actual event123 JSON and NEJ1 sidecar length/hash/sequence match in campaign_071.zip, and event source belongs to terminal call5. The sidecar records producer publication marker2311.5796264s; independent external observation2311.735s is distinct from post-return outer acceptance2370.0371459s. Internal solver discovery instant remains unrecorded. Final report uses these distinct scopes and does not substitute producer endpoint."
+    },
+    {
+      "property": "paper and research conclusion",
+      "status": "PASS",
+      "evidence": "Final report, decision and current main/supplement tables match actual original-objective endpoints. Default B is retained, C166/D167/C169 off, Native Seed0/exposed/short-cap limits explicit, no new P pairing or OR scalarization novelty claim. Recommend only future independently preregistered finite confirmation, not an automatic new study."
+    }
+  ],
+  "review_script_correction": {
+    "issue": "Initial final-readback script tried raw result lambda field, which this result schema does not expose.",
+    "fix": "Use actual frozen argv lambda plus journal identity and every LP objective coefficient; successful readback follows.",
+    "producer_code_changed": false,
+    "H_or_Native_rerun": false
+  },
+  "cost_scope": "Readback runtime only recorded separately; enclosing reviewer/source/paper reading is nested in parent scientific clock and is not added to Native runtime.",
+  "final_scientific_recommendation": "No mathematical blocker to the stated limited confirmation recommendation. No default promotion, global performance dominance or new P win-rate claim is justified.",
+  "file_bindings": [
+    {
+      "path": "src/Round169Primal.inc",
+      "SHA256": "7b15a3c3221dece2688f5802b19e4075ab7b4b085806859a3ebba9fdeee7b62f",
+      "bytes": 12107
+    },
+    {
+      "path": "src/main.cpp",
+      "SHA256": "154c8882be5c5d82892fd45e06b5a4158ad7301684f4a2e4b528bae432ea5baf",
+      "bytes": 1155365
+    },
+    {
+      "path": "src/HgaTgbcRunner.cpp",
+      "SHA256": "c38cea16ac7cc347eca98989ab8d305b2ae5d32b689bb44dc6e110af3466a7eb",
+      "bytes": 27708
+    },
+    {
+      "path": "include/hga_tgbc/HybridGA.h",
+      "SHA256": "37143e3def3fa34d47ca77d7c89b3efc01a30789c3e7c0ad66e9656f82caba87",
+      "bytes": 67428
+    },
+    {
+      "path": "src/hga_tgbc/HgaTgbcGreedy.cpp",
+      "SHA256": "871b3f3e024e273bbc8ee55d60dfc29f11d5282891eae1ed1419da02119821cd",
+      "bytes": 100387
+    },
+    {
+      "path": "src/Evaluator.cpp",
+      "SHA256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "bytes": 6239
+    },
+    {
+      "path": "src/PhysicalWitnessValidation.cpp",
+      "SHA256": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678",
+      "bytes": 4881
+    },
+    {
+      "path": "src/Result.cpp",
+      "SHA256": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+      "bytes": 250280
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "SHA256": "bf53b91647e9d14b88fea43c193f57ef6e524acc3c4a7b75e7f4d64ca79d8930",
+      "bytes": 564163
+    },
+    {
+      "path": "results/unified_exact_round168/route_family_theory.md",
+      "SHA256": "3958a5df02c0b9a9f4e4fd8e4b308ded62e591f1e95c53bd40d6e65eaf9de5dc",
+      "bytes": 11853
+    },
+    {
+      "path": "results/unified_exact_round169/complete_arms.json",
+      "SHA256": "f1fe53024f1d2426d1d8feeab6f184cca47f786ceaebba03dd7adf42ad0c04ee",
+      "bytes": 58773
+    },
+    {
+      "path": "results/unified_exact_round169/complete_comparisons.json",
+      "SHA256": "8436c8e00c72fa6176272ea6dfa31b17043f777ca8ab0af99dc42b1b0dd15c0e",
+      "bytes": 5145
+    },
+    {
+      "path": "results/unified_exact_round169/method_note.md",
+      "SHA256": "cc8941b0a1993f6c4e3d55adf0d447d18e81ac76b2283d2f2469a2de08c5ba76",
+      "bytes": 2614
+    },
+    {
+      "path": "results/unified_exact_round169/final_report.md",
+      "SHA256": "a991d890f0573ad47b2bb19f0bcf52522bfaffebe081ccf63b9853697ef5cec8",
+      "bytes": 13382
+    },
+    {
+      "path": "results/unified_exact_round169/research_decision.md",
+      "SHA256": "e7ac80c34ea7b68bb605a174fae5552961af1a6dfc8cd3739504560871f8947f",
+      "bytes": 1245
+    },
+    {
+      "path": "results/unified_exact_round169/decision.json",
+      "SHA256": "ff2926f9896d70cac535fb5a40f3d53614ac7c62e2479043ff569f3cbaf13101",
+      "bytes": 1820
+    },
+    {
+      "path": "results/unified_exact_round169/weight_provenance.json",
+      "SHA256": "a6abad893f89737cb371ee2423cba82dee29318c9378bdb47442c91021884ff0",
+      "bytes": 39813
+    },
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "SHA256": "dcc900d22082809b607bd499c51a48ccde639fc1d46d0c0e8a147b7216c0c9cd",
+      "bytes": 69677
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "SHA256": "a7473c181e0d696b676325ac34e71a6bfe551645a595b68416ce1afe7106d67e",
+      "bytes": 154723
+    }
+  ],
+  "actual_audit_bindings": [
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_01.json",
+      "SHA256": "7d0dc1780d1ad730529787139b3f02ab46bafe8ceacfe01cfe9708d95ea1be3a"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_02.json",
+      "SHA256": "8130befabfa01fa8ec65439d4914b17f1098fe9b5322306cdcbb93b84ed5a53a"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_03.json",
+      "SHA256": "d4977e0f6efbe5498104423133c43768428a55166340ee6325f00f92f888e952"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_04.json",
+      "SHA256": "423cbea247a9bd1a832cf7477ecc90aaa418aab0bc74c751f339b2134db36ae7"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_05.json",
+      "SHA256": "a5b613c4706b7740f7213220a04e552fce14264d95c14973aa9b6653f3da49f3"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_06.json",
+      "SHA256": "36631e4bc57c03c27bd43cfa79de33f4e830ca07d81a44c40b2ac407a201a634"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_07.json",
+      "SHA256": "b248d46e9c74902dfb40c1c9051d72494d3ddf8c5bf9cd04a725f4d659f86e56"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_08.json",
+      "SHA256": "e8dd15ea0fc789ec0a9200aa6f4686f81e5069c7e910393aeb6c8d340050b290"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_09.json",
+      "SHA256": "5f6a86a62fc3cdb3c6500ec5169d771f296e452bdf87a5366d99e3db5e473755"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_10.json",
+      "SHA256": "f3867c19e2107aba4914e87ac2b0932bbcaa615da8ede27215570f842a7b7f03"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_11.json",
+      "SHA256": "a0d6cb06bb749f05de9295c982f48f9de55b0ec5016c4610d1131e0fdf3af19f"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_12.json",
+      "SHA256": "2947cd5b64f3da44259160f37767d529acafd1d89eecf22590735b70a0a14b05"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_13.json",
+      "SHA256": "b5ee53c44cfb54e74626bdca2c670d1198549384dd091f9f0d61742305151665"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_14.json",
+      "SHA256": "0d2b735ac660180313d16434791c2b8a42dc8bbab9b673f80097ba6040be5ff8"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_15.json",
+      "SHA256": "78afb449e05c084736973df73e7d7a4c9dc956c4324ff8f183964ea00b191d06"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_16.json",
+      "SHA256": "04689ce2cbdd2262d47fa882cb8d281b4d65cb07e3189819e6d7aa39b2f8ebaf"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_17.json",
+      "SHA256": "0f1b73dfe3a75b5678e13ed2ae2b84f83113144c4e917db37b4e0f2d828f1f43"
+    },
+    {
+      "path": "results/unified_exact_round169/review/complete_audit_18.json",
+      "SHA256": "dcd84e2f489c31205fd5384e23e1b2408b127a39e79e53b47bd5b80460ef517f"
+    }
+  ]
+}

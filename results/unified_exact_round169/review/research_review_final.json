@@ -1,0 +1,521 @@
+{
+  "schema": "round169-independent-research-review-final-v1",
+  "UTC": "2026-11-16T02:41:19.732174+00:00",
+  "reviewer": "/root/research_review",
+  "status": "PASS_RESEARCH_AND_TEXT_TARGETED_PDF_PENDING",
+  "blocking_findings": [],
+  "scope": "All 18 actual endpoint rows, raw results and qualified audit outputs; tables in body/final report/S169; H path/pool costs; decision and limitations; corrected historic timing and CSV increment. Targeted new PDF review follows separately.",
+  "Optimize": 0,
+  "H_calls": 0,
+  "all_18_endpoint_and_fee_rows_match_raw_and_audit": true,
+  "main_compact_table_rows_match": true,
+  "all_7_H_pool_expense_rows_match": true,
+  "actual_Optimize": 93,
+  "LP": 66,
+  "MIP": 27,
+  "complete_H_calls": 42,
+  "H_only_H_calls": 35,
+  "n20_certificates": 9,
+  "n35_certificates": 0,
+  "comparisons": [
+    {
+      "role": "R163-C20-S",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.0,
+      "C_L_minus_B": -6.938893903907228e-16,
+      "C_L_minus_M": -6.938893903907228e-16,
+      "all_certified": true
+    },
+    {
+      "role": "R163-B20-B",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.0,
+      "C_L_minus_B": 0.0,
+      "C_L_minus_M": 0.0,
+      "all_certified": true
+    },
+    {
+      "role": "R163-X20-S",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.0,
+      "C_L_minus_B": 0.0,
+      "C_L_minus_M": 0.0,
+      "all_certified": true
+    },
+    {
+      "role": "R163-C35-U",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.027821718287085517,
+      "C_L_minus_B": -0.0016932596611213008,
+      "C_L_minus_M": -0.0016932596611213008,
+      "all_certified": false
+    },
+    {
+      "role": "R163-B35-S",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.031859624174245565,
+      "C_L_minus_B": 0.00021269389746804424,
+      "C_L_minus_M": 0.00021269389746804424,
+      "all_certified": false
+    },
+    {
+      "role": "R163-X35-S",
+      "final_B_minus_M": 0.0068174895360569865,
+      "final_M_minus_C": 0.04503147830989629,
+      "C_L_minus_B": -0.006449483702130998,
+      "C_L_minus_M": -0.006449483702130998,
+      "all_certified": false
+    }
+  ],
+  "endpoint_readback": [
+    {
+      "position": 1,
+      "role": "R163-C20-S",
+      "arm": "B",
+      "initial_U": 0.308606526667351,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281274,
+      "relative_gap": -3.91780751344589e-15,
+      "certificate": true,
+      "process_seconds": 211.4824220999144,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 2,
+      "role": "R163-C20-S",
+      "arm": "M",
+      "initial_U": 0.308606526667351,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281274,
+      "relative_gap": -3.91780751344589e-15,
+      "certificate": true,
+      "process_seconds": 211.05195309966803,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 3,
+      "role": "R163-C20-S",
+      "arm": "C",
+      "initial_U": 0.2900336843130432,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281205,
+      "relative_gap": -2.9020796395895477e-16,
+      "certificate": true,
+      "process_seconds": 219.51179050002247,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 4,
+      "role": "R163-B20-B",
+      "arm": "M",
+      "initial_U": 0.43287983257650753,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161,
+      "relative_gap": 3.672481209375123e-15,
+      "certificate": true,
+      "process_seconds": 2.8423431999981403,
+      "Optimize": 9,
+      "LP": 7,
+      "MIP": 2
+    },
+    {
+      "position": 5,
+      "role": "R163-B20-B",
+      "arm": "C",
+      "initial_U": 0.43287983257650753,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161,
+      "relative_gap": 3.672481209375123e-15,
+      "certificate": true,
+      "process_seconds": 2.819448699709028,
+      "Optimize": 9,
+      "LP": 7,
+      "MIP": 2
+    },
+    {
+      "position": 6,
+      "role": "R163-B20-B",
+      "arm": "B",
+      "initial_U": 0.43287983257650753,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161,
+      "relative_gap": 3.672481209375123e-15,
+      "certificate": true,
+      "process_seconds": 2.8507301001809537,
+      "Optimize": 9,
+      "LP": 7,
+      "MIP": 2
+    },
+    {
+      "position": 7,
+      "role": "R163-X20-S",
+      "arm": "C",
+      "initial_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525,
+      "relative_gap": 2.8887028024029015e-14,
+      "certificate": true,
+      "process_seconds": 124.76573250023648,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 8,
+      "role": "R163-X20-S",
+      "arm": "B",
+      "initial_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525,
+      "relative_gap": 2.8887028024029015e-14,
+      "certificate": true,
+      "process_seconds": 124.53611769992858,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 9,
+      "role": "R163-X20-S",
+      "arm": "M",
+      "initial_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525,
+      "relative_gap": 2.8887028024029015e-14,
+      "certificate": true,
+      "process_seconds": 124.72628209972754,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 10,
+      "role": "R163-C35-U",
+      "arm": "B",
+      "initial_U": 0.17449020363402978,
+      "U": 0.1480229632656324,
+      "L": 0.017120344246947146,
+      "relative_gap": 0.884339943821932,
+      "certificate": false,
+      "process_seconds": 594.1540716001764,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 11,
+      "role": "R163-C35-U",
+      "arm": "M",
+      "initial_U": 0.17449020363402978,
+      "U": 0.1480229632656324,
+      "L": 0.017120344246947146,
+      "relative_gap": 0.884339943821932,
+      "certificate": false,
+      "process_seconds": 594.1548105003312,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 12,
+      "role": "R163-C35-U",
+      "arm": "C",
+      "initial_U": 0.15516542546598344,
+      "U": 0.1202012449785469,
+      "L": 0.015427084585825845,
+      "relative_gap": 0.8716561996626639,
+      "certificate": false,
+      "process_seconds": 594.1518824002706,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 13,
+      "role": "R163-B35-S",
+      "arm": "M",
+      "initial_U": 0.21972078756431687,
+      "U": 0.21972078756431676,
+      "L": 0.11865217498201656,
+      "relative_gap": 0.4599865752470751,
+      "certificate": false,
+      "process_seconds": 594.1375311999582,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 14,
+      "role": "R163-B35-S",
+      "arm": "C",
+      "initial_U": 0.20673909923575257,
+      "U": 0.1878611633900712,
+      "L": 0.11886486887948461,
+      "relative_gap": 0.36727279478901154,
+      "certificate": false,
+      "process_seconds": 594.1860555000603,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 15,
+      "role": "R163-B35-S",
+      "arm": "B",
+      "initial_U": 0.21972078756431687,
+      "U": 0.21972078756431676,
+      "L": 0.11865217498201656,
+      "relative_gap": 0.4599865752470751,
+      "certificate": false,
+      "process_seconds": 594.1414286000654,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 16,
+      "role": "R163-X35-S",
+      "arm": "C",
+      "initial_U": 0.5079988087626506,
+      "U": 0.466514934786982,
+      "L": 0.3511829462176636,
+      "relative_gap": 0.2472203566687116,
+      "certificate": false,
+      "process_seconds": 594.1505891000852,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 17,
+      "role": "R163-X35-S",
+      "arm": "B",
+      "initial_U": 0.6008692809039473,
+      "U": 0.5183639026329353,
+      "L": 0.3576324299197946,
+      "relative_gap": 0.31007458639911917,
+      "certificate": false,
+      "process_seconds": 594.1379945003428,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 18,
+      "role": "R163-X35-S",
+      "arm": "M",
+      "initial_U": 0.6008692809039473,
+      "U": 0.5115464130968783,
+      "L": 0.3576324299197946,
+      "relative_gap": 0.300879801395333,
+      "certificate": false,
+      "process_seconds": 594.1460667001083,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    }
+  ],
+  "H_pool_costs": [
+    {
+      "role": "R163-C20-S",
+      "B_path_seconds": 0.3187117,
+      "M_pool_seconds": 0.9481819,
+      "C_pool_seconds": 1.0111096
+    },
+    {
+      "role": "R163-B20-B",
+      "B_path_seconds": 0.0101949,
+      "M_pool_seconds": 0.032899,
+      "C_pool_seconds": 0.0367087
+    },
+    {
+      "role": "R163-X20-S",
+      "B_path_seconds": 0.0570205,
+      "M_pool_seconds": 0.1722087,
+      "C_pool_seconds": 0.15578419999999998
+    },
+    {
+      "role": "R163-C35-U",
+      "B_path_seconds": 2.1659543,
+      "M_pool_seconds": 6.2874452000000005,
+      "C_pool_seconds": 6.0328558999999995
+    },
+    {
+      "role": "R163-B35-S",
+      "B_path_seconds": 2.0091297,
+      "M_pool_seconds": 5.45301,
+      "C_pool_seconds": 5.5383201
+    },
+    {
+      "role": "R163-X35-S",
+      "B_path_seconds": 0.2391247,
+      "M_pool_seconds": 0.6897255,
+      "C_pool_seconds": 0.680967
+    },
+    {
+      "role": "R-X35-S-T2",
+      "B_path_seconds": 0.297282,
+      "M_pool_seconds": 1.1416044,
+      "C_pool_seconds": 1.0545664000000001
+    }
+  ],
+  "structural_readback": [
+    {
+      "role": "R163-C20-S",
+      "served_added": [
+        15
+      ],
+      "served_removed": [
+        20
+      ],
+      "owner_changes": 1,
+      "stock_changes": 15,
+      "order_inversions": 22
+    },
+    {
+      "role": "R163-B20-B",
+      "served_added": [],
+      "served_removed": [],
+      "owner_changes": 0,
+      "stock_changes": 0,
+      "order_inversions": 0
+    },
+    {
+      "role": "R163-X20-S",
+      "served_added": [],
+      "served_removed": [],
+      "owner_changes": 0,
+      "stock_changes": 0,
+      "order_inversions": 0
+    },
+    {
+      "role": "R163-C35-U",
+      "served_added": [],
+      "served_removed": [],
+      "owner_changes": 24,
+      "stock_changes": 19,
+      "order_inversions": 6
+    },
+    {
+      "role": "R163-B35-S",
+      "served_added": [],
+      "served_removed": [],
+      "owner_changes": 7,
+      "stock_changes": 24,
+      "order_inversions": 41
+    },
+    {
+      "role": "R163-X35-S",
+      "served_added": [
+        12,
+        20,
+        29
+      ],
+      "served_removed": [],
+      "owner_changes": 10,
+      "stock_changes": 10,
+      "order_inversions": 1
+    },
+    {
+      "role": "R-X35-S-T2",
+      "served_added": [
+        25,
+        27,
+        34
+      ],
+      "served_removed": [
+        28,
+        29,
+        30
+      ],
+      "owner_changes": 0,
+      "stock_changes": 17,
+      "order_inversions": 6
+    }
+  ],
+  "interpretation": "C retains a finite paid original-objective primal benefit beyond matched M on all three n35 roles, with no n35 certification and mixed L. C20 is a slower certified counterexample. M improves the paid X35 endpoint despite identical H Start, so no blanket restart-null explanation or causal speed claim is made. Only a future independently preregistered limited confirmation is recommended; B stays default.",
+  "prior_art_and_history_boundaries_preserved": true,
+  "new_OR_theory_claim": false,
+  "new_P_pair_claim": false,
+  "exposed_known_inputs_and_single_Native_Seed_limits_explicit": true,
+  "weight_provenance_clock_correction": "review/provenance_clock_update.json remains authoritative correction to preserved initial review; current report uses validated NEJ1 producer marker versus external availability, unrecorded internal discovery and later outer-store acceptance.",
+  "CSV_increment": {
+    "records": 6,
+    "columns": 28,
+    "UTF8_BOM": true,
+    "no_P_pairs": true,
+    "actual_master_available": false,
+    "actual_master_rows_added": 0,
+    "no_112_to_118_fabrication": true,
+    "increment": {
+      "path": "results/unified_exact_round169/GI_TBC_R169_B_controls_increment_28col.csv",
+      "bytes": 4691,
+      "SHA256": "7214c7606c909e62b0219217df4da2cf5d7eb8c5dee5bc18d11d4597a35e6c0b"
+    }
+  },
+  "pending_delivery_check": "At read time final_report mentions CSV_QA.json; root was notified to create it or correct that reference before final delivery. PDF generation/visual review pending root paths.",
+  "seconds": 0.12656049989163876,
+  "evidence": [
+    {
+      "path": "results/unified_exact_round169/complete_arms.json",
+      "bytes": 58773,
+      "SHA256": "f1fe53024f1d2426d1d8feeab6f184cca47f786ceaebba03dd7adf42ad0c04ee"
+    },
+    {
+      "path": "results/unified_exact_round169/complete_arms.csv",
+      "bytes": 23823,
+      "SHA256": "8cbe7e1e1ef569b5add300503421c59291339283350de05db73c4184ed30d0bf"
+    },
+    {
+      "path": "results/unified_exact_round169/final_report.md",
+      "bytes": 13382,
+      "SHA256": "a991d890f0573ad47b2bb19f0bcf52522bfaffebe081ccf63b9853697ef5cec8"
+    },
+    {
+      "path": "results/unified_exact_round169/research_decision.md",
+      "bytes": 1245,
+      "SHA256": "e7ac80c34ea7b68bb605a174fae5552961af1a6dfc8cd3739504560871f8947f"
+    },
+    {
+      "path": "results/unified_exact_round169/decision.json",
+      "bytes": 1820,
+      "SHA256": "ff2926f9896d70cac535fb5a40f3d53614ac7c62e2479043ff569f3cbaf13101"
+    },
+    {
+      "path": "results/unified_exact_round169/author_decision_memo.md",
+      "bytes": 1195,
+      "SHA256": "87da72a47c1fbec047d5e2a225ed3975d1561cd48cd863e82fca17020ebaf4aa"
+    },
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 69677,
+      "SHA256": "dcc900d22082809b607bd499c51a48ccde639fc1d46d0c0e8a147b7216c0c9cd"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 154723,
+      "SHA256": "a7473c181e0d696b676325ac34e71a6bfe551645a595b68416ce1afe7106d67e"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 13019,
+      "SHA256": "fbac93c2210fda644c4570d5e2f7be65261305f3ac8c7d92b293cb2a1f5042ec"
+    },
+    {
+      "path": "results/unified_exact_round169/weight_provenance.json",
+      "bytes": 39813,
+      "SHA256": "a6abad893f89737cb371ee2423cba82dee29318c9378bdb47442c91021884ff0"
+    },
+    {
+      "path": "results/unified_exact_round169/CSV_reconciliation.json",
+      "bytes": 3073,
+      "SHA256": "8c74d74d90b421151b7ef1a9b41d5528a0a7d1fddae52c7d7596c935e02e40d9"
+    }
+  ]
+}

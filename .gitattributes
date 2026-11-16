@@ -598,6 +598,13 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round165/goal.md -whitespace
 
 # Round168 scientific inputs, source and evidence preserve measured bytes.
+# Round169 measured sources, frozen inputs and new-only evidence.
+/src/Round169Primal.inc -text whitespace=cr-at-eol
+/scripts/round169* -text whitespace=cr-at-eol
+/results/unified_exact_round169/** -text whitespace=cr-at-eol
+/results/unified_exact_round169/goal.md -whitespace
+/results/unified_exact_round169/artifacts/** -text -diff -whitespace
+/results/unified_exact_round169/**/*.log -whitespace
 /src/round168_route_family.cpp -text whitespace=cr-at-eol
 /scripts/round168* -text whitespace=cr-at-eol
 /results/unified_exact_round168/** -text whitespace=cr-at-eol
