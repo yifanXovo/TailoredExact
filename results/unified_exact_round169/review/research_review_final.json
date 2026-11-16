@@ -1,0 +1,630 @@
+{
+  "schema": "round169-independent-research-review-final-v1",
+  "UTC": "2026-11-16T02:55:15.472182+00:00",
+  "reviewer": "/root/research_review",
+  "status": "PASS",
+  "blocking_findings": [],
+  "scope": "All 18 actual endpoint rows, raw results and qualified audit outputs; tables in body/final report/S169; H path/pool costs; decision and limitations; corrected historic timing and CSV increment. Targeted PDF evidence, when available, is embedded below.",
+  "Optimize": 0,
+  "H_calls": 0,
+  "all_18_endpoint_and_fee_rows_match_raw_and_audit": true,
+  "main_compact_table_rows_match": true,
+  "all_7_H_pool_expense_rows_match": true,
+  "actual_Optimize": 93,
+  "LP": 66,
+  "MIP": 27,
+  "complete_H_calls": 42,
+  "H_only_H_calls": 35,
+  "n20_certificates": 9,
+  "n35_certificates": 0,
+  "comparisons": [
+    {
+      "role": "R163-C20-S",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.0,
+      "C_L_minus_B": -6.938893903907228e-16,
+      "C_L_minus_M": -6.938893903907228e-16,
+      "all_certified": true
+    },
+    {
+      "role": "R163-B20-B",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.0,
+      "C_L_minus_B": 0.0,
+      "C_L_minus_M": 0.0,
+      "all_certified": true
+    },
+    {
+      "role": "R163-X20-S",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.0,
+      "C_L_minus_B": 0.0,
+      "C_L_minus_M": 0.0,
+      "all_certified": true
+    },
+    {
+      "role": "R163-C35-U",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.027821718287085517,
+      "C_L_minus_B": -0.0016932596611213008,
+      "C_L_minus_M": -0.0016932596611213008,
+      "all_certified": false
+    },
+    {
+      "role": "R163-B35-S",
+      "final_B_minus_M": 0.0,
+      "final_M_minus_C": 0.031859624174245565,
+      "C_L_minus_B": 0.00021269389746804424,
+      "C_L_minus_M": 0.00021269389746804424,
+      "all_certified": false
+    },
+    {
+      "role": "R163-X35-S",
+      "final_B_minus_M": 0.0068174895360569865,
+      "final_M_minus_C": 0.04503147830989629,
+      "C_L_minus_B": -0.006449483702130998,
+      "C_L_minus_M": -0.006449483702130998,
+      "all_certified": false
+    }
+  ],
+  "endpoint_readback": [
+    {
+      "position": 1,
+      "role": "R163-C20-S",
+      "arm": "B",
+      "initial_U": 0.308606526667351,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281274,
+      "relative_gap": -3.91780751344589e-15,
+      "certificate": true,
+      "process_seconds": 211.4824220999144,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 2,
+      "role": "R163-C20-S",
+      "arm": "M",
+      "initial_U": 0.308606526667351,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281274,
+      "relative_gap": -3.91780751344589e-15,
+      "certificate": true,
+      "process_seconds": 211.05195309966803,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 3,
+      "role": "R163-C20-S",
+      "arm": "C",
+      "initial_U": 0.2900336843130432,
+      "U": 0.191280592282812,
+      "L": 0.19128059228281205,
+      "relative_gap": -2.9020796395895477e-16,
+      "certificate": true,
+      "process_seconds": 219.51179050002247,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 4,
+      "role": "R163-B20-B",
+      "arm": "M",
+      "initial_U": 0.43287983257650753,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161,
+      "relative_gap": 3.672481209375123e-15,
+      "certificate": true,
+      "process_seconds": 2.8423431999981403,
+      "Optimize": 9,
+      "LP": 7,
+      "MIP": 2
+    },
+    {
+      "position": 5,
+      "role": "R163-B20-B",
+      "arm": "C",
+      "initial_U": 0.43287983257650753,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161,
+      "relative_gap": 3.672481209375123e-15,
+      "certificate": true,
+      "process_seconds": 2.819448699709028,
+      "Optimize": 9,
+      "LP": 7,
+      "MIP": 2
+    },
+    {
+      "position": 6,
+      "role": "R163-B20-B",
+      "arm": "B",
+      "initial_U": 0.43287983257650753,
+      "U": 0.42323218169431764,
+      "L": 0.4232321816943161,
+      "relative_gap": 3.672481209375123e-15,
+      "certificate": true,
+      "process_seconds": 2.8507301001809537,
+      "Optimize": 9,
+      "LP": 7,
+      "MIP": 2
+    },
+    {
+      "position": 7,
+      "role": "R163-X20-S",
+      "arm": "C",
+      "initial_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525,
+      "relative_gap": 2.8887028024029015e-14,
+      "certificate": true,
+      "process_seconds": 124.76573250023648,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 8,
+      "role": "R163-X20-S",
+      "arm": "B",
+      "initial_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525,
+      "relative_gap": 2.8887028024029015e-14,
+      "certificate": true,
+      "process_seconds": 124.53611769992858,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 9,
+      "role": "R163-X20-S",
+      "arm": "M",
+      "initial_U": 0.5268146619010788,
+      "U": 0.4477476265860282,
+      "L": 0.44774762658601525,
+      "relative_gap": 2.8887028024029015e-14,
+      "certificate": true,
+      "process_seconds": 124.72628209972754,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 10,
+      "role": "R163-C35-U",
+      "arm": "B",
+      "initial_U": 0.17449020363402978,
+      "U": 0.1480229632656324,
+      "L": 0.017120344246947146,
+      "relative_gap": 0.884339943821932,
+      "certificate": false,
+      "process_seconds": 594.1540716001764,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 11,
+      "role": "R163-C35-U",
+      "arm": "M",
+      "initial_U": 0.17449020363402978,
+      "U": 0.1480229632656324,
+      "L": 0.017120344246947146,
+      "relative_gap": 0.884339943821932,
+      "certificate": false,
+      "process_seconds": 594.1548105003312,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 12,
+      "role": "R163-C35-U",
+      "arm": "C",
+      "initial_U": 0.15516542546598344,
+      "U": 0.1202012449785469,
+      "L": 0.015427084585825845,
+      "relative_gap": 0.8716561996626639,
+      "certificate": false,
+      "process_seconds": 594.1518824002706,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 13,
+      "role": "R163-B35-S",
+      "arm": "M",
+      "initial_U": 0.21972078756431687,
+      "U": 0.21972078756431676,
+      "L": 0.11865217498201656,
+      "relative_gap": 0.4599865752470751,
+      "certificate": false,
+      "process_seconds": 594.1375311999582,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 14,
+      "role": "R163-B35-S",
+      "arm": "C",
+      "initial_U": 0.20673909923575257,
+      "U": 0.1878611633900712,
+      "L": 0.11886486887948461,
+      "relative_gap": 0.36727279478901154,
+      "certificate": false,
+      "process_seconds": 594.1860555000603,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 15,
+      "role": "R163-B35-S",
+      "arm": "B",
+      "initial_U": 0.21972078756431687,
+      "U": 0.21972078756431676,
+      "L": 0.11865217498201656,
+      "relative_gap": 0.4599865752470751,
+      "certificate": false,
+      "process_seconds": 594.1414286000654,
+      "Optimize": 4,
+      "LP": 3,
+      "MIP": 1
+    },
+    {
+      "position": 16,
+      "role": "R163-X35-S",
+      "arm": "C",
+      "initial_U": 0.5079988087626506,
+      "U": 0.466514934786982,
+      "L": 0.3511829462176636,
+      "relative_gap": 0.2472203566687116,
+      "certificate": false,
+      "process_seconds": 594.1505891000852,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 17,
+      "role": "R163-X35-S",
+      "arm": "B",
+      "initial_U": 0.6008692809039473,
+      "U": 0.5183639026329353,
+      "L": 0.3576324299197946,
+      "relative_gap": 0.31007458639911917,
+      "certificate": false,
+      "process_seconds": 594.1379945003428,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "position": 18,
+      "role": "R163-X35-S",
+      "arm": "M",
+      "initial_U": 0.6008692809039473,
+      "U": 0.5115464130968783,
+      "L": 0.3576324299197946,
+      "relative_gap": 0.300879801395333,
+      "certificate": false,
+      "process_seconds": 594.1460667001083,
+      "Optimize": 5,
+      "LP": 3,
+      "MIP": 2
+    }
+  ],
+  "H_pool_costs": [
+    {
+      "role": "R163-C20-S",
+      "B_path_seconds": 0.3187117,
+      "M_pool_seconds": 0.9481819,
+      "C_pool_seconds": 1.0111096
+    },
+    {
+      "role": "R163-B20-B",
+      "B_path_seconds": 0.0101949,
+      "M_pool_seconds": 0.032899,
+      "C_pool_seconds": 0.0367087
+    },
+    {
+      "role": "R163-X20-S",
+      "B_path_seconds": 0.0570205,
+      "M_pool_seconds": 0.1722087,
+      "C_pool_seconds": 0.15578419999999998
+    },
+    {
+      "role": "R163-C35-U",
+      "B_path_seconds": 2.1659543,
+      "M_pool_seconds": 6.2874452000000005,
+      "C_pool_seconds": 6.0328558999999995
+    },
+    {
+      "role": "R163-B35-S",
+      "B_path_seconds": 2.0091297,
+      "M_pool_seconds": 5.45301,
+      "C_pool_seconds": 5.5383201
+    },
+    {
+      "role": "R163-X35-S",
+      "B_path_seconds": 0.2391247,
+      "M_pool_seconds": 0.6897255,
+      "C_pool_seconds": 0.680967
+    },
+    {
+      "role": "R-X35-S-T2",
+      "B_path_seconds": 0.297282,
+      "M_pool_seconds": 1.1416044,
+      "C_pool_seconds": 1.0545664000000001
+    }
+  ],
+  "structural_readback": [
+    {
+      "role": "R163-C20-S",
+      "served_added": [
+        15
+      ],
+      "served_removed": [
+        20
+      ],
+      "owner_changes": 1,
+      "stock_changes": 15,
+      "order_inversions": 22
+    },
+    {
+      "role": "R163-B20-B",
+      "served_added": [],
+      "served_removed": [],
+      "owner_changes": 0,
+      "stock_changes": 0,
+      "order_inversions": 0
+    },
+    {
+      "role": "R163-X20-S",
+      "served_added": [],
+      "served_removed": [],
+      "owner_changes": 0,
+      "stock_changes": 0,
+      "order_inversions": 0
+    },
+    {
+      "role": "R163-C35-U",
+      "served_added": [],
+      "served_removed": [],
+      "owner_changes": 24,
+      "stock_changes": 19,
+      "order_inversions": 6
+    },
+    {
+      "role": "R163-B35-S",
+      "served_added": [],
+      "served_removed": [],
+      "owner_changes": 7,
+      "stock_changes": 24,
+      "order_inversions": 41
+    },
+    {
+      "role": "R163-X35-S",
+      "served_added": [
+        12,
+        20,
+        29
+      ],
+      "served_removed": [],
+      "owner_changes": 10,
+      "stock_changes": 10,
+      "order_inversions": 1
+    },
+    {
+      "role": "R-X35-S-T2",
+      "served_added": [
+        25,
+        27,
+        34
+      ],
+      "served_removed": [
+        28,
+        29,
+        30
+      ],
+      "owner_changes": 0,
+      "stock_changes": 17,
+      "order_inversions": 6
+    }
+  ],
+  "interpretation": "C retains a finite paid original-objective primal benefit beyond matched M on all three n35 roles, with no n35 certification and mixed L. C20 is a slower certified counterexample. M improves the paid X35 endpoint despite identical H Start, so no blanket restart-null explanation or causal speed claim is made. Only a future independently preregistered limited confirmation is recommended; B stays default.",
+  "prior_art_and_history_boundaries_preserved": true,
+  "new_OR_theory_claim": false,
+  "new_P_pair_claim": false,
+  "exposed_known_inputs_and_single_Native_Seed_limits_explicit": true,
+  "weight_provenance_clock_correction": "review/provenance_clock_update.json remains authoritative correction to preserved initial review; current report uses validated NEJ1 producer marker versus external availability, unrecorded internal discovery and later outer-store acceptance.",
+  "CSV_increment": {
+    "records": 6,
+    "columns": 28,
+    "UTF8_BOM": true,
+    "no_P_pairs": true,
+    "actual_master_available": false,
+    "actual_master_rows_added": 0,
+    "no_112_to_118_fabrication": true,
+    "increment": {
+      "path": "results/unified_exact_round169/GI_TBC_R169_B_controls_increment_28col.csv",
+      "bytes": 4811,
+      "SHA256": "91a000abe33c84276de84fe1d677421c90d3de39467f657cfda232790c0f2048"
+    }
+  },
+  "pending_delivery_check": null,
+  "CSV_QA_reference_resolved": true,
+  "PDF_visual_review": {
+    "schema": "round169-independent-research-PDF-final-v1",
+    "reviewer": "/root/research_review",
+    "UTC": "2026-11-16T02:55:15.272556+00:00",
+    "status": "PASS",
+    "Optimize": 0,
+    "H_calls": 0,
+    "actual_visual_inspection": true,
+    "documents": [
+      {
+        "document": "results/unified_exact_round137/manuscript.pdf",
+        "SHA256": "84658a802fd087909ee7b6e45d71894302f0b9f69eb0d58dac0700231fae18b9",
+        "page_count": 53,
+        "viewed_PNGs": [
+          {
+            "page": 22,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-022.png",
+            "bytes": 227012,
+            "SHA256": "1fc3eccc08a31a5df8c5cbb51f610fe3e0eb746a8aaa230bf3e684b41889e31e"
+          },
+          {
+            "page": 23,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-023.png",
+            "bytes": 335977,
+            "SHA256": "a05e936b2991a3ba3897c560e5e9f963a0771ac30e141312241f613dc7d12461"
+          },
+          {
+            "page": 24,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-024.png",
+            "bytes": 284624,
+            "SHA256": "e65d996fdcad2881ac01a7f891af013c6ca65b67b38df7ab6d33411907ca45cf"
+          },
+          {
+            "page": 52,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-052.png",
+            "bytes": 289593,
+            "SHA256": "94df70f64152b722dcf68045fa8e799daf2033534774cd59a5b2e6a198609eb0"
+          },
+          {
+            "page": 53,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_manuscript_84658a802fd0\\page-053.png",
+            "bytes": 269236,
+            "SHA256": "02aad7cb0b7b9d8c651bd90060a4d9ac9311564118cc2cd02ed86d15032fb601"
+          }
+        ]
+      },
+      {
+        "document": "results/unified_exact_round137/supplement.pdf",
+        "SHA256": "c26599a1412278410f6834bb2eddc9729efb9c2f9ca8b66c033b76194100f3e4",
+        "page_count": 59,
+        "viewed_PNGs": [
+          {
+            "page": 55,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-055.png",
+            "bytes": 319363,
+            "SHA256": "156129f1637814b45099fe80d6efb0f76ccd3bd0ae9356e5f1a2b98ed6479929"
+          },
+          {
+            "page": 56,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-056.png",
+            "bytes": 236607,
+            "SHA256": "d6608794005bcd0c92db479a176985358264a185f039ea7f73af5a48ac853b0d"
+          },
+          {
+            "page": 57,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-057.png",
+            "bytes": 164688,
+            "SHA256": "ac58e078f5ee375699b3a86885f5792a544bb132b80a2df6bfc91d93b0fc321f"
+          },
+          {
+            "page": 58,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-058.png",
+            "bytes": 140329,
+            "SHA256": "9e312de1757903d26262293c09edb855bedbf6564cfbed525228c737451be982"
+          },
+          {
+            "page": 59,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round169\\pdf\\QA_supplement_c26599a14122\\page-059.png",
+            "bytes": 95536,
+            "SHA256": "4abd3b0799e0e654a69586bf895a35d39f683fbdf18f66e4bfbee94b666b241e"
+          }
+        ]
+      }
+    ],
+    "findings": [],
+    "main_readback": "Page23 retains the paid comparison and full Table11 with all six rows on one page. The reduced paragraph preserves C/M interpretation, weaker C35/X35 L, B35 L increase, all n35 OPEN, retained n20 certification and slower C20-C, default-off recommendation and known-role/single-Seed/no-new-P limits. Pages22/24 show clean adjacent section/appendix transitions.",
+    "supplement_readback": "Pages56/57/58 contain S169 and the complete seven H rows, seven path/pool cost rows, all18 paid endpoints and all18 cost rows. Each caption and full table share a page. Pages55/59 show intact adjacent R168 evidence and references. Table figures match the independently reconciled source tables at displayed rounding.",
+    "bibliography_readback": "Paquete and Stutzle 2003 title, year and author-hosted PDF URL render normally in main53 and supplement59; author diacritics render correctly. Main52/53 references stay inside margins.",
+    "layout_checks": {
+      "overlap": false,
+      "clipping": false,
+      "replacement_glyphs": false,
+      "blank_pages_in_reviewed_set": false,
+      "orphaned_R169_table_captions": false,
+      "split_Table11_last_row": false
+    },
+    "CSV_QA_followup": {
+      "reference_now_exists": true,
+      "PASS": true,
+      "records": 6,
+      "columns": 28,
+      "UTF8_BOM": true,
+      "SHA256": "91a000abe33c84276de84fe1d677421c90d3de39467f657cfda232790c0f2048",
+      "data_commit_exists_locally": "c9fcb1f1ee8a2ea07004ad6162831f4bcf01443a",
+      "no_self_SHA": true
+    },
+    "limitations": "This independent review covers actual targeted PNGs and source/data reconciliation, not human peer review or new optimization. Public delivery/recovery remains the root delivery step."
+  },
+  "seconds": 0.13855780009180307,
+  "evidence": [
+    {
+      "path": "results/unified_exact_round169/complete_arms.json",
+      "bytes": 58773,
+      "SHA256": "f1fe53024f1d2426d1d8feeab6f184cca47f786ceaebba03dd7adf42ad0c04ee"
+    },
+    {
+      "path": "results/unified_exact_round169/complete_arms.csv",
+      "bytes": 23823,
+      "SHA256": "8cbe7e1e1ef569b5add300503421c59291339283350de05db73c4184ed30d0bf"
+    },
+    {
+      "path": "results/unified_exact_round169/final_report.md",
+      "bytes": 13823,
+      "SHA256": "f242762f931706fe70236ae22297c04f4a67c7b17f01ba6c03efa4f39349b611"
+    },
+    {
+      "path": "results/unified_exact_round169/research_decision.md",
+      "bytes": 1245,
+      "SHA256": "e7ac80c34ea7b68bb605a174fae5552961af1a6dfc8cd3739504560871f8947f"
+    },
+    {
+      "path": "results/unified_exact_round169/decision.json",
+      "bytes": 1820,
+      "SHA256": "ff2926f9896d70cac535fb5a40f3d53614ac7c62e2479043ff569f3cbaf13101"
+    },
+    {
+      "path": "results/unified_exact_round169/author_decision_memo.md",
+      "bytes": 1195,
+      "SHA256": "87da72a47c1fbec047d5e2a225ed3975d1561cd48cd863e82fca17020ebaf4aa"
+    },
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 69315,
+      "SHA256": "47454137aac80617e5da6fbc4884ab7ba02206852ef342745b1045d225488d97"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 154719,
+      "SHA256": "bc0f41b936722c43a13385b813cd770927838e5f3de6c21a104b86ea1defef45"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 13019,
+      "SHA256": "fbac93c2210fda644c4570d5e2f7be65261305f3ac8c7d92b293cb2a1f5042ec"
+    },
+    {
+      "path": "results/unified_exact_round169/weight_provenance.json",
+      "bytes": 39813,
+      "SHA256": "a6abad893f89737cb371ee2423cba82dee29318c9378bdb47442c91021884ff0"
+    },
+    {
+      "path": "results/unified_exact_round169/CSV_reconciliation.json",
+      "bytes": 3073,
+      "SHA256": "761da68f4da7a5da755bd50dc8e903e384f372c4072b49b887aa9a6732ce1b9b"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "UTC": "2026-11-16T02:37:38.237363+00:00",
+  "schema": "round169-NEJ1-human-label-clarification-v1",
+  "source": "src/NativeEvidenceJournal.cpp:263-273",
+  "old_label": "C++ producer commit-close seconds; exact raw byte/sequence/hash verified",
+  "new_label": "C++ producer publication/close marker: sampled after JSON close+hash and before commit-file write; commit-file close and external first-seen were not separately measured; raw byte/sequence/hash verified",
+  "source_sequence": "closedWrite JSON; SHA256 data; sample processElapsedSeconds into NEJ1 receipt; closedWrite commit file",
+  "raw_Native_and_H_replayed": false,
+  "Optimize": 0,
+  "numerical_data_changed": false,
+  "qualifications_changed": false,
+  "commit_file_close_not_measured": true,
+  "external_first_observation_not_recorded": true,
+  "derived_audits": [
+    {
+      "position": 1,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_01.json",
+      "old_SHA256": "966e240517ca4edf47ee251a27ba8c038c425729cf8a9b14ee3b35e58f92c7bf",
+      "new_SHA256": "7d0dc1780d1ad730529787139b3f02ab46bafe8ceacfe01cfe9708d95ea1be3a",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 2,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_02.json",
+      "old_SHA256": "87325f3f6217d24dda78735431010a11403f34342faedf03d25ab876f8ee94cf",
+      "new_SHA256": "8130befabfa01fa8ec65439d4914b17f1098fe9b5322306cdcbb93b84ed5a53a",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 3,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_03.json",
+      "old_SHA256": "09c5921c61c2504aa8d671921c26d5ef588a11dd35ead0c89fbf9a2557483f27",
+      "new_SHA256": "d4977e0f6efbe5498104423133c43768428a55166340ee6325f00f92f888e952",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 4,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_04.json",
+      "old_SHA256": "7709383fcd49fa4202dd7a1d1d53f814fd2f1e80ea1eaed3c208815c775968f4",
+      "new_SHA256": "423cbea247a9bd1a832cf7477ecc90aaa418aab0bc74c751f339b2134db36ae7",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 5,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_05.json",
+      "old_SHA256": "7b801d360bce23265a20f5029c10676d9fda01072663aa6e9129e0d74a25eeaa",
+      "new_SHA256": "a5b613c4706b7740f7213220a04e552fce14264d95c14973aa9b6653f3da49f3",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 6,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_06.json",
+      "old_SHA256": "73f8a52b41e2b11e4afff0d8cfadee1c65f6b63070d524f93332cdaeb3b49ea2",
+      "new_SHA256": "36631e4bc57c03c27bd43cfa79de33f4e830ca07d81a44c40b2ac407a201a634",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 7,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_07.json",
+      "old_SHA256": "845ec42f76710cdaa0418812404fbe07a77dca5c2c535d6b0be03dcf35ffb390",
+      "new_SHA256": "b248d46e9c74902dfb40c1c9051d72494d3ddf8c5bf9cd04a725f4d659f86e56",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 8,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_08.json",
+      "old_SHA256": "8795dbe1c51783b2165a02588197f3b91d6a9193c00bb7bfc1c54128efb5d8d0",
+      "new_SHA256": "e8dd15ea0fc789ec0a9200aa6f4686f81e5069c7e910393aeb6c8d340050b290",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 9,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_09.json",
+      "old_SHA256": "3d506279deeebadeb7c6eea198625d7938a9d6594f6d3fa1a10e1ffc0c0b453f",
+      "new_SHA256": "5f6a86a62fc3cdb3c6500ec5169d771f296e452bdf87a5366d99e3db5e473755",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 10,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_10.json",
+      "old_SHA256": "3fbc7c57ccb536bd09c602629bd2fd6b628bc54f71e454bd4bcb909677d32ae6",
+      "new_SHA256": "f3867c19e2107aba4914e87ac2b0932bbcaa615da8ede27215570f842a7b7f03",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 11,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_11.json",
+      "old_SHA256": "de22dcf8fef9d5a020cb59735ddde15fd586854c5157e760c357290b28ed302a",
+      "new_SHA256": "a0d6cb06bb749f05de9295c982f48f9de55b0ec5016c4610d1131e0fdf3af19f",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 12,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_12.json",
+      "old_SHA256": "abf7e7b38b4b14964d48eddf804fdaa3d999831b4b2df50a702480edf6bbfcbd",
+      "new_SHA256": "2947cd5b64f3da44259160f37767d529acafd1d89eecf22590735b70a0a14b05",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 13,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_13.json",
+      "old_SHA256": "cae43ec33e72b8369a14e1a923b2002469f350b7632f7b9c9842be0f8483a5bc",
+      "new_SHA256": "b5ee53c44cfb54e74626bdca2c670d1198549384dd091f9f0d61742305151665",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 14,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_14.json",
+      "old_SHA256": "a713345e5be28dd218bdd05514b98370c8936c1a86f04481f4427fd6f225c08b",
+      "new_SHA256": "0d2b735ac660180313d16434791c2b8a42dc8bbab9b673f80097ba6040be5ff8",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 15,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_15.json",
+      "old_SHA256": "f41ad71284a0f682a77f76a4df37b2d907d5105d02e4a9643520b1fdb53a8abd",
+      "new_SHA256": "78afb449e05c084736973df73e7d7a4c9dc956c4324ff8f183964ea00b191d06",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 16,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_16.json",
+      "old_SHA256": "acf1e0ae71cf084ac493b1cda1fc33e1b9344fc770065833bb1c3300817ef0c0",
+      "new_SHA256": "04689ce2cbdd2262d47fa882cb8d281b4d65cb07e3189819e6d7aa39b2f8ebaf",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 17,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_17.json",
+      "old_SHA256": "c3aa0ee30aca66fddac180d77302499492e6efdd1c91ae5a50adbf2cdc0c8c18",
+      "new_SHA256": "0f1b73dfe3a75b5678e13ed2ae2b84f83113144c4e917db37b4e0f2d828f1f43",
+      "numbers_and_flags_unchanged": true
+    },
+    {
+      "position": 18,
+      "path": "results\\unified_exact_round169\\review\\complete_audit_18.json",
+      "old_SHA256": "cefe5fc4db9ad71224aed062d4e8e009e661a7bceccfaeaf5600b5497115fde0",
+      "new_SHA256": "dcd84e2f489c31205fd5384e23e1b2408b127a39e79e53b47bd5b80460ef517f",
+      "numbers_and_flags_unchanged": true
+    }
+  ]
+}

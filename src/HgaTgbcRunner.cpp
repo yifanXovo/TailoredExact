@@ -130,6 +130,7 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                       1.0,
                       options.no_improve_generation_limit);
     ga.set_seed(options.seed);
+    ga.set_trace_initial_orders(options.round169_trace_initial_orders);
     ga.set_fixed_generations(options.fixed_generations);
     if (options.fixed_generations >= 0) {
         ga.set_absolute_deadline(started + std::chrono::seconds(
@@ -254,6 +255,7 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                              : ";native_generation_stagnation_hga"));
     }
     ga.run();
+    out.round169_initial_orders = ga.get_initial_orders_trace();
     out.global_deadline_reached = ga.stopped_on_absolute_deadline();
     out.candidate_observer_failed =
         ga.best_observer_failed_and_disabled();

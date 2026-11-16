@@ -1,0 +1,127 @@
+{
+  "UTC": "2026-11-16T00:49:28.899998+00:00",
+  "reviewer": "independent math_review agent",
+  "status": "PASS_EXISTING_H_AND_STATIC_SEMANTICS_WITH_FINAL_PANEL_PENDING",
+  "review_scope": "Actual C++ implementation and all 35 completed H fleets; no judgment on absent final panel results",
+  "no_solver_or_H_rerun": true,
+  "proofs": [
+    {
+      "property": "unchanged feasible-set transfer",
+      "result": "PASS",
+      "reason": "Only copied SolveOptions.lambda/seed/output paths change. Actual Instance is constant. Each child terminal fleet is reverified at opt.lambda. All 35 fleets independently pass stocks, service uniqueness, route compression, prefix Q, empty departure and loaded-return handling."
+    },
+    {
+      "property": "original objective",
+      "result": "PASS",
+      "reason": "Fraction objective arithmetic from actual binary64 station weights/lambda matches all original G/P/F and separately all search F to 1e-12. Search objective is never reused as original U."
+    },
+    {
+      "property": "initial upper nonworsening",
+      "result": "PASS",
+      "reason": "Base index 0 remains in each candidate pool. Replacement uses a strict original-F decrease >1e-10 with base-first ties. All seven stored U_M/U_C are <= U_B. This says nothing about final paid-cap U/L/gap/certificate time."
+    },
+    {
+      "property": "greedy/cache isolation",
+      "result": "PASS_STATIC_AND_RECORDED",
+      "reason": "RAII saves/restores greedy lambda/scaling around each child; no preset reapplied. HybridGA decode cache belongs to a fresh object. Persistent GreedyStaticData stores unweighted ratio/penalty data keyed by target/capacity/weight values and signatures, not weighted F."
+    },
+    {
+      "property": "original exact-search state",
+      "result": "PASS_STATIC_FINAL_DATA_PENDING",
+      "reason": "Wrapper returns only selected routes and rebuilt original Verification while retaining original caller opt. Main acceptIncumbentRoutes verifies again at opt.lambda; PaperExternalGiniTree validates its own seed, resets run state and builds original domain/cutoff. No child performs Optimize or returns a lower/domain/tree/certificate. Final actual matrices/Starts and qualified endpoints await complete panel."
+    },
+    {
+      "property": "R168 scope",
+      "result": "PASS_LIMITED_SCOPE",
+      "reason": "R168 families are derived from old final parent owner/order and bound physical input. R169 base-H objective/fleet differs from the old C35/B35/X35 final parents. The method note correctly does not transfer the old exclusion to arbitrary new initializations."
+    },
+    {
+      "property": "fixed E4 gate",
+      "result": "PASS",
+      "reason": "All 35 paths have all three full-H stage flags and 25 completed descent seeds. Independent pool minima/delta recomputation yields four eligible current-role gates plus the nontriggering motivation-role signal; no change to threshold."
+    }
+  ],
+  "findings": [
+    {
+      "id": "M169-UNKNOWN-WORDING",
+      "priority": "required document correction, no rerun",
+      "status": "OPEN_AT_INITIAL_REVIEW",
+      "location": "results/unified_exact_round168/route_family_theory.md: target-verdicts paragraph",
+      "issue": "The inherited phrase API/mapping/qualification failure is an error is too broad for the actual valid-model rejected-lower UNKNOWN. Distinguish implementation/model/API/mapping failures from numerical rejection of a particular Native lower when physical U and mathematical L remain valid.",
+      "fix": "Clarify only the sentence; preserve experiment, raw bound, thresholds and UNKNOWN verdict."
+    },
+    {
+      "id": "M169-BASE-DIAGNOSTICS",
+      "priority": "audit interpretation",
+      "status": "NOT_A_PRODUCER_ERROR",
+      "location": "src/Round169Primal.inc return and main result propagation",
+      "issue": "hga_* and decoded_* fields intentionally describe base H even when C selects a child fleet. A legacy audit that requires base H fleet==actual Start would incorrectly reject valid C records.",
+      "fix": "Bind complete-Start provenance to primal/selection.json and its selected path, while preserving base historical diagnostics. Include all child costs separately."
+    }
+  ],
+  "independent_readback": "math_readback_initial.json",
+  "final_followup": [
+    "All eighteen returned/failed states and actual selected original-objective Starts",
+    "Qualified original global lower/upper/gap and certificate scopes",
+    "R168 UNKNOWN wording correction",
+    "Any final method/report statements relevant to these mathematical properties"
+  ],
+  "file_bindings": [
+    {
+      "path": "src/Round169Primal.inc",
+      "SHA256": "7b15a3c3221dece2688f5802b19e4075ab7b4b085806859a3ebba9fdeee7b62f"
+    },
+    {
+      "path": "src/main.cpp",
+      "SHA256": "154c8882be5c5d82892fd45e06b5a4158ad7301684f4a2e4b528bae432ea5baf"
+    },
+    {
+      "path": "src/HgaTgbcRunner.cpp",
+      "SHA256": "c38cea16ac7cc347eca98989ab8d305b2ae5d32b689bb44dc6e110af3466a7eb"
+    },
+    {
+      "path": "include/hga_tgbc/HybridGA.h",
+      "SHA256": "37143e3def3fa34d47ca77d7c89b3efc01a30789c3e7c0ad66e9656f82caba87"
+    },
+    {
+      "path": "src/hga_tgbc/HgaTgbcGreedy.cpp",
+      "SHA256": "871b3f3e024e273bbc8ee55d60dfc29f11d5282891eae1ed1419da02119821cd"
+    },
+    {
+      "path": "src/Evaluator.cpp",
+      "SHA256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41"
+    },
+    {
+      "path": "src/PhysicalWitnessValidation.cpp",
+      "SHA256": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678"
+    },
+    {
+      "path": "src/Result.cpp",
+      "SHA256": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b"
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "SHA256": "bf53b91647e9d14b88fea43c193f57ef6e524acc3c4a7b75e7f4d64ca79d8930"
+    },
+    {
+      "path": "src/round168_route_family.cpp",
+      "SHA256": "1f065e3eef524af337c771395358d359a37119b2714c8f3e5939bcbda05ce030"
+    },
+    {
+      "path": "results/unified_exact_round168/route_family_theory.md",
+      "SHA256": "e4af508055bf7d581c5300b4f346aec75709672f8db5236991b7a0114deda7bc"
+    },
+    {
+      "path": "results/unified_exact_round169/h_panel_frozen.json",
+      "SHA256": "579085f76e5ab3c1e6db607fc8a30fe52aade5abe4e538a13de09ce294ece29f"
+    },
+    {
+      "path": "results/unified_exact_round169/h_results.json",
+      "SHA256": "be8789f73e5bf80ba0f7e41e6329033fa71a1d932889662c3735312f5d22f7b3"
+    },
+    {
+      "path": "results/unified_exact_round169/method_note.md",
+      "SHA256": "cc8941b0a1993f6c4e3d55adf0d447d18e81ac76b2283d2f2469a2de08c5ba76"
+    }
+  ]
+}

@@ -1,23 +1,24 @@
 # GI-TBC release and paper-S2 run guide
 
-The current paper is the [R165 manuscript](../results/unified_exact_round137/manuscript.pdf)
+The current paper is the [R169 manuscript](../results/unified_exact_round137/manuscript.pdf)
 and [supplement](../results/unified_exact_round137/supplement.pdf), built from
-the maintained R137 component directory with `scripts/round165_documents.py`.
+the maintained R137 component directory with `scripts/round169_documents.py`.
 See the [current review packet](paper_review.md). The release/runtime commands
-below retain their historical R137 contract; R165 performs no new solver call,
-production compilation or default promotion. The later R163/R164 measured
+below retain their historical R137 contract. R169's common research B/M/C
+build and short-cap comparison are identified in the [current report](../results/unified_exact_round169/final_report.md),
+with no default promotion or new P pair. The R163/R164 measured
 C++ source is `e920b92e199e825ec89a2932f701861ff158e0d4`, with PE SHA256
 `fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93`.
-The [source manifest](../results/unified_exact_round165/source_manifest.json)
+The [current source manifest](../results/unified_exact_round169/source_manifest.json)
 keeps that identity separate from the older source/PE below and the document build.
 
 Round160's optional physical-neighborhood research is documented in
 [the mathematical section](round160_physical_neighborhood.md). Its new
 switch is default-off and does not redefine the stable GI-TBC/S2 profile.
 
-This guide describes the Round137 branch from verified main
-`b2b940c1e517a72e226ec60fc49ff19651737632`. The English Draft PR targets
-`main` and must remain a Draft; its actual identity/readback belongs in the
+The runtime contract below describes the historical Round137 entry from main
+`b2b940c1e517a72e226ec60fc49ff19651737632`. The current English R169 Open Draft
+stacks on `codex/round168-route-family`; its actual identity/readback belongs in the
 continuation record. This record does not assert that the branch has merged. The accepted
 Round136 mainline and all historical observations remain separately pinned.
 

@@ -1,0 +1,7189 @@
+{
+  "UTC": "2026-11-16T02:42:00.083035+00:00",
+  "schema": "round169-independent-final-mathematics-readback-v1",
+  "H_or_Optimize_executed": 0,
+  "final_fleets_recomputed": 18,
+  "selected_Start_fleets_recomputed": 18,
+  "actual_calls_with_original_lambda_LP_objective_checked": 93,
+  "LP": 66,
+  "MIP": 27,
+  "unique_actual_LP_files": 66,
+  "all_checks_PASS": true,
+  "certificate_count": 9,
+  "original_exact_code_hashes_unchanged_from_initial_review": true,
+  "pool_inclusion_checks": [
+    {
+      "role": "R163-C20-S",
+      "initial_B": 0.308606526667351,
+      "initial_M": 0.308606526667351,
+      "initial_C": 0.2900336843130432,
+      "C_minus_B_U": 0.0,
+      "C_minus_M_U": 0.0,
+      "C_minus_B_L": -6.938893903907228e-16,
+      "C_minus_M_L": -6.938893903907228e-16
+    },
+    {
+      "role": "R163-B20-B",
+      "initial_B": 0.43287983257650753,
+      "initial_M": 0.43287983257650753,
+      "initial_C": 0.43287983257650753,
+      "C_minus_B_U": 0.0,
+      "C_minus_M_U": 0.0,
+      "C_minus_B_L": 0.0,
+      "C_minus_M_L": 0.0
+    },
+    {
+      "role": "R163-X20-S",
+      "initial_B": 0.5268146619010788,
+      "initial_M": 0.5268146619010788,
+      "initial_C": 0.5268146619010788,
+      "C_minus_B_U": 0.0,
+      "C_minus_M_U": 0.0,
+      "C_minus_B_L": 0.0,
+      "C_minus_M_L": 0.0
+    },
+    {
+      "role": "R163-C35-U",
+      "initial_B": 0.17449020363402978,
+      "initial_M": 0.17449020363402978,
+      "initial_C": 0.15516542546598344,
+      "C_minus_B_U": -0.027821718287085517,
+      "C_minus_M_U": -0.027821718287085517,
+      "C_minus_B_L": -0.0016932596611213008,
+      "C_minus_M_L": -0.0016932596611213008
+    },
+    {
+      "role": "R163-B35-S",
+      "initial_B": 0.21972078756431687,
+      "initial_M": 0.21972078756431687,
+      "initial_C": 0.20673909923575257,
+      "C_minus_B_U": -0.031859624174245565,
+      "C_minus_M_U": -0.031859624174245565,
+      "C_minus_B_L": 0.00021269389746804424,
+      "C_minus_M_L": 0.00021269389746804424
+    },
+    {
+      "role": "R163-X35-S",
+      "initial_B": 0.6008692809039473,
+      "initial_M": 0.6008692809039473,
+      "initial_C": 0.5079988087626506,
+      "C_minus_B_U": -0.051848967845953275,
+      "C_minus_M_U": -0.04503147830989629,
+      "C_minus_B_L": -0.006449483702130998,
+      "C_minus_M_L": -0.006449483702130998
+    }
+  ],
+  "rows": [
+    {
+      "position": 1,
+      "role": "R163-C20-S",
+      "arm": "B",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/01_R163-C20-S_B/result.json",
+        "SHA256": "bd9d4788c0fa4e67795642bdcb0e88460697b8548934505cc9d433bdcf2267b9",
+        "bytes": 97270
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_01.json",
+        "SHA256": "7d0dc1780d1ad730529787139b3f02ab46bafe8ceacfe01cfe9708d95ea1be3a",
+        "bytes": 4368561
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          11,
+          12,
+          17,
+          10,
+          7,
+          10,
+          9,
+          10,
+          7,
+          9,
+          12,
+          13,
+          7,
+          11,
+          6,
+          9,
+          13,
+          7,
+          11,
+          9
+        ],
+        "G": {
+          "value": 0.07556576093183874,
+          "exact": "9562507/126545500"
+        },
+        "P": {
+          "value": 1.072664567995893,
+          "exact": "3481691472337361624611/3245834323438463877120"
+        },
+        "F": {
+          "value": 0.191280592282812,
+          "exact": "94356640383761829019444570160974598361891029/493289147935373061521904096864413235019776000"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              3,
+              10,
+              19,
+              13,
+              7,
+              9,
+              16,
+              18,
+              11,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              15,
+              8,
+              13,
+              8,
+              4,
+              0,
+              4,
+              0,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 15,
+            "travel": 1794.0969974705188,
+            "pickups": 30,
+            "drops": 30,
+            "station_handling": 3600,
+            "return_unloading": 0,
+            "duration": 5394.0969974705185,
+            "time_slack": 5.903002529481455
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              15,
+              17,
+              12,
+              14,
+              20,
+              8,
+              4,
+              2,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              1,
+              8,
+              0,
+              5,
+              12,
+              16,
+              8,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 16,
+            "travel": 2039.6478274234782,
+            "pickups": 28,
+            "drops": 28,
+            "station_handling": 3360,
+            "return_unloading": 0,
+            "duration": 5399.647827423478,
+            "time_slack": 0.35217257652220724
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          12,
+          10,
+          18,
+          8,
+          9,
+          11,
+          9,
+          11,
+          7,
+          9,
+          12,
+          12,
+          6,
+          11,
+          2,
+          9,
+          15,
+          7,
+          11,
+          11
+        ],
+        "G": {
+          "value": 0.13540758190334348,
+          "exact": "96610523/713479420"
+        },
+        "P": {
+          "value": 1.6055363784710388,
+          "exact": "29530728813698852709721/18393061166151295303680"
+        },
+        "F": {
+          "value": 0.30860652666735094,
+          "exact": "972745151491082026965333394820406127479304907/3152056315839394199509600204168762145135132672"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              3,
+              2,
+              4,
+              20,
+              17,
+              12,
+              5,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              13,
+              7,
+              1,
+              6,
+              11,
+              4,
+              7,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 13,
+            "travel": 2252.942535606882,
+            "pickups": 26,
+            "drops": 26,
+            "station_handling": 3120,
+            "return_unloading": 0,
+            "duration": 5372.942535606882,
+            "time_slack": 27.057464393117698
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              8,
+              14,
+              11,
+              18,
+              16,
+              9,
+              19,
+              10,
+              13,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              3,
+              8,
+              14,
+              10,
+              14,
+              10,
+              15,
+              8,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 15,
+            "travel": 2589.8340987721917,
+            "pickups": 23,
+            "drops": 23,
+            "station_handling": 2760,
+            "return_unloading": 0,
+            "duration": 5349.834098772191,
+            "time_slack": 50.16590122780872
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/01_R163-C20-S_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "7e53095f6ef7bb3add2cadcd80e742991d7785df92e0a6096cd97100dbd1ebe4",
+          "original_objective": 0.308606526667351,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.19128059228281274,
+      "independent_interval_envelope": {
+        "L": 0.19128059228281274,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.1543032633336755,
+            "L": 0.19128059228281274,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.1543032633336755,
+            "hi": 0.308606526667351,
+            "L": 0.2396563538331216,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.308606526667351,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "2198e77be27453419c694ec17537f05cdeb8323f05f1e26250b4928b8726ea0c",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.308606526667351,
+            "saved_objective_cutoff": 0.308606526667351,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "6d548a8c4e2f713746616bca772101fdfcb909b33499301050c83e8347f3adfe",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.1543032633336755,
+            "saved_objective_cutoff": 0.308606526667351,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "bd4fb74caa889a6d51d96131d5b992af3be30621e8be9efbe7646d4d141a4117",
+          "scope": {
+            "saved_G_lower": 0.1543032633336755,
+            "saved_G_upper": 0.308606526667351,
+            "saved_objective_cutoff": 0.308606526667351,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "2198e77be27453419c694ec17537f05cdeb8323f05f1e26250b4928b8726ea0c",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.308606526667351,
+            "saved_objective_cutoff": 0.308606526667351,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 2,
+      "role": "R163-C20-S",
+      "arm": "M",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/02_R163-C20-S_M/result.json",
+        "SHA256": "1a91511ccf426863811edd25e7e049634993c09b56b73e66225796730220ce8e",
+        "bytes": 97263
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_02.json",
+        "SHA256": "8130befabfa01fa8ec65439d4914b17f1098fe9b5322306cdcbb93b84ed5a53a",
+        "bytes": 4384250
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          11,
+          12,
+          17,
+          10,
+          7,
+          10,
+          9,
+          10,
+          7,
+          9,
+          12,
+          13,
+          7,
+          11,
+          6,
+          9,
+          13,
+          7,
+          11,
+          9
+        ],
+        "G": {
+          "value": 0.07556576093183874,
+          "exact": "9562507/126545500"
+        },
+        "P": {
+          "value": 1.072664567995893,
+          "exact": "3481691472337361624611/3245834323438463877120"
+        },
+        "F": {
+          "value": 0.191280592282812,
+          "exact": "94356640383761829019444570160974598361891029/493289147935373061521904096864413235019776000"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              3,
+              10,
+              19,
+              13,
+              7,
+              9,
+              16,
+              18,
+              11,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              15,
+              8,
+              13,
+              8,
+              4,
+              0,
+              4,
+              0,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 15,
+            "travel": 1794.0969974705188,
+            "pickups": 30,
+            "drops": 30,
+            "station_handling": 3600,
+            "return_unloading": 0,
+            "duration": 5394.0969974705185,
+            "time_slack": 5.903002529481455
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              15,
+              17,
+              12,
+              14,
+              20,
+              8,
+              4,
+              2,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              1,
+              8,
+              0,
+              5,
+              12,
+              16,
+              8,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 16,
+            "travel": 2039.6478274234782,
+            "pickups": 28,
+            "drops": 28,
+            "station_handling": 3360,
+            "return_unloading": 0,
+            "duration": 5399.647827423478,
+            "time_slack": 0.35217257652220724
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          12,
+          10,
+          18,
+          8,
+          9,
+          11,
+          9,
+          11,
+          7,
+          9,
+          12,
+          12,
+          6,
+          11,
+          2,
+          9,
+          15,
+          7,
+          11,
+          11
+        ],
+        "G": {
+          "value": 0.13540758190334348,
+          "exact": "96610523/713479420"
+        },
+        "P": {
+          "value": 1.6055363784710388,
+          "exact": "29530728813698852709721/18393061166151295303680"
+        },
+        "F": {
+          "value": 0.30860652666735094,
+          "exact": "972745151491082026965333394820406127479304907/3152056315839394199509600204168762145135132672"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              3,
+              2,
+              4,
+              20,
+              17,
+              12,
+              5,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              13,
+              7,
+              1,
+              6,
+              11,
+              4,
+              7,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 13,
+            "travel": 2252.942535606882,
+            "pickups": 26,
+            "drops": 26,
+            "station_handling": 3120,
+            "return_unloading": 0,
+            "duration": 5372.942535606882,
+            "time_slack": 27.057464393117698
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              8,
+              14,
+              11,
+              18,
+              16,
+              9,
+              19,
+              10,
+              13,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              3,
+              8,
+              14,
+              10,
+              14,
+              10,
+              15,
+              8,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 15,
+            "travel": 2589.8340987721917,
+            "pickups": 23,
+            "drops": 23,
+            "station_handling": 2760,
+            "return_unloading": 0,
+            "duration": 5349.834098772191,
+            "time_slack": 50.16590122780872
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/02_R163-C20-S_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "7e53095f6ef7bb3add2cadcd80e742991d7785df92e0a6096cd97100dbd1ebe4",
+          "original_objective": 0.308606526667351,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.19128059228281274,
+      "independent_interval_envelope": {
+        "L": 0.19128059228281274,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.1543032633336755,
+            "L": 0.19128059228281274,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.1543032633336755,
+            "hi": 0.308606526667351,
+            "L": 0.2396563538331216,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.308606526667351,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "2198e77be27453419c694ec17537f05cdeb8323f05f1e26250b4928b8726ea0c",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.308606526667351,
+            "saved_objective_cutoff": 0.308606526667351,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "6d548a8c4e2f713746616bca772101fdfcb909b33499301050c83e8347f3adfe",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.1543032633336755,
+            "saved_objective_cutoff": 0.308606526667351,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "bd4fb74caa889a6d51d96131d5b992af3be30621e8be9efbe7646d4d141a4117",
+          "scope": {
+            "saved_G_lower": 0.1543032633336755,
+            "saved_G_upper": 0.308606526667351,
+            "saved_objective_cutoff": 0.308606526667351,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "2198e77be27453419c694ec17537f05cdeb8323f05f1e26250b4928b8726ea0c",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.308606526667351,
+            "saved_objective_cutoff": 0.308606526667351,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 3,
+      "role": "R163-C20-S",
+      "arm": "C",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/03_R163-C20-S_C/result.json",
+        "SHA256": "06394dabc52f9eaa6179cc03b54d7d75138a241ed6604c43492adac5d27ab1c2",
+        "bytes": 97310
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_03.json",
+        "SHA256": "d4977e0f6efbe5498104423133c43768428a55166340ee6325f00f92f888e952",
+        "bytes": 5978536
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          11,
+          12,
+          17,
+          10,
+          7,
+          10,
+          9,
+          10,
+          7,
+          9,
+          12,
+          13,
+          7,
+          11,
+          6,
+          9,
+          13,
+          7,
+          11,
+          9
+        ],
+        "G": {
+          "value": 0.07556576093183874,
+          "exact": "9562507/126545500"
+        },
+        "P": {
+          "value": 1.072664567995893,
+          "exact": "3481691472337361624611/3245834323438463877120"
+        },
+        "F": {
+          "value": 0.191280592282812,
+          "exact": "94356640383761829019444570160974598361891029/493289147935373061521904096864413235019776000"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              3,
+              10,
+              19,
+              13,
+              7,
+              9,
+              16,
+              18,
+              11,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              15,
+              8,
+              13,
+              8,
+              4,
+              0,
+              4,
+              0,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 15,
+            "travel": 1794.0969974705188,
+            "pickups": 30,
+            "drops": 30,
+            "station_handling": 3600,
+            "return_unloading": 0,
+            "duration": 5394.0969974705185,
+            "time_slack": 5.903002529481455
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              15,
+              17,
+              12,
+              14,
+              20,
+              8,
+              4,
+              2,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              1,
+              8,
+              0,
+              5,
+              12,
+              16,
+              8,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 16,
+            "travel": 2039.6478274234782,
+            "pickups": 28,
+            "drops": 28,
+            "station_handling": 3360,
+            "return_unloading": 0,
+            "duration": 5399.647827423478,
+            "time_slack": 0.35217257652220724
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          10,
+          12,
+          16,
+          10,
+          7,
+          9,
+          8,
+          10,
+          6,
+          8,
+          12,
+          14,
+          6,
+          11,
+          7,
+          9,
+          12,
+          6,
+          11,
+          16
+        ],
+        "G": {
+          "value": 0.12355362376034251,
+          "exact": "11151989/90260315"
+        },
+        "P": {
+          "value": 1.5432530138772993,
+          "exact": "4730857846515416447253/3065510194358549217280"
+        },
+        "F": {
+          "value": 0.29003368431304327,
+          "exact": "1156532394522661814738139594256027544408775061/3987579571186555175717743336624016210306007040"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              3,
+              2,
+              4,
+              5,
+              15,
+              17,
+              12,
+              0
+            ],
+            "prefix_loads": [
+              6,
+              17,
+              9,
+              1,
+              6,
+              1,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 17,
+            "travel": 1701.7413777584914,
+            "pickups": 30,
+            "drops": 30,
+            "station_handling": 3600,
+            "return_unloading": 0,
+            "duration": 5301.741377758492,
+            "time_slack": 98.25862224150842
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              14,
+              8,
+              10,
+              19,
+              13,
+              9,
+              16,
+              18,
+              11,
+              6,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              9,
+              3,
+              8,
+              4,
+              1,
+              5,
+              2,
+              8,
+              3,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 9,
+            "travel": 2446.3379315435564,
+            "pickups": 24,
+            "drops": 24,
+            "station_handling": 2880,
+            "return_unloading": 0,
+            "duration": 5326.337931543556,
+            "time_slack": 73.6620684564441
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "C_s1",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/03_R163-C20-S_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "fb449f2f1fc932089d0bbd9f8a853872eb52d6cb549ac8b766b6f6b91e523619",
+          "original_objective": 0.2900336843130432,
+          "max_row_residual": 1.3211653993039363e-14,
+          "selected_H": "C_s1"
+        }
+      ],
+      "qualified_L": 0.19128059228281205,
+      "independent_interval_envelope": {
+        "L": 0.19128059228281205,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.1450168421565216,
+            "L": 0.19128059228281205,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.1450168421565216,
+            "hi": 0.2900336843130432,
+            "L": 0.23182348100844663,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.2900336843130432,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "a9b9edb84fc19a9ae740b4eed53c42e9f5b9015bcb67556cbe36dfd5af030208",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.2900336843130432,
+            "saved_objective_cutoff": 0.2900336843130432,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "2597a561fd7ff55d5f90bbd3943c4784539b5f4d3ad66698c04c85ad77df9d58",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.1450168421565216,
+            "saved_objective_cutoff": 0.2900336843130432,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "b64586d0cf5a9c9a8893d627525be38d327c37a19c1496fdbfee9612ae703c3c",
+          "scope": {
+            "saved_G_lower": 0.1450168421565216,
+            "saved_G_upper": 0.2900336843130432,
+            "saved_objective_cutoff": 0.2900336843130432,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "a9b9edb84fc19a9ae740b4eed53c42e9f5b9015bcb67556cbe36dfd5af030208",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.2900336843130432,
+            "saved_objective_cutoff": 0.2900336843130432,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 4,
+      "role": "R163-B20-B",
+      "arm": "M",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/04_R163-B20-B_M/result.json",
+        "SHA256": "b7945df58f3ea94305260d1a52616b7c24301274bea88bb221b7adcf2ebbc524",
+        "bytes": 96208
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_04.json",
+        "SHA256": "423cbea247a9bd1a832cf7477ecc90aaa418aab0bc74c751f339b2134db36ae7",
+        "bytes": 211407
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          4,
+          8,
+          7,
+          4,
+          13,
+          4,
+          5,
+          8,
+          4,
+          6,
+          11,
+          8,
+          13,
+          7,
+          8,
+          7,
+          12,
+          8,
+          6,
+          7
+        ],
+        "G": {
+          "value": 0.1709193230498591,
+          "exact": "41973/245572"
+        },
+        "P": {
+          "value": 2.47933968982684,
+          "exact": "14739058360262328989/5944751508129054720"
+        },
+        "F": {
+          "value": 0.42323218169431764,
+          "exact": "3710135296864201428757660560937408066969/8766193728490788496455250931344757227520"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              6,
+              18,
+              10,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              5,
+              3,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 5,
+            "travel": 6333.047711933519,
+            "pickups": 5,
+            "drops": 5,
+            "station_handling": 600,
+            "return_unloading": 0,
+            "duration": 6933.047711933519,
+            "time_slack": 266.95228806648083
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              8,
+              20,
+              15,
+              3,
+              0
+            ],
+            "prefix_loads": [
+              3,
+              0,
+              3,
+              1
+            ],
+            "return_load": 1,
+            "peak_load": 3,
+            "travel": 4484.3533638836325,
+            "pickups": 6,
+            "drops": 5,
+            "station_handling": 660,
+            "return_unloading": 60,
+            "duration": 5204.3533638836325,
+            "time_slack": 1995.6466361163675
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          4,
+          8,
+          5,
+          4,
+          13,
+          4,
+          5,
+          8,
+          4,
+          7,
+          11,
+          8,
+          13,
+          7,
+          8,
+          7,
+          12,
+          8,
+          6,
+          7
+        ],
+        "G": {
+          "value": 0.17467967122208916,
+          "exact": "42589/243812"
+        },
+        "P": {
+          "value": 2.5371909755411255,
+          "exact": "15082969878259533839/5944751508129054720"
+        },
+        "F": {
+          "value": 0.43287983257650764,
+          "exact": "3767512022325121785538696753636162155259/8703366936502517082150031925761194065920"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              15,
+              8,
+              20,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              3,
+              6,
+              3,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 6,
+            "travel": 3620.789695833137,
+            "pickups": 6,
+            "drops": 6,
+            "station_handling": 720,
+            "return_unloading": 0,
+            "duration": 4340.789695833137,
+            "time_slack": 2859.2103041668634
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              6,
+              18,
+              10,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              5,
+              2
+            ],
+            "return_load": 2,
+            "peak_load": 5,
+            "travel": 6332.708535692894,
+            "pickups": 5,
+            "drops": 3,
+            "station_handling": 480,
+            "return_unloading": 120,
+            "duration": 6932.708535692894,
+            "time_slack": 267.29146430710625
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/04_R163-B20-B_M/external/native_logs/L0.0.1_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "31a183aa60acfd8b1244fcbde1e1acff6365908bd9f2e04f00085a06df0d3db5",
+          "original_objective": 0.43287983257650753,
+          "max_row_residual": 5.1514348342607263e-14,
+          "selected_H": "base"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/04_R163-B20-B_M/external/native_logs/L0.0.1_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "31a183aa60acfd8b1244fcbde1e1acff6365908bd9f2e04f00085a06df0d3db5",
+          "original_objective": 0.43287983257650753,
+          "max_row_residual": 5.1514348342607263e-14,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.4232321816943161,
+      "independent_interval_envelope": {
+        "L": 0.4232321816943161,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.10821995814412688,
+            "L": 0.43287983257650753,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.10821995814412688,
+            "hi": 0.16232993721619032,
+            "L": 0.4232321816943161,
+            "calls": [
+              1,
+              2,
+              5,
+              6,
+              8,
+              9
+            ]
+          },
+          {
+            "lo": 0.16232993721619032,
+            "hi": 0.21643991628825376,
+            "L": 0.4232321816943161,
+            "calls": [
+              1,
+              2,
+              5,
+              7,
+              8,
+              9
+            ]
+          },
+          {
+            "lo": 0.21643991628825376,
+            "hi": 0.43287983257650753,
+            "L": 0.43287983257650753,
+            "calls": [
+              1,
+              3
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.43287983257650753,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 9,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "42cf9b9e30909f68207e6bc3c804d47a1ef69c630c45c3bee6ceff3ae7c01357",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.43287983257650753,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "00725e6481196ee7ecbf97aec3ebdb25ae9e5e0b58bac9ac77ec72c31ca4ef24",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "fe50c0b039a49abdeb6674666c645eb56ad0a6fb5bf0513efc7d2d9b7deb60cf",
+          "scope": {
+            "saved_G_lower": 0.21643991628825376,
+            "saved_G_upper": 0.43287983257650753,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "36507e52fd049e953f4106be7774d2f2838838daf23a0273e0705f9e664c683c",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.10821995814412688,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "5": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "6": {
+          "model_SHA256": "8609981c198cfad4b1de8129b851bf7913da686966010236a5f8a4af7434834e",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.16232993721619032,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "7": {
+          "model_SHA256": "f37ac8088a0503ccadccdf1bd0d08374b8534a4da6ce47f591cde35e45370500",
+          "scope": {
+            "saved_G_lower": 0.16232993721619032,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "8": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "9": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 5,
+      "role": "R163-B20-B",
+      "arm": "C",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/05_R163-B20-B_C/result.json",
+        "SHA256": "6ff69172fa698f0883df228e4c6221e0fe136bb5e29ee476c6388c37b18f8862",
+        "bytes": 96188
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_05.json",
+        "SHA256": "a5b613c4706b7740f7213220a04e552fce14264d95c14973aa9b6653f3da49f3",
+        "bytes": 211400
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          4,
+          8,
+          7,
+          4,
+          13,
+          4,
+          5,
+          8,
+          4,
+          6,
+          11,
+          8,
+          13,
+          7,
+          8,
+          7,
+          12,
+          8,
+          6,
+          7
+        ],
+        "G": {
+          "value": 0.1709193230498591,
+          "exact": "41973/245572"
+        },
+        "P": {
+          "value": 2.47933968982684,
+          "exact": "14739058360262328989/5944751508129054720"
+        },
+        "F": {
+          "value": 0.42323218169431764,
+          "exact": "3710135296864201428757660560937408066969/8766193728490788496455250931344757227520"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              6,
+              18,
+              10,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              5,
+              3,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 5,
+            "travel": 6333.047711933519,
+            "pickups": 5,
+            "drops": 5,
+            "station_handling": 600,
+            "return_unloading": 0,
+            "duration": 6933.047711933519,
+            "time_slack": 266.95228806648083
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              8,
+              20,
+              15,
+              3,
+              0
+            ],
+            "prefix_loads": [
+              3,
+              0,
+              3,
+              1
+            ],
+            "return_load": 1,
+            "peak_load": 3,
+            "travel": 4484.3533638836325,
+            "pickups": 6,
+            "drops": 5,
+            "station_handling": 660,
+            "return_unloading": 60,
+            "duration": 5204.3533638836325,
+            "time_slack": 1995.6466361163675
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          4,
+          8,
+          5,
+          4,
+          13,
+          4,
+          5,
+          8,
+          4,
+          7,
+          11,
+          8,
+          13,
+          7,
+          8,
+          7,
+          12,
+          8,
+          6,
+          7
+        ],
+        "G": {
+          "value": 0.17467967122208916,
+          "exact": "42589/243812"
+        },
+        "P": {
+          "value": 2.5371909755411255,
+          "exact": "15082969878259533839/5944751508129054720"
+        },
+        "F": {
+          "value": 0.43287983257650764,
+          "exact": "3767512022325121785538696753636162155259/8703366936502517082150031925761194065920"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              15,
+              8,
+              20,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              3,
+              6,
+              3,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 6,
+            "travel": 3620.789695833137,
+            "pickups": 6,
+            "drops": 6,
+            "station_handling": 720,
+            "return_unloading": 0,
+            "duration": 4340.789695833137,
+            "time_slack": 2859.2103041668634
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              6,
+              18,
+              10,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              5,
+              2
+            ],
+            "return_load": 2,
+            "peak_load": 5,
+            "travel": 6332.708535692894,
+            "pickups": 5,
+            "drops": 3,
+            "station_handling": 480,
+            "return_unloading": 120,
+            "duration": 6932.708535692894,
+            "time_slack": 267.29146430710625
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/05_R163-B20-B_C/external/native_logs/L0.0.1_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "31a183aa60acfd8b1244fcbde1e1acff6365908bd9f2e04f00085a06df0d3db5",
+          "original_objective": 0.43287983257650753,
+          "max_row_residual": 5.1514348342607263e-14,
+          "selected_H": "base"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/05_R163-B20-B_C/external/native_logs/L0.0.1_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "31a183aa60acfd8b1244fcbde1e1acff6365908bd9f2e04f00085a06df0d3db5",
+          "original_objective": 0.43287983257650753,
+          "max_row_residual": 5.1514348342607263e-14,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.4232321816943161,
+      "independent_interval_envelope": {
+        "L": 0.4232321816943161,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.10821995814412688,
+            "L": 0.43287983257650753,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.10821995814412688,
+            "hi": 0.16232993721619032,
+            "L": 0.4232321816943161,
+            "calls": [
+              1,
+              2,
+              5,
+              6,
+              8,
+              9
+            ]
+          },
+          {
+            "lo": 0.16232993721619032,
+            "hi": 0.21643991628825376,
+            "L": 0.4232321816943161,
+            "calls": [
+              1,
+              2,
+              5,
+              7,
+              8,
+              9
+            ]
+          },
+          {
+            "lo": 0.21643991628825376,
+            "hi": 0.43287983257650753,
+            "L": 0.43287983257650753,
+            "calls": [
+              1,
+              3
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.43287983257650753,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 9,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "42cf9b9e30909f68207e6bc3c804d47a1ef69c630c45c3bee6ceff3ae7c01357",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.43287983257650753,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "00725e6481196ee7ecbf97aec3ebdb25ae9e5e0b58bac9ac77ec72c31ca4ef24",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "fe50c0b039a49abdeb6674666c645eb56ad0a6fb5bf0513efc7d2d9b7deb60cf",
+          "scope": {
+            "saved_G_lower": 0.21643991628825376,
+            "saved_G_upper": 0.43287983257650753,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "36507e52fd049e953f4106be7774d2f2838838daf23a0273e0705f9e664c683c",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.10821995814412688,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "5": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "6": {
+          "model_SHA256": "8609981c198cfad4b1de8129b851bf7913da686966010236a5f8a4af7434834e",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.16232993721619032,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "7": {
+          "model_SHA256": "f37ac8088a0503ccadccdf1bd0d08374b8534a4da6ce47f591cde35e45370500",
+          "scope": {
+            "saved_G_lower": 0.16232993721619032,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "8": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "9": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 6,
+      "role": "R163-B20-B",
+      "arm": "B",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/06_R163-B20-B_B/result.json",
+        "SHA256": "8c9d726e10a0719a97fcde250c27f35086d5b21006e19e5596744bb6c33717ba",
+        "bytes": 96217
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_06.json",
+        "SHA256": "36631e4bc57c03c27bd43cfa79de33f4e830ca07d81a44c40b2ac407a201a634",
+        "bytes": 201810
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          4,
+          8,
+          7,
+          4,
+          13,
+          4,
+          5,
+          8,
+          4,
+          6,
+          11,
+          8,
+          13,
+          7,
+          8,
+          7,
+          12,
+          8,
+          6,
+          7
+        ],
+        "G": {
+          "value": 0.1709193230498591,
+          "exact": "41973/245572"
+        },
+        "P": {
+          "value": 2.47933968982684,
+          "exact": "14739058360262328989/5944751508129054720"
+        },
+        "F": {
+          "value": 0.42323218169431764,
+          "exact": "3710135296864201428757660560937408066969/8766193728490788496455250931344757227520"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              6,
+              18,
+              10,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              5,
+              3,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 5,
+            "travel": 6333.047711933519,
+            "pickups": 5,
+            "drops": 5,
+            "station_handling": 600,
+            "return_unloading": 0,
+            "duration": 6933.047711933519,
+            "time_slack": 266.95228806648083
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              8,
+              20,
+              15,
+              3,
+              0
+            ],
+            "prefix_loads": [
+              3,
+              0,
+              3,
+              1
+            ],
+            "return_load": 1,
+            "peak_load": 3,
+            "travel": 4484.3533638836325,
+            "pickups": 6,
+            "drops": 5,
+            "station_handling": 660,
+            "return_unloading": 60,
+            "duration": 5204.3533638836325,
+            "time_slack": 1995.6466361163675
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          4,
+          8,
+          5,
+          4,
+          13,
+          4,
+          5,
+          8,
+          4,
+          7,
+          11,
+          8,
+          13,
+          7,
+          8,
+          7,
+          12,
+          8,
+          6,
+          7
+        ],
+        "G": {
+          "value": 0.17467967122208916,
+          "exact": "42589/243812"
+        },
+        "P": {
+          "value": 2.5371909755411255,
+          "exact": "15082969878259533839/5944751508129054720"
+        },
+        "F": {
+          "value": 0.43287983257650764,
+          "exact": "3767512022325121785538696753636162155259/8703366936502517082150031925761194065920"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              15,
+              8,
+              20,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              3,
+              6,
+              3,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 6,
+            "travel": 3620.789695833137,
+            "pickups": 6,
+            "drops": 6,
+            "station_handling": 720,
+            "return_unloading": 0,
+            "duration": 4340.789695833137,
+            "time_slack": 2859.2103041668634
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              6,
+              18,
+              10,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              5,
+              2
+            ],
+            "return_load": 2,
+            "peak_load": 5,
+            "travel": 6332.708535692894,
+            "pickups": 5,
+            "drops": 3,
+            "station_handling": 480,
+            "return_unloading": 120,
+            "duration": 6932.708535692894,
+            "time_slack": 267.29146430710625
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/06_R163-B20-B_B/external/native_logs/L0.0.1_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "31a183aa60acfd8b1244fcbde1e1acff6365908bd9f2e04f00085a06df0d3db5",
+          "original_objective": 0.43287983257650753,
+          "max_row_residual": 5.1514348342607263e-14,
+          "selected_H": "base"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/06_R163-B20-B_B/external/native_logs/L0.0.1_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "31a183aa60acfd8b1244fcbde1e1acff6365908bd9f2e04f00085a06df0d3db5",
+          "original_objective": 0.43287983257650753,
+          "max_row_residual": 5.1514348342607263e-14,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.4232321816943161,
+      "independent_interval_envelope": {
+        "L": 0.4232321816943161,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.10821995814412688,
+            "L": 0.43287983257650753,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.10821995814412688,
+            "hi": 0.16232993721619032,
+            "L": 0.4232321816943161,
+            "calls": [
+              1,
+              2,
+              5,
+              6,
+              8,
+              9
+            ]
+          },
+          {
+            "lo": 0.16232993721619032,
+            "hi": 0.21643991628825376,
+            "L": 0.4232321816943161,
+            "calls": [
+              1,
+              2,
+              5,
+              7,
+              8,
+              9
+            ]
+          },
+          {
+            "lo": 0.21643991628825376,
+            "hi": 0.43287983257650753,
+            "L": 0.43287983257650753,
+            "calls": [
+              1,
+              3
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.43287983257650753,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 9,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "42cf9b9e30909f68207e6bc3c804d47a1ef69c630c45c3bee6ceff3ae7c01357",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.43287983257650753,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "00725e6481196ee7ecbf97aec3ebdb25ae9e5e0b58bac9ac77ec72c31ca4ef24",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "fe50c0b039a49abdeb6674666c645eb56ad0a6fb5bf0513efc7d2d9b7deb60cf",
+          "scope": {
+            "saved_G_lower": 0.21643991628825376,
+            "saved_G_upper": 0.43287983257650753,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "36507e52fd049e953f4106be7774d2f2838838daf23a0273e0705f9e664c683c",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.10821995814412688,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "5": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "6": {
+          "model_SHA256": "8609981c198cfad4b1de8129b851bf7913da686966010236a5f8a4af7434834e",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.16232993721619032,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "7": {
+          "model_SHA256": "f37ac8088a0503ccadccdf1bd0d08374b8534a4da6ce47f591cde35e45370500",
+          "scope": {
+            "saved_G_lower": 0.16232993721619032,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "8": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "9": {
+          "model_SHA256": "1aaef024995bf344d96f081147ae212012ab2d0a5f44d02a2b0d9280bc0fe723",
+          "scope": {
+            "saved_G_lower": 0.10821995814412688,
+            "saved_G_upper": 0.21643991628825376,
+            "saved_objective_cutoff": 0.43287983257650753,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 7,
+      "role": "R163-X20-S",
+      "arm": "C",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/07_R163-X20-S_C/result.json",
+        "SHA256": "37e47a4815709d1bc370e31ff5561bd58c91e07327b11770fae07d49923455e8",
+        "bytes": 96699
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_07.json",
+        "SHA256": "b248d46e9c74902dfb40c1c9051d72494d3ddf8c5bf9cd04a725f4d659f86e56",
+        "bytes": 1792545
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          0,
+          7,
+          2,
+          4,
+          8,
+          8,
+          2,
+          8,
+          5,
+          7,
+          3,
+          10,
+          3,
+          3,
+          6,
+          3,
+          1,
+          5,
+          1,
+          8
+        ],
+        "G": {
+          "value": 0.2487228038909928,
+          "exact": "66991/269340"
+        },
+        "P": {
+          "value": 1.4966666666666666,
+          "exact": "4529540361224150087/3026418949592973312"
+        },
+        "F": {
+          "value": 0.44774762658602824,
+          "exact": "91316753960962586539184134711012498009/203946930232174860714142232691353845760"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              6,
+              7,
+              11,
+              13,
+              14,
+              20,
+              16,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              2,
+              4,
+              7,
+              8,
+              2,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 8,
+            "travel": 4187.83180151031,
+            "pickups": 10,
+            "drops": 10,
+            "station_handling": 1200,
+            "return_unloading": 0,
+            "duration": 5387.83180151031,
+            "time_slack": 12.16819848969044
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              8,
+              10,
+              12,
+              18,
+              15,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              8,
+              14,
+              8,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 14,
+            "travel": 3681.360255844771,
+            "pickups": 14,
+            "drops": 14,
+            "station_handling": 1680,
+            "return_unloading": 0,
+            "duration": 5361.360255844771,
+            "time_slack": 38.63974415522898
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          0,
+          7,
+          2,
+          4,
+          8,
+          7,
+          2,
+          8,
+          3,
+          8,
+          3,
+          10,
+          6,
+          4,
+          6,
+          1,
+          7,
+          4,
+          1,
+          2
+        ],
+        "G": {
+          "value": 0.2901125342415044,
+          "exact": "78371/270140"
+        },
+        "P": {
+          "value": 1.78,
+          "exact": "448918810856291049/252201579132747776"
+        },
+        "F": {
+          "value": 0.5268146619010788,
+          "exact": "80821020406996258128181207629174567863/153414523649252942953103092947322142720"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              5,
+              8,
+              10,
+              17,
+              12,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              8,
+              13,
+              7,
+              1
+            ],
+            "return_load": 1,
+            "peak_load": 13,
+            "travel": 3478.202597420599,
+            "pickups": 13,
+            "drops": 12,
+            "station_handling": 1500,
+            "return_unloading": 60,
+            "duration": 5038.202597420599,
+            "time_slack": 361.797402579401
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              6,
+              9,
+              18,
+              15,
+              11,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              7,
+              4,
+              0,
+              2,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 7,
+            "travel": 4203.688923318682,
+            "pickups": 9,
+            "drops": 9,
+            "station_handling": 1080,
+            "return_unloading": 0,
+            "duration": 5283.688923318682,
+            "time_slack": 116.3110766813179
+          }
+        ]
+      },
+      "U_error": 5.551115123125783e-17,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/07_R163-X20-S_C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "aa75d3ff26f24ef65befa5c4c0ff717359915172f7db6ef75cba3441a7cb939c",
+          "original_objective": 0.5268146619010788,
+          "max_row_residual": 1.2989609388114332e-14,
+          "selected_H": "base"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/07_R163-X20-S_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "aa75d3ff26f24ef65befa5c4c0ff717359915172f7db6ef75cba3441a7cb939c",
+          "original_objective": 0.5268146619010788,
+          "max_row_residual": 1.2989609388114332e-14,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.44774762658601525,
+      "independent_interval_envelope": {
+        "L": 0.44774762658601525,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.2634073309505394,
+            "L": 0.44774762658601525,
+            "calls": [
+              1,
+              2,
+              4,
+              5
+            ]
+          },
+          {
+            "lo": 0.2634073309505394,
+            "hi": 0.5268146619010788,
+            "L": 0.44774762658601525,
+            "calls": [
+              1,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.5268146619010788,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 5,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "76cdde3e3e13bd4f2c07d950863f1202384d6024494c4275968b3baf48b4cc38",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.2634073309505394,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "0150a83ead4c577d133bf0515b097a4a3f1238d11a5908e4a7b8cd2912a28539",
+          "scope": {
+            "saved_G_lower": 0.2634073309505394,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "5": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 8,
+      "role": "R163-X20-S",
+      "arm": "B",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/08_R163-X20-S_B/result.json",
+        "SHA256": "fecccad27d972c28ef373a192b5c4da85d19ba118e5079c1b2d890b4af624437",
+        "bytes": 96662
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_08.json",
+        "SHA256": "e8dd15ea0fc789ec0a9200aa6f4686f81e5069c7e910393aeb6c8d340050b290",
+        "bytes": 1781389
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          0,
+          7,
+          2,
+          4,
+          8,
+          8,
+          2,
+          8,
+          5,
+          7,
+          3,
+          10,
+          3,
+          3,
+          6,
+          3,
+          1,
+          5,
+          1,
+          8
+        ],
+        "G": {
+          "value": 0.2487228038909928,
+          "exact": "66991/269340"
+        },
+        "P": {
+          "value": 1.4966666666666666,
+          "exact": "4529540361224150087/3026418949592973312"
+        },
+        "F": {
+          "value": 0.44774762658602824,
+          "exact": "91316753960962586539184134711012498009/203946930232174860714142232691353845760"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              6,
+              7,
+              11,
+              13,
+              14,
+              20,
+              16,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              2,
+              4,
+              7,
+              8,
+              2,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 8,
+            "travel": 4187.83180151031,
+            "pickups": 10,
+            "drops": 10,
+            "station_handling": 1200,
+            "return_unloading": 0,
+            "duration": 5387.83180151031,
+            "time_slack": 12.16819848969044
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              8,
+              10,
+              12,
+              18,
+              15,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              8,
+              14,
+              8,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 14,
+            "travel": 3681.360255844771,
+            "pickups": 14,
+            "drops": 14,
+            "station_handling": 1680,
+            "return_unloading": 0,
+            "duration": 5361.360255844771,
+            "time_slack": 38.63974415522898
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          0,
+          7,
+          2,
+          4,
+          8,
+          7,
+          2,
+          8,
+          3,
+          8,
+          3,
+          10,
+          6,
+          4,
+          6,
+          1,
+          7,
+          4,
+          1,
+          2
+        ],
+        "G": {
+          "value": 0.2901125342415044,
+          "exact": "78371/270140"
+        },
+        "P": {
+          "value": 1.78,
+          "exact": "448918810856291049/252201579132747776"
+        },
+        "F": {
+          "value": 0.5268146619010788,
+          "exact": "80821020406996258128181207629174567863/153414523649252942953103092947322142720"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              5,
+              8,
+              10,
+              17,
+              12,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              8,
+              13,
+              7,
+              1
+            ],
+            "return_load": 1,
+            "peak_load": 13,
+            "travel": 3478.202597420599,
+            "pickups": 13,
+            "drops": 12,
+            "station_handling": 1500,
+            "return_unloading": 60,
+            "duration": 5038.202597420599,
+            "time_slack": 361.797402579401
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              6,
+              9,
+              18,
+              15,
+              11,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              7,
+              4,
+              0,
+              2,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 7,
+            "travel": 4203.688923318682,
+            "pickups": 9,
+            "drops": 9,
+            "station_handling": 1080,
+            "return_unloading": 0,
+            "duration": 5283.688923318682,
+            "time_slack": 116.3110766813179
+          }
+        ]
+      },
+      "U_error": 5.551115123125783e-17,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/08_R163-X20-S_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "aa75d3ff26f24ef65befa5c4c0ff717359915172f7db6ef75cba3441a7cb939c",
+          "original_objective": 0.5268146619010788,
+          "max_row_residual": 1.2989609388114332e-14,
+          "selected_H": "base"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/08_R163-X20-S_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "aa75d3ff26f24ef65befa5c4c0ff717359915172f7db6ef75cba3441a7cb939c",
+          "original_objective": 0.5268146619010788,
+          "max_row_residual": 1.2989609388114332e-14,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.44774762658601525,
+      "independent_interval_envelope": {
+        "L": 0.44774762658601525,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.2634073309505394,
+            "L": 0.44774762658601525,
+            "calls": [
+              1,
+              2,
+              4,
+              5
+            ]
+          },
+          {
+            "lo": 0.2634073309505394,
+            "hi": 0.5268146619010788,
+            "L": 0.44774762658601525,
+            "calls": [
+              1,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.5268146619010788,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 5,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "76cdde3e3e13bd4f2c07d950863f1202384d6024494c4275968b3baf48b4cc38",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.2634073309505394,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "0150a83ead4c577d133bf0515b097a4a3f1238d11a5908e4a7b8cd2912a28539",
+          "scope": {
+            "saved_G_lower": 0.2634073309505394,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "5": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 9,
+      "role": "R163-X20-S",
+      "arm": "M",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/09_R163-X20-S_M/result.json",
+        "SHA256": "fd9184efe91b1b5913967a88303588171893f2581a6f74adf0345572bc195958",
+        "bytes": 96659
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_09.json",
+        "SHA256": "5f6a86a62fc3cdb3c6500ec5169d771f296e452bdf87a5366d99e3db5e473755",
+        "bytes": 1792741
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          0,
+          7,
+          2,
+          4,
+          8,
+          8,
+          2,
+          8,
+          5,
+          7,
+          3,
+          10,
+          3,
+          3,
+          6,
+          3,
+          1,
+          5,
+          1,
+          8
+        ],
+        "G": {
+          "value": 0.2487228038909928,
+          "exact": "66991/269340"
+        },
+        "P": {
+          "value": 1.4966666666666666,
+          "exact": "4529540361224150087/3026418949592973312"
+        },
+        "F": {
+          "value": 0.44774762658602824,
+          "exact": "91316753960962586539184134711012498009/203946930232174860714142232691353845760"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              6,
+              7,
+              11,
+              13,
+              14,
+              20,
+              16,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              2,
+              4,
+              7,
+              8,
+              2,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 8,
+            "travel": 4187.83180151031,
+            "pickups": 10,
+            "drops": 10,
+            "station_handling": 1200,
+            "return_unloading": 0,
+            "duration": 5387.83180151031,
+            "time_slack": 12.16819848969044
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              8,
+              10,
+              12,
+              18,
+              15,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              8,
+              14,
+              8,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 14,
+            "travel": 3681.360255844771,
+            "pickups": 14,
+            "drops": 14,
+            "station_handling": 1680,
+            "return_unloading": 0,
+            "duration": 5361.360255844771,
+            "time_slack": 38.63974415522898
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          0,
+          7,
+          2,
+          4,
+          8,
+          7,
+          2,
+          8,
+          3,
+          8,
+          3,
+          10,
+          6,
+          4,
+          6,
+          1,
+          7,
+          4,
+          1,
+          2
+        ],
+        "G": {
+          "value": 0.2901125342415044,
+          "exact": "78371/270140"
+        },
+        "P": {
+          "value": 1.78,
+          "exact": "448918810856291049/252201579132747776"
+        },
+        "F": {
+          "value": 0.5268146619010788,
+          "exact": "80821020406996258128181207629174567863/153414523649252942953103092947322142720"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              5,
+              8,
+              10,
+              17,
+              12,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              8,
+              13,
+              7,
+              1
+            ],
+            "return_load": 1,
+            "peak_load": 13,
+            "travel": 3478.202597420599,
+            "pickups": 13,
+            "drops": 12,
+            "station_handling": 1500,
+            "return_unloading": 60,
+            "duration": 5038.202597420599,
+            "time_slack": 361.797402579401
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              6,
+              9,
+              18,
+              15,
+              11,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              7,
+              4,
+              0,
+              2,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 7,
+            "travel": 4203.688923318682,
+            "pickups": 9,
+            "drops": 9,
+            "station_handling": 1080,
+            "return_unloading": 0,
+            "duration": 5283.688923318682,
+            "time_slack": 116.3110766813179
+          }
+        ]
+      },
+      "U_error": 5.551115123125783e-17,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/09_R163-X20-S_M/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "aa75d3ff26f24ef65befa5c4c0ff717359915172f7db6ef75cba3441a7cb939c",
+          "original_objective": 0.5268146619010788,
+          "max_row_residual": 1.2989609388114332e-14,
+          "selected_H": "base"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/09_R163-X20-S_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "aa75d3ff26f24ef65befa5c4c0ff717359915172f7db6ef75cba3441a7cb939c",
+          "original_objective": 0.5268146619010788,
+          "max_row_residual": 1.2989609388114332e-14,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.44774762658601525,
+      "independent_interval_envelope": {
+        "L": 0.44774762658601525,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.2634073309505394,
+            "L": 0.44774762658601525,
+            "calls": [
+              1,
+              2,
+              4,
+              5
+            ]
+          },
+          {
+            "lo": 0.2634073309505394,
+            "hi": 0.5268146619010788,
+            "L": 0.44774762658601525,
+            "calls": [
+              1,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.5268146619010788,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": true,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 5,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "76cdde3e3e13bd4f2c07d950863f1202384d6024494c4275968b3baf48b4cc38",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.2634073309505394,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "0150a83ead4c577d133bf0515b097a4a3f1238d11a5908e4a7b8cd2912a28539",
+          "scope": {
+            "saved_G_lower": 0.2634073309505394,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "5": {
+          "model_SHA256": "a8297f54c0ac3c90e96eb09aecc94492da8af93db2d3fc3c6d766ee20ffbac91",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5268146619010788,
+            "saved_objective_cutoff": 0.5268146619010788,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 10,
+      "role": "R163-C35-U",
+      "arm": "B",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/10_R163-C35-U_B/result.json",
+        "SHA256": "aed5fa320519f1f45eb73326999a2da0e632f0714d5ab151e05821dbc99cefa9",
+        "bytes": 98724
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_10.json",
+        "SHA256": "f3867c19e2107aba4914e87ac2b0932bbcaa615da8ede27215570f842a7b7f03",
+        "bytes": 182326
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          13,
+          9,
+          10,
+          5,
+          16,
+          21,
+          12,
+          9,
+          11,
+          29,
+          12,
+          14,
+          20,
+          11,
+          12,
+          17,
+          15,
+          20,
+          31,
+          12,
+          22,
+          10,
+          16,
+          29,
+          8,
+          18,
+          20,
+          14,
+          9,
+          12,
+          11,
+          26,
+          9,
+          11,
+          15
+        ],
+        "G": {
+          "value": 0.0822569462137761,
+          "exact": "6323018/76869107"
+        },
+        "P": {
+          "value": 0.5941730117235705,
+          "exact": "1873484665355650866589/3153096199911650623488"
+        },
+        "F": {
+          "value": 0.14802296326563238,
+          "exact": "198863260605178097373724579956647123949781807/1343462231926211359934889438166157561589399552"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              20,
+              35,
+              6,
+              24,
+              10,
+              25,
+              2,
+              19,
+              26,
+              27,
+              5,
+              0
+            ],
+            "prefix_loads": [
+              10,
+              4,
+              13,
+              0,
+              2,
+              20,
+              18,
+              16,
+              0,
+              11,
+              2,
+              11
+            ],
+            "return_load": 11,
+            "peak_load": 20,
+            "travel": 3621.7845347150455,
+            "pickups": 59,
+            "drops": 48,
+            "station_handling": 6420,
+            "return_unloading": 660,
+            "duration": 10701.784534715045,
+            "time_slack": 98.21546528495492
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              11,
+              23,
+              17,
+              1,
+              32,
+              13,
+              21,
+              12,
+              31,
+              8,
+              22,
+              0
+            ],
+            "prefix_loads": [
+              10,
+              15,
+              8,
+              1,
+              19,
+              10,
+              0,
+              10,
+              6,
+              1,
+              10
+            ],
+            "return_load": 10,
+            "peak_load": 19,
+            "travel": 4472.822493047789,
+            "pickups": 52,
+            "drops": 42,
+            "station_handling": 5640,
+            "return_unloading": 600,
+            "duration": 10712.822493047788,
+            "time_slack": 87.17750695221184
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              15,
+              14,
+              16,
+              30,
+              7,
+              33,
+              3,
+              9,
+              34,
+              29,
+              0
+            ],
+            "prefix_loads": [
+              9,
+              18,
+              11,
+              6,
+              15,
+              22,
+              17,
+              24,
+              20,
+              27
+            ],
+            "return_load": 27,
+            "peak_load": 27,
+            "travel": 5039.163948885052,
+            "pickups": 48,
+            "drops": 21,
+            "station_handling": 4140,
+            "return_unloading": 1620,
+            "duration": 10799.163948885052,
+            "time_slack": 0.8360511149476224
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          13,
+          9,
+          11,
+          10,
+          20,
+          21,
+          12,
+          9,
+          11,
+          29,
+          14,
+          20,
+          20,
+          11,
+          12,
+          17,
+          15,
+          16,
+          31,
+          12,
+          22,
+          10,
+          14,
+          26,
+          8,
+          20,
+          20,
+          18,
+          10,
+          12,
+          11,
+          26,
+          9,
+          11,
+          22
+        ],
+        "G": {
+          "value": 0.08526527561969233,
+          "exact": "86012309/1008761285"
+        },
+        "P": {
+          "value": 0.8061160851096616,
+          "exact": "88961654762642571211579/110358366996907771822080"
+        },
+        "F": {
+          "value": 0.17449020363402976,
+          "exact": "3076331140422965508733039901187023465818198181/17630394580060010279936211383038717300844789760"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              20,
+              12,
+              18,
+              35,
+              24,
+              6,
+              10,
+              25,
+              2,
+              19,
+              26,
+              27,
+              5,
+              34,
+              0
+            ],
+            "prefix_loads": [
+              6,
+              0,
+              4,
+              8,
+              10,
+              15,
+              2,
+              20,
+              18,
+              16,
+              0,
+              9,
+              0,
+              5,
+              1
+            ],
+            "return_load": 1,
+            "peak_load": 20,
+            "travel": 4354.34595715613,
+            "pickups": 53,
+            "drops": 52,
+            "station_handling": 6300,
+            "return_unloading": 60,
+            "duration": 10714.345957156129,
+            "time_slack": 85.65404284387114
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              8,
+              31,
+              29,
+              11,
+              23,
+              17,
+              1,
+              32,
+              13,
+              21,
+              0
+            ],
+            "prefix_loads": [
+              9,
+              4,
+              0,
+              6,
+              14,
+              21,
+              14,
+              7,
+              25,
+              16,
+              6
+            ],
+            "return_load": 6,
+            "peak_load": 25,
+            "travel": 4999.393254175596,
+            "pickups": 48,
+            "drops": 42,
+            "station_handling": 5400,
+            "return_unloading": 360,
+            "duration": 10759.393254175597,
+            "time_slack": 40.60674582440333
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              7,
+              4,
+              33,
+              3,
+              9,
+              15,
+              14,
+              16,
+              30,
+              0
+            ],
+            "prefix_loads": [
+              9,
+              4,
+              11,
+              5,
+              12,
+              21,
+              30,
+              23,
+              18
+            ],
+            "return_load": 18,
+            "peak_load": 30,
+            "travel": 5769.674459925723,
+            "pickups": 41,
+            "drops": 23,
+            "station_handling": 3840,
+            "return_unloading": 1080,
+            "duration": 10689.674459925722,
+            "time_slack": 110.32554007427825
+          }
+        ]
+      },
+      "U_error": -2.7755575615628914e-17,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/10_R163-C35-U_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "4f37e14316699b012df7414625bda7b44fbb70f074116546abc7281a6a037608",
+          "original_objective": 0.17449020363402978,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.017120344246947146,
+      "independent_interval_envelope": {
+        "L": 0.01712034424695,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.08724510181701489,
+            "L": 0.01712034424695,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.08724510181701489,
+            "hi": 0.17449020363402978,
+            "L": 0.08724510181701489,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.17449020363402978,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "c5350ebe16bd659ca7f1290247da3f1e018a372bf2c15c1f1db0e69d3a5ca0a8",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.17449020363402978,
+            "saved_objective_cutoff": 0.17449020363402978,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "3e268e3f687a5f45dfde986cebc3ebfc78f254df643a904b9d75f31deff64e7e",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.08724510181701489,
+            "saved_objective_cutoff": 0.17449020363402978,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "75b73bf2e9c9f19116ef5d88167a079b8d562973f565903f986e745e97f11a99",
+          "scope": {
+            "saved_G_lower": 0.08724510181701489,
+            "saved_G_upper": 0.17449020363402978,
+            "saved_objective_cutoff": 0.17449020363402978,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "c5350ebe16bd659ca7f1290247da3f1e018a372bf2c15c1f1db0e69d3a5ca0a8",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.17449020363402978,
+            "saved_objective_cutoff": 0.17449020363402978,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 11,
+      "role": "R163-C35-U",
+      "arm": "M",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/11_R163-C35-U_M/result.json",
+        "SHA256": "7cdc9fe93b95356f407740605dcaf1763c341ec69d9e41c582589900dd778544",
+        "bytes": 98763
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_11.json",
+        "SHA256": "a0d6cb06bb749f05de9295c982f48f9de55b0ec5016c4610d1131e0fdf3af19f",
+        "bytes": 208305
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          13,
+          9,
+          10,
+          5,
+          16,
+          21,
+          12,
+          9,
+          11,
+          29,
+          12,
+          14,
+          20,
+          11,
+          12,
+          17,
+          15,
+          20,
+          31,
+          12,
+          22,
+          10,
+          16,
+          29,
+          8,
+          18,
+          20,
+          14,
+          9,
+          12,
+          11,
+          26,
+          9,
+          11,
+          15
+        ],
+        "G": {
+          "value": 0.0822569462137761,
+          "exact": "6323018/76869107"
+        },
+        "P": {
+          "value": 0.5941730117235705,
+          "exact": "1873484665355650866589/3153096199911650623488"
+        },
+        "F": {
+          "value": 0.14802296326563238,
+          "exact": "198863260605178097373724579956647123949781807/1343462231926211359934889438166157561589399552"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              20,
+              35,
+              6,
+              24,
+              10,
+              25,
+              2,
+              19,
+              26,
+              27,
+              5,
+              0
+            ],
+            "prefix_loads": [
+              10,
+              4,
+              13,
+              0,
+              2,
+              20,
+              18,
+              16,
+              0,
+              11,
+              2,
+              11
+            ],
+            "return_load": 11,
+            "peak_load": 20,
+            "travel": 3621.7845347150455,
+            "pickups": 59,
+            "drops": 48,
+            "station_handling": 6420,
+            "return_unloading": 660,
+            "duration": 10701.784534715045,
+            "time_slack": 98.21546528495492
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              11,
+              23,
+              17,
+              1,
+              32,
+              13,
+              21,
+              12,
+              31,
+              8,
+              22,
+              0
+            ],
+            "prefix_loads": [
+              10,
+              15,
+              8,
+              1,
+              19,
+              10,
+              0,
+              10,
+              6,
+              1,
+              10
+            ],
+            "return_load": 10,
+            "peak_load": 19,
+            "travel": 4472.822493047789,
+            "pickups": 52,
+            "drops": 42,
+            "station_handling": 5640,
+            "return_unloading": 600,
+            "duration": 10712.822493047788,
+            "time_slack": 87.17750695221184
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              15,
+              14,
+              16,
+              30,
+              7,
+              33,
+              3,
+              9,
+              34,
+              29,
+              0
+            ],
+            "prefix_loads": [
+              9,
+              18,
+              11,
+              6,
+              15,
+              22,
+              17,
+              24,
+              20,
+              27
+            ],
+            "return_load": 27,
+            "peak_load": 27,
+            "travel": 5039.163948885052,
+            "pickups": 48,
+            "drops": 21,
+            "station_handling": 4140,
+            "return_unloading": 1620,
+            "duration": 10799.163948885052,
+            "time_slack": 0.8360511149476224
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          13,
+          9,
+          11,
+          10,
+          20,
+          21,
+          12,
+          9,
+          11,
+          29,
+          14,
+          20,
+          20,
+          11,
+          12,
+          17,
+          15,
+          16,
+          31,
+          12,
+          22,
+          10,
+          14,
+          26,
+          8,
+          20,
+          20,
+          18,
+          10,
+          12,
+          11,
+          26,
+          9,
+          11,
+          22
+        ],
+        "G": {
+          "value": 0.08526527561969233,
+          "exact": "86012309/1008761285"
+        },
+        "P": {
+          "value": 0.8061160851096616,
+          "exact": "88961654762642571211579/110358366996907771822080"
+        },
+        "F": {
+          "value": 0.17449020363402976,
+          "exact": "3076331140422965508733039901187023465818198181/17630394580060010279936211383038717300844789760"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              20,
+              12,
+              18,
+              35,
+              24,
+              6,
+              10,
+              25,
+              2,
+              19,
+              26,
+              27,
+              5,
+              34,
+              0
+            ],
+            "prefix_loads": [
+              6,
+              0,
+              4,
+              8,
+              10,
+              15,
+              2,
+              20,
+              18,
+              16,
+              0,
+              9,
+              0,
+              5,
+              1
+            ],
+            "return_load": 1,
+            "peak_load": 20,
+            "travel": 4354.34595715613,
+            "pickups": 53,
+            "drops": 52,
+            "station_handling": 6300,
+            "return_unloading": 60,
+            "duration": 10714.345957156129,
+            "time_slack": 85.65404284387114
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              8,
+              31,
+              29,
+              11,
+              23,
+              17,
+              1,
+              32,
+              13,
+              21,
+              0
+            ],
+            "prefix_loads": [
+              9,
+              4,
+              0,
+              6,
+              14,
+              21,
+              14,
+              7,
+              25,
+              16,
+              6
+            ],
+            "return_load": 6,
+            "peak_load": 25,
+            "travel": 4999.393254175596,
+            "pickups": 48,
+            "drops": 42,
+            "station_handling": 5400,
+            "return_unloading": 360,
+            "duration": 10759.393254175597,
+            "time_slack": 40.60674582440333
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              7,
+              4,
+              33,
+              3,
+              9,
+              15,
+              14,
+              16,
+              30,
+              0
+            ],
+            "prefix_loads": [
+              9,
+              4,
+              11,
+              5,
+              12,
+              21,
+              30,
+              23,
+              18
+            ],
+            "return_load": 18,
+            "peak_load": 30,
+            "travel": 5769.674459925723,
+            "pickups": 41,
+            "drops": 23,
+            "station_handling": 3840,
+            "return_unloading": 1080,
+            "duration": 10689.674459925722,
+            "time_slack": 110.32554007427825
+          }
+        ]
+      },
+      "U_error": -2.7755575615628914e-17,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/11_R163-C35-U_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "4f37e14316699b012df7414625bda7b44fbb70f074116546abc7281a6a037608",
+          "original_objective": 0.17449020363402978,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.017120344246947146,
+      "independent_interval_envelope": {
+        "L": 0.01712034424695,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.08724510181701489,
+            "L": 0.01712034424695,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.08724510181701489,
+            "hi": 0.17449020363402978,
+            "L": 0.08724510181701489,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.17449020363402978,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "c5350ebe16bd659ca7f1290247da3f1e018a372bf2c15c1f1db0e69d3a5ca0a8",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.17449020363402978,
+            "saved_objective_cutoff": 0.17449020363402978,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "3e268e3f687a5f45dfde986cebc3ebfc78f254df643a904b9d75f31deff64e7e",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.08724510181701489,
+            "saved_objective_cutoff": 0.17449020363402978,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "75b73bf2e9c9f19116ef5d88167a079b8d562973f565903f986e745e97f11a99",
+          "scope": {
+            "saved_G_lower": 0.08724510181701489,
+            "saved_G_upper": 0.17449020363402978,
+            "saved_objective_cutoff": 0.17449020363402978,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "c5350ebe16bd659ca7f1290247da3f1e018a372bf2c15c1f1db0e69d3a5ca0a8",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.17449020363402978,
+            "saved_objective_cutoff": 0.17449020363402978,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 12,
+      "role": "R163-C35-U",
+      "arm": "C",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/12_R163-C35-U_C/result.json",
+        "SHA256": "d159a8423fec2cda89fa6b0e4aa6e3df0027bf139c290dc494068225c77de453",
+        "bytes": 98891
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_12.json",
+        "SHA256": "2947cd5b64f3da44259160f37767d529acafd1d89eecf22590735b70a0a14b05",
+        "bytes": 185283
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          13,
+          14,
+          10,
+          5,
+          15,
+          19,
+          14,
+          9,
+          12,
+          29,
+          14,
+          16,
+          20,
+          12,
+          14,
+          17,
+          15,
+          12,
+          31,
+          12,
+          21,
+          11,
+          16,
+          20,
+          13,
+          18,
+          20,
+          17,
+          10,
+          12,
+          11,
+          29,
+          10,
+          12,
+          15
+        ],
+        "G": {
+          "value": 0.05727373830614527,
+          "exact": "75256008/1313970595"
+        },
+        "P": {
+          "value": 0.56852806108532,
+          "exact": "4182788560886275597799/7357224466460518121472"
+        },
+        "F": {
+          "value": 0.1202012449785469,
+          "exact": "920125323714495997816473194311291504833202891/7654873490525966158331139176307424169180528640"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              23,
+              17,
+              32,
+              21,
+              6,
+              35,
+              18,
+              2,
+              31,
+              8,
+              22,
+              27,
+              0
+            ],
+            "prefix_loads": [
+              7,
+              12,
+              5,
+              20,
+              11,
+              0,
+              9,
+              17,
+              10,
+              6,
+              1,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 20,
+            "travel": 4475.326564684906,
+            "pickups": 52,
+            "drops": 52,
+            "station_handling": 6240,
+            "return_unloading": 0,
+            "duration": 10715.326564684907,
+            "time_slack": 84.67343531509323
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              14,
+              9,
+              16,
+              3,
+              33,
+              30,
+              7,
+              15,
+              11,
+              1,
+              13,
+              29,
+              20,
+              0
+            ],
+            "prefix_loads": [
+              8,
+              14,
+              7,
+              2,
+              8,
+              3,
+              10,
+              17,
+              25,
+              18,
+              9,
+              15,
+              9
+            ],
+            "return_load": 9,
+            "peak_load": 25,
+            "travel": 5036.454474600575,
+            "pickups": 48,
+            "drops": 39,
+            "station_handling": 5220,
+            "return_unloading": 540,
+            "duration": 10796.454474600574,
+            "time_slack": 3.5455253994259692
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              5,
+              34,
+              26,
+              19,
+              24,
+              10,
+              25,
+              12,
+              0
+            ],
+            "prefix_loads": [
+              10,
+              5,
+              16,
+              0,
+              11,
+              29,
+              22,
+              30
+            ],
+            "return_load": 30,
+            "peak_load": 30,
+            "travel": 3497.57737755274,
+            "pickups": 58,
+            "drops": 28,
+            "station_handling": 5160,
+            "return_unloading": 1800,
+            "duration": 10457.57737755274,
+            "time_slack": 342.42262244726044
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          13,
+          14,
+          10,
+          10,
+          17,
+          18,
+          15,
+          9,
+          14,
+          29,
+          15,
+          20,
+          20,
+          14,
+          15,
+          17,
+          15,
+          12,
+          31,
+          12,
+          22,
+          11,
+          17,
+          23,
+          12,
+          19,
+          20,
+          19,
+          12,
+          12,
+          11,
+          26,
+          12,
+          11,
+          15
+        ],
+        "G": {
+          "value": 0.07338217296846453,
+          "exact": "153119769/2086607180"
+        },
+        "P": {
+          "value": 0.7388831439599616,
+          "exact": "2329769633398928000167/3153096199911650623488"
+        },
+        "F": {
+          "value": 0.15516542546598344,
+          "exact": "1414650927760750295188794562411077790238554141/9117049906655146435608080610926280179837829120"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              28,
+              23,
+              17,
+              32,
+              21,
+              6,
+              35,
+              18,
+              2,
+              31,
+              8,
+              22,
+              27,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              9,
+              2,
+              20,
+              10,
+              0,
+              9,
+              17,
+              10,
+              6,
+              1,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 20,
+            "travel": 4475.326564684906,
+            "pickups": 52,
+            "drops": 52,
+            "station_handling": 6240,
+            "return_unloading": 0,
+            "duration": 10715.326564684907,
+            "time_slack": 84.67343531509323
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              14,
+              9,
+              16,
+              33,
+              3,
+              30,
+              7,
+              15,
+              11,
+              1,
+              13,
+              29,
+              20,
+              34,
+              0
+            ],
+            "prefix_loads": [
+              8,
+              14,
+              18,
+              11,
+              15,
+              10,
+              5,
+              11,
+              17,
+              24,
+              17,
+              8,
+              12,
+              6,
+              2
+            ],
+            "return_load": 2,
+            "peak_load": 24,
+            "travel": 5389.66102057551,
+            "pickups": 45,
+            "drops": 43,
+            "station_handling": 5280,
+            "return_unloading": 120,
+            "duration": 10789.66102057551,
+            "time_slack": 10.33897942449039
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              12,
+              24,
+              10,
+              25,
+              19,
+              26,
+              4,
+              0
+            ],
+            "prefix_loads": [
+              4,
+              12,
+              30,
+              24,
+              8,
+              18,
+              13
+            ],
+            "return_load": 13,
+            "peak_load": 30,
+            "travel": 5897.09415279142,
+            "pickups": 40,
+            "drops": 27,
+            "station_handling": 4020,
+            "return_unloading": 780,
+            "duration": 10697.09415279142,
+            "time_slack": 102.90584720857987
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "C_s2",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/12_R163-C35-U_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "1285e916b3736a0678de3f123b731d22f8db21ee4e4d6063a15eaee3b968a2f4",
+          "original_objective": 0.15516542546598344,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "C_s2"
+        }
+      ],
+      "qualified_L": 0.015427084585825845,
+      "independent_interval_envelope": {
+        "L": 0.01542708458583,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.07758271273299172,
+            "L": 0.01542708458583,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.07758271273299172,
+            "hi": 0.15516542546598344,
+            "L": 0.07758271273299172,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.15516542546598344,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "d443d12f5cf80a641c3ad5719d96cec8cecc2334f8d753f618be42c013fe9a04",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.15516542546598344,
+            "saved_objective_cutoff": 0.15516542546598344,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "4176c8a5bf85f8ac56938d860c9fd309a5e6e00424fb244673fbf1255604dd8e",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.07758271273299172,
+            "saved_objective_cutoff": 0.15516542546598344,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "1b5d97e5c803f9c4d0bbfb7799945fe8198a1228c0ad136ab2af9b26438ea2a3",
+          "scope": {
+            "saved_G_lower": 0.07758271273299172,
+            "saved_G_upper": 0.15516542546598344,
+            "saved_objective_cutoff": 0.15516542546598344,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "d443d12f5cf80a641c3ad5719d96cec8cecc2334f8d753f618be42c013fe9a04",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.15516542546598344,
+            "saved_objective_cutoff": 0.15516542546598344,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 13,
+      "role": "R163-B35-S",
+      "arm": "M",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/13_R163-B35-S_M/result.json",
+        "SHA256": "eacb9da74322856e0e248f3009eff08009284aff06d62d9dcafed4dba9df8d93",
+        "bytes": 98903
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_13.json",
+        "SHA256": "b5ee53c44cfb54e74626bdca2c670d1198549384dd091f9f0d61742305151665",
+        "bytes": 151480
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          12,
+          8,
+          6,
+          6,
+          6,
+          15,
+          7,
+          6,
+          7,
+          25,
+          14,
+          8,
+          8,
+          7,
+          5,
+          6,
+          9,
+          11,
+          20,
+          12,
+          7,
+          14,
+          9,
+          20,
+          6,
+          14,
+          8,
+          21,
+          13,
+          14,
+          10,
+          9,
+          7,
+          8,
+          11
+        ],
+        "G": {
+          "value": 0.09420961275797637,
+          "exact": "19139518/203158865"
+        },
+        "P": {
+          "value": 1.1610285714285713,
+          "exact": "128129217179609831064401/110358366996907771822080"
+        },
+        "F": {
+          "value": 0.21972078756431682,
+          "exact": "8126608121554333401704870868289631136841129/36986068599337727610900334902843925164195840"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              20,
+              25,
+              11,
+              3,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "prefix_loads": [
+              12,
+              16,
+              10,
+              14,
+              8,
+              18,
+              9,
+              19,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 19,
+            "travel": 2280.3208814286754,
+            "pickups": 40,
+            "drops": 40,
+            "station_handling": 4800,
+            "return_unloading": 0,
+            "duration": 7080.320881428675,
+            "time_slack": 119.67911857132458
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              26,
+              29,
+              35,
+              21,
+              9,
+              2,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              12,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              10,
+              14,
+              17,
+              13,
+              8,
+              3,
+              4,
+              8,
+              17,
+              12,
+              7,
+              2,
+              5,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 17,
+            "travel": 3056.2080723874265,
+            "pickups": 34,
+            "drops": 34,
+            "station_handling": 4080,
+            "return_unloading": 0,
+            "duration": 7136.208072387426,
+            "time_slack": 63.791927612574
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              31,
+              23,
+              33,
+              16,
+              27,
+              18,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              8,
+              14,
+              18,
+              26,
+              20,
+              26,
+              21,
+              15,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 26,
+            "travel": 3305.3055081158213,
+            "pickups": 32,
+            "drops": 32,
+            "station_handling": 3840,
+            "return_unloading": 0,
+            "duration": 7145.305508115822,
+            "time_slack": 54.694491884178206
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          12,
+          8,
+          6,
+          6,
+          6,
+          15,
+          7,
+          6,
+          7,
+          25,
+          14,
+          8,
+          8,
+          7,
+          5,
+          6,
+          9,
+          11,
+          20,
+          12,
+          7,
+          14,
+          9,
+          20,
+          6,
+          14,
+          8,
+          21,
+          13,
+          14,
+          10,
+          9,
+          7,
+          8,
+          11
+        ],
+        "G": {
+          "value": 0.09420961275797637,
+          "exact": "19139518/203158865"
+        },
+        "P": {
+          "value": 1.1610285714285713,
+          "exact": "128129217179609831064401/110358366996907771822080"
+        },
+        "F": {
+          "value": 0.21972078756431682,
+          "exact": "8126608121554333401704870868289631136841129/36986068599337727610900334902843925164195840"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              20,
+              25,
+              11,
+              3,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "prefix_loads": [
+              12,
+              16,
+              10,
+              14,
+              8,
+              18,
+              9,
+              19,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 19,
+            "travel": 2280.3208814286754,
+            "pickups": 40,
+            "drops": 40,
+            "station_handling": 4800,
+            "return_unloading": 0,
+            "duration": 7080.320881428675,
+            "time_slack": 119.67911857132458
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              26,
+              29,
+              35,
+              21,
+              9,
+              2,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              12,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              10,
+              14,
+              17,
+              13,
+              8,
+              3,
+              4,
+              8,
+              17,
+              12,
+              7,
+              2,
+              5,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 17,
+            "travel": 3056.2080723874265,
+            "pickups": 34,
+            "drops": 34,
+            "station_handling": 4080,
+            "return_unloading": 0,
+            "duration": 7136.208072387426,
+            "time_slack": 63.791927612574
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              31,
+              23,
+              33,
+              16,
+              27,
+              18,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              8,
+              14,
+              18,
+              26,
+              20,
+              26,
+              21,
+              15,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 26,
+            "travel": 3305.3055081158213,
+            "pickups": 32,
+            "drops": 32,
+            "station_handling": 3840,
+            "return_unloading": 0,
+            "duration": 7145.305508115822,
+            "time_slack": 54.694491884178206
+          }
+        ]
+      },
+      "U_error": 5.551115123125783e-17,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/13_R163-B35-S_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "3d8b326a8abbacb6d72bcd2858ebdeda275fdb7067413636ca4afd1e61a99a6c",
+          "original_objective": 0.21972078756431684,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.11865217498201656,
+      "independent_interval_envelope": {
+        "L": 0.11865217498201656,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.10986039378215844,
+            "L": 0.11865217498201656,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.10986039378215844,
+            "hi": 0.21972078756431687,
+            "L": 0.1905865423548901,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.21972078756431687,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "c3a6ff1bc1fabd1eaf416f60adc5dc5e6c40046a2f73994710c5ab64e7c14e34",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.21972078756431687,
+            "saved_objective_cutoff": 0.21972078756431687,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "1b361714e0af205769fca3125c2dd3512c2878b808fe3845ee659dfcd95f2d37",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.10986039378215844,
+            "saved_objective_cutoff": 0.21972078756431687,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "d85883a89f2e023772c2dcf8cec0453ed2d9afb356b558e2f42e5ae7bc12f77a",
+          "scope": {
+            "saved_G_lower": 0.10986039378215844,
+            "saved_G_upper": 0.21972078756431687,
+            "saved_objective_cutoff": 0.21972078756431687,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "c3a6ff1bc1fabd1eaf416f60adc5dc5e6c40046a2f73994710c5ab64e7c14e34",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.21972078756431687,
+            "saved_objective_cutoff": 0.21972078756431687,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 14,
+      "role": "R163-B35-S",
+      "arm": "C",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/14_R163-B35-S_C/result.json",
+        "SHA256": "0bdee4bdfe7c69fd9e495d26e6e700f45d3ea979077d191b52e871c474de053f",
+        "bytes": 98944
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_14.json",
+        "SHA256": "0d2b735ac660180313d16434791c2b8a42dc8bbab9b673f80097ba6040be5ff8",
+        "bytes": 141656
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          12,
+          10,
+          6,
+          6,
+          5,
+          15,
+          8,
+          6,
+          10,
+          25,
+          14,
+          7,
+          8,
+          8,
+          2,
+          6,
+          9,
+          11,
+          20,
+          11,
+          8,
+          13,
+          8,
+          20,
+          6,
+          13,
+          8,
+          21,
+          12,
+          13,
+          11,
+          10,
+          8,
+          9,
+          10
+        ],
+        "G": {
+          "value": 0.08255194638838685,
+          "exact": "106679528/1292271505"
+        },
+        "P": {
+          "value": 0.9741523809523809,
+          "exact": "430023463872217452128389/441433467987631087288320"
+        },
+        "F": {
+          "value": 0.18786116339007122,
+          "exact": "65664171322270955945648765354822553647035859/349535636516458497734476763137334025834725376"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              18,
+              11,
+              20,
+              21,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "prefix_loads": [
+              12,
+              3,
+              7,
+              12,
+              7,
+              17,
+              9,
+              19,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 19,
+            "travel": 2185.087949997088,
+            "pickups": 41,
+            "drops": 41,
+            "station_handling": 4920,
+            "return_unloading": 0,
+            "duration": 7105.087949997088,
+            "time_slack": 94.91205000291211
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              15,
+              24,
+              17,
+              2,
+              3,
+              22,
+              26,
+              29,
+              35,
+              25,
+              14,
+              9,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              0,
+              9,
+              13,
+              6,
+              0,
+              6,
+              12,
+              17,
+              21,
+              15,
+              8,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 21,
+            "travel": 2787.164573765213,
+            "pickups": 36,
+            "drops": 36,
+            "station_handling": 4320,
+            "return_unloading": 0,
+            "duration": 7107.1645737652125,
+            "time_slack": 92.83542623478752
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              4,
+              12,
+              13,
+              31,
+              23,
+              33,
+              27,
+              16,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              7,
+              12,
+              16,
+              11,
+              15,
+              10,
+              17,
+              12,
+              17,
+              11,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 17,
+            "travel": 3337.879226202647,
+            "pickups": 32,
+            "drops": 32,
+            "station_handling": 3840,
+            "return_unloading": 0,
+            "duration": 7177.879226202647,
+            "time_slack": 22.12077379735274
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          12,
+          8,
+          5,
+          5,
+          6,
+          16,
+          8,
+          6,
+          8,
+          25,
+          13,
+          7,
+          9,
+          6,
+          1,
+          6,
+          10,
+          10,
+          20,
+          12,
+          9,
+          13,
+          9,
+          20,
+          5,
+          13,
+          9,
+          21,
+          12,
+          15,
+          12,
+          11,
+          8,
+          9,
+          10
+        ],
+        "G": {
+          "value": 0.10344163565116594,
+          "exact": "331892819/3208503200"
+        },
+        "P": {
+          "value": 0.9555428571428571,
+          "exact": "70301432873230161370969/73572244664605181214720"
+        },
+        "F": {
+          "value": 0.20673909923575226,
+          "exact": "4672309081162235122502802998963807225966847/22600026305784702797264321885940208998809600"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              11,
+              3,
+              20,
+              21,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "prefix_loads": [
+              12,
+              17,
+              12,
+              16,
+              10,
+              20,
+              10,
+              20,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 20,
+            "travel": 2184.061125773637,
+            "pickups": 41,
+            "drops": 41,
+            "station_handling": 4920,
+            "return_unloading": 0,
+            "duration": 7104.061125773636,
+            "time_slack": 95.93887422636362
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              15,
+              24,
+              17,
+              4,
+              2,
+              22,
+              26,
+              29,
+              35,
+              25,
+              18,
+              14,
+              9,
+              0
+            ],
+            "prefix_loads": [
+              1,
+              0,
+              9,
+              12,
+              8,
+              3,
+              9,
+              15,
+              20,
+              24,
+              19,
+              11,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 24,
+            "travel": 3053.0278738807647,
+            "pickups": 34,
+            "drops": 34,
+            "station_handling": 4080,
+            "return_unloading": 0,
+            "duration": 7133.027873880765,
+            "time_slack": 66.97212611923533
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              12,
+              31,
+              13,
+              23,
+              33,
+              27,
+              16,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              6,
+              11,
+              15,
+              19,
+              25,
+              19,
+              13,
+              18,
+              11,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 25,
+            "travel": 3523.8782140967282,
+            "pickups": 30,
+            "drops": 30,
+            "station_handling": 3600,
+            "return_unloading": 0,
+            "duration": 7123.878214096729,
+            "time_slack": 76.1217859032713
+          }
+        ]
+      },
+      "U_error": 2.7755575615628914e-17,
+      "selected_H": "C_s2",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/14_R163-B35-S_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "3297a0abba08a54164988e79379cfc15f4cf1398196df04bad9dc744f551a181",
+          "original_objective": 0.20673909923575257,
+          "max_row_residual": 1.1102230246251565e-16,
+          "selected_H": "C_s2"
+        }
+      ],
+      "qualified_L": 0.11886486887948461,
+      "independent_interval_envelope": {
+        "L": 0.1188648688795,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.10336954961787628,
+            "L": 0.1188648688795,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.10336954961787628,
+            "hi": 0.20673909923575257,
+            "L": 0.18497149106354296,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.20673909923575257,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "de5845259cd69e62c4317d656f3f4e51f235d6344677929847762d6d1142bbf7",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.20673909923575257,
+            "saved_objective_cutoff": 0.20673909923575257,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "76d8259d0f29cf6e3344266e8d32f9918c02446c24651728b2baf274b28c71cd",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.10336954961787628,
+            "saved_objective_cutoff": 0.20673909923575257,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "381541ee346feae8062e0506d275f0e4f67a24978d0b343aea839db864a0fc0a",
+          "scope": {
+            "saved_G_lower": 0.10336954961787628,
+            "saved_G_upper": 0.20673909923575257,
+            "saved_objective_cutoff": 0.20673909923575257,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "de5845259cd69e62c4317d656f3f4e51f235d6344677929847762d6d1142bbf7",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.20673909923575257,
+            "saved_objective_cutoff": 0.20673909923575257,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 15,
+      "role": "R163-B35-S",
+      "arm": "B",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/15_R163-B35-S_B/result.json",
+        "SHA256": "5f320e61a64f157f18391d7d147ac2622d753e13d40480cd92997f878350295b",
+        "bytes": 98886
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_15.json",
+        "SHA256": "78afb449e05c084736973df73e7d7a4c9dc956c4324ff8f183964ea00b191d06",
+        "bytes": 125506
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          12,
+          8,
+          6,
+          6,
+          6,
+          15,
+          7,
+          6,
+          7,
+          25,
+          14,
+          8,
+          8,
+          7,
+          5,
+          6,
+          9,
+          11,
+          20,
+          12,
+          7,
+          14,
+          9,
+          20,
+          6,
+          14,
+          8,
+          21,
+          13,
+          14,
+          10,
+          9,
+          7,
+          8,
+          11
+        ],
+        "G": {
+          "value": 0.09420961275797637,
+          "exact": "19139518/203158865"
+        },
+        "P": {
+          "value": 1.1610285714285713,
+          "exact": "128129217179609831064401/110358366996907771822080"
+        },
+        "F": {
+          "value": 0.21972078756431682,
+          "exact": "8126608121554333401704870868289631136841129/36986068599337727610900334902843925164195840"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              20,
+              25,
+              11,
+              3,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "prefix_loads": [
+              12,
+              16,
+              10,
+              14,
+              8,
+              18,
+              9,
+              19,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 19,
+            "travel": 2280.3208814286754,
+            "pickups": 40,
+            "drops": 40,
+            "station_handling": 4800,
+            "return_unloading": 0,
+            "duration": 7080.320881428675,
+            "time_slack": 119.67911857132458
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              26,
+              29,
+              35,
+              21,
+              9,
+              2,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              12,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              10,
+              14,
+              17,
+              13,
+              8,
+              3,
+              4,
+              8,
+              17,
+              12,
+              7,
+              2,
+              5,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 17,
+            "travel": 3056.2080723874265,
+            "pickups": 34,
+            "drops": 34,
+            "station_handling": 4080,
+            "return_unloading": 0,
+            "duration": 7136.208072387426,
+            "time_slack": 63.791927612574
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              31,
+              23,
+              33,
+              16,
+              27,
+              18,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              8,
+              14,
+              18,
+              26,
+              20,
+              26,
+              21,
+              15,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 26,
+            "travel": 3305.3055081158213,
+            "pickups": 32,
+            "drops": 32,
+            "station_handling": 3840,
+            "return_unloading": 0,
+            "duration": 7145.305508115822,
+            "time_slack": 54.694491884178206
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          12,
+          8,
+          6,
+          6,
+          6,
+          15,
+          7,
+          6,
+          7,
+          25,
+          14,
+          8,
+          8,
+          7,
+          5,
+          6,
+          9,
+          11,
+          20,
+          12,
+          7,
+          14,
+          9,
+          20,
+          6,
+          14,
+          8,
+          21,
+          13,
+          14,
+          10,
+          9,
+          7,
+          8,
+          11
+        ],
+        "G": {
+          "value": 0.09420961275797637,
+          "exact": "19139518/203158865"
+        },
+        "P": {
+          "value": 1.1610285714285713,
+          "exact": "128129217179609831064401/110358366996907771822080"
+        },
+        "F": {
+          "value": 0.21972078756431682,
+          "exact": "8126608121554333401704870868289631136841129/36986068599337727610900334902843925164195840"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              10,
+              20,
+              25,
+              11,
+              3,
+              28,
+              30,
+              19,
+              6,
+              1,
+              0
+            ],
+            "prefix_loads": [
+              12,
+              16,
+              10,
+              14,
+              8,
+              18,
+              9,
+              19,
+              9,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 19,
+            "travel": 2280.3208814286754,
+            "pickups": 40,
+            "drops": 40,
+            "station_handling": 4800,
+            "return_unloading": 0,
+            "duration": 7080.320881428675,
+            "time_slack": 119.67911857132458
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              22,
+              26,
+              29,
+              35,
+              21,
+              9,
+              2,
+              5,
+              17,
+              24,
+              15,
+              13,
+              4,
+              12,
+              7,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              10,
+              14,
+              17,
+              13,
+              8,
+              3,
+              4,
+              8,
+              17,
+              12,
+              7,
+              2,
+              5,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 17,
+            "travel": 3056.2080723874265,
+            "pickups": 34,
+            "drops": 34,
+            "station_handling": 4080,
+            "return_unloading": 0,
+            "duration": 7136.208072387426,
+            "time_slack": 63.791927612574
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              32,
+              34,
+              8,
+              31,
+              23,
+              33,
+              16,
+              27,
+              18,
+              14,
+              0
+            ],
+            "prefix_loads": [
+              8,
+              14,
+              18,
+              26,
+              20,
+              26,
+              21,
+              15,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 26,
+            "travel": 3305.3055081158213,
+            "pickups": 32,
+            "drops": 32,
+            "station_handling": 3840,
+            "return_unloading": 0,
+            "duration": 7145.305508115822,
+            "time_slack": 54.694491884178206
+          }
+        ]
+      },
+      "U_error": 5.551115123125783e-17,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/15_R163-B35-S_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "3d8b326a8abbacb6d72bcd2858ebdeda275fdb7067413636ca4afd1e61a99a6c",
+          "original_objective": 0.21972078756431684,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.11865217498201656,
+      "independent_interval_envelope": {
+        "L": 0.11865217498201656,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.10986039378215844,
+            "L": 0.11865217498201656,
+            "calls": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "lo": 0.10986039378215844,
+            "hi": 0.21972078756431687,
+            "L": 0.1905865423548901,
+            "calls": [
+              1,
+              3,
+              4
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.21972078756431687,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 4,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "c3a6ff1bc1fabd1eaf416f60adc5dc5e6c40046a2f73994710c5ab64e7c14e34",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.21972078756431687,
+            "saved_objective_cutoff": 0.21972078756431687,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "1b361714e0af205769fca3125c2dd3512c2878b808fe3845ee659dfcd95f2d37",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.10986039378215844,
+            "saved_objective_cutoff": 0.21972078756431687,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "d85883a89f2e023772c2dcf8cec0453ed2d9afb356b558e2f42e5ae7bc12f77a",
+          "scope": {
+            "saved_G_lower": 0.10986039378215844,
+            "saved_G_upper": 0.21972078756431687,
+            "saved_objective_cutoff": 0.21972078756431687,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "c3a6ff1bc1fabd1eaf416f60adc5dc5e6c40046a2f73994710c5ab64e7c14e34",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.21972078756431687,
+            "saved_objective_cutoff": 0.21972078756431687,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 16,
+      "role": "R163-X35-S",
+      "arm": "C",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/16_R163-X35-S_C/result.json",
+        "SHA256": "5b92afbb06624cac98ab3ba22819562fe12be98a085718d402a325859a36045d",
+        "bytes": 98211
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_16.json",
+        "SHA256": "04689ce2cbdd2262d47fa882cb8d281b4d65cb07e3189819e6d7aa39b2f8ebaf",
+        "bytes": 123140
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          7,
+          1,
+          4,
+          2,
+          1,
+          7,
+          1,
+          1,
+          1,
+          7,
+          1,
+          1,
+          1,
+          4,
+          1,
+          1,
+          7,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          5,
+          1,
+          1,
+          1,
+          1,
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          4
+        ],
+        "G": {
+          "value": 0.1927848912456178,
+          "exact": "76712/397915"
+        },
+        "P": {
+          "value": 2.946875,
+          "exact": "212344722430518887/72057594037927936"
+        },
+        "F": {
+          "value": 0.4665149347869821,
+          "exact": "963863149938322662435715090208104776067/2066092804463885935806712446841614499840"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              3,
+              34,
+              29,
+              16,
+              8,
+              25,
+              17,
+              14,
+              30,
+              31,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              7,
+              6,
+              3,
+              4,
+              3,
+              6,
+              1,
+              8,
+              7,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 8,
+            "travel": 8405.587331283792,
+            "pickups": 18,
+            "drops": 18,
+            "station_handling": 2160,
+            "return_unloading": 0,
+            "duration": 10565.587331283792,
+            "time_slack": 234.41266871620792
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              21,
+              19,
+              4,
+              11,
+              18,
+              7,
+              20,
+              33,
+              22,
+              10,
+              0
+            ],
+            "prefix_loads": [
+              1,
+              0,
+              2,
+              1,
+              2,
+              1,
+              7,
+              6,
+              5,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 7,
+            "travel": 9226.972101801326,
+            "pickups": 10,
+            "drops": 10,
+            "station_handling": 1200,
+            "return_unloading": 0,
+            "duration": 10426.972101801326,
+            "time_slack": 373.02789819867394
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              1,
+              12,
+              2,
+              28,
+              24,
+              35,
+              9,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              4,
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 5,
+            "travel": 9730.083915785177,
+            "pickups": 7,
+            "drops": 7,
+            "station_handling": 840,
+            "return_unloading": 0,
+            "duration": 10570.083915785177,
+            "time_slack": 229.91608421482306
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          7,
+          1,
+          6,
+          2,
+          0,
+          5,
+          1,
+          0,
+          1,
+          6,
+          1,
+          1,
+          1,
+          5,
+          1,
+          2,
+          2,
+          1,
+          0,
+          4,
+          3,
+          1,
+          1,
+          4,
+          2,
+          1,
+          1,
+          0,
+          5,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "G": {
+          "value": 0.20901477392955933,
+          "exact": "16397/78449"
+        },
+        "P": {
+          "value": 3.21875,
+          "exact": "231935380809580545/72057594037927936"
+        },
+        "F": {
+          "value": 0.5079988087626508,
+          "exact": "206923406870340315699567223912210606127/407330496255198692630588906530987311104"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              25,
+              34,
+              3,
+              29,
+              14,
+              30,
+              35,
+              9,
+              24,
+              31,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              1,
+              6,
+              2,
+              8,
+              7,
+              3,
+              2,
+              5,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 8,
+            "travel": 8761.265249025631,
+            "pickups": 16,
+            "drops": 16,
+            "station_handling": 1920,
+            "return_unloading": 0,
+            "duration": 10681.265249025631,
+            "time_slack": 118.73475097436858
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              4,
+              11,
+              7,
+              20,
+              1,
+              21,
+              22,
+              33,
+              10,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              1,
+              0,
+              3,
+              8,
+              6,
+              5,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 8,
+            "travel": 9415.801286844897,
+            "pickups": 10,
+            "drops": 10,
+            "station_handling": 1200,
+            "return_unloading": 0,
+            "duration": 10615.801286844897,
+            "time_slack": 184.19871315510318
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              18,
+              5,
+              12,
+              2,
+              0
+            ],
+            "prefix_loads": [
+              1,
+              2,
+              1,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 2,
+            "travel": 10133.96268470266,
+            "pickups": 2,
+            "drops": 2,
+            "station_handling": 240,
+            "return_unloading": 0,
+            "duration": 10373.96268470266,
+            "time_slack": 426.0373152973407
+          }
+        ]
+      },
+      "U_error": 5.551115123125783e-17,
+      "selected_H": "C_s1",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/16_R163-X35-S_C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "3aae7067bd1a1f07e9d973ab0ef5f88b8d21df8ac0a354aa49fea51d1b56a669",
+          "original_objective": 0.5079988087626506,
+          "max_row_residual": 2.1516122217235534e-13,
+          "selected_H": "C_s1"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/16_R163-X35-S_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "3aae7067bd1a1f07e9d973ab0ef5f88b8d21df8ac0a354aa49fea51d1b56a669",
+          "original_objective": 0.5079988087626506,
+          "max_row_residual": 2.1516122217235534e-13,
+          "selected_H": "C_s1"
+        }
+      ],
+      "qualified_L": 0.3511829462176636,
+      "independent_interval_envelope": {
+        "L": 0.3511829462177,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.2539994043813253,
+            "L": 0.3511829462177,
+            "calls": [
+              1,
+              2,
+              4,
+              5
+            ]
+          },
+          {
+            "lo": 0.2539994043813253,
+            "hi": 0.5079988087626506,
+            "L": 0.47278191545568027,
+            "calls": [
+              1,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.5079988087626506,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 5,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "8007267f6403f5aad9a58d860e23e3590a1fcdfefe6e5aa15771c643404b9397",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5079988087626506,
+            "saved_objective_cutoff": 0.5079988087626506,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "854dd2602dab041154b5e1033132fa0423b9583600d289d8c06f7b8f6bcbe990",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.2539994043813253,
+            "saved_objective_cutoff": 0.5079988087626506,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "dc6472f1d3078cc2c49ea222e30cee452297115f54167cea51001b451d1d5a34",
+          "scope": {
+            "saved_G_lower": 0.2539994043813253,
+            "saved_G_upper": 0.5079988087626506,
+            "saved_objective_cutoff": 0.5079988087626506,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "8007267f6403f5aad9a58d860e23e3590a1fcdfefe6e5aa15771c643404b9397",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5079988087626506,
+            "saved_objective_cutoff": 0.5079988087626506,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "5": {
+          "model_SHA256": "8007267f6403f5aad9a58d860e23e3590a1fcdfefe6e5aa15771c643404b9397",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.5079988087626506,
+            "saved_objective_cutoff": 0.5079988087626506,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 17,
+      "role": "R163-X35-S",
+      "arm": "B",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/17_R163-X35-S_B/result.json",
+        "SHA256": "8ef11444ae9a92b4e90babb3c449cf5f7795fbf9f9b209bca2ee2570b2c5c235",
+        "bytes": 97685
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_17.json",
+        "SHA256": "0f1b73dfe3a75b5678e13ed2ae2b84f83113144c4e917db37b4e0f2d828f1f43",
+        "bytes": 139150
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          8,
+          1,
+          6,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1,
+          8,
+          1,
+          1,
+          1,
+          6,
+          1,
+          1,
+          2,
+          2,
+          0,
+          5,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          1,
+          5,
+          1,
+          0,
+          1,
+          1,
+          1,
+          5
+        ],
+        "G": {
+          "value": 0.21647711018010515,
+          "exact": "170256/786485"
+        },
+        "P": {
+          "value": 3.25,
+          "exact": "234187180623265793/72057594037927936"
+        },
+        "F": {
+          "value": 0.5183639026329353,
+          "exact": "2116823798032672076061610443915613357291/4083663594784763907424807405486667202560"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              3,
+              34,
+              29,
+              16,
+              33,
+              1,
+              20,
+              10,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              4,
+              0,
+              1,
+              0,
+              4,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 6,
+            "travel": 7528.169810741749,
+            "pickups": 12,
+            "drops": 12,
+            "station_handling": 1440,
+            "return_unloading": 0,
+            "duration": 8968.169810741749,
+            "time_slack": 1831.8301892582513
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              4,
+              11,
+              7,
+              21,
+              30,
+              24,
+              9,
+              35,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              4,
+              3,
+              2,
+              1,
+              0,
+              5,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 5,
+            "travel": 9642.054735164716,
+            "pickups": 9,
+            "drops": 9,
+            "station_handling": 1080,
+            "return_unloading": 0,
+            "duration": 10722.054735164716,
+            "time_slack": 77.94526483528352
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              14,
+              28,
+              2,
+              12,
+              5,
+              22,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 5,
+            "travel": 9081.913735669877,
+            "pickups": 5,
+            "drops": 5,
+            "station_handling": 600,
+            "return_unloading": 0,
+            "duration": 9681.913735669877,
+            "time_slack": 1118.0862643301225
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          8,
+          1,
+          6,
+          2,
+          0,
+          7,
+          1,
+          0,
+          1,
+          7,
+          1,
+          0,
+          1,
+          7,
+          1,
+          2,
+          2,
+          0,
+          0,
+          7,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "G": {
+          "value": 0.2865006306862403,
+          "exact": "106753/372610"
+        },
+        "P": {
+          "value": 3.384375,
+          "exact": "30483739977764045/9007199254740992"
+        },
+        "F": {
+          "value": 0.6008692809039471,
+          "exact": "72656427421628563285747411402833783443/120918858278666382666671764826918748160"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              3,
+              34,
+              14,
+              1,
+              10,
+              33,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              4,
+              8,
+              12,
+              7,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 12,
+            "travel": 9212.433505704734,
+            "pickups": 13,
+            "drops": 13,
+            "station_handling": 1560,
+            "return_unloading": 0,
+            "duration": 10772.433505704734,
+            "time_slack": 27.56649429526624
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              4,
+              11,
+              7,
+              21,
+              30,
+              24,
+              9,
+              35,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              4,
+              3,
+              2,
+              1,
+              0,
+              5,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 5,
+            "travel": 9642.054735164716,
+            "pickups": 9,
+            "drops": 9,
+            "station_handling": 1080,
+            "return_unloading": 0,
+            "duration": 10722.054735164716,
+            "time_slack": 77.94526483528352
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              18,
+              22,
+              5,
+              2,
+              31,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              1,
+              2,
+              1,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 2,
+            "travel": 10376.757033689642,
+            "pickups": 3,
+            "drops": 3,
+            "station_handling": 360,
+            "return_unloading": 0,
+            "duration": 10736.757033689642,
+            "time_slack": 63.24296631035759
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/17_R163-X35-S_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1",
+          "original_objective": 0.6008692809039473,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/17_R163-X35-S_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1",
+          "original_objective": 0.6008692809039473,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.3576324299197946,
+      "independent_interval_envelope": {
+        "L": 0.3576324299198,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.30043464045197366,
+            "L": 0.3576324299198,
+            "calls": [
+              1,
+              2,
+              4,
+              5
+            ]
+          },
+          {
+            "lo": 0.30043464045197366,
+            "hi": 0.6008692809039473,
+            "L": 0.5054299720913279,
+            "calls": [
+              1,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.6008692809039473,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 5,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "6c613d7cb2990d07b840c6e7fe849bbac3494cc3dd2958b1fa1271309ebb17a2",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.6008692809039473,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "439eb9472039c25d9adf6d5bdff0f817cbd73dbb05edc9b61f1a0a3cc3f414ab",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.30043464045197366,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "e1fb1f9d8810243f55b093c2d7cc68fde5da2a2a6ef2830dcea04732e1e1d6ef",
+          "scope": {
+            "saved_G_lower": 0.30043464045197366,
+            "saved_G_upper": 0.6008692809039473,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "6c613d7cb2990d07b840c6e7fe849bbac3494cc3dd2958b1fa1271309ebb17a2",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.6008692809039473,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "5": {
+          "model_SHA256": "6c613d7cb2990d07b840c6e7fe849bbac3494cc3dd2958b1fa1271309ebb17a2",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.6008692809039473,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    },
+    {
+      "position": 18,
+      "role": "R163-X35-S",
+      "arm": "M",
+      "raw_result": {
+        "path": "results/unified_exact_round169/complete_raw/18_R163-X35-S_M/result.json",
+        "SHA256": "48a3a1319ec0ad65e66ecdba68c82489e435d4293df93519c54cb8a6d30c5385",
+        "bytes": 97816
+      },
+      "audit": {
+        "path": "results/unified_exact_round169/review/complete_audit_18.json",
+        "SHA256": "dcd84e2f489c31205fd5384e23e1b2408b127a39e79e53b47bd5b80460ef517f",
+        "bytes": 157610
+      },
+      "final_physical": {
+        "Y": [
+          50000,
+          8,
+          1,
+          5,
+          0,
+          2,
+          1,
+          1,
+          0,
+          1,
+          8,
+          1,
+          1,
+          1,
+          5,
+          1,
+          1,
+          2,
+          2,
+          2,
+          5,
+          2,
+          1,
+          1,
+          3,
+          2,
+          1,
+          1,
+          1,
+          6,
+          1,
+          0,
+          1,
+          1,
+          1,
+          5
+        ],
+        "G": {
+          "value": 0.20733741454825713,
+          "exact": "165448/797965"
+        },
+        "P": {
+          "value": 3.275,
+          "exact": "235988620474213991/72057594037927936"
+        },
+        "F": {
+          "value": 0.5115464130968783,
+          "exact": "2119475501777528919861496646363289727653/4143271162720743728600337503346113904640"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              3,
+              34,
+              29,
+              16,
+              33,
+              1,
+              20,
+              10,
+              0
+            ],
+            "prefix_loads": [
+              6,
+              5,
+              0,
+              1,
+              0,
+              4,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 6,
+            "travel": 7528.169810741749,
+            "pickups": 13,
+            "drops": 13,
+            "station_handling": 1560,
+            "return_unloading": 0,
+            "duration": 9088.169810741749,
+            "time_slack": 1711.8301892582513
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              19,
+              4,
+              11,
+              7,
+              21,
+              30,
+              24,
+              35,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              0,
+              4,
+              3,
+              2,
+              1,
+              0,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 4,
+            "travel": 9466.98359316729,
+            "pickups": 10,
+            "drops": 10,
+            "station_handling": 1200,
+            "return_unloading": 0,
+            "duration": 10666.98359316729,
+            "time_slack": 133.01640683271035
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              14,
+              9,
+              28,
+              2,
+              12,
+              5,
+              22,
+              0
+            ],
+            "prefix_loads": [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 6,
+            "travel": 9669.729337162618,
+            "pickups": 6,
+            "drops": 6,
+            "station_handling": 720,
+            "return_unloading": 0,
+            "duration": 10389.729337162618,
+            "time_slack": 410.2706628373817
+          }
+        ]
+      },
+      "initial_physical": {
+        "Y": [
+          50000,
+          8,
+          1,
+          6,
+          2,
+          0,
+          7,
+          1,
+          0,
+          1,
+          7,
+          1,
+          0,
+          1,
+          7,
+          1,
+          2,
+          2,
+          0,
+          0,
+          7,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "G": {
+          "value": 0.2865006306862403,
+          "exact": "106753/372610"
+        },
+        "P": {
+          "value": 3.384375,
+          "exact": "30483739977764045/9007199254740992"
+        },
+        "F": {
+          "value": 0.6008692809039471,
+          "exact": "72656427421628563285747411402833783443/120918858278666382666671764826918748160"
+        },
+        "cars": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              3,
+              34,
+              14,
+              1,
+              10,
+              33,
+              6,
+              0
+            ],
+            "prefix_loads": [
+              5,
+              4,
+              8,
+              12,
+              7,
+              6,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 12,
+            "travel": 9212.433505704734,
+            "pickups": 13,
+            "drops": 13,
+            "station_handling": 1560,
+            "return_unloading": 0,
+            "duration": 10772.433505704734,
+            "time_slack": 27.56649429526624
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              25,
+              4,
+              11,
+              7,
+              21,
+              30,
+              24,
+              9,
+              35,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              4,
+              3,
+              2,
+              1,
+              0,
+              5,
+              4,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 5,
+            "travel": 9642.054735164716,
+            "pickups": 9,
+            "drops": 9,
+            "station_handling": 1080,
+            "return_unloading": 0,
+            "duration": 10722.054735164716,
+            "time_slack": 77.94526483528352
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              18,
+              22,
+              5,
+              2,
+              31,
+              0
+            ],
+            "prefix_loads": [
+              2,
+              1,
+              2,
+              1,
+              0
+            ],
+            "return_load": 0,
+            "peak_load": 2,
+            "travel": 10376.757033689642,
+            "pickups": 3,
+            "drops": 3,
+            "station_handling": 360,
+            "return_unloading": 0,
+            "duration": 10736.757033689642,
+            "time_slack": 63.24296631035759
+          }
+        ]
+      },
+      "U_error": 0.0,
+      "selected_H": "base",
+      "Start_checks": [
+        {
+          "path": "results/unified_exact_round169/complete_raw/18_R163-X35-S_M/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1",
+          "original_objective": 0.6008692809039473,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        },
+        {
+          "path": "results/unified_exact_round169/complete_raw/18_R163-X35-S_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "vector_SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1",
+          "original_objective": 0.6008692809039473,
+          "max_row_residual": 2.220446049250313e-16,
+          "selected_H": "base"
+        }
+      ],
+      "qualified_L": 0.3576324299197946,
+      "independent_interval_envelope": {
+        "L": 0.3576324299198,
+        "pieces": [
+          {
+            "lo": 0.0,
+            "hi": 0.30043464045197366,
+            "L": 0.3576324299198,
+            "calls": [
+              1,
+              2,
+              4,
+              5
+            ]
+          },
+          {
+            "lo": 0.30043464045197366,
+            "hi": 0.6008692809039473,
+            "L": 0.5054299720913279,
+            "calls": [
+              1,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        "outside_G_cap_lower": 0.6008692809039473,
+        "scope": "combination of inherited qualified numerical bounds; not a rational Native certificate"
+      },
+      "certificate": false,
+      "certificate_scope": "original fixed-lambda global problem under inherited numerical qualification",
+      "actual_calls": 5,
+      "actual_models": {
+        "1": {
+          "model_SHA256": "6c613d7cb2990d07b840c6e7fe849bbac3494cc3dd2958b1fa1271309ebb17a2",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.6008692809039473,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "2": {
+          "model_SHA256": "439eb9472039c25d9adf6d5bdff0f817cbd73dbb05edc9b61f1a0a3cc3f414ab",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.30043464045197366,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "3": {
+          "model_SHA256": "e1fb1f9d8810243f55b093c2d7cc68fde5da2a2a6ef2830dcea04732e1e1d6ef",
+          "scope": {
+            "saved_G_lower": 0.30043464045197366,
+            "saved_G_upper": 0.6008692809039473,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "LP"
+        },
+        "4": {
+          "model_SHA256": "6c613d7cb2990d07b840c6e7fe849bbac3494cc3dd2958b1fa1271309ebb17a2",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.6008692809039473,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "CHILD_BOUND_TARGET_MIP"
+        },
+        "5": {
+          "model_SHA256": "6c613d7cb2990d07b840c6e7fe849bbac3494cc3dd2958b1fa1271309ebb17a2",
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.6008692809039473,
+            "saved_objective_cutoff": 0.6008692809039473,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          },
+          "solve_kind": "MIP"
+        }
+      }
+    }
+  ],
+  "initial_35_H_review_not_rerun": true,
+  "seconds": 1.4901850996538997
+}

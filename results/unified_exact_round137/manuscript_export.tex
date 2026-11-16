@@ -145,7 +145,7 @@
 \title{GI-TBC: a Gini-interval tailored branch-and-cut algorithm for
 equitable bicycle redistribution}
 \author{}
-\date{15 November 2026}
+\date{16 November 2026}
 
 \begin{document}
 \maketitle
@@ -1698,6 +1698,62 @@ separate value of interval scheduling are specific scientific questions;
 the present study closes neither them nor the general scalability of
 equitable redistribution.
 
+Objective diversification has direct local-search precedents (Paquete
+and Stützle 2003). A default-off test retains complete own-H and adds
+independent half/double-weight H, against two original-weight restarts.
+All 35 H paths finish; four of six current roles pass the frozen gate.
+Table 11 gives fully paid same-build outcomes on the six exposed roles
+at Native Seed 0, with 300/600s caps. C improves U on all n35 roles
+beyond both controls, raising B35 L slightly and weakening C35/X35 L.
+All n35 runs remain OPEN. All n20 roles certify; C20-C takes 219.5s
+versus 211.5/211.1s for B/M. M also improves paid X35 despite an
+unchanged H Start. Recommend only future independent limited
+confirmation. B stays main and C166/D167/C169 stay off. This known-role
+single-Seed panel adds no statistical or new P-GRB win-rate claim. Full
+path work, costs and fleet changes are in Supplement S169.
+
+\Needspace{10\baselineskip}
+
+\textbf{Table 11. Paid original-objective B/M/C endpoints.} Each cell
+gives true U / qualified global L. B retains base-H, M adds two
+original-weight complete H paths, and C adds half/double-weight paths.
+All work is charged to the common process cap.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Input
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+B: U / L
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+M: U / L
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+C: U / L
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+R163-C20-S & 0.1912806 / 0.1912806 & 0.1912806 / 0.1912806 & 0.1912806 /
+0.1912806 \\
+R163-B20-B & 0.4232322 / 0.4232322 & 0.4232322 / 0.4232322 & 0.4232322 /
+0.4232322 \\
+R163-X20-S & 0.4477476 / 0.4477476 & 0.4477476 / 0.4477476 & 0.4477476 /
+0.4477476 \\
+R163-C35-U & 0.148023 / 0.01712034 & 0.148023 / 0.01712034 & 0.1202012 /
+0.01542708 \\
+R163-B35-S & 0.2197208 / 0.1186522 & 0.2197208 / 0.1186522 & 0.1878612 /
+0.1188649 \\
+R163-X35-S & 0.5183639 / 0.3576324 & 0.5115464 / 0.3576324 & 0.4665149 /
+0.3511829 \\
+\end{longtable}
+}
+
 \clearpage
 
 \section{Appendix A. Complete model, scoped strengthening and proof
@@ -3135,12 +3191,12 @@ tie rule is asserted.
 
 The historical breadth/resource study's GI-TBC source/PE and policy are
 fixed in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round168-route-family/results/unified_exact_round137/candidate_manifest.json}{candidate\_\allowbreak{}manifest.json};
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round169-primal-reweight/results/unified_exact_round137/candidate_manifest.json}{candidate\_\allowbreak{}manifest.json};
 its 120 actual method vectors, inputs, physical horizons, weights, Seeds
 and caps are in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round168-route-family/results/unified_exact_round137/matrix_frozen.json}{matrix\_\allowbreak{}frozen.json},
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round169-primal-reweight/results/unified_exact_round137/matrix_frozen.json}{matrix\_\allowbreak{}frozen.json},
 with the prospectively registered sharing and order in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round168-route-family/results/unified_exact_round137/experiment_plan.json}{experiment\_\allowbreak{}plan.json}.
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round169-primal-reweight/results/unified_exact_round137/experiment_plan.json}{experiment\_\allowbreak{}plan.json}.
 The default vector below uses ms2, tau=.08 and AP off. The three AM
 values are .04/.08/.16; the explicit
 \texttt{-\allowbreak{}-\allowbreak{}round137-\allowbreak{}am-\allowbreak{}threshold} overrides the actual
@@ -3927,6 +3983,11 @@ Muldoon, Frank M., Warren P. Adams, and Hanif D. Sherali. 2013. {``Ideal
 Representations of Lexicographic Orderings and Base-2 Expansions of
 Integer Variables.''} \emph{Operations Research Letters} 41 (1): 32--39.
 \url{https://doi.org/10.1016/j.orl.2012.10.005}.
+
+\bibitem[\citeproctext]{ref-paquete2003two}
+Paquete, Luis, and Thomas Stützle. 2003. \emph{A Two-Phase Local Search
+for the Biobjective Traveling Salesman Problem}.
+\url{https://iridia.ulb.ac.be/~stuetzle/publications/EMO03.pdf}.
 
 \bibitem[\citeproctext]{ref-qiao2026}
 Qiao, Jian, Zhengjie Cui, Niannian Sun, and Ying Fan. 2026. {``A

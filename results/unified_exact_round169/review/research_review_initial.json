@@ -1,0 +1,182 @@
+{
+  "schema": "round169-independent-research-review-initial-v1",
+  "UTC": "2026-11-16T00:49:25.590687+00:00",
+  "reviewer": "/root/research_review",
+  "scope": "Actual design, frozen gate, 35 H outputs, directed history and live original literature; full 18-arm panel and revised manuscript still pending.",
+  "status": "PASS_WITH_FINAL_REVIEW_PENDING",
+  "blocking_findings": [],
+  "checks": {
+    "preregistered_freeze_semantically_unchanged_from_commit": "23e48b5665c1b6d972304724bf88f7261713c8f2",
+    "H_window_start_epoch": 1794789689.7723851,
+    "H_calls": 35,
+    "expected_Optimize": 0,
+    "recomputed_rows": [
+      {
+        "role": "R163-C20-S",
+        "Delta_restart": 0.0,
+        "Delta_weight": 0.018572842354307784,
+        "C_gain_percent_vs_B": 6.018292145301118,
+        "delta": 0.000308606526667351,
+        "gate": true,
+        "can_trigger_E5": true
+      },
+      {
+        "role": "R163-B20-B",
+        "Delta_restart": 0.0,
+        "Delta_weight": 0.0,
+        "C_gain_percent_vs_B": 0.0,
+        "delta": 0.0004328798325765075,
+        "gate": false,
+        "can_trigger_E5": true
+      },
+      {
+        "role": "R163-X20-S",
+        "Delta_restart": 0.0,
+        "Delta_weight": 0.0,
+        "C_gain_percent_vs_B": 0.0,
+        "delta": 0.0005268146619010789,
+        "gate": false,
+        "can_trigger_E5": true
+      },
+      {
+        "role": "R163-C35-U",
+        "Delta_restart": 0.0,
+        "Delta_weight": 0.01932477816804634,
+        "C_gain_percent_vs_B": 11.074993189060354,
+        "delta": 0.0001744902036340298,
+        "gate": true,
+        "can_trigger_E5": true
+      },
+      {
+        "role": "R163-B35-S",
+        "Delta_restart": 0.0,
+        "Delta_weight": 0.012981688328564306,
+        "C_gain_percent_vs_B": 5.908265882564385,
+        "delta": 0.00021972078756431687,
+        "gate": true,
+        "can_trigger_E5": true
+      },
+      {
+        "role": "R163-X35-S",
+        "Delta_restart": 0.0,
+        "Delta_weight": 0.09287047214129673,
+        "C_gain_percent_vs_B": 15.45601931947369,
+        "delta": 0.0006008692809039473,
+        "gate": true,
+        "can_trigger_E5": true
+      },
+      {
+        "role": "R-X35-S-T2",
+        "Delta_restart": 0.0,
+        "Delta_weight": 0.0030675141672203976,
+        "C_gain_percent_vs_B": 0.7223631898507622,
+        "delta": 0.0004246498451636407,
+        "gate": true,
+        "can_trigger_E5": false
+      }
+    ],
+    "current_roles_triggering": 4,
+    "R137_motivation_excluded_as_trigger": true,
+    "matched_restart_structure_control_not_equal_cpu_claim": true,
+    "C_only_beats_B_is_insufficient_explanation": true,
+    "known_exposed_inputs_single_Native_Seed_limits_explicit": true,
+    "B_default_retained_and_no_P_win_rate_increment_claim": true,
+    "no_OR_novel_scalarization_claim": true
+  },
+  "historical_boundaries_read": {
+    "R73": "Full 24 random orders plus 25th joint constructed order, finite own-H; no novelty claim for generic multistart.",
+    "R88": "a1_g3_decision retains 24+1; cheaper constructive-only loses U6/D6 quality and does not justify promotion.",
+    "R96": "Finite order/quantity diagnosis and better initial primal do not guarantee complete endpoint; V1 is adverse.",
+    "R97": "Late physical feedback gives mixed complete outcomes and is not promoted.",
+    "R105_107": "Assignment masters, full/IIS and signed-literal feasibility conflicts/frontiers were actually implemented and adverse on complete roles.",
+    "R134_137_166": "Offline lambda studies and archive transfer are prior analysis; R166 explicitly retains open/provenance/time bounds and supplies no free Start.",
+    "R159_160": "Bounded quantity/owner/order releases already exist; R160 improves initialization yet worsens hard full endpoints."
+  },
+  "weight_provenance_independent_readback": {
+    "all_11_selected_archive_member_hashes_and_lengths_pass": true,
+    "all_three_archive_hashes_pass": true,
+    "H_original_F_by_rho": [
+      {
+        "record": "R137:B3:68",
+        "rho": 0.49999999999999994,
+        "F": 0.421918541547217
+      },
+      {
+        "record": "R137:B2:59",
+        "rho": 0.9999999999999999,
+        "F": 0.4246498451636407
+      },
+      {
+        "record": "R137:B3:71",
+        "rho": 1.9999999999999998,
+        "F": 0.4215823309964203
+      }
+    ],
+    "exact_final_fleet_matches_only_witness_sequence": 123,
+    "witness_call": 5,
+    "call_native_log": "external/native_logs/L0_terminal_mip.gurobi.log",
+    "terminal_source_confirmed_by_call_event_22": true,
+    "witness_has_no_clock": true,
+    "rounded_local_native_time_seconds": 2298,
+    "outer_acceptance_process_seconds": 2370.0371459,
+    "exact_process_first_hit_seconds": null,
+    "producer_endpoint_not_called_first_hit": true,
+    "interpretation": "Both historical perturbed-weight H fleets slightly improve original H, but neither attains the better historical original final fleet, much less the rho2 final fleet reevaluated at original lambda. Event/source is recovered; exact process discovery time remains unknown."
+  },
+  "literature": {
+    "actual_URL": "https://iridia.ulb.ac.be/~stuetzle/publications/EMO03.pdf",
+    "version": "Live author-hosted 15-page manuscript",
+    "sections": [
+      "2",
+      "Algorithm 1",
+      "4.1",
+      "4.2"
+    ],
+    "read_date": "2026-11-16",
+    "relationship": "Weighted aggregation/local-search/archive prior art; original-target independent extra paths and matched restart control are the experiment here, not a new theory claim.",
+    "memo": "results/unified_exact_round169/literature_reading_memo.md"
+  },
+  "final_review_requirements": [
+    "Read all 18 actual paid arm outcomes and C-vs-M comparison, retaining adverse proof/certificate roles.",
+    "Ensure final decision uses end-to-end evidence rather than H or Work alone and leaves B default.",
+    "Check revised body/supplement/references, R168 UNKNOWN wording, navigation and CSV reconciliation; currently these final artifacts are not yet formed.",
+    "Do not generalize Delta_restart=0 on these fixed seeds into a claim that multistart is ineffective in general."
+  ],
+  "evidence": [
+    {
+      "path": "results/unified_exact_round169/research_design.md",
+      "SHA256": "162dadc02aea1964f155f72e1084497413e2494541be9de83636da1db9f199c0",
+      "bytes": 3561
+    },
+    {
+      "path": "results/unified_exact_round169/method_note.md",
+      "SHA256": "cc8941b0a1993f6c4e3d55adf0d447d18e81ac76b2283d2f2469a2de08c5ba76",
+      "bytes": 2614
+    },
+    {
+      "path": "results/unified_exact_round169/h_panel_frozen.json",
+      "SHA256": "579085f76e5ab3c1e6db607fc8a30fe52aade5abe4e538a13de09ce294ece29f",
+      "bytes": 15305
+    },
+    {
+      "path": "results/unified_exact_round169/h_results.json",
+      "SHA256": "be8789f73e5bf80ba0f7e41e6329033fa71a1d932889662c3735312f5d22f7b3",
+      "bytes": 8461
+    },
+    {
+      "path": "results/unified_exact_round169/h_results.csv",
+      "SHA256": "c70ead0cd61be542d5279e5099ab83c348b896f29b384a719c2858bd55288c9b",
+      "bytes": 1441
+    },
+    {
+      "path": "results/unified_exact_round169/weight_provenance.json",
+      "SHA256": "82f71ae0920881f26c2b18145643778f667665c3d242021ff508528f3a2f211c",
+      "bytes": 38471
+    },
+    {
+      "path": "results/unified_exact_round169/literature_reading_memo.md",
+      "SHA256": "b85162d682d240073194353b2ff3d6c87fc41498c930c301acc4dde58c6f6f41",
+      "bytes": 1820
+    }
+  ]
+}

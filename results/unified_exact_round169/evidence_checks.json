@@ -1,0 +1,82 @@
+{
+  "UTC": "2026-11-16T03:07:01.979640+00:00",
+  "PASS": true,
+  "H_paths": 35,
+  "H_Optimize": 0,
+  "complete_positions": 18,
+  "complete_H_calls": 42,
+  "actual_Optimize": 93,
+  "LP": 66,
+  "MIP": 27,
+  "all_source_hashes_match_measured_tree": true,
+  "common_PE": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round169\\ExactEBRP.exe",
+    "bytes": 9884148,
+    "SHA256": "c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57"
+  },
+  "raw_carrier": {
+    "UTC": "2026-11-16T02:42:57.376461+00:00",
+    "new_only": true,
+    "carrier": {
+      "path": "results/unified_exact_round169/artifacts/round169_new_raw_and_runtime.zip",
+      "bytes": 33289072,
+      "SHA256": "bb770a7c4b503bb97f7d5e0da5c2b991e4da0f5a5337cf622cdea782762e76ff"
+    },
+    "membermap": {
+      "path": "results/unified_exact_round169/artifacts/round169_new_raw_members.csv.gz",
+      "bytes": 1883188,
+      "SHA256": "5e85d1001e7fb3b4f3dfeb4a04dfd17baa5b7312ff5980dc0f69b719b992e6f4"
+    },
+    "members": 40026,
+    "raw_uncompressed_bytes": 165520534,
+    "all_local_member_bytes_verified": true,
+    "own_project_PE_included": true,
+    "commercial_DLL_licenses_credentials_private_antecedents_included": false,
+    "historical_carriers_repacked": false,
+    "old_H_member_copies_included": false,
+    "old_raw_sources": "weight_provenance.json exact fixed archive/member/hash references",
+    "restore": "raw folders expand under results/unified_exact_round169; runtime/ is the measured common complete B/M/C PE"
+  },
+  "CSV_QA": {
+    "path": "results/unified_exact_round169/CSV_QA.json",
+    "bytes": 2587,
+    "SHA256": "394645fddf40a97981fe4ea07b1ac6b5534aadb8a570849fecd0366d9ed19ed4"
+  },
+  "PDF_QA": {
+    "path": "results/unified_exact_round169/document_qa.json",
+    "bytes": 34343,
+    "SHA256": "5c655628083a33c607a1033963faa68b0850660c7b89521119770ce76acd3a8b"
+  },
+  "independent_reviews": [
+    {
+      "path": "math_review_final.json",
+      "status": "PASS",
+      "file": {
+        "path": "results/unified_exact_round169/review/math_review_final.json",
+        "bytes": 13487,
+        "SHA256": "2a07c4e0f261711e424063eb258ebacbc6c151c304c5aaba27ba6d5d2edbd102"
+      }
+    },
+    {
+      "path": "implementation_review_final.json",
+      "status": "PASS",
+      "file": {
+        "path": "results/unified_exact_round169/review/implementation_review_final.json",
+        "bytes": 18409,
+        "SHA256": "dff387bf7542a6d43ab13163ab505bb9aff9d4aaf2f54ab118d494ad1af74673"
+      }
+    },
+    {
+      "path": "research_review_final.json",
+      "status": "PASS",
+      "file": {
+        "path": "results/unified_exact_round169/review/research_review_final.json",
+        "bytes": 20366,
+        "SHA256": "da436f8114cac695a9d64c41091efa8ad6fd9767f47a948eac2cbd43b6ec60e2"
+      }
+    }
+  ],
+  "new_P_pairs": 0,
+  "default_B": true,
+  "raw_experiments_not_rerun": true
+}

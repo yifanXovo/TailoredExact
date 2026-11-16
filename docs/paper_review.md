@@ -6,11 +6,22 @@ Read the [current main PDF with complete Appendix A/B](../results/unified_exact_
 [mathematical companion](../results/unified_exact_round137/mathematical_analysis.md),
 [supplement PDF](../results/unified_exact_round137/supplement.pdf) and
 [bibliography](../results/unified_exact_round137/references.bib).
-There is one maintained paper directory. Round166 holds research evidence,
-[contribution positioning](../results/unified_exact_round166/contribution_positioning.md)
-and the [internal author memo](../results/unified_exact_round166/author_decision_memo.md).
+There is one maintained paper directory. The current [R169 report](../results/unified_exact_round169/final_report.md),
+[decision](../results/unified_exact_round169/research_decision.md) and
+[author memo](../results/unified_exact_round169/author_decision_memo.md) add
+the fixed half/double-weight complete-H test against matched restarts.
+Four current H roles trigger all eighteen paid short-cap positions. C improves
+all three n35 primal endpoints beyond B/M, with mixed proof lower bounds;
+n20 certification is retained but C20 costs more. Only future independent
+limited confirmation is recommended. Uniform B remains main and C166/D167/C169
+stay off. The paper adds one compact paid table and Supplement S169, with no
+new P comparison or robust/general OR-method claim.
 
-The new question is whether legal affine-piece support can compress the
+The retained Round166 evidence includes
+[contribution positioning](../results/unified_exact_round166/contribution_positioning.md)
+and the [then-current author memo](../results/unified_exact_round166/author_decision_memo.md).
+
+Its representation question was whether legal affine-piece support can compress the
 joint inventory/movement/visit/product graph while preserving integer
 physical points and common raw LP information. The paper gives the
 constructive proof and its exact interface boundary. C166 implements that

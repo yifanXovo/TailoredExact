@@ -1,0 +1,43 @@
+{
+  "schema": "round169-independent-audit-development-cost-v1",
+  "Optimize": 0,
+  "enclosing_process_attempts": [
+    {
+      "action": "complete audit import attempt",
+      "passed": false,
+      "seconds": 0.5408785,
+      "error": "Legacy module import attempted missing metadata; no solver/model; replaced by pure AST definition loader"
+    },
+    {
+      "action": "complete audit 01 data-schema attempt",
+      "passed": false,
+      "seconds": 2.0518576,
+      "error": "solver_runtime field spelling in derived cost reader; all scientific gates reached; no raw changed"
+    },
+    {
+      "action": "complete audit 01 corrected",
+      "passed": true,
+      "seconds": 2.2623981
+    },
+    {
+      "action": "complete audit 02",
+      "passed": true,
+      "seconds": 2.1331244
+    },
+    {
+      "action": "complete audit positions03to06",
+      "passed": true,
+      "seconds": 6.4590734
+    },
+    {
+      "action": "independent H physical/hash audit",
+      "passed": true,
+      "seconds": 0.1946108
+    }
+  ],
+  "observed_tool_process_outer_sum_seconds": 13.641942799999999,
+  "source": "Actual functions.exec exec_command wall_time_seconds readbacks, inclusive of per-process imports/shell overhead",
+  "pure_scientific_check_seconds_nested": true,
+  "not_total_human_or_agent_review_elapsed": true,
+  "nested_in_root_science_window_not_added_again": true
+}

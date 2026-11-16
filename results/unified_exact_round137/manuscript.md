@@ -545,6 +545,19 @@ The same verified fleets and qualified global bounds support decisions beyond ce
 
 Further algorithm comparisons require a representation whose conditional information survives the declared physical interface at an acceptable complete cost, followed by independently paid own-H full-method evidence with qualified endpoints and all adverse cases retained. Better local hulls, fewer binaries and small LP times are insufficient substitutes. The unresolved incumbent deficits, physical realization gaps and separate value of interval scheduling are specific scientific questions; the present study closes neither them nor the general scalability of equitable redistribution.
 
+Objective diversification has direct local-search precedents [@paquete2003two]. A default-off test retains complete own-H and adds independent half/double-weight H, against two original-weight restarts. All 35 H paths finish; four of six current roles pass the frozen gate. Table 11 gives fully paid same-build outcomes on the six exposed roles at Native Seed 0, with 300/600s caps. C improves U on all n35 roles beyond both controls, raising B35 L slightly and weakening C35/X35 L. All n35 runs remain OPEN. All n20 roles certify; C20-C takes 219.5s versus 211.5/211.1s for B/M. M also improves paid X35 despite an unchanged H Start. Recommend only future independent limited confirmation. B stays main and C166/D167/C169 stay off. This known-role single-Seed panel adds no statistical or new P-GRB win-rate claim. Full path work, costs and fleet changes are in Supplement S169.
+
+**Table 11. Paid original-objective B/M/C endpoints.** Each cell gives true U / qualified global L. B retains base-H, M adds two original-weight complete H paths, and C adds half/double-weight paths. All work is charged to the common process cap.
+
+| Input | B: U / L | M: U / L | C: U / L |
+|---|---|---|---|
+| R163-C20-S | 0.191280592 / 0.191280592 | 0.191280592 / 0.191280592 | 0.191280592 / 0.191280592 |
+| R163-B20-B | 0.423232182 / 0.423232182 | 0.423232182 / 0.423232182 | 0.423232182 / 0.423232182 |
+| R163-X20-S | 0.447747627 / 0.447747627 | 0.447747627 / 0.447747627 | 0.447747627 / 0.447747627 |
+| R163-C35-U | 0.148022963 / 0.0171203442 | 0.148022963 / 0.0171203442 | 0.120201245 / 0.0154270846 |
+| R163-B35-S | 0.219720788 / 0.118652175 | 0.219720788 / 0.118652175 | 0.187861163 / 0.118864869 |
+| R163-X35-S | 0.518363903 / 0.35763243 | 0.511546413 / 0.35763243 | 0.466514935 / 0.351182946 |
+
 \clearpage
 
 # Appendix A. Complete model, scoped strengthening and proof obligations

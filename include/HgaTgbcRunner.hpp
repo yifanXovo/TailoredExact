@@ -14,6 +14,7 @@ inline bool isDecodedDescentStopMode(const std::string& mode) {
 }
 
 struct HgaTgbcOptions {
+    bool round169_trace_initial_orders = false;
     double lambda = 0.15;
     unsigned seed = 20260626u;
     int pop_size = 24;
@@ -43,6 +44,7 @@ struct HgaTgbcOptions {
 };
 
 struct HgaTgbcResult {
+    std::string round169_initial_orders;
     bool found = false;
     std::vector<RoutePlan> routes;
     std::string source_label;

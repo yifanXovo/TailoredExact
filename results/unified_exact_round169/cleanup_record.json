@@ -1,0 +1,37 @@
+{
+  "UTC": "2026-11-16T03:09:22.191844+00:00",
+  "scope": "bounded metadata screening of current round only",
+  "assets": [
+    {
+      "root": "E:\\codes\\ExactEBRP-work\\worktrees\\round169\\results\\unified_exact_round169",
+      "files": 40135,
+      "logical_bytes": 212573276,
+      "retained": true
+    },
+    {
+      "root": "E:\\codes\\ExactEBRP-work\\build-cache\\round169",
+      "files": 103,
+      "logical_bytes": 43768011,
+      "retained": true
+    },
+    {
+      "root": "E:\\codes\\ExactEBRP-work\\temp\\round169",
+      "files": 9043,
+      "logical_bytes": 404108788,
+      "retained": true
+    },
+    {
+      "root": "E:\\codes\\ExactEBRP-work\\recovery\\round169-public-b86cef9917a9",
+      "files": 124,
+      "logical_bytes": 62364787,
+      "retained": true
+    }
+  ],
+  "actions": [],
+  "deleted_files": 0,
+  "deleted_bytes": 0,
+  "volume_free_before": 142574010368,
+  "volume_free_after": 142574010368,
+  "observed_free_change": 0,
+  "policy": "retain unique raw/failures/build dependencies, QA, recovery and active Draft; zero deletion is allowed"
+}

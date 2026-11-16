@@ -1,0 +1,620 @@
+{
+  "PASS": true,
+  "fleets": 35,
+  "maximum_absolute_numeric_difference": 4.440892098500626e-16,
+  "Optimize_run_by_reviewer": 0,
+  "H_calls": 35,
+  "seconds": 0.042802099604159594,
+  "rows": [
+    {
+      "role": "R163-C20-S",
+      "valid_fleets": 5,
+      "B": 0.308606526667351,
+      "M": 0.308606526667351,
+      "C": 0.29003368431304327,
+      "paths": [
+        {
+          "path": "base",
+          "F": 0.308606526667351,
+          "G": 0.13540758190334348,
+          "P": 1.6055363784710388,
+          "effective_seed": 20260626,
+          "decoded_checks": 426,
+          "H_seconds": 0.3182227,
+          "return_loads": [
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "0b4f97dfd0ce0abb180a2ecd34b4c35dd5f03f844d16d03fc560e051f90a357b",
+          "orders_file_byte_SHA256": "4153105db220e4ad1a690b22ac7010b9f44e22815f75c5183f79c8a929500b9f"
+        },
+        {
+          "path": "M_s1",
+          "F": 0.308606526667351,
+          "G": 0.13540758190334348,
+          "P": 1.6055363784710388,
+          "effective_seed": 20260627,
+          "decoded_checks": 429,
+          "H_seconds": 0.3243559,
+          "return_loads": [
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "704a2bc685e57dbfab52f5b7cb9e329e6155db3cad0c533da8b9a09c1f3c33f7",
+          "orders_file_byte_SHA256": "0cb364f68e6f612f2d6c950343c28c22495a9b6a6820a07e895d0851cd472de0"
+        },
+        {
+          "path": "M_s2",
+          "F": 0.308606526667351,
+          "G": 0.13540758190334348,
+          "P": 1.6055363784710388,
+          "effective_seed": 20260628,
+          "decoded_checks": 430,
+          "H_seconds": 0.3038745,
+          "return_loads": [
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "ede061020410cc7630a0e52d4c56245307856ada981cbc353f3a0a0c8b9d60b4",
+          "orders_file_byte_SHA256": "cf8eeac6fb52af3ab19e0ffe38d4018c7a78196fcdd854394bb460af1b0fe895"
+        },
+        {
+          "path": "C_s1",
+          "F": 0.29003368431304327,
+          "G": 0.12355362376034251,
+          "P": 1.5432530138772993,
+          "effective_seed": 20260627,
+          "decoded_checks": 463,
+          "H_seconds": 0.3818945,
+          "return_loads": [
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "704a2bc685e57dbfab52f5b7cb9e329e6155db3cad0c533da8b9a09c1f3c33f7",
+          "orders_file_byte_SHA256": "0cb364f68e6f612f2d6c950343c28c22495a9b6a6820a07e895d0851cd472de0"
+        },
+        {
+          "path": "C_s2",
+          "F": 0.3104986970203388,
+          "G": 0.1428988573392667,
+          "P": 1.5536332510600512,
+          "effective_seed": 20260628,
+          "decoded_checks": 429,
+          "H_seconds": 0.3087849,
+          "return_loads": [
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "ede061020410cc7630a0e52d4c56245307856ada981cbc353f3a0a0c8b9d60b4",
+          "orders_file_byte_SHA256": "cf8eeac6fb52af3ab19e0ffe38d4018c7a78196fcdd854394bb460af1b0fe895"
+        }
+      ]
+    },
+    {
+      "role": "R163-B20-B",
+      "valid_fleets": 5,
+      "B": 0.43287983257650764,
+      "M": 0.43287983257650764,
+      "C": 0.43287983257650764,
+      "paths": [
+        {
+          "path": "base",
+          "F": 0.43287983257650764,
+          "G": 0.17467967122208913,
+          "P": 2.5371909755411255,
+          "effective_seed": 20260626,
+          "decoded_checks": 142,
+          "H_seconds": 0.0097699,
+          "return_loads": [
+            0,
+            2
+          ],
+          "orders_LF_semantic_SHA256": "0b4f97dfd0ce0abb180a2ecd34b4c35dd5f03f844d16d03fc560e051f90a357b",
+          "orders_file_byte_SHA256": "4153105db220e4ad1a690b22ac7010b9f44e22815f75c5183f79c8a929500b9f"
+        },
+        {
+          "path": "M_s1",
+          "F": 0.43287983257650764,
+          "G": 0.17467967122208913,
+          "P": 2.5371909755411255,
+          "effective_seed": 20260627,
+          "decoded_checks": 145,
+          "H_seconds": 0.0099222,
+          "return_loads": [
+            0,
+            2
+          ],
+          "orders_LF_semantic_SHA256": "704a2bc685e57dbfab52f5b7cb9e329e6155db3cad0c533da8b9a09c1f3c33f7",
+          "orders_file_byte_SHA256": "0cb364f68e6f612f2d6c950343c28c22495a9b6a6820a07e895d0851cd472de0"
+        },
+        {
+          "path": "M_s2",
+          "F": 0.43287983257650764,
+          "G": 0.17467967122208913,
+          "P": 2.5371909755411255,
+          "effective_seed": 20260628,
+          "decoded_checks": 167,
+          "H_seconds": 0.0112456,
+          "return_loads": [
+            0,
+            2
+          ],
+          "orders_LF_semantic_SHA256": "ede061020410cc7630a0e52d4c56245307856ada981cbc353f3a0a0c8b9d60b4",
+          "orders_file_byte_SHA256": "cf8eeac6fb52af3ab19e0ffe38d4018c7a78196fcdd854394bb460af1b0fe895"
+        },
+        {
+          "path": "C_s1",
+          "F": 0.43287983257650764,
+          "G": 0.17467967122208913,
+          "P": 2.5371909755411255,
+          "effective_seed": 20260627,
+          "decoded_checks": 145,
+          "H_seconds": 0.0123595,
+          "return_loads": [
+            0,
+            2
+          ],
+          "orders_LF_semantic_SHA256": "704a2bc685e57dbfab52f5b7cb9e329e6155db3cad0c533da8b9a09c1f3c33f7",
+          "orders_file_byte_SHA256": "0cb364f68e6f612f2d6c950343c28c22495a9b6a6820a07e895d0851cd472de0"
+        },
+        {
+          "path": "C_s2",
+          "F": 0.43287983257650764,
+          "G": 0.17467967122208913,
+          "P": 2.5371909755411255,
+          "effective_seed": 20260628,
+          "decoded_checks": 167,
+          "H_seconds": 0.0124321,
+          "return_loads": [
+            0,
+            2
+          ],
+          "orders_LF_semantic_SHA256": "ede061020410cc7630a0e52d4c56245307856ada981cbc353f3a0a0c8b9d60b4",
+          "orders_file_byte_SHA256": "cf8eeac6fb52af3ab19e0ffe38d4018c7a78196fcdd854394bb460af1b0fe895"
+        }
+      ]
+    },
+    {
+      "role": "R163-X20-S",
+      "valid_fleets": 5,
+      "B": 0.5268146619010788,
+      "M": 0.5268146619010788,
+      "C": 0.5268146619010788,
+      "paths": [
+        {
+          "path": "base",
+          "F": 0.5268146619010788,
+          "G": 0.29011253424150435,
+          "P": 1.78,
+          "effective_seed": 20260626,
+          "decoded_checks": 306,
+          "H_seconds": 0.0564396,
+          "return_loads": [
+            1,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "0b4f97dfd0ce0abb180a2ecd34b4c35dd5f03f844d16d03fc560e051f90a357b",
+          "orders_file_byte_SHA256": "4153105db220e4ad1a690b22ac7010b9f44e22815f75c5183f79c8a929500b9f"
+        },
+        {
+          "path": "M_s1",
+          "F": 0.5268146619010788,
+          "G": 0.29011253424150435,
+          "P": 1.78,
+          "effective_seed": 20260627,
+          "decoded_checks": 318,
+          "H_seconds": 0.0566233,
+          "return_loads": [
+            1,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "704a2bc685e57dbfab52f5b7cb9e329e6155db3cad0c533da8b9a09c1f3c33f7",
+          "orders_file_byte_SHA256": "0cb364f68e6f612f2d6c950343c28c22495a9b6a6820a07e895d0851cd472de0"
+        },
+        {
+          "path": "M_s2",
+          "F": 0.5268146619010788,
+          "G": 0.29011253424150435,
+          "P": 1.78,
+          "effective_seed": 20260628,
+          "decoded_checks": 345,
+          "H_seconds": 0.0571582,
+          "return_loads": [
+            1,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "ede061020410cc7630a0e52d4c56245307856ada981cbc353f3a0a0c8b9d60b4",
+          "orders_file_byte_SHA256": "cf8eeac6fb52af3ab19e0ffe38d4018c7a78196fcdd854394bb460af1b0fe895"
+        },
+        {
+          "path": "C_s1",
+          "F": 0.5886582474623037,
+          "G": 0.2885695949800342,
+          "P": 2.2566666666666664,
+          "effective_seed": 20260627,
+          "decoded_checks": 304,
+          "H_seconds": 0.0515945,
+          "return_loads": [
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "704a2bc685e57dbfab52f5b7cb9e329e6155db3cad0c533da8b9a09c1f3c33f7",
+          "orders_file_byte_SHA256": "0cb364f68e6f612f2d6c950343c28c22495a9b6a6820a07e895d0851cd472de0"
+        },
+        {
+          "path": "C_s2",
+          "F": 0.531963712626869,
+          "G": 0.30634314525098244,
+          "P": 1.6966666666666668,
+          "effective_seed": 20260628,
+          "decoded_checks": 322,
+          "H_seconds": 0.0460076,
+          "return_loads": [
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "ede061020410cc7630a0e52d4c56245307856ada981cbc353f3a0a0c8b9d60b4",
+          "orders_file_byte_SHA256": "cf8eeac6fb52af3ab19e0ffe38d4018c7a78196fcdd854394bb460af1b0fe895"
+        }
+      ]
+    },
+    {
+      "role": "R163-C35-U",
+      "valid_fleets": 5,
+      "B": 0.17449020363402973,
+      "M": 0.17449020363402973,
+      "C": 0.15516542546598344,
+      "paths": [
+        {
+          "path": "base",
+          "F": 0.17449020363402973,
+          "G": 0.08526527561969231,
+          "P": 0.8061160851096616,
+          "effective_seed": 20260626,
+          "decoded_checks": 1307,
+          "H_seconds": 2.1653342,
+          "return_loads": [
+            1,
+            6,
+            18
+          ],
+          "orders_LF_semantic_SHA256": "b1b9c864976ef861f2496a3b7f932f8480d631b04b7a3d6297873b6eb2f7b520",
+          "orders_file_byte_SHA256": "b2680b6e1260fb96644171c2686c1059f04393d77080ec4d327712642f5407ec"
+        },
+        {
+          "path": "M_s1",
+          "F": 0.17449020363402973,
+          "G": 0.08526527561969231,
+          "P": 0.8061160851096616,
+          "effective_seed": 20260627,
+          "decoded_checks": 1273,
+          "H_seconds": 2.4016041,
+          "return_loads": [
+            1,
+            6,
+            18
+          ],
+          "orders_LF_semantic_SHA256": "0df876c553727986edb4767b186a39eaaacc378c16b63e65c0541357fa5bc2d7",
+          "orders_file_byte_SHA256": "a2c6eb5bd596f24f7c2feb4801272beaca7a59289008713dad3f3cd57105e399"
+        },
+        {
+          "path": "M_s2",
+          "F": 0.17449020363402973,
+          "G": 0.08526527561969231,
+          "P": 0.8061160851096616,
+          "effective_seed": 20260628,
+          "decoded_checks": 1125,
+          "H_seconds": 1.7186527,
+          "return_loads": [
+            1,
+            6,
+            18
+          ],
+          "orders_LF_semantic_SHA256": "6be9f1e47d17af5b5c0c4f7db919ec5a5d64185a9bc900add18853e9cc4831d8",
+          "orders_file_byte_SHA256": "819a92b458ab3016dbda733963a62ef8d2882dc82b8920c37a23419cac268f67"
+        },
+        {
+          "path": "C_s1",
+          "F": 0.22633018312284672,
+          "G": 0.08300921035421036,
+          "P": 1.2948549699451333,
+          "effective_seed": 20260627,
+          "decoded_checks": 1205,
+          "H_seconds": 2.6291739,
+          "return_loads": [
+            0,
+            3,
+            14
+          ],
+          "orders_LF_semantic_SHA256": "0df876c553727986edb4767b186a39eaaacc378c16b63e65c0541357fa5bc2d7",
+          "orders_file_byte_SHA256": "a2c6eb5bd596f24f7c2feb4801272beaca7a59289008713dad3f3cd57105e399"
+        },
+        {
+          "path": "C_s2",
+          "F": 0.15516542546598344,
+          "G": 0.07338217296846453,
+          "P": 0.7388831439599616,
+          "effective_seed": 20260628,
+          "decoded_checks": 957,
+          "H_seconds": 1.2324609,
+          "return_loads": [
+            0,
+            2,
+            13
+          ],
+          "orders_LF_semantic_SHA256": "6be9f1e47d17af5b5c0c4f7db919ec5a5d64185a9bc900add18853e9cc4831d8",
+          "orders_file_byte_SHA256": "819a92b458ab3016dbda733963a62ef8d2882dc82b8920c37a23419cac268f67"
+        }
+      ]
+    },
+    {
+      "role": "R163-B35-S",
+      "valid_fleets": 5,
+      "B": 0.21972078756431676,
+      "M": 0.21972078756431676,
+      "C": 0.20673909923575226,
+      "paths": [
+        {
+          "path": "base",
+          "F": 0.21972078756431676,
+          "G": 0.09420961275797635,
+          "P": 1.1610285714285713,
+          "effective_seed": 20260626,
+          "decoded_checks": 1003,
+          "H_seconds": 2.0086986,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "b1b9c864976ef861f2496a3b7f932f8480d631b04b7a3d6297873b6eb2f7b520",
+          "orders_file_byte_SHA256": "b2680b6e1260fb96644171c2686c1059f04393d77080ec4d327712642f5407ec"
+        },
+        {
+          "path": "M_s1",
+          "F": 0.21972078756431676,
+          "G": 0.09420961275797635,
+          "P": 1.1610285714285713,
+          "effective_seed": 20260627,
+          "decoded_checks": 924,
+          "H_seconds": 1.8960805,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "0df876c553727986edb4767b186a39eaaacc378c16b63e65c0541357fa5bc2d7",
+          "orders_file_byte_SHA256": "a2c6eb5bd596f24f7c2feb4801272beaca7a59289008713dad3f3cd57105e399"
+        },
+        {
+          "path": "M_s2",
+          "F": 0.21972078756431676,
+          "G": 0.09420961275797635,
+          "P": 1.1610285714285713,
+          "effective_seed": 20260628,
+          "decoded_checks": 825,
+          "H_seconds": 1.5465797,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "6be9f1e47d17af5b5c0c4f7db919ec5a5d64185a9bc900add18853e9cc4831d8",
+          "orders_file_byte_SHA256": "819a92b458ab3016dbda733963a62ef8d2882dc82b8920c37a23419cac268f67"
+        },
+        {
+          "path": "C_s1",
+          "F": 0.23096590442836173,
+          "G": 0.10681374421289615,
+          "P": 1.1484571428571428,
+          "effective_seed": 20260627,
+          "decoded_checks": 1018,
+          "H_seconds": 2.043555,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "0df876c553727986edb4767b186a39eaaacc378c16b63e65c0541357fa5bc2d7",
+          "orders_file_byte_SHA256": "a2c6eb5bd596f24f7c2feb4801272beaca7a59289008713dad3f3cd57105e399"
+        },
+        {
+          "path": "C_s2",
+          "F": 0.20673909923575226,
+          "G": 0.10344163565116594,
+          "P": 0.9555428571428571,
+          "effective_seed": 20260628,
+          "decoded_checks": 871,
+          "H_seconds": 1.4842767,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "6be9f1e47d17af5b5c0c4f7db919ec5a5d64185a9bc900add18853e9cc4831d8",
+          "orders_file_byte_SHA256": "819a92b458ab3016dbda733963a62ef8d2882dc82b8920c37a23419cac268f67"
+        }
+      ]
+    },
+    {
+      "role": "R163-X35-S",
+      "valid_fleets": 5,
+      "B": 0.6008692809039471,
+      "M": 0.6008692809039471,
+      "C": 0.5079988087626508,
+      "paths": [
+        {
+          "path": "base",
+          "F": 0.6008692809039471,
+          "G": 0.28650063068624027,
+          "P": 3.384375,
+          "effective_seed": 20260626,
+          "decoded_checks": 493,
+          "H_seconds": 0.2382489,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "b1b9c864976ef861f2496a3b7f932f8480d631b04b7a3d6297873b6eb2f7b520",
+          "orders_file_byte_SHA256": "b2680b6e1260fb96644171c2686c1059f04393d77080ec4d327712642f5407ec"
+        },
+        {
+          "path": "M_s1",
+          "F": 0.6008692809039471,
+          "G": 0.28650063068624027,
+          "P": 3.384375,
+          "effective_seed": 20260627,
+          "decoded_checks": 520,
+          "H_seconds": 0.2330282,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "0df876c553727986edb4767b186a39eaaacc378c16b63e65c0541357fa5bc2d7",
+          "orders_file_byte_SHA256": "a2c6eb5bd596f24f7c2feb4801272beaca7a59289008713dad3f3cd57105e399"
+        },
+        {
+          "path": "M_s2",
+          "F": 0.6008692809039471,
+          "G": 0.28650063068624027,
+          "P": 3.384375,
+          "effective_seed": 20260628,
+          "decoded_checks": 512,
+          "H_seconds": 0.2163453,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "6be9f1e47d17af5b5c0c4f7db919ec5a5d64185a9bc900add18853e9cc4831d8",
+          "orders_file_byte_SHA256": "819a92b458ab3016dbda733963a62ef8d2882dc82b8920c37a23419cac268f67"
+        },
+        {
+          "path": "C_s1",
+          "F": 0.5079988087626508,
+          "G": 0.20901477392955936,
+          "P": 3.21875,
+          "effective_seed": 20260627,
+          "decoded_checks": 506,
+          "H_seconds": 0.2255259,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "0df876c553727986edb4767b186a39eaaacc378c16b63e65c0541357fa5bc2d7",
+          "orders_file_byte_SHA256": "a2c6eb5bd596f24f7c2feb4801272beaca7a59289008713dad3f3cd57105e399"
+        },
+        {
+          "path": "C_s2",
+          "F": 0.6051760776725774,
+          "G": 0.37469712266532057,
+          "P": 2.48125,
+          "effective_seed": 20260628,
+          "decoded_checks": 488,
+          "H_seconds": 0.2150854,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "6be9f1e47d17af5b5c0c4f7db919ec5a5d64185a9bc900add18853e9cc4831d8",
+          "orders_file_byte_SHA256": "819a92b458ab3016dbda733963a62ef8d2882dc82b8920c37a23419cac268f67"
+        }
+      ]
+    },
+    {
+      "role": "R-X35-S-T2",
+      "valid_fleets": 5,
+      "B": 0.42464984516364046,
+      "M": 0.42464984516364046,
+      "C": 0.4215823309964203,
+      "paths": [
+        {
+          "path": "base",
+          "F": 0.42464984516364046,
+          "G": 0.18996356026548078,
+          "P": 3.112344736904762,
+          "effective_seed": 20260626,
+          "decoded_checks": 627,
+          "H_seconds": 0.2968328,
+          "return_loads": [
+            2,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "b1b9c864976ef861f2496a3b7f932f8480d631b04b7a3d6297873b6eb2f7b520",
+          "orders_file_byte_SHA256": "b2680b6e1260fb96644171c2686c1059f04393d77080ec4d327712642f5407ec"
+        },
+        {
+          "path": "M_s1",
+          "F": 0.42464984516364046,
+          "G": 0.18996356026548078,
+          "P": 3.112344736904762,
+          "effective_seed": 20260627,
+          "decoded_checks": 712,
+          "H_seconds": 0.4382398,
+          "return_loads": [
+            2,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "0df876c553727986edb4767b186a39eaaacc378c16b63e65c0541357fa5bc2d7",
+          "orders_file_byte_SHA256": "a2c6eb5bd596f24f7c2feb4801272beaca7a59289008713dad3f3cd57105e399"
+        },
+        {
+          "path": "M_s2",
+          "F": 0.42464984516364046,
+          "G": 0.18996356026548078,
+          "P": 3.112344736904762,
+          "effective_seed": 20260628,
+          "decoded_checks": 688,
+          "H_seconds": 0.4049415,
+          "return_loads": [
+            2,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "6be9f1e47d17af5b5c0c4f7db919ec5a5d64185a9bc900add18853e9cc4831d8",
+          "orders_file_byte_SHA256": "819a92b458ab3016dbda733963a62ef8d2882dc82b8920c37a23419cac268f67"
+        },
+        {
+          "path": "C_s1",
+          "F": 0.421918541547217,
+          "G": 0.15474298838120926,
+          "P": 3.543208445634921,
+          "effective_seed": 20260627,
+          "decoded_checks": 671,
+          "H_seconds": 0.3848442,
+          "return_loads": [
+            0,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "0df876c553727986edb4767b186a39eaaacc378c16b63e65c0541357fa5bc2d7",
+          "orders_file_byte_SHA256": "a2c6eb5bd596f24f7c2feb4801272beaca7a59289008713dad3f3cd57105e399"
+        },
+        {
+          "path": "C_s2",
+          "F": 0.4215823309964203,
+          "G": 0.19345907131038642,
+          "P": 3.0253077079365083,
+          "effective_seed": 20260628,
+          "decoded_checks": 690,
+          "H_seconds": 0.3712847,
+          "return_loads": [
+            2,
+            0,
+            0
+          ],
+          "orders_LF_semantic_SHA256": "6be9f1e47d17af5b5c0c4f7db919ec5a5d64185a9bc900add18853e9cc4831d8",
+          "orders_file_byte_SHA256": "819a92b458ab3016dbda733963a62ef8d2882dc82b8920c37a23419cac268f67"
+        }
+      ]
+    }
+  ],
+  "observed_native_named_files": [],
+  "native_initial_orders_hash_semantics": "LF normalized in-memory order stream; actual CRLF file-byte hashes separately checked"
+}

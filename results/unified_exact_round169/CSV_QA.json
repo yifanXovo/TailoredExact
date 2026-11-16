@@ -1,0 +1,56 @@
+{
+  "UTC": "2026-11-16T02:46:58.549Z",
+  "PASS": true,
+  "operation": "read-only Artifact Tool import/schema/endpoint validation",
+  "rows": 6,
+  "columns": 28,
+  "UTF8_BOM": true,
+  "exact_qualified_binary64_endpoints": true,
+  "P_fields_empty": true,
+  "new_B_P_pairs": 0,
+  "workbook_edits": 0,
+  "workbook_exports": 0,
+  "source_CSV_SHA256": "91a000abe33c84276de84fe1d677421c90d3de39467f657cfda232790c0f2048",
+  "protected_103_row_reference_SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+  "checks": [
+    {
+      "row": 2,
+      "role": "R163-C20-S",
+      "position": 1,
+      "PASS": true
+    },
+    {
+      "row": 3,
+      "role": "R163-B20-B",
+      "position": 6,
+      "PASS": true
+    },
+    {
+      "row": 4,
+      "role": "R163-X20-S",
+      "position": 8,
+      "PASS": true
+    },
+    {
+      "row": 5,
+      "role": "R163-C35-U",
+      "position": 10,
+      "PASS": true
+    },
+    {
+      "row": 6,
+      "role": "R163-B35-S",
+      "position": 15,
+      "PASS": true
+    },
+    {
+      "row": 7,
+      "role": "R163-X35-S",
+      "position": 17,
+      "PASS": true
+    }
+  ],
+  "inspection": "{\"kind\":\"region\",\"sheet\":\"B controls\",\"address\":\"O1:Y7\",\"rows\":7,\"cols\":11,\"nonEmpty\":47,\"blank\":30,\"text\":47,\"maxTextLength\":20,\"preview\":[[\"GI_TBC_状态\",\"GI_TBC_收敛时间_秒\",\"GI_TBC_未收敛Gap_百分比\",\"GI_TBC_LB\",\"GI_TBC_UB\",\"P_GRB_状态\",\"P_GRB_收敛时间_秒\",\"P_GRB_未收敛Gap_百分比\",\"P_GRB_LB\",\"P_GRB_UB\",\"对比结果\"],[\"已收敛\",\"213.31245899992064\",null,\"0.19128059228281274\",\"0.191280592282812\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"已收敛\",\"4.121416000183672\",null,\"0.4232321816943161\",\"0.42323218169431764\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"已收敛\",\"125.64404560020193\",null,\"0.44774762658601525\",\"0.4477476265860282\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"88.4339943821932\",\"0.017120344246947146\",\"0.1480229632656324\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"45.99865752470751\",\"0.11865217498201656\",\"0.21972078756431676\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"31.007458639911917\",\"0.3576324299197946\",\"0.5183639026329353\",\"无配对结果\",null,null,null,null,\"N/A\"]],\"previewAddress\":\"O1:Y7\",\"previewRows\":7,\"previewCols\":11}",
+  "source_contract": "User requests byte-exact CSV and unchanged historical rows; no workbook redesign, formulas or XLSX variant",
+  "Optimize": 0
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "round169-independent-implementation-review-initial-v1",
+  "UTC": "2026-11-16T00:58:05.574158+00:00",
+  "reviewer": "independent agent /root/implementation_review",
+  "status": "PASS_FOR_COMPLETED_SCOPE_FINAL_18_POSITION_REVIEW_PENDING",
+  "run_Optimize": 0,
+  "core_code_modified": false,
+  "raw_files_modified": false,
+  "scope": {
+    "H_fleets": 35,
+    "H_inputs": 7,
+    "complete_positions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "complete_Optimize": 39,
+    "not_yet_reviewed": "positions7..18; final analysis/CSV/current-paper/delivery not yet complete"
+  },
+  "checks": [
+    {
+      "topic": "actual complete H",
+      "PASS": true,
+      "evidence": [
+        "src/main.cpp:8676",
+        "src/main.cpp:8795",
+        "src/main.cpp:8931",
+        "src/HgaTgbcRunner.cpp:132"
+      ],
+      "detail": "The one historical base primitive retains R73 joint insertion, 24 random orders plus constructed order, full finite interroute decoded descent and R83 physical closure. No recursive wrapper call."
+    },
+    {
+      "topic": "post-preset seeds and random orders",
+      "PASS": true,
+      "evidence": [
+        "src/Round169Primal.inc:53",
+        "src/HgaTgbcRunner.cpp:132",
+        "review/implementation_independent_H_readback.json"
+      ],
+      "detail": "Actual seeds20260626/27/28 recorded and RNG setter follows option copy; same s1/s2 M/C initial24 files are byte-identical, all contain each station once and M-1 separators."
+    },
+    {
+      "topic": "search versus original evaluation",
+      "PASS": true,
+      "evidence": [
+        "src/Round169Primal.inc:68",
+        "review/implementation_independent_H_readback.json"
+      ],
+      "detail": "All35 original and search G/P/F independently recomputed; maximum absolute numerical difference4.440892098500626e-16. Entire physical paths, prefix loads and loaded-return handling checked."
+    },
+    {
+      "topic": "global objective and caches",
+      "PASS": true,
+      "evidence": [
+        "src/Round169Primal.inc:3",
+        "src/Round169Primal.inc:13",
+        "src/hga_tgbc/HgaTgbcGreedy.cpp:524",
+        "include/hga_tgbc/HybridGA.h:377"
+      ],
+      "detail": "Child-call RAII restores saved greedy lambda/scaling; normal, intentional exception and early-return checks recorded. Each HybridGA decode cache is instance-local; persistent static cache holds unweighted ratio/penalty tables keyed by capacity/target/weight content, not weighted F."
+    },
+    {
+      "topic": "isolation, full costs and deadline",
+      "PASS": true,
+      "evidence": [
+        "src/Round169Primal.inc:54",
+        "src/ProcessPhaseLedger.cpp:54",
+        "src/PaperExternalGiniTree.cpp:1798",
+        "review/complete_audit_02.json",
+        "review/complete_audit_03.json"
+      ],
+      "detail": "Child logs and candidate stores have independent paths; process_start_time is copied unchanged. Root+child phase streams merge into one continuous process sequence and original cap. All actual LP/MIP logs matched to committed call/model/settings;39 actual Optimize in first6 processes."
+    },
+    {
+      "topic": "H-only no Optimize",
+      "PASS": true,
+      "evidence": [
+        "src/main.cpp:20517",
+        "h_results.json",
+        "review/implementation_independent_H_readback.json"
+      ],
+      "detail": "H-only dispatch precedes exact-method selection; zero journal/native model files observed in all seven diagnostic runs. Reviewer invoked no solver."
+    },
+    {
+      "topic": "independently paid full arms and original Start",
+      "PASS": true,
+      "evidence": [
+        "scripts/round169_run.py",
+        "src/main.cpp:13048",
+        "src/PaperExternalGiniTree.cpp:3810",
+        "src/MipStartMapping.cpp:77",
+        "review/complete_audit_01.json",
+        "review/complete_audit_02.json",
+        "review/complete_audit_03.json"
+      ],
+      "detail": "Full argv points only at original physical input and each arm own trace. Initial committed witness equals selected paid H fleet; original G/P/F, cutoff, all submitted native columns/rows/types/readback and complete original-objective cover checked."
+    },
+    {
+      "topic": "source/PE and frozen spending gate",
+      "PASS": true,
+      "evidence": [
+        "candidate_manifest.json",
+        "h_panel_frozen.json",
+        "matrix_execution_frozen.json"
+      ],
+      "detail": "All source hashes match current source; new common PE is c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57. Fixed E4 screen passed before first complete launch; no diagnostic fleet appears in full command inputs."
+    }
+  ],
+  "findings": [
+    {
+      "id": "I169-HASH",
+      "severity": "metadata clarification",
+      "code": "src/Round169Primal.inc:86",
+      "detail": "Native initial_random_orders_SHA256 hashes LF-normalized in-memory text; Windows file bytes use CRLF. The native field is a semantic order-stream identity rather than raw byte SHA.",
+      "resolution": "Derived audits separately bind LF semantic SHA and actual file-byte SHA; M/C actual file bytes match. No PE change or experiment rerun required."
+    },
+    {
+      "id": "I169-COMPLETE",
+      "severity": "metadata clarification",
+      "code": "src/Round169Primal.inc:156",
+      "detail": "necessary_H_complete is the five-path H-panel gate; normal full M/C three-path runs emit false although all path complete/valid flags pass. Exact solver never reads that gate field.",
+      "resolution": "Derived full audit checks expected arm call count and every complete path, explicitly records complete_arm_initialization=True. Explain field in results metadata; no PE change/rerun."
+    },
+    {
+      "id": "I169-CLI",
+      "severity": "resolved pre-scientific-run error",
+      "evidence": "qualification/base_direct/completion.json",
+      "detail": "Initial orchestration used unknown --round166-joint-breakpoint. It failed before H/Optimize, was corrected to --round166-breakpoint, preserved, and charged to qualification receipt. No scientific position rerun."
+    },
+    {
+      "id": "I169-ADAPTER",
+      "severity": "resolved read-only adapter development",
+      "evidence": "review/implementation_review_development_cost.json",
+      "detail": "Old supervisor receipt schema/import assumptions were not fabricated; pure predicates now consume actual new commit/invocation/completion schema. Two adapter development errors retained and costs recorded; no optimization or raw rewrite."
+    }
+  ],
+  "final_followup_required": [
+    "audit all18 actual complete positions and counts/statuses",
+    "read final complete_arms/cost/CSV reconciliation and source evidence bindings",
+    "check final correction wording and initial fields interpretation"
+  ]
+}

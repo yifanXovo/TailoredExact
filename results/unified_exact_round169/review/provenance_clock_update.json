@@ -1,0 +1,49 @@
+{
+  "schema": "round169-independent-provenance-clock-correction-v1",
+  "UTC": "2026-11-16T02:25:21.619109+00:00",
+  "reviewer": "/root/research_review",
+  "status": "PASS_CORRECTION_VERIFIED",
+  "Optimize": 0,
+  "H_calls": 0,
+  "preserved_initial_review": "results/unified_exact_round169/review/research_review_initial.json",
+  "initial_review_limitation": "Initial research review read witness JSON and the rounded Native log, but missed the existing NEJ1 commit sidecar and observations entry. Its blanket process-first-hit-unknown interpretation was incomplete and is superseded here; the initial review is preserved unchanged.",
+  "archive_SHA256": "650e20df10ae98a455500a609879e11465e90ae44cf12cd0d97a42b5bb9d189d",
+  "members_checked": [
+    {
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/journal/event_123.json",
+      "bytes": 1461,
+      "SHA256": "9aa779bceee6db583f26df07861ebd4a952504be19948d09d647cb0919933e93"
+    },
+    {
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/journal/event_123.commit",
+      "bytes": 98,
+      "SHA256": "30da3565865066ccb33464956ef0ad73a5757f1d5fbda4cf55796f8764b34016"
+    },
+    {
+      "member": "results/unified_exact_round137/campaign/071/raw/R137_071_R-X35-S-T2-rho2_S0_S2/observations.json",
+      "bytes": 166706,
+      "SHA256": "c62f79ee09b5193db0646b10c296a9f7ce4a319cc24de26c991683bec3c3bee4"
+    }
+  ],
+  "sidecar_sequence_length_SHA256_match": true,
+  "observation_payload_and_SHA256_match": true,
+  "historical_R137_publish_body_matches_current_after_EOL_normalization": true,
+  "first_exact_final_fleet_witness_sequence": 123,
+  "terminal_call": 5,
+  "producer_timestamp_seconds": 2311.5796264,
+  "producer_timestamp_semantics": "NEJ1 field sampled after event JSON closed and hashed, immediately before sidecar receipt write. This records a verified-witness publication/producer-close marker; code does not separately time receipt-file close.",
+  "first_external_observation_seconds": 2311.7349999998696,
+  "first_effective_availability_seconds": 2311.7349999998696,
+  "external_clock_semantics": "Completed sidecar and matching JSON actually observed and accepted by the external reader at this process-relative time.",
+  "post_return_outer_store_acceptance_seconds": 2370.0371459,
+  "precise_internal_solver_discovery_seconds": null,
+  "rounded_native_log_local_seconds": 2298,
+  "conclusion": "Recorded final-fleet witness publication is recoverable at NEJ1 producer timestamp 2311.5796264s, with external availability at 2311.735s. Internal solver discovery instant remains unrecorded. 2370.0371459s post-return outer-store acceptance and producer endpoint are distinct from this first recorded witness availability.",
+  "wording_nuance": "Call 2311.5796264s the timestamp recorded in the validated commit sidecar / producer publication marker; it is not a separately measured commit-file-close instant.",
+  "readback_correction": "First verification script compared extracted CRLF/LF function boundaries before complete newline normalization; normalization before extraction proves publish bodies identical. No solver or H was run.",
+  "weight_provenance_binding": {
+    "path": "results/unified_exact_round169/weight_provenance.json",
+    "bytes": 39785,
+    "SHA256": "5032f3848dd25f2a3c6e249b7231fccf371cf24c63c5374cb920efb876a560e1"
+  }
+}

@@ -1439,3 +1439,79 @@ Six tiny MIPs agree with independent complete C++ enumeration on two four-statio
 The research choice is to reject a quantity-only continuation for these target deficits and close expansion of this conditional-MIP set. No new complete mechanism is recommended: the remaining broad query does not identify one sufficient action, and fixed-route optimization, finite block exchange and joint bounded-block reconstruction already have historical precedents. No extra time, Seed, input or complete-method pilot follows. B remains the uniform default; C166/D167 remain off.
 
 Full [family theory](../unified_exact_round168/route_family_theory.md), [all results](../unified_exact_round168/route_family_results.csv), [frozen targets](../unified_exact_round168/target_manifest.json), [fleet changes](../unified_exact_round168/fleet_changes.json), [costs](../unified_exact_round168/cost_report.json) and [research decision](../unified_exact_round168/research_decision.md) give the scope and evidence. The [current R168 document manifest](../unified_exact_round168/source_manifest.json) binds this revision.
+
+## S169 Paid objective-diversified initialization against matched multistart
+
+The inputs and H seeds were fixed before the screen. The first six known roles alone trigger the complete panel. H-only shares one newly produced base diagnostically; complete B/M/C independently pay for 1/3/3 H calls and never import diagnostic or historical Starts. Search weights are half/double the fixed original lambda, and every transferred fleet is checked and evaluated at that original lambda. Earlier aggregation/local-search methods [@paquete2003two] provide direct prior art.
+
+**Table S169.1. All seven H screens.** Raw 17-digit G/P/F and every path, seed and workload are retained in the linked study CSV.
+
+| Input | B = M | C | Delta restart | Delta weight | C source |
+|---|---|---|---|---|---|
+| R163-C20-S | 0.308606527 | 0.290033684 | 0 | 0.0185728424 | C_s1 |
+| R163-B20-B | 0.432879833 | 0.432879833 | 0 | 0 | base |
+| R163-X20-S | 0.526814662 | 0.526814662 | 0 | 0 | base |
+| R163-C35-U | 0.174490204 | 0.155165425 | 0 | 0.0193247782 | C_s2 |
+| R163-B35-S | 0.219720788 | 0.206739099 | 0 | 0.0129816883 | C_s2 |
+| R163-X35-S | 0.600869281 | 0.507998809 | 0 | 0.0928704721 | C_s1 |
+| R-X35-S-T2 | 0.424649845 | 0.421582331 | 0 | 0.00306751417 | C_s2 |
+
+**Table S169.2. Diagnostic H path/pool expenses in seconds.** Base is shared here; these sums are not three measured solver runs.
+
+| Input | B path s | M pool s | C pool s |
+|---|---|---|---|
+| R163-C20-S | 0.3187117 | 0.9481819 | 1.0111096 |
+| R163-B20-B | 0.0101949 | 0.032899 | 0.0367087 |
+| R163-X20-S | 0.0570205 | 0.1722087 | 0.1557842 |
+| R163-C35-U | 2.1659543 | 6.2874452 | 6.0328559 |
+| R163-B35-S | 2.0091297 | 5.45301 | 5.5383201 |
+| R163-X35-S | 0.2391247 | 0.6897255 | 0.680967 |
+| R-X35-S-T2 | 0.297282 | 1.1416044 | 1.0545664 |
+
+**Table S169.3. All eighteen paid endpoints and process times.** CERT clocks apply only to qualified closed coverage. OPEN clocks are endpoints. Raw signed numerical gaps are retained in the machine table.
+
+| Input / arm | Initial U | True U | Qualified L | Rel. gap | State | Process s |
+|---|---|---|---|---|---|---|
+| R163-C20-S/B | 0.308606527 | 0.191280592 | 0.191280592 | 0 | CERT | 211.482422 |
+| R163-C20-S/M | 0.308606527 | 0.191280592 | 0.191280592 | 0 | CERT | 211.051953 |
+| R163-C20-S/C | 0.290033684 | 0.191280592 | 0.191280592 | 0 | CERT | 219.511791 |
+| R163-B20-B/M | 0.432879833 | 0.423232182 | 0.423232182 | 3.67248121e-15 | CERT | 2.8423432 |
+| R163-B20-B/C | 0.432879833 | 0.423232182 | 0.423232182 | 3.67248121e-15 | CERT | 2.8194487 |
+| R163-B20-B/B | 0.432879833 | 0.423232182 | 0.423232182 | 3.67248121e-15 | CERT | 2.8507301 |
+| R163-X20-S/C | 0.526814662 | 0.447747627 | 0.447747627 | 2.8887028e-14 | CERT | 124.765733 |
+| R163-X20-S/B | 0.526814662 | 0.447747627 | 0.447747627 | 2.8887028e-14 | CERT | 124.536118 |
+| R163-X20-S/M | 0.526814662 | 0.447747627 | 0.447747627 | 2.8887028e-14 | CERT | 124.726282 |
+| R163-C35-U/B | 0.174490204 | 0.148022963 | 0.0171203442 | 0.884339944 | OPEN | 594.154072 |
+| R163-C35-U/M | 0.174490204 | 0.148022963 | 0.0171203442 | 0.884339944 | OPEN | 594.154811 |
+| R163-C35-U/C | 0.155165425 | 0.120201245 | 0.0154270846 | 0.8716562 | OPEN | 594.151882 |
+| R163-B35-S/M | 0.219720788 | 0.219720788 | 0.118652175 | 0.459986575 | OPEN | 594.137531 |
+| R163-B35-S/C | 0.206739099 | 0.187861163 | 0.118864869 | 0.367272795 | OPEN | 594.186056 |
+| R163-B35-S/B | 0.219720788 | 0.219720788 | 0.118652175 | 0.459986575 | OPEN | 594.141429 |
+| R163-X35-S/C | 0.507998809 | 0.466514935 | 0.351182946 | 0.247220357 | OPEN | 594.150589 |
+| R163-X35-S/B | 0.600869281 | 0.518363903 | 0.35763243 | 0.310074586 | OPEN | 594.137995 |
+| R163-X35-S/M | 0.600869281 | 0.511546413 | 0.35763243 | 0.300879801 | OPEN | 594.146067 |
+
+**Table S169.4. All eighteen actual H/model/Native expenses.** Counts are actual Optimize calls, not process counts. Native and H are nested within the process totals; post-return independent audits are separately recorded.
+
+| Input / arm | H s | Build s | LP / MIP | Native s | Work | Nodes |
+|---|---|---|---|---|---|---|
+| R163-C20-S/B | 0.3333626 | 0.2453869 | 3 / 1 | 210.609 | 356.904567 | 21388 |
+| R163-C20-S/M | 0.9526118 | 0.2760809 | 3 / 1 | 209.559 | 356.904567 | 21388 |
+| R163-C20-S/C | 1.0246987 | 0.2520883 | 3 / 1 | 217.967 | 361.544687 | 25631 |
+| R163-B20-B/M | 0.0311666 | 0.5180858 | 7 / 2 | 1.96099997 | 2.52435474 | 160 |
+| R163-B20-B/C | 0.0356623 | 0.5299503 | 7 / 2 | 1.89899969 | 2.52435474 | 160 |
+| R163-B20-B/B | 0.0095249 | 0.5254682 | 7 / 2 | 1.98600006 | 2.52435474 | 160 |
+| R163-X20-S/C | 0.168697 | 0.2319255 | 3 / 2 | 124.106 | 220.964024 | 8842 |
+| R163-X20-S/B | 0.0546172 | 0.2330952 | 3 / 2 | 123.997 | 220.964024 | 8842 |
+| R163-X20-S/M | 0.163555 | 0.22953 | 3 / 2 | 124.076 | 220.964024 | 8842 |
+| R163-C35-U/B | 2.1463582 | 1.037485 | 3 / 1 | 590.53 | 1316.24398 | 621 |
+| R163-C35-U/M | 6.3750957 | 1.0585371 | 3 / 1 | 586.267 | 1304.52589 | 620 |
+| R163-C35-U/C | 5.9617828 | 1.0494073 | 3 / 1 | 586.664 | 1324.37591 | 664 |
+| R163-B35-S/M | 5.4083157 | 1.032466 | 3 / 1 | 587.254 | 1319.21008 | 534 |
+| R163-B35-S/C | 5.6236217 | 1.0394798 | 3 / 1 | 587.072 | 1309.00557 | 544 |
+| R163-B35-S/B | 2.0038263 | 1.0273832 | 3 / 1 | 590.684 | 1329.65564 | 535 |
+| R163-X35-S/C | 0.6332578 | 1.0098484 | 3 / 2 | 592.035 | 1387.55054 | 948 |
+| R163-X35-S/B | 0.2207683 | 1.0464369 | 3 / 2 | 592.416 | 1404.70239 | 941 |
+| R163-X35-S/M | 0.6354323 | 0.9675659 | 3 / 2 | 592.081 | 1437.53053 | 949 |
+
+The full fixed record, raw carrier/member map, exact source/PE/DLL, qualifications, structural comparisons and decision are in [the Round169 report](https://github.com/yifanXovo/TailoredExact/blob/codex/round169-primal-reweight/results/unified_exact_round169/final_report.md). All six current inputs are exposed and only Native Seed 0 is measured. No new P run is made, and M/C are excluded from the GI-TBC master CSV.
