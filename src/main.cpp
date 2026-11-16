@@ -30,6 +30,8 @@
 #include "ReplicaExternalGiniTree.hpp"
 #include "GiniFrontierGeometry.hpp"
 #include "HgaTgbcRunner.hpp"
+#include "FileSha256.hpp"
+#include "hga_tgbc/GreedyMethods.h"
 #include "Round73JointInsertion.hpp"
 #include "Round75QuantityDescent.hpp"
 #include "Round76PhysicalClosure.hpp"
@@ -1582,6 +1584,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.primal_heuristic = requireValue(i, argc, argv);
             opt.primal_heuristic_explicit = true;
         }
+        else if (arg == "--round169-primal-mode") opt.round169_primal_mode = requireValue(i, argc, argv);
+        else if (arg == "--round169-trace") opt.round169_trace_directory = requireValue(i, argc, argv);
+        else if (arg == "--round169-h-only") opt.round169_h_only = true;
+        else if (arg == "--round169-h-base-direct") { opt.round169_h_base_direct = true; opt.round169_h_only = true; }
+        else if (arg == "--round169-h-panel") { opt.round169_h_panel = true; opt.round169_h_only = true; }
         else if (arg == "--primal-heuristic-seconds") opt.primal_heuristic_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-seed") opt.primal_heuristic_seed = static_cast<unsigned>(std::stoul(requireValue(i, argc, argv)));
         else if (arg == "--primal-heuristic-runs") opt.primal_heuristic_runs = std::stoi(requireValue(i, argc, argv));
@@ -8131,6 +8138,9 @@ BpcOwnedIncumbentResult runBpcOwnedIncumbentGenerator(
 }
 
 struct PaperPrimalHeuristicResult {
+    bool round169_joint_complete = false;
+    bool round169_closure_complete = false;
+    std::string round169_initial_orders;
     bool found = false;
     ebrp::Verification verification;
     std::vector<ebrp::RoutePlan> routes;
@@ -8663,7 +8673,7 @@ void writeHeuristicCandidatesCsv(
     }
 }
 
-PaperPrimalHeuristicResult runPaperPrimalHeuristic(
+PaperPrimalHeuristicResult runPaperPrimalHeuristicBase(
     const ebrp::Instance& instance,
     const ebrp::SolveOptions& opt) {
     PaperPrimalHeuristicResult out;
@@ -8783,6 +8793,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
             ? std::filesystem::path{}
             : std::filesystem::path(opt.primal_heuristic_generation_log + ".joint.csv");
         const auto constructed = ebrp::runRound73JointInsertion(instance, opt, trace_path);
+        out.round169_joint_complete = constructed.stats.exhausted && !constructed.stats.deadline_reached;
         consider(constructed.routes, "round73_joint_position_quantity_insertion");
         out.hga_stop_mode = "motif-exhaustion"; // legacy output field; no HGA executes
         out.hga_total_generations = 0;
@@ -8819,6 +8830,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
     if ((mode == "hga-tgbc" || mode == "best-of-all") &&
         (search_state_stop || !timedOut())) {
         ebrp::HgaTgbcOptions hga_opt;
+        hga_opt.round169_trace_initial_orders = !opt.round169_trace_directory.empty();
         hga_opt.lambda = opt.lambda;
         hga_opt.seed = opt.primal_heuristic_seed;
         hga_opt.stop_mode = opt.primal_heuristic_stop;
@@ -8847,6 +8859,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         if (joint_seeded) hga_opt.joint_constructive_routes = joint_seed_routes;
         hga_opt.iterations = 10;
         ebrp::HgaTgbcResult native = ebrp::runHgaTgbcNative(instance, hga_opt);
+        out.round169_initial_orders = native.round169_initial_orders;
         out.hga_stop_mode = native.stop_mode;
         out.hga_total_generations = native.total_generations;
         out.hga_generations_since_improvement =
@@ -8916,6 +8929,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                 ? std::filesystem::path{}
                 : std::filesystem::path(opt.primal_heuristic_generation_log + ".exchange");
             const auto balanced = ebrp::runRound83ExchangeDescent(instance, opt, out.routes, trace_directory);
+            out.round169_closure_complete = (balanced.exhausted || balanced.zero) && !balanced.deadline && !balanced.verification_failed;
             consider(balanced.routes, "round83_equal_net_exchange_physical_descent");
             out.local_moves_tested += balanced.insertion_evaluations + balanced.quantity_evaluations + balanced.block_placements + balanced.equal_net_pairs;
             std::ostringstream note;
@@ -9220,6 +9234,8 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
     return out;
 }
 
+#include "Round169Primal.inc"
+
 ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
                                                  const ebrp::SolveOptions& opt) {
     const auto start = std::chrono::steady_clock::now();
@@ -9239,7 +9255,8 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
     result.primal_heuristic = opt.primal_heuristic;
     result.ub_event_log_path = opt.ub_event_log_path;
 
-    PaperPrimalHeuristicResult heuristic = runPaperPrimalHeuristic(instance, opt);
+    PaperPrimalHeuristicResult heuristic = opt.round169_h_base_direct
+        ? runPaperPrimalHeuristicBase(instance,opt) : runPaperPrimalHeuristic(instance, opt);
     result.hga_stop_mode = heuristic.hga_stop_mode;
     result.hga_total_generations = heuristic.hga_total_generations;
     result.hga_generations_since_improvement =
@@ -20497,7 +20514,9 @@ int main(int argc, char** argv) {
                 effective_opt.max_branch_nodes = 1;
                 effective_opt.auto_interval_oracle_total_budget = nominal;
             }
-            if (opt.method == "tailored") {
+            if (opt.round169_h_only) {
+                results.push_back(solvePrimalHeuristicDiagnostic(instance, opt));
+            } else if (opt.method == "tailored") {
                 results.push_back(ebrp::solveTailoredExact(instance, opt));
             } else if (opt.method == "cplex") {
                 results.push_back(ebrp::solveCplexBaseline(instance, opt));

@@ -62,6 +62,8 @@ public:
         double elapsed_seconds = 0.0;
     };
     void set_decoded_descent_only(bool enabled) { decoded_descent_only = enabled; }
+    void set_trace_initial_orders(bool enabled) { trace_initial_orders = enabled; }
+    const string& get_initial_orders_trace() const { return initial_orders_trace; }
     const vector<DescentPass>& get_descent_passes() const { return descent_passes; }
     int get_descent_seeds_completed() const { return descent_seeds_completed; }
     bool completed_decoded_descent() const { return descent_complete; }
@@ -792,6 +794,8 @@ private:
         return chrom;
     }
 
+    bool trace_initial_orders = false;
+    string initial_orders_trace;
     vector<Individual> initialize_population() {
         vector<Individual> pop; pop.reserve(pop_size);
         int cc = constructive_count;
@@ -802,6 +806,11 @@ private:
             if (i < cc) ind.routes = build_constructive_individual();
             else ind.routes = chromosome_to_routes(make_random_chromosome());
             ind.chrom = routes_to_chromosome(ind.routes);
+            if (trace_initial_orders) {
+                initial_orders_trace += std::to_string(i) + ":";
+                for (int v : ind.chrom) initial_orders_trace += std::to_string(v) + ",";
+                initial_orders_trace += "\n";
+            }
             pop.push_back(std::move(ind));
         }
         // Appending after the unchanged random initialization preserves its

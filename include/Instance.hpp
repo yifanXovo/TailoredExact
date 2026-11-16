@@ -29,6 +29,12 @@ struct Instance {
 };
 
 struct SolveOptions {
+    // Round169: paid own-H initialization only; the R83 preset remains intact.
+    std::string round169_primal_mode = "off"; // off|multistart|reweight
+    std::string round169_trace_directory;
+    bool round169_h_only = false;
+    bool round169_h_base_direct = false; // qualification: unchanged base primitive
+    bool round169_h_panel = false; // diagnostic: one base plus four independent H
     std::string round120_native_proof = "off"; // off|d0|d1; explicitly mutually exclusive
     bool round120_qualification_empty_seed = false;
     bool round120_qualification_export_only = false;
