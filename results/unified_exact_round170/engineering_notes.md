@@ -29,3 +29,24 @@ position supplies Native Seed1/clock/Start/proof readback; its original fleet,
 random-order identity, objective and deterministic H workload match R169.
 Subsequent completed positions receive the same required checks. The P
 qualification uses its actual Seed1 cold position, not a separate screen.
+
+Per-row `audit_seconds` uses the successful reader process outer clock,
+including Python import/adapter/serialization; `audit_function_seconds`
+preserves the nested pure-function timer inherited from R169. The first two
+manual audit process clocks conservatively include brief console/date
+readback. `T_total_with_independent_audit` adds the outer audit clock to the
+solver process clock, while `T_cert_process` is always the solver process
+endpoint alone. All attempts remain separately charged, without summing
+nested timers again.
+
+The first P post-return reader attempt incorrectly applied B's one-hot/AP
+support helper to the plain compact integer-Y model. It failed before
+endpoint qualification, after confirming the actual P matrix exactly
+matches the inherited qualified original reference. The reader now uses
+the appropriate original compact matrix/type/domain/fingerprint contract;
+it retains B's AP/interface checks for B/M/C. No qualification is bypassed:
+P still requires exact reference matrix bytes, actual full-original scope,
+restored integer types, original objective/physical witness, cold NumStart,
+per-call settings, Native quality, returned bound/log and lifecycle checks.
+The failed read and its 0.4711743s process cost remain in review costs and
+attempts. No C++ source, PE, parameter, raw evidence or solver run changes.

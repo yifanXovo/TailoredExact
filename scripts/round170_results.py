@@ -19,7 +19,9 @@ def complete_tables():
         phase=list(csv.DictReader((d/'phases.csv').open(newline='',encoding='utf-8-sig')))
         events={x['event']:float(x['process_seconds']) for x in phase}
         build=(events['root_canonical_model_construction_complete']-events['root_canonical_model_construction_start']) if not is_plain else None
-        process=a['completion']['process_outer_seconds'];audit=a['audit_seconds'];phys=a['true_final_physical']
+        audit_costs=[v for v in read(OUT/'review/audit_process_costs.json') if p['position'] in v['positions'] and v['rc']==0]
+        assert audit_costs and audit_costs[-1]['positions']==[p['position']], 'one measured audit process per returned position'
+        process=a['completion']['process_outer_seconds'];audit=audit_costs[-1]['audit_process_outer_seconds'];phys=a['true_final_physical']
         selected=a['full_paid_H']['selected'] if not is_plain else None
         row=dict(position=p['position'],role=p['role'],arm=p['arm'],run_id=d.name,
             input_path=q['input_path'],input_SHA256=q['input_sha256'],T_seconds=q['T_seconds'],lambda_value=q['lambda'],
@@ -36,7 +38,9 @@ def complete_tables():
             certificate=a['certificate'],state='CERT' if a['certificate'] else 'OPEN',certificate_basis=a['certificate_basis'],
             T_cert_process=process if a['certificate'] else None,certification_censored=not a['certificate'],
             process_outer_seconds=process,CPP_final_process_wall_seconds=r['final_process_wall_time_seconds'],
-            audit_seconds=audit,T_total_with_independent_audit=process+audit,process_wall_time_comparable=r['process_wall_time_comparable'],
+            audit_seconds=audit,audit_function_seconds=a['audit_seconds'],
+            audit_seconds_scope='successful audit process outer clock, including interpreter/import/serialization; first two manual clocks conservatively include brief status readback',
+            T_total_with_independent_audit=process+audit,process_wall_time_comparable=r['process_wall_time_comparable'],
             raw_status=r['status'],actual_Optimize=a['actual_Optimize'],LP=a['LP'],MIP=a['MIP'],Native_seconds=a['Native_seconds'],
             Work=r['gurobi_work'] if is_plain else sum(float(x['work']) for x in ledger),
             nodes=r['gurobi_node_count'] if is_plain else sum(float(x['nodes']) for x in ledger),
@@ -124,7 +128,7 @@ def comparisons(rows):
 def costs(rows):
     attempts=read(OUT/'review/complete_audit_attempts.json')
     totals={key:sum(r[key] for r in rows) for key in ['H_calls','actual_Optimize','LP','MIP','Native_seconds',
-        'Work','nodes','process_outer_seconds','H_seconds','initialization_seconds','audit_seconds',
+        'Work','nodes','process_outer_seconds','H_seconds','initialization_seconds','audit_seconds','audit_function_seconds',
         'process_residual_after_Native_and_H_seconds','original_H_reverification_seconds']}
     totals.update(UTC=utc(),complete_positions=22,nominal_process_cap_sum=13200,qualification_H=0,qualification_Optimize=0,
         all_model_build_reported_tailored_seconds=sum(r['all_model_build_seconds'] or 0 for r in rows),

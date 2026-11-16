@@ -92,7 +92,14 @@ def plain(position):
         for cid,call in js['calls'].items():
             model_path=core.portable(ROOT,call['model_path'])
             fact,model=context.model_contract(ROOT,p,model_path,'P-GRB')
-            ap=old.ap_audit.contract(model,data,False);scope=context.model_scope_contract(call,model,p)
+            # P has the original integer-Y compact formulation, not B's
+            # one-hot stock interface. Its byte-exact qualified compact matrix
+            # plus type/domain/fingerprint checks are the applicable contract.
+            assert not any(name.startswith('state_') for name in model['order'])
+            ap=dict(enabled=False,one_hot_AP_contract_applicable=False,
+                original_compact_reference_SHA256=p['reference']['canonical_sha256'],
+                full_matrix_byte_identity_verified=True)
+            scope=context.model_scope_contract(call,model,p)
             shortcut=proof.no_improver_shortcut_analysis(launch,call,model,emitter,physical['F'])
             assert not shortcut['model_scope_issue']
             contracts.append(dict(call=cid,model=fact,scope=scope,AP=ap,no_improver_shortcut_check=shortcut))
