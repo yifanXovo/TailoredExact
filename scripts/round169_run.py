@@ -18,7 +18,7 @@ def command(p,d,arm='B',panel=False,direct=False):
         assert '${' not in t,t
         cmd.append(t)
     cmd[cmd.index('--process-shutdown-margin')+1]='6'
-    cmd+=['--round166-joint-breakpoint','off','--round169-primal-mode',dict(B='off',M='multistart',C='reweight')[arm],
+    cmd+=['--round166-breakpoint','off','--round169-primal-mode',dict(B='off',M='multistart',C='reweight')[arm],
         '--round169-trace',str(d/'primal'),'--export-incumbent',str(d/'fleet.json')]
     if panel:cmd+=['--round169-h-panel']
     elif direct:cmd+=['--round169-h-base-direct']
@@ -62,19 +62,20 @@ def candidate():
 
 def qualify():
     start=time.perf_counter();roles=read(OUT/'h_panel_frozen.json')['roles'];receipts=[]
-    d=OUT/'qualification/base_direct';cmd,_=command(roles[0],d,direct=True);receipts.append(launch(cmd,d,60))
+    d=OUT/'qualification/base_direct_02';cmd,_=command(roles[0],d,direct=True);receipts.append(launch(cmd,d,60))
     raw=(ROOT/'tests/data/round59_tiny.txt').read_text();print(raw,flush=True)
     # Tiny fixture already in the test suite; only two degenerate objective copies.
     for name,lam,zero_w in [('lambda0',0,False),('weights0',.15,True),('zero',.15,False)]:
         p=OUT/f'qualification/inputs/{name}.txt';p.parent.mkdir(parents=True,exist_ok=True)
         text=re.sub(r'weights\s*=\s*\[[^\n]*\]',lambda m:'weights = ['+','.join('0' for _ in m[0].split('[')[1].split(']')[0].split(','))+']',raw) if zero_w else raw
         p.write_text(text,encoding='utf-8')
-        q=dict(id=name,V=2,input_path=p.relative_to(ROOT).as_posix(),T_seconds=3600,**{'lambda':lam})
+        q=dict(id=name,V=3,input_path=p.relative_to(ROOT).as_posix(),T_seconds=3600,**{'lambda':lam})
         d=OUT/f'qualification/{name}';cmd,_=command(q,d,arm='C');cmd+=['--round169-h-only']
         receipts.append(launch(cmd,d,60));s=read(d/'primal/selection.json');assert s['calls']==1 and s['skip_reason'],s
-    total=sum(r['process_outer_seconds'] for r in receipts);assert total<300
+    failed=read(OUT/'qualification/base_direct/completion.json')
+    total=sum(r['process_outer_seconds'] for r in receipts)+failed['process_outer_seconds'];assert total<300
     write(OUT/'qualification/receipt.json',dict(UTC=utc(),processes=receipts,process_outer_seconds=total,cap=300,
-        original_base_comparison='pending first real H-panel base',Optimize=0))
+        original_base_comparison='pending first real H-panel base',failed_cli_typo=failed,Optimize=0))
     print('qualification processes',total,flush=True)
 
 def h_panel():
@@ -90,7 +91,7 @@ def h_panel():
         print(p['id'],json.dumps(s),flush=True)
     elapsed=time.perf_counter()-start;assert elapsed<=1200
     actual=sum(r['calls'] for r in rows);assert actual<=35
-    direct=result(OUT/'qualification/base_direct/result.json')
+    direct=result(OUT/'qualification/base_direct_02/result.json')
     first=result(OUT/'h_raw'/panel['roles'][0]['id']/'result.json')
     assert direct['routes']==first['routes']
     assert all(abs(direct[k]-first[k])<1e-13 for k in ['G','P','objective'])
