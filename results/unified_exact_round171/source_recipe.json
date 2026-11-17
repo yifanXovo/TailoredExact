@@ -113,7 +113,7 @@
   "positivity": "s=sum(D)-sum(b)>0 and min(w_i/D_i)>0 imply F >= lambda*min(w_i/D_i)*s>0; offline only",
   "historical_identity_rule": "R163 row-order-invariant base and full keys; bounded pinned input manifests and public text",
   "generation_dependencies": {
-    "scripts/round171_setup.py": "6f962d1f94dc1184cd3ab84ea232d3b95ba97d95de6330ed24b2aab6637d600b",
+    "scripts/round171_setup.py": "c4c5d6ff150e829ffb623108dae27a0117e508a48dca72f9a36667a2c8d95bfa",
     "scripts/round171_common.py": "f17b538d46bdcc6b7d04d6642d2a8b8558e24bc2037cca668ad208875bf5cb99",
     "scripts/round163_setup.py": "ea52c530c022a1ac076ae9783e7049d76f21a4d3bebce068e5011e9a31a0c670",
     "scripts/round137_setup.py": "d06a75f729bd57eb2664328dc039d55001a422d7a349cbad03a5e6a4bed4866f",
@@ -181,5 +181,6 @@
     }
   },
   "before_any_H_DP_RN_or_Optimize": true,
-  "no_outcome_selection": true
+  "no_outcome_selection": true,
+  "dependency_identity": "Freeze exact checkout SHA256. Git reproducibility compares inherited CRLF/LF after newline normalization."
 }

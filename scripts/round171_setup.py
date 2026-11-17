@@ -216,7 +216,8 @@ def generate():
     assert not (OUT / "input_manifest.json").is_file()
     for name, expected in recipe["generation_dependencies"].items():
         assert sha(ROOT / name) == expected, name
-        require_committed(ROOT / name)
+        checked = (ROOT / name).read_bytes()
+        assert checked.replace(b"\r\n", b"\n") == blob("HEAD", name).replace(b"\r\n", b"\n"), name
     for name, expected in recipe["source_files"].items():
         assert sha(ROOT / name) == expected["SHA256"], name
     history_index = history()
