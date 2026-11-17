@@ -1,0 +1,185 @@
+{
+  "UTC": "2026-11-17T21:30:31.986009+00:00",
+  "family": "round171-frozen-b-n50-positive-v1",
+  "source_commit": "f14a054627f79dba61cd5ffa00d3280499826335",
+  "specs": [
+    {
+      "id": "R171-C50-S-C",
+      "source": "CITI",
+      "geometry": "compact",
+      "n": 50,
+      "inventory": "shortage",
+      "replicate": 1,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "M": 3,
+      "cap_seconds": 1200
+    },
+    {
+      "id": "R171-C50-S-R",
+      "source": "CITI",
+      "geometry": "regional",
+      "n": 50,
+      "inventory": "shortage",
+      "replicate": 1,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "M": 3,
+      "cap_seconds": 1200
+    },
+    {
+      "id": "R171-B50-S-C",
+      "source": "CABI",
+      "geometry": "compact",
+      "n": 50,
+      "inventory": "shortage",
+      "replicate": 1,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "M": 3,
+      "cap_seconds": 1200
+    },
+    {
+      "id": "R171-B50-S-R",
+      "source": "CABI",
+      "geometry": "regional",
+      "n": 50,
+      "inventory": "shortage",
+      "replicate": 1,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "M": 3,
+      "cap_seconds": 1200
+    },
+    {
+      "id": "R171-X50-S-C",
+      "source": "DIVVY",
+      "geometry": "compact",
+      "n": 50,
+      "inventory": "shortage",
+      "replicate": 1,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "M": 3,
+      "cap_seconds": 1200
+    },
+    {
+      "id": "R171-X50-S-R",
+      "source": "DIVVY",
+      "geometry": "regional",
+      "n": 50,
+      "inventory": "shortage",
+      "replicate": 1,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "M": 3,
+      "cap_seconds": 1200
+    }
+  ],
+  "selection_id_rule": "r171_<ID> plus _collision_k only for exact physical collisions",
+  "family_rule": "FAMILY|source=<source>|source_sha256=<source_identity_SHA>, plus |collision=k if needed",
+  "anchors": "R57/R137 hash-first, then farthest-first with original tie-break; compact slot 0 and regional slot 2",
+  "eligibility": "Qualified archived rows with 0 < capacity < 100, excluding earlier accepted rows of the same source",
+  "regional_selection": "R57 nearest-2n regional pool",
+  "inventory": "R109 shortage, original target, weight, total adjustment and sign repair, checked with assert_equivalent",
+  "projections": {
+    "CITI": "R57 UTM 18N metres",
+    "CABI": "R116 EPSG:32618",
+    "DIVVY": "R132 EPSG:32616"
+  },
+  "measurements": "Archived coordinates/capacity, synthetic or transformed operational fields",
+  "rho": 1,
+  "lambda_rule": "1/sum(serialized non-depot weights)",
+  "T_rule": "300*ceil(max(1800,0.75*T_base)/300)",
+  "T_base": "2*d_max/1.5 + 120*sum(max(b_i-D_i,0))/M, using serialized inputs",
+  "positivity": "s=sum(D)-sum(b)>0 and min(w_i/D_i)>0 imply F >= lambda*min(w_i/D_i)*s>0; offline only",
+  "historical_identity_rule": "R163 row-order-invariant base and full keys; bounded pinned input manifests and public text",
+  "generation_dependencies": {
+    "scripts/round171_setup.py": "6f962d1f94dc1184cd3ab84ea232d3b95ba97d95de6330ed24b2aab6637d600b",
+    "scripts/round171_common.py": "f17b538d46bdcc6b7d04d6642d2a8b8558e24bc2037cca668ad208875bf5cb99",
+    "scripts/round163_setup.py": "ea52c530c022a1ac076ae9783e7049d76f21a4d3bebce068e5011e9a31a0c670",
+    "scripts/round137_setup.py": "d06a75f729bd57eb2664328dc039d55001a422d7a349cbad03a5e6a4bed4866f",
+    "scripts/round122_common.py": "1afde640f299d64fe810506aaedc0d59a2cf3c0b7129b87dc9d84688830e587e",
+    "scripts/round122_data.py": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+    "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+    "scripts/round107_reader.py": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
+    "scripts/round171_history.py": "380569be5b39eccd2c8789c80f9abc809ae756a5af273338cc607cef31b73a2f",
+    "scripts/round170_common.py": "55a0395998a2437d53e6221f187217f8d3313a13bdd86ce6f8ba6035d9888c48",
+    "scripts/round163_common.py": "ecbe57743c642d43c806bff22eec403d3c05d02a1f2e5c85c61a1023317462a8",
+    "scripts/round140_common.py": "8b4b1f44484d482b1dad991b2aa0c986f4e904ba964f880dd07f776de4891c45"
+  },
+  "source_files": {
+    "results/data_generation_citibike_round57/source_station_table.csv": {
+      "path": "results/data_generation_citibike_round57/source_station_table.csv",
+      "bytes": 69678,
+      "SHA256": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0"
+    },
+    "results/unified_exact_round116/source/source_station_table.csv": {
+      "path": "results/unified_exact_round116/source/source_station_table.csv",
+      "bytes": 192293,
+      "SHA256": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa"
+    },
+    "results/unified_exact_round116/source/snapshot.json": {
+      "path": "results/unified_exact_round116/source/snapshot.json",
+      "bytes": 9688,
+      "SHA256": "89e4e89d6e6641b6aea3c073adb8b2e1643f28f99809e769cf41822e38dde1d1"
+    },
+    "results/unified_exact_round116/source/row_decisions.json": {
+      "path": "results/unified_exact_round116/source/row_decisions.json",
+      "bytes": 503939,
+      "SHA256": "da1f975f71ac1f6df09311f948442b0a4539f1ac0d00c3ace38c662d10b69b0f"
+    },
+    "results/unified_exact_round116/projection_contract.json": {
+      "path": "results/unified_exact_round116/projection_contract.json",
+      "bytes": 3892,
+      "SHA256": "15554a7fe01602de7a6ec45e61fe54830076cf7355188e91b73081093f939f3a"
+    },
+    "results/unified_exact_round116/source/requests/station_information/01.response": {
+      "path": "results/unified_exact_round116/source/requests/station_information/01.response",
+      "bytes": 277085,
+      "SHA256": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+    },
+    "results/unified_exact_round132/source/DIVVY/qualified_stations.json": {
+      "path": "results/unified_exact_round132/source/DIVVY/qualified_stations.json",
+      "bytes": 836362,
+      "SHA256": "757480d21b9277f7a4b930e35a5b6f727a2a278817d22eab83bcc29a052c2518"
+    },
+    "results/unified_exact_round132/source/DIVVY/snapshot.json": {
+      "path": "results/unified_exact_round132/source/DIVVY/snapshot.json",
+      "bytes": 730,
+      "SHA256": "c6e722d749034b6c812bd7a2b0d84203c38c54ea3f3bd9bd7e833fa9eac79983"
+    },
+    "results/unified_exact_round132/source/DIVVY/row_decisions.json": {
+      "path": "results/unified_exact_round132/source/DIVVY/row_decisions.json",
+      "bytes": 285033,
+      "SHA256": "954155c0c6c5b6c45fe60cdb09466a5a1e0602fea89c11c80d91369f5d570c9f"
+    },
+    "results/unified_exact_round132/source/DIVVY/station_information.json": {
+      "path": "results/unified_exact_round132/source/DIVVY/station_information.json",
+      "bytes": 680256,
+      "SHA256": "abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324"
+    }
+  },
+  "before_any_H_DP_RN_or_Optimize": true,
+  "no_outcome_selection": true
+}

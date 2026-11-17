@@ -611,3 +611,10 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round168/goal.md -whitespace
 /results/unified_exact_round168/**/*.fleet -whitespace
 /results/unified_exact_round168/artifacts/** -text -diff -whitespace
+
+# Round171: preserve frozen evidence and the historical CSV byte prefix.
+/scripts/round171* -text whitespace=cr-at-eol
+/results/unified_exact_round171/** -text whitespace=cr-at-eol
+/results/unified_exact_round171/goal.md -whitespace
+/results/unified_exact_round171/artifacts/** -text -diff -whitespace
+/results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv -text whitespace=cr-at-eol
