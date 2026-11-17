@@ -1,0 +1,162 @@
+{
+  "UTC": "2026-11-17T09:01:46.503736+00:00",
+  "bounded_search_roots": [
+    "C:\\Users\\Administrator\\Downloads",
+    "C:\\Users\\Administrator\\Desktop",
+    "C:\\Users\\Administrator\\Documents",
+    "E:\\codes\\ExactEBRP-work\\temp",
+    "E:\\codes\\ExactEBRP-work\\plans"
+  ],
+  "matching_paths": [
+    "C:\\Users\\Administrator\\Downloads\\TailoredExact_Round170_Complete_Goal.md",
+    "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+    "C:\\Users\\Administrator\\Desktop\\Research\\docs\\tempfiles\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv"
+  ],
+  "found": [
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 25180,
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3",
+      "records": 91,
+      "columns": 28,
+      "encoding": "gb18030"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\Research\\docs\\tempfiles\\GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 25180,
+      "SHA256": "2a0b80b9536bfbb278370f9b9dbf6947b9570d25ab7b158605e6a2012ad2b2f3",
+      "records": 91,
+      "columns": 28,
+      "encoding": "gb18030"
+    },
+    {
+      "path": "results/unified_exact_round164/reports/GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+      "bytes": 32685,
+      "SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+      "records": 103,
+      "columns": 28,
+      "encoding": "gb18030"
+    }
+  ],
+  "expected_records": 118,
+  "expected_columns": 28,
+  "expected_bytes": 70240,
+  "expected_SHA256": "5e3303adfba0092c465b8dab3232e1ced7d0e85d8d21aa3e8398ed0d3e5880e3",
+  "authoritative_118_available": false,
+  "package_received": false,
+  "protected_old_copies_unchanged": true,
+  "missing_policy": "Deliver qualified mergeable increment, never fabricate old rows or relabel historical copies",
+  "qualified_new_B_records": 8,
+  "new_strict_P_pairs": 3,
+  "new_physical_inputs": 0,
+  "candidate_C_rows_in_master": 0,
+  "candidate_M_rows_in_master": 0,
+  "increment": {
+    "path": "results/unified_exact_round170/GI_TBC_R170_B_increment_28col.csv",
+    "bytes": 7182,
+    "SHA256": "3e6f2f8c84587a15a70590d688319a0b429a1a313c7495505b8b73bf1ba04885"
+  },
+  "increment_mapping": [
+    {
+      "increment_row": 1,
+      "position": 1,
+      "run_id": "01_R163-C20-S_S1_B",
+      "role": "R163-C20-S",
+      "Native_Seed": 1,
+      "P_run_id": null,
+      "new_strict_pair": false,
+      "T_cert_process": 369.44721830030903,
+      "audit_seconds": 3.2452306,
+      "T_total_with_independent_audit": 372.69244890030905
+    },
+    {
+      "increment_row": 2,
+      "position": 6,
+      "run_id": "06_R163-C35-U_S1_B",
+      "role": "R163-C35-U",
+      "Native_Seed": 1,
+      "P_run_id": "04_R163-C35-U_S1_P",
+      "new_strict_pair": true,
+      "T_cert_process": null,
+      "audit_seconds": 3.069400600157678,
+      "T_total_with_independent_audit": 597.224237699993
+    },
+    {
+      "increment_row": 3,
+      "position": 8,
+      "run_id": "08_R163-B35-S_S1_B",
+      "role": "R163-B35-S",
+      "Native_Seed": 1,
+      "P_run_id": "09_R163-B35-S_S1_P",
+      "new_strict_pair": true,
+      "T_cert_process": null,
+      "audit_seconds": 2.9254626999609172,
+      "T_total_with_independent_audit": 597.0696197003126
+    },
+    {
+      "increment_row": 4,
+      "position": 13,
+      "run_id": "13_R163-X35-S_S1_B",
+      "role": "R163-X35-S",
+      "Native_Seed": 1,
+      "P_run_id": "11_R163-X35-S_S1_P",
+      "new_strict_pair": true,
+      "T_cert_process": null,
+      "audit_seconds": 2.767197099979967,
+      "T_total_with_independent_audit": 596.9045313000679
+    },
+    {
+      "increment_row": 5,
+      "position": 16,
+      "run_id": "16_R163-C20-S_S2_B",
+      "role": "R163-C20-S",
+      "Native_Seed": 2,
+      "P_run_id": null,
+      "new_strict_pair": false,
+      "T_cert_process": 327.3153041000478,
+      "audit_seconds": 3.400375900324434,
+      "T_total_with_independent_audit": 330.71568000037223
+    },
+    {
+      "increment_row": 6,
+      "position": 17,
+      "run_id": "17_R163-C35-U_S2_B",
+      "role": "R163-C35-U",
+      "Native_Seed": 2,
+      "P_run_id": null,
+      "new_strict_pair": false,
+      "T_cert_process": null,
+      "audit_seconds": 2.8235609997063875,
+      "T_total_with_independent_audit": 596.9812913993374
+    },
+    {
+      "increment_row": 7,
+      "position": 20,
+      "run_id": "20_R163-B35-S_S2_B",
+      "role": "R163-B35-S",
+      "Native_Seed": 2,
+      "P_run_id": null,
+      "new_strict_pair": false,
+      "T_cert_process": null,
+      "audit_seconds": 2.846291699912399,
+      "T_total_with_independent_audit": 597.0347894998267
+    },
+    {
+      "increment_row": 8,
+      "position": 21,
+      "run_id": "21_R163-X35-S_S2_B",
+      "role": "R163-X35-S",
+      "Native_Seed": 2,
+      "P_run_id": null,
+      "new_strict_pair": false,
+      "T_cert_process": null,
+      "audit_seconds": 2.7221718998625875,
+      "T_total_with_independent_audit": 596.8620517998934
+    }
+  ],
+  "clock_policy": "qualified CERT uses process outer T_cert_process only; OPEN gaps expressed in percent; independent audit separate",
+  "actual_master": null,
+  "actual_records": null,
+  "actual_master_rows_appended": 0,
+  "disposition": "Authoritative 118-row package absent. Deliver 8-row qualified mergeable increment with 3 strict P pairs; no 126-row master is claimed."
+}

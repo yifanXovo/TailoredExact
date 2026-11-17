@@ -1,0 +1,75 @@
+{
+  "H_calls": 41,
+  "actual_Optimize": 84,
+  "LP": 57,
+  "MIP": 27,
+  "Native_seconds": 12125.87400007248,
+  "Work": 26372.78981563921,
+  "nodes": 155005.0,
+  "process_outer_seconds": 12199.509713100735,
+  "H_seconds": 47.7711535,
+  "initialization_seconds": 48.1014196,
+  "audit_seconds": 57.13070000015803,
+  "audit_function_seconds": 50.39345150021836,
+  "process_residual_after_Native_and_H_seconds": 25.86455952825585,
+  "original_H_reverification_seconds": 0.0001491,
+  "UTC": "2026-11-17T08:48:52.948898+00:00",
+  "complete_positions": 22,
+  "nominal_process_cap_sum": 13200,
+  "qualification_H": 0,
+  "qualification_Optimize": 0,
+  "all_model_build_reported_tailored_seconds": 16.4998149,
+  "P_model_build_separate_timer": null,
+  "postreturn_audit_all_attempt_seconds": 52.90497239958495,
+  "postreturn_audit_attempts": 23,
+  "science_start_epoch": 1794855003,
+  "science_cap_seconds": 21600,
+  "instrumented_audit_process_outer_seconds": 57.60187429987498,
+  "science_elapsed_conservative_seconds": 51812.08050942421,
+  "science_gross_wall_seconds": 51812.08050942421,
+  "inactive_postcompletion_gap_seconds": 37639.58786392212,
+  "science_charged_seconds": 14172.49264550209,
+  "science_clock_scope": "all work through the final panel audit plus all resumed closeout; inactive terminal-to-resume gap separately disclosed; ordinary Git/public transfer not deducted here",
+  "Native_H_model_checks_nested_not_added_to_process": true,
+  "independent_reviews_separate_from_successful_reader": true,
+  "ordinary_Git_public_recovery_IO": "recorded separately at publication",
+  "no_extra_solver_qualification": true,
+  "document_build_attempts": [
+    {
+      "log": "document_pdf_console.log",
+      "seconds": 20.89624990010634
+    },
+    {
+      "log": "document_pdf_console_02.log",
+      "seconds": 18.655456999782473
+    }
+  ],
+  "document_build_seconds": 39.55170689988881,
+  "CPP_source_unchanged_after_measurement": true,
+  "independent_agent_reviews": [
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/math_review_final.json",
+        "bytes": 541536,
+        "SHA256": "f58e48fecc932c7695f9c4e015a6877e109dbfc7752318c24b2f34648a857e62"
+      },
+      "review_seconds": 580.82554936409
+    },
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/execution_review_final.json",
+        "bytes": 68281,
+        "SHA256": "abe56f87bcbc0de99e1c420d5491bde835c06897928e108e3052edf9a7c04615"
+      },
+      "review_seconds": 829.3774960041046
+    },
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/research_review_final.json",
+        "bytes": 25335,
+        "SHA256": "86723d33925e3159b4772a0350eec3a9be9d48ae7a0dc71c8fd4cca86e7dfcf2"
+      },
+      "review_seconds": 906.741112
+    }
+  ]
+}

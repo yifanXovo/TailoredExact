@@ -1,0 +1,186 @@
+{
+  "schema": "round170-independent-closeout-cost-clock-addendum-v1",
+  "UTC": "2026-11-17T09:16:14.612546+00:00",
+  "reviewer_id": "/root/execution_review",
+  "status": "PASS",
+  "scope": "Narrow refreshed cost/clock and exact binding readback only. No full checker, solver, H, model construction, Git or raw member replay.",
+  "Optimize_run_by_reviewer": 0,
+  "H_run_by_reviewer": 0,
+  "solver_API_calls": 0,
+  "model_construction_calls": 0,
+  "original_execution_review": {
+    "path": "results/unified_exact_round170/review/execution_review_final.json",
+    "bytes": 68281,
+    "SHA256": "abe56f87bcbc0de99e1c420d5491bde835c06897928e108e3052edf9a7c04615"
+  },
+  "original_cost_snapshot_binding_preserved": {
+    "path": "results/unified_exact_round170/cost_report.json",
+    "bytes": 1662,
+    "SHA256": "dab88c2b1d4eff9a140766e7f6ec0ebe3885c1abe0ad56f45f3993cd62726652"
+  },
+  "refreshed_cost_report": {
+    "path": "results/unified_exact_round170/cost_report.json",
+    "bytes": 2858,
+    "SHA256": "1df7bf0916d7ebb3af8adbdb99d1c7297a467dc0884ebfd8e5d56d21cab148e7"
+  },
+  "science_close": {
+    "path": "results/unified_exact_round170/science_close.json",
+    "bytes": 726,
+    "SHA256": "5906aeb261bc8fe55a672830813399ad68879a9568a1f39eaede2318454b0926"
+  },
+  "work_interruption": {
+    "path": "results/unified_exact_round170/work_interruption.json",
+    "bytes": 789,
+    "SHA256": "62aa82ae289f94e9699389db75955c5159e51fcf06bf73eccfe7ae73f45e1fb9"
+  },
+  "clock": {
+    "science_gross_wall_seconds": 51812.08050942421,
+    "inactive_postcompletion_gap_seconds": 37639.58786392212,
+    "science_charged_seconds": 14172.49264550209,
+    "science_capacity_seconds": 21600,
+    "remaining_science_capacity_at_snapshot_seconds": 7427.50735449791,
+    "science_close_charged_seconds": 14172.505645751953,
+    "retained_original_aggregate_UTC": "2026-11-17T08:48:52.948898+00:00",
+    "refreshed_clock_derived_UTC": "2026-11-17T09:13:35.080509+00:00",
+    "science_close_UTC": "2026-11-17T09:13:35.093509+00:00",
+    "sequential_snapshot_seconds": 0.012999534606933594
+  },
+  "timestamp_semantics": "cost_report.UTC preserves original aggregate creation. The refreshed science-clock measurement is independently derived from start_epoch + gross_wall; science_close records its 13ms-later sequential timestamp. The addendum disambiguates these without rewriting the original review or production records.",
+  "document_build_attempts": [
+    {
+      "log": "document_pdf_console.log",
+      "seconds": 20.89624990010634,
+      "file": {
+        "path": "results/unified_exact_round170/document_pdf_console.log",
+        "bytes": 3373,
+        "SHA256": "cd428ffb9e3c9770749b909b6287f21b74a06ae896f16c54ccb9757eb368c458"
+      }
+    },
+    {
+      "log": "document_pdf_console_02.log",
+      "seconds": 18.655456999782473,
+      "file": {
+        "path": "results/unified_exact_round170/document_pdf_console_02.log",
+        "bytes": 3374,
+        "SHA256": "d082ab6397a4d7a72665c24c41afbe14dcbc7bde4aeded6f802f6bf3754917e6"
+      }
+    }
+  ],
+  "document_build_seconds": 39.55170689988881,
+  "independent_agent_reviews": [
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/math_review_final.json",
+        "bytes": 541536,
+        "SHA256": "f58e48fecc932c7695f9c4e015a6877e109dbfc7752318c24b2f34648a857e62"
+      },
+      "review_seconds": 580.82554936409,
+      "status": "PASS"
+    },
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/execution_review_final.json",
+        "bytes": 68281,
+        "SHA256": "abe56f87bcbc0de99e1c420d5491bde835c06897928e108e3052edf9a7c04615"
+      },
+      "review_seconds": 829.3774960041046,
+      "status": "PASS"
+    },
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/research_review_final.json",
+        "bytes": 25335,
+        "SHA256": "86723d33925e3159b4772a0350eec3a9be9d48ae7a0dc71c8fd4cca86e7dfcf2"
+      },
+      "review_seconds": 906.741112,
+      "status": "PASS"
+    }
+  ],
+  "cost_nesting": "Document build timers and concurrent independent review wall times are separately disclosed nested costs; they are not added a second time to elapsed occupied science segments.",
+  "unchanged_core_bindings": [
+    {
+      "path": "results/unified_exact_round170/goal.md",
+      "bytes": 31906,
+      "SHA256": "da0f4cee602651ce5ac1a0089eb77ed0c3a9ad19d6be9d19eb05eb5e5237fddd"
+    },
+    {
+      "path": "results/unified_exact_round170/matrix_frozen.json",
+      "bytes": 77777,
+      "SHA256": "43ae60d821fe1bb0d4c3b1d20144f637435867fa5b472faf249e39ce235321ec"
+    },
+    {
+      "path": "results/unified_exact_round170/candidate_manifest.json",
+      "bytes": 29034,
+      "SHA256": "bef6afdc81e207905989c9cfbc84b66ef6ee85000d4b5e0646d005d820e381e8"
+    },
+    {
+      "path": "results/unified_exact_round170/environment_manifest.json",
+      "bytes": 820,
+      "SHA256": "535e6fa79d133eb39ddf497d4f0b57e72e63ae55682ec37d1bb15bb10723ef02"
+    },
+    {
+      "path": "results/unified_exact_round170/inputs_frozen.json",
+      "bytes": 12719,
+      "SHA256": "8f2b353ce45919100d1c1ea81b60efa9da9071b5f6d04ef4823506e5d3b0eba4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_status.json",
+      "bytes": 24975,
+      "SHA256": "285dfa34dd3aebc7bc62c0c2372419505d6c7872d11256ebf3baa80da94d790d"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_arms.json",
+      "bytes": 81832,
+      "SHA256": "2fb9b523ee51f89afa7bce9712bca19eef5d1b279ba9b621f88ee62eff02d4e3"
+    },
+    {
+      "path": "results/unified_exact_round170/h_path_results.json",
+      "bytes": 123425,
+      "SHA256": "682ab5ab1c21447ecb3f42342fdfab8206cedb00def7164019e3349c9c067b58"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CB.json",
+      "bytes": 21340,
+      "SHA256": "971875af15525fd22722360decf08e00962aa5908abdfdea3e904747200faeb4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CM.json",
+      "bytes": 8154,
+      "SHA256": "697a717dedbd2e081e2163dfbd9135ee582e86e5ee668283dc976a62821eaf7b"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_BP.json",
+      "bytes": 7995,
+      "SHA256": "8eea3c6e8e7238b62408d828105c8d78866dfaa5d03351d263446f64aa86fde4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CP.json",
+      "bytes": 7991,
+      "SHA256": "5df4cd40cda42d86e6d6d8bc0bba5b1a0f002d94b37eaf102e16ed51b43f9d59"
+    },
+    {
+      "path": "results/unified_exact_round170/CSV_reconciliation.json",
+      "bytes": 5568,
+      "SHA256": "bd9ef4aafa7ffb6e4a86e60d6fed09b9b7a605429a175d6e7b245d1364ec0c34"
+    },
+    {
+      "path": "results/unified_exact_round170/GI_TBC_R170_B_increment_28col.csv",
+      "bytes": 7182,
+      "SHA256": "3e6f2f8c84587a15a70590d688319a0b429a1a313c7495505b8b73bf1ba04885"
+    },
+    {
+      "path": "results/unified_exact_round170/work_interruption.json",
+      "bytes": 789,
+      "SHA256": "62aa82ae289f94e9699389db75955c5159e51fcf06bf73eccfe7ae73f45e1fb9"
+    }
+  ],
+  "original_core_review_status": "PASS",
+  "checks": 48,
+  "errors": [],
+  "check_process_seconds": 0.008198800031095743,
+  "publication_IO_not_reviewed_or_excluded_from_this_snapshot": true,
+  "production_files_modified": false,
+  "writes": [
+    "review/execution_review_closeout_clock.json"
+  ]
+}

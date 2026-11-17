@@ -1,0 +1,481 @@
+{
+  "schema": "round170-qualified-cold-P-postreturn-audit-v1",
+  "UTC": "2026-11-16T20:17:40.883615+00:00",
+  "passed": true,
+  "position": 9,
+  "role": "R163-B35-S",
+  "research_arm": "P",
+  "Native_Seed": 1,
+  "Optimize_run_by_reviewer": 0,
+  "actual_invocation": {
+    "path": "results/unified_exact_round170/complete_raw/09_R163-B35-S_S1_P/invocation.json",
+    "bytes": 3901,
+    "SHA256": "045564a4d341f28cd1c2be53919a97091e8a2e368cfcea958b9f05623c43685d"
+  },
+  "input": {
+    "path": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+    "bytes": 2131,
+    "SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1"
+  },
+  "completion": {
+    "UTC": "2026-11-16T20:17:35.487148+00:00",
+    "started_epoch": 1794859661.3337443,
+    "ended_epoch": 1794860255.4871483,
+    "process_outer_seconds": 594.1535554998554,
+    "rc": 0,
+    "affinity": {
+      "mask": 4,
+      "set_success": true
+    },
+    "result": {
+      "path": "results/unified_exact_round170/complete_raw/09_R163-B35-S_S1_P/result.json",
+      "bytes": 88469,
+      "SHA256": "c7bb20c281df94198f81c2a777429222132db62522844fc51487b5e9f03007be"
+    }
+  },
+  "U": 0.3181243732426501,
+  "L": 0.11407508736077816,
+  "absolute_gap": 0.20404928588187193,
+  "relative_gap": 0.6414135572260378,
+  "certificate": false,
+  "certificate_basis": "complete_original_cold_compact_qualified_native_bound_open",
+  "true_final_physical": {
+    "G": 0.16057751812596013,
+    "P": 1.4573714285714285,
+    "F": 0.3181243732426501,
+    "Y": [
+      50000,
+      13,
+      7,
+      6,
+      6,
+      6,
+      13,
+      10,
+      7,
+      2,
+      25,
+      11,
+      8,
+      6,
+      8,
+      6,
+      7,
+      8,
+      2,
+      20,
+      11,
+      3,
+      11,
+      11,
+      20,
+      7,
+      13,
+      7,
+      21,
+      10,
+      17,
+      18,
+      12,
+      13,
+      10,
+      14
+    ],
+    "maximum_duration": 7180.861542733109,
+    "pickups": [
+      36,
+      31,
+      28
+    ],
+    "return_loads": [
+      0,
+      0,
+      0
+    ],
+    "routes": [
+      {
+        "vehicle": 0,
+        "nodes": [
+          0,
+          28,
+          25,
+          20,
+          26,
+          14,
+          10,
+          16,
+          23,
+          12,
+          7,
+          0
+        ],
+        "operations": [
+          {
+            "station": 28,
+            "pickup": 10,
+            "drop": 0
+          },
+          {
+            "station": 25,
+            "pickup": 0,
+            "drop": 7
+          },
+          {
+            "station": 20,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 26,
+            "pickup": 6,
+            "drop": 0
+          },
+          {
+            "station": 14,
+            "pickup": 0,
+            "drop": 7
+          },
+          {
+            "station": 10,
+            "pickup": 12,
+            "drop": 0
+          },
+          {
+            "station": 16,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 23,
+            "pickup": 0,
+            "drop": 8
+          },
+          {
+            "station": 12,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 7,
+            "pickup": 0,
+            "drop": 8
+          }
+        ]
+      },
+      {
+        "vehicle": 1,
+        "nodes": [
+          0,
+          11,
+          27,
+          5,
+          13,
+          17,
+          22,
+          19,
+          6,
+          4,
+          2,
+          3,
+          0
+        ],
+        "operations": [
+          {
+            "station": 11,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 27,
+            "pickup": 0,
+            "drop": 5
+          },
+          {
+            "station": 5,
+            "pickup": 1,
+            "drop": 0
+          },
+          {
+            "station": 13,
+            "pickup": 0,
+            "drop": 3
+          },
+          {
+            "station": 17,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 22,
+            "pickup": 8,
+            "drop": 0
+          },
+          {
+            "station": 19,
+            "pickup": 10,
+            "drop": 0
+          },
+          {
+            "station": 6,
+            "pickup": 0,
+            "drop": 8
+          },
+          {
+            "station": 4,
+            "pickup": 0,
+            "drop": 5
+          },
+          {
+            "station": 2,
+            "pickup": 0,
+            "drop": 4
+          },
+          {
+            "station": 3,
+            "pickup": 0,
+            "drop": 6
+          }
+        ]
+      },
+      {
+        "vehicle": 2,
+        "nodes": [
+          0,
+          24,
+          15,
+          29,
+          1,
+          8,
+          34,
+          32,
+          30,
+          0
+        ],
+        "operations": [
+          {
+            "station": 24,
+            "pickup": 9,
+            "drop": 0
+          },
+          {
+            "station": 15,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 29,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 1,
+            "pickup": 0,
+            "drop": 10
+          },
+          {
+            "station": 8,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 34,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 32,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 30,
+            "pickup": 0,
+            "drop": 12
+          }
+        ]
+      }
+    ],
+    "complete_fleet_vehicles": 3,
+    "empty_vehicles_added": 0
+  },
+  "full_paid_H": null,
+  "Start_checks": [],
+  "cold_parameters": {
+    "MIPFocus": 0,
+    "Cuts": -1,
+    "NumStart_before_optimize": 0,
+    "loaded_after_presets": true,
+    "authoritative_model_environment": true
+  },
+  "models": [
+    {
+      "call": 1,
+      "model": {
+        "path": "results/unified_exact_round170/complete_raw/09_R163-B35-S_S1_P/compact.lp",
+        "SHA": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb",
+        "rows": 14054,
+        "columns": 5500,
+        "quantity_columns": 210,
+        "quantity_type": "I",
+        "direction_columns": 105,
+        "frozen_A_B_rows_checked": 0,
+        "route_load_Y_integer": true,
+        "state_assignment_direction_binary": true
+      },
+      "scope": {
+        "full_original_reference_already_checked": true
+      },
+      "AP": {
+        "enabled": false,
+        "one_hot_AP_contract_applicable": false,
+        "original_compact_reference_SHA256": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb",
+        "full_matrix_byte_identity_verified": true
+      },
+      "no_improver_shortcut_check": {
+        "call": 1,
+        "actual_constant_infeasibility_rows_zero_based": [],
+        "identified_legacy_shortcut_rows": [],
+        "similar_row_shapes": [],
+        "model_scope_issue": false,
+        "inclusive_domain_empty_proved_by_marker": false,
+        "old_side_default_performance_disposition": "UNALTERED",
+        "analytic_compatibility_requires_independent_review": true
+      }
+    }
+  ],
+  "journal_events": 131,
+  "actual_Optimize": 1,
+  "LP": 0,
+  "MIP": 1,
+  "Native_seconds": 593.8379998207092,
+  "actual_call_log_bindings": [
+    {
+      "call": 1,
+      "serial_ordinal": 1,
+      "model_SHA": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb",
+      "leaf": "",
+      "true_G_interval": [
+        0,
+        0.9714285714285714
+      ],
+      "cutoff": 0,
+      "epoch": null,
+      "epoch_source": "scope/cutoff bound; no invented epoch",
+      "solve_kind": "MIP",
+      "ledger": null,
+      "raw_log": "results/unified_exact_round170/complete_raw/09_R163-B35-S_S1_P/native.log",
+      "raw_log_SHA": "4e381805d0f1b6103c0c7f3b8a76d62401e3810aa6e343a8cc1e65634783bff5",
+      "byte_begin": 0,
+      "byte_end": 20687,
+      "segment_SHA": "4e381805d0f1b6103c0c7f3b8a76d62401e3810aa6e343a8cc1e65634783bff5",
+      "fingerprint": "0x82005fc7",
+      "fingerprint_contract": {
+        "cold_reference": "0x82005fc7",
+        "Optimize_log": "0x82005fc7",
+        "same_state_equal": true
+      },
+      "parameters": {
+        "TimeLimit": 593.8311393,
+        "MIPGap": 0.0,
+        "MIPGapAbs": 0.0,
+        "Seed": 1.0,
+        "Threads": 1.0
+      },
+      "native_types": {
+        "C": 983,
+        "B": 4167,
+        "I": 350
+      },
+      "journal_returned": true,
+      "return_sequence": 131,
+      "return_available": 594.0091798,
+      "return_code": 0,
+      "missing_return_requires_unchanged_narrow_gate": false
+    }
+  ],
+  "actual_native_quality": {
+    "quality": [
+      {
+        "call": 1,
+        "sufficient": true,
+        "violated_attributes": [],
+        "unknown_attributes": [
+          "DualVio"
+        ],
+        "solution_count": 10,
+        "solution_count_read_return_code": 0,
+        "native_status": 9,
+        "native_status_read_return_code": 0,
+        "optimize_return_code": 0,
+        "quality_applicability": "KNOWN",
+        "residuals_not_qualified_by_assuming_unknown_count_zero": false,
+        "retained_attributes": {
+          "ObjVal": 0.31812437324264975,
+          "ObjBoundC": 0.11407508736077816,
+          "ConstrVio": 8.570921750106208e-13,
+          "BoundVio": 0,
+          "IntVio": 0,
+          "DualVio": null
+        },
+        "solve_kind": "MIP",
+        "objective_error_bound_claimed": false
+      }
+    ],
+    "infeasibility": [],
+    "extra_Optimize": 0
+  },
+  "qualified_cold_bound": {
+    "call": 1,
+    "lo": 0,
+    "hi": 0.9714285714285714,
+    "L": 0.11407508736077816,
+    "cutoff": null,
+    "sequence": 131,
+    "source": "linked_returned_complete_original_cold_native_log_and_readback",
+    "native_status": 9,
+    "native_log": "results/unified_exact_round170/complete_raw/09_R163-B35-S_S1_P/native.log",
+    "native_log_SHA": "4e381805d0f1b6103c0c7f3b8a76d62401e3810aa6e343a8cc1e65634783bff5",
+    "printed_native_final_bound": 0.1140750873608,
+    "full_original": true
+  },
+  "actual_Optimize_parameters": [
+    {
+      "call": 1,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 1,
+        "Presolve": -1,
+        "MIPFocus": 0,
+        "Cuts": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "expected": {
+          "Threads": 1,
+          "Seed": 1,
+          "Presolve": -1,
+          "MIPFocus": 0,
+          "Cuts": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "qualification_reason": ""
+      },
+      "model_SHA256": "09867733ce2c84675fe6652d01fa7ff6bec971d41a13d41ccdf1f2371ddd9eeb"
+    }
+  ],
+  "phase_event_count": 7,
+  "phase_files": [
+    "results/unified_exact_round170/complete_raw/09_R163-B35-S_S1_P/phases.csv"
+  ],
+  "exact_first_hit_global_seconds": null,
+  "first_hit_missing_reason": "no exact global first-hit clock; rounded solver discovery times not promoted",
+  "raw_bytes_unchanged": true,
+  "audit_seconds": 0.26171059999614954
+}

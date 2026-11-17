@@ -1,0 +1,1640 @@
+{
+  "schema": "round170-independent-execution-data-cost-review-v1",
+  "UTC": "2026-11-17T09:08:14.017929+00:00",
+  "reviewer_id": "/root/execution_review",
+  "status": "PASS",
+  "scope": [
+    "actual frozen 22-position order and serial clocks",
+    "actual common PE/DLL/source/input identities",
+    "every Optimize journal/commit/model/log/settings binding",
+    "all 41 complete paid-H paths and selected own Start/vector records",
+    "correct cold original compact P qualification",
+    "complete cost/attempt accounting and gross/occupied science clocks",
+    "eight B CSV increment rows and all four comparison groups",
+    "exact archive member bytes"
+  ],
+  "Optimize_run_by_reviewer": 0,
+  "H_run_by_reviewer": 0,
+  "solver_API_calls": 0,
+  "model_construction_calls": 0,
+  "review_clock_start_epoch": 1794905664.6404333,
+  "review_seconds": 829.3774960041046,
+  "review_seconds_scope": "Independent data reads/checking/authoring since first instrumented Python read; earlier read-only setup is inside parent gross/occupied closeout clock. Concurrent review wall is not added again to the parent elapsed science segments.",
+  "check_process_seconds": 18.161473200190812,
+  "error_count": 0,
+  "errors": [],
+  "checks_by_scope": {
+    "matrix": 6,
+    "frozen_bindings": 3,
+    "common_identity": 28,
+    "source_bytes": 254,
+    "build_bytes": 5,
+    "inputs": 67,
+    "compact_reference": 4,
+    "own_process": 370,
+    "endpoint_row": 220,
+    "argv": 1079,
+    "completion": 44,
+    "clocks": 693,
+    "raw_bindings": 44,
+    "settings": 274,
+    "journal": 25191,
+    "Optimize": 393,
+    "native_quality": 336,
+    "lower_bound_scope": 82,
+    "paid_H": 284,
+    "fixed_H": 451,
+    "H_table": 41,
+    "H_semantics": 19,
+    "Start": 134,
+    "cost_row": 236,
+    "qualification": 22,
+    "cert_clock": 22,
+    "audit_cost": 25,
+    "P_cold": 15,
+    "P_compact": 18,
+    "totals": 18,
+    "comparisons": 310,
+    "CSV_twins": 3535,
+    "CSV": 57,
+    "science_clock": 6,
+    "protected_bytes": 47,
+    "archive": 103443
+  },
+  "findings": [
+    {
+      "severity": "info",
+      "finding": "22 prescribed positions returned once normally, with 41 own paid complete H and 84 actual Optimize calls (57 LP, 27 MIP)."
+    },
+    {
+      "severity": "info",
+      "finding": "Actual Native Seeds 1/2, single-thread settings and zero gaps match every actual call; all arms share measured PE/DLL and each role retains original input/clock."
+    },
+    {
+      "severity": "info",
+      "finding": "P has zero user starts and its byte-exact original compact reference. The retained position-4 failure is a reader AP-contract applicability error, followed by a successful reader-only retry; no optimizer rerun is present."
+    },
+    {
+      "severity": "info",
+      "finding": "Four C20 certificates use process outer endpoints only. Eighteen OPEN rows have null certificate time and unknown exact first hit; the 600s cap and observed ~594s endpoints are not convergence times."
+    },
+    {
+      "severity": "limitation",
+      "finding": "The byte-pinned 118-row authoritative package was absent in the bounded entry lookup. Only the qualified eight-row increment is delivered, with three new strict P pairs, five explicit N/A-P records, no candidate substitution, no master append and zero new physical inputs."
+    },
+    {
+      "severity": "info",
+      "finding": "Gross elapsed wall remains reported. Occupied work subtracts only the explicitly recorded postcompletion inactive interval; this is not a claim of gross wall delivery within six hours."
+    }
+  ],
+  "initial_review_resolution": {
+    "initial_report_retained": "review/execution_review_initial.json",
+    "initial_checker_false_assertions": [
+      "The first checker counted only literal MIP phase names; five actual CHILD_BOUND_TARGET_MIP phases must also be counted as MIP. Actual total is 27.",
+      "The first checker equated the pre-Start ledger remaining budget with the slightly smaller actual post-mapping Optimize request. Actual Start JSON and log requests agree; the additional setup cost is paid.",
+      "The first checker demanded duplicate gross/inactive prose in every engineering/reproduction note. The required disclosure is present in cost_report, work_interruption and final_report; the other notes make no contradictory six-hour gross-wall claim."
+    ],
+    "production_changes_requested": [],
+    "producer_or_optimizer_reruns_requested": 0,
+    "only_reviewer_checker_corrected": true
+  },
+  "actual_totals": {
+    "H_calls": 41,
+    "H_seconds": 47.77115350000001,
+    "LP": 57,
+    "MIP": 27,
+    "Native_seconds": 12125.87400007248,
+    "Work": 26372.78981563921,
+    "nodes": 155005.0,
+    "process_outer_seconds": 12199.509713100735,
+    "actual_Optimize": 84,
+    "audit_seconds": 57.13070000015803,
+    "audit_function_seconds": 50.39345150021836,
+    "initialization_seconds": 48.1014196,
+    "process_residual_after_Native_and_H_seconds": 25.86455952825585,
+    "original_H_reverification_seconds": 0.0001491
+  },
+  "per_position": [
+    {
+      "position": 1,
+      "role": "R163-C20-S",
+      "arm": "B",
+      "Native_Seed": 1,
+      "H_calls": 1,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "CERT",
+      "U": 0.191280592282812,
+      "L": 0.19128059228281188,
+      "T_cert_process": 369.44721830030903,
+      "process_outer_seconds": 369.44721830030903,
+      "started_epoch": 1794855353.7246442,
+      "ended_epoch": 1794855723.1717067,
+      "journal_events": 5275,
+      "Native_seconds": 368.1860001087189,
+      "H_seconds": 0.3535513,
+      "Work": 631.0798061955771,
+      "nodes": 25760.0,
+      "audit_seconds": 3.2452306,
+      "Start_count": 1
+    },
+    {
+      "position": 2,
+      "role": "R163-C20-S",
+      "arm": "C",
+      "Native_Seed": 1,
+      "H_calls": 3,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "CERT",
+      "U": 0.191280592282812,
+      "L": 0.19128059228281197,
+      "T_cert_process": 371.87350320024416,
+      "process_outer_seconds": 371.87350320024416,
+      "started_epoch": 1794855723.3534913,
+      "ended_epoch": 1794856095.2267866,
+      "journal_events": 6894,
+      "Native_seconds": 370.19799995422363,
+      "H_seconds": 1.1064294000000001,
+      "Work": 609.086807724645,
+      "nodes": 39907.0,
+      "audit_seconds": 3.8820087,
+      "Start_count": 1
+    },
+    {
+      "position": 3,
+      "role": "R163-C35-U",
+      "arm": "M",
+      "Native_Seed": 1,
+      "H_calls": 3,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.11192353095740712,
+      "L": 0.014452970272203701,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.158614799846,
+      "started_epoch": 1794856095.3920276,
+      "ended_epoch": 1794856689.551278,
+      "journal_events": 97,
+      "Native_seconds": 586.3020000457764,
+      "H_seconds": 6.3581985,
+      "Work": 1280.1434405669522,
+      "nodes": 2575.0,
+      "audit_seconds": 2.9204799002036452,
+      "Start_count": 1
+    },
+    {
+      "position": 4,
+      "role": "R163-C35-U",
+      "arm": "P",
+      "Native_Seed": 1,
+      "H_calls": 0,
+      "actual_Optimize": 1,
+      "LP": 0,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.2465498905404982,
+      "L": 0.004824441779303833,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1634820997715,
+      "started_epoch": 1794856689.7092776,
+      "ended_epoch": 1794857283.8720207,
+      "journal_events": 235,
+      "Native_seconds": 593.8570001125336,
+      "H_seconds": 0,
+      "Work": 1174.9079049649863,
+      "nodes": 2184,
+      "audit_seconds": 0.4582028998993337,
+      "Start_count": 0
+    },
+    {
+      "position": 5,
+      "role": "R163-C35-U",
+      "arm": "C",
+      "Native_Seed": 1,
+      "H_calls": 3,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.15314634616868236,
+      "L": 0.015482252972800025,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1526937000453,
+      "started_epoch": 1794857284.0440197,
+      "ended_epoch": 1794857878.1962304,
+      "journal_events": 123,
+      "Native_seconds": 586.5759999752045,
+      "H_seconds": 6.0139552,
+      "Work": 1313.0485345171646,
+      "nodes": 744.0,
+      "audit_seconds": 2.9999746000394225,
+      "Start_count": 1
+    },
+    {
+      "position": 6,
+      "role": "R163-C35-U",
+      "arm": "B",
+      "Native_Seed": 1,
+      "H_calls": 1,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.11192353095740712,
+      "L": 0.014493297128750063,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1548370998353,
+      "started_epoch": 1794857878.373199,
+      "ended_epoch": 1794858472.5286474,
+      "journal_events": 101,
+      "Native_seconds": 590.4809999465942,
+      "H_seconds": 2.1643979,
+      "Work": 1293.5575188122143,
+      "nodes": 2578.0,
+      "audit_seconds": 3.069400600157678,
+      "Start_count": 1
+    },
+    {
+      "position": 7,
+      "role": "R163-B35-S",
+      "arm": "C",
+      "Native_Seed": 1,
+      "H_calls": 3,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.16855683884121309,
+      "L": 0.11781288287622042,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1665082001127,
+      "started_epoch": 1794858472.6876462,
+      "ended_epoch": 1794859066.8546686,
+      "journal_events": 120,
+      "Native_seconds": 586.9880001544952,
+      "H_seconds": 5.5875145,
+      "Work": 1179.8817879261753,
+      "nodes": 596.0,
+      "audit_seconds": 3.0181859000585973,
+      "Start_count": 1
+    },
+    {
+      "position": 8,
+      "role": "R163-B35-S",
+      "arm": "B",
+      "Native_Seed": 1,
+      "H_calls": 1,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.20892093167125783,
+      "L": 0.11897902113805536,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1441570003517,
+      "started_epoch": 1794859067.0126688,
+      "ended_epoch": 1794859661.1564991,
+      "journal_events": 76,
+      "Native_seconds": 590.5629999637604,
+      "H_seconds": 2.051676,
+      "Work": 1315.8197855877381,
+      "nodes": 544.0,
+      "audit_seconds": 2.9254626999609172,
+      "Start_count": 1
+    },
+    {
+      "position": 9,
+      "role": "R163-B35-S",
+      "arm": "P",
+      "Native_Seed": 1,
+      "H_calls": 0,
+      "actual_Optimize": 1,
+      "LP": 0,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.3181243732426501,
+      "L": 0.11407508736077816,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1535554998554,
+      "started_epoch": 1794859661.3337443,
+      "ended_epoch": 1794860255.4871483,
+      "journal_events": 131,
+      "Native_seconds": 593.8379998207092,
+      "H_seconds": 0,
+      "Work": 1093.006308165354,
+      "nodes": 2358,
+      "audit_seconds": 0.4444943000562489,
+      "Start_count": 0
+    },
+    {
+      "position": 10,
+      "role": "R163-B35-S",
+      "arm": "M",
+      "Native_Seed": 1,
+      "H_calls": 3,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.20892093167125783,
+      "L": 0.11897902113805536,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1958928001113,
+      "started_epoch": 1794860255.6461482,
+      "ended_epoch": 1794860849.8423805,
+      "journal_events": 76,
+      "Native_seconds": 587.2249999046326,
+      "H_seconds": 5.447834,
+      "Work": 1307.144236027116,
+      "nodes": 543.0,
+      "audit_seconds": 2.928656999953091,
+      "Start_count": 1
+    },
+    {
+      "position": 11,
+      "role": "R163-X35-S",
+      "arm": "P",
+      "Native_Seed": 1,
+      "H_calls": 0,
+      "actual_Optimize": 1,
+      "LP": 0,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.599347390042705,
+      "L": 0.3480777125726512,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1319927996956,
+      "started_epoch": 1794860850.0119617,
+      "ended_epoch": 1794861444.1443322,
+      "journal_events": 69,
+      "Native_seconds": 593.8550000190735,
+      "H_seconds": 0,
+      "Work": 1077.1570160314584,
+      "nodes": 3128,
+      "audit_seconds": 0.41215990018099546,
+      "Start_count": 0
+    },
+    {
+      "position": 12,
+      "role": "R163-X35-S",
+      "arm": "M",
+      "Native_Seed": 1,
+      "H_calls": 3,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "state": "OPEN",
+      "U": 0.4800634802452629,
+      "L": 0.3609406056045314,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1491264002398,
+      "started_epoch": 1794861444.3032045,
+      "ended_epoch": 1794862038.452202,
+      "journal_events": 62,
+      "Native_seconds": 591.9990003108978,
+      "H_seconds": 0.6392296,
+      "Work": 1403.5590918268801,
+      "nodes": 1129.0,
+      "audit_seconds": 2.7676375000737607,
+      "Start_count": 2
+    },
+    {
+      "position": 13,
+      "role": "R163-X35-S",
+      "arm": "B",
+      "Native_Seed": 1,
+      "H_calls": 1,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "state": "OPEN",
+      "U": 0.4800634802452629,
+      "L": 0.36100969069075184,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1373342000879,
+      "started_epoch": 1794862038.6042013,
+      "ended_epoch": 1794862632.7412255,
+      "journal_events": 63,
+      "Native_seconds": 592.4909999370575,
+      "H_seconds": 0.2140562,
+      "Work": 1478.5509830543685,
+      "nodes": 1292.0,
+      "audit_seconds": 2.767197099979967,
+      "Start_count": 2
+    },
+    {
+      "position": 14,
+      "role": "R163-X35-S",
+      "arm": "C",
+      "Native_Seed": 1,
+      "H_calls": 3,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "state": "OPEN",
+      "U": 0.472051985895639,
+      "L": 0.3506517287938848,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1628487003036,
+      "started_epoch": 1794862632.8868082,
+      "ended_epoch": 1794863227.0500693,
+      "journal_events": 73,
+      "Native_seconds": 592.0509996414185,
+      "H_seconds": 0.610448,
+      "Work": 1398.779009912281,
+      "nodes": 918.0,
+      "audit_seconds": 2.672504900023341,
+      "Start_count": 2
+    },
+    {
+      "position": 15,
+      "role": "R163-C20-S",
+      "arm": "C",
+      "Native_Seed": 2,
+      "H_calls": 3,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "CERT",
+      "U": 0.191280592282812,
+      "L": 0.19128059228281163,
+      "T_cert_process": 436.06373120006174,
+      "process_outer_seconds": 436.06373120006174,
+      "started_epoch": 1794863227.1980681,
+      "ended_epoch": 1794863663.2617903,
+      "journal_events": 4609,
+      "Native_seconds": 434.5390000343323,
+      "H_seconds": 0.9721825,
+      "Work": 816.914297771428,
+      "nodes": 32177.0,
+      "audit_seconds": 2.5381645997986197,
+      "Start_count": 1
+    },
+    {
+      "position": 16,
+      "role": "R163-C20-S",
+      "arm": "B",
+      "Native_Seed": 2,
+      "H_calls": 1,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "CERT",
+      "U": 0.191280592282812,
+      "L": 0.19128059228281205,
+      "T_cert_process": 327.3153041000478,
+      "process_outer_seconds": 327.3153041000478,
+      "started_epoch": 1794863663.4067898,
+      "ended_epoch": 1794863990.722555,
+      "journal_events": 6514,
+      "Native_seconds": 326.45099997520447,
+      "H_seconds": 0.3157041,
+      "Work": 592.5252757036967,
+      "nodes": 33959.0,
+      "audit_seconds": 3.400375900324434,
+      "Start_count": 1
+    },
+    {
+      "position": 17,
+      "role": "R163-C35-U",
+      "arm": "B",
+      "Native_Seed": 2,
+      "H_calls": 1,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.11571627866711331,
+      "L": 0.015241545156955904,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.157730399631,
+      "started_epoch": 1794863990.8689215,
+      "ended_epoch": 1794864585.0264835,
+      "journal_events": 120,
+      "Native_seconds": 590.6510000228882,
+      "H_seconds": 2.0635811,
+      "Work": 1388.1339364154258,
+      "nodes": 587.0,
+      "audit_seconds": 2.8235609997063875,
+      "Start_count": 1
+    },
+    {
+      "position": 18,
+      "role": "R163-C35-U",
+      "arm": "C",
+      "Native_Seed": 2,
+      "H_calls": 3,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.1204169113320095,
+      "L": 0.015694611035021094,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.163563199807,
+      "started_epoch": 1794864585.170483,
+      "ended_epoch": 1794865179.333234,
+      "journal_events": 143,
+      "Native_seconds": 586.9279999732971,
+      "H_seconds": 5.7763287,
+      "Work": 1374.1307423594333,
+      "nodes": 629.0,
+      "audit_seconds": 2.8306515999138355,
+      "Start_count": 1
+    },
+    {
+      "position": 19,
+      "role": "R163-B35-S",
+      "arm": "C",
+      "Native_Seed": 2,
+      "H_calls": 3,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.19250213261861057,
+      "L": 0.11937356222727903,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1525810002349,
+      "started_epoch": 1794865179.4752333,
+      "ended_epoch": 1794865773.6273894,
+      "journal_events": 93,
+      "Native_seconds": 587.3379998207092,
+      "H_seconds": 5.3519032,
+      "Work": 1369.9597362660263,
+      "nodes": 567.0,
+      "audit_seconds": 2.7671982999891043,
+      "Start_count": 1
+    },
+    {
+      "position": 20,
+      "role": "R163-B35-S",
+      "arm": "B",
+      "Native_Seed": 2,
+      "H_calls": 1,
+      "actual_Optimize": 4,
+      "LP": 3,
+      "MIP": 1,
+      "state": "OPEN",
+      "U": 0.17427665216447524,
+      "L": 0.11832566878244366,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1884977999143,
+      "started_epoch": 1794865773.7703881,
+      "ended_epoch": 1794866367.9595437,
+      "journal_events": 107,
+      "Native_seconds": 590.8429999351501,
+      "H_seconds": 1.9179995,
+      "Work": 1358.8240717074596,
+      "nodes": 563.0,
+      "audit_seconds": 2.846291699912399,
+      "Start_count": 1
+    },
+    {
+      "position": 21,
+      "role": "R163-X35-S",
+      "arm": "B",
+      "Native_Seed": 2,
+      "H_calls": 1,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "state": "OPEN",
+      "U": 0.4688151160365388,
+      "L": 0.36773011426847557,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1398799000308,
+      "started_epoch": 1794866368.0975442,
+      "ended_epoch": 1794866962.2369719,
+      "journal_events": 87,
+      "Native_seconds": 592.4089999198914,
+      "H_seconds": 0.212356,
+      "Work": 1461.7063628218034,
+      "nodes": 1115.0,
+      "audit_seconds": 2.7221718998625875,
+      "Start_count": 2
+    },
+    {
+      "position": 22,
+      "role": "R163-X35-S",
+      "arm": "C",
+      "Native_Seed": 2,
+      "H_calls": 3,
+      "actual_Optimize": 5,
+      "LP": 3,
+      "MIP": 2,
+      "state": "OPEN",
+      "U": 0.47342295106419374,
+      "L": 0.36682015533547474,
+      "T_cert_process": null,
+      "process_outer_seconds": 594.1366607001983,
+      "started_epoch": 1794866962.3780823,
+      "ended_epoch": 1794867556.5141087,
+      "journal_events": 57,
+      "Native_seconds": 592.1050004959106,
+      "H_seconds": 0.6138078,
+      "Work": 1454.8731612810257,
+      "nodes": 1152.0,
+      "audit_seconds": 2.6906884000636637,
+      "Start_count": 2
+    }
+  ],
+  "native_requested_limit_plus_commit_clock_minus_594_range_seconds": [
+    -0.0005225999999538544,
+    0.08235600000000431
+  ],
+  "native_clock_note": "TimeLimit is set just before serialized call-commit observation; small bounded setup/commit offsets do not reset the shared deadline. The actual process/phase deadlines are independently checked.",
+  "science_clock_snapshot": {
+    "UTC": "2026-11-17T08:48:52.948898+00:00",
+    "science_start_epoch": 1794855003,
+    "science_gross_wall_seconds": 50329.94889879227,
+    "inactive_postcompletion_gap_seconds": 37639.58786392212,
+    "science_charged_seconds": 12690.361034870148,
+    "science_clock_scope": "all work through the final panel audit plus all resumed closeout; inactive terminal-to-resume gap separately disclosed; ordinary Git/public transfer not deducted here"
+  },
+  "last_actual_process_end_epoch": 1794867556.5141087,
+  "last_instrumented_reader_end_epoch": 1794867585.9077644,
+  "archive_verification": {
+    "status": "PASS",
+    "archive": {
+      "path": "results/unified_exact_round170/artifacts/round170_new_raw.zip",
+      "bytes": 37750953,
+      "SHA256": "717a47c94b0c0b16120fa4fc90eac368b1c1366f5fa0f1ef9b8e8fe910ac1ab3"
+    },
+    "member_map": {
+      "path": "results/unified_exact_round170/artifacts/round170_new_raw_members.csv.gz",
+      "bytes": 2226134,
+      "SHA256": "3ed2b7ba34d54e2f5b9a1dac6d7a0d925e7b544d845b86a02e1cc8e31acf02a6"
+    },
+    "member_count": 51718,
+    "uncompressed_bytes": 206513335,
+    "actual_raw_files_checked": 51718
+  },
+  "bindings": [
+    {
+      "path": "results/unified_exact_round170/goal.md",
+      "bytes": 31906,
+      "SHA256": "da0f4cee602651ce5ac1a0089eb77ed0c3a9ad19d6be9d19eb05eb5e5237fddd"
+    },
+    {
+      "path": "results/unified_exact_round170/matrix_frozen.json",
+      "bytes": 77777,
+      "SHA256": "43ae60d821fe1bb0d4c3b1d20144f637435867fa5b472faf249e39ce235321ec"
+    },
+    {
+      "path": "results/unified_exact_round170/candidate_manifest.json",
+      "bytes": 29034,
+      "SHA256": "bef6afdc81e207905989c9cfbc84b66ef6ee85000d4b5e0646d005d820e381e8"
+    },
+    {
+      "path": "results/unified_exact_round170/environment_manifest.json",
+      "bytes": 820,
+      "SHA256": "535e6fa79d133eb39ddf497d4f0b57e72e63ae55682ec37d1bb15bb10723ef02"
+    },
+    {
+      "path": "results/unified_exact_round170/inputs_frozen.json",
+      "bytes": 12719,
+      "SHA256": "8f2b353ce45919100d1c1ea81b60efa9da9071b5f6d04ef4823506e5d3b0eba4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_status.json",
+      "bytes": 24975,
+      "SHA256": "285dfa34dd3aebc7bc62c0c2372419505d6c7872d11256ebf3baa80da94d790d"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_arms.json",
+      "bytes": 81832,
+      "SHA256": "2fb9b523ee51f89afa7bce9712bca19eef5d1b279ba9b621f88ee62eff02d4e3"
+    },
+    {
+      "path": "results/unified_exact_round170/h_path_results.json",
+      "bytes": 123425,
+      "SHA256": "682ab5ab1c21447ecb3f42342fdfab8206cedb00def7164019e3349c9c067b58"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CB.json",
+      "bytes": 21340,
+      "SHA256": "971875af15525fd22722360decf08e00962aa5908abdfdea3e904747200faeb4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CM.json",
+      "bytes": 8154,
+      "SHA256": "697a717dedbd2e081e2163dfbd9135ee582e86e5ee668283dc976a62821eaf7b"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_BP.json",
+      "bytes": 7995,
+      "SHA256": "8eea3c6e8e7238b62408d828105c8d78866dfaa5d03351d263446f64aa86fde4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CP.json",
+      "bytes": 7991,
+      "SHA256": "5df4cd40cda42d86e6d6d8bc0bba5b1a0f002d94b37eaf102e16ed51b43f9d59"
+    },
+    {
+      "path": "results/unified_exact_round170/cost_report.json",
+      "bytes": 1662,
+      "SHA256": "dab88c2b1d4eff9a140766e7f6ec0ebe3885c1abe0ad56f45f3993cd62726652"
+    },
+    {
+      "path": "results/unified_exact_round170/CSV_reconciliation.json",
+      "bytes": 5568,
+      "SHA256": "bd9ef4aafa7ffb6e4a86e60d6fed09b9b7a605429a175d6e7b245d1364ec0c34"
+    },
+    {
+      "path": "results/unified_exact_round170/GI_TBC_R170_B_increment_28col.csv",
+      "bytes": 7182,
+      "SHA256": "3e6f2f8c84587a15a70590d688319a0b429a1a313c7495505b8b73bf1ba04885"
+    },
+    {
+      "path": "results/unified_exact_round170/work_interruption.json",
+      "bytes": 789,
+      "SHA256": "62aa82ae289f94e9699389db75955c5159e51fcf06bf73eccfe7ae73f45e1fb9"
+    }
+  ],
+  "actual_H_metadata_bindings": [
+    {
+      "path": "results/unified_exact_round170/complete_raw/01_R163-C20-S_S1_B/primal/base/path.json",
+      "bytes": 2586,
+      "SHA256": "8d0c998feb13dd7e64563e520c2927b8ae3d226167074f903731756f5dc341c4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/primal/base/path.json",
+      "bytes": 2576,
+      "SHA256": "7f71e548470ed6195b426456739b366aabefc050ec0897e9ebbd7381552556c1"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/primal/C_s1/path.json",
+      "bytes": 2608,
+      "SHA256": "2558fbf5425e46156767808a5e7c5a9a25522cbea2ee45ff9c750fed74911042"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/primal/C_s2/path.json",
+      "bytes": 2613,
+      "SHA256": "5d2803393fa67d1f22faa8edb396e2e25b21b0e882fe09e07670e473f97d0274"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/primal/base/path.json",
+      "bytes": 2575,
+      "SHA256": "115f0567d3ebd481fac7b8865e69d425d283f5832a31b304592864b870b5db5d"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/primal/M_s1/path.json",
+      "bytes": 2612,
+      "SHA256": "5f1f55ed41fa1f3bbe95b0efe8cff3a42de264fd4e1e20e43fcc729299821504"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/primal/M_s2/path.json",
+      "bytes": 2603,
+      "SHA256": "81a3f792ec719a6e60a041ee9b043a42f93cc2b1fd81fab8e01e68f570176603"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/primal/base/path.json",
+      "bytes": 2575,
+      "SHA256": "171b67200153ad49b08cc32b2e89e65fc5539fb4431a43b6ab595cdb86f62691"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/primal/C_s1/path.json",
+      "bytes": 2611,
+      "SHA256": "7f1458d41605a1c00b804efc848faef262bfe7bcc667e5566b4a3565b92964d2"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/primal/C_s2/path.json",
+      "bytes": 2607,
+      "SHA256": "cca1ab84a1650d50a1d25a06b92b684e305c435c9d4f43235efb07028c3884c8"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/06_R163-C35-U_S1_B/primal/base/path.json",
+      "bytes": 2583,
+      "SHA256": "08968ba58570b13f9a39ed027784a30303159e5e411cdd35041911a39eab4449"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/primal/base/path.json",
+      "bytes": 2573,
+      "SHA256": "f88047fb5a352725752e1fa4cb092ba7761ade26387f925b4ebc0bf1f5b9ba6e"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/primal/C_s1/path.json",
+      "bytes": 2610,
+      "SHA256": "2ecb87aa9020e1fadca66ce4635d702c39a1062f42e3948bfc6a3fd124a4dd3b"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/primal/C_s2/path.json",
+      "bytes": 2611,
+      "SHA256": "929504607d92ff1886107e7a98723e0d2d457ac0928ac39d3f4ec6ba45659f2e"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/08_R163-B35-S_S1_B/primal/base/path.json",
+      "bytes": 2582,
+      "SHA256": "32c4ba242457bbe8c4fcdd89031ff862d1ed3ffaab487927dff6788de6ae64c4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/primal/base/path.json",
+      "bytes": 2573,
+      "SHA256": "ef07a48082c8cf45ea4d4a6bc5b5d70cdbc70cf880c76f5fe2bea50e9c8e6eeb"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/primal/M_s1/path.json",
+      "bytes": 2600,
+      "SHA256": "0a83bace56496a29c3c754d5161ef2e69658c84b07460371c6761500c4c4b69e"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/primal/M_s2/path.json",
+      "bytes": 2608,
+      "SHA256": "41dec6f7f013874f8e0db704f74ae1071c95400f9412217855e9588b3bd0dc3a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/primal/base/path.json",
+      "bytes": 2581,
+      "SHA256": "5df2aa6620103623f65b82ed831362e8502703f30b882e9676e2de67d12fe9af"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/primal/M_s1/path.json",
+      "bytes": 2610,
+      "SHA256": "27e85ef7e72bd397a5ec4025dd8b7fd951383283d44fb4684c97dea9d763f8fc"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/primal/M_s2/path.json",
+      "bytes": 2610,
+      "SHA256": "599a794af0cabc55465d2de44d4b8eb11da77cb6113f62b261441bd81a22b081"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/primal/base/path.json",
+      "bytes": 2557,
+      "SHA256": "dc4391e3b210291ce134231ff6fdeb36ff50c7ded621053ff457ca8421afb2f0"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/primal/base/path.json",
+      "bytes": 2577,
+      "SHA256": "25c5311f419247095debb7ad7ab61eb5070000122c3af321f5bf3b8845dd8462"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/primal/C_s1/path.json",
+      "bytes": 2594,
+      "SHA256": "fda87cebe0a854dba13d34d1fa5eb05e85a2f0216ba67dd1fd8805f0d35b15f4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/primal/C_s2/path.json",
+      "bytes": 2593,
+      "SHA256": "821313e7ee54a927b91446b801084dc39dce117c135bea2d74480f66c927412a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/primal/base/path.json",
+      "bytes": 2576,
+      "SHA256": "aaf11086a9df5c1c8abf2485b09cce1a87f7e39ca5aedd0dcd0ae9a6085de7e0"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/primal/C_s1/path.json",
+      "bytes": 2618,
+      "SHA256": "da996e325f598da7c880b23c17b09a285dfd055221b4c71a804fcdadfb113842"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/primal/C_s2/path.json",
+      "bytes": 2613,
+      "SHA256": "24632c853f1d6bce53781e3b44a30daa9e46358a0075be8827271d5429bd71cd"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/16_R163-C20-S_S2_B/primal/base/path.json",
+      "bytes": 2561,
+      "SHA256": "4f8017331e2ec9147a743121c39bcdd2d9ef9744982e10843305f16cf3514bfe"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/17_R163-C35-U_S2_B/primal/base/path.json",
+      "bytes": 2569,
+      "SHA256": "fe14429b92d0f11067ecf84d2ca469a90679cb8d446eb3eb3f29d281f2589fe0"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/primal/base/path.json",
+      "bytes": 2593,
+      "SHA256": "eed0b7c3d416a06fd9dde615a5d49790d7164223c0ef62ae1fae342b1a404aa5"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/primal/C_s1/path.json",
+      "bytes": 2605,
+      "SHA256": "451d68d7d8f2343ae2d5444884023f71e7923526a4544384b510dbfce1892176"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/primal/C_s2/path.json",
+      "bytes": 2614,
+      "SHA256": "af4f2b95a340eee44ca00d8a7c8c991448cd9b22edffeedc0a064d01f46f44c2"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/primal/base/path.json",
+      "bytes": 2582,
+      "SHA256": "9dc9ad143bcdea9ecd84643cf25bcbcd33874796c766964b7ce61200d58a70fb"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/primal/C_s1/path.json",
+      "bytes": 2595,
+      "SHA256": "b7cd6400754b2557583988956b8efa0f51a6e883b83385550fa1e0f565255824"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/primal/C_s2/path.json",
+      "bytes": 2610,
+      "SHA256": "403b9c5a11358c4ece630a7d447550c1536c8b14acc48fd16eca8df66ccd6051"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/20_R163-B35-S_S2_B/primal/base/path.json",
+      "bytes": 2574,
+      "SHA256": "57cceadc287f1fb4ff84c20215a99dd609f1bcf5ffca9c76f6db32f0899c2de9"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/primal/base/path.json",
+      "bytes": 2567,
+      "SHA256": "33daaaa7b88f44aaa77ffb6fbeff6b339bcead0c184ed3d36fc05561361ec4cb"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/primal/base/path.json",
+      "bytes": 2582,
+      "SHA256": "3cc3ad7f568fb11fcc61b319c10a786bd1f1aa3f43d16b83a50df853e5ed1aaf"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/primal/C_s1/path.json",
+      "bytes": 2610,
+      "SHA256": "3b461b82193c73039f8dcd7742d72e3e761804f0d8ba323c266befe7290782de"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/primal/C_s2/path.json",
+      "bytes": 2618,
+      "SHA256": "4282e4b889215e7dfc19cd1e585af9809099338764793cef6fc5c1c58bdc149d"
+    }
+  ],
+  "actual_Start_and_vector_bindings": [
+    {
+      "path": "results/unified_exact_round170/complete_raw/01_R163-C20-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 564,
+      "SHA256": "ed3b284b326c102e6c22e535d7bce7f564f9ed2393d278715fcf6cf88aa7fae0"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/01_R163-C20-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 63636,
+      "SHA256": "7e53095f6ef7bb3add2cadcd80e742991d7785df92e0a6096cd97100dbd1ebe4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "753d7dbfec8aea7cadabbb038f91f4d5f46a0a928b20451293af3cc64beb88c5"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 63540,
+      "SHA256": "fb449f2f1fc932089d0bbd9f8a853872eb52d6cb549ac8b766b6f6b91e523619"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "5cca1c39084a4ba01de7bc1f37221f659d1e64aed4fe9ea1211e32692b16c9fe"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 211318,
+      "SHA256": "4f37e14316699b012df7414625bda7b44fbb70f074116546abc7281a6a037608"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 555,
+      "SHA256": "de4a5fab10092607917b6c004bd66fb7537764ad8b5c1e19cdeca928588fa96a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 211778,
+      "SHA256": "1285e916b3736a0678de3f123b731d22f8db21ee4e4d6063a15eaee3b968a2f4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/06_R163-C35-U_S1_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "7c0af3cbed37709ecb8e808c8486d40d403bfdb2e04347b6724e8c256e0c5c44"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/06_R163-C35-U_S1_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 211318,
+      "SHA256": "4f37e14316699b012df7414625bda7b44fbb70f074116546abc7281a6a037608"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 558,
+      "SHA256": "afdad4b576541872f68a058683d416d960458cfe30ac8421e2ac579b3b346a6f"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 211370,
+      "SHA256": "3297a0abba08a54164988e79379cfc15f4cf1398196df04bad9dc744f551a181"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/08_R163-B35-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "8d26434fa9cae22137073a0791c8a1e224c653896736a953b4189a0584960c29"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/08_R163-B35-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 212900,
+      "SHA256": "3d8b326a8abbacb6d72bcd2858ebdeda275fdb7067413636ca4afd1e61a99a6c"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 553,
+      "SHA256": "8b5fb2279a935619813ce4d9a3afc2a2748eb29e8052e591f9699ebf31df01be"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 212900,
+      "SHA256": "3d8b326a8abbacb6d72bcd2858ebdeda275fdb7067413636ca4afd1e61a99a6c"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "07d796ba27a6b28dc8821e40d9cea70ced83131c83cc2462652492523fb99450"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 176648,
+      "SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "aa9dacc6e94a388cb7d4b4ddb3730a64a4f8107fae27884e96229cb620a0e7ed"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 176648,
+      "SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "bytes": 548,
+      "SHA256": "10a1e0d5c45f29550c854b9f7580ac615eb3301fd7811949c65808fb31db0e91"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 176648,
+      "SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 548,
+      "SHA256": "72a7aa29dd9c59a71f1393d131c58873622b2d56628c9d2bfed256fb29aca8ad"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 176648,
+      "SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "bytes": 558,
+      "SHA256": "9e96b1610c38e1d571080670dfd6d9d32af8d57ee0c21859f0eb49ee8cb0e2ea"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 177822,
+      "SHA256": "3aae7067bd1a1f07e9d973ab0ef5f88b8d21df8ac0a354aa49fea51d1b56a669"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 559,
+      "SHA256": "5acb0ef9990e6d756c35f0ec8fbb1aa390a3bd5cb15f52b0528b534e5385a9c2"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 177822,
+      "SHA256": "3aae7067bd1a1f07e9d973ab0ef5f88b8d21df8ac0a354aa49fea51d1b56a669"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "9fe0bc5080bd673e95d98f6a90dbe6dce7fee5b878e012e7bb234fbfa29e9405"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 63540,
+      "SHA256": "fb449f2f1fc932089d0bbd9f8a853872eb52d6cb549ac8b766b6f6b91e523619"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/16_R163-C20-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 564,
+      "SHA256": "a1268366a9f806ca870d25512776111bdc1f4cdef39a4e5af5c8a96d30289731"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/16_R163-C20-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 63636,
+      "SHA256": "7e53095f6ef7bb3add2cadcd80e742991d7785df92e0a6096cd97100dbd1ebe4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/17_R163-C35-U_S2_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "366fc944f50c2fa619aa50461247c0f7af5d49cada5493e18f1f99dbf9116a97"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/17_R163-C35-U_S2_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 211318,
+      "SHA256": "4f37e14316699b012df7414625bda7b44fbb70f074116546abc7281a6a037608"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 566,
+      "SHA256": "e3bcd7882eb8985e0f58cc90868d42773316f2e3b70f1e4b57716af228e2228d"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 211778,
+      "SHA256": "1285e916b3736a0678de3f123b731d22f8db21ee4e4d6063a15eaee3b968a2f4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 555,
+      "SHA256": "c9c2487b2969de77d79a68ada351861e895520f08c2daadad77e474fc366c8df"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 211370,
+      "SHA256": "3297a0abba08a54164988e79379cfc15f4cf1398196df04bad9dc744f551a181"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/20_R163-B35-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 555,
+      "SHA256": "c798b48a773964f59683ee6854f34cc149363acf1ee1e27653d05876a9bb3dca"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/20_R163-B35-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 212900,
+      "SHA256": "3d8b326a8abbacb6d72bcd2858ebdeda275fdb7067413636ca4afd1e61a99a6c"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "bytes": 554,
+      "SHA256": "da145a66426d8199764cd5e0f79403b1742295164eaf418e9b86fd077ab43be2"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 176648,
+      "SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 555,
+      "SHA256": "d32df76c04b3257186f36ae5a88a45cb4e290b1b4a84524a848cc818c2148de4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 176648,
+      "SHA256": "d7bbc1bf0b052a76c70b5481917ed63994552b77c464aa322b02ac19955cf6f1"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "bytes": 555,
+      "SHA256": "b27db9d003b83dbcb90c72b93e2c42f90fa0bb688398da4f0a3623617053417c"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 177822,
+      "SHA256": "3aae7067bd1a1f07e9d973ab0ef5f88b8d21df8ac0a354aa49fea51d1b56a669"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "bytes": 555,
+      "SHA256": "63f1a5e655e3f6bb9c855fdc9f99f091863537a749571cd1c296f4308207750e"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "bytes": 177822,
+      "SHA256": "3aae7067bd1a1f07e9d973ab0ef5f88b8d21df8ac0a354aa49fea51d1b56a669"
+    }
+  ],
+  "actual_native_log_bindings": [
+    {
+      "path": "results/unified_exact_round170/complete_raw/01_R163-C20-S_S1_B/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1396,
+      "SHA256": "3699002b8c002c27f10bdd5fcf32a954b9d4ecbe8be643a812968830645d32a5"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/01_R163-C20-S_S1_B/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1399,
+      "SHA256": "2c31166dfc91833dab45db72c4cfa99951c11c2aeaf17d2c817d3741179eb6af"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/01_R163-C20-S_S1_B/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1398,
+      "SHA256": "3277cdae47625a68672f12cb2f9aa83deee37c80f9673fa507d1f575abd48841"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/01_R163-C20-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 12764,
+      "SHA256": "c90e65cb1631eabf185a85f3d69910585041fe53d3207b79bba84ee338133bd6"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1396,
+      "SHA256": "31eff299fd261ffc6a0122f1f39070db36db3100530d6bebc69acce151e73cf8"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1399,
+      "SHA256": "16d3cbef935bf5ddf75f4fd73686882506adb90fe2569c8fabebe06d3d10ceb4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1398,
+      "SHA256": "e892015b70c0026ae9f4ecf2900a0037f9d01c8e46a95bac5276976b4008cccc"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/02_R163-C20-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 11852,
+      "SHA256": "2cc3c51a821cb3ce251cb88c851d69e275c172ba7197b73150e9f41f20577aff"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "fa9c4b3b9bf6436a67e9a291e99cc9ce37fefce50abc087e7149a8f80e864c1a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "df9f1943650c2725d63920a489a8111bcfde44070a7089bda6a5bde45f52fa9d"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "d397131b54726f5164afd4b76ad578728a3be2d56f67da689d2279ac841121d9"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/03_R163-C35-U_S1_M/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 13621,
+      "SHA256": "ebb33b7a73bc13205a67694f6555e38b00af48f6f5af8a4eb1ffb68ef7cb8807"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/04_R163-C35-U_S1_P/native.log",
+      "bytes": 21351,
+      "SHA256": "a0ed793718897e447f7ff5f2f0f179b822ab55172733a235bf2bd2a3536e68c0"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "7c3b0b63001db1b008ceba433f4283e87e5d12fa18daf46bd6955a6c527b9dab"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "2b2ee1cb716579fade7e94c1556369ecebcbf582a90502af4e08bc8a7288d5ac"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "b11e677f767214ed8d19f9522fd89bc0bdb1b02ff13f4a42bb4392b527a2d53a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/05_R163-C35-U_S1_C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 12188,
+      "SHA256": "a308a7a6fede661fb0d806b1e5f0dc8ecbff126460bfeff3b7380ff57d14415b"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/06_R163-C35-U_S1_B/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "70b033f80b977945b777ba87cd2bffae3a6818e6c25c9983edffa40b99692b50"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/06_R163-C35-U_S1_B/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "fb2d60d98f6b0d4f0f6efde3a89d73afc8f00115be41413f0af3e1b6ef442358"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/06_R163-C35-U_S1_B/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "2540eea88b079feccab0c5a42bb38e877cd7b81fdfbd191a66b510feab3203b8"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/06_R163-C35-U_S1_B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 13555,
+      "SHA256": "ed7df94b2bc6e1b28de9eefae1bd247231451813699afcaf98d7c53f552505e3"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "b306eb8f9f00fd8e086a483eb235717f824e9204615c316aa7e78fbd0adf64b0"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1409,
+      "SHA256": "c6916862af1ce2880e475c1f1f9898fbddbaa3c937fdac654f4dcdc80f95280b"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1408,
+      "SHA256": "2678eb787814008bd6f2a61b9a8f5eb31afd5615b68e04b82b1be12500235a72"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/07_R163-B35-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 10979,
+      "SHA256": "7f585fdc8fd03d18dcbf8e80796751bea51840a62a16ee11d7a6d269c9768e84"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/08_R163-B35-S_S1_B/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "bd1081490f816c9655ae1b83a31a88525eb8859636ae49842e5fc42e7ebaf1a2"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/08_R163-B35-S_S1_B/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1408,
+      "SHA256": "082afd14bcb85df39de011825622c17a9c66c88990fe2ccee4690990ac5cdf8a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/08_R163-B35-S_S1_B/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1407,
+      "SHA256": "3ff4c95e744a6587d84cdbf7536a928a72249819d85e82850e2e144f0c8dffb8"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/08_R163-B35-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 11512,
+      "SHA256": "c1d8a5652179f37abc5c0734117c099134b7a6642a1ec7c96f5498f7868f928f"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/09_R163-B35-S_S1_P/native.log",
+      "bytes": 20687,
+      "SHA256": "4e381805d0f1b6103c0c7f3b8a76d62401e3810aa6e343a8cc1e65634783bff5"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "20f040e68b674e2a0d62aeebaf25204209889d3070057849b839c48c133efafe"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1408,
+      "SHA256": "2ed805e89ec4be1859469831e925b81cc2c8e88e1a45ba75c220fc3c4d8e6b09"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1408,
+      "SHA256": "702c8a84da0552cea36a0361f1045ec025615ff788582290522ab4eac214787c"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/10_R163-B35-S_S1_M/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 11435,
+      "SHA256": "87f05795392607dbe10ca6f80d4d4d789ecf9bb8e2425f6773d2f54eb8a5c05a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/11_R163-X35-S_S1_P/native.log",
+      "bytes": 18715,
+      "SHA256": "699361a4dd1f3463ec515189338fc3630c5f959261b5ed2e07688d07c669e84e"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1402,
+      "SHA256": "bed8333d38f238b0027ebaca5e9c4520d9ff128a584ae042435f5c4e303f3d93"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "ffdbb56861f839cd75761f63283d8b97d69035d9806e00b35c0f6677cdbe73d5"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "7bd5a1d43bb08903b058df37123f588c7e3e4dfc129b66b02b83e9abcf35af34"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "bytes": 2274,
+      "SHA256": "082149a317fcc2405bfd37ad394143e91ce5f61e6d176bccb036a58640e15fb4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/12_R163-X35-S_S1_M/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 11925,
+      "SHA256": "49cb796f74354191dffed3e203915c7128354cfc24dccb6890b1ba49a35022aa"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1402,
+      "SHA256": "1bbed60fda21e0ad496694d53ee7987b6348e4732f703104e669a194f87fa67e"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "8f940d11d61eb93c134950f33fb71cfbfe5385af5adfb0a76bdb09353bf55207"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "10a0c8bbaf96d2015f9faf6a4878f400adc31f361ecf17aada0b61bd5132b532"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "bytes": 2251,
+      "SHA256": "6438fc0f286da0ff68ec4274882b5d4552769d6a1f802b69e838b09c8ee20ce4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/13_R163-X35-S_S1_B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 12131,
+      "SHA256": "e386465cbc57efb53204e35d0681fc463beaa10372453c2a3c522e29f67f390a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1402,
+      "SHA256": "bd8a373f4ecbe30f45c07cde2656e68aeb10e195e3414eac568f8892e23fa077"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "5d093e7beb71a08838d37562117799727cf17ca0082b851d1a41645bdfac5adf"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "4bb0239269a08056ae9225c7d63e446de89da35ee81bafd6692ca5640ecb9066"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "bytes": 2267,
+      "SHA256": "1be3038543ad86eb58ff5c7f9f16e5d57ffc6d7820a24e3ecfffbfa001f62da7"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/14_R163-X35-S_S1_C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 11478,
+      "SHA256": "999b55f6e53f21e79c27d08baf6b20ded542766268281cd425d31fec18f77ed4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1397,
+      "SHA256": "0492db2d094ba19b811b141164f6a4359a6f75533d569adfb33f196d9956a825"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1398,
+      "SHA256": "4634371201dd8e74fff264dac8ab1e4f6c281c46f1137859ff8adc715bcbf5d8"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1397,
+      "SHA256": "b30f513ef7d784432e9a445bdce344223f6c3f0550ee9c74cc102863de9d8324"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/15_R163-C20-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 13764,
+      "SHA256": "243063a43ee75b8008c4ebb982c4ef848003f2ee5a1f21931e0a5fef1c0316da"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/16_R163-C20-S_S2_B/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1397,
+      "SHA256": "4516db6c672989e07fe649181906a3af9094fbe76dc4f4625ec09ef886a6aa8e"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/16_R163-C20-S_S2_B/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1399,
+      "SHA256": "312298cefc603b742ef8f7a6367a857feae951594e575a9c5eaffc43c31ade15"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/16_R163-C20-S_S2_B/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1398,
+      "SHA256": "5bcc11c95e64ca0b46ff40b92d3861afd328db5ea02687c66afaffc709f40dcd"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/16_R163-C20-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 13446,
+      "SHA256": "9e94f23ab5f3d1a40d6ec635da4810f32b0c32b10701da6b1fe82542a01f9a43"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/17_R163-C35-U_S2_B/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "571e5c5401fe3069f867415a568152e9259f4a2045fd26619eab48d9e0648144"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/17_R163-C35-U_S2_B/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "a17136901e5fbc6e31971e5b0a0146acea9dd7ab20a5e3497152e88804eeac7b"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/17_R163-C35-U_S2_B/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "76c387303ace4b6f7b019f02ed85f0f8484e40dc2aaaa8e8a7c46f01ca5f758b"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/17_R163-C35-U_S2_B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 12710,
+      "SHA256": "177d2b166132eeb75a81f92de80211ca940f9edc2a44d761215d8bfbfa589b69"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "49f2beb0d590f536c322f850376fd3f0f1cfb8bae01da7bf62bb1197ca837340"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "0dff2cb4a98fe2dfcab9677afbc775c9b824481448acdcd405fbc745a17b59f5"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "3584ffef16fdd1b0e32489818779ac6c6f46371e7b026d47f33b29d49626f59f"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/18_R163-C35-U_S2_C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 12954,
+      "SHA256": "3a0c771b1d50f6ac51657922196e2c75e37b9234a463f124336abd0ef583d318"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1406,
+      "SHA256": "8864650c281b90dd191d67012406f5a86933f5b59fb6036a6d01ab041a7e98d1"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1407,
+      "SHA256": "309961f2d08c2928a8a57e8b6d5354ecf9bf6a5cae2f42669780bf60df837cdb"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1408,
+      "SHA256": "dbe054852d5c6a178a64e92c8da725f7e8e8a20c7bf2a2a85ea0dfd6786165bb"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/19_R163-B35-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 12036,
+      "SHA256": "d61b8d6a62ed524f019d5fe77759f7bf037fe87e8dabd6d176c1d74954a98892"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/20_R163-B35-S_S2_B/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "ce479afe70a33be8cf01e8b3f5384fd18601657f36c81867b868494ea1af0cad"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/20_R163-B35-S_S2_B/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1408,
+      "SHA256": "34ad5015eacd0e807681ccd0cfc5b2c923ef2ef6cd501b54c300eeb881056dd3"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/20_R163-B35-S_S2_B/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1408,
+      "SHA256": "636bed8cf1588cffd02c230901ba59723e61fa26902845ade205c697637ae4bd"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/20_R163-B35-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 12810,
+      "SHA256": "65667fb4e69d51fa11e605fe45e338180cfb59d891694e152777cc9d9729b5e9"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1402,
+      "SHA256": "d08ea468a39ee92d2425a436e810936f1424dc0cff32eee18811059c2abecc2a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "6ce5f1ba5b8167dce6488b961ce3bc8c18abce1259807dfcdc83d26bd653e61e"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1403,
+      "SHA256": "76eae24147de6e6b6fa30e506b2bd0c6e13ffdcad2b01bfaf948de4aa39b412d"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "bytes": 2223,
+      "SHA256": "bac7d0fce7c895026236c6ad2d20ac33f7497e7b402be6a50469af024a147458"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/21_R163-X35-S_S2_B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 13250,
+      "SHA256": "2f8d15af7593cb9252c042e1476fa31ae07f22417089c79feaa8ce65c15b15f4"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0_lp.gurobi.log",
+      "bytes": 1402,
+      "SHA256": "d7b06ba4d1127fbf9f7f5384aeaa43d395d0557d5860b406e57ea739749da7d0"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0.0_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "6a686a0e696de7a5f66f0d24ea1d7cbd87dca4f9ab4005feff6051e24c43ea3a"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0.1_lp.gurobi.log",
+      "bytes": 1404,
+      "SHA256": "176b696cb78d72e7ef2649db936fbb0ee74d3d3705c5705892b76b2dc47da877"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "bytes": 2258,
+      "SHA256": "1007b04bdd4dfd4ab61aa9b41828660880b6bbd2e552a605e7695a020f888e05"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_raw/22_R163-X35-S_S2_C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "bytes": 12476,
+      "SHA256": "d25375bc5e3c6a1433aac08f6f146efa8d4d79dd074de4042005cccd03b77ad9"
+    }
+  ],
+  "checker": {
+    "path": "results/unified_exact_round170/review/execution_review_check.py",
+    "bytes": 56269,
+    "SHA256": "436afaa3951efb68512d5fa5487a19a4f2c61afa0cf7be4a196f9c98246512c8"
+  },
+  "writes": [
+    "review/execution_review_final.json"
+  ],
+  "production_raw_CPP_CSV_Git_modified_by_reviewer": false
+}

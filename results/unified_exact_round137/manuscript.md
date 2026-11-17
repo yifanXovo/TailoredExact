@@ -439,13 +439,62 @@ Retain B uniformly. C166 loses C20's certificate; its C35/B35 U improve by .0085
 
 Separately, 72 fixed canonical raw LPs, twelve local LPs and four tiny physical MIPs qualify. In 24 frame/scope triples D167 matches R_abs within \(2.22\times10^{-16}\); F0 also matches C166. Among sixteen bit-conditioned triples, D167 raises C166's bound by .000358489 on X20 root F2 and .00000692904/.0000208111 on B35 root F1/F2. Thirteen show no increment. D167 has more rows/columns than R_abs in every frame. Recorded C++ subprocess wall time is 126.262s; management-inclusive and independent-check costs are reported separately. The modest gains and larger matrices support retaining this offline prototype, with no complete-integration or speed claim.
 
+### 4.6 Paid objective diversification
+
+Objective diversification has direct local-search precedents [@paquete2003two].
+The fixed default-off C169 initializer retains complete base H at original
+lambda and seed 20260626, adds independent complete H at lambda/2 and 2 lambda
+with seeds 20260627/28, and selects by the reverified original objective.
+M instead adds two original-weight complete restarts at those same seeds.
+Only original-target fleet/UB/Start transfers to unchanged B. Base inclusion
+protects initialization, not equal-budget final U, L, gap or certificate time.
+
+In the preceding exposed-input Seed 0 study, all 35 H paths completed and four
+of six roles triggered eighteen paid B/M/C runs. C lowered all three n35 U
+endpoints by about 18.8%, 14.5%, 10.0% versus B and also beat M, while weakening
+C35/X35 L and increasing C20 certificate time from 211.5 to 219.5 s. All n35
+runs stayed open. S169 preserves that historical 300/600 s study separately.
+
+The confirmation freezes that recipe on C20 and those three n35 roles,
+Native Seeds 1/2 and 22 predeclared serial runs. Every run pays its own H,
+construction, LP/MIP and checks under a common 600 s process cap. M and new
+cold compact P are measured only on n35 Seed 1. P retains its own method
+definition and internal heuristics, with actual NumStart=0. The four inputs
+and Seeds 1/2 were exposed earlier and selected for the known positive and
+protection signals; this is no held-out or new-input validation.
+
+**Table 7. Fixed paid confirmation at 600 s.** Cells are original U / qualified
+global L, with C marking a qualified certificate; all other observed cells
+are OPEN. A dash is an unmeasured cell, never an imported old control. B
+remains default; C is the fixed research candidate. M/P have Seed 1 only.
+
+| Role/Seed | B: U/L | C: U/L | M: U/L | P: U/L |
+|---|---|---|---|---|
+| C20/1 | 0.191281/0.191281 C | 0.191281/0.191281 C | - | - |
+| C20/2 | 0.191281/0.191281 C | 0.191281/0.191281 C | - | - |
+| C35/1 | 0.111924/0.0144933 | 0.153146/0.0154823 | 0.111924/0.014453 | 0.24655/0.00482444 |
+| C35/2 | 0.115716/0.0152415 | 0.120417/0.0156946 | - | - |
+| B35/1 | 0.208921/0.118979 | 0.168557/0.117813 | 0.208921/0.118979 | 0.318124/0.114075 |
+| B35/2 | 0.174277/0.118326 | 0.192502/0.119374 | - | - |
+| X35/1 | 0.480063/0.36101 | 0.472052/0.350652 | 0.480063/0.360941 | 0.599347/0.348078 |
+| X35/2 | 0.468815/0.36773 | 0.473423/0.36682 | - | - |
+
+
+The new C/B results reverse the initial interpretation. C35's final U is worse by 36.83%/4.06% at Seeds 1/2, despite stronger L. B35 improves U by 19.32% at Seed 1 but worsens it by 10.46% at Seed 2. X35 improves U by 1.67% at Seed 1 and worsens it by 0.98% at Seed 2, with weaker L at both. Only B35 Seed 1 reduces absolute gap; X35 Seed 1's smaller U accompanies a larger absolute gap. M retains B's initial and final U at all three Seed 1 roles, so the B35/X35 Seed 1 gains exceed these matched restarts but do not repeat across the two new C/B trajectories. All n35 observations remain OPEN. C20 certifies the same objective in every run, with B/C process times 369.447/371.874 s and 327.315/436.064 s: C's proof-cost regression persists. Against the new cold P, B and C each improve U, L and gap at all three Seed 1 roles. B/P U reductions are 54.60%, 34.33%, 19.90%; C/P reductions are 37.88%, 47.02%, 21.24%. These three B/P endpoint advantage observations add no certificate or physical input. The candidate comparison is separate from the default-method evidence.
+
+The materiality scale max(1e-6, 0.001 max(abs(U_reference), 1e-12)) is descriptive;
+there is no significance or population claim. Certification uses the
+qualified process endpoint T_cert_process, with independent audit costs
+separate. S170 gives every initial U, endpoint, signed gap, expense and
+negative result. Close further optimization of this fixed recipe. Retain its initialization and local paid positives as bounded findings, with B remaining uniform default and C169 default off; this selected exposed-input study does not confirm a repeatable complete-method benefit.
+
 ## 5. Certified transportation decisions
 
 ### 5.1 What more route time certifiably buys
 
 The four input-designed resource pairs fix the physical data, normalized weights and \(\rho=1\), and change only route horizon T. Each base has positive shortage, positive weights and a pre-solve positive objective floor; the design uses no observed difficulty filter. Increasing T enlarges the physical feasible set, but finite-budget bounds and computational time can move in either direction.
 
-**Table 7. Input-based positive-objective resource design.**
+**Table 8. Input-based positive-objective resource design.**
 
 | Base / source | \(n\) | T1 / T2 (s) | Shortage s | \(\Omega\) | Floor lambda a s |
 |---|---|---|---|---|---|
@@ -464,9 +513,9 @@ If \([L_j,U_j]\) contains the optimum at \(T_j\), feasible-set nesting gives
 \max\{0,L_1-U_2\}\le F^*(T_1)-F^*(T_2)\le U_1-L_2.
 \]
 
-The computation uses the complete full-precision fleets and qualified global lower sources. Each original lower is reduced by \(10^{-7}\), and recomputed feasible objectives receive \(10^{-12}\) upward protection. These guards and outward display rounding are retained in Table 8; all arithmetic and source ownership are preserved in the decision data.
+The computation uses the complete full-precision fleets and qualified global lower sources. Each original lower is reduced by \(10^{-7}\), and recomputed feasible objectives receive \(10^{-12}\) upward protection. These guards and outward display rounding are retained in Table 9; all arithmetic and source ownership are preserved in the decision data.
 
-**Table 8. Two-sided resource-value improvement intervals.** The bounds use complete physical fleets and qualified global lower sources. Displayed interval endpoints are rounded outward after reducing each original lower by \(10^{-7}\) and adding \(10^{-12}\) to exactly recomputed feasible objectives; full original endpoints and arithmetic are retained in the decision data.
+**Table 9. Two-sided resource-value improvement intervals.** The bounds use complete physical fleets and qualified global lower sources. Displayed interval endpoints are rounded outward after reducing each original lower by \(10^{-7}\) and adding \(10^{-12}\) to exactly recomputed feasible objectives; full original endpoints and arithmetic are retained in the decision data.
 
 | Base | T1 / T2 (s) | Improvement interval | Interval width | B state T1 / T2 |
 |---|---|---|---|---|
@@ -484,7 +533,7 @@ All four larger-horizon saved B fleets reduce both Gini and average target devia
 
 ### 5.2 Quality between sampled objective weights
 
-**Table 9. Objective-weight evidence. (a) Sampled complete-method outcomes; C denotes an own qualified certificate.**
+**Table 10. Objective-weight evidence. (a) Sampled complete-method outcomes; C denotes an own qualified certificate.**
 
 | Physical configuration | \(\rho\) | P: U / L | PS: U / L | GI-TBC: U / L |
 |---|---|---|---|---|
@@ -515,9 +564,9 @@ v(\rho)\ge\frac{\rho_b-\rho}{\rho_b-\rho_a}L_a+
 
 Let \(L_C\) be the maximum of applicable chords. A repeated actual coordinate uses the greatest qualified lower and contributes no zero-length chord. Chords are never extrapolated. These standard parametric-optimization facts yield
 \(0\le U_{\mathcal A}(\rho)-v(\rho)\le U_{\mathcal A}(\rho)-L_C(\rho)\).
-We calculate the worst bound over the entire covered interval from all true affine-line intersections, active-chord intersections and domain endpoints using rational arithmetic. No dense grid or new solver is used. Actual binary64 lambda/weight coordinates are retained, including small differences from displayed .5/1/2. The numerical guards are those stated with Table 8.
+We calculate the worst bound over the entire covered interval from all true affine-line intersections, active-chord intersections and domain endpoints using rational arithmetic. No dense grid or new solver is used. Actual binary64 lambda/weight coordinates are retained, including small differences from displayed .5/1/2. The numerical guards are those stated with Table 9.
 
-**Table 10. Continuous-weight quality guarantees from the complete fleet archive.** Ranges below are display coordinates; the machine-readable data preserve exact loaded coordinates. Regret bounds are rounded upward.
+**Table 11. Continuous-weight quality guarantees from the complete fleet archive.** Ranges below are display coordinates; the machine-readable data preserve exact loaded coordinates. Regret bounds are rounded upward.
 
 | Fixed physical family | Covered rho range | Runs / distinct G,p lines | Supported archive lines | Worst absolute regret bound |
 |---|---|---|---|---|
@@ -545,18 +594,7 @@ The same verified fleets and qualified global bounds support decisions beyond ce
 
 Further algorithm comparisons require a representation whose conditional information survives the declared physical interface at an acceptable complete cost, followed by independently paid own-H full-method evidence with qualified endpoints and all adverse cases retained. Better local hulls, fewer binaries and small LP times are insufficient substitutes. The unresolved incumbent deficits, physical realization gaps and separate value of interval scheduling are specific scientific questions; the present study closes neither them nor the general scalability of equitable redistribution.
 
-Objective diversification has direct local-search precedents [@paquete2003two]. A default-off test retains complete own-H and adds independent half/double-weight H, against two original-weight restarts. All 35 H paths finish; four of six current roles pass the frozen gate. Table 11 gives fully paid same-build outcomes on the six exposed roles at Native Seed 0, with 300/600s caps. C improves U on all n35 roles beyond both controls, raising B35 L slightly and weakening C35/X35 L. All n35 runs remain OPEN. All n20 roles certify; C20-C takes 219.5s versus 211.5/211.1s for B/M. M also improves paid X35 despite an unchanged H Start. Recommend only future independent limited confirmation. B stays main and C166/D167/C169 stay off. This known-role single-Seed panel adds no statistical or new P-GRB win-rate claim. Full path work, costs and fleet changes are in Supplement S169.
-
-**Table 11. Paid original-objective B/M/C endpoints.** Each cell gives true U / qualified global L. B retains base-H, M adds two original-weight complete H paths, and C adds half/double-weight paths. All work is charged to the common process cap.
-
-| Input | B: U / L | M: U / L | C: U / L |
-|---|---|---|---|
-| R163-C20-S | 0.191280592 / 0.191280592 | 0.191280592 / 0.191280592 | 0.191280592 / 0.191280592 |
-| R163-B20-B | 0.423232182 / 0.423232182 | 0.423232182 / 0.423232182 | 0.423232182 / 0.423232182 |
-| R163-X20-S | 0.447747627 / 0.447747627 | 0.447747627 / 0.447747627 | 0.447747627 / 0.447747627 |
-| R163-C35-U | 0.148022963 / 0.0171203442 | 0.148022963 / 0.0171203442 | 0.120201245 / 0.0154270846 |
-| R163-B35-S | 0.219720788 / 0.118652175 | 0.219720788 / 0.118652175 | 0.187861163 / 0.118864869 |
-| R163-X35-S | 0.518363903 / 0.35763243 | 0.511546413 / 0.35763243 | 0.466514935 / 0.351182946 |
+Paid objective reweighting improves complete-H initialization but fails the two-additional-Seed endpoint confirmation: four of six n35 U comparisons regress, only one absolute gap improves, and C20 proof time increases at both Seeds. Local B35/X35 Seed 1 primal gains coexist with weaker proof endpoints and do not justify further optimization or default adoption of this fixed recipe. The three new same-budget B/P pairs strengthen the default method's endpoint evidence, while all n35 runs remain open. Preserve these mixed and adverse findings and close the C169 optimization line.
 
 \clearpage
 
@@ -1095,7 +1133,7 @@ For a fixed physical domain and normalized weight vector, \(v(\rho)=\min_x\{G(x)
 
 All feasible-line intersections, overlapping lower-chord intersections and chord interval endpoints partition the covered parameter range into finitely many pieces on which both envelope expressions are affine. Using every distinct anchor pair also makes the maximum applicable-chord envelope continuous: at an interior anchor, starting/ending chords share its L value with an incoming/outgoing anchor chord, while spanning chords remain continuous. The gap therefore attains a maximum at a partition endpoint (or everywhere on a constant piece). Checking all such points proves the stated continuous-interval regret bounds; a grid would not suffice. Same-coordinate lowers combine by maximum, never by a zero-length chord. Outside a chord's endpoint interval no extrapolation is granted.
 
-The application reconstructs complete fleets, verifies fixed physical/normalized-weight identity and uses actual loaded lambda/omega values. Rational G/P/coordinate arithmetic supplements the inherited numerical lower qualifications; it does not turn native solves into rational proofs. Original lowers are conservatively reduced by 1e-7, and exact feasible objectives receive a 1e-12 upward guard. No source crossing is clipped. The original run objectives, statuses and clocks remain unchanged. Likewise, nested physical time domains give the two-sided difference interval in Table 8; this is an objective-value decision bound, not a monetary resource price.
+The application reconstructs complete fleets, verifies fixed physical/normalized-weight identity and uses actual loaded lambda/omega values. Rational G/P/coordinate arithmetic supplements the inherited numerical lower qualifications; it does not turn native solves into rational proofs. Original lowers are conservatively reduced by 1e-7, and exact feasible objectives receive a 1e-12 upward guard. No source crossing is clipped. The original run objectives, statuses and clocks remain unchanged. Likewise, nested physical time domains give the two-sided difference interval in Table 9; this is an objective-value decision bound, not a monetary resource price.
 
 \clearpage
 

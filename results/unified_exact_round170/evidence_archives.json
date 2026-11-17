@@ -1,0 +1,27 @@
+{
+  "UTC": "2026-11-17T08:57:00.198542+00:00",
+  "new_only": true,
+  "carrier": {
+    "path": "results/unified_exact_round170/artifacts/round170_new_raw.zip",
+    "bytes": 37750953,
+    "SHA256": "717a47c94b0c0b16120fa4fc90eac368b1c1366f5fa0f1ef9b8e8fe910ac1ab3"
+  },
+  "membermap": {
+    "path": "results/unified_exact_round170/artifacts/round170_new_raw_members.csv.gz",
+    "bytes": 2226134,
+    "SHA256": "3ed2b7ba34d54e2f5b9a1dac6d7a0d925e7b544d845b86a02e1cc8e31acf02a6"
+  },
+  "members": 51718,
+  "raw_uncompressed_bytes": 206513335,
+  "all_local_member_bytes_verified": true,
+  "historical_carriers_repacked": false,
+  "commercial_DLL_licenses_credentials_included": false,
+  "inherited_PE": {
+    "commit": "b86cef9917a9fd526ca89bcbdad4b667008c7eab",
+    "archive": "results/unified_exact_round169/artifacts/round169_new_raw_and_runtime.zip",
+    "member": "runtime/ExactEBRP.exe",
+    "bytes": 9884148,
+    "SHA256": "c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57"
+  },
+  "restore": "expand complete_raw members under results/unified_exact_round170; resolve old PE from fixed R169 runtime member"
+}

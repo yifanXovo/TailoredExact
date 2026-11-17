@@ -1,0 +1,483 @@
+{
+  "schema": "round170-independent-research-manuscript-final-v1",
+  "reviewerID": "/root/research_review",
+  "independent_agent": true,
+  "human_peer_review": false,
+  "review_started_UTC": "2026-11-17T08:57:02+00:00",
+  "UTC": "2026-11-17T09:12:08.741112+00:00",
+  "status": "PASS",
+  "scope": "Round170 goal H(3): independent review of actual research interpretation, all four endpoint comparison groups, CSV claim boundaries, current R137 manuscript/supplement/references and actual freshly compiled targeted PDF pages.",
+  "Optimize": 0,
+  "H_calls": 0,
+  "model_builds": 0,
+  "producer_source_raw_Git_mutations": false,
+  "review_seconds": 906.741112,
+  "review_clock_basis": "continuous actual elapsed reviewer time from first read at08:57:02UTC through this final record; no solver work and no intentionally inactive gap",
+  "bindings": [
+    {
+      "path": "results/unified_exact_round170/goal.md",
+      "bytes": 31906,
+      "SHA256": "da0f4cee602651ce5ac1a0089eb77ed0c3a9ad19d6be9d19eb05eb5e5237fddd"
+    },
+    {
+      "path": "results/unified_exact_round170/research_design.md",
+      "bytes": 4296,
+      "SHA256": "c359cff34aa0ffc5937119d773cdc695d6b3c0cd581a7e2b1232074ae34eb741"
+    },
+    {
+      "path": "results/unified_exact_round170/decision.json",
+      "bytes": 7064,
+      "SHA256": "c7e4ce94ca5b46a5de17088b3590ff12033a7a769d6e5125683ea192aaf5da36"
+    },
+    {
+      "path": "results/unified_exact_round170/research_decision.md",
+      "bytes": 1483,
+      "SHA256": "55ee7f8258e83f3a779fbcf2f4683bb214a4c27e3f2e457849baafadc643d408"
+    },
+    {
+      "path": "results/unified_exact_round170/final_report.md",
+      "bytes": 15765,
+      "SHA256": "b450b2bcc1437323701193c6e48bb2bcb23acb232bbc320ec511cd5856de3bda"
+    },
+    {
+      "path": "results/unified_exact_round170/author_decision_memo.md",
+      "bytes": 1333,
+      "SHA256": "eadf5eb9ee04efa00e1616510d099ea9d3f190240f96fc8b7683f30535d16ec3"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_arms.json",
+      "bytes": 81832,
+      "SHA256": "2fb9b523ee51f89afa7bce9712bca19eef5d1b279ba9b621f88ee62eff02d4e3"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_arms.csv",
+      "bytes": 41495,
+      "SHA256": "7c1053525535d8a67ae933df76af7a8b3040c2e3f1aed4c0a661eda4cfb6bfca"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CB.json",
+      "bytes": 21340,
+      "SHA256": "971875af15525fd22722360decf08e00962aa5908abdfdea3e904747200faeb4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CB.csv",
+      "bytes": 10727,
+      "SHA256": "dfdc2b84a12a80becacb8dd8411351633ef9ba102c7faa9cd4cfe4a6efa6d708"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CM.json",
+      "bytes": 8154,
+      "SHA256": "697a717dedbd2e081e2163dfbd9135ee582e86e5ee668283dc976a62821eaf7b"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CM.csv",
+      "bytes": 4539,
+      "SHA256": "09593349b2daf63a6476efaf7f0d9e8e81f679e058768babc4c534f545d26102"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_BP.json",
+      "bytes": 7995,
+      "SHA256": "8eea3c6e8e7238b62408d828105c8d78866dfaa5d03351d263446f64aa86fde4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_BP.csv",
+      "bytes": 4368,
+      "SHA256": "4d20f9ad0f7ed9705efad73d1268cc248833684aca95ef6b99a3def4dba93512"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CP.json",
+      "bytes": 7991,
+      "SHA256": "5df4cd40cda42d86e6d6d8bc0bba5b1a0f002d94b37eaf102e16ed51b43f9d59"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CP.csv",
+      "bytes": 4364,
+      "SHA256": "d22f7d58d269d33ef06478da6a52f2d346e075d8694058703ad6d3f23d8e9904"
+    },
+    {
+      "path": "results/unified_exact_round170/mechanism_initialization.json",
+      "bytes": 3043,
+      "SHA256": "1f27c08d50707ae60cbe2a2dc54f45b5138ab9a3b98be81da1e84b6a20e1e95f"
+    },
+    {
+      "path": "results/unified_exact_round170/h_path_results.json",
+      "bytes": 123425,
+      "SHA256": "682ab5ab1c21447ecb3f42342fdfab8206cedb00def7164019e3349c9c067b58"
+    },
+    {
+      "path": "results/unified_exact_round170/matrix_frozen.json",
+      "bytes": 77777,
+      "SHA256": "43ae60d821fe1bb0d4c3b1d20144f637435867fa5b472faf249e39ce235321ec"
+    },
+    {
+      "path": "results/unified_exact_round170/inputs_frozen.json",
+      "bytes": 12719,
+      "SHA256": "8f2b353ce45919100d1c1ea81b60efa9da9071b5f6d04ef4823506e5d3b0eba4"
+    },
+    {
+      "path": "results/unified_exact_round170/cost_report.json",
+      "bytes": 1662,
+      "SHA256": "dab88c2b1d4eff9a140766e7f6ec0ebe3885c1abe0ad56f45f3993cd62726652"
+    },
+    {
+      "path": "results/unified_exact_round170/work_interruption.json",
+      "bytes": 789,
+      "SHA256": "62aa82ae289f94e9699389db75955c5159e51fcf06bf73eccfe7ae73f45e1fb9"
+    },
+    {
+      "path": "results/unified_exact_round170/CSV_reconciliation.json",
+      "bytes": 5568,
+      "SHA256": "bd9ef4aafa7ffb6e4a86e60d6fed09b9b7a605429a175d6e7b245d1364ec0c34"
+    },
+    {
+      "path": "results/unified_exact_round170/GI_TBC_R170_B_increment_28col.csv",
+      "bytes": 7182,
+      "SHA256": "3e6f2f8c84587a15a70590d688319a0b429a1a313c7495505b8b73bf1ba04885"
+    },
+    {
+      "path": "results/unified_exact_round170/document_build.json",
+      "bytes": 12937,
+      "SHA256": "fec5d0564e43fdacb094022bb1d3939d1c69c4b3653f75929c6a7c344af9f862"
+    },
+    {
+      "path": "results/unified_exact_round170/manuscript_change_record.json",
+      "bytes": 506,
+      "SHA256": "6703a141c9cf1eae5d214bdd49a139216564a10b734c2db4a347e8abe09b4d95"
+    },
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 72236,
+      "SHA256": "856fe9351e22197183c5ea1ee5f9bf065190ccc30174d9d66ff7c0fe1c84ec63"
+    },
+    {
+      "path": "results/unified_exact_round137/manuscript.md",
+      "bytes": 169940,
+      "SHA256": "a8268e902dc5c8aacf6f98d5796bdec1483ec8a12bea4a249105755b5609dae8"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 166530,
+      "SHA256": "8bbd02175e2502e5a724dc676b41db2a30bb5978d32c39b94a41d86a6b0baffb"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 12785,
+      "SHA256": "5e3fa7d349036ffc74b102b5b0836a63a94ec49a4771890afa0a917e8196b279"
+    },
+    {
+      "path": "results/unified_exact_round137/model_and_algorithm_appendices.md",
+      "bytes": 99173,
+      "SHA256": "4fa3eebebf9ec7600e228dd775d73a02edf166f007955b45100bd4650fc1f949"
+    },
+    {
+      "path": "results/unified_exact_round137/manuscript.pdf",
+      "bytes": 1102528,
+      "SHA256": "fb6aa67f5f94c745d5df440dc2247c96774d585df1d4036cd59fc5832efe96d5"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.pdf",
+      "bytes": 457501,
+      "SHA256": "7a399df16b72852064ba23f377a87c0373aa8549693284fdedca80f604d757b5"
+    },
+    {
+      "path": "results/unified_exact_round170/review/research_review_initial.json",
+      "bytes": 5845,
+      "SHA256": "dfb6366eadbd354c527e271c4abd3dfaa4ba5cdcb741188e7e04243f9815e5cd"
+    },
+    {
+      "path": "results/unified_exact_round170/review/research_review_checks.py",
+      "bytes": 17278,
+      "SHA256": "7c3a96dd12377b13564ab85094bbb01cd9607f17e75488b4a097b184b67079f3"
+    },
+    {
+      "path": "results/unified_exact_round170/review/research_review_arithmetic.json",
+      "bytes": 74844,
+      "SHA256": "6e73aa1ee8814af74315f72e89504a0551daa9cb08090e9de3e3fe5f52a3c282"
+    },
+    {
+      "path": "results/unified_exact_round170/review/research_review_base_lookup.json",
+      "bytes": 1044,
+      "SHA256": "6d1c3d327b10ca9dd787c0a2e1bc7241d72d5893e1d0b580561753107a6b42aa"
+    }
+  ],
+  "findings": [
+    {
+      "id": "R170-R1",
+      "severity": "minor",
+      "status": "RESOLVED",
+      "origin": "Independent actual initial manuscript PNG pages18/19 and source readback",
+      "finding": "New prose concatenated ordinary words/numbers/units (all35, common600s, by36.83%, times369.447...).",
+      "resolution": "Parent corrected the thin document writer/source. Independently viewed actual pass02 main18/19 and supplement58/60/61; word-number/unit spacing is legible and corrected. Original initial record is preserved."
+    },
+    {
+      "id": "R170-R2",
+      "severity": "minor",
+      "status": "RESOLVED",
+      "origin": "Primary agent visual finding, independently confirmed in initial main23/24 and final pass02 main24/25",
+      "finding": "Pending Figure3 floated between pages of Conclusions in the initial build.",
+      "resolution": "Actual pass02 Figure3 is on24 before Conclusions; Conclusions occupies25, followed by AppendixA26. No result table remains in Conclusions."
+    },
+    {
+      "id": "R170-R3",
+      "severity": "minor",
+      "status": "RESOLVED",
+      "origin": "Independent final_report readback following spacing cleanup",
+      "finding": "Thousands separator in capacity was accidentally normalized to21, 600 s.",
+      "resolution": "Read back current final_report with21,600 s; paper/PDF sources did not change, so another PDF build was unnecessary."
+    }
+  ],
+  "open_findings": [],
+  "independent_arithmetic": {
+    "status": "PASS",
+    "checks": 589,
+    "failed_checks": [],
+    "evidence": {
+      "path": "results/unified_exact_round170/review/research_review_arithmetic.json",
+      "bytes": 74844,
+      "SHA256": "6e73aa1ee8814af74315f72e89504a0551daa9cb08090e9de3e3fe5f52a3c282"
+    },
+    "scope": "22actual audit endpoints/clocks, complete_arms and all four comparison JSON/CSV parity, originalG+lambdaP, all C/B C/M B/P C/P metrics, H/Optimize totals, CSV8/3/5 mapping, all S169historical endpoints/cost/H tables and S170endpoint/cost/comparison tables at displayed precision."
+  },
+  "comparison_readback": {
+    "CB": "Eight new pairs at 600 s; all n35 remain OPEN. C35 U regresses by 36.8312319%/4.06220518%; B35 changes from -19.3202723% to +10.4577866%, and X35 from -1.66884062% to +0.982868272%. Only B35 Seed1 improves absolute gap. X35 Seed1 has lower U but weaker L and a larger absolute gap; X35 L weakens at both Seeds. C35 L strengthens despite worse U. B35 L is weaker at Seed1 and stronger at Seed2. C20 has the same qualified original optimum, with C/B certificate-process ratios 1.00657 and 1.33224. No n35 speed ratio is manufactured.",
+    "CM": "Only three n35Seed1 pairs exist. M has exactly B initial and finalU, but its own paid H/work/time and small C35/X35 lower differences remain. Independent original-weight restartDelta=0; weightDelta=0.0193247781680,0.0129816883286,0.0928704721413. C beats M paidU on B35/X35Seed1 and loses on C35; equal path counts are not equated with equal CPU/work or remaining Native time.",
+    "BP": "Three actual strict n35Seed1 pairs independently match original input/Seed/cap/environment. B has lowerU, higher qualifiedL and smaller absolute/relative gaps in all3, with U reductions54.6041044%,34.3272791%,19.9022990%. No new certificate or new physical input follows. This group alone is default-method benchmark evidence.",
+    "CP": "Candidate comparison is separate. C also improves U/L/bothgaps against these3P endpoints, with U reductions37.8842368%,47.0154276%,21.2390020%; B already improves eachP endpoint. C adds betterU thanB only on B35/X35Seed1 while losingL. These are not additional B/P wins or a candidate promotion. No M/PSeed2 or historical long-cap P cells are imported."
+  },
+  "decision_review": {
+    "status": "PASS",
+    "decision": "Close further optimization of fixedC169; retain initialization/local paid positives and every adverse endpoint/time. B/GI-TBC uniform default; C166/D167/C169 default off.",
+    "basis": "No n35 role retains finalU gains at both additionalSeeds; four of six U comparisons regress, only one absolute gap improves and C20 proof time increases at bothSeeds. Local B35/X35Seed1 primal positives are acknowledged rather than erased. This supports the actual finite close decision without adding weights/Hseeds/thirdNativeSeed/longerCaps/newneighborhood/successorRound.",
+    "external_validity": "Four inputs and NativeSeeds1/2 were known/exposed, with roles selected from existing positive/protection signals. NativeSeed changes search trajectories rather than H randomness. No holdout/generalization/statistical significance/population/long-budget claim is made."
+  },
+  "manuscript_review": {
+    "status": "PASS",
+    "source_assembly_matches_current_body": true,
+    "main_table7": "One complete compact8-row B/C/M/P endpoint table in computational Section4.6, cap600s, M/PSeed1-only and missingcells marked. Negative U/L/gap/C20proof results and default-off decision are explicit nearby.",
+    "historical_evidence": "Old R169Seed0 300/600s study remains separately identified in4.6 and S169, with all7H screens,7H costs,18paid endpoints and18cost rows independently reconciled. Old B/P tables and adverse controls remain. No pooling old C20Seed0cap300 with newcap600 is implied.",
+    "new_supplement": "S170 preserves all22 endpoints/costs,8C/B differences,9mechanism/benchmark differences and3initialization decompositions; exact signed gaps remain in machine tables while display gaps are nonnegative.",
+    "crossreferences": "Main table numbers1..11 unique; resource bounds nowTable9 and actual AppendixA.10 referencesTable9. S169/S170 links and citation resolution are intact.",
+    "conclusions": "No paid table remains; mixed/negative C169 decision retained. Actual Figure3 precedes Conclusions and Appendix follows cleanly.",
+    "attribution_and_journal_claims": "Paquete-Stutzle prior art is explicit in4.6 and S169 with a rendered bibliography entry. HGA-TGBC and standard formulation lineage remain attributed. Author memo appropriately treats same-budget B/P as bounded EJOR/TRE computational evidence, with no new OR principle/theorem or generally faster candidate claim."
+  },
+  "prior_art_direct_read": {
+    "URL": "https://iridia.ulb.ac.be/~stuetzle/publications/EMO03.pdf",
+    "version": "Live author-hosted15-page manuscript opened independently2026-11-17",
+    "relevant_sections": [
+      "2",
+      "Algorithm1",
+      "4.1",
+      "4.2"
+    ],
+    "relationship": "The source varies weighted aggregations, chains local optima and maintains an approximate Pareto archive. Current C169 instead adds independent completeH paths for a fixed original evaluation objective. Generic scalarization/restarts/solution transfer are not presented as new. This is a directed attribution check, not a new literature survey.",
+    "mathematical_glyph_extraction_limitation": "The web extraction corrupts some formula glyphs; interpretation uses clear algorithm definitions and surrounding implementation prose rather than reconstructing missing symbols."
+  },
+  "CSV_review": {
+    "status": "PASS",
+    "records": 8,
+    "columns": 28,
+    "UTF8_BOM": true,
+    "strict_new_BP_pairs": 3,
+    "unpaired_NA_P": 5,
+    "candidate_rows_in_default_master": 0,
+    "new_physical_inputs": 0,
+    "actual_master_rows_appended": 0,
+    "base118_available_in_bounded_lookup": false,
+    "bounded_lookup": {
+      "path": "results/unified_exact_round170/review/research_review_base_lookup.json",
+      "bytes": 1044,
+      "SHA256": "6d1c3d327b10ca9dd787c0a2e1bc7241d72d5893e1d0b580561753107a6b42aa"
+    },
+    "interpretation": "No126master or missing historical row is fabricated. Pair counts are separate from per-indicator advantages. CERT times useT_cert_process; OPEN gaps usepercent. Sources/runIDs/Seed/cap and fixedR163metadata links are preserved."
+  },
+  "cost_claim_review": {
+    "status": "PASS",
+    "snapshot_UTC": "2026-11-17T08:48:52.948898+00:00",
+    "process_outer_seconds": 12199.509713100735,
+    "science_gross_wall_seconds": 50329.94889879227,
+    "inactive_postcompletion_gap_seconds": 37639.58786392212,
+    "inactive_interval_hms": "10h27m19.588s",
+    "science_charged_snapshot_seconds": 12690.361034870148,
+    "capacity_seconds": 21600,
+    "basis": "Current report explicitly discloses grosswall including inactive postcomputation interruption and charges the occupied segments before/after it. It claims no six-hour grosswall delivery. Nested H/Native/model work is not double-added; post-return audit is separate from certificate time.",
+    "closeout_boundary": "This is the bound cost snapshot during closeout, not a claim that later ordinary Git/public-recovery I/O or final closure transcription had already occurred. Final closeout must continue charging occupied science time under the stated policy."
+  },
+  "PDF_visual_review": {
+    "status": "PASS",
+    "actual_visual_inspection": true,
+    "documents": [
+      {
+        "document": {
+          "path": "results/unified_exact_round137/manuscript.pdf",
+          "bytes": 1102528,
+          "SHA256": "fb6aa67f5f94c745d5df440dc2247c96774d585df1d4036cd59fc5832efe96d5"
+        },
+        "page_count": 55,
+        "actual_PNG_inspection": true,
+        "viewed_PNGs": [
+          {
+            "page": 1,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-001.png",
+            "bytes": 110928,
+            "SHA256": "b998b7b8eccb7a033c1017e8d821dbbbd6ce6d2fdc997f03a82c770f964735c5"
+          },
+          {
+            "page": 2,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-002.png",
+            "bytes": 68796,
+            "SHA256": "ed6b0ad17f9662b3ebe2c99414ec5f1d804e8dc3058aaf9ccc896a85ac5cd32e"
+          },
+          {
+            "page": 17,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-017.png",
+            "bytes": 309877,
+            "SHA256": "5219d101e5b2d2291be4c0365179e59b802f20ec4a41620ba00d24954b38c0fb"
+          },
+          {
+            "page": 18,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-018.png",
+            "bytes": 322069,
+            "SHA256": "3292c5e3908719610404d6e9e56833d0c5cccf7da614d3bfc55796e40f134e6e"
+          },
+          {
+            "page": 19,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-019.png",
+            "bytes": 278726,
+            "SHA256": "a4b61af3e6883fe169ded23d0abd0b2de574ecaf3cfa827a1d9d87ae29634aab"
+          },
+          {
+            "page": 20,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-020.png",
+            "bytes": 276393,
+            "SHA256": "16d4324efbbc057209c87cc321c81f234af6e067f191f3d971e17c1c17360d13"
+          },
+          {
+            "page": 24,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-024.png",
+            "bytes": 148033,
+            "SHA256": "5107e5bdc165c2640722339a11e208833fd95d17d360d73004c304fbb6eaba5e"
+          },
+          {
+            "page": 25,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-025.png",
+            "bytes": 299272,
+            "SHA256": "927fbb575e97e42920ea895b5288c635037c8b81eefaa60ba0b444889047a616"
+          },
+          {
+            "page": 26,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-026.png",
+            "bytes": 284750,
+            "SHA256": "cc3791f8e049b2d4ed109b65966b8742521cfb93dfe6e85dca958b90b46f2767"
+          },
+          {
+            "page": 39,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-039.png",
+            "bytes": 363315,
+            "SHA256": "615520652e2d7fc5e7f829271727e0c235db9fe3d02c5c10b8c8a98b1c82354b"
+          },
+          {
+            "page": 40,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-040.png",
+            "bytes": 114837,
+            "SHA256": "9fe08d239a60075ff61e88e273011cf7d86b07d8dda98fc5e95175c035db0c96"
+          },
+          {
+            "page": 54,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-054.png",
+            "bytes": 289528,
+            "SHA256": "260e88cdd01a563920193b651f5615a47edeeae21c147b60a111b248e2324828"
+          },
+          {
+            "page": 55,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_manuscript_fb6aa67f5f94\\page-055.png",
+            "bytes": 269221,
+            "SHA256": "668863487b40eac0c952b5b7e95d3dfe9a5e9b3b9f0a2ad805aea7276ad2ae86"
+          }
+        ]
+      },
+      {
+        "document": {
+          "path": "results/unified_exact_round137/supplement.pdf",
+          "bytes": 457501,
+          "SHA256": "7a399df16b72852064ba23f377a87c0373aa8549693284fdedca80f604d757b5"
+        },
+        "page_count": 62,
+        "actual_PNG_inspection": true,
+        "viewed_PNGs": [
+          {
+            "page": 55,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_supplement_7a399df16b72\\page-055.png",
+            "bytes": 319363,
+            "SHA256": "156129f1637814b45099fe80d6efb0f76ccd3bd0ae9356e5f1a2b98ed6479929"
+          },
+          {
+            "page": 56,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_supplement_7a399df16b72\\page-056.png",
+            "bytes": 236607,
+            "SHA256": "d6608794005bcd0c92db479a176985358264a185f039ea7f73af5a48ac853b0d"
+          },
+          {
+            "page": 57,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_supplement_7a399df16b72\\page-057.png",
+            "bytes": 164688,
+            "SHA256": "ac58e078f5ee375699b3a86885f5792a544bb132b80a2df6bfc91d93b0fc321f"
+          },
+          {
+            "page": 58,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_supplement_7a399df16b72\\page-058.png",
+            "bytes": 187947,
+            "SHA256": "b55bee3a9bc596c92bce0baa46f9782a8dee91d2d4c47cb8fc7f40f84fff82a9"
+          },
+          {
+            "page": 59,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_supplement_7a399df16b72\\page-059.png",
+            "bytes": 284658,
+            "SHA256": "e7b1e137c0cbeda5e8de26a58d227d438c9cfcb24fcc4849dd7353374d2bd88f"
+          },
+          {
+            "page": 60,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_supplement_7a399df16b72\\page-060.png",
+            "bytes": 288108,
+            "SHA256": "b2d887237f0f2e11ebf7fb9e9f40faff48d17ba0b23a6d9cef3116165f54c597"
+          },
+          {
+            "page": 61,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_supplement_7a399df16b72\\page-061.png",
+            "bytes": 202186,
+            "SHA256": "efacc1373581c284249e7dabf967b6d6a1f602d22f651ca3aa8b0677638d8239"
+          },
+          {
+            "page": 62,
+            "path": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\QA_supplement_7a399df16b72\\page-062.png",
+            "bytes": 95525,
+            "SHA256": "702bb8d349ee9c5e9bae76606f3c10e27f0341a129e823a8064ca433b773bb97"
+          }
+        ]
+      }
+    ],
+    "build_sources_and_outputs_match_actual_bytes": true,
+    "main_readback": "Actual new main18/19 retain4.6, completeTable7, known-input/Seed/cap/M/P limits, all adverse U/L/gap and C20times, finite close decision. Adjacent17/20 are clean. Figure3on24 precedes fullConclusions25 and Appendix26. Appendix40 usesTable9; references54/55 render author names/diacritics/URLs normally.",
+    "supplement_readback": "Actual pages55/56 retain adjacentS168 and attributedS169. Pages56/57/58 contain all S169tables intact. Page59 holds all22new endpoint rows and all22cost rows with their captions. Page60 holds all8C/B,9C/M-B/P-C/P and3initialization rows. Pages60/61 preserve fullnegative narratives/limits/closure. Page62 references render correctly.",
+    "layout_checks": {
+      "overlap": false,
+      "clipping": false,
+      "missing_rows": false,
+      "orphaned_table_captions": false,
+      "blank_pages_in_viewed_set": false,
+      "replacement_glyphs": false,
+      "unresolved_citations": false,
+      "figure_interrupts_conclusions": false
+    }
+  },
+  "limitations": "PASS applies to this independent research/manuscript scope and the bound actual files/pages, not human peer review, new mathematical optimization, the separate math/execution reviews, final external scientific acceptance, or public Git delivery/recovery. Only own review outputs/scratch were written.",
+  "C20_independent_certification_time_ratios": [
+    {
+      "Native_Seed": 1,
+      "C_over_B_T_cert_process": 1.0065673383903053
+    },
+    {
+      "Native_Seed": 2,
+      "C_over_B_T_cert_process": 1.3322436370612651
+    }
+  ]
+}

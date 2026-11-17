@@ -1515,3 +1515,143 @@ The inputs and H seeds were fixed before the screen. The first six known roles a
 | R163-X35-S/M | 0.6354323 | 0.9675659 | 3 / 2 | 592.081 | 1437.53053 | 949 |
 
 The full fixed record, raw carrier/member map, exact source/PE/DLL, qualifications, structural comparisons and decision are in [the Round169 report](https://github.com/yifanXovo/TailoredExact/blob/codex/round169-primal-reweight/results/unified_exact_round169/final_report.md). All six current inputs are exposed and only Native Seed 0 is measured. No new P run is made, and M/C are excluded from the GI-TBC master CSV.
+
+
+## S170 Fixed paid initialization and matched cold controls
+
+Four already exposed original problems are selected from R169's three n35
+positive signals and C20 proof-cost protection. All positions use the same
+measured PE, Threads=1, a 600 s shared process cap and 6 s shutdown margin.
+Native Seeds 1/2 were exposed previously; they are finite search trajectories,
+not independent physical or H-randomness samples. M/P occur on n35 Seed 1
+only. B remains default; C166/D167/C169 remain off. The R169 Seed 0 study in
+S169 has separate identity and C20's different 300 s cap.
+
+**Table S170.1. All 22 qualified original-objective endpoints.** Initial U is
+the arm's own selected complete-H original F; P is cold. Gap is a percentage.
+Process seconds are T_cert_process only for CERT and censored endpoints for
+OPEN. Exact signed gaps and binary64 values remain in the machine table.
+
+| Run: role/Seed/arm | Initial U | True U | Qualified L | Gap % | State | Process s |
+|---|---|---|---|---|---|---|
+| C20/1/B | 0.308606527 | 0.191280592 | 0.191280592 | 5.80415928e-14 | CERT | 369.447218 |
+| C20/1/C | 0.290033684 | 0.191280592 | 0.191280592 | 1.45103982e-14 | CERT | 371.873503 |
+| C35/1/M | 0.174490204 | 0.111923531 | 0.0144529703 | 87.0867456 | OPEN | 594.158615 |
+| C35/1/P | - | 0.246549891 | 0.00482444178 | 98.0432189 | OPEN | 594.163482 |
+| C35/1/C | 0.155165425 | 0.153146346 | 0.015482253 | 89.8905502 | OPEN | 594.152694 |
+| C35/1/B | 0.174490204 | 0.111923531 | 0.0144932971 | 87.0507149 | OPEN | 594.154837 |
+| B35/1/C | 0.206739099 | 0.168556839 | 0.117812883 | 30.1049523 | OPEN | 594.166508 |
+| B35/1/B | 0.219720788 | 0.208920932 | 0.118979021 | 43.0506938 | OPEN | 594.144157 |
+| B35/1/P | - | 0.318124373 | 0.114075087 | 64.1413557 | OPEN | 594.153555 |
+| B35/1/M | 0.219720788 | 0.208920932 | 0.118979021 | 43.0506938 | OPEN | 594.195893 |
+| X35/1/P | - | 0.59934739 | 0.348077713 | 41.9238795 | OPEN | 594.131993 |
+| X35/1/M | 0.600869281 | 0.48006348 | 0.360940606 | 24.8139839 | OPEN | 594.149126 |
+| X35/1/B | 0.600869281 | 0.48006348 | 0.361009691 | 24.7995931 | OPEN | 594.137334 |
+| X35/1/C | 0.507998809 | 0.472051986 | 0.350651729 | 25.7175609 | OPEN | 594.162849 |
+| C20/2/C | 0.290033684 | 0.191280592 | 0.191280592 | 1.88635177e-13 | CERT | 436.063731 |
+| C20/2/B | 0.308606527 | 0.191280592 | 0.191280592 | 0 | CERT | 327.315304 |
+| C35/2/B | 0.174490204 | 0.115716279 | 0.0152415452 | 86.8285212 | OPEN | 594.15773 |
+| C35/2/C | 0.155165425 | 0.120416911 | 0.015694611 | 86.9664395 | OPEN | 594.163563 |
+| B35/2/C | 0.206739099 | 0.192502133 | 0.119373562 | 37.9884469 | OPEN | 594.152581 |
+| B35/2/B | 0.219720788 | 0.174276652 | 0.118325669 | 32.1046926 | OPEN | 594.188498 |
+| X35/2/B | 0.600869281 | 0.468815116 | 0.367730114 | 21.5618051 | OPEN | 594.13988 |
+| X35/2/C | 0.507998809 | 0.473422951 | 0.366820155 | 22.5174541 | OPEN | 594.136661 |
+
+
+**Table S170.2. All 22 paid H/model/Native/audit expenses.** Build is the
+reported tailored C++ build timer; P has no separate measured build timer.
+Native/H/build overlap the process total. Audit is independent post-return
+reading, reported separately from certification; its full process and any
+reader failures are accounted for in the cost report.
+
+| Run | H s | Build s | LP/MIP | Native s | Work | Nodes | Audit s |
+|---|---|---|---|---|---|---|---|
+| C20/1/B | 0.3535513 | 0.2894667 | 3/1 | 368.186 | 631.079806 | 25760 | 3.2452306 |
+| C20/1/C | 1.1064294 | 0.2611721 | 3/1 | 370.198 | 609.086808 | 39907 | 3.8820087 |
+| C35/1/M | 6.3581985 | 1.0512529 | 3/1 | 586.302 | 1280.14344 | 2575 | 2.9204799 |
+| C35/1/P | 0 | - | 0/1 | 593.857 | 1174.9079 | 2184 | 0.4582029 |
+| C35/1/C | 6.0139552 | 1.0994509 | 3/1 | 586.576 | 1313.04853 | 744 | 2.9999746 |
+| C35/1/B | 2.1643979 | 1.0605453 | 3/1 | 590.481 | 1293.55752 | 2578 | 3.0694006 |
+| B35/1/C | 5.5875145 | 1.107171 | 3/1 | 586.988 | 1179.88179 | 596 | 3.0181859 |
+| B35/1/B | 2.051676 | 1.0900337 | 3/1 | 590.563 | 1315.81979 | 544 | 2.9254627 |
+| B35/1/P | 0 | - | 0/1 | 593.838 | 1093.00631 | 2358 | 0.4444943 |
+| B35/1/M | 5.447834 | 1.0622845 | 3/1 | 587.225 | 1307.14424 | 543 | 2.928657 |
+| X35/1/P | 0 | - | 0/1 | 593.855 | 1077.15702 | 3128 | 0.4121599 |
+| X35/1/M | 0.6392296 | 1.008222 | 3/2 | 591.999 | 1403.55909 | 1129 | 2.7676375 |
+| X35/1/B | 0.2140562 | 0.984185 | 3/2 | 592.491 | 1478.55098 | 1292 | 2.7671971 |
+| X35/1/C | 0.610448 | 0.9937934 | 3/2 | 592.051 | 1398.77901 | 918 | 2.6725049 |
+| C20/2/C | 0.9721825 | 0.2441089 | 3/1 | 434.539 | 816.914298 | 32177 | 2.5381646 |
+| C20/2/B | 0.3157041 | 0.2683379 | 3/1 | 326.451 | 592.525276 | 33959 | 3.4003759 |
+| C35/2/B | 2.0635811 | 1.0106143 | 3/1 | 590.651 | 1388.13394 | 587 | 2.823561 |
+| C35/2/C | 5.7763287 | 1.0046958 | 3/1 | 586.928 | 1374.13074 | 629 | 2.8306516 |
+| B35/2/C | 5.3519032 | 0.997044 | 3/1 | 587.338 | 1369.95974 | 567 | 2.7671983 |
+| B35/2/B | 1.9179995 | 0.9962902 | 3/1 | 590.843 | 1358.82407 | 563 | 2.8462917 |
+| X35/2/B | 0.212356 | 1.0093577 | 3/2 | 592.409 | 1461.70636 | 1115 | 2.7221719 |
+| X35/2/C | 0.6138078 | 0.9617886 | 3/2 | 592.105 | 1454.87316 | 1152 | 2.6906884 |
+
+
+**Table S170.3. C/B paired differences on both Native Seeds.** U differences
+and percentages use B as reference; lower and absolute gap differences remain
+separate. Joint-CERT process time ratio is absent for OPEN pairs.
+
+| Role/Seed | Delta U (%) | Delta L | Delta abs. gap | C/B T_cert |
+|---|---|---|---|---|
+| C20/1 | 0 (0%) | 8.32667268e-17 | -8.32667268e-17 | 1.00656734 |
+| C35/1 | 0.0412228152 (36.8312319%) | 0.000988955844 | 0.0402338594 | - |
+| B35/1 | -0.0403640928 (-19.3202723%) | -0.00116613826 | -0.0391979546 | - |
+| X35/1 | -0.00801149435 (-1.66884062%) | -0.0103579619 | 0.00234646755 | - |
+| C20/2 | 0 (0%) | -4.16333634e-16 | 3.60822483e-16 | 1.33224364 |
+| C35/2 | 0.00470063266 (4.06220518%) | 0.000453065878 | 0.00424756679 | - |
+| B35/2 | 0.0182254805 (10.4577866%) | 0.00104789344 | 0.017177587 | - |
+| X35/2 | 0.00460783503 (0.982868272%) | -0.000909958933 | 0.00551779396 | - |
+
+
+**Table S170.4. Seed 1 mechanism and benchmark comparisons.** Each difference
+is the first arm minus the named reference. B/P updates the default-method
+evidence. C/P is candidate-only and uses no across-arm endpoint splicing.
+There are no M/P Seed 2 observations.
+
+| Role | Comparison | Delta U | Delta U % | Delta L | Delta abs. gap |
+|---|---|---|---|---|---|
+| C35 | C/M | 0.0412228152 | 36.8312319 | 0.0010292827 | 0.0401935325 |
+| B35 | C/M | -0.0403640928 | -19.3202723 | -0.00116613826 | -0.0391979546 |
+| X35 | C/M | -0.00801149435 | -1.66884062 | -0.0102888768 | 0.00227738246 |
+| C35 | B/P | -0.13462636 | -54.6041044 | 0.00966885535 | -0.144295215 |
+| B35 | B/P | -0.109203442 | -34.3272791 | 0.00490393378 | -0.114107375 |
+| X35 | B/P | -0.11928391 | -19.902299 | 0.0129319781 | -0.132215888 |
+| C35 | C/P | -0.0934035444 | -37.8842368 | 0.0106578112 | -0.104061356 |
+| B35 | C/P | -0.149567534 | -47.0154276 | 0.00373779552 | -0.15330533 |
+| X35 | C/P | -0.127295404 | -21.239002 | 0.00257401622 | -0.12986942 |
+
+
+**Table S170.5. Independently paid Seed 1 initialization decomposition.**
+Delta restart = F_B-F_M; Delta weight = F_M-F_C. Equal finite call counts
+do not imply equal actual H work or equal remaining Native time.
+
+| Role | B initial U | M initial U | C initial U | Delta restart | Delta weight |
+|---|---|---|---|---|---|
+| C35 | 0.174490204 | 0.174490204 | 0.155165425 | 0 | 0.0193247782 |
+| B35 | 0.219720788 | 0.219720788 | 0.206739099 | 0 | 0.0129816883 |
+| X35 | 0.600869281 | 0.600869281 | 0.507998809 | 0 | 0.0928704721 |
+
+
+C35 has U_C/U_B=0.153146346/0.111923531 at Seed 1 and 0.120416911/0.115716279 at Seed 2: U worsens by 36.83% and 4.06%, despite qualified L rising by 0.000988956 and 0.000453066. B35 Seed 1 improves U from 0.208920932 to 0.168556839 and absolute gap from 0.089941911 to 0.050743956, while L falls from 0.118979021 to 0.117812883. At Seed 2 B35 instead worsens U from 0.174276652 to 0.192502133 and gap from 0.055950983 to 0.073128570, although L rises by 0.001047893. X35 Seed 1 lowers U by 1.67% but loses 0.010357962 in L, increasing absolute gap; Seed 2 worsens both U and L. Thus two of six n35 U differences favor C and four favor B at the frozen materiality scale; this is a descriptive count, not statistical inference. C20 B/C certificate process times are 369.447218/371.873503 s at Seed 1 and 327.315304/436.063731 s at Seed 2, with the same qualified original optimum 0.191280592. Its observed C proof-cost regression persists and becomes substantial at Seed 2.
+
+At Seed 1, M retains exactly B's selected original initial U and final U on all three n35 roles, with the same base fleet and first actual model. Delta_restart is zero; Delta_weight is 0.0193247782, 0.0129816883 and 0.0928704721 for C35/B35/X35. C's paid final U is nevertheless 36.83% worse than M on C35, 19.32% better on B35 and 1.67% better on X35. The two Seed 1 primal gains therefore go beyond the observed original-weight restarts, but do not survive as consistent Seed 1/2 C/B gains. Equal extra-H call counts do not imply equal work or equal remaining Native time; M's small C35/X35 lower differences and its Work/nodes are retained.
+
+All three new strictly matched Seed 1 B/P pairs favor B in U, qualified L and absolute/relative gap, with no new certificate. C35 B/P is U 0.111923531/0.246549891 and L 0.014493297/0.004824442; B35 is U 0.208920932/0.318124373 and L 0.118979021/0.114075087; X35 is U 0.480063480/0.599347390 and L 0.361009691/0.348077713. B's U reductions relative to P are 54.60%, 34.33% and 19.90%. These are three new same-budget run-pair advantage observations on already exposed physical inputs, not three new physical instances, population wins or certificate-speed comparisons.
+
+Separately, C also has lower U, higher qualified L and smaller gaps than the same three cold P runs: C/P U reductions are 37.88%, 47.02% and 21.24% on C35/B35/X35. C adds a better Seed 1 U than B on B35 and X35, at weaker L, but loses to B on C35. B already improves all those P endpoints. C/P therefore supplies bounded candidate endpoint evidence, not a promotion of C, a new certificate or extra default-method B/P wins. No M/P Seed 2 cells exist and no historical long-cap P is borrowed.
+
+Close further optimization of the fixed C169 recipe. Preserve its correctly paid complete-H initialization improvements and the B35/X35 Seed 1 primal positives as local research findings, together with every adverse U/L/gap and C20 time result. Do not promote it as a candidate confirmed across these two additional Native Seeds. B/GI-TBC remains uniform default and C166/D167/C169 remain default off. This closes this recipe without adding weights, H seeds, a third Native Seed, longer caps, new neighborhoods or a successor round.
+
+The fixed materiality scale max(1e-6, 0.001 max(abs(U_reference), 1e-12)) is
+descriptive, not significance or a qualification rule. Complete H includes
+joint construction, 24 random orders, the constructed 25th seed, interroute
+decoded descent and R83 physical closure. Each extra path starts from the
+original input. Only original-target reverified fleet/UB/Start enters the
+unchanged exact layer; no foreign lower, cutoff, domain, tree or certificate
+is transferred. Inclusion of base guarantees initialization, not terminal
+dominance. Full path/control/parameter/fleet/Start/coverage and cost evidence
+is available in [the fixed confirmation report](https://github.com/yifanXovo/TailoredExact/blob/codex/round170-reweight-confirmation/results/unified_exact_round170/final_report.md)
+and its separate comparison CSVs. Global first-hit timing is unobserved.

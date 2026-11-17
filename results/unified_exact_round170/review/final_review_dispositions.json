@@ -1,0 +1,36 @@
+{
+  "UTC": "2026-11-17T09:13:34.883209+00:00",
+  "status": "PASS",
+  "actual_independent_agents": true,
+  "human_journal_peer_review": false,
+  "reviews": [
+    {
+      "file": "math_review_final.json",
+      "status": "PASS",
+      "reviewer_canonical_id": "/root/math_review",
+      "review_seconds": 580.82554936409,
+      "Optimize": 0,
+      "H_calls": 0
+    },
+    {
+      "file": "execution_review_final.json",
+      "status": "PASS",
+      "review_seconds": 829.3774960041046
+    },
+    {
+      "file": "research_review_final.json",
+      "status": "PASS",
+      "Optimize": 0,
+      "H_calls": 0,
+      "review_seconds": 906.741112
+    }
+  ],
+  "corrections": [
+    "P reader uses qualified cold compact reference rather than B-only one-hot/AP contract; no solver rerun",
+    "Execution reviewer corrected target-MIP count and post-mapping TimeLimit interpretation; no production change",
+    "New prose spacing and pending-figure ordering corrected and actual pass02 PDFs rechecked",
+    "Report thousands separator fixed without PDF/source-data changes"
+  ],
+  "unresolved_findings": [],
+  "Optimize": 0
+}
