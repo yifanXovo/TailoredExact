@@ -1,0 +1,4673 @@
+{
+  "UTC": "2026-11-17T21:31:57.969477+00:00",
+  "commit": "f14a054627f79dba61cd5ffa00d3280499826335",
+  "manifests": [
+    {
+      "path": "results/unified_exact_round109/input_manifest.json",
+      "SHA256": "1f701266c2e1947ea5e9094a411b4c21751164a5a02125f576282ec660b2d80d"
+    },
+    {
+      "path": "results/unified_exact_round110/input_manifest.json",
+      "SHA256": "1f701266c2e1947ea5e9094a411b4c21751164a5a02125f576282ec660b2d80d"
+    },
+    {
+      "path": "results/unified_exact_round116/input_manifest.json",
+      "SHA256": "572a553e584c4a0bb02aafa55e01b1801950fc6ec30fe6ce327f0ecfada63557"
+    },
+    {
+      "path": "results/unified_exact_round122/input_manifest.json",
+      "SHA256": "7d9d2de6a7038a6aa6acfd08bf7b7bea266c4a16c52303a8d11a9377b5062d50"
+    },
+    {
+      "path": "results/unified_exact_round123/input_manifest.json",
+      "SHA256": "52fc171ad641a4269240b57f8865806e8b4ad8d76d6aa4c3aee04a647d4bcb31"
+    },
+    {
+      "path": "results/unified_exact_round130/input_manifest.json",
+      "SHA256": "a37348283b1af2289b301881305e2d3d1d3128a0402ed8da3dabcbf6f1b63353"
+    },
+    {
+      "path": "results/unified_exact_round131/input_manifest.json",
+      "SHA256": "379c1a8101d488ea099c958d35a0bcc070495350ea67d637e5dec81e4f6117e3"
+    },
+    {
+      "path": "results/unified_exact_round132/input_manifest.json",
+      "SHA256": "6824ba61683be5d7407035759168c11394dc0cb8166174485d57e38d6b7fde09"
+    },
+    {
+      "path": "results/unified_exact_round137/input_manifest.json",
+      "SHA256": "39412c61bbad754eca2925e1d24e01fc73cbde38efff33c6b007c023d600cf2a"
+    },
+    {
+      "path": "results/unified_exact_round163/input_manifest.json",
+      "SHA256": "166bc5b463fb1dd2ad5c7819b5d31c86f706abf6ffd2a11469585ca623eedb1e"
+    },
+    {
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+      "SHA256": "2e4fbf46a04c0779d7946016aa7ecd05d9531fc96a76cd8a3c3b6283f2c232ef"
+    }
+  ],
+  "distinct_text_inputs": 154,
+  "parsed_inputs": 152,
+  "n50_inputs": 94,
+  "round58_V50_cases": 10,
+  "normalized_base_keys": {
+    "960f5693415b32ce9bc419f098fe58d48355468042a20ac5831dcbfd4b8fc5e7": [
+      {
+        "input": "reference/round109_geographic/G20-C1.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G20-C1",
+        "n": 20,
+        "checked_input_SHA256": "27b5e90ef70a1bf574bcb860ac33a0365920d8f832cad809ca2a6621b93cad09",
+        "full_key": "73b4ae164c253b48f774a5b95c11426e1d9faf14f39e605f07c3fa0822687f8e"
+      },
+      {
+        "input": "reference/round109_geographic/G20-C1.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G20-C1",
+        "n": 20,
+        "checked_input_SHA256": "27b5e90ef70a1bf574bcb860ac33a0365920d8f832cad809ca2a6621b93cad09",
+        "full_key": "73b4ae164c253b48f774a5b95c11426e1d9faf14f39e605f07c3fa0822687f8e"
+      }
+    ],
+    "cac3ac2b4b11f24a2a924ab036368a5151a71bac272762023ab7131950c4246e": [
+      {
+        "input": "reference/round109_geographic/G20-C2.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G20-C2",
+        "n": 20,
+        "checked_input_SHA256": "180c30ab2e70a9c6afdc9c34744e50e86d09a234ceb55fdc2f52eb391e82aa1e",
+        "full_key": "47488ef0ca32fdedc40231b7182adb4ac08d8545f7a8264488382a5cd3825772"
+      },
+      {
+        "input": "reference/round109_geographic/G20-C2.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G20-C2",
+        "n": 20,
+        "checked_input_SHA256": "180c30ab2e70a9c6afdc9c34744e50e86d09a234ceb55fdc2f52eb391e82aa1e",
+        "full_key": "47488ef0ca32fdedc40231b7182adb4ac08d8545f7a8264488382a5cd3825772"
+      }
+    ],
+    "f24774a83ba1e7eb17780d165e40496859bb589d19150a2eadb8e0eeeeaeeb33": [
+      {
+        "input": "reference/round109_geographic/G20-R1.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G20-R1",
+        "n": 20,
+        "checked_input_SHA256": "8e65808b3ccdb07f099a42a8c075cf28d0858d25b228dfba1fc19ceeea0526ff",
+        "full_key": "7ff67476fabfd62ba72f596e53fbc246f64888d189d9588665a04a41292adaef"
+      },
+      {
+        "input": "reference/round109_geographic/G20-R1.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G20-R1",
+        "n": 20,
+        "checked_input_SHA256": "8e65808b3ccdb07f099a42a8c075cf28d0858d25b228dfba1fc19ceeea0526ff",
+        "full_key": "7ff67476fabfd62ba72f596e53fbc246f64888d189d9588665a04a41292adaef"
+      }
+    ],
+    "7de8d2bd06c08025d1ed28fa66e8e95da21a7ca24fa94f7548dbc1ecd64e7a3a": [
+      {
+        "input": "reference/round109_geographic/G20-R2.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G20-R2",
+        "n": 20,
+        "checked_input_SHA256": "5848338342898969c94d4391f4bfcb83c3a57ee227b8d2fd3db185693e8c8716",
+        "full_key": "8ea9a2fbc130918d120124aae266a8a0f70142b42c8edcaa8ed76902140283fd"
+      },
+      {
+        "input": "reference/round109_geographic/G20-R2.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G20-R2",
+        "n": 20,
+        "checked_input_SHA256": "5848338342898969c94d4391f4bfcb83c3a57ee227b8d2fd3db185693e8c8716",
+        "full_key": "8ea9a2fbc130918d120124aae266a8a0f70142b42c8edcaa8ed76902140283fd"
+      }
+    ],
+    "63448a44520231e0aea7d27233d7a81192c6a60f584357050b43c72e89d324e2": [
+      {
+        "input": "reference/round109_geographic/G50-C1.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G50-C1",
+        "n": 50,
+        "checked_input_SHA256": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+        "full_key": "c58d8b85afac927e6913a08be2eb448bb55f267d623f0b4edc6046afe5870501"
+      },
+      {
+        "input": "reference/round109_geographic/G50-C1.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G50-C1",
+        "n": 50,
+        "checked_input_SHA256": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+        "full_key": "c58d8b85afac927e6913a08be2eb448bb55f267d623f0b4edc6046afe5870501"
+      }
+    ],
+    "37d5dec2eed21d6673a58f1d52c91c60b80315951875f74991f9b85dcf1c94ff": [
+      {
+        "input": "reference/round109_geographic/G50-C2.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G50-C2",
+        "n": 50,
+        "checked_input_SHA256": "64d70f9b0a932594bb5cb81430e33fe40e207f60d34d5d594748c04ebdf4cdc3",
+        "full_key": "807ca8994150dc137c58dabd03dcfa42b790422acaf33885bf9b04140937c129"
+      },
+      {
+        "input": "reference/round109_geographic/G50-C2.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G50-C2",
+        "n": 50,
+        "checked_input_SHA256": "64d70f9b0a932594bb5cb81430e33fe40e207f60d34d5d594748c04ebdf4cdc3",
+        "full_key": "807ca8994150dc137c58dabd03dcfa42b790422acaf33885bf9b04140937c129"
+      }
+    ],
+    "b711fd3d093bd512dbc887215f402e09da5410b027b8a1ef0dcbeccc5cbd16ec": [
+      {
+        "input": "reference/round109_geographic/G50-R1.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G50-R1",
+        "n": 50,
+        "checked_input_SHA256": "c7a5200b5a93095304ffc82f404e6a3e9548962d2cf5cd60ab34d64327b71f47",
+        "full_key": "956d303f0e85cc3da5c65a292cef756f62450fe47162170bd2a821fc297a6f49"
+      },
+      {
+        "input": "reference/round109_geographic/G50-R1.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G50-R1",
+        "n": 50,
+        "checked_input_SHA256": "c7a5200b5a93095304ffc82f404e6a3e9548962d2cf5cd60ab34d64327b71f47",
+        "full_key": "956d303f0e85cc3da5c65a292cef756f62450fe47162170bd2a821fc297a6f49"
+      }
+    ],
+    "fe46fd6eda7bb3bfb6e35d4b0f390ad3f65ae37abb2bf2edca92e7ab7331f5d4": [
+      {
+        "input": "reference/round109_geographic/G50-R2.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G50-R2",
+        "n": 50,
+        "checked_input_SHA256": "596886779e57c67b99d70385d59806b2e2d04619e2a07bf011e6d0fc5bdfc394",
+        "full_key": "fd75d0ef7ee6838bd41eba66e92cf65efd7e1782ce74e3cc627b0a9e59d61854"
+      },
+      {
+        "input": "reference/round109_geographic/G50-R2.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G50-R2",
+        "n": 50,
+        "checked_input_SHA256": "596886779e57c67b99d70385d59806b2e2d04619e2a07bf011e6d0fc5bdfc394",
+        "full_key": "fd75d0ef7ee6838bd41eba66e92cf65efd7e1782ce74e3cc627b0a9e59d61854"
+      }
+    ],
+    "4a20538a44758aeb4d620a321f093924c38171afc932d0facc9f2e4df9a1d1b3": [
+      {
+        "input": "reference/round109_geographic/G100-C1.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G100-C1",
+        "n": 100,
+        "checked_input_SHA256": "f70d9de06929576b62195f2df75c4394e9fd7b5eb8b2bfd20cc09a456101ef27",
+        "full_key": "41f0794cf9aaa14abb82a95379376060e6023433670e1fe1113938ba379e99df"
+      },
+      {
+        "input": "reference/round109_geographic/G100-C1.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G100-C1",
+        "n": 100,
+        "checked_input_SHA256": "f70d9de06929576b62195f2df75c4394e9fd7b5eb8b2bfd20cc09a456101ef27",
+        "full_key": "41f0794cf9aaa14abb82a95379376060e6023433670e1fe1113938ba379e99df"
+      }
+    ],
+    "8e2366b4b74fac9c9aba3a0d1557be5fceab4b5b814f352867dd8c2f087ebbab": [
+      {
+        "input": "reference/round109_geographic/G100-C2.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G100-C2",
+        "n": 100,
+        "checked_input_SHA256": "757ca48de0e7990a349a84c657a8164a2d56dff890741c8a98612960f3c7b454",
+        "full_key": "373550f2b90741c8275599d7179d8fa731b0db059c19993599ef14c865ff780b"
+      },
+      {
+        "input": "reference/round109_geographic/G100-C2.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G100-C2",
+        "n": 100,
+        "checked_input_SHA256": "757ca48de0e7990a349a84c657a8164a2d56dff890741c8a98612960f3c7b454",
+        "full_key": "373550f2b90741c8275599d7179d8fa731b0db059c19993599ef14c865ff780b"
+      }
+    ],
+    "45610960945cea9538e8d49f81b875bd1e7db2819b9ec338cb4aa7ccfec1ab1c": [
+      {
+        "input": "reference/round109_geographic/G100-R1.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G100-R1",
+        "n": 100,
+        "checked_input_SHA256": "5187c21b92ee3ec98757d08fa5481bee266657c616d0479b406c1d989698b94f",
+        "full_key": "e96abca6488aaed3e5ba90a2ede849beb606ec11091dfc4b6dd87d5c0562d5f2"
+      },
+      {
+        "input": "reference/round109_geographic/G100-R1.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G100-R1",
+        "n": 100,
+        "checked_input_SHA256": "5187c21b92ee3ec98757d08fa5481bee266657c616d0479b406c1d989698b94f",
+        "full_key": "e96abca6488aaed3e5ba90a2ede849beb606ec11091dfc4b6dd87d5c0562d5f2"
+      }
+    ],
+    "e5fa2e98fef74ad8e22d506a9039110916d7ff255c2eb739f1e9f902305cf0d3": [
+      {
+        "input": "reference/round109_geographic/G100-R2.txt",
+        "manifest": "results/unified_exact_round109/input_manifest.json",
+        "id": "G100-R2",
+        "n": 100,
+        "checked_input_SHA256": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+        "full_key": "8f3dffa4a9fc79151d7cb13783da6738ddb348f64ee9c8927667d568f79d8aa0"
+      },
+      {
+        "input": "reference/round109_geographic/G100-R2.txt",
+        "manifest": "results/unified_exact_round110/input_manifest.json",
+        "id": "G100-R2",
+        "n": 100,
+        "checked_input_SHA256": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+        "full_key": "8f3dffa4a9fc79151d7cb13783da6738ddb348f64ee9c8927667d568f79d8aa0"
+      }
+    ],
+    "3997b1e27f66e8dfe4772f22392eb2a8e40a1d668caae69ab32f2aa6ce2b7298": [
+      {
+        "input": "reference/round116_external/E20-C1.txt",
+        "manifest": "results/unified_exact_round116/input_manifest.json",
+        "id": "E20-C1",
+        "n": 20,
+        "checked_input_SHA256": "e323bfab7cff339f30b804df5d996d92e88b84d1671326d93dcd0c5f464ca521",
+        "full_key": "845d5877de4d8ad04346a84da856d3769fb77f8940cdad1c7eb59f86f092a314"
+      }
+    ],
+    "1268fde7f7c3b55459c24647660c100b5d082b138ba829b6be526aebcf0b733b": [
+      {
+        "input": "reference/round116_external/E20-R2.txt",
+        "manifest": "results/unified_exact_round116/input_manifest.json",
+        "id": "E20-R2",
+        "n": 20,
+        "checked_input_SHA256": "b7ab93b8decfac48f93581be4c96cc2da71bd2498d39fc7c9f49dd157523680e",
+        "full_key": "fe5fbc0967bcc3422bc1f68b343d86525bda93c6ceb15658fd14b637c2c08097"
+      }
+    ],
+    "b678a77a34652e7566fbb4ec49ad9df565c891d433b106dcb9ef51b8d37827db": [
+      {
+        "input": "reference/round116_external/E50-C1.txt",
+        "manifest": "results/unified_exact_round116/input_manifest.json",
+        "id": "E50-C1",
+        "n": 50,
+        "checked_input_SHA256": "9de25da5486b956bad260bdb9c9ab50065eaf448ec271336e9eb75a1ba784b4f",
+        "full_key": "2e9f27685acffd168f0fd17f36109cddb19ead244c4f63558e01ab44cc0dae16"
+      }
+    ],
+    "0b79867bec39b6c15c05f2c908510c6804794a148c2df742f551a7eb8949a22f": [
+      {
+        "input": "reference/round116_external/E50-R2.txt",
+        "manifest": "results/unified_exact_round116/input_manifest.json",
+        "id": "E50-R2",
+        "n": 50,
+        "checked_input_SHA256": "d6db5a271111dd7bd8560781c4b26a934dae1fb0da0a24ab4fe01fc45daa1f92",
+        "full_key": "fb0e21c03d3daebe808b99092bf04ba20270fbceeb86b2d3f52b0d215490f970"
+      }
+    ],
+    "7c63f823278b7c664bcb1defddd561567c3508a9c4eafb0262c77b565aac16ad": [
+      {
+        "input": "reference/round116_external/E100-C1.txt",
+        "manifest": "results/unified_exact_round116/input_manifest.json",
+        "id": "E100-C1",
+        "n": 100,
+        "checked_input_SHA256": "e53a3710d4f80db49f67211d9776416d12ce4f07db63851b385fe8327e8f3c28",
+        "full_key": "a1b140d753d9a5ba24b77c7e75260495a6afe5411c68074428760487a3fb2de3"
+      }
+    ],
+    "2de02f039fa8b431be15ee878a1ff38321f0c47e3f26e4d6d6b39b5724cc14fd": [
+      {
+        "input": "reference/round116_external/E100-R2.txt",
+        "manifest": "results/unified_exact_round116/input_manifest.json",
+        "id": "E100-R2",
+        "n": 100,
+        "checked_input_SHA256": "4e18ac981bcef1627585c6823b51de4b8ae5f203c4172b616d05329e1715361b",
+        "full_key": "43f0e20f31bbc4ac4b2de39ad76cbe2b24712addd7095e82b96058e0a9a2d79f"
+      }
+    ],
+    "48711938aca212191fc6ea41ec0e2afcf6dbafb73b20339dce1d6e25a4bad37d": [
+      {
+        "input": "reference/round100_confirmation/H100.txt",
+        "manifest": "results/unified_exact_round116/input_manifest.json",
+        "id": "H100",
+        "n": 20,
+        "checked_input_SHA256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+        "full_key": "730679186a79dcad36067861aac217f4efca015fadd4e750e3c9866faae8a8f5"
+      },
+      {
+        "input": "reference/round100_confirmation/H100.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "H100",
+        "n": 20,
+        "checked_input_SHA256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+        "full_key": "730679186a79dcad36067861aac217f4efca015fadd4e750e3c9866faae8a8f5"
+      },
+      {
+        "input": "reference/round100_confirmation/H100.txt",
+        "manifest": "results/unified_exact_round123/input_manifest.json",
+        "id": "H100",
+        "n": 20,
+        "checked_input_SHA256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+        "full_key": "730679186a79dcad36067861aac217f4efca015fadd4e750e3c9866faae8a8f5"
+      }
+    ],
+    "43beb07f4161f47c91bc222f4ba9b320e73e1f14b6db8367c559599c95de4b2d": [
+      {
+        "input": "reference/round122_paper_benchmark/PB-C20-B.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-C20-B",
+        "n": 20,
+        "checked_input_SHA256": "b04a721313ebc18c4a3bc4cd4b9f6b69b74e3fce53897fce9a6cc8c32fc7babd",
+        "full_key": "6b588e7cf8037b4790e7ae297809a359bcb5f968d87a2ab6e6fc4a4455232072"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-C20-B.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-C20-B",
+        "n": 20,
+        "checked_input_SHA256": "b04a721313ebc18c4a3bc4cd4b9f6b69b74e3fce53897fce9a6cc8c32fc7babd",
+        "full_key": "6b588e7cf8037b4790e7ae297809a359bcb5f968d87a2ab6e6fc4a4455232072"
+      }
+    ],
+    "864e2b5bb2bbc5ed10521ba1134ffe32bf11857994b5d063244a5bfed0be8691": [
+      {
+        "input": "reference/round122_paper_benchmark/PB-B20-S.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-B20-S",
+        "n": 20,
+        "checked_input_SHA256": "3aa535245e6475f791d50d8be26e8165c6f83371d9dbebac76728b9cc36eebbc",
+        "full_key": "f4f64cc91bffe4f2afe3092786ebb2820f206045b42fde0dc9d00a19b567d66d"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-B20-S.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-B20-S",
+        "n": 20,
+        "checked_input_SHA256": "3aa535245e6475f791d50d8be26e8165c6f83371d9dbebac76728b9cc36eebbc",
+        "full_key": "f4f64cc91bffe4f2afe3092786ebb2820f206045b42fde0dc9d00a19b567d66d"
+      }
+    ],
+    "e3dafdef11430657b7ac4aa9171880af54e1d800cac07def45c293bae10ab0c6": [
+      {
+        "input": "reference/round122_paper_benchmark/PB-C35-U.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-C35-U",
+        "n": 35,
+        "checked_input_SHA256": "67fa5712962980350c0b7be00abbcc4866af0fe376d0395b565ec082d36842e5",
+        "full_key": "5a43a2a145ba2b3eebb88591dabc47de0857d5dbcf0dd689f5e68c6a92973cfe"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-C35-U.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-C35-U",
+        "n": 35,
+        "checked_input_SHA256": "67fa5712962980350c0b7be00abbcc4866af0fe376d0395b565ec082d36842e5",
+        "full_key": "5a43a2a145ba2b3eebb88591dabc47de0857d5dbcf0dd689f5e68c6a92973cfe"
+      },
+      {
+        "input": "results/unified_exact_round131/inputs/PB-C35-U.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "PB-C35-U",
+        "n": 35,
+        "checked_input_SHA256": "67fa5712962980350c0b7be00abbcc4866af0fe376d0395b565ec082d36842e5",
+        "full_key": "5a43a2a145ba2b3eebb88591dabc47de0857d5dbcf0dd689f5e68c6a92973cfe"
+      }
+    ],
+    "75dd77f9e6c8acf89dcaf63c5e3de4acba64336dabc610fd69702679b63da8a9": [
+      {
+        "input": "reference/round122_paper_benchmark/PB-B35-B.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-B35-B",
+        "n": 35,
+        "checked_input_SHA256": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+        "full_key": "c8ae76cf43f0b627061e8ab9be4f632b92ec8934aac0089973d3387620d9d3ca"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-B35-B.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-B35-B",
+        "n": 35,
+        "checked_input_SHA256": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+        "full_key": "c8ae76cf43f0b627061e8ab9be4f632b92ec8934aac0089973d3387620d9d3ca"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-B35-B.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-B35-B",
+        "n": 35,
+        "checked_input_SHA256": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+        "full_key": "c8ae76cf43f0b627061e8ab9be4f632b92ec8934aac0089973d3387620d9d3ca"
+      },
+      {
+        "input": "results/unified_exact_round131/inputs/PB-B35-B.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "PB-B35-B",
+        "n": 35,
+        "checked_input_SHA256": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+        "full_key": "c8ae76cf43f0b627061e8ab9be4f632b92ec8934aac0089973d3387620d9d3ca"
+      }
+    ],
+    "ba0fed01ca4038b4a7e24440872e6634f49e1784ddfde27f632db362e0433434": [
+      {
+        "input": "reference/round122_paper_benchmark/PB-C50-S.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-C50-S",
+        "n": 50,
+        "checked_input_SHA256": "3e17bd07ae0abbfebfd8264540e6f5bd737a0d4506c4b6e96950936153db9992",
+        "full_key": "1a8aea5c58d4f31915f6b47bb293c5e5ac3df077a5c9004b5f594199a63aa13d"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-C50-S.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-C50-S",
+        "n": 50,
+        "checked_input_SHA256": "3e17bd07ae0abbfebfd8264540e6f5bd737a0d4506c4b6e96950936153db9992",
+        "full_key": "1a8aea5c58d4f31915f6b47bb293c5e5ac3df077a5c9004b5f594199a63aa13d"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-C50-S.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-C50-S",
+        "n": 50,
+        "checked_input_SHA256": "3e17bd07ae0abbfebfd8264540e6f5bd737a0d4506c4b6e96950936153db9992",
+        "full_key": "1a8aea5c58d4f31915f6b47bb293c5e5ac3df077a5c9004b5f594199a63aa13d"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-C50-S.txt",
+        "manifest": "results/unified_exact_round123/input_manifest.json",
+        "id": "PB-C50-S",
+        "n": 50,
+        "checked_input_SHA256": "3e17bd07ae0abbfebfd8264540e6f5bd737a0d4506c4b6e96950936153db9992",
+        "full_key": "1a8aea5c58d4f31915f6b47bb293c5e5ac3df077a5c9004b5f594199a63aa13d"
+      }
+    ],
+    "b8452410c97323c4dd9b54e6cd385cce62603f125a6c407b16a399b49805ccd9": [
+      {
+        "input": "reference/round122_paper_benchmark/PB-B50-U.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-B50-U",
+        "n": 50,
+        "checked_input_SHA256": "172096bf5f76d5c58ce5d6600628368e9550d0cc28bdc112ae300dddd96529da",
+        "full_key": "7e0694f0854e4be9cd61922cdb3c89f68b7f6caa59bfea730c5e6feddab36eb0"
+      },
+      {
+        "input": "reference/round122_paper_benchmark/PB-B50-U.txt",
+        "manifest": "results/unified_exact_round122/input_manifest.json",
+        "id": "PB-B50-U",
+        "n": 50,
+        "checked_input_SHA256": "172096bf5f76d5c58ce5d6600628368e9550d0cc28bdc112ae300dddd96529da",
+        "full_key": "7e0694f0854e4be9cd61922cdb3c89f68b7f6caa59bfea730c5e6feddab36eb0"
+      }
+    ],
+    "d662ba67b5e78bd7afcafc453db087b27456752b988eb954f13a32ada8495b9c": [
+      {
+        "input": "results/unified_exact_round130/inputs/UC-B20-B.txt",
+        "manifest": "results/unified_exact_round130/input_manifest.json",
+        "id": "UC-B20-B",
+        "n": 20,
+        "checked_input_SHA256": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+        "full_key": "6fdf5e082dab001236e1be49577d6f8217a377d3622d10625a79a543f0b93025"
+      },
+      {
+        "input": "results/unified_exact_round130/inputs/UC-B20-B.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "UC-B20-B",
+        "n": 20,
+        "checked_input_SHA256": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+        "full_key": "6fdf5e082dab001236e1be49577d6f8217a377d3622d10625a79a543f0b93025"
+      }
+    ],
+    "b73fd312e62962a0ef35d385cc2f07294f784ef0d19a6040b800fe14d9ebba61": [
+      {
+        "input": "results/unified_exact_round130/inputs/UC-C20-U.txt",
+        "manifest": "results/unified_exact_round130/input_manifest.json",
+        "id": "UC-C20-U",
+        "n": 20,
+        "checked_input_SHA256": "e4de3620f2eba0c9c91a18fddbc5db26700914c280e614c37d3c159417f61df5",
+        "full_key": "bebc62ee9d0e73684ff9c2d5b3ac43df498a2e285710d76753fac3e526f20bc1"
+      }
+    ],
+    "0b720dc37a7b1edc3cd78a9ae6dba013bbd12c12c0dd099a621701199df00a6e": [
+      {
+        "input": "results/unified_exact_round130/inputs/UC-B30-S.txt",
+        "manifest": "results/unified_exact_round130/input_manifest.json",
+        "id": "UC-B30-S",
+        "n": 30,
+        "checked_input_SHA256": "e8ed0a8859b6704ee167e356e740dddd5804112167209403734bb032d5b7e1b0",
+        "full_key": "f610aa8b7dbcd7f7b12dbad24d38bab8eb78040f026ac3f08fd43cfad15ca347"
+      }
+    ],
+    "0bab0688aac2e143a55e4623a8f045509a5025407f0b80d80b97d4277b7265dd": [
+      {
+        "input": "results/unified_exact_round131/inputs/SC-C15-S.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "SC-C15-S",
+        "n": 15,
+        "checked_input_SHA256": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+        "full_key": "5131250b64f16450d704cb11eed1ae0b58d80587cbd4582b40f7bc759ce91136"
+      }
+    ],
+    "cc245a532c4e96a0b1e090b119b044b87704a015e79ad44096b3af1cecfe8444": [
+      {
+        "input": "results/unified_exact_round131/inputs/SC-B15-S.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "SC-B15-S",
+        "n": 15,
+        "checked_input_SHA256": "b87de1a37e60cc2e7cbbf7885bac1155ac4c0b14356de7c5af92e402555474de",
+        "full_key": "afb497ddfe0e50f7f879c79750a9d381b0d079d110a8bc7f04213a4f28b7e329"
+      }
+    ],
+    "04780d12808545908a2e8d2c7b1e376f1abef52e496fb77b71fb4de984bb7eb4": [
+      {
+        "input": "results/unified_exact_round131/inputs/SC-C15-B.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "SC-C15-B",
+        "n": 15,
+        "checked_input_SHA256": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea",
+        "full_key": "7ae380260dbc185ffb2bddecd3bad94760d450b044d31eff655f3a013238e6a7"
+      }
+    ],
+    "a1ced6069ed5bc5e3cc276092910ee81e362f555e952578316eb82a9704a5f11": [
+      {
+        "input": "results/unified_exact_round131/inputs/SC-B20-S.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "SC-B20-S",
+        "n": 20,
+        "checked_input_SHA256": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+        "full_key": "f5156f024098ed030ec7cff45326087c64624a637cfe2de57c6ae7d7f19578f8"
+      }
+    ],
+    "f48569b8eb592de9b438173de8f1072219d6dd206fde4ba4566fb885acee3a40": [
+      {
+        "input": "results/unified_exact_round131/inputs/SC-C20-S.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "SC-C20-S",
+        "n": 20,
+        "checked_input_SHA256": "5729b59070d5451750e8e0b2446b08381e5c001e96d3c3f247e57801f6dcde11",
+        "full_key": "fcf68878edfdebb4bba6910329701e14d24d3d70c6f29c375e0a764687fe3ee4"
+      }
+    ],
+    "9a0f3a566b797a71a497d39f757a8739bc539c53b4504eba94e8b95053349b0e": [
+      {
+        "input": "results/unified_exact_round131/inputs/SC-B20-U.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "SC-B20-U",
+        "n": 20,
+        "checked_input_SHA256": "c688de15fc31612b83885efe2e86e60f50ba57a5c5119f7e7801bf240a096bab",
+        "full_key": "a9781dbb8e9602aaa5de5c2614a6cc3c73da5266f26a96ec05f4d7041b94723e"
+      }
+    ],
+    "edd5774337b67c39ba759434f3ee73e5a9092a1b2b136489fd6d2aaabc0bab53": [
+      {
+        "input": "results/unified_exact_round131/inputs/SM-C8-S.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "SM-C8-S",
+        "n": 8,
+        "checked_input_SHA256": "cd0c04a81c0096147d1c365eb4da02ad85397bbef2987d0b13be00628a6b3be0",
+        "full_key": "0fd57c234615a41f28dac33e0c841d6543540d1465bdef5ecd53bbb3e7958d12"
+      }
+    ],
+    "a9cdc7a3ab11c179b52bed6b09c68d851cf7a2bb4eccb364bcc6dd203738956f": [
+      {
+        "input": "results/unified_exact_round131/inputs/SM-B10-B.txt",
+        "manifest": "results/unified_exact_round131/input_manifest.json",
+        "id": "SM-B10-B",
+        "n": 10,
+        "checked_input_SHA256": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f",
+        "full_key": "e76e2e9f785fd9a926a2f6ed897c17d6ce4a772e1021097624e2e626a0077821"
+      }
+    ],
+    "7e685c68333261a2f04fce9108b5bfaa2050b3660613fed3648b6b2932660fd1": [
+      {
+        "input": "results/unified_exact_round132/inputs/K-15-S.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "K-15-S",
+        "n": 15,
+        "checked_input_SHA256": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+        "full_key": "4196064af1efaad047b928c9dfc7d5d89abb8f177b53e4cae910117f55d0fa77"
+      },
+      {
+        "input": "results/unified_exact_round132/inputs/K-15-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "K-15-S",
+        "n": 15,
+        "checked_input_SHA256": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+        "full_key": "4196064af1efaad047b928c9dfc7d5d89abb8f177b53e4cae910117f55d0fa77"
+      }
+    ],
+    "2073db4f700c57f8b3effd793d58f89979a63dcaaea71bd90819e61dc6e10478": [
+      {
+        "input": "results/unified_exact_round132/inputs/K-15-B.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "K-15-B",
+        "n": 15,
+        "checked_input_SHA256": "274cd13f7f1140a8fcf6515e05b4bbf4093d1561a13e5a43450f97e6fc5db954",
+        "full_key": "decec7121345007f24da34a2967e9395d619fcd89f2d6b7ab48a3af0ecf48997"
+      }
+    ],
+    "61f28e6ca4f8149a3bc1a5353b10166cb10f58bd3a93b5502cdec42999aa9a93": [
+      {
+        "input": "results/unified_exact_round132/inputs/K-20-S.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "K-20-S",
+        "n": 20,
+        "checked_input_SHA256": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+        "full_key": "7d080de1674ec62a8a83199bf8d67a77ae9f00483be09d77331be3ff9ee95228"
+      },
+      {
+        "input": "results/unified_exact_round132/inputs/K-20-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "K-20-S",
+        "n": 20,
+        "checked_input_SHA256": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+        "full_key": "7d080de1674ec62a8a83199bf8d67a77ae9f00483be09d77331be3ff9ee95228"
+      }
+    ],
+    "8bc1aa779cb09c2ea2870ad91870c43876b9732679f5b7612bee0335297e3452": [
+      {
+        "input": "results/unified_exact_round132/inputs/K-20-U.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "K-20-U",
+        "n": 20,
+        "checked_input_SHA256": "f1757e81671889f1dbcaa83f0780a049ef321dff6855a80f0ea4eb80514f3ea7",
+        "full_key": "fa39f495f979740d4b58f88142c1c80330b2c0a648cb3e23eb5505f38b57db7e"
+      }
+    ],
+    "b190a57ebda912925a2bdf430f833d3e0cf3f044915c9a3614525922f52f9f2b": [
+      {
+        "input": "results/unified_exact_round132/inputs/K-35-B.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "K-35-B",
+        "n": 35,
+        "checked_input_SHA256": "f208424eb05eb54cb60e85db6969443b07c1e80763a964c50980dd6b80bcd52b",
+        "full_key": "f9b0f6c5c428e2cd7c8cb9a8503b521caa44da991002d928cca4a6bf83ac51b1"
+      }
+    ],
+    "46eacbe45e9ff19559859d1e3c49a1985120daa7adb8a5344490b42a000a5af2": [
+      {
+        "input": "results/unified_exact_round132/inputs/K-35-U.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "K-35-U",
+        "n": 35,
+        "checked_input_SHA256": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+        "full_key": "525ec7a3d139d9a7c6e1d1fe52e0acac165fa58d4a51feda95180e16b18b35f8"
+      },
+      {
+        "input": "results/unified_exact_round132/inputs/K-35-U.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "K-35-U",
+        "n": 35,
+        "checked_input_SHA256": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+        "full_key": "525ec7a3d139d9a7c6e1d1fe52e0acac165fa58d4a51feda95180e16b18b35f8"
+      }
+    ],
+    "cf4797701233cd076bd3214ad765d2d7f567c8e5be04ea7b6e4d51ef3d5d1075": [
+      {
+        "input": "results/unified_exact_round132/inputs/X-15-S.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "X-15-S",
+        "n": 15,
+        "checked_input_SHA256": "bdc3eadb559b5e97f601f0cdc1c62150b5a53aafa0e76dad74b6ef9c9d295999",
+        "full_key": "bfb55846323d97138c9485cb89ee7e0e52ba0edee91a59a98a577fe0a9824612"
+      }
+    ],
+    "319a2abcb4ec811ebedb53d931e1936cf542fb7233e66d2c7ad53f9527680576": [
+      {
+        "input": "results/unified_exact_round132/inputs/X-15-B.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "X-15-B",
+        "n": 15,
+        "checked_input_SHA256": "c62fdf9dba207a161add1579cd8274d9a66988c4c50db151751eef80435c142c",
+        "full_key": "2b9c3b4902c761e529d29930c52ce1651765f99851b060b3b8e22007453385fc"
+      },
+      {
+        "input": "results/unified_exact_round132/inputs/X-15-B.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "X-15-B",
+        "n": 15,
+        "checked_input_SHA256": "c62fdf9dba207a161add1579cd8274d9a66988c4c50db151751eef80435c142c",
+        "full_key": "2b9c3b4902c761e529d29930c52ce1651765f99851b060b3b8e22007453385fc"
+      }
+    ],
+    "95d5137ae5483fcdf11c135627c9f9fcbd6e081e42c39c026dbaf51e8b2da6b2": [
+      {
+        "input": "results/unified_exact_round132/inputs/X-20-S.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "X-20-S",
+        "n": 20,
+        "checked_input_SHA256": "ed520ce851838681ff94ab1a4b982d67f49a16cc9e063435984c3f8c2d43d77f",
+        "full_key": "16d71fac8d660e44e79e536d03b643d4e7966faf328fff346f8ae55d49721579"
+      }
+    ],
+    "2c1287c1d6b0c51a74a0fe28b23abcbdaabef63f111ba3ab6eaec2beb592bfcf": [
+      {
+        "input": "results/unified_exact_round132/inputs/X-20-U.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "X-20-U",
+        "n": 20,
+        "checked_input_SHA256": "eb9a8a2947ae45b7634acfd4ae2528e6a7d16c13204ff563eb8d827ca036bb0c",
+        "full_key": "c94138f877d455fad2f560caa105faae2fc9f79e1b5df58c9479438303c21b28"
+      }
+    ],
+    "ef4b3dcd1cdce4230e1fc149c384e3b6aeecb3fd58a5364ff49b533b32d2b0e9": [
+      {
+        "input": "results/unified_exact_round132/inputs/X-35-B.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "X-35-B",
+        "n": 35,
+        "checked_input_SHA256": "2e66f0e144f3950633aa8d9e4b490ef7fc3f838e4cdc477f1daf9dc4df1f27a1",
+        "full_key": "8f03c24d2303de9d8b8777a8c8c8dfe5b6c5e7f8cbbb64bb5707bad297405ba1"
+      },
+      {
+        "input": "results/unified_exact_round132/inputs/X-35-B.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "X-35-B",
+        "n": 35,
+        "checked_input_SHA256": "2e66f0e144f3950633aa8d9e4b490ef7fc3f838e4cdc477f1daf9dc4df1f27a1",
+        "full_key": "8f03c24d2303de9d8b8777a8c8c8dfe5b6c5e7f8cbbb64bb5707bad297405ba1"
+      }
+    ],
+    "ea1ccbdddc38c552a2adb83588f4566c71c6f1c0a95b1ea4e19add8be2ea8f2c": [
+      {
+        "input": "results/unified_exact_round132/inputs/X-35-U.txt",
+        "manifest": "results/unified_exact_round132/input_manifest.json",
+        "id": "X-35-U",
+        "n": 35,
+        "checked_input_SHA256": "6a040c2d36b40f833cf083eab2aac3bde37185e85d7e66c415a98e2cbf59fe68",
+        "full_key": "29b8adf09b8d584a041e0d1a565aaa57c965c68016cbfca4adc42fa51b2f5350"
+      }
+    ],
+    "3dcc6f43664cc13d1f7b42c37ca777757b613faaa1c90f4af4f91fc97e9d2fbf": [
+      {
+        "input": "results/unified_exact_round137/inputs/N-B15-B.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "N-B15-B",
+        "n": 15,
+        "checked_input_SHA256": "be69ab8b5dfda82294d7a4c997e8e9e8d483a2e800ab3da057b93dbe15f3a860",
+        "full_key": "e11bd59bbc9a81fcbbf0b9a6a035def1971ca8d1ee0b10a10784b29561b760e0"
+      }
+    ],
+    "50455cffbdc58297a87a1908614462cf70c8082e2c590811cf72cba63a5d1894": [
+      {
+        "input": "results/unified_exact_round137/inputs/N-X15-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "N-X15-S",
+        "n": 15,
+        "checked_input_SHA256": "773f919eac35a74d02377b30c531d0021617362a9d0ea2bc0252c02221aa34d3",
+        "full_key": "7c10ee3fc012932fa17928aa386ffa081d8d656ceb4dc11a4f321e9540fca6bf"
+      }
+    ],
+    "0cdc0f33836bc9b5a456aa0adb6b8a9eb3f1769b5a624874bc5550751cbd58a3": [
+      {
+        "input": "results/unified_exact_round137/inputs/N-C20-U.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "N-C20-U",
+        "n": 20,
+        "checked_input_SHA256": "93b93b6abed55cf97f8ee21ddd85fb8501554b8e4c35bb997ae75782f1f98e16",
+        "full_key": "da4d3c9c21b85f9e2328015045d0f88ad96ea340b4f916f2cd824d63a3ce5c32"
+      }
+    ],
+    "c1cf5e466006d70f0982b98eb94ced03a7cbfdfb738c0e7b3750f9ff2be9455a": [
+      {
+        "input": "results/unified_exact_round137/inputs/N-X20-B.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "N-X20-B",
+        "n": 20,
+        "checked_input_SHA256": "c211a1139db85152fbdf2a7362a43a7389d25e865119debd0878c0e7fea81684",
+        "full_key": "8a4aa7b28de520736094c4efbfe4bdd240e6c7d749b0538d177e54c2809f5ff2"
+      }
+    ],
+    "69a4ebbbcbe0a28e75520dbf7af4ba135acc65d7872c31ad0c4cbfd48176b29d": [
+      {
+        "input": "results/unified_exact_round137/inputs/N-B35-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "N-B35-S",
+        "n": 35,
+        "checked_input_SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+        "full_key": "74ece1b5bda4a02e7d2922dedc2906fb999138426f7182ba1961bb00ea802f1a"
+      }
+    ],
+    "15bb254a0106a23b7347008527b6884bd2581c9177c1abaa9e3afb6a331d0dac": [
+      {
+        "input": "results/unified_exact_round137/inputs/N-C35-B.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "N-C35-B",
+        "n": 35,
+        "checked_input_SHA256": "23dc726c169de65d73ee4e3019371533c89b3468732b60b92a0b098c1f6c8565",
+        "full_key": "5f4c1b9934472c13fcc28464961a7cfec258f7ddf71e73d432a73a0eb6b0b1fe"
+      }
+    ],
+    "d9bd612be47c775de46c1bc26b8bc323de0a4cbc1a25a7d6fcd240cbfc75709a": [
+      {
+        "input": "results/unified_exact_round137/inputs/R-B20-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "R-B20-S-T1",
+        "n": 20,
+        "checked_input_SHA256": "d80b5af16dbf828b90f2ff20b248c0bb3756fab1124233b5e4a984a951889143",
+        "full_key": "b7303f5ac8a8ae7c7533445799c71ff4ed4b6e6571a544c0395cd4923150b307"
+      },
+      {
+        "input": "results/unified_exact_round137/inputs/R-B20-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "R-B20-S-T2",
+        "n": 20,
+        "checked_input_SHA256": "d80b5af16dbf828b90f2ff20b248c0bb3756fab1124233b5e4a984a951889143",
+        "full_key": "d76af254d6ada6b5f6386f3c8ba4743f63f8dab72d09f59eb942028068ef5422"
+      }
+    ],
+    "77fed9c645ead13356c2805f968b2447867fe62e8b53eb3d87bc3ef03e22a214": [
+      {
+        "input": "results/unified_exact_round137/inputs/R-X20-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "R-X20-S-T1",
+        "n": 20,
+        "checked_input_SHA256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+        "full_key": "78f2eb985d33a25ee6ed31264004d4184469fd61db6db21b290342086014310e"
+      },
+      {
+        "input": "results/unified_exact_round137/inputs/R-X20-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "R-X20-S-T2",
+        "n": 20,
+        "checked_input_SHA256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+        "full_key": "8b7163d4484586a61d28fcfaf65d12f19f373e042e1e8313b4c8e1092dd97e6b"
+      }
+    ],
+    "ca1afa2c647187ef5194d2c2bdd590e4ae1259cfbd1f9e0eb99e6cd48fb988ca": [
+      {
+        "input": "results/unified_exact_round137/inputs/R-B35-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "R-B35-S-T1",
+        "n": 35,
+        "checked_input_SHA256": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+        "full_key": "c3ac584a6db44c02b73dd4b44c9d6c2afe0de62b72c2b508c782282520769ce4"
+      },
+      {
+        "input": "results/unified_exact_round137/inputs/R-B35-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "R-B35-S-T2",
+        "n": 35,
+        "checked_input_SHA256": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+        "full_key": "041eba0ef7eb1a36103234d577a6b383bbd9aea549363e7088f6cc31f14403b8"
+      }
+    ],
+    "125b7b6ed146fbc8a4a0150fe607a44f5ff02ec7cc376ab6950f36e66e710012": [
+      {
+        "input": "results/unified_exact_round137/inputs/R-X35-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "R-X35-S-T1",
+        "n": 35,
+        "checked_input_SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+        "full_key": "c7db5e95b1b893bbacf276f8fe30e281e0a089785ec8b4fb1659324b8f5cd009"
+      },
+      {
+        "input": "results/unified_exact_round137/inputs/R-X35-S.txt",
+        "manifest": "results/unified_exact_round137/input_manifest.json",
+        "id": "R-X35-S-T2",
+        "n": 35,
+        "checked_input_SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+        "full_key": "7a0b81c56d4096356432d6f8dc7962984eca767e116aa02d946e9fd6a8777984"
+      }
+    ],
+    "7ccb876487b8c956b61bea84647319a1ee2e2bce574da20027b342d48dbc5e8b": [
+      {
+        "input": "results/unified_exact_round163/inputs/R163-C20-S/first/instance.txt",
+        "manifest": "results/unified_exact_round163/input_manifest.json",
+        "id": "R163-C20-S",
+        "n": 20,
+        "checked_input_SHA256": "cdf6943983c8f2bbd932cb7a3bf3e6645d828b9f651806c4514b6d9a13b865ca",
+        "full_key": "f6295601ba416b5370ef4a9323adfb22b012aac238cc13bca9a240aaec02d238"
+      }
+    ],
+    "bcfd5c8228f3b76929087f14ac1c05000c674f180c786cabba8fa4f0bebd3ac5": [
+      {
+        "input": "results/unified_exact_round163/inputs/R163-B20-B/first/instance.txt",
+        "manifest": "results/unified_exact_round163/input_manifest.json",
+        "id": "R163-B20-B",
+        "n": 20,
+        "checked_input_SHA256": "1101972093cf4e0cfba3470236876048cb26e7e7b924439c7ade6e65a30a28c4",
+        "full_key": "352e520f817c7bded96efb4efe1bb46bea86522a325b3bdeb100aff75f5ccf00"
+      }
+    ],
+    "d370bedcbb208fffa042cce2f865ca239011285df277349cde55a3b3d7a4cd58": [
+      {
+        "input": "results/unified_exact_round163/inputs/R163-X20-S/first/instance.txt",
+        "manifest": "results/unified_exact_round163/input_manifest.json",
+        "id": "R163-X20-S",
+        "n": 20,
+        "checked_input_SHA256": "749674d7000925c032a619ad1b067cbdcaef0b1cdfd3267228b5d9a379b4a0da",
+        "full_key": "259768ac18d34a24d090ddf4504f2bee0ead29ce9a962228837f560b860a3d4a"
+      }
+    ],
+    "5e20d78fd539db9481303643dc10bb445604fe7e082b6596302780296028c43b": [
+      {
+        "input": "results/unified_exact_round163/inputs/R163-C35-U/first/instance.txt",
+        "manifest": "results/unified_exact_round163/input_manifest.json",
+        "id": "R163-C35-U",
+        "n": 35,
+        "checked_input_SHA256": "fb9d881dba6d0d07c59c48a683d2b2543f3effeae593306e28d79875cdcc20d7",
+        "full_key": "2e4147e036402315aeaba2f0e9146efa007e7b634226ad301f5eb95734673de9"
+      }
+    ],
+    "3fd919f29d1bde5b0ebd643def4e53d7c82f4794438eef9b17be560ffe5528ae": [
+      {
+        "input": "results/unified_exact_round163/inputs/R163-B35-S/first/instance.txt",
+        "manifest": "results/unified_exact_round163/input_manifest.json",
+        "id": "R163-B35-S",
+        "n": 35,
+        "checked_input_SHA256": "8f644c76508a54443e280fe03833f15131989d55184bdfca21b56223f69c17b1",
+        "full_key": "499f387bf6cdda0698c190c621041a3971e99151a763d1fffecc80b9c8b02d64"
+      }
+    ],
+    "788f6382218c6a9a70f30f9be80a1d2ec45b6c568440ca7b938d02da97863c20": [
+      {
+        "input": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+        "manifest": "results/unified_exact_round163/input_manifest.json",
+        "id": "R163-X35-S",
+        "n": 35,
+        "checked_input_SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9",
+        "full_key": "adc6caf63376b3b1c378ac2872ed4e45fe4f8489782b44ccb155805d44f83d24"
+      }
+    ],
+    "e55d80b23fbaacd74af9815aa538758319f58aa2f016dfc5f14b1fd5b896e30c": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_shortage_M04_Q30.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_compact_r1_shortage_M04_Q30_T01800",
+        "n": 50,
+        "checked_input_SHA256": "9a0c5824c118b24f895b58d052ca9db277d38d57083c6e37c1df81ff39555dbe",
+        "full_key": "53aa3d4c03705bdd28dc6b2b222f069c86090cafc55ead9520c4b9accb88879c"
+      }
+    ],
+    "06ba7770519984bb3dee751997bf36713737905999057a78863243b62cc4dbbe": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_balanced_M07_Q20.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_compact_r2_balanced_M07_Q20_T03600",
+        "n": 50,
+        "checked_input_SHA256": "915801240a408cefd6a964dfdbf9fd38c8fa3e3ce2f005e70baa4ebfc8bc9439",
+        "full_key": "48b7de376144515dce59a541654be2d41c9dd773c7ccb94ec520575524817b6e"
+      }
+    ],
+    "0b06062c8bc77a774473a381f984da3ceb12cb32c62151f6d945475faf6c541a": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_surplus_M04_Q20.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_compact_r2_surplus_M04_Q20_T10800",
+        "n": 50,
+        "checked_input_SHA256": "ea19c87717ea584743b4d01f10d2937e8ea2adbaec497f92e2270a1ec22a3d98",
+        "full_key": "5e724513245eafad50b8f8b4f44abeb2959e92702513ece40104a2dedef72f0e"
+      }
+    ],
+    "5e98da17935b16c1739c1fd8f673cd530b0aefff047a8bfa7ea57cfa616f12cf": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_shortage_M07_Q20.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_regional_r2_shortage_M07_Q20_T18000",
+        "n": 50,
+        "checked_input_SHA256": "783aa1407d17d705781f6cba12fb58f268952579ce1db6e391c80d8fcd05f01b",
+        "full_key": "087d2a72ad1eabf6a7fa583fb8cb5bf5508e11c50fecb4002e4ab32954fac6dc"
+      }
+    ],
+    "6c6e85c31e2929b187439bb44143c2f4c3f911ea80095150b4c50152da3e1cfe": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_balanced_M04_Q30.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_regional_r1_balanced_M04_Q30_T01800",
+        "n": 50,
+        "checked_input_SHA256": "79ca3506aac00f52268199bd88596f7a512161f5dc19b75315a4bb576d41ceb2",
+        "full_key": "cba680c4bc2e7c6db179b2fb5305900bb7ae892c002785ee9e3b6c2e5e6ca832"
+      }
+    ],
+    "e7377f047c48a71f91882b4b514a7a420933b80e77637fff6e0466cd835622d0": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_surplus_M07_Q30.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_regional_r2_surplus_M07_Q30_T03600",
+        "n": 50,
+        "checked_input_SHA256": "a0731e42027d644c6046bd455dc539ad5d4ee0df63590921492cc6182b44e6f1",
+        "full_key": "2bb7df0c798b830c7f3ab935589de8dc9ed160485ec2ce7de85ddac7a0c156c0"
+      }
+    ],
+    "e10ba2c85552f46d917fc7d20329eaa64e0339c939ecf0d14fb5e6fabf82165d": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_surplus_M04_Q30.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_compact_r1_surplus_M04_Q30_T03600",
+        "n": 50,
+        "checked_input_SHA256": "8e97ccedc30ad7f65ced1971d52eb2be899bbe77875fbbc8c1e4ea563b378a7a",
+        "full_key": "1f9f0106b187682acdb958b93c4ba8a0af3832cce2abdbb91f2fa8bcece113e6"
+      },
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_surplus_M04_Q30.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_compact_r1_surplus_M04_Q30_T18000",
+        "n": 50,
+        "checked_input_SHA256": "8e97ccedc30ad7f65ced1971d52eb2be899bbe77875fbbc8c1e4ea563b378a7a",
+        "full_key": "3c5fc3ae905ae7c2e4a7c305580e9a3f5b3ed333fe1de1226ef21c07ed6cfb32"
+      }
+    ],
+    "39a9524832f3555fbc805a5b0a17a25a2f855bd5eb62fea49b1148183b5ec99e": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_regional_r1_shortage_M04_Q30_T03600",
+        "n": 50,
+        "checked_input_SHA256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "full_key": "262fec8f07d39c8055836ab04a5be494a24a21c3023b1717540be0e4198e8f67"
+      },
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "manifest": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+        "id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "n": 50,
+        "checked_input_SHA256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "full_key": "da17e1a299b181868e93eeabf7d2595868c28acea2327b38adc75b741222afe8"
+      }
+    ],
+    "31405e1fd517584b175593f1fecf81b870fcb4b07760e22b55e67ce303bf59fe": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_balanced_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "db148cafe91a31ff9e8d535b7c82004d7ff0fefa5f285b9246ad21d245efc8e6",
+        "full_key": null
+      }
+    ],
+    "3ee6cc6bda8e829f6c8455cb71202fc1b0cb09c2b987ab4a0c5e76bee1e1cdc1": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_balanced_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "55fdcb830c03b0c7339cb115d33257b840c8484792fd51626f9fc1379ee16877",
+        "full_key": null
+      }
+    ],
+    "23e68440a08876b1052f2386c856333d09223b7eb0dd99da6147bc503edc5ec2": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_balanced_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "199af30234876500c1d58dc9e27ac7b3d989e4b188f014dba34b199efe8b852e",
+        "full_key": null
+      }
+    ],
+    "8786dc7f436d64e78bef07d05725bff3d626c232295810a23b6f24e1bde30dc3": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_balanced_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "164965abef86b8a9ab7c9573262afe6e586d9a87ddf5287c4e9437a7ee801ccd",
+        "full_key": null
+      }
+    ],
+    "56a07e10496d363a19103b8b98982ca61638bb6bbe4620998d7ad43b7d6bffef": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_shortage_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "e7a7127300d75ecb734aeb26380173315ef2e9ac558a47e1a2ca430cb56cb0f6",
+        "full_key": null
+      }
+    ],
+    "7ff3f4b7500a7ba3ba56267e0165b8e5edb1be4ba01cf3f731d4677669cb7f19": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_shortage_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "d86fcb3720117e64167114f4bf08f1ef4d7cc9a6af551b82cd556ec0ce936b83",
+        "full_key": null
+      }
+    ],
+    "64495f42195a8da8893b22810a6d838bb62ed23342e501ea47f34b5ff1aba38e": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_shortage_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "f4bd67a249883a44ee3c89b5fa355153a6305d13b1e77fe3f0d9f859b0d28ad2",
+        "full_key": null
+      }
+    ],
+    "7a745140ff906620d5ae895d4faefbcc47ce6b03e7ef5c5bfb5fa5c8fccd0a8a": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_surplus_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "c442d76d0fc5f2fbfff66aae10bcdb5c21b7899363a626a048ed47adfbe919a4",
+        "full_key": null
+      }
+    ],
+    "cd968ad6605d2cd35067c4d62d619748c86902ca707964737e229c3406180dd9": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_surplus_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "2050af1f2ca13e33e481a260f08867d7dcc541521f7ee5af9ecf676f83d1ded8",
+        "full_key": null
+      }
+    ],
+    "e43b15f437f934ce719ec538696224f1eabac844f17a3e282e808cd444f56480": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r1_surplus_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "91abe0648881f2ca7c99d064e3e2897c46967dfa47e29577a1440dc1b0fbbc7d",
+        "full_key": null
+      }
+    ],
+    "0ad6542b1b685f2f54ac27ed507a8e9a0315a475385fb8b051a62aa120e2e91a": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_balanced_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "17196080b47a6d8b17f0dfbf2ebe7bdb3b9811f1fd8831317d5f8852c1fdc98c",
+        "full_key": null
+      }
+    ],
+    "ecb65855f31910171bccb487bec8d6fe6b37df9a8339840c018e7080e63ff638": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_balanced_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "82f6ede2681eaaf626ca3efa1887a1672f31b23dd5f358d443a650521b6b0fc5",
+        "full_key": null
+      }
+    ],
+    "830cce6ddad2fe7fe5218d1a9e40aa54971406119956d1508caa5164322efeb8": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_balanced_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "734ae4b2bb14959e835dd5f9be6ca27b81af4240ebd5989c4212a5ac48b53b72",
+        "full_key": null
+      }
+    ],
+    "37cc873ed4b8cab8042cc710847b99d6a2532a4106e0af62214cee4322b557c9": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_shortage_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "a963efd28292dade753befe9006c564c544d229b4deb759482bdec2072b446aa",
+        "full_key": null
+      }
+    ],
+    "524925c33a23da18e792cf03c9e8f7f20fca598e12db401ea2dbfe5b88b96c10": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_shortage_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "0647dcf952e8d328268f6982309b8876b97341b1ef57e53a812703d00ecc9e7c",
+        "full_key": null
+      }
+    ],
+    "a3d82f8d3323befd65b5eefedff63753685f6d834e8be6c18d5127f36cbd0ebf": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_shortage_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "77117f3ca5f41fb2bd8ca731750ed42b7c70ba15b8a276173e2d98add6f4dd99",
+        "full_key": null
+      }
+    ],
+    "8d301cc368e42d811120e9de62ebe354bf35dee95fac2148df62711abf83b5fc": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_shortage_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "eee7d8c4ac1e8386f4c16a0644b622b43b82afb3ebf10949436941f5f0ce0362",
+        "full_key": null
+      }
+    ],
+    "3133c84eee63eff02e928875295a758c86b112b27c3290b397cd5c2797ad4500": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_surplus_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "c7be0098b16a472bd1cea0149bc339ec8f9411b188871fd6523a1d534981ed6f",
+        "full_key": null
+      }
+    ],
+    "7111f6bbea1c1f08b3db2e5aa01f15be484196813e3b0374060305926d530405": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_surplus_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "5e05fc6ab26cf9e862ac06b779241ba5a82cf9fe9c2e74004368785774ecef92",
+        "full_key": null
+      }
+    ],
+    "69c2845e8724052731c0af174d07861962ef20900abedf369cecd2ad373f61f9": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_compact_r2_surplus_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "9e93845b2d2caaeecd19daafa9013c8f5ca5219476155f01a4fb946657651e57",
+        "full_key": null
+      }
+    ],
+    "c6b093d6fd99382d0958aa8663d45d6b1a5230665f394168fcf7b08662783d44": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_balanced_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "30cdf2bb05781b609bd4edb2a147f7a044f76216852757190db36b734eabb641",
+        "full_key": null
+      }
+    ],
+    "830e09506d931e85da9e96523671427087195adb67e38c21a6d90e3d30b8bdcb": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_balanced_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "c62c2c0aeef4bb7609508d0a9493b393348b1d680303d990342f6b60e5c52991",
+        "full_key": null
+      }
+    ],
+    "a824fbac5d394caf071124e4dc25e952d6d69c9e672b40b22ceb082bb2efe731": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_balanced_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "73e8bb1ddf54d5989de62e0a5967ee276c59f7af6b48c258ab2ed2e7f73d487f",
+        "full_key": null
+      }
+    ],
+    "608dbe92a4b5192fb2ebadb05dbe64136e55549c7b275ed515a372c92dc602cc": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "d7a142a981715afc74b06c02b9d56379d93225813a2c4143cac6aba9232e0229",
+        "full_key": null
+      }
+    ],
+    "3e235eae07e7448c71887fcb4bcc54b96fb8885291fa75c4cb5c389cfc0a4a9e": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "f5a8f0e74aba49156319188b9ea398993b5b0722dda5dbba39caa15bf9b7edf5",
+        "full_key": null
+      }
+    ],
+    "e90ae7b982378312bf259eba848a99aa2b87db891bf8cb72367922bf381b806e": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "2d5b1063e877b2f29c4f153eca77d97f3ef71e5bd9387ce8cb2d01c6bc8eab3f",
+        "full_key": null
+      }
+    ],
+    "f7ab31e23f3741c06affb40206c48a2549744d964b89096dd535500f9d2ef0a6": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_surplus_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "dfd9226b1b6f37b84e565ccc5b10d0116080516a53f1ae3c3e68239d8386d885",
+        "full_key": null
+      }
+    ],
+    "8d828d5e52dd92f0d3024433f05f308278c8c91f217d17e98d1f42a564155f90": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_surplus_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "73888b1351f7058b2fc6d23f79558434890fe7081973ea75958e67f39be3c801",
+        "full_key": null
+      }
+    ],
+    "29785709ccd193908a604f5c78fdbe512a4c9f24d1534618502eb2f1c92bcc9d": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_surplus_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "3a9a90108c646d4e17cddcb4d5674c2fc6f2a06f2cf0f82284a4a6239d179ef0",
+        "full_key": null
+      }
+    ],
+    "1b0d4518bc162c65aab4fcf56b576f4fd72aae68769de4231a68cff106839603": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_surplus_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "717595fbe3c2af96b9ab96341237596547aeb78a2de1ce9ddd917c8311d9080b",
+        "full_key": null
+      }
+    ],
+    "29565665e8516c3a9145d885f36860f343f82f3512c8796f1250b80b612e6275": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_balanced_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "186f079f37ad01a80b203f180c8fc42a785b4b83942e7081f918fffc920c3186",
+        "full_key": null
+      }
+    ],
+    "6d088a585727bf11916a4f9956e92f481c39eb5e5c2836d272196672b90c7268": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_balanced_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "9b5b87de432d03d01adb39404e2492260e36612a62702db9dbab98aac3c8808a",
+        "full_key": null
+      }
+    ],
+    "13741252aea09eda7f46b3ec016c267855bbeee29333df706a6e18c96cb5c5cf": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_balanced_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "865b507eba3f383463a9e3799cbc560792c611e2322eca37957bdac8a49fc846",
+        "full_key": null
+      }
+    ],
+    "5c1ce26103a0c395b11d36c1f49ba8b906a12e6408bd5cf8fda2122067afa7d6": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_balanced_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "7837f6c06daa0e0d1156b6984a4257bd0f274058988b87020009e3eb9bf265ed",
+        "full_key": null
+      }
+    ],
+    "2d34f58d197378c3b0391ba85a08f30eb50655094c5ce384afbeb378f28bd0b3": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_shortage_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "53095a0801edf2463e5c25bcb49d9f2d92aee66eed83a5709e1abc453fe1b69f",
+        "full_key": null
+      }
+    ],
+    "543204bd1e13c882895d8a16ab82cc91f9b10fee328bd5baf078e4a6657be6fc": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_shortage_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "02eb9a0244142882c058ba7d379e6284ec36bd1848b8cdb87648b138c1010fb3",
+        "full_key": null
+      }
+    ],
+    "d4ac1e91437750a8a6907f5a8b2c0d383ffd17b6bd0a1a4a42a5ece57088d3fd": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_shortage_M07_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "bfdc4a4d5e442cc474bed4d823364af4fdd9d0324957a45bb8ba575a93139eab",
+        "full_key": null
+      }
+    ],
+    "15b0e8861a5ed0789d6c5d7587512e1a03eda562cb4afc37a6a259da1d73f9f7": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_surplus_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "094095e6d3b17d348154349b22efe6abb8432fd403ecca451e09bc737afb39f1",
+        "full_key": null
+      }
+    ],
+    "919c4af0a1fb1004f9bf7653014111b004082f58c6a7b80c25976b4e1d7d043d": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_surplus_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "f9afd970dd70aea58a958b381f7f0e15d1620a5f70793b370d2bbb15384abcac",
+        "full_key": null
+      }
+    ],
+    "15047afb30b87ee50a7c8912238a4ffd562ab67341c18774f9b3282babb288a1": [
+      {
+        "input": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r2_surplus_M07_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "926b739c7ceefa5fbfddeb420425712ca77880fb22a3df42831cb68668773b5c",
+        "full_key": null
+      }
+    ],
+    "389685eaaf98a3543c0506c8d7b77bf4fd673c369baf36cf75f686dfb1b43910": [
+      {
+        "input": "reference/heldout_round26/V50_M3/high_imbalance_seed6202.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "dc638980e691c1e5a0db8863194d2c961c9548923de05ea66613c11a7b8542ba",
+        "full_key": null
+      }
+    ],
+    "ff10ca6635b2aae7b6b20c12e3d29ee0b6050786fe5466b52f052a033986ff31": [
+      {
+        "input": "reference/heldout_round26/V50_M3/moderate_seed6301.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "d07c4fc1d6f4c54b1964d7d1c925dd12b780f1973f5b61f1e02c1cfa35404ae3",
+        "full_key": null
+      }
+    ],
+    "01b4de6fd5576511dbdabc0e3b31482f96bd1f90a3d1c911f1ef1049b2c38a8f": [
+      {
+        "input": "reference/heldout_round26/V50_M3/tight_T_seed6102.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "62ed13533967116ca5cb0f3d3e8c4b984900b8aa11306aa6bb20a1aa6584e16c",
+        "full_key": null
+      }
+    ],
+    "39dd90cc724e0932bd2b90c440c341ec75d6ce51faf7420dab5bd637ba55e8d0": [
+      {
+        "input": "reference/heldout_round31/V50_M3/round31_sealed_high_imbalance_V50_seed802548647.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "7eb428a88b804a79aa77582d1f8a3fdcba14b493386fd6eab400e5b3ee91b0e7",
+        "full_key": null
+      }
+    ],
+    "33629e3d008b8233a16a4e476f553781c8badff19c099e521cb9fec737067bff": [
+      {
+        "input": "reference/heldout_round31/V50_M3/round31_sealed_moderate_V50_seed1112848618.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "14645ca5ea5fd88739a4d6632fdd986b574baeb1fc2706a261e36cf8bf61ce9b",
+        "full_key": null
+      }
+    ],
+    "0be7809b1a62b896a43398fd0aa0bd3183ebb13886336764dadf0582a050eeca": [
+      {
+        "input": "reference/heldout_round31/V50_M3/round31_sealed_tight_T_V50_seed1973327304.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "deea51d98a6185a90e6febd66fcae995841c1ee2624a8e372010afb578d39c34",
+        "full_key": null
+      }
+    ],
+    "2ef8d4883e583f0b9cc8545b8aac6bdab72dca78719a0c2882cc09889badaf72": [
+      {
+        "input": "reference/large_diagnostics/V50_M3_high_imbalance_seed5201.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "e57b6339cbf64edb9d6e8d2aa6b195a4b9eee2fe1a75c011e4c6d25ec4f8e872",
+        "full_key": null
+      }
+    ],
+    "720d2e235c422f72dc6c1ad1f7214e6b201694cb572005152768834579093aaf": [
+      {
+        "input": "reference/large_diagnostics/V50_M3_moderate_seed5101.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "6e10780f946a9f43a9d34b5e2e0467a8424c5f0195e6696d20a575948d404de7",
+        "full_key": null
+      }
+    ],
+    "e39662a72f31766feae18eef32ad5811670438d55738279cc173015547d305f4": [
+      {
+        "input": "reference/qualification_round32/V50_M2/round32_multi_m_high_imbalance_V50_M2_seed910922492.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "2f0770edc8a8aa122256be1091df5d8a6dc4eefd8e407502b2aa266ff184a23d",
+        "full_key": null
+      }
+    ],
+    "e0a3c66261191b667bbfffe0b4ac92367d5c37f5f200e7fd03c2f814c182d568": [
+      {
+        "input": "reference/qualification_round32/V50_M2/round32_multi_m_moderate_V50_M2_seed254020866.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "c6db687e5626187035907510b05a1a11f7353c83691a5290147bcf7215f1cb2a",
+        "full_key": null
+      }
+    ],
+    "28774098050b5f3bd6024586e0d9f118064fb4167f4137eca4672de46c42ac01": [
+      {
+        "input": "reference/qualification_round32/V50_M2/round32_multi_m_tight_T_V50_M2_seed104207248.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "07b345d3a957f98bf3df3218728c6ce7110efc708ba138ec49ba0d9f3cc4d09f",
+        "full_key": null
+      }
+    ],
+    "81f4ec088c2b82a69eba844fc2eadd12d90621206dc747a5b91ab902ce9eafba": [
+      {
+        "input": "reference/qualification_round32/V50_M4/round32_multi_m_high_imbalance_V50_M4_seed163456187.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "341488984031d90ccf81b358bc67a65cf9a3d77099305668b887d5ade73a07ad",
+        "full_key": null
+      }
+    ],
+    "aacb2e9d97f085a09cfdb5390a6343557700a1cfa0faf7ae49c167c81c475ae7": [
+      {
+        "input": "reference/qualification_round32/V50_M4/round32_multi_m_moderate_V50_M4_seed721910669.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "8eec8b89c4c4f3ca6a36c0777b1403912bcfa0509870afaccddda5c7ffcfae0e",
+        "full_key": null
+      }
+    ],
+    "d67812d661d10de4a1ca470addb6cae615e53bf58eb2e8f9496cd61df5c08d86": [
+      {
+        "input": "reference/qualification_round32/V50_M4/round32_multi_m_tight_T_V50_M4_seed1562257203.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "6a71328fbde8d2cce8ace454018dbbf8c78a0024828f16aa074863e67d84e21e",
+        "full_key": null
+      }
+    ],
+    "0c571e1403163b14f9b818db455f194bea43f25c582d8c5fd448fcf54d6b6219": [
+      {
+        "input": "reference/round101_confirmation/C101-V50.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "4b0cf9a27af7515028de620f83773d9aa520d3a0794b8f39c5b6124f2042d032",
+        "full_key": null
+      }
+    ],
+    "dc381d44785007d262224ee69773d0f1011575129a6e61c83e379f108a2e2974": [
+      {
+        "input": "reference/round52_holdout/V50_M3/round52_holdout_high_imbalance_3600_V50_M3_seed1732937213.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "4920098d8ce5f7542298ff76aa81509352370587f1d33162ac86597b3e558a62",
+        "full_key": null
+      }
+    ],
+    "f74d30c68a2a4927704dbd9acf79283e29a325bd120455a0aaf94df4d78de610": [
+      {
+        "input": "reference/round52_holdout/V50_M3/round52_holdout_moderate_3600_V50_M3_seed210097992.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "b15a088619601868e2dab78cf25741c52bdf1817b90d4bf186525a0ff3086b3b",
+        "full_key": null
+      }
+    ],
+    "309868eccaaadc42e22919bad88d4aee0991e2bac214133e5748927f125e8e87": [
+      {
+        "input": "reference/round52_holdout/V50_M3/round52_holdout_tight_T_2400_V50_M3_seed1725116517.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "7149cb6cab0fd17fdc26ce9968b3a060590a0eb189471f6042675876b03f38fb",
+        "full_key": null
+      }
+    ],
+    "c443c524ff8500ad7839687d35fedd43cb6e6ae9b7d6878dbd8d8b30c1e45c92": [
+      {
+        "input": "reference/round52_holdout/V50_M3/round52_holdout_tight_T_2550_V50_M3_seed97079863.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "a581cbaa00264e9774afa938301c4efb6acc8efefd5780096996c52539796380",
+        "full_key": null
+      }
+    ],
+    "787eed12540a6e197efeb14f1db3b9c88dddf6c0acd42e3c195edae8ed7e3b38": [
+      {
+        "input": "reference/round52_validation/V50_M3/round52_validation_high_imbalance_3600_V50_M3_seed67656343.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "a0560a14d3e4cdbbaedd5e5536c9ce7eef80940e842b3a5af29ddc5a0262626d",
+        "full_key": null
+      }
+    ],
+    "dc7f44c23c7360b2484685813e8383dfedf2f0e4266f8f338e4bafcf72f6e338": [
+      {
+        "input": "reference/round52_validation/V50_M3/round52_validation_moderate_3600_V50_M3_seed664120090.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "6dac00a7bdd903f54ce257c11e294e667af8e1d5f8947c38335b7fe3306575a3",
+        "full_key": null
+      }
+    ],
+    "74360ed1e5b52115778430f8f91d2f8265e147bf4476e562672ad260b3bf353e": [
+      {
+        "input": "reference/round52_validation/V50_M3/round52_validation_tight_T_2400_V50_M3_seed1300319903.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "f7854be6105c695164c3f4f91c6e4c562adbec464dc216f2f4d2541277c4b7dc",
+        "full_key": null
+      }
+    ],
+    "14422fb88e23c6ac6db990ff880ae1d0a92005d12ce6b1b33a5386021c3bcde0": [
+      {
+        "input": "reference/round52_validation/V50_M3/round52_validation_tight_T_2550_V50_M3_seed657579881.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "f6d54dbf7ff56e3390c1c2aaf5984e35b8b14aae816df6194ff0c7e4613dda56",
+        "full_key": null
+      }
+    ],
+    "0ca615f53a7086e49c82a5d3420800ed6ba4e928d684c5b7de877079a36daef7": [
+      {
+        "input": "reference/round54_generalization/V50_M2_Q20/round54_generalization_moderate_3600_V50_M2_Q20_seed1123418787.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "a973bc08313af2792bc3a8d8e2f40c9e162fda44a931e98344768f7bd1e70f7e",
+        "full_key": null
+      }
+    ],
+    "9b0c0e8b92aa3e5763e0c53a7f5c068c5e94c685546e598a111a1c24361a3577": [
+      {
+        "input": "reference/round54_generalization/V50_M2_Q30/round54_generalization_tight_T_2400_V50_M2_Q30_seed554739910.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "45102146e7c2d3e5c9022f3c8aa899a04b9b7a9799a73d7c3ffbd98c91f86879",
+        "full_key": null
+      }
+    ],
+    "147d6f9fd54174e74e393e446fb42b1edc821ca211b8f06814d5f447b9883342": [
+      {
+        "input": "reference/round54_generalization/V50_M3_Q20/round54_generalization_high_imbalance_3600_V50_M3_Q20_seed1405083217.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "9d3b971d88277135d7d02e48cb423e62efb1c8a3f0a0667e85965280c2b76767",
+        "full_key": null
+      }
+    ],
+    "31d1f18d03778d233b21a03064db7ed4a70cb42a57ffa5825006d4b6cd338727": [
+      {
+        "input": "reference/round54_generalization/V50_M3_Q30/round54_generalization_moderate_3600_V50_M3_Q30_seed68178453.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "f8ca6a98fdb429ad9dae063f0c9e48fca8a5f4b1c74e8868a4d900b95afc7a0b",
+        "full_key": null
+      }
+    ],
+    "e64c5b47d070bc2729ae05679fd8e75d04b231711f4a90be7e90dba3bc006e3e": [
+      {
+        "input": "reference/round55_expansion_panel/V50_M2_Q20/round55_expansion_panel_tight_T_2400_V50_M2_Q20_seed1120113474.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "65158e8d5f2582c50598a15d8a58f211a85fd657e1a0b01f771ceacdd3a019ac",
+        "full_key": null
+      }
+    ],
+    "023a3a4b0fdd350a4b16efd9a742ead1bdc94d1eff9bbf51bab46188568e48cb": [
+      {
+        "input": "reference/round55_expansion_panel/V50_M2_Q30/round55_expansion_panel_high_imbalance_3600_V50_M2_Q30_seed1100170043.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "066e4e592ffbd315d9a7054466995b13f7e6331317cc496919860627c1ef3e2b",
+        "full_key": null
+      }
+    ],
+    "18a81dadd6b6a92a69ad468f43ecefa22a6ff0d481ecff930a16a2cfa9fccee2": [
+      {
+        "input": "reference/round55_expansion_panel/V50_M3_Q20/round55_expansion_panel_moderate_3600_V50_M3_Q20_seed843126409.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "85dd8e865036923a377946825d892b6d123e80b6953b7eb9763bb389519f6655",
+        "full_key": null
+      }
+    ],
+    "121ee8d4debe5eba44e5dbb7b8d0023ad26a7647bf197a66fdbc8ed8f93481f6": [
+      {
+        "input": "reference/round55_expansion_panel/V50_M3_Q30/round55_expansion_panel_tight_T_2400_V50_M3_Q30_seed1468663058.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "fb0d1eace7d56082832b0054cdeace5924b0a03f794b5a511c629238fbb48878",
+        "full_key": null
+      }
+    ],
+    "a002cb6dc81a5a6756bb6f02fc87c75739d6b675c6e12182bceb8e48d3751bfe": [
+      {
+        "input": "reference/round55_sealed_generalization/V50_M2_Q20/round55_sealed_generalization_moderate_3600_V50_M2_Q20_seed1864056449.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "33f246b4d059624705b53317e2ee762ea45168cca7cde26b9f727100d66f4f2f",
+        "full_key": null
+      }
+    ],
+    "4e4c6d4468222853329e8e452a3804ecf7c645cb70ae0f17c811eb9161352211": [
+      {
+        "input": "reference/round55_sealed_generalization/V50_M2_Q30/round55_sealed_generalization_tight_T_2400_V50_M2_Q30_seed1727613808.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "9cc7293acef4d751cd5151692adde85c1aa65f3208f28325e413a3f314aab7af",
+        "full_key": null
+      }
+    ],
+    "5d2a3d101791f6426675ffcfcc04da90312ae4a02eb14b61de02c6dfde549c24": [
+      {
+        "input": "reference/round55_sealed_generalization/V50_M3_Q20/round55_sealed_generalization_high_imbalance_3600_V50_M3_Q20_seed1172417783.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "71ed13774dcdeaea0d559c6f3ca1375f8093af052bf68ff1b123c4f2ed3addfb",
+        "full_key": null
+      }
+    ],
+    "843dfad51925ed5cde8fb62d5921de5a584b1bbe0f830ec99d475d9f7efef4ab": [
+      {
+        "input": "reference/round55_sealed_generalization/V50_M3_Q30/round55_sealed_generalization_moderate_3600_V50_M3_Q30_seed1360644398.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "611800cd5e0b6b14821f92cdc2531512c953919d0bc23ba182fc9cdfd2325b4c",
+        "full_key": null
+      }
+    ],
+    "c68d523969a547a8be84a2d79df47a7643ff4c3f0b7cb2bf2e8e7dd43f359daa": [
+      {
+        "input": "reference/round56_paper_candidate/fleet_variants/V50/r56_V50_M04_Q20.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "46cb0f21b94ccabd5b67505473d3326bbfe3e3fce329b653afece79ba0afee68",
+        "full_key": null
+      }
+    ],
+    "d6c1e206c778e4a2d9d3066ffe41ccc82bdc11fd453b213ba6aa987ed8524533": [
+      {
+        "input": "reference/round56_paper_candidate/fleet_variants/V50/r56_V50_M04_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "f843a977e509433929bb8cb2a4f02a310ce549d9ae19277f86561b3dcc2bdfb3",
+        "full_key": null
+      }
+    ],
+    "cb6c9e21a9fa2d0d40e77c40c10a3dad1f5a3ece21353fa2bb6d1e2b5db61d77": [
+      {
+        "input": "reference/round56_paper_candidate/fleet_variants/V50/r56_V50_M05_Q30.txt",
+        "manifest": "pinned V50 text inventory",
+        "id": null,
+        "n": 50,
+        "checked_input_SHA256": "d4d918c92fcb733327629d1b1c40c24b6f61d55a58a204f2bb4a59d8de2edef9",
+        "full_key": null
+      }
+    ]
+  },
+  "historical_source_selections": [
+    {
+      "path": "reference/round109_geographic/G20-C1_selection.json",
+      "source": "CITI",
+      "rows": [
+        433,
+        438,
+        427,
+        432,
+        437,
+        439,
+        423,
+        430,
+        421,
+        412,
+        418,
+        400,
+        413,
+        406,
+        395,
+        410,
+        386,
+        390,
+        393,
+        373
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G20-C2_selection.json",
+      "source": "CITI",
+      "rows": [
+        7,
+        9,
+        11,
+        15,
+        12,
+        16,
+        3,
+        13,
+        27,
+        21,
+        25,
+        30,
+        4,
+        19,
+        22,
+        8,
+        33,
+        17,
+        24,
+        32
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G20-R1_selection.json",
+      "source": "CITI",
+      "rows": [
+        370,
+        385,
+        256,
+        308,
+        422,
+        267,
+        341,
+        382,
+        398,
+        355,
+        284,
+        367,
+        419,
+        358,
+        411,
+        403,
+        399,
+        396,
+        352,
+        343
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G20-R2_selection.json",
+      "source": "CITI",
+      "rows": [
+        118,
+        49,
+        241,
+        190,
+        123,
+        160,
+        102,
+        87,
+        209,
+        153,
+        67,
+        161,
+        219,
+        75,
+        120,
+        135,
+        131,
+        91,
+        189,
+        152
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G50-C1_selection.json",
+      "source": "CITI",
+      "rows": [
+        63,
+        56,
+        48,
+        75,
+        57,
+        69,
+        86,
+        49,
+        93,
+        64,
+        102,
+        47,
+        89,
+        91,
+        36,
+        67,
+        115,
+        59,
+        80,
+        106,
+        71,
+        37,
+        101,
+        131,
+        110,
+        40,
+        130,
+        122,
+        66,
+        81,
+        50,
+        83,
+        95,
+        43,
+        123,
+        112,
+        133,
+        143,
+        87,
+        149,
+        153,
+        72,
+        23,
+        52,
+        96,
+        126,
+        138,
+        111,
+        29,
+        152
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G50-C2_selection.json",
+      "source": "CITI",
+      "rows": [
+        440,
+        436,
+        441,
+        428,
+        435,
+        429,
+        434,
+        425,
+        442,
+        426,
+        417,
+        420,
+        419,
+        424,
+        416,
+        431,
+        407,
+        404,
+        401,
+        414,
+        422,
+        409,
+        408,
+        399,
+        394,
+        415,
+        403,
+        405,
+        389,
+        387,
+        385,
+        397,
+        402,
+        411,
+        392,
+        376,
+        379,
+        384,
+        375,
+        396,
+        382,
+        368,
+        388,
+        391,
+        398,
+        378,
+        362,
+        354,
+        355,
+        351
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G50-R1_selection.json",
+      "source": "CITI",
+      "rows": [
+        381,
+        330,
+        207,
+        439,
+        336,
+        288,
+        254,
+        413,
+        280,
+        410,
+        339,
+        342,
+        386,
+        213,
+        275,
+        437,
+        306,
+        374,
+        241,
+        412,
+        301,
+        319,
+        236,
+        320,
+        356,
+        294,
+        361,
+        393,
+        363,
+        304,
+        263,
+        209,
+        331,
+        255,
+        421,
+        234,
+        427,
+        360,
+        317,
+        438,
+        261,
+        303,
+        347,
+        278,
+        371,
+        400,
+        315,
+        310,
+        253,
+        350
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G50-R2_selection.json",
+      "source": "CITI",
+      "rows": [
+        187,
+        344,
+        51,
+        196,
+        287,
+        92,
+        128,
+        239,
+        265,
+        132,
+        183,
+        229,
+        65,
+        144,
+        90,
+        308,
+        235,
+        167,
+        221,
+        180,
+        129,
+        352,
+        204,
+        38,
+        256,
+        166,
+        79,
+        99,
+        178,
+        136,
+        230,
+        205,
+        279,
+        173,
+        159,
+        85,
+        231,
+        271,
+        114,
+        251,
+        162,
+        225,
+        103,
+        206,
+        333,
+        140,
+        119,
+        145,
+        104,
+        150
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G100-C1_selection.json",
+      "source": "CITI",
+      "rows": [
+        334,
+        327,
+        318,
+        328,
+        351,
+        354,
+        309,
+        324,
+        355,
+        368,
+        349,
+        332,
+        308,
+        343,
+        292,
+        283,
+        376,
+        362,
+        316,
+        375,
+        296,
+        387,
+        385,
+        379,
+        358,
+        365,
+        277,
+        346,
+        279,
+        265,
+        323,
+        344,
+        293,
+        384,
+        394,
+        389,
+        340,
+        258,
+        312,
+        401,
+        382,
+        249,
+        372,
+        272,
+        399,
+        298,
+        397,
+        404,
+        369,
+        260,
+        341,
+        357,
+        248,
+        244,
+        388,
+        367,
+        407,
+        392,
+        330,
+        378,
+        408,
+        333,
+        313,
+        231,
+        233,
+        299,
+        391,
+        402,
+        238,
+        417,
+        403,
+        420,
+        416,
+        345,
+        352,
+        235,
+        322,
+        409,
+        414,
+        377,
+        419,
+        396,
+        269,
+        245,
+        221,
+        405,
+        290,
+        303,
+        252,
+        364,
+        425,
+        228,
+        216,
+        428,
+        426,
+        212,
+        356,
+        331,
+        415,
+        429
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G100-C2_selection.json",
+      "source": "CITI",
+      "rows": [
+        1,
+        6,
+        0,
+        10,
+        5,
+        2,
+        14,
+        8,
+        18,
+        4,
+        23,
+        29,
+        20,
+        3,
+        17,
+        24,
+        37,
+        36,
+        40,
+        34,
+        19,
+        12,
+        43,
+        9,
+        47,
+        32,
+        21,
+        41,
+        50,
+        48,
+        15,
+        7,
+        42,
+        52,
+        57,
+        59,
+        49,
+        11,
+        30,
+        64,
+        56,
+        63,
+        66,
+        33,
+        69,
+        54,
+        71,
+        27,
+        72,
+        53,
+        16,
+        62,
+        83,
+        75,
+        89,
+        77,
+        25,
+        86,
+        93,
+        67,
+        45,
+        78,
+        13,
+        96,
+        39,
+        55,
+        106,
+        22,
+        91,
+        80,
+        110,
+        70,
+        102,
+        112,
+        88,
+        61,
+        111,
+        98,
+        115,
+        35,
+        81,
+        31,
+        101,
+        51,
+        94,
+        95,
+        26,
+        108,
+        130,
+        133,
+        87,
+        90,
+        131,
+        134,
+        138,
+        44,
+        73,
+        143,
+        124,
+        122
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G100-R1_selection.json",
+      "source": "CITI",
+      "rows": [
+        288,
+        402,
+        69,
+        437,
+        254,
+        118,
+        277,
+        347,
+        168,
+        219,
+        381,
+        348,
+        410,
+        163,
+        346,
+        242,
+        80,
+        280,
+        400,
+        291,
+        339,
+        299,
+        130,
+        160,
+        213,
+        191,
+        439,
+        49,
+        317,
+        120,
+        211,
+        243,
+        371,
+        122,
+        306,
+        366,
+        319,
+        324,
+        305,
+        421,
+        273,
+        102,
+        138,
+        240,
+        413,
+        293,
+        338,
+        238,
+        330,
+        161,
+        294,
+        253,
+        201,
+        393,
+        164,
+        361,
+        372,
+        373,
+        75,
+        215,
+        87,
+        423,
+        269,
+        224,
+        310,
+        110,
+        189,
+        263,
+        266,
+        135,
+        260,
+        391,
+        234,
+        337,
+        184,
+        433,
+        386,
+        349,
+        342,
+        200,
+        192,
+        142,
+        131,
+        257,
+        278,
+        312,
+        365,
+        148,
+        282,
+        412,
+        315,
+        89,
+        190,
+        157,
+        170,
+        199,
+        153,
+        245,
+        101,
+        261
+      ]
+    },
+    {
+      "path": "reference/round109_geographic/G100-R2_selection.json",
+      "source": "CITI",
+      "rows": [
+        74,
+        226,
+        6,
+        287,
+        88,
+        218,
+        13,
+        69,
+        187,
+        316,
+        128,
+        19,
+        148,
+        258,
+        51,
+        180,
+        183,
+        43,
+        130,
+        232,
+        127,
+        333,
+        147,
+        4,
+        96,
+        230,
+        7,
+        65,
+        28,
+        109,
+        18,
+        172,
+        27,
+        167,
+        124,
+        103,
+        239,
+        221,
+        184,
+        248,
+        54,
+        260,
+        292,
+        37,
+        110,
+        71,
+        79,
+        0,
+        196,
+        178,
+        270,
+        61,
+        155,
+        173,
+        238,
+        205,
+        211,
+        140,
+        145,
+        35,
+        251,
+        41,
+        77,
+        162,
+        231,
+        46,
+        113,
+        166,
+        85,
+        12,
+        208,
+        5,
+        277,
+        154,
+        265,
+        159,
+        223,
+        177,
+        225,
+        52,
+        199,
+        90,
+        70,
+        138,
+        121,
+        119,
+        129,
+        104,
+        150,
+        33,
+        39,
+        98,
+        89,
+        267,
+        132,
+        45,
+        16,
+        84,
+        156,
+        32
+      ]
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-C20-B_selection.json",
+      "source": "CITI",
+      "rows": [
+        435,
+        426,
+        428,
+        441,
+        442,
+        431,
+        440,
+        420,
+        416,
+        425,
+        436,
+        414,
+        429,
+        408,
+        417,
+        404,
+        434,
+        407,
+        401,
+        419
+      ]
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-B20-S_selection.json",
+      "source": "CABI",
+      "rows": [
+        783,
+        645,
+        266,
+        707,
+        322,
+        710,
+        815,
+        327,
+        628,
+        513,
+        656,
+        518,
+        773,
+        416,
+        651,
+        427,
+        576,
+        511,
+        423,
+        572
+      ]
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-C35-U_selection.json",
+      "source": "CITI",
+      "rows": [
+        411,
+        292,
+        402,
+        440,
+        333,
+        368,
+        407,
+        343,
+        380,
+        382,
+        431,
+        349,
+        424,
+        379,
+        334,
+        442,
+        416,
+        403,
+        357,
+        394,
+        389,
+        429,
+        428,
+        355,
+        308,
+        396,
+        398,
+        358,
+        378,
+        352,
+        370,
+        344,
+        385,
+        328,
+        435
+      ]
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-B35-B_selection.json",
+      "source": "CABI",
+      "rows": [
+        551,
+        550,
+        552,
+        553,
+        555,
+        554,
+        530,
+        529,
+        410,
+        431,
+        766,
+        399,
+        1,
+        687,
+        403,
+        837,
+        822,
+        406,
+        745,
+        401,
+        519,
+        737,
+        704,
+        409,
+        402,
+        445,
+        795,
+        474,
+        808,
+        532,
+        625,
+        547,
+        411,
+        430,
+        740
+      ]
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-C50-S_selection.json",
+      "source": "CITI",
+      "rows": [
+        326,
+        335,
+        342,
+        317,
+        311,
+        348,
+        300,
+        306,
+        331,
+        360,
+        338,
+        301,
+        356,
+        282,
+        278,
+        322,
+        303,
+        345,
+        281,
+        325,
+        286,
+        350,
+        330,
+        336,
+        313,
+        291,
+        290,
+        263,
+        366,
+        261,
+        273,
+        274,
+        299,
+        304,
+        254,
+        321,
+        259,
+        363,
+        295,
+        312,
+        347,
+        275,
+        340,
+        298,
+        305,
+        269,
+        386,
+        255,
+        323,
+        247
+      ]
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-B50-U_selection.json",
+      "source": "CABI",
+      "rows": [
+        279,
+        667,
+        391,
+        537,
+        430,
+        855,
+        656,
+        835,
+        255,
+        287,
+        428,
+        274,
+        357,
+        303,
+        498,
+        576,
+        200,
+        263,
+        267,
+        413,
+        251,
+        347,
+        277,
+        702,
+        266,
+        773,
+        249,
+        354,
+        422,
+        439,
+        805,
+        629,
+        220,
+        248,
+        298,
+        646,
+        254,
+        271,
+        364,
+        278,
+        324,
+        493,
+        262,
+        427,
+        789,
+        751,
+        857,
+        416,
+        753,
+        352
+      ]
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B20-B_selection.json",
+      "source": "CABI",
+      "rows": [
+        251,
+        250,
+        702,
+        429,
+        263,
+        262,
+        422,
+        279,
+        855,
+        352,
+        628,
+        267,
+        629,
+        646,
+        254,
+        278,
+        274,
+        287,
+        272,
+        789
+      ]
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C20-U_selection.json",
+      "source": "CITI",
+      "rows": [
+        370,
+        385,
+        256,
+        308,
+        422,
+        267,
+        341,
+        382,
+        398,
+        355,
+        284,
+        367,
+        419,
+        358,
+        411,
+        403,
+        399,
+        396,
+        352,
+        343
+      ]
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B30-S_selection.json",
+      "source": "CABI",
+      "rows": [
+        551,
+        550,
+        552,
+        553,
+        555,
+        554,
+        530,
+        529,
+        410,
+        431,
+        766,
+        399,
+        1,
+        687,
+        403,
+        837,
+        822,
+        406,
+        745,
+        401,
+        519,
+        737,
+        704,
+        409,
+        402,
+        445,
+        795,
+        474,
+        808,
+        532
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SC-C15-S_selection.json",
+      "source": "CITI",
+      "rows": [
+        282,
+        261,
+        306,
+        273,
+        278,
+        311,
+        290,
+        303,
+        300,
+        259,
+        254,
+        247,
+        317,
+        299,
+        240
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SC-B15-S_selection.json",
+      "source": "CABI",
+      "rows": [
+        263,
+        427,
+        629,
+        422,
+        251,
+        254,
+        855,
+        279,
+        274,
+        702,
+        628,
+        646,
+        267,
+        278,
+        262
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SC-C15-B_selection.json",
+      "source": "CITI",
+      "rows": [
+        411,
+        425,
+        352,
+        375,
+        378,
+        424,
+        399,
+        358,
+        380,
+        403,
+        398,
+        434,
+        407,
+        382,
+        396
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SC-B20-S_selection.json",
+      "source": "CABI",
+      "rows": [
+        85,
+        231,
+        863,
+        101,
+        228,
+        858,
+        344,
+        105,
+        648,
+        226,
+        179,
+        816,
+        769,
+        754,
+        8,
+        99,
+        93,
+        421,
+        486,
+        103
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SC-C20-S_selection.json",
+      "source": "CITI",
+      "rows": [
+        28,
+        109,
+        21,
+        73,
+        7,
+        25,
+        65,
+        74,
+        45,
+        44,
+        104,
+        13,
+        33,
+        85,
+        31,
+        60,
+        39,
+        61,
+        84,
+        100
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SC-B20-U_selection.json",
+      "source": "CABI",
+      "rows": [
+        551,
+        550,
+        552,
+        553,
+        555,
+        554,
+        530,
+        529,
+        410,
+        431,
+        766,
+        399,
+        1,
+        687,
+        403,
+        837,
+        822,
+        406,
+        745,
+        401
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SM-C8-S_selection.json",
+      "source": "CITI",
+      "rows": [
+        83,
+        66,
+        71,
+        72,
+        96,
+        112,
+        59,
+        111
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SM-B10-B_selection.json",
+      "source": "CABI",
+      "rows": [
+        612,
+        496,
+        675,
+        593,
+        748,
+        592,
+        613,
+        559,
+        557,
+        614
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/PB-C35-U_selection.json",
+      "source": "CITI",
+      "rows": [
+        411,
+        292,
+        402,
+        440,
+        333,
+        368,
+        407,
+        343,
+        380,
+        382,
+        431,
+        349,
+        424,
+        379,
+        334,
+        442,
+        416,
+        403,
+        357,
+        394,
+        389,
+        429,
+        428,
+        355,
+        308,
+        396,
+        398,
+        358,
+        378,
+        352,
+        370,
+        344,
+        385,
+        328,
+        435
+      ]
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/PB-B35-B_selection.json",
+      "source": "CABI",
+      "rows": [
+        551,
+        550,
+        552,
+        553,
+        555,
+        554,
+        530,
+        529,
+        410,
+        431,
+        766,
+        399,
+        1,
+        687,
+        403,
+        837,
+        822,
+        406,
+        745,
+        401,
+        519,
+        737,
+        704,
+        409,
+        402,
+        445,
+        795,
+        474,
+        808,
+        532,
+        625,
+        547,
+        411,
+        430,
+        740
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-15-S_selection.json",
+      "source": "CITI",
+      "rows": [
+        285,
+        297,
+        289,
+        262,
+        276,
+        307,
+        302,
+        314,
+        246,
+        353,
+        359,
+        383,
+        220,
+        203,
+        222
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-15-B_selection.json",
+      "source": "CABI",
+      "rows": [
+        464,
+        114,
+        280,
+        507,
+        387,
+        293,
+        676,
+        68,
+        119,
+        462,
+        42,
+        827,
+        370,
+        94,
+        461
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-20-S_selection.json",
+      "source": "CITI",
+      "rows": [
+        171,
+        151,
+        176,
+        179,
+        125,
+        107,
+        97,
+        175,
+        217,
+        182,
+        197,
+        227,
+        237,
+        210,
+        158,
+        137,
+        188,
+        58,
+        68,
+        82
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-20-U_selection.json",
+      "source": "CABI",
+      "rows": [
+        679,
+        624,
+        758,
+        602,
+        503,
+        130,
+        682,
+        43,
+        502,
+        104,
+        442,
+        798,
+        828,
+        674,
+        818,
+        7,
+        72,
+        492,
+        41,
+        388
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-35-B_selection.json",
+      "source": "CITI",
+      "rows": [
+        296,
+        272,
+        332,
+        327,
+        283,
+        252,
+        228,
+        242,
+        226,
+        215,
+        335,
+        326,
+        192,
+        186,
+        224,
+        168,
+        202,
+        214,
+        172,
+        281,
+        156,
+        191,
+        200,
+        286,
+        157,
+        181,
+        164,
+        274,
+        185,
+        146,
+        134,
+        141,
+        170,
+        149,
+        325
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-35-U_selection.json",
+      "source": "CABI",
+      "rows": [
+        441,
+        98,
+        814,
+        560,
+        655,
+        672,
+        209,
+        490,
+        343,
+        276,
+        227,
+        844,
+        817,
+        161,
+        634,
+        37,
+        752,
+        210,
+        4,
+        623,
+        663,
+        432,
+        489,
+        538,
+        796,
+        264,
+        657,
+        419,
+        208,
+        240,
+        487,
+        229,
+        330,
+        269,
+        842
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-15-S_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        268,
+        940,
+        273,
+        271,
+        150,
+        916,
+        276,
+        917,
+        521,
+        267,
+        1195,
+        270,
+        910,
+        924,
+        1213
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-15-B_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        836,
+        713,
+        707,
+        831,
+        784,
+        591,
+        767,
+        837,
+        833,
+        590,
+        773,
+        787,
+        586,
+        725,
+        772
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-20-S_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        1755,
+        1450,
+        1532,
+        1451,
+        1349,
+        1674,
+        1311,
+        1752,
+        1595,
+        805,
+        1502,
+        2000,
+        1345,
+        1736,
+        1777,
+        1511,
+        1689,
+        1259,
+        1489,
+        1515
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-20-U_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        2061,
+        56,
+        980,
+        1430,
+        62,
+        55,
+        158,
+        48,
+        129,
+        457,
+        2047,
+        1439,
+        49,
+        1421,
+        393,
+        118,
+        1054,
+        1428,
+        392,
+        1435
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-35-B_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        314,
+        1964,
+        210,
+        516,
+        1965,
+        1961,
+        411,
+        198,
+        120,
+        1976,
+        1960,
+        104,
+        1975,
+        1963,
+        100,
+        1966,
+        1977,
+        1962,
+        1974,
+        25,
+        299,
+        101,
+        102,
+        355,
+        1959,
+        977,
+        2024,
+        515,
+        1794,
+        73,
+        402,
+        105,
+        1799,
+        506,
+        291
+      ]
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-35-U_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        297,
+        914,
+        664,
+        1039,
+        991,
+        741,
+        628,
+        247,
+        282,
+        751,
+        318,
+        1001,
+        753,
+        986,
+        40,
+        692,
+        286,
+        629,
+        277,
+        990,
+        948,
+        1015,
+        742,
+        283,
+        925,
+        706,
+        776,
+        915,
+        1193,
+        994,
+        703,
+        1192,
+        41,
+        752,
+        653
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/N-B15-B_selection.json",
+      "source": "CABI",
+      "rows": [
+        297,
+        575,
+        538,
+        419,
+        743,
+        490,
+        817,
+        859,
+        565,
+        836,
+        207,
+        746,
+        803,
+        487,
+        663
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/N-X15-S_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        1368,
+        1401,
+        1398,
+        2034,
+        1991,
+        1990,
+        1350,
+        1992,
+        1366,
+        1367,
+        1989,
+        1363,
+        1397,
+        1371,
+        1986
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/N-C20-U_selection.json",
+      "source": "CITI",
+      "rows": [
+        136,
+        139,
+        154,
+        147,
+        117,
+        103,
+        119,
+        128,
+        141,
+        100,
+        150,
+        166,
+        132,
+        173,
+        104,
+        146,
+        167,
+        90,
+        181,
+        94
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/N-X20-B_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        1453,
+        1264,
+        1700,
+        1600,
+        1515,
+        1470,
+        1487,
+        1479,
+        1260,
+        1251,
+        1619,
+        1263,
+        1396,
+        1345,
+        1620,
+        1557,
+        1525,
+        1488,
+        1351,
+        1454
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/N-B35-S_selection.json",
+      "source": "CABI",
+      "rows": [
+        17,
+        11,
+        12,
+        55,
+        13,
+        603,
+        20,
+        286,
+        14,
+        2,
+        21,
+        759,
+        15,
+        323,
+        329,
+        18,
+        16,
+        234,
+        604,
+        832,
+        121,
+        5,
+        19,
+        380,
+        205,
+        236,
+        381,
+        540,
+        541,
+        747,
+        211,
+        300,
+        643,
+        864,
+        203
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/N-C35-B_selection.json",
+      "source": "CITI",
+      "rows": [
+        442,
+        357,
+        345,
+        410,
+        376,
+        422,
+        391,
+        328,
+        332,
+        398,
+        420,
+        389,
+        436,
+        365,
+        397,
+        340,
+        431,
+        392,
+        343,
+        401,
+        419,
+        327,
+        414,
+        411,
+        377,
+        355,
+        354,
+        394,
+        425,
+        372,
+        358,
+        435,
+        356,
+        385,
+        405
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/R-B20-S_selection.json",
+      "source": "CABI",
+      "rows": [
+        735,
+        126,
+        658,
+        125,
+        127,
+        412,
+        158,
+        129,
+        332,
+        219,
+        306,
+        312,
+        563,
+        821,
+        170,
+        505,
+        128,
+        321,
+        168,
+        307
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/R-X20-S_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        2061,
+        56,
+        980,
+        1430,
+        62,
+        55,
+        158,
+        48,
+        129,
+        457,
+        2047,
+        1439,
+        49,
+        1421,
+        393,
+        118,
+        1054,
+        1428,
+        392,
+        1435
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/R-B35-S_selection.json",
+      "source": "CABI",
+      "rows": [
+        72,
+        492,
+        818,
+        3,
+        390,
+        71,
+        43,
+        104,
+        696,
+        41,
+        494,
+        175,
+        840,
+        62,
+        47,
+        491,
+        729,
+        677,
+        63,
+        718,
+        130,
+        39,
+        521,
+        151,
+        418,
+        261,
+        682,
+        847,
+        225,
+        67,
+        0,
+        653,
+        841,
+        46,
+        343
+      ]
+    },
+    {
+      "path": "results/unified_exact_round137/inputs/R-X35-S_selection.json",
+      "source": "DIVVY",
+      "rows": [
+        1326,
+        1994,
+        1373,
+        1995,
+        1993,
+        1370,
+        2033,
+        1325,
+        1324,
+        1369,
+        1402,
+        1344,
+        1327,
+        1365,
+        1323,
+        2032,
+        1374,
+        1400,
+        1320,
+        1319,
+        1318,
+        1987,
+        1317,
+        2002,
+        1321,
+        1364,
+        1322,
+        1988,
+        1399,
+        1372,
+        1913,
+        1908,
+        1907,
+        1914,
+        1918
+      ]
+    },
+    {
+      "path": "results/unified_exact_round163/inputs/R163-C20-S/first/selection.json",
+      "source": "CITI",
+      "rows": [
+        274,
+        286,
+        291,
+        281,
+        263,
+        255,
+        275,
+        301,
+        266,
+        304,
+        243,
+        278,
+        295,
+        300,
+        234,
+        246,
+        254,
+        236,
+        305,
+        317
+      ]
+    },
+    {
+      "path": "results/unified_exact_round163/inputs/R163-B20-B/first/selection.json",
+      "source": "CABI",
+      "rows": [
+        751,
+        305,
+        702,
+        429,
+        251,
+        254,
+        422,
+        855,
+        279,
+        274,
+        347,
+        628,
+        287,
+        629,
+        646,
+        267,
+        278,
+        262,
+        352,
+        789
+      ]
+    },
+    {
+      "path": "results/unified_exact_round163/inputs/R163-X20-S/first/selection.json",
+      "source": "DIVVY",
+      "rows": [
+        1368,
+        1401,
+        1398,
+        2034,
+        1991,
+        1990,
+        1350,
+        1992,
+        1366,
+        1367,
+        1989,
+        1363,
+        1397,
+        1371,
+        1986,
+        1365,
+        1994,
+        2033,
+        1326,
+        2002
+      ]
+    },
+    {
+      "path": "results/unified_exact_round163/inputs/R163-C35-U/first/selection.json",
+      "source": "CITI",
+      "rows": [
+        442,
+        357,
+        345,
+        410,
+        376,
+        422,
+        391,
+        328,
+        332,
+        398,
+        420,
+        389,
+        436,
+        365,
+        397,
+        340,
+        431,
+        392,
+        343,
+        401,
+        419,
+        327,
+        414,
+        411,
+        377,
+        355,
+        354,
+        394,
+        425,
+        372,
+        358,
+        435,
+        356,
+        385,
+        405
+      ]
+    },
+    {
+      "path": "results/unified_exact_round163/inputs/R163-B35-S/first/selection.json",
+      "source": "CABI",
+      "rows": [
+        334,
+        139,
+        22,
+        33,
+        48,
+        326,
+        738,
+        661,
+        183,
+        34,
+        520,
+        79,
+        198,
+        182,
+        131,
+        819,
+        362,
+        195,
+        110,
+        180,
+        90,
+        59,
+        124,
+        113,
+        524,
+        83,
+        313,
+        478,
+        523,
+        386,
+        407,
+        87,
+        797,
+        647,
+        58
+      ]
+    },
+    {
+      "path": "results/unified_exact_round163/inputs/R163-X35-S/first/selection.json",
+      "source": "DIVVY",
+      "rows": [
+        836,
+        513,
+        799,
+        932,
+        1204,
+        832,
+        784,
+        893,
+        279,
+        831,
+        707,
+        30,
+        713,
+        825,
+        367,
+        592,
+        801,
+        767,
+        357,
+        837,
+        833,
+        590,
+        588,
+        838,
+        911,
+        773,
+        787,
+        57,
+        817,
+        690,
+        691,
+        542,
+        586,
+        766,
+        1144
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V08/cb443_V08_compact_r1.json",
+      "source": "CITI",
+      "rows": [
+        42,
+        32,
+        41,
+        54,
+        53,
+        62,
+        34,
+        24
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V08/cb443_V08_compact_r2.json",
+      "source": "CITI",
+      "rows": [
+        437,
+        430,
+        438,
+        433,
+        427,
+        423,
+        432,
+        413
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V08/cb443_V08_regional_r1.json",
+      "source": "CITI",
+      "rows": [
+        370,
+        411,
+        344,
+        382,
+        377,
+        333,
+        398,
+        396
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V08/cb443_V08_regional_r2.json",
+      "source": "CITI",
+      "rows": [
+        207,
+        161,
+        213,
+        253,
+        243,
+        160,
+        189,
+        209
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V12/cb443_V12_compact_r1.json",
+      "source": "CITI",
+      "rows": [
+        307,
+        294,
+        302,
+        315,
+        319,
+        314,
+        288,
+        339,
+        285,
+        297,
+        329,
+        268
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V12/cb443_V12_compact_r2.json",
+      "source": "CITI",
+      "rows": [
+        127,
+        144,
+        114,
+        113,
+        145,
+        162,
+        116,
+        92,
+        105,
+        129,
+        174,
+        165
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V12/cb443_V12_regional_r1.json",
+      "source": "CITI",
+      "rows": [
+        436,
+        403,
+        431,
+        404,
+        441,
+        428,
+        424,
+        417,
+        399,
+        416,
+        401,
+        415
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V12/cb443_V12_regional_r2.json",
+      "source": "CITI",
+      "rows": [
+        1,
+        9,
+        43,
+        14,
+        36,
+        2,
+        19,
+        23,
+        3,
+        8,
+        34,
+        6
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V20/cb443_V20_compact_r1.json",
+      "source": "CITI",
+      "rows": [
+        404,
+        394,
+        420,
+        401,
+        416,
+        407,
+        408,
+        387,
+        417,
+        414,
+        428,
+        425,
+        426,
+        385,
+        397,
+        376,
+        379,
+        399,
+        384,
+        419
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V20/cb443_V20_compact_r2.json",
+      "source": "CITI",
+      "rows": [
+        1,
+        6,
+        0,
+        10,
+        5,
+        2,
+        14,
+        8,
+        18,
+        4,
+        23,
+        29,
+        20,
+        3,
+        17,
+        24,
+        37,
+        36,
+        40,
+        34
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V20/cb443_V20_regional_r1.json",
+      "source": "CITI",
+      "rows": [
+        288,
+        207,
+        374,
+        295,
+        381,
+        257,
+        339,
+        246,
+        297,
+        347,
+        319,
+        361,
+        276,
+        294,
+        320,
+        275,
+        371,
+        253,
+        315,
+        321
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V20/cb443_V20_regional_r2.json",
+      "source": "CITI",
+      "rows": [
+        144,
+        225,
+        65,
+        150,
+        230,
+        92,
+        193,
+        183,
+        104,
+        129,
+        229,
+        165,
+        205,
+        85,
+        187,
+        114,
+        99,
+        162,
+        206,
+        140
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V30/cb443_V30_compact_r1.json",
+      "source": "CITI",
+      "rows": [
+        402,
+        397,
+        388,
+        414,
+        408,
+        391,
+        384,
+        416,
+        379,
+        431,
+        426,
+        372,
+        394,
+        404,
+        365,
+        420,
+        362,
+        376,
+        387,
+        435,
+        428,
+        401,
+        349,
+        346,
+        407,
+        417,
+        442,
+        425,
+        385,
+        354
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V30/cb443_V30_compact_r2.json",
+      "source": "CITI",
+      "rows": [
+        0,
+        2,
+        5,
+        4,
+        8,
+        1,
+        6,
+        10,
+        3,
+        14,
+        18,
+        17,
+        20,
+        12,
+        9,
+        24,
+        23,
+        19,
+        29,
+        7,
+        21,
+        15,
+        34,
+        11,
+        32,
+        40,
+        41,
+        30,
+        37,
+        43
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V30/cb443_V30_regional_r1.json",
+      "source": "CITI",
+      "rows": [
+        162,
+        154,
+        284,
+        65,
+        198,
+        140,
+        230,
+        92,
+        202,
+        232,
+        104,
+        239,
+        165,
+        127,
+        267,
+        167,
+        193,
+        109,
+        145,
+        205,
+        169,
+        251,
+        85,
+        187,
+        117,
+        256,
+        223,
+        225,
+        150,
+        121
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V30/cb443_V30_regional_r2.json",
+      "source": "CITI",
+      "rows": [
+        288,
+        281,
+        406,
+        207,
+        337,
+        381,
+        262,
+        366,
+        295,
+        243,
+        315,
+        374,
+        353,
+        336,
+        297,
+        220,
+        266,
+        319,
+        241,
+        347,
+        390,
+        291,
+        371,
+        294,
+        289,
+        338,
+        339,
+        363,
+        246,
+        310
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V50/cb443_V50_compact_r1.json",
+      "source": "CITI",
+      "rows": [
+        90,
+        94,
+        70,
+        103,
+        73,
+        119,
+        61,
+        88,
+        55,
+        100,
+        108,
+        79,
+        117,
+        132,
+        45,
+        53,
+        136,
+        141,
+        51,
+        78,
+        60,
+        147,
+        98,
+        62,
+        58,
+        146,
+        104,
+        139,
+        84,
+        54,
+        128,
+        124,
+        39,
+        68,
+        154,
+        77,
+        44,
+        33,
+        155,
+        42,
+        166,
+        82,
+        35,
+        121,
+        99,
+        65,
+        150,
+        46,
+        30,
+        137
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V50/cb443_V50_compact_r2.json",
+      "source": "CITI",
+      "rows": [
+        437,
+        430,
+        438,
+        433,
+        427,
+        423,
+        432,
+        413,
+        439,
+        412,
+        406,
+        421,
+        400,
+        418,
+        395,
+        393,
+        390,
+        386,
+        410,
+        374,
+        373,
+        371,
+        383,
+        363,
+        366,
+        359,
+        381,
+        361,
+        350,
+        347,
+        353,
+        337,
+        336,
+        339,
+        338,
+        329,
+        360,
+        325,
+        320,
+        321,
+        342,
+        310,
+        315,
+        305,
+        348,
+        356,
+        326,
+        335,
+        319,
+        304
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V50/cb443_V50_regional_r1.json",
+      "source": "CITI",
+      "rows": [
+        411,
+        293,
+        232,
+        431,
+        316,
+        376,
+        235,
+        370,
+        429,
+        391,
+        287,
+        258,
+        327,
+        389,
+        369,
+        346,
+        333,
+        355,
+        441,
+        404,
+        239,
+        409,
+        292,
+        397,
+        251,
+        344,
+        249,
+        392,
+        428,
+        372,
+        362,
+        270,
+        328,
+        414,
+        398,
+        354,
+        332,
+        407,
+        277,
+        377,
+        352,
+        323,
+        343,
+        267,
+        358,
+        424,
+        385,
+        256,
+        283,
+        440
+      ]
+    },
+    {
+      "path": "reference/citibike443-regional-v1/selections/V50/cb443_V50_regional_r2.json",
+      "source": "CITI",
+      "rows": [
+        118,
+        215,
+        288,
+        37,
+        275,
+        91,
+        189,
+        133,
+        219,
+        254,
+        297,
+        153,
+        71,
+        151,
+        87,
+        49,
+        172,
+        200,
+        257,
+        115,
+        123,
+        57,
+        243,
+        175,
+        209,
+        149,
+        234,
+        120,
+        276,
+        294,
+        286,
+        106,
+        161,
+        224,
+        86,
+        213,
+        67,
+        253,
+        135,
+        263,
+        295,
+        190,
+        182,
+        152,
+        163,
+        63,
+        246,
+        47,
+        48,
+        93
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "reference/generated/regen_V50_M3_average.txt",
+      "manifest": "pinned V50 text inventory",
+      "issue": "legacy text schema",
+      "detail": "invalid first line"
+    },
+    {
+      "path": "reference/generated/regen_V50_M5_low.txt",
+      "manifest": "pinned V50 text inventory",
+      "issue": "legacy text schema",
+      "detail": "invalid first line"
+    }
+  ],
+  "scope": "Pinned manifest-linked inputs plus named V50 reference text. Parsed exact base and full keys when the config is present.",
+  "historical_raw_restored": 0,
+  "Optimize": 0
+}
