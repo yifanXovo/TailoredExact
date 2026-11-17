@@ -1,0 +1,18 @@
+{
+  "UTC": "2026-11-17T08:48:29.755314+00:00",
+  "science_start_epoch": 1794855003,
+  "first_science_segment_end_epoch": 1794867585.908144,
+  "first_science_segment_seconds": 12582.908143997192,
+  "resume_epoch": 1794905225.496008,
+  "inactive_postcompletion_gap_seconds": 37639.58786392212,
+  "reason": "Both original process/session handles now returned rc=0; all 22 solver processes and read-only audits ended before the gap. No R170 computation or authoring ran during the postcompletion inactive interval.",
+  "evidence": [
+    "panel_complete.json",
+    "monitor_status.json",
+    "complete_status.json",
+    "review/audit_process_costs.json"
+  ],
+  "gross_wall_clock_must_remain_reported": true,
+  "science_capacity_seconds": 21600,
+  "no_solver_restarts": true
+}

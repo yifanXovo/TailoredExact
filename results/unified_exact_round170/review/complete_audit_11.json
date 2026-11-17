@@ -1,0 +1,427 @@
+{
+  "schema": "round170-qualified-cold-P-postreturn-audit-v1",
+  "UTC": "2026-11-16T20:37:44.360405+00:00",
+  "passed": true,
+  "position": 11,
+  "role": "R163-X35-S",
+  "research_arm": "P",
+  "Native_Seed": 1,
+  "Optimize_run_by_reviewer": 0,
+  "actual_invocation": {
+    "path": "results/unified_exact_round170/complete_raw/11_R163-X35-S_S1_P/invocation.json",
+    "bytes": 3902,
+    "SHA256": "5eafb97a1ee7907fc3ac90d32073be467ab073fd89d423a09d29b7b767bd007c"
+  },
+  "input": {
+    "path": "results/unified_exact_round163/inputs/R163-X35-S/first/instance.txt",
+    "bytes": 2068,
+    "SHA256": "5804470a50da77c2da43ca5654b85e22f0e82459ef556d4d4d75e52e3a87daa9"
+  },
+  "completion": {
+    "UTC": "2026-11-16T20:37:24.144332+00:00",
+    "started_epoch": 1794860850.0119617,
+    "ended_epoch": 1794861444.1443322,
+    "process_outer_seconds": 594.1319927996956,
+    "rc": 0,
+    "affinity": {
+      "mask": 4,
+      "set_success": true
+    },
+    "result": {
+      "path": "results/unified_exact_round170/complete_raw/11_R163-X35-S_S1_P/result.json",
+      "bytes": 87508,
+      "SHA256": "d84c6c81065bf08ebb41664ef1ab4a577c638372515cdad48122adab2ff81ec1"
+    }
+  },
+  "U": 0.599347390042705,
+  "L": 0.3480777125726512,
+  "absolute_gap": 0.2512696774700538,
+  "relative_gap": 0.41923879480337806,
+  "certificate": false,
+  "certificate_basis": "complete_original_cold_compact_qualified_native_bound_open",
+  "true_final_physical": {
+    "G": 0.2843981883010504,
+    "P": 3.390625,
+    "F": 0.599347390042705,
+    "Y": [
+      50000,
+      6,
+      0,
+      5,
+      2,
+      1,
+      6,
+      1,
+      0,
+      1,
+      8,
+      1,
+      0,
+      1,
+      5,
+      1,
+      1,
+      2,
+      1,
+      0,
+      5,
+      1,
+      1,
+      1,
+      3,
+      4,
+      1,
+      1,
+      0,
+      5,
+      1,
+      1,
+      1,
+      1,
+      1,
+      5
+    ],
+    "maximum_duration": 10720.741793484804,
+    "pickups": [
+      9,
+      12,
+      7
+    ],
+    "return_loads": [
+      1,
+      0,
+      0
+    ],
+    "routes": [
+      {
+        "vehicle": 0,
+        "nodes": [
+          0,
+          3,
+          16,
+          10,
+          22,
+          20,
+          31,
+          0
+        ],
+        "operations": [
+          {
+            "station": 3,
+            "pickup": 6,
+            "drop": 0
+          },
+          {
+            "station": 16,
+            "pickup": 1,
+            "drop": 0
+          },
+          {
+            "station": 10,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 22,
+            "pickup": 0,
+            "drop": 1
+          },
+          {
+            "station": 20,
+            "pickup": 2,
+            "drop": 0
+          },
+          {
+            "station": 31,
+            "pickup": 0,
+            "drop": 1
+          }
+        ]
+      },
+      {
+        "vehicle": 1,
+        "nodes": [
+          0,
+          1,
+          30,
+          14,
+          34,
+          29,
+          9,
+          6,
+          0
+        ],
+        "operations": [
+          {
+            "station": 1,
+            "pickup": 6,
+            "drop": 0
+          },
+          {
+            "station": 30,
+            "pickup": 0,
+            "drop": 1
+          },
+          {
+            "station": 14,
+            "pickup": 6,
+            "drop": 0
+          },
+          {
+            "station": 34,
+            "pickup": 0,
+            "drop": 1
+          },
+          {
+            "station": 29,
+            "pickup": 0,
+            "drop": 4
+          },
+          {
+            "station": 9,
+            "pickup": 0,
+            "drop": 1
+          },
+          {
+            "station": 6,
+            "pickup": 0,
+            "drop": 5
+          }
+        ]
+      },
+      {
+        "vehicle": 2,
+        "nodes": [
+          0,
+          18,
+          11,
+          4,
+          7,
+          33,
+          24,
+          35,
+          0
+        ],
+        "operations": [
+          {
+            "station": 18,
+            "pickup": 1,
+            "drop": 0
+          },
+          {
+            "station": 11,
+            "pickup": 0,
+            "drop": 1
+          },
+          {
+            "station": 4,
+            "pickup": 2,
+            "drop": 0
+          },
+          {
+            "station": 7,
+            "pickup": 0,
+            "drop": 1
+          },
+          {
+            "station": 33,
+            "pickup": 0,
+            "drop": 1
+          },
+          {
+            "station": 24,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 35,
+            "pickup": 0,
+            "drop": 4
+          }
+        ]
+      }
+    ],
+    "complete_fleet_vehicles": 3,
+    "empty_vehicles_added": 0
+  },
+  "full_paid_H": null,
+  "Start_checks": [],
+  "cold_parameters": {
+    "MIPFocus": 0,
+    "Cuts": -1,
+    "NumStart_before_optimize": 0,
+    "loaded_after_presets": true,
+    "authoritative_model_environment": true
+  },
+  "models": [
+    {
+      "call": 1,
+      "model": {
+        "path": "results/unified_exact_round170/complete_raw/11_R163-X35-S_S1_P/compact.lp",
+        "SHA": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4",
+        "rows": 13814,
+        "columns": 5340,
+        "quantity_columns": 210,
+        "quantity_type": "I",
+        "direction_columns": 105,
+        "frozen_A_B_rows_checked": 0,
+        "route_load_Y_integer": true,
+        "state_assignment_direction_binary": true
+      },
+      "scope": {
+        "full_original_reference_already_checked": true
+      },
+      "AP": {
+        "enabled": false,
+        "one_hot_AP_contract_applicable": false,
+        "original_compact_reference_SHA256": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4",
+        "full_matrix_byte_identity_verified": true
+      },
+      "no_improver_shortcut_check": {
+        "call": 1,
+        "actual_constant_infeasibility_rows_zero_based": [],
+        "identified_legacy_shortcut_rows": [],
+        "similar_row_shapes": [],
+        "model_scope_issue": false,
+        "inclusive_domain_empty_proved_by_marker": false,
+        "old_side_default_performance_disposition": "UNALTERED",
+        "analytic_compatibility_requires_independent_review": true
+      }
+    }
+  ],
+  "journal_events": 69,
+  "actual_Optimize": 1,
+  "LP": 0,
+  "MIP": 1,
+  "Native_seconds": 593.8550000190735,
+  "actual_call_log_bindings": [
+    {
+      "call": 1,
+      "serial_ordinal": 1,
+      "model_SHA": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4",
+      "leaf": "",
+      "true_G_interval": [
+        0,
+        0.9714285714285714
+      ],
+      "cutoff": 0,
+      "epoch": null,
+      "epoch_source": "scope/cutoff bound; no invented epoch",
+      "solve_kind": "MIP",
+      "ledger": null,
+      "raw_log": "results/unified_exact_round170/complete_raw/11_R163-X35-S_S1_P/native.log",
+      "raw_log_SHA": "699361a4dd1f3463ec515189338fc3630c5f959261b5ed2e07688d07c669e84e",
+      "byte_begin": 0,
+      "byte_end": 18715,
+      "segment_SHA": "699361a4dd1f3463ec515189338fc3630c5f959261b5ed2e07688d07c669e84e",
+      "fingerprint": "0x738bb40d",
+      "fingerprint_contract": {
+        "cold_reference": "0x738bb40d",
+        "Optimize_log": "0x738bb40d",
+        "same_state_equal": true
+      },
+      "parameters": {
+        "TimeLimit": 593.8476554,
+        "MIPGap": 0.0,
+        "MIPGapAbs": 0.0,
+        "Seed": 1.0,
+        "Threads": 1.0
+      },
+      "native_types": {
+        "C": 903,
+        "B": 4087,
+        "I": 350
+      },
+      "journal_returned": true,
+      "return_sequence": 69,
+      "return_available": 594.0085181,
+      "return_code": 0,
+      "missing_return_requires_unchanged_narrow_gate": false
+    }
+  ],
+  "actual_native_quality": {
+    "quality": [
+      {
+        "call": 1,
+        "sufficient": true,
+        "violated_attributes": [],
+        "unknown_attributes": [
+          "DualVio"
+        ],
+        "solution_count": 10,
+        "solution_count_read_return_code": 0,
+        "native_status": 9,
+        "native_status_read_return_code": 0,
+        "optimize_return_code": 0,
+        "quality_applicability": "KNOWN",
+        "residuals_not_qualified_by_assuming_unknown_count_zero": false,
+        "retained_attributes": {
+          "ObjVal": 0.5993473900427049,
+          "ObjBoundC": 0.3480777125726512,
+          "ConstrVio": 2.8688162956314045e-13,
+          "BoundVio": 0,
+          "IntVio": 0,
+          "DualVio": null
+        },
+        "solve_kind": "MIP",
+        "objective_error_bound_claimed": false
+      }
+    ],
+    "infeasibility": [],
+    "extra_Optimize": 0
+  },
+  "qualified_cold_bound": {
+    "call": 1,
+    "lo": 0,
+    "hi": 0.9714285714285714,
+    "L": 0.3480777125726512,
+    "cutoff": null,
+    "sequence": 69,
+    "source": "linked_returned_complete_original_cold_native_log_and_readback",
+    "native_status": 9,
+    "native_log": "results/unified_exact_round170/complete_raw/11_R163-X35-S_S1_P/native.log",
+    "native_log_SHA": "699361a4dd1f3463ec515189338fc3630c5f959261b5ed2e07688d07c669e84e",
+    "printed_native_final_bound": 0.3480777125727,
+    "full_original": true
+  },
+  "actual_Optimize_parameters": [
+    {
+      "call": 1,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 1,
+        "Presolve": -1,
+        "MIPFocus": 0,
+        "Cuts": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "expected": {
+          "Threads": 1,
+          "Seed": 1,
+          "Presolve": -1,
+          "MIPFocus": 0,
+          "Cuts": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "qualification_reason": ""
+      },
+      "model_SHA256": "f16ade9d1291831e93b58ca0cf1505eb999359de5696e2aad64c96acdb3b97a4"
+    }
+  ],
+  "phase_event_count": 7,
+  "phase_files": [
+    "results/unified_exact_round170/complete_raw/11_R163-X35-S_S1_P/phases.csv"
+  ],
+  "exact_first_hit_global_seconds": null,
+  "first_hit_missing_reason": "no exact global first-hit clock; rounded solver discovery times not promoted",
+  "raw_bytes_unchanged": true,
+  "audit_seconds": 0.22144740028306842
+}
