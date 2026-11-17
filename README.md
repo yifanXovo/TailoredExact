@@ -3,8 +3,9 @@
 Exact solvers for the Equity-aware Bike Repositioning Problem.
 
 The main paper algorithm is **GI-TBC/B** (historical S2/ms2), with AP disabled
-and a uniform pair-support configuration. The current R169 manuscript includes
-the paid objective-diversified initialization study; C166/D167/C169 stay off.
+and a uniform pair-support configuration. The current R170 manuscript includes
+the fixed paid-initialization confirmation and matched cold controls; the
+mixed/negative result closes further C169 optimization. C166/D167/C169 stay off.
 Historical and new measured source/PE identities remain distinct from
 document generation. Start with the
 [paper-S2 release and run guide](docs/paper_s2_release.md), then the
@@ -27,10 +28,11 @@ Read the [current complete manuscript](results/unified_exact_round137/manuscript
 [main + Appendix A/B PDF](results/unified_exact_round137/manuscript.pdf), and
 [supplement PDF](results/unified_exact_round137/supplement.pdf).
 The [contribution map](results/unified_exact_round165/contribution_positioning.md)
-and [current author memo](results/unified_exact_round169/author_decision_memo.md) explain
+and [current author memo](results/unified_exact_round170/author_decision_memo.md) explain
 the integrated method's finite evidence and the unestablished independent
-performance value of the outer controller. The [R169 report](results/unified_exact_round169/final_report.md)
-separates paid n35 primal gains from mixed proof costs and the matched restart control.
+performance value of the outer controller. The [R170 report](results/unified_exact_round170/final_report.md)
+separates nonrepeating candidate gains, C20 proof-cost regressions and three
+new same-budget B/P endpoint advantage observations.
 The bare executable retains its **ENS-C compatibility default**. AP and TC are
 closed research studies, with AP research-only and default off.
 
@@ -38,8 +40,8 @@ Round136 was merged into Git `main` by ordinary merge commit in
 [PR #198](https://github.com/yifanXovo/TailoredExact/pull/198). Its historical
 checkout disposition is in the
 [integration, PR disposition and local cleanup](results/unified_exact_round136/RESUME.md)
-record. R169 uses the isolated `ExactEBRP-work/worktrees/round169` checkout
-from verified R168, retaining the dirty R155 `paper-current` entry. The original `E:\codes\ExactEBRP` checkout retains
+record. R170 uses the isolated `ExactEBRP-work/worktrees/round170` checkout
+from verified R169, retaining the dirty R155 `paper-current` entry. The original `E:\codes\ExactEBRP` checkout retains
 user changes and the shared Git store. New work belongs under
 `E:\codes\ExactEBRP-work`; see [workspace policy](WORKSPACE_POLICY.md).
 
@@ -48,5 +50,5 @@ The former K1-AM-SF/R55-R58 entry is
 Use the [research index](docs/unified_exact_research_index.md) for fixed evidence
 versions and earlier results. The root [Manuscript directory](Manuscript/README.md)
 is also historical. Current paper sources and the component-only
-`scripts/round165_documents.py` build are documented in the review packet;
+`scripts/round170_documents.py` build are documented in the review packet;
 historical release configurations keep their own identities in the run guide.

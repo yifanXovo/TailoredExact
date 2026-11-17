@@ -1,5 +1,37 @@
 # Current manuscript and research mainline
 
+Round170 closes further optimization of fixed C169 after its22-position,
+600s confirmation on four selected exposed inputs and Native Seeds1/2.
+No n35 role retains lower final U at both Seeds; only B35 Seed1 improves
+absolute gap. C20 certifies the same optimum but C/B proof-time ratios are
+1.00657/1.33224. Matched M retains B initial/final U on all three Seed1 roles.
+Three new strict Seed1 B/P pairs favor B in U/L/gap, with zero new certificate
+or physical input. C/P remains a separate candidate result. Uniform B stays
+main and C166/D167/C169 remain default off.
+
+The [report](../results/unified_exact_round170/final_report.md),
+[all paid arms](../results/unified_exact_round170/complete_arms.csv),
+[decision](../results/unified_exact_round170/research_decision.md),
+[costs](../results/unified_exact_round170/cost_report.json) and
+[CSV reconciliation](../results/unified_exact_round170/CSV_reconciliation.json)
+bind41 own-H calls and84 actual Optimize calls (57 LP/27 MIP). The specified
+118-row attachment was absent. Eight qualified mergeable B rows contain
+three actual P counterparts and five N/A-P rows; no126-row master is claimed.
+Gross elapsed time and the postcompletion inactive interruption are disclosed
+separately from charged scientific work.
+
+The same maintained [paper](../results/unified_exact_round137/manuscript.md),
+[main PDF](../results/unified_exact_round137/manuscript.pdf) and
+[supplement PDF](../results/unified_exact_round137/supplement.pdf) use
+scripts/round170_documents.py assemble|pdf|qa. The paid table now belongs to
+computational Section4.6/Table7, with complete historical/current S169/S170.
+The isolated worktree is E:/codes/ExactEBRP-work/worktrees/round170, branch
+codex/round170-reweight-confirmation, stacked on R169 while main lacks its
+dependencies. Historical production source/PE identities stay historical.
+No merge or Round171 is started.
+
+## Round169 baseline (retained historical record)
+
 Round169 tests paid objective-diversified complete-H initialization against
 matched original-weight restarts. All35 H paths complete and four of six
 current roles trigger the full eighteen-position short-cap Seed0 panel.

@@ -1,0 +1,60 @@
+{
+  "UTC": "2026-11-17T09:13:35.085509+00:00",
+  "PASS": true,
+  "positions": 22,
+  "complete_H_calls": 41,
+  "actual_Optimize": 84,
+  "LP": 57,
+  "MIP": 27,
+  "all_source_hashes_match": true,
+  "common_PE": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round169\\ExactEBRP.exe",
+    "bytes": 9884148,
+    "SHA256": "c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57"
+  },
+  "independent_reviews": [
+    {
+      "path": "math_review_final.json",
+      "status": "PASS",
+      "file": {
+        "path": "results/unified_exact_round170/review/math_review_final.json",
+        "bytes": 541536,
+        "SHA256": "f58e48fecc932c7695f9c4e015a6877e109dbfc7752318c24b2f34648a857e62"
+      }
+    },
+    {
+      "path": "execution_review_final.json",
+      "status": "PASS",
+      "file": {
+        "path": "results/unified_exact_round170/review/execution_review_final.json",
+        "bytes": 68281,
+        "SHA256": "abe56f87bcbc0de99e1c420d5491bde835c06897928e108e3052edf9a7c04615"
+      }
+    },
+    {
+      "path": "research_review_final.json",
+      "status": "PASS",
+      "file": {
+        "path": "results/unified_exact_round170/review/research_review_final.json",
+        "bytes": 25335,
+        "SHA256": "86723d33925e3159b4772a0350eec3a9be9d48ae7a0dc71c8fd4cca86e7dfcf2"
+      }
+    }
+  ],
+  "CSV_QA": {
+    "path": "results/unified_exact_round170/CSV_QA.json",
+    "bytes": 3754,
+    "SHA256": "5fdd232e28c00a521af2678324be6b33bef82e02ef4cf8ed49d894bb4a86f88a"
+  },
+  "PDF_QA": {
+    "path": "results/unified_exact_round170/document_qa.json",
+    "bytes": 36043,
+    "SHA256": "a246361b2ff51cdb5f025c4149acc7dcdcf78f2999a7601086096d43b6691987"
+  },
+  "new_B_records": 8,
+  "new_strict_P_pairs": 3,
+  "new_physical_inputs": 0,
+  "default_B": true,
+  "C166_D167_C169_default_off": true,
+  "solver_reruns_for_documentation": 0
+}

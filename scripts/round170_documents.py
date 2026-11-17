@@ -27,6 +27,8 @@ def typeset(raw,supplement=False):
     title,text=previous.typeset(raw,supplement)
     if not supplement:
         text=text.replace('**Table 7.','```{=latex}\n\\Needspace{18\\baselineskip}\n```\n\n**Table 7.',1)
+        # Finish the last resource/weight figure before opening Conclusions.
+        text=text.replace('## 6. Conclusions','\\clearpage\n\n## 6. Conclusions',1)
     elif '## S170' in text:
         at=text.index('## S170');head,tail=text[:at],text[at:]
         for marker in ['```{=latex}\n\\begin{landscape}\n```\n\n','```{=latex}\n\\end{landscape}\n```\n\n']:
@@ -61,7 +63,7 @@ def pdf():
 def qa():
     source=inspect.getsource(previous.qa)
     source=source.replace("['Table 11.','S169','paid objective','matched multistart','Paquete']",
-        "['Table 7.','S170','4.6 Paid','matched cold','fixed candidate','Paquete']")
+        "['Table 7.','S170','4.6 Paid','matched cold','fixed candidate','Paquete','Conclusions','difference interval','C169','A.10']")
     ns=dict(vars(previous),ROOT=ROOT,OUT=OUT,TEMP=TEMP,PAPER=PAPER,checks=checks,old=old,__file__=__file__)
     exec(compile(source,__file__+'::qa','exec'),ns);ns['qa']()
 

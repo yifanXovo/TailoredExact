@@ -1,0 +1,88 @@
+{
+  "UTC": "2026-11-17T09:01:50.229Z",
+  "PASS": true,
+  "operation": "read-only Artifact Tool CSV import/schema/endpoint validation",
+  "rows": 8,
+  "columns": 28,
+  "UTF8_BOM": true,
+  "exact_binary64_qualified_endpoints": true,
+  "new_B_P_pairs": 3,
+  "unpaired_rows": 5,
+  "new_physical_inputs": 0,
+  "T_cert_uses_process_only": true,
+  "OPEN_gap_unit": "percent",
+  "C_M_excluded": true,
+  "workbook_edits": 0,
+  "workbook_exports": 0,
+  "source_CSV_SHA256": "3e6f2f8c84587a15a70590d688319a0b429a1a313c7495505b8b73bf1ba04885",
+  "protected_103_row_reference_SHA256": "acca7225bb586f0955a4c453e59c199ba9e8c1835d538abcbfb156df528c772b",
+  "checks": [
+    {
+      "row": 2,
+      "role": "R163-C20-S",
+      "Native_Seed": 1,
+      "position": 1,
+      "paired": false,
+      "PASS": true
+    },
+    {
+      "row": 3,
+      "role": "R163-C35-U",
+      "Native_Seed": 1,
+      "position": 6,
+      "paired": true,
+      "PASS": true
+    },
+    {
+      "row": 4,
+      "role": "R163-B35-S",
+      "Native_Seed": 1,
+      "position": 8,
+      "paired": true,
+      "PASS": true
+    },
+    {
+      "row": 5,
+      "role": "R163-X35-S",
+      "Native_Seed": 1,
+      "position": 13,
+      "paired": true,
+      "PASS": true
+    },
+    {
+      "row": 6,
+      "role": "R163-C20-S",
+      "Native_Seed": 2,
+      "position": 16,
+      "paired": false,
+      "PASS": true
+    },
+    {
+      "row": 7,
+      "role": "R163-C35-U",
+      "Native_Seed": 2,
+      "position": 17,
+      "paired": false,
+      "PASS": true
+    },
+    {
+      "row": 8,
+      "role": "R163-B35-S",
+      "Native_Seed": 2,
+      "position": 20,
+      "paired": false,
+      "PASS": true
+    },
+    {
+      "row": 9,
+      "role": "R163-X35-S",
+      "Native_Seed": 2,
+      "position": 21,
+      "paired": false,
+      "PASS": true
+    }
+  ],
+  "inspection": "{\"kind\":\"region\",\"sheet\":\"B records\",\"address\":\"O1:Y9\",\"rows\":9,\"cols\":11,\"nonEmpty\":68,\"blank\":31,\"text\":68,\"maxTextLength\":20,\"preview\":[[\"GI_TBC_状态\",\"GI_TBC_收敛时间_秒\",\"GI_TBC_未收敛Gap_百分比\",\"GI_TBC_LB\",\"GI_TBC_UB\",\"P_GRB_状态\",\"P_GRB_收敛时间_秒\",\"P_GRB_未收敛Gap_百分比\",\"P_GRB_LB\",\"P_GRB_UB\",\"对比结果\"],[\"已收敛\",\"369.44721830030903\",null,\"0.19128059228281188\",\"0.191280592282812\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"87.05071489009265\",\"0.014493297128750063\",\"0.11192353095740712\",\"未收敛\",null,\"98.04321885167847\",\"0.004824441779303833\",\"0.2465498905404982\",\"分指标比较\"],[\"未收敛\",null,\"43.05069377860532\",\"0.11897902113805536\",\"0.20892093167125783\",\"未收敛\",null,\"64.14135572260378\",\"0.11407508736077816\",\"0.3181243732426501\",\"分指标比较\"],[\"未收敛\",null,\"24.79959306500192\",\"0.36100969069075184\",\"0.4800634802452629\",\"未收敛\",null,\"41.9238794803378\",\"0.3480777125726512\",\"0.599347390042705\",\"分指标比较\"],[\"已收敛\",\"327.3153041000478\",null,\"0.19128059228281205\",\"0.191280592282812\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"86.82852116183065\",\"0.015241545156955904\",\"0.11571627866711331\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"32.10469256043966\",\"0.11832566878244366\",\"0.17427665216447524\",\"无配对结果\",null,null,null,null,\"N/A\"],[\"未收敛\",null,\"21.56180513603252\",\"0.36773011426847557\",\"0.4688151160365388\",\"无配对结果\",null,null,null,null,\"N/A\"]],\"previewAddress\":\"O1:Y9\",\"previewRows\":9,\"previewCols\":11}",
+  "source_contract": "User explicitly prescribes flat CSV, historical byte preservation and Python/Node intermediates; no workbook redesign/XLSX variant",
+  "Optimize": 0
+}

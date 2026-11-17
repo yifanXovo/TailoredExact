@@ -6,16 +6,17 @@ Read the [current main PDF with complete Appendix A/B](../results/unified_exact_
 [mathematical companion](../results/unified_exact_round137/mathematical_analysis.md),
 [supplement PDF](../results/unified_exact_round137/supplement.pdf) and
 [bibliography](../results/unified_exact_round137/references.bib).
-There is one maintained paper directory. The current [R169 report](../results/unified_exact_round169/final_report.md),
-[decision](../results/unified_exact_round169/research_decision.md) and
-[author memo](../results/unified_exact_round169/author_decision_memo.md) add
-the fixed half/double-weight complete-H test against matched restarts.
-Four current H roles trigger all eighteen paid short-cap positions. C improves
-all three n35 primal endpoints beyond B/M, with mixed proof lower bounds;
-n20 certification is retained but C20 costs more. Only future independent
-limited confirmation is recommended. Uniform B remains main and C166/D167/C169
-stay off. The paper adds one compact paid table and Supplement S169, with no
-new P comparison or robust/general OR-method claim.
+There is one maintained paper directory. The current [R170 report](../results/unified_exact_round170/final_report.md),
+[decision](../results/unified_exact_round170/research_decision.md) and
+[author memo](../results/unified_exact_round170/author_decision_memo.md) complete
+22 fixed paid confirmation positions at Native Seeds1/2 and600s. C's gains
+do not repeat across both new Seeds on any n35 role; C20 retains certification
+but costs more, particularly at Seed2. Close further C169 optimization and
+retain its initialization/local positives and all adverse results. Uniform
+B remains main and C166/D167/C169 stay off. Computational Section4.6/Table7
+integrates the old/new findings, while Supplements S169/S170 retain complete
+historical/current details. Three new same-budget B/P pairs improve U/L/gap;
+all n35 runs remain OPEN and no physical input or OR-theory claim is added.
 
 The retained Round166 evidence includes
 [contribution positioning](../results/unified_exact_round166/contribution_positioning.md)
@@ -46,22 +47,23 @@ E+'s proof gain and cost, and unresolved independent value of external
 control all remain visible. No per-input portfolio or extra experiment is
 used to improve the presentation.
 
-Final independent mathematics, implementation/data, and research/manuscript
-findings and their actual dispositions are in
-[the review closeout](../results/unified_exact_round166/review/final_review_dispositions.json).
-The [full report](../results/unified_exact_round166/final_report.md) links
-new-only recovery, source/build/QA and CSV reconciliation.
+Current independent mathematics, execution/data and research/manuscript
+findings are in the [review directory](../results/unified_exact_round170/review).
+The [full report](../results/unified_exact_round170/final_report.md) links
+new-only recovery, source/build/QA and CSV reconciliation. The absent
+118-row attachment is disclosed; the actual eight-row B increment has three
+strict P pairs and five unpaired rows, without a fabricated126-row master.
 
 Build the sole current components with:
 
 ```powershell
-python -B scripts/round166_documents.py assemble
-python -B scripts/round166_documents.py pdf
-python -B scripts/round166_documents.py qa
+python -B scripts/round170_documents.py assemble
+python -B scripts/round170_documents.py pdf
+python -B scripts/round170_documents.py qa
 ```
 
-The [build record](../results/unified_exact_round166/document_build.json)
-and [page QA](../results/unified_exact_round166/document_qa.json) bind the
+The [build record](../results/unified_exact_round170/document_build.json)
+and [page QA](../results/unified_exact_round170/document_qa.json) bind the
 actual exports. The historical R137 generator remains excluded. Future
 research navigation is not an executed query or an automatically started
-Round167.
+Round171.

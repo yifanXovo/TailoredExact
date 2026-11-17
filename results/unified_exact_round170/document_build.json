@@ -1,0 +1,261 @@
+{
+  "UTC": "2026-11-17T09:00:45.898920+00:00",
+  "document_date": "17 November 2026",
+  "date_timezone": "Asia/Shanghai",
+  "versions": {
+    "pandoc": "pandoc 3.9\r\nFeatures: +server +lua\r\nScripting engine: Lua 5.4\r\nUser data directory: C:\\Users\\Administrator\\AppData\\Roaming\\pandoc\r\nCopyright (C) 2006-2025 John MacFarlane. Web:  https://pandoc.org\r\nThis is free software; see the source for copying conditions. There is no\r\nwarranty, not even for merchantability or fitness for a particular purpose.",
+    "xelatex": "xelatex: security risk: running with elevated privileges\r\nMiKTeX-XeTeX 4.16 (MiKTeX 25.12)\r\n© 1994-2008 SIL International, © 2009-2023 Jonathan Kew, © 2010-2012 Hàn Thế Thành, © 2012-2013 Khaled Hosny\r\nTeX is a trademark of the American Mathematical Society\r\nusing bzip2 version 1.0.8, 13-Jul-2019\r\ncompiled with curl version 8.4.0; using libcurl/8.4.0 Schannel\r\ncompiled with expat version 2.5; using expat_2.5.0\r\ncompiled with fontconfig version 2.13.1; using 2.13.1\r\ncompiled with freetype2 version 2.12.1; using 2.12.1\r\ncompiled with graphite2 version 1.3.14; using 1.3.14\r\ncompiled with harfbuzz version 12.3.0; using 12.3.0\r\ncompiled with icu version 78.1; using 78.1\r\ncompiled with jpeg version 9.5\r\ncompiled with liblzma version 50040002; using 50040002\r\ncompiled with libpng version 1.6.44; using 1.6.44\r\ncompiled with libressl version LibreSSL 3.8.1; using LibreSSL 3.8.1\r\ncompiled with MiKTeX Application Framework version 4.8; using 4.8\r\ncompiled with MiKTeX Core version 4.24; using 4.24\r\ncompiled with MiKTeX Archive Extractor version 4.1; using 4.1\r\ncompiled with MiKTeX Package Manager version 4.10; using 4.10\r\ncompiled with pplib version v2.05 less toxic i hope\r\nusing teckit version 2.4\r\ncompiled with uriparser version 0.9.7\r\ncompiled with zlib version 1.2.13; using 1.2.13\r\nxelatex: major issue: So far, you have not checked for MiKTeX updates.",
+    "Python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "Python_executable": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe"
+  },
+  "outputs": [
+    {
+      "path": "results/unified_exact_round137/manuscript.pdf",
+      "bytes": 1102528,
+      "SHA256": "fb6aa67f5f94c745d5df440dc2247c96774d585df1d4036cd59fc5832efe96d5",
+      "source": {
+        "path": "results/unified_exact_round137/manuscript.md",
+        "bytes": 169940,
+        "SHA256": "a8268e902dc5c8aacf6f98d5796bdec1483ec8a12bea4a249105755b5609dae8"
+      },
+      "intermediate_TeX": {
+        "path": "results/unified_exact_round137/manuscript_export.tex",
+        "bytes": 203625,
+        "SHA256": "8dd88d5087014243763709f8ad56ee9e2a8dfdcf07e3a3c8a22ef06dff16b53d"
+      },
+      "commands": [
+        [
+          "pandoc",
+          "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\manuscript\\reading.md",
+          "-f",
+          "markdown+tex_math_single_backslash+tex_math_dollars+raw_tex+raw_attribute+fenced_divs",
+          "--standalone",
+          "--listings",
+          "--citeproc",
+          "--bibliography",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round170\\results\\unified_exact_round137\\references.bib",
+          "--toc",
+          "--toc-depth=2",
+          "--metadata",
+          "title=GI-TBC: a Gini-interval tailored branch-and-cut algorithm for equitable bicycle redistribution",
+          "--metadata",
+          "date=17 November 2026",
+          "--metadata",
+          "lang=en-US",
+          "--variable",
+          "fontsize=11pt",
+          "--variable",
+          "geometry=margin=22mm",
+          "--variable",
+          "mainfont=Times New Roman",
+          "--variable",
+          "sansfont=Arial",
+          "--variable",
+          "monofont=Consolas",
+          "--include-in-header",
+          "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\manuscript\\header.tex",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\manuscript\\reading.tex"
+        ],
+        [
+          "xelatex",
+          "-disable-installer",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-file-line-error",
+          "-output-directory=E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\manuscript",
+          "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\manuscript\\reading.tex"
+        ]
+      ],
+      "passes": [
+        {
+          "number": 1,
+          "seconds": 2.882885300088674,
+          "return_code": 0
+        },
+        {
+          "number": 2,
+          "seconds": 2.974073300138116,
+          "return_code": 0
+        },
+        {
+          "number": 3,
+          "seconds": 3.0747072002850473,
+          "return_code": 0
+        }
+      ],
+      "warnings": [
+        "Package hyperref Warning: Option `colorlinks' has already been used,"
+      ],
+      "log_root": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\manuscript"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.pdf",
+      "bytes": 457501,
+      "SHA256": "7a399df16b72852064ba23f377a87c0373aa8549693284fdedca80f604d757b5",
+      "source": {
+        "path": "results/unified_exact_round137/supplement.md",
+        "bytes": 166530,
+        "SHA256": "8bbd02175e2502e5a724dc676b41db2a30bb5978d32c39b94a41d86a6b0baffb"
+      },
+      "intermediate_TeX": {
+        "path": "results/unified_exact_round137/supplement_export.tex",
+        "bytes": 219623,
+        "SHA256": "d49134d4974d0e4ac1a06aea659fc2a9ed94e2df2d0baff2ef0ce2cfe9f2db72"
+      },
+      "commands": [
+        [
+          "pandoc",
+          "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\supplement\\reading.md",
+          "-f",
+          "markdown+tex_math_single_backslash+tex_math_dollars+raw_tex+raw_attribute+fenced_divs",
+          "--standalone",
+          "--listings",
+          "--citeproc",
+          "--bibliography",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round170\\results\\unified_exact_round137\\references.bib",
+          "--toc",
+          "--toc-depth=2",
+          "--metadata",
+          "title=Supplement: complete observations, mathematical comparisons and reproducibility",
+          "--metadata",
+          "date=17 November 2026",
+          "--metadata",
+          "lang=en-US",
+          "--variable",
+          "fontsize=11pt",
+          "--variable",
+          "geometry=margin=22mm",
+          "--variable",
+          "mainfont=Times New Roman",
+          "--variable",
+          "sansfont=Arial",
+          "--variable",
+          "monofont=Consolas",
+          "--include-in-header",
+          "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\supplement\\header.tex",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\supplement\\reading.tex"
+        ],
+        [
+          "xelatex",
+          "-disable-installer",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-file-line-error",
+          "-output-directory=E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\supplement",
+          "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\supplement\\reading.tex"
+        ]
+      ],
+      "passes": [
+        {
+          "number": 1,
+          "seconds": 2.400145699735731,
+          "return_code": 0
+        },
+        {
+          "number": 2,
+          "seconds": 2.6586155998520553,
+          "return_code": 0
+        },
+        {
+          "number": 3,
+          "seconds": 2.4917504000477493,
+          "return_code": 0
+        }
+      ],
+      "warnings": [
+        "Package hyperref Warning: Option `colorlinks' has already been used,",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 287--303",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 303--305",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 305--338",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 355--371",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 371--373",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 373--386",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 506--524",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 524--526",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 526--755",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 795--813",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 813--815",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 815--862",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 922--938",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 938--940",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 940--974",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 1165--1183",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 1183--1185",
+        "Overfull \\hbox (0.17395pt too wide) in alignment at lines 1185--1246",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 1260--1276",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 1276--1278",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 1278--1299",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1347--1365",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1365--1367",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1367--1372",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1771--1789",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1789--1791",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 1791--1796",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2612--2628",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2628--2630",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2630--2655",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2915--2931",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2931--2933",
+        "Overfull \\hbox (0.1306pt too wide) in alignment at lines 2933--2955",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4098--4116",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4116--4118",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4118--4155",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4173--4191",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4191--4193",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4193--4227",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4265--4283",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4283--4285",
+        "Overfull \\hbox (0.1216pt too wide) in alignment at lines 4285--4326"
+      ],
+      "log_root": "E:\\codes\\ExactEBRP-work\\temp\\round170\\pdf\\attempt02\\supplement"
+    }
+  ],
+  "source_manifest_SHA256": "64bc6da07831b48ca750ba925ef321d13285858159a8ec5627ca11db237405ae",
+  "sources": [
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 72236,
+      "SHA256": "856fe9351e22197183c5ea1ee5f9bf065190ccc30174d9d66ff7c0fe1c84ec63"
+    },
+    {
+      "path": "results/unified_exact_round137/model_and_algorithm_appendices.md",
+      "bytes": 99173,
+      "SHA256": "4fa3eebebf9ec7600e228dd775d73a02edf166f007955b45100bd4650fc1f949"
+    },
+    {
+      "path": "results/unified_exact_round137/mathematical_analysis.md",
+      "bytes": 30211,
+      "SHA256": "cec89b9a4185ab945d6194fef2e86fe429b30b2bda1e8e403a77216b1e680c83"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 166530,
+      "SHA256": "8bbd02175e2502e5a724dc676b41db2a30bb5978d32c39b94a41d86a6b0baffb"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 12785,
+      "SHA256": "5e3fa7d349036ffc74b102b5b0836a63a94ec49a4771890afa0a917e8196b279"
+    }
+  ],
+  "commands": [
+    "python scripts/round170_results.py",
+    "python scripts/round170_documents.py assemble",
+    "python scripts/round170_documents.py pdf",
+    "python scripts/round170_documents.py qa"
+  ],
+  "legacy_assembler_invoked": false,
+  "method_and_model_source_used": false,
+  "new_Optimize": 0,
+  "production_compile": 0,
+  "document_operation_marker_successful_invocations": 1,
+  "seconds": 18.655456999782473,
+  "visual_QA_pending": false,
+  "targeted_visual_QA": {
+    "path": "results/unified_exact_round170/document_qa.json",
+    "bytes": 36043,
+    "SHA256": "a246361b2ff51cdb5f025c4149acc7dcdcf78f2999a7601086096d43b6691987"
+  }
+}

@@ -50,3 +50,20 @@ restored integer types, original objective/physical witness, cold NumStart,
 per-call settings, Native quality, returned bound/log and lifecycle checks.
 The failed read and its 0.4711743s process cost remain in review costs and
 attempts. No C++ source, PE, parameter, raw evidence or solver run changes.
+
+P's legacy raw `initial_heuristic_UB=0` means no custom-H initialization and
+is represented as missing, not a feasible zero incumbent, in complete_arms.
+Its optional raw `gap=null` does not remove endpoint information: absolute
+and relative gaps are recomputed from the independently qualified original
+U/L. OPEN CSV gaps use percent. Raw metadata is retained unchanged.
+
+All solver processes and their primary audits ended at06:19 on17November.
+The continuation resumed at16:47 after a terminal, inactive interval of
+37639.587864s. Both original session handles returned rc=0; no solver was
+restarted. `work_interruption.json` preserves that interval and the actual
+first work segment. Gross wall remains explicit (51812.080509s at science
+close); occupied scientific work is14172.492646s, including all work before
+completion and after resumption. This is no six-hour gross-wall claim.
+Ordinary Git/public recovery I/O is separately receipted. Independent
+execution review verified these identities and the two document attempts
+in `review/execution_review_closeout_clock.json`.

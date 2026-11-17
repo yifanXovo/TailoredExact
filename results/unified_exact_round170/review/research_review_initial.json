@@ -1,0 +1,130 @@
+{
+  "schema": "round170-independent-research-manuscript-initial-v1",
+  "reviewerID": "/root/research_review",
+  "independent_agent": true,
+  "review_started_UTC": "2026-11-17T08:57:02+00:00",
+  "UTC": "2026-11-17T08:59:31.157415+00:00",
+  "status": "NEEDS_MINOR_CORRECTION_AND_REVIEW_IN_PROGRESS",
+  "scope": "Actual Round170 goal H(3) research/manuscript review. Read-only data/source/PDF inspection; only own review outputs and scratch writes. No optimizer/model/production-source/raw/Git mutations.",
+  "Optimize": 0,
+  "H_calls": 0,
+  "review_seconds": 149.157415,
+  "bindings": [
+    {
+      "path": "results/unified_exact_round170/goal.md",
+      "bytes": 31906,
+      "SHA256": "da0f4cee602651ce5ac1a0089eb77ed0c3a9ad19d6be9d19eb05eb5e5237fddd"
+    },
+    {
+      "path": "results/unified_exact_round170/decision.json",
+      "bytes": 7064,
+      "SHA256": "c7e4ce94ca5b46a5de17088b3590ff12033a7a769d6e5125683ea192aaf5da36"
+    },
+    {
+      "path": "results/unified_exact_round170/research_decision.md",
+      "bytes": 1480,
+      "SHA256": "a0769c4855b6ba0d1d52d38e6684858fd6171f346cc691d393fd41d105ea83c8"
+    },
+    {
+      "path": "results/unified_exact_round170/final_report.md",
+      "bytes": 15729,
+      "SHA256": "6ceb230eb915704803ac357bdac85801492c0d9f7fdc9d4ebdd8a8b9ffd81667"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_arms.json",
+      "bytes": 81832,
+      "SHA256": "2fb9b523ee51f89afa7bce9712bca19eef5d1b279ba9b621f88ee62eff02d4e3"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_arms.csv",
+      "bytes": 41495,
+      "SHA256": "7c1053525535d8a67ae933df76af7a8b3040c2e3f1aed4c0a661eda4cfb6bfca"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CB.json",
+      "bytes": 21340,
+      "SHA256": "971875af15525fd22722360decf08e00962aa5908abdfdea3e904747200faeb4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CM.json",
+      "bytes": 8154,
+      "SHA256": "697a717dedbd2e081e2163dfbd9135ee582e86e5ee668283dc976a62821eaf7b"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_BP.json",
+      "bytes": 7995,
+      "SHA256": "8eea3c6e8e7238b62408d828105c8d78866dfaa5d03351d263446f64aa86fde4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CP.json",
+      "bytes": 7991,
+      "SHA256": "5df4cd40cda42d86e6d6d8bc0bba5b1a0f002d94b37eaf102e16ed51b43f9d59"
+    },
+    {
+      "path": "results/unified_exact_round170/cost_report.json",
+      "bytes": 1662,
+      "SHA256": "dab88c2b1d4eff9a140766e7f6ec0ebe3885c1abe0ad56f45f3993cd62726652"
+    },
+    {
+      "path": "results/unified_exact_round170/CSV_reconciliation.json",
+      "bytes": 5568,
+      "SHA256": "cb4ff8366670086740ed211052359e03efa67ba167754afb8687ee0b7512b1b5"
+    },
+    {
+      "path": "results/unified_exact_round170/document_build.json",
+      "bytes": 12935,
+      "SHA256": "72dd60d0a5232fcc8fa479a4c80b5512f6dbc97d21af6e665ef5d56747e3cf67"
+    },
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 72188,
+      "SHA256": "1efb0f151de84d99da44813a3529c8fb44b0b6df669cad44e2138221c8845d82"
+    },
+    {
+      "path": "results/unified_exact_round137/manuscript.md",
+      "bytes": 169892,
+      "SHA256": "497caafc7a60918d1ffb299f4830c6e27e29d18ecfd78ac20e3eb5e97e88108f"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 166501,
+      "SHA256": "2b7c82be0afa2f0d5848f43686a198011860541c752310d1cc3262bd498d79b9"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 12785,
+      "SHA256": "5e3fa7d349036ffc74b102b5b0836a63a94ec49a4771890afa0a917e8196b279"
+    },
+    {
+      "path": "results/unified_exact_round137/manuscript.pdf",
+      "bytes": 1102521,
+      "SHA256": "5315be82b47ec364cc8cfa1e082016464d046ddf04061236e05049fa127dc637"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.pdf",
+      "bytes": 457410,
+      "SHA256": "c8a922797af7ccf831cf4c903c41cfacbefdca9ace6949a08cbbd9f544206ea6"
+    }
+  ],
+  "findings": [
+    {
+      "id": "R170-R1",
+      "severity": "minor",
+      "status": "OPEN",
+      "source": "results/unified_exact_round137/paper_body.md lines 444-488 and actual manuscript PDF pages18-19",
+      "finding": "New Section4.6 prose visibly concatenates ordinary words and numbers, e.g. all35, about18.8%, from211.5 to219.5s, common600s, worse by36.83%, process times369.447/371.874s and327.315/436.064s, are54.60%. Scientific interpretation appears intact, but these need prose spacing cleanup in the source/generator and fresh PDF readback.",
+      "correction_requested": "Normalize word/number and number/unit spacing in new text; rebuild and visually inspect changed/adjacent pages.",
+      "reported_to_parent": true
+    }
+  ],
+  "preliminary_observations": [
+    "Actual final_report/decision/research_decision preserve negative C/B endpoints, all n35 OPEN, M/P only n35 Seed1, four selected exposed inputs/known Seeds, no statistical/holdout/long-cap claims and B default.",
+    "Actual compiled manuscript.pdf SHA5315be82b47e and supplement.pdf SHAc8a922797af7 were inspected visually on main18/19 and supplement58/59; Table7 is compact in computational Section4.6 and all22 endpoint/cost rows are present.",
+    "No global-science PASS is asserted before independent endpoint arithmetic, complete S169/S170 and final PDF checks."
+  ],
+  "pending": [
+    "independent arithmetic reconciliation of all four comparison groups and CSV8/3/5 mapping",
+    "read complete changed supplement sections, prior-art bibliography and conclusions",
+    "inspect actual current/rebuilt changed and adjacent PDF pages with bound hashes"
+  ]
+}

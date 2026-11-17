@@ -1,0 +1,2829 @@
+{
+  "schema": "round170-independent-research-arithmetic-v1",
+  "UTC": "2026-11-17T09:07:32.463630+00:00",
+  "reviewerID": "/root/research_review",
+  "Optimize": 0,
+  "H_calls": 0,
+  "passed": true,
+  "checks": [
+    {
+      "check": "22 unique frozen positions",
+      "passed": true
+    },
+    {
+      "check": "arms 8B/8C/3M/3P",
+      "passed": true
+    },
+    {
+      "check": "all same 600s cap and Threads=1",
+      "passed": true
+    },
+    {
+      "check": "M and P only n35 Seed1",
+      "passed": true
+    },
+    {
+      "check": "all n35 OPEN, four C20 CERT",
+      "passed": true
+    },
+    {
+      "check": "exact four selected exposed physical inputs",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 01_R163-C20-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 01_R163-C20-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 01_R163-C20-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 01_R163-C20-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 01_R163-C20-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 01_R163-C20-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 02_R163-C20-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 02_R163-C20-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 02_R163-C20-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 02_R163-C20-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 02_R163-C20-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 02_R163-C20-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 03_R163-C35-U_S1_M",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 03_R163-C35-U_S1_M",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 03_R163-C35-U_S1_M",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 03_R163-C35-U_S1_M",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 03_R163-C35-U_S1_M",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 03_R163-C35-U_S1_M",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 04_R163-C35-U_S1_P",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 04_R163-C35-U_S1_P",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 04_R163-C35-U_S1_P",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 04_R163-C35-U_S1_P",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 04_R163-C35-U_S1_P",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 04_R163-C35-U_S1_P",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 06_R163-C35-U_S1_B",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 06_R163-C35-U_S1_B",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 06_R163-C35-U_S1_B",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 06_R163-C35-U_S1_B",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 06_R163-C35-U_S1_B",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 06_R163-C35-U_S1_B",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 08_R163-B35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 08_R163-B35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 08_R163-B35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 08_R163-B35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 08_R163-B35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 08_R163-B35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 09_R163-B35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 09_R163-B35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 09_R163-B35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 09_R163-B35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 09_R163-B35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 09_R163-B35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 10_R163-B35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 10_R163-B35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 10_R163-B35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 10_R163-B35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 10_R163-B35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 10_R163-B35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 11_R163-X35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 11_R163-X35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 11_R163-X35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 11_R163-X35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 11_R163-X35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 11_R163-X35-S_S1_P",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 12_R163-X35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 12_R163-X35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 12_R163-X35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 12_R163-X35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 12_R163-X35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 12_R163-X35-S_S1_M",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 13_R163-X35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 13_R163-X35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 13_R163-X35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 13_R163-X35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 13_R163-X35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 13_R163-X35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 15_R163-C20-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 15_R163-C20-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 15_R163-C20-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 15_R163-C20-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 15_R163-C20-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 15_R163-C20-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 16_R163-C20-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 16_R163-C20-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 16_R163-C20-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 16_R163-C20-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 16_R163-C20-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 16_R163-C20-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 17_R163-C35-U_S2_B",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 17_R163-C35-U_S2_B",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 17_R163-C35-U_S2_B",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 17_R163-C35-U_S2_B",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 17_R163-C35-U_S2_B",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 17_R163-C35-U_S2_B",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 18_R163-C35-U_S2_C",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 18_R163-C35-U_S2_C",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 18_R163-C35-U_S2_C",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 18_R163-C35-U_S2_C",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 18_R163-C35-U_S2_C",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 18_R163-C35-U_S2_C",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 19_R163-B35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 19_R163-B35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 19_R163-B35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 19_R163-B35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 19_R163-B35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 19_R163-B35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 20_R163-B35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 20_R163-B35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 20_R163-B35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 20_R163-B35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 20_R163-B35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 20_R163-B35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 21_R163-X35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 21_R163-X35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 21_R163-X35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 21_R163-X35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 21_R163-X35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 21_R163-X35-S_S2_B",
+      "passed": true
+    },
+    {
+      "check": "frozen identity 22_R163-X35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "actual input hash 22_R163-X35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "endpoint matches actual audit 22_R163-X35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "process and counts match audit 22_R163-X35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "own original G/P/F 22_R163-X35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "own gap and certified clock 22_R163-X35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row count agrees",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row1 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row2 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row3 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row4 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row5 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row6 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row7 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row8 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row9 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row10 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row11 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row12 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row13 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row14 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row15 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row16 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row17 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row18 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row19 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row20 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row21 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "complete_arms CSV row22 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row count agrees",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row1 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row2 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row3 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row4 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row5 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row6 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row7 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CB CSV row8 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CM CSV row count agrees",
+      "passed": true
+    },
+    {
+      "check": "comparison_CM CSV row1 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CM CSV row2 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CM CSV row3 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_BP CSV row count agrees",
+      "passed": true
+    },
+    {
+      "check": "comparison_BP CSV row1 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_BP CSV row2 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_BP CSV row3 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CP CSV row count agrees",
+      "passed": true
+    },
+    {
+      "check": "comparison_CP CSV row1 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CP CSV row2 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison_CP CSV row3 all fields agree",
+      "passed": true
+    },
+    {
+      "check": "comparison CB count",
+      "passed": true
+    },
+    {
+      "check": "comparison CB identities 02_R163-C20-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CB 02_R163-C20-S_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CB identities 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CB 05_R163-C35-U_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CB identities 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CB 07_R163-B35-S_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CB identities 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CB 14_R163-X35-S_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CB identities 15_R163-C20-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CB 15_R163-C20-S_S2_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CB identities 18_R163-C35-U_S2_C",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CB 18_R163-C35-U_S2_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CB identities 19_R163-B35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CB 19_R163-B35-S_S2_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CB identities 22_R163-X35-S_S2_C",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CB 22_R163-X35-S_S2_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CM count",
+      "passed": true
+    },
+    {
+      "check": "comparison CM identities 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CM 05_R163-C35-U_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CM identities 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CM 07_R163-B35-S_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CM identities 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CM 14_R163-X35-S_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison BP count",
+      "passed": true
+    },
+    {
+      "check": "comparison BP identities 06_R163-C35-U_S1_B",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "BP 06_R163-C35-U_S1_B no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison BP identities 08_R163-B35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "BP 08_R163-B35-S_S1_B no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison BP identities 13_R163-X35-S_S1_B",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "BP 13_R163-X35-S_S1_B no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CP count",
+      "passed": true
+    },
+    {
+      "check": "comparison CP identities 05_R163-C35-U_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CP 05_R163-C35-U_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CP identities 07_R163-B35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CP 07_R163-B35-S_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "comparison CP identities 14_R163-X35-S_S1_C",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C U exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C L exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C absolute_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C relative_gap exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C process_outer_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C H_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C Native_seconds exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C Work exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C nodes exact endpoints",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C percent and materiality",
+      "passed": true
+    },
+    {
+      "check": "CP 14_R163-X35-S_S1_C no OPEN time ratio",
+      "passed": true
+    },
+    {
+      "check": "C/B n35 U two improve/four regress",
+      "passed": true
+    },
+    {
+      "check": "only B35Seed1 improves absolute gap",
+      "passed": true
+    },
+    {
+      "check": "C35 U worse both seeds",
+      "passed": true
+    },
+    {
+      "check": "R163-B35-S U improves onlySeed1",
+      "passed": true
+    },
+    {
+      "check": "R163-X35-S U improves onlySeed1",
+      "passed": true
+    },
+    {
+      "check": "C20 both certificate-time regressions",
+      "passed": true
+    },
+    {
+      "check": "all new B/P and C/P improve U/L/both gaps without certificates",
+      "passed": true
+    },
+    {
+      "check": "R163-C35-U matched M equality and C initialization benefit",
+      "passed": true
+    },
+    {
+      "check": "R163-B35-S matched M equality and C initialization benefit",
+      "passed": true
+    },
+    {
+      "check": "R163-X35-S matched M equality and C initialization benefit",
+      "passed": true
+    },
+    {
+      "check": "41 complete paid H paths",
+      "passed": true
+    },
+    {
+      "check": "84 Optimize =57LP+27MIP",
+      "passed": true
+    },
+    {
+      "check": "cost process total",
+      "passed": true
+    },
+    {
+      "check": "inactive gap explicitly separates gross and charged work",
+      "passed": true
+    },
+    {
+      "check": "increment UTF8 BOM/8rows/28columns",
+      "passed": true
+    },
+    {
+      "check": "missing118 base; no fabricated126 master",
+      "passed": true
+    },
+    {
+      "check": "CSV B endpoints R163-C20-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV CERT process clock R163-C20-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV explicit N/A-P R163-C20-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV B endpoints R163-C35-U/1",
+      "passed": true
+    },
+    {
+      "check": "CSV OPEN gap in percent R163-C35-U/1",
+      "passed": true
+    },
+    {
+      "check": "CSV actual P endpoints R163-C35-U/1",
+      "passed": true
+    },
+    {
+      "check": "CSV B endpoints R163-B35-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV OPEN gap in percent R163-B35-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV actual P endpoints R163-B35-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV B endpoints R163-X35-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV OPEN gap in percent R163-X35-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV actual P endpoints R163-X35-S/1",
+      "passed": true
+    },
+    {
+      "check": "CSV B endpoints R163-C20-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV CERT process clock R163-C20-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV explicit N/A-P R163-C20-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV B endpoints R163-C35-U/2",
+      "passed": true
+    },
+    {
+      "check": "CSV OPEN gap in percent R163-C35-U/2",
+      "passed": true
+    },
+    {
+      "check": "CSV explicit N/A-P R163-C35-U/2",
+      "passed": true
+    },
+    {
+      "check": "CSV B endpoints R163-B35-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV OPEN gap in percent R163-B35-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV explicit N/A-P R163-B35-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV B endpoints R163-X35-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV OPEN gap in percent R163-X35-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV explicit N/A-P R163-X35-S/2",
+      "passed": true
+    },
+    {
+      "check": "CSV3 paired/5unpaired",
+      "passed": true
+    },
+    {
+      "check": "assembled manuscript begins with current paper body",
+      "passed": true
+    },
+    {
+      "check": "Conclusions has no paid result table",
+      "passed": true
+    },
+    {
+      "check": "one compact main table in experimental4.6",
+      "passed": true
+    },
+    {
+      "check": "S169andS170 retained",
+      "passed": true
+    },
+    {
+      "check": "all main table numbers1to11 exactly once",
+      "passed": true
+    },
+    {
+      "check": "main Table7 eight rows",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C20-S/1/B",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C20-S/1/C",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C20-S/1/M",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C20-S/1/P",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C20-S/2/B",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C20-S/2/C",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C20-S/2/M",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C20-S/2/P",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C35-U/1/B",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C35-U/1/C",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C35-U/1/M",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C35-U/1/P",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C35-U/2/B",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C35-U/2/C",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C35-U/2/M",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-C35-U/2/P",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-B35-S/1/B",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-B35-S/1/C",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-B35-S/1/M",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-B35-S/1/P",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-B35-S/2/B",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-B35-S/2/C",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-B35-S/2/M",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-B35-S/2/P",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-X35-S/1/B",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-X35-S/1/C",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-X35-S/1/M",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-X35-S/1/P",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-X35-S/2/B",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-X35-S/2/C",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-X35-S/2/M",
+      "passed": true
+    },
+    {
+      "check": "main Table7 source cell R163-X35-S/2/P",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS169.1",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS169.2",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS169.3",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS169.4",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS170.1",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS170.2",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS170.3",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS170.4",
+      "passed": true
+    },
+    {
+      "check": "complete supplementary TableS170.5",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row1",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row2",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row3",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row4",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row5",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row6",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row7",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row8",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row9",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row10",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row11",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row12",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row13",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row14",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row15",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row16",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row17",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row18",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row19",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row20",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row21",
+      "passed": true
+    },
+    {
+      "check": "complete S170.1 endpoint row22",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row1",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row2",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row3",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row4",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row5",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row6",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row7",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row8",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row9",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row10",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row11",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row12",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row13",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row14",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row15",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row16",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row17",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row18",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row19",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row20",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row21",
+      "passed": true
+    },
+    {
+      "check": "complete S170.2 cost row22",
+      "passed": true
+    },
+    {
+      "check": "S170.3 independent paired rowC20/1",
+      "passed": true
+    },
+    {
+      "check": "S170.3 independent paired rowC35/1",
+      "passed": true
+    },
+    {
+      "check": "S170.3 independent paired rowB35/1",
+      "passed": true
+    },
+    {
+      "check": "S170.3 independent paired rowX35/1",
+      "passed": true
+    },
+    {
+      "check": "S170.3 independent paired rowC20/2",
+      "passed": true
+    },
+    {
+      "check": "S170.3 independent paired rowC35/2",
+      "passed": true
+    },
+    {
+      "check": "S170.3 independent paired rowB35/2",
+      "passed": true
+    },
+    {
+      "check": "S170.3 independent paired rowX35/2",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowC35/C/M",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowB35/C/M",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowX35/C/M",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowC35/B/P",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowB35/B/P",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowX35/B/P",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowC35/C/P",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowB35/C/P",
+      "passed": true
+    },
+    {
+      "check": "S170.4 independent paired rowX35/C/P",
+      "passed": true
+    },
+    {
+      "check": "historical S169.1 preserved R163-C20-S",
+      "passed": true
+    },
+    {
+      "check": "historical S169.1 preserved R163-B20-B",
+      "passed": true
+    },
+    {
+      "check": "historical S169.1 preserved R163-X20-S",
+      "passed": true
+    },
+    {
+      "check": "historical S169.1 preserved R163-C35-U",
+      "passed": true
+    },
+    {
+      "check": "historical S169.1 preserved R163-B35-S",
+      "passed": true
+    },
+    {
+      "check": "historical S169.1 preserved R163-X35-S",
+      "passed": true
+    },
+    {
+      "check": "historical S169.1 preserved R-X35-S-T2",
+      "passed": true
+    },
+    {
+      "check": "historical S169.2 preserved R163-C20-S",
+      "passed": true
+    },
+    {
+      "check": "historical S169.2 preserved R163-B20-B",
+      "passed": true
+    },
+    {
+      "check": "historical S169.2 preserved R163-X20-S",
+      "passed": true
+    },
+    {
+      "check": "historical S169.2 preserved R163-C35-U",
+      "passed": true
+    },
+    {
+      "check": "historical S169.2 preserved R163-B35-S",
+      "passed": true
+    },
+    {
+      "check": "historical S169.2 preserved R163-X35-S",
+      "passed": true
+    },
+    {
+      "check": "historical S169.2 preserved R-X35-S-T2",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row1",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row2",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row3",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row4",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row5",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row6",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row7",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row8",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row9",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row10",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row11",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row12",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row13",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row14",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row15",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row16",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row17",
+      "passed": true
+    },
+    {
+      "check": "historical S169.3 preserved row18",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row1",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row2",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row3",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row4",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row5",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row6",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row7",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row8",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row9",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row10",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row11",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row12",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row13",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row14",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row15",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row16",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row17",
+      "passed": true
+    },
+    {
+      "check": "historical S169.4 preserved row18",
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "independently_recomputed_comparisons": {
+    "CB": [
+      {
+        "role": "R163-C20-S",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "B",
+        "U_difference": 0.0,
+        "L_difference": 8.326672684688674e-17,
+        "absolute_gap_difference": -8.326672684688674e-17,
+        "relative_gap_difference": -4.3531194593843215e-16,
+        "process_outer_seconds_difference": 2.4262848999351263,
+        "H_seconds_difference": 0.7528781000000001,
+        "Native_seconds_difference": 2.0119998455047607,
+        "Work_difference": -21.992998470932093,
+        "nodes_difference": 14147.0,
+        "U_change_percent": 0.0,
+        "delta": 0.00019128059228281199,
+        "T_cert_ratio": 1.0065673383903053
+      },
+      {
+        "role": "R163-C35-U",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "B",
+        "U_difference": 0.04122281521127524,
+        "L_difference": 0.0009889558440499616,
+        "absolute_gap_difference": 0.040233859367225275,
+        "relative_gap_difference": 0.028398353188250458,
+        "process_outer_seconds_difference": -0.00214339978992939,
+        "H_seconds_difference": 3.8495573,
+        "Native_seconds_difference": -3.9049999713897705,
+        "Work_difference": 19.491015704950314,
+        "nodes_difference": -1834.0,
+        "U_change_percent": 36.83123187648782,
+        "delta": 0.00011192353095740712,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-B35-S",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "B",
+        "U_difference": -0.040364092830044745,
+        "L_difference": -0.0011661382618349397,
+        "absolute_gap_difference": -0.039197954568209806,
+        "relative_gap_difference": -0.12945741458755877,
+        "process_outer_seconds_difference": 0.022351199761033058,
+        "H_seconds_difference": 3.5358385,
+        "Native_seconds_difference": -3.5749998092651367,
+        "Work_difference": -135.9379976615628,
+        "nodes_difference": 52.0,
+        "U_change_percent": -19.320272271022912,
+        "delta": 0.00020892093167125783,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-X35-S",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "B",
+        "U_difference": -0.008011494349623893,
+        "L_difference": -0.010357961896867052,
+        "absolute_gap_difference": 0.0023464675472431584,
+        "relative_gap_difference": 0.009179678666437208,
+        "process_outer_seconds_difference": 0.025514500215649605,
+        "H_seconds_difference": 0.39639179999999996,
+        "Native_seconds_difference": -0.4400002956390381,
+        "Work_difference": -79.77197314208752,
+        "nodes_difference": -374.0,
+        "U_change_percent": -1.668840617813887,
+        "delta": 0.0004800634802452629,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-C20-S",
+        "Native_Seed": 2,
+        "subject": "C",
+        "reference": "B",
+        "U_difference": 0.0,
+        "L_difference": -4.163336342344337e-16,
+        "absolute_gap_difference": 3.608224830031759e-16,
+        "relative_gap_difference": 1.886351765733206e-15,
+        "process_outer_seconds_difference": 108.74842710001394,
+        "H_seconds_difference": 0.6564783999999999,
+        "Native_seconds_difference": 108.08800005912781,
+        "Work_difference": 224.38902206773128,
+        "nodes_difference": -1782.0,
+        "U_change_percent": 0.0,
+        "delta": 0.00019128059228281199,
+        "T_cert_ratio": 1.3322436370612651
+      },
+      {
+        "role": "R163-C35-U",
+        "Native_Seed": 2,
+        "subject": "C",
+        "reference": "B",
+        "U_difference": 0.00470063266489619,
+        "L_difference": 0.00045306587806519076,
+        "absolute_gap_difference": 0.004247566786830997,
+        "relative_gap_difference": 0.0013791830135368999,
+        "process_outer_seconds_difference": 0.005832800175994635,
+        "H_seconds_difference": 3.7127475999999997,
+        "Native_seconds_difference": -3.7230000495910645,
+        "Work_difference": -14.00319405599248,
+        "nodes_difference": 42.0,
+        "U_change_percent": 4.062205178943517,
+        "delta": 0.00011571627866711331,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-B35-S",
+        "Native_Seed": 2,
+        "subject": "C",
+        "reference": "B",
+        "U_difference": 0.01822548045413533,
+        "L_difference": 0.001047893444835371,
+        "absolute_gap_difference": 0.017177587009299958,
+        "relative_gap_difference": 0.05883754318855683,
+        "process_outer_seconds_difference": -0.03591679967939854,
+        "H_seconds_difference": 3.4339036999999997,
+        "Native_seconds_difference": -3.505000114440918,
+        "Work_difference": 11.13566455856676,
+        "nodes_difference": 4.0,
+        "U_change_percent": 10.457786644268825,
+        "delta": 0.00017427665216447524,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-X35-S",
+        "Native_Seed": 2,
+        "subject": "C",
+        "reference": "B",
+        "U_difference": 0.0046078350276549385,
+        "L_difference": -0.0009099589330008317,
+        "absolute_gap_difference": 0.00551779396065577,
+        "relative_gap_difference": 0.009556489690313918,
+        "process_outer_seconds_difference": -0.0032191998325288296,
+        "H_seconds_difference": 0.4014518,
+        "Native_seconds_difference": -0.3039994239807129,
+        "Work_difference": -6.833201540777736,
+        "nodes_difference": 37.0,
+        "U_change_percent": 0.9828682715289859,
+        "delta": 0.0004688151160365388,
+        "T_cert_ratio": null
+      }
+    ],
+    "CM": [
+      {
+        "role": "R163-C35-U",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "M",
+        "U_difference": 0.04122281521127524,
+        "L_difference": 0.0010292827005963234,
+        "absolute_gap_difference": 0.040193532510678906,
+        "relative_gap_difference": 0.028038045965976477,
+        "process_outer_seconds_difference": -0.005921099800616503,
+        "H_seconds_difference": -0.3442433000000005,
+        "Native_seconds_difference": 0.2739999294281006,
+        "Work_difference": 32.905093950212404,
+        "nodes_difference": -1831.0,
+        "U_change_percent": 36.83123187648782,
+        "delta": 0.00011192353095740712,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-B35-S",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "M",
+        "U_difference": -0.040364092830044745,
+        "L_difference": -0.0011661382618349397,
+        "absolute_gap_difference": -0.039197954568209806,
+        "relative_gap_difference": -0.12945741458755877,
+        "process_outer_seconds_difference": -0.02938459999859333,
+        "H_seconds_difference": 0.13968049999999987,
+        "Native_seconds_difference": -0.2369997501373291,
+        "Work_difference": -127.26244810094067,
+        "nodes_difference": 53.0,
+        "U_change_percent": -19.320272271022912,
+        "delta": 0.00020892093167125783,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-X35-S",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "M",
+        "U_difference": -0.008011494349623893,
+        "L_difference": -0.010288876810646608,
+        "absolute_gap_difference": 0.0022773824610227145,
+        "relative_gap_difference": 0.009035770435415036,
+        "process_outer_seconds_difference": 0.013722300063818693,
+        "H_seconds_difference": -0.028781599999999963,
+        "Native_seconds_difference": 0.05199933052062988,
+        "Work_difference": -4.780081914599123,
+        "nodes_difference": -211.0,
+        "U_change_percent": -1.668840617813887,
+        "delta": 0.0004800634802452629,
+        "T_cert_ratio": null
+      }
+    ],
+    "BP": [
+      {
+        "role": "R163-C35-U",
+        "Native_Seed": 1,
+        "subject": "B",
+        "reference": "P",
+        "U_difference": -0.13462635958309108,
+        "L_difference": 0.00966885534944623,
+        "absolute_gap_difference": -0.14429521493253733,
+        "relative_gap_difference": -0.1099250396158582,
+        "process_outer_seconds_difference": -0.00864499993622303,
+        "H_seconds_difference": 2.1643979,
+        "Native_seconds_difference": -3.376000165939331,
+        "Work_difference": 118.64961384722801,
+        "nodes_difference": 394.0,
+        "U_change_percent": -54.60410438145273,
+        "delta": 0.0002465498905404982,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-B35-S",
+        "Native_Seed": 1,
+        "subject": "B",
+        "reference": "P",
+        "U_difference": -0.10920344157139225,
+        "L_difference": 0.0049039337772772,
+        "absolute_gap_difference": -0.11410737534866947,
+        "relative_gap_difference": -0.21090661943998457,
+        "process_outer_seconds_difference": -0.009398499503731728,
+        "H_seconds_difference": 2.051676,
+        "Native_seconds_difference": -3.2749998569488525,
+        "Work_difference": 222.81347742238404,
+        "nodes_difference": -1814.0,
+        "U_change_percent": -34.32727912617279,
+        "delta": 0.0003181243732426501,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-X35-S",
+        "Native_Seed": 1,
+        "subject": "B",
+        "reference": "P",
+        "U_difference": -0.11928390979744208,
+        "L_difference": 0.012931978118100651,
+        "absolute_gap_difference": -0.13221588791554273,
+        "relative_gap_difference": -0.17124286415335888,
+        "process_outer_seconds_difference": 0.005341400392353535,
+        "H_seconds_difference": 0.2140562,
+        "Native_seconds_difference": -1.3640000820159912,
+        "Work_difference": 401.39396702291015,
+        "nodes_difference": -1836.0,
+        "U_change_percent": -19.902299030440894,
+        "delta": 0.000599347390042705,
+        "T_cert_ratio": null
+      }
+    ],
+    "CP": [
+      {
+        "role": "R163-C35-U",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "P",
+        "U_difference": -0.09340354437181583,
+        "L_difference": 0.010657811193496191,
+        "absolute_gap_difference": -0.10406135556531204,
+        "relative_gap_difference": -0.08152668642760774,
+        "process_outer_seconds_difference": -0.01078839972615242,
+        "H_seconds_difference": 6.0139552,
+        "Native_seconds_difference": -7.281000137329102,
+        "Work_difference": 138.14062955217832,
+        "nodes_difference": -1440.0,
+        "U_change_percent": -37.884236803777206,
+        "delta": 0.0002465498905404982,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-B35-S",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "P",
+        "U_difference": -0.149567534401437,
+        "L_difference": 0.0037377955154422604,
+        "absolute_gap_difference": -0.15330532991687928,
+        "relative_gap_difference": -0.34036403402754334,
+        "process_outer_seconds_difference": 0.01295270025730133,
+        "H_seconds_difference": 5.5875145,
+        "Native_seconds_difference": -6.849999666213989,
+        "Work_difference": 86.87547976082124,
+        "nodes_difference": -1762.0,
+        "U_change_percent": -47.01542760678511,
+        "delta": 0.0003181243732426501,
+        "T_cert_ratio": null
+      },
+      {
+        "role": "R163-X35-S",
+        "Native_Seed": 1,
+        "subject": "C",
+        "reference": "P",
+        "U_difference": -0.12729540414706597,
+        "L_difference": 0.0025740162212335993,
+        "absolute_gap_difference": -0.12986942036829957,
+        "relative_gap_difference": -0.16206318548692167,
+        "process_outer_seconds_difference": 0.03085590060800314,
+        "H_seconds_difference": 0.610448,
+        "Native_seconds_difference": -1.8040003776550293,
+        "Work_difference": 321.62199388082263,
+        "nodes_difference": -2210.0,
+        "U_change_percent": -21.239001998156006,
+        "delta": 0.000599347390042705,
+        "T_cert_ratio": null
+      }
+    ]
+  },
+  "independently_recomputed_initialization": [
+    {
+      "role": "R163-C35-U",
+      "Delta_restart": 0.0,
+      "Delta_weight": 0.01932477816804634,
+      "M_U_minus_B_U": 0.0
+    },
+    {
+      "role": "R163-B35-S",
+      "Delta_restart": 0.0,
+      "Delta_weight": 0.012981688328564306,
+      "M_U_minus_B_U": 0.0
+    },
+    {
+      "role": "R163-X35-S",
+      "Delta_restart": 0.0,
+      "Delta_weight": 0.09287047214129673,
+      "M_U_minus_B_U": 0.0
+    }
+  ],
+  "CSV": {
+    "records": 8,
+    "columns": 28,
+    "new_strict_B_P_pairs": 3,
+    "unpaired": 5,
+    "new_physical_inputs": 0,
+    "actual_master_rows_appended": 0,
+    "increment": {
+      "path": "results/unified_exact_round170/GI_TBC_R170_B_increment_28col.csv",
+      "bytes": 7182,
+      "SHA256": "3e6f2f8c84587a15a70590d688319a0b429a1a313c7495505b8b73bf1ba04885"
+    }
+  },
+  "limitations": "Source/data/derived-table reconciliation, not new optimization, model construction or a replacement for independent physical/proof audit. PDF visual findings are recorded separately.",
+  "bindings": [
+    {
+      "path": "results/unified_exact_round170/complete_arms.json",
+      "bytes": 81832,
+      "SHA256": "2fb9b523ee51f89afa7bce9712bca19eef5d1b279ba9b621f88ee62eff02d4e3"
+    },
+    {
+      "path": "results/unified_exact_round170/complete_arms.csv",
+      "bytes": 41495,
+      "SHA256": "7c1053525535d8a67ae933df76af7a8b3040c2e3f1aed4c0a661eda4cfb6bfca"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CB.json",
+      "bytes": 21340,
+      "SHA256": "971875af15525fd22722360decf08e00962aa5908abdfdea3e904747200faeb4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CB.csv",
+      "bytes": 10727,
+      "SHA256": "dfdc2b84a12a80becacb8dd8411351633ef9ba102c7faa9cd4cfe4a6efa6d708"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CM.json",
+      "bytes": 8154,
+      "SHA256": "697a717dedbd2e081e2163dfbd9135ee582e86e5ee668283dc976a62821eaf7b"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CM.csv",
+      "bytes": 4539,
+      "SHA256": "09593349b2daf63a6476efaf7f0d9e8e81f679e058768babc4c534f545d26102"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_BP.json",
+      "bytes": 7995,
+      "SHA256": "8eea3c6e8e7238b62408d828105c8d78866dfaa5d03351d263446f64aa86fde4"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_BP.csv",
+      "bytes": 4368,
+      "SHA256": "4d20f9ad0f7ed9705efad73d1268cc248833684aca95ef6b99a3def4dba93512"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CP.json",
+      "bytes": 7991,
+      "SHA256": "5df4cd40cda42d86e6d6d8bc0bba5b1a0f002d94b37eaf102e16ed51b43f9d59"
+    },
+    {
+      "path": "results/unified_exact_round170/comparison_CP.csv",
+      "bytes": 4364,
+      "SHA256": "d22f7d58d269d33ef06478da6a52f2d346e075d8694058703ad6d3f23d8e9904"
+    },
+    {
+      "path": "results/unified_exact_round170/matrix_frozen.json",
+      "bytes": 77777,
+      "SHA256": "43ae60d821fe1bb0d4c3b1d20144f637435867fa5b472faf249e39ce235321ec"
+    },
+    {
+      "path": "results/unified_exact_round170/h_path_results.json",
+      "bytes": 123425,
+      "SHA256": "682ab5ab1c21447ecb3f42342fdfab8206cedb00def7164019e3349c9c067b58"
+    },
+    {
+      "path": "results/unified_exact_round170/cost_report.json",
+      "bytes": 1662,
+      "SHA256": "dab88c2b1d4eff9a140766e7f6ec0ebe3885c1abe0ad56f45f3993cd62726652"
+    },
+    {
+      "path": "results/unified_exact_round170/work_interruption.json",
+      "bytes": 789,
+      "SHA256": "62aa82ae289f94e9699389db75955c5159e51fcf06bf73eccfe7ae73f45e1fb9"
+    },
+    {
+      "path": "results/unified_exact_round170/CSV_reconciliation.json",
+      "bytes": 5568,
+      "SHA256": "bd9ef4aafa7ffb6e4a86e60d6fed09b9b7a605429a175d6e7b245d1364ec0c34"
+    },
+    {
+      "path": "results/unified_exact_round137/paper_body.md",
+      "bytes": 72236,
+      "SHA256": "856fe9351e22197183c5ea1ee5f9bf065190ccc30174d9d66ff7c0fe1c84ec63"
+    },
+    {
+      "path": "results/unified_exact_round137/manuscript.md",
+      "bytes": 169940,
+      "SHA256": "a8268e902dc5c8aacf6f98d5796bdec1483ec8a12bea4a249105755b5609dae8"
+    },
+    {
+      "path": "results/unified_exact_round137/supplement.md",
+      "bytes": 166530,
+      "SHA256": "8bbd02175e2502e5a724dc676b41db2a30bb5978d32c39b94a41d86a6b0baffb"
+    },
+    {
+      "path": "results/unified_exact_round137/references.bib",
+      "bytes": 12785,
+      "SHA256": "5e3fa7d349036ffc74b102b5b0836a63a94ec49a4771890afa0a917e8196b279"
+    },
+    {
+      "path": "results/unified_exact_round169/complete_arms.json",
+      "bytes": 58773,
+      "SHA256": "f1fe53024f1d2426d1d8feeab6f184cca47f786ceaebba03dd7adf42ad0c04ee"
+    },
+    {
+      "path": "results/unified_exact_round169/h_results.json",
+      "bytes": 8461,
+      "SHA256": "be8789f73e5bf80ba0f7e41e6329033fa71a1d932889662c3735312f5d22f7b3"
+    },
+    {
+      "path": "results/unified_exact_round169/h_pool_costs.json",
+      "bytes": 3319,
+      "SHA256": "aa7b528cf27eaf1de7d9db06a9b30b2687fc532ed8aedccd25f372285b804699"
+    }
+  ]
+}

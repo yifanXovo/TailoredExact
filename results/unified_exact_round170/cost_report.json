@@ -25,13 +25,51 @@
   "science_start_epoch": 1794855003,
   "science_cap_seconds": 21600,
   "instrumented_audit_process_outer_seconds": 57.60187429987498,
-  "science_elapsed_conservative_seconds": 50329.94889879227,
-  "science_gross_wall_seconds": 50329.94889879227,
+  "science_elapsed_conservative_seconds": 51812.08050942421,
+  "science_gross_wall_seconds": 51812.08050942421,
   "inactive_postcompletion_gap_seconds": 37639.58786392212,
-  "science_charged_seconds": 12690.361034870148,
+  "science_charged_seconds": 14172.49264550209,
   "science_clock_scope": "all work through the final panel audit plus all resumed closeout; inactive terminal-to-resume gap separately disclosed; ordinary Git/public transfer not deducted here",
   "Native_H_model_checks_nested_not_added_to_process": true,
   "independent_reviews_separate_from_successful_reader": true,
   "ordinary_Git_public_recovery_IO": "recorded separately at publication",
-  "no_extra_solver_qualification": true
+  "no_extra_solver_qualification": true,
+  "document_build_attempts": [
+    {
+      "log": "document_pdf_console.log",
+      "seconds": 20.89624990010634
+    },
+    {
+      "log": "document_pdf_console_02.log",
+      "seconds": 18.655456999782473
+    }
+  ],
+  "document_build_seconds": 39.55170689988881,
+  "CPP_source_unchanged_after_measurement": true,
+  "independent_agent_reviews": [
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/math_review_final.json",
+        "bytes": 541536,
+        "SHA256": "f58e48fecc932c7695f9c4e015a6877e109dbfc7752318c24b2f34648a857e62"
+      },
+      "review_seconds": 580.82554936409
+    },
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/execution_review_final.json",
+        "bytes": 68281,
+        "SHA256": "abe56f87bcbc0de99e1c420d5491bde835c06897928e108e3052edf9a7c04615"
+      },
+      "review_seconds": 829.3774960041046
+    },
+    {
+      "file": {
+        "path": "results/unified_exact_round170/review/research_review_final.json",
+        "bytes": 25335,
+        "SHA256": "86723d33925e3159b4772a0350eec3a9be9d48ae7a0dc71c8fd4cca86e7dfcf2"
+      },
+      "review_seconds": 906.741112
+    }
+  ]
 }

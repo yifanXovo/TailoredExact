@@ -39,6 +39,15 @@ def protected():
 def result(p):
     d=read(p);return d[0] if isinstance(d,list) else d['results'][0] if 'results' in d else d
 
+def science_clock():
+    """Charge actual task work across the recorded postcompletion interruption."""
+    gross=time.time()-SCIENCE_START
+    interruption=OUT/'work_interruption.json'
+    gap=read(interruption)['inactive_postcompletion_gap_seconds'] if interruption.is_file() else 0.
+    return dict(science_elapsed_conservative_seconds=gross,science_gross_wall_seconds=gross,
+        inactive_postcompletion_gap_seconds=gap,science_charged_seconds=gross-gap,
+        science_clock_scope='all work through the final panel audit plus all resumed closeout; inactive terminal-to-resume gap separately disclosed; ordinary Git/public transfer not deducted here')
+
 def prepare():
     assert not (OUT/'entry_state.json').exists()
     OUT.mkdir(parents=True,exist_ok=True)

@@ -6,8 +6,13 @@ def table(headers,rows):
     return '\n'.join(['| '+' | '.join(headers)+' |','|'+'---|'*len(headers),*['| '+' | '.join(map(str,r))+' |' for r in rows]])+'\n'
 def f(x):return '-' if x is None else format(x,'.9g')
 def label(a):return a['role'].split('-')[1]+'/'+str(a['Native_Seed'])+'/'+a['arm']
+def clean_prose(text):
+    text=re.sub(r'\b(Seeds|Seed|seeds|seed|all|about|from|to|and|common|by|times|are|at|under)(?=\d)',r'\1 ',text)
+    text=re.sub(r'(?<=\d)(?=(?:s|lambda)\b)',' ',text)
+    return re.sub(r',(?=\d)(?!\d{3}(?:\D|$))',', ',text)
 def main():
     arms=read(OUT/'complete_arms.json')['rows'];cost=read(OUT/'cost_report.json');dec=read(OUT/'decision.json')
+    dec={k:clean_prose(v) if isinstance(v,str) else v for k,v in dec.items()}
     comps={k:read(OUT/f'comparison_{k}.json')['rows'] for k in ['CB','CM','BP','CP']}
     by={(a['role'],a['Native_Seed'],a['arm']):a for a in arms}
     roles=[p['id'] for p in read(OUT/'inputs_frozen.json')['roles']]
@@ -95,10 +100,15 @@ work is nested within each process total, never added a second time.
 Tailored model builds have C++ timers; plain P has no separate build timer.
 The residual includes other construction, transformations, checks, logging,
 serialization and process overhead, not a fabricated pure-verifier timer.
-The full process/inner audit attempt costs are in cost_report.json; all
-research reading, adaptation, analysis, limited manuscript builds and agent
-review remain inside the conservative 21,600s science window. Ordinary
-Git/public recovery transfer is recorded separately at delivery.
+The full process/inner audit attempt costs are in cost_report.json. At this
+export, occupied scientific work is {cost['science_charged_seconds']:.3f}s;
+gross elapsed wall time is {cost['science_gross_wall_seconds']:.3f}s, including
+a separately disclosed {cost['inactive_postcompletion_gap_seconds']:.3f}s
+inactive interval after all solvers/audits ended and before continuation.
+The 21,600s capacity charges actual work before and after that interruption;
+there is no claim of a six-hour gross wall-clock delivery. Closure updates
+the final occupied-work total. Ordinary Git/public transfer is recorded
+separately, and is not deducted from these conservative work segments.
 
 Every arm uses actual measured source {MEASURED}, PE {PE_SHA}, DLL {DLL_SHA}.
 Actual bytes, build records and all 254 source files were read back rather
@@ -141,7 +151,7 @@ the judgment affected here. Three actual independent agent reviews, targeted
 PDF inspection, the new-only raw member map and public receipt are linked
 through the final delivery. No merge or Round171 is started.
 """
-    (OUT/'final_report.md').write_text(report,encoding='utf-8')
+    (OUT/'final_report.md').write_text(clean_prose(report),encoding='utf-8')
     (OUT/'research_decision.md').write_text('# Finite candidate decision\n\n'+dec['headline']+'\n\n'+dec['rationale']+'\n\n'+dec['decision_explanation']+'\n\n'+dec['next_recommendation']+'\n',encoding='utf-8')
     (OUT/'author_decision_memo.md').write_text('# Change to the author assessment\n\n'+dec['rationale']+'\n\n'+dec['author_assessment']+'\n',encoding='utf-8')
     supplement=subprocess.check_output(['git','show',BASE+':results/unified_exact_round137/supplement.md'],cwd=ROOT).decode('utf-8-sig')
@@ -212,6 +222,8 @@ dominance. Full path/control/parameter/fleet/Start/coverage and cost evidence
 is available in [the fixed confirmation report](https://github.com/yifanXovo/TailoredExact/blob/{BRANCH}/results/unified_exact_round170/final_report.md)
 and its separate comparison CSVs. Global first-hit timing is unobserved.
 """
+    head,tail=supplement.split('## S170 Fixed paid initialization and matched cold controls',1)
+    supplement=head+'## S170 Fixed paid initialization and matched cold controls'+clean_prose(tail)
     (PAPER/'supplement.md').write_text(supplement,encoding='utf-8')
     body=subprocess.check_output(['git','show',BASE+':results/unified_exact_round137/paper_body.md'],cwd=ROOT).decode('utf-8-sig')
     old_tail=body.index('Objective diversification has direct local-search precedents')
@@ -266,7 +278,7 @@ negative result. {dec['paper_decision']}
 
 """
     marker='## 5. Certified transportation decisions';assert marker in body
-    body=body.replace(marker,section+marker,1)
+    body=body.replace(marker,clean_prose(section)+marker,1)
     (PAPER/'paper_body.md').write_text(body,encoding='utf-8')
     appendix=subprocess.check_output(['git','show',BASE+':results/unified_exact_round137/model_and_algorithm_appendices.md'],cwd=ROOT).decode('utf-8-sig')
     appendix=appendix.replace('difference interval in Table 8;','difference interval in Table 9;')

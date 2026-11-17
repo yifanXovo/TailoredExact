@@ -1,15 +1,16 @@
 # GI-TBC release and paper-S2 run guide
 
-The current paper is the [R169 manuscript](../results/unified_exact_round137/manuscript.pdf)
+The current paper is the [R170 manuscript](../results/unified_exact_round137/manuscript.pdf)
 and [supplement](../results/unified_exact_round137/supplement.pdf), built from
-the maintained R137 component directory with `scripts/round169_documents.py`.
+the maintained R137 component directory with `scripts/round170_documents.py`.
 See the [current review packet](paper_review.md). The release/runtime commands
-below retain their historical R137 contract. R169's common research B/M/C
-build and short-cap comparison are identified in the [current report](../results/unified_exact_round169/final_report.md),
-with no default promotion or new P pair. The R163/R164 measured
+below retain their historical R137 contract. R170 reuses the common measured
+R169 PE for its22-position B/C/M/P confirmation; the [current report](../results/unified_exact_round170/final_report.md)
+closes further C169 optimization while adding three same-budget B/P endpoint
+advantage observations, with no default promotion or new certificate. The R163/R164 measured
 C++ source is `e920b92e199e825ec89a2932f701861ff158e0d4`, with PE SHA256
 `fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93`.
-The [current source manifest](../results/unified_exact_round169/source_manifest.json)
+The [current source manifest](../results/unified_exact_round170/source_manifest.json)
 keeps that identity separate from the older source/PE below and the document build.
 
 Round160's optional physical-neighborhood research is documented in
@@ -17,8 +18,8 @@ Round160's optional physical-neighborhood research is documented in
 switch is default-off and does not redefine the stable GI-TBC/S2 profile.
 
 The runtime contract below describes the historical Round137 entry from main
-`b2b940c1e517a72e226ec60fc49ff19651737632`. The current English R169 Open Draft
-stacks on `codex/round168-route-family`; its actual identity/readback belongs in the
+`b2b940c1e517a72e226ec60fc49ff19651737632`. The current English R170 Open Draft
+stacks on `codex/round169-primal-reweight`; its actual identity/readback belongs in the
 continuation record. This record does not assert that the branch has merged. The accepted
 Round136 mainline and all historical observations remain separately pinned.
 
@@ -31,7 +32,7 @@ Round136 mainline and all historical observations remain separately pinned.
 | Historical R137 measured source | `779713ad9a0b01edc538ecb64df9438739127be3`; actual frozen source/PE hashes are in the [candidate manifest](../results/unified_exact_round137/candidate_manifest.json) |
 | Current Round137 profile | [gi_tbc_round137.json](../config/gi_tbc_round137.json), normalized against all 28 actual default vectors in the frozen 120-position matrix; actual guarded promotion and all 28 CLI checks passed with six refusal cases and zero native execution |
 | Compatibility identities | Bare executable default remains ENS-C; immutable [paper_s2.json](../config/paper_s2.json) preserves the accepted R135 profile and its 16-vector provenance |
-| Current paper | R165 revision of the maintained R137 components, including evidence through R164; complete model/algorithm appendices and bibliography |
+| Current paper | R170 revision of the maintained R137 components, including fixed paid confirmation and matched cold controls; complete model/algorithm appendices and bibliography |
 
 GI-TBC independently pays complete own H, keeps M-B shared inventory/service
 states, VD-P, uniform pair-only support, the current interval controller and

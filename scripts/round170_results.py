@@ -135,7 +135,7 @@ def costs(rows):
         P_model_build_separate_timer=None,postreturn_audit_all_attempt_seconds=sum(r['audit_inclusive_seconds'] for r in attempts),
         postreturn_audit_attempts=len(attempts),science_start_epoch=SCIENCE_START,science_cap_seconds=SCIENCE_CAP,
         instrumented_audit_process_outer_seconds=sum(r['audit_process_outer_seconds'] for r in read(OUT/'review/audit_process_costs.json')),
-        science_elapsed_conservative_seconds=time.time()-SCIENCE_START,Native_H_model_checks_nested_not_added_to_process=True,
+        **science_clock(),Native_H_model_checks_nested_not_added_to_process=True,
         independent_reviews_separate_from_successful_reader=True,ordinary_Git_public_recovery_IO='recorded separately at publication',
         no_extra_solver_qualification=True)
     write(OUT/'cost_report.json',totals)

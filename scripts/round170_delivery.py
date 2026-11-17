@@ -94,8 +94,8 @@ def scientific_close():
     for name in ['math_review_final.json','execution_review_final.json','research_review_final.json']:
         r=read(OUT/'review'/name);assert r['status']=='PASS',(name,r.get('status'))
         reviews.append(dict(path=name,status=r['status'],file=bind(OUT/'review'/name)))
-    cost=read(OUT/'cost_report.json');cost['science_elapsed_conservative_seconds']=time.time()-SCIENCE_START
-    assert cost['science_elapsed_conservative_seconds']<SCIENCE_CAP
+    cost=read(OUT/'cost_report.json');cost.update(science_clock())
+    assert cost['science_charged_seconds']<SCIENCE_CAP
     cost['CPP_source_unchanged_after_measurement']=True
     cost['independent_agent_reviews']=[dict(file=r['file'],review_seconds=read(OUT/'review'/r['path']).get('review_seconds')) for r in reviews]
     write(OUT/'cost_report.json',cost)
@@ -106,9 +106,9 @@ def scientific_close():
         PDF_QA=bind(OUT/'document_qa.json'),new_B_records=8,new_strict_P_pairs=3,new_physical_inputs=0,
         default_B=True,C166_D167_C169_default_off=True,solver_reruns_for_documentation=0))
     write(OUT/'science_close.json',dict(UTC=utc(),scientific_objective_achieved=True,delivery_remaining=True,
-        science_elapsed_conservative_seconds=cost['science_elapsed_conservative_seconds'],science_capacity_seconds=SCIENCE_CAP,
+        **science_clock(),science_capacity_seconds=SCIENCE_CAP,
         all_22_qualified=True,decision=read(OUT/'decision.json')['decision'],no_Round171=True))
-    print('Science closed at',cost['science_elapsed_conservative_seconds'],'conservative seconds',flush=True)
+    print('Science closed at',cost['science_charged_seconds'],'charged seconds; gross wall',cost['science_gross_wall_seconds'],flush=True)
 
 if __name__=='__main__':
     if sys.argv[1]=='recover':recover(sys.argv[2])
