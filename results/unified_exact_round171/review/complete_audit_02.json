@@ -1,0 +1,528 @@
+{
+  "schema": "round171-qualified-cold-P-postreturn-audit-v1",
+  "UTC": "2026-11-17T22:14:27.196920+00:00",
+  "passed": true,
+  "position": 2,
+  "role": "R171-C50-S-C",
+  "research_arm": "P",
+  "Native_Seed": 0,
+  "Optimize_run_by_reviewer": 0,
+  "actual_invocation": {
+    "path": "results/unified_exact_round171/complete_raw/02_R171-C50-S-C_S0_P/invocation.json",
+    "bytes": 4035,
+    "SHA256": "9e316b42c7e5949bc63603fae2c3001d38015ba1e978e0c321d0926c3af520a8"
+  },
+  "input": {
+    "path": "results/unified_exact_round171/inputs/R171-C50-S-C/first/instance.txt",
+    "bytes": 2986,
+    "SHA256": "bd4209dde4c8cfd9d60bdee29af9b1e9af257767a486bf3814afa2172a2f0ba1"
+  },
+  "completion": {
+    "UTC": "2026-11-17T22:14:24.963851+00:00",
+    "started_epoch": 1794952470.8756185,
+    "ended_epoch": 1794953664.963851,
+    "process_outer_seconds": 1194.088493200019,
+    "rc": 0,
+    "affinity": {
+      "mask": 4,
+      "set_success": true,
+      "wrapper_killed": false
+    },
+    "result": {
+      "path": "results/unified_exact_round171/complete_raw/02_R171-C50-S-C_S0_P/result.json",
+      "bytes": 88780,
+      "SHA256": "aac36dc4a9db2aee59560dd5595b1088ac6784ce21d25cbf882e49c4d42f09be"
+    },
+    "deadline_seconds": 1200
+  },
+  "U": 0.5237715123731919,
+  "L": 0.29133113141544276,
+  "absolute_gap": 0.2324403809577491,
+  "relative_gap": 0.4437820222496814,
+  "certificate": false,
+  "certificate_basis": "complete_original_cold_compact_qualified_native_bound_open",
+  "true_final_physical": {
+    "G": 0.2578933353013193,
+    "P": 3.2031418139683847,
+    "F": 0.5237715123731919,
+    "Y": [
+      50000,
+      17,
+      14,
+      11,
+      9,
+      7,
+      28,
+      8,
+      13,
+      31,
+      14,
+      13,
+      21,
+      8,
+      14,
+      25,
+      6,
+      13,
+      22,
+      17,
+      20,
+      12,
+      13,
+      11,
+      5,
+      30,
+      29,
+      13,
+      22,
+      6,
+      10,
+      15,
+      3,
+      7,
+      20,
+      14,
+      18,
+      4,
+      3,
+      20,
+      5,
+      15,
+      3,
+      5,
+      3,
+      3,
+      15,
+      6,
+      18,
+      16,
+      16
+    ],
+    "maximum_duration": 7490.624258484094,
+    "pickups": [
+      36,
+      39,
+      41
+    ],
+    "return_loads": [
+      0,
+      0,
+      0
+    ],
+    "routes": [
+      {
+        "vehicle": 0,
+        "nodes": [
+          0,
+          30,
+          31,
+          29,
+          22,
+          9,
+          4,
+          5,
+          11,
+          21,
+          17,
+          10,
+          13,
+          0
+        ],
+        "operations": [
+          {
+            "station": 30,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 31,
+            "pickup": 6,
+            "drop": 0
+          },
+          {
+            "station": 29,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 22,
+            "pickup": 0,
+            "drop": 4
+          },
+          {
+            "station": 9,
+            "pickup": 16,
+            "drop": 0
+          },
+          {
+            "station": 4,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 5,
+            "pickup": 0,
+            "drop": 5
+          },
+          {
+            "station": 11,
+            "pickup": 0,
+            "drop": 9
+          },
+          {
+            "station": 21,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 17,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 10,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 13,
+            "pickup": 0,
+            "drop": 6
+          }
+        ]
+      },
+      {
+        "vehicle": 1,
+        "nodes": [
+          0,
+          48,
+          46,
+          41,
+          33,
+          26,
+          25,
+          24,
+          18,
+          12,
+          0
+        ],
+        "operations": [
+          {
+            "station": 48,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 46,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 41,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 33,
+            "pickup": 0,
+            "drop": 3
+          },
+          {
+            "station": 26,
+            "pickup": 18,
+            "drop": 0
+          },
+          {
+            "station": 25,
+            "pickup": 0,
+            "drop": 21
+          },
+          {
+            "station": 24,
+            "pickup": 0,
+            "drop": 4
+          },
+          {
+            "station": 18,
+            "pickup": 11,
+            "drop": 0
+          },
+          {
+            "station": 12,
+            "pickup": 0,
+            "drop": 11
+          }
+        ]
+      },
+      {
+        "vehicle": 2,
+        "nodes": [
+          0,
+          15,
+          7,
+          3,
+          1,
+          2,
+          6,
+          8,
+          14,
+          19,
+          23,
+          0
+        ],
+        "operations": [
+          {
+            "station": 15,
+            "pickup": 13,
+            "drop": 0
+          },
+          {
+            "station": 7,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 3,
+            "pickup": 0,
+            "drop": 7
+          },
+          {
+            "station": 1,
+            "pickup": 2,
+            "drop": 0
+          },
+          {
+            "station": 2,
+            "pickup": 2,
+            "drop": 0
+          },
+          {
+            "station": 6,
+            "pickup": 15,
+            "drop": 0
+          },
+          {
+            "station": 8,
+            "pickup": 0,
+            "drop": 9
+          },
+          {
+            "station": 14,
+            "pickup": 0,
+            "drop": 10
+          },
+          {
+            "station": 19,
+            "pickup": 9,
+            "drop": 0
+          },
+          {
+            "station": 23,
+            "pickup": 0,
+            "drop": 9
+          }
+        ]
+      }
+    ],
+    "complete_fleet_vehicles": 3,
+    "empty_vehicles_added": 0
+  },
+  "full_paid_H": null,
+  "Start_checks": [],
+  "cold_parameters": {
+    "MIPFocus": 0,
+    "Cuts": -1,
+    "NumStart_before_optimize": 0,
+    "loaded_after_presets": true,
+    "authoritative_model_environment": true
+  },
+  "models": [
+    {
+      "call": 1,
+      "model": {
+        "path": "results/unified_exact_round171/complete_raw/02_R171-C50-S-C_S0_P/compact.lp",
+        "SHA": "ae4cab81860fcc2f2b79a8db25a85657cb65cd9a3289ee115309162db1ee30bc",
+        "rows": 27605,
+        "columns": 10504,
+        "quantity_columns": 300,
+        "quantity_type": "I",
+        "direction_columns": 150,
+        "frozen_A_B_rows_checked": 0,
+        "route_load_Y_integer": true,
+        "state_assignment_direction_binary": true
+      },
+      "scope": {
+        "full_original_reference_already_checked": true
+      },
+      "AP": {
+        "enabled": false,
+        "one_hot_AP_contract_applicable": false,
+        "original_compact_reference_SHA256": "ae4cab81860fcc2f2b79a8db25a85657cb65cd9a3289ee115309162db1ee30bc",
+        "full_matrix_byte_identity_verified": true
+      },
+      "no_improver_shortcut_check": {
+        "call": 1,
+        "actual_constant_infeasibility_rows_zero_based": [],
+        "identified_legacy_shortcut_rows": [],
+        "similar_row_shapes": [],
+        "model_scope_issue": false,
+        "inclusive_domain_empty_proved_by_marker": false,
+        "old_side_default_performance_disposition": "UNALTERED",
+        "analytic_compatibility_requires_independent_review": true
+      }
+    }
+  ],
+  "journal_events": 294,
+  "actual_Optimize": 1,
+  "LP": 0,
+  "MIP": 1,
+  "Native_seconds": 1193.7380001544952,
+  "actual_call_log_bindings": [
+    {
+      "call": 1,
+      "serial_ordinal": 1,
+      "model_SHA": "ae4cab81860fcc2f2b79a8db25a85657cb65cd9a3289ee115309162db1ee30bc",
+      "leaf": "",
+      "true_G_interval": [
+        0,
+        0.98
+      ],
+      "cutoff": 0,
+      "epoch": null,
+      "epoch_source": "scope/cutoff bound; no invented epoch",
+      "solve_kind": "MIP",
+      "ledger": null,
+      "raw_log": "results/unified_exact_round171/complete_raw/02_R171-C50-S-C_S0_P/native.log",
+      "raw_log_SHA": "2b9b5aa99a545232b8a11d0c98c8c6a6f1620b480af8e3581f249a1eaa518e21",
+      "byte_begin": 0,
+      "byte_end": 43589,
+      "segment_SHA": "2b9b5aa99a545232b8a11d0c98c8c6a6f1620b480af8e3581f249a1eaa518e21",
+      "fingerprint": "0xc61c4b60",
+      "fingerprint_contract": {
+        "cold_reference": "0xc61c4b60",
+        "Optimize_log": "0xc61c4b60",
+        "same_state_equal": true
+      },
+      "parameters": {
+        "TimeLimit": 1193.7315886,
+        "MIPGap": 0.0,
+        "MIPGapAbs": 0.0,
+        "Threads": 1.0
+      },
+      "native_types": {
+        "C": 1790,
+        "B": 8214,
+        "I": 500
+      },
+      "journal_returned": true,
+      "return_sequence": 294,
+      "return_available": 1194.0097731,
+      "return_code": 0,
+      "missing_return_requires_unchanged_narrow_gate": false
+    }
+  ],
+  "actual_native_quality": {
+    "quality": [
+      {
+        "call": 1,
+        "sufficient": true,
+        "violated_attributes": [],
+        "unknown_attributes": [
+          "DualVio"
+        ],
+        "solution_count": 10,
+        "solution_count_read_return_code": 0,
+        "native_status": 9,
+        "native_status_read_return_code": 0,
+        "optimize_return_code": 0,
+        "quality_applicability": "KNOWN",
+        "residuals_not_qualified_by_assuming_unknown_count_zero": false,
+        "retained_attributes": {
+          "ObjVal": 0.5237715087806273,
+          "ObjBoundC": 0.29133113141544276,
+          "ConstrVio": 1.304691475412234e-07,
+          "BoundVio": 3.229302542204399e-08,
+          "IntVio": 0,
+          "DualVio": null
+        },
+        "solve_kind": "MIP",
+        "objective_error_bound_claimed": false
+      }
+    ],
+    "infeasibility": [],
+    "extra_Optimize": 0
+  },
+  "qualified_cold_bound": {
+    "call": 1,
+    "lo": 0,
+    "hi": 0.98,
+    "L": 0.29133113141544276,
+    "cutoff": null,
+    "sequence": 294,
+    "source": "linked_returned_complete_original_cold_native_log_and_readback",
+    "native_status": 9,
+    "native_log": "results/unified_exact_round171/complete_raw/02_R171-C50-S-C_S0_P/native.log",
+    "native_log_SHA": "2b9b5aa99a545232b8a11d0c98c8c6a6f1620b480af8e3581f249a1eaa518e21",
+    "printed_native_final_bound": 0.2913311314154,
+    "full_original": true
+  },
+  "actual_Optimize_parameters": [
+    {
+      "call": 1,
+      "leaf": "",
+      "kind": "MIP",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPFocus": 0,
+        "Cuts": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06,
+        "expected": {
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPFocus": 0,
+          "Cuts": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "qualification_reason": "",
+        "TimeLimit": 1193.7315886
+      },
+      "TimeLimit_provenance": "Actual Optimize banner in the bound native log",
+      "model_SHA256": "ae4cab81860fcc2f2b79a8db25a85657cb65cd9a3289ee115309162db1ee30bc",
+      "model_fingerprint": "0xc61c4b60",
+      "model_rows": 27605,
+      "model_columns": 10504,
+      "status_returned": true,
+      "native_log_SHA256": "2b9b5aa99a545232b8a11d0c98c8c6a6f1620b480af8e3581f249a1eaa518e21",
+      "native_log_segment_SHA256": "2b9b5aa99a545232b8a11d0c98c8c6a6f1620b480af8e3581f249a1eaa518e21"
+    }
+  ],
+  "phase_event_count": 7,
+  "phase_files": [
+    "results/unified_exact_round171/complete_raw/02_R171-C50-S-C_S0_P/phases.csv"
+  ],
+  "exact_first_hit_global_seconds": null,
+  "first_hit_missing_reason": "Logs do not expose an unambiguous process-wall first-hit time.",
+  "raw_bytes_unchanged": true,
+  "audit_seconds": 0.5174131002277136,
+  "run_id": "02_R171-C50-S-C_S0_P",
+  "initial_qualified_global_L": null,
+  "native_DLL_live_readback": {
+    "path": "results/unified_exact_round171/runtime_readbacks/02.json",
+    "bytes": 661,
+    "SHA256": "3a74f26c2092c77bf3ec24c2724eaf4dcb1d4a6f34544a089503e486ae3f4169"
+  },
+  "CPP_effective_preset": "custom",
+  "raw_status": "time_limit"
+}
