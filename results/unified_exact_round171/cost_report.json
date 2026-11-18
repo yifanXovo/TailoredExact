@@ -15,8 +15,10 @@
   "audit_seconds": 52.42254390055314,
   "T_total_with_independent_audit": 14382.093024800066,
   "pre_first_optimize_seconds": 9.8654798,
-  "post_last_optimize_seconds": 0.44202289999998357,
-  "UTC": "2026-11-18T01:33:54.001074+00:00",
+  "post_last_optimize_seconds": 0.512469300000248,
+  "return_marker_to_qualified_tail_seconds": 0.07044640000026448,
+  "qualified_tail_to_exit_seconds": 0.44202289999998357,
+  "UTC": "2026-11-18T01:43:47.065012+00:00",
   "nominal_process_cap_sum": 14400,
   "by_arm": {
     "B": {
@@ -36,7 +38,9 @@
       "audit_seconds": 48.68531420035288,
       "T_total_with_independent_audit": 7213.7997203003615,
       "pre_first_optimize_seconds": 8.2809206,
-      "post_last_optimize_seconds": 0.20068799999990006
+      "post_last_optimize_seconds": 0.25969430000031934,
+      "return_marker_to_qualified_tail_seconds": 0.05900630000041929,
+      "qualified_tail_to_exit_seconds": 0.20068799999990006
     },
     "P": {
       "process_outer_seconds": 7164.556074799504,
@@ -55,7 +59,9 @@
       "audit_seconds": 3.7372297002002597,
       "T_total_with_independent_audit": 7168.293304499704,
       "pre_first_optimize_seconds": 1.5845592,
-      "post_last_optimize_seconds": 0.2413349000000835
+      "post_last_optimize_seconds": 0.2527749999999287,
+      "return_marker_to_qualified_tail_seconds": 0.011440099999845188,
+      "qualified_tail_to_exit_seconds": 0.2413349000000835
     }
   },
   "qualified_positions": 12,
@@ -70,13 +76,13 @@
   "post_return_check_seconds_combined_with_finalization": true,
   "timer_scope": "H, Native, construction, mapping, checks and serialization are nested in the producer process.",
   "clock": {
-    "UTC": "2026-11-18T01:33:54.001074+00:00",
+    "UTC": "2026-11-18T01:43:47.065012+00:00",
     "start_epoch": 1794950675.0,
-    "measured_epoch": 1794965634.001074,
+    "measured_epoch": 1794966227.0650122,
     "science_cap_seconds": 25200,
-    "gross_elapsed_seconds": 14959.001074075699,
+    "gross_elapsed_seconds": 15552.065012216568,
     "inactive_continuation_seconds": 0,
-    "occupied_conservative_seconds": 14959.001074075699,
+    "occupied_conservative_seconds": 15552.065012216568,
     "scope": "Elapsed time less documented terminal inactive intervals. Git and public transfer are itemized separately."
   }
 }

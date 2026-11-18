@@ -67,6 +67,22 @@ def interval_activity(directory, audit, returned):
     )
 
 
+def last_return_marker(directory, calls, cap):
+    from round171_audit import old
+
+    expected = {row["call"] for row in calls}
+    timestamps = {}
+    for path in (directory / "journal").glob("event_*.json"):
+        event = read(path)
+        if event["kind"] == "returned":
+            assert event["call"] not in timestamps
+            marker = old.committed(path.with_suffix(".commit"), cap)
+            assert marker["payload"] == event
+            timestamps[event["call"]] = marker["data_close_seconds"]
+    assert set(timestamps) == expected
+    return timestamps[max(timestamps)]
+
+
 def run_record(registered, panel, audit, fees):
     n = registered["position"]
     directory = Path(registered["directory"])
@@ -95,8 +111,11 @@ def run_record(registered, panel, audit, fees):
     else:
         assert h is None and audit["cold_parameters"]["NumStart_before_optimize"] == 0 and not audit["Start_checks"]
     assert math.isclose(lp_seconds + mip_seconds, audit["Native_seconds"], abs_tol=1e-5)
-    outer_finalize = phase["process_exit"] - max(binding["return_available"] for binding in audit["actual_call_log_bindings"])
-    assert outer_finalize >= 0
+    native_return = last_return_marker(directory, bank, registered["cap"])
+    qualified_tail = max(binding["return_available"] for binding in audit["actual_call_log_bindings"])
+    exit_marker = phase["process_exit"]
+    assert native_return <= qualified_tail <= exit_marker
+    outer_finalize = exit_marker - native_return
     h_seconds = path["H_seconds"] if path else 0.0
     h_check_seconds = path["original_verification_seconds"] if path else 0.0
     model_seconds = returned["external_gini_tree_model_build_seconds"] if b_arm else None
@@ -145,7 +164,11 @@ def run_record(registered, panel, audit, fees):
         root_model_construction_seconds=first_build, all_recorded_model_build_seconds=model_seconds,
         all_recorded_model_import_seconds=model_read_seconds, pre_first_optimize_seconds=process_to_first_native,
         post_last_optimize_seconds=outer_finalize,
-        post_last_optimize_scope="C++ return publication marker to process exit, including checks, cleanup and serialization.",
+        last_native_return_marker_seconds=native_return,
+        last_qualified_journal_tail_seconds=qualified_tail,
+        return_marker_to_qualified_tail_seconds=qualified_tail - native_return,
+        qualified_tail_to_exit_seconds=exit_marker - qualified_tail,
+        post_last_optimize_scope="Raw NEJ1 Optimize-return publication to C++ process exit. Intervals isolate the subsequent evidence-publishing window from the remaining finalization.",
         process_residual_after_H_and_Native_seconds=residual,
         P_NumStart_before_optimize=audit["cold_parameters"]["NumStart_before_optimize"] if not b_arm else None,
         audit_file=fees["audit"], invocation=audit["actual_invocation"], raw_result=audit["completion"]["result"],
@@ -258,7 +281,8 @@ def collect(partial=False):
     fields = ("process_outer_seconds", "H_calls", "H_seconds", "H_original_reverification_seconds",
               "H_initialization_seconds", "actual_Optimize", "LP", "MIP", "LP_native_seconds", "MIP_native_seconds",
               "Native_seconds", "Work", "nodes", "audit_seconds", "T_total_with_independent_audit",
-              "pre_first_optimize_seconds", "post_last_optimize_seconds")
+              "pre_first_optimize_seconds", "post_last_optimize_seconds",
+              "return_marker_to_qualified_tail_seconds", "qualified_tail_to_exit_seconds")
     costs = {key: sum(row[key] for row in complete if row[key] is not None) for key in fields}
     aggregate = {arm: {key: sum(row[key] for row in complete if row["arm"] == arm and row[key] is not None)
                        for key in fields} for arm in ("B", "P")}
@@ -340,7 +364,13 @@ def apply_master(data_commit):
     csv.writer(serial, lineterminator="\r\n").writerows(values)
     increment_bytes = serial.getvalue().encode("utf-8")
     updated = base + increment_bytes
-    assert MASTER.read_bytes() in (base, updated), "An authority already exists with different bytes"
+    existing = MASTER.read_bytes()
+    if existing not in (base, updated):
+        prior = read(OUT / "CSV_reconciliation.json")
+        assert digest(existing) == prior["master"]["SHA256"], "Preserve the different authority"
+        previous_commit = prior["evidence_data_commit"]
+        expected_previous = base + increment_bytes.replace(data_commit.encode("ascii"), previous_commit.encode("ascii"))
+        assert existing == expected_previous, "A data-link rebind must preserve every other CSV byte"
     verify = list(csv.reader(io.StringIO(updated.decode("utf-8-sig"), newline="")))
     assert verify[:127] == table and len(verify) == 127 + len(mapping) and {len(row) for row in verify} == {28}
     keys = [(row[0], row[10], row[11], row[12], row[13], row[7], row[8]) for row in verify]
