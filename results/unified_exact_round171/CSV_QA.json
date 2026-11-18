@@ -1,0 +1,196 @@
+{
+  "schema": "round171-independent-execution-CSV-audit-v1",
+  "UTC": "2026-11-18T01:47:54.169415+00:00",
+  "PASS": true,
+  "method": "Independent Python standard-library byte, CSV and full-precision numeric checks, without importing generation or producer code.",
+  "data_commit": "26730ec056490cf17502b7a74af418c3f1a18aad",
+  "baseline_commit": "2bf623c537ec363a9d6eb13c9ab0496d074d9c47",
+  "baseline_embedded_payload_verified": true,
+  "baseline_file_bytes": 76970,
+  "baseline_SHA256": "ef96de583ff382fa8a303b92f86d30e43b8f863f786117b6ce3241d13d4e5b0c",
+  "baseline_rows": 126,
+  "baseline_prefix_exact": true,
+  "master_bytes": 82303,
+  "master_SHA256": "0487ebaf90274f85a7cd94358215a701825f328c954a8de235fd5e58633989dc",
+  "prospective_Git_blob_oid_from_unstaged_bytes": "32a93abb23f57ff909ad450874fdd9b6820868c4",
+  "Git_text_filter_preserves_CRLF_and_BOM": true,
+  "master_rows": 132,
+  "columns": 28,
+  "encoding": "UTF-8 BOM",
+  "line_endings": "CRLF",
+  "increment_bytes": 5785,
+  "increment_SHA256": "13258a4773565d337bf922a3ce8885063ada980088600a4bac5bcd6aaad0d73d",
+  "increment_byte_matches_master_append": true,
+  "new_B_rows": 6,
+  "strict_B_P_pairs": 6,
+  "new_distinct_physical_keys": 6,
+  "certificates": {
+    "B": 0,
+    "P": 0
+  },
+  "joint_OPEN_pairs": 6,
+  "material_advantage_counts": {
+    "B_lower_U_material": 5,
+    "B_higher_L_material": 6,
+    "B_narrower_absolute_gap_material": 6,
+    "B_joint_U_L_gap_material": 5
+  },
+  "row_checks": [
+    {
+      "master_line": 128,
+      "role": "R171-C50-S-C",
+      "key": [
+        "R171-C50-S-C",
+        "0",
+        "1",
+        "171",
+        "1200",
+        "7500",
+        "0.083005434199766193"
+      ],
+      "B_run": "01_R171-C50-S-C_S0_B",
+      "P_run": "02_R171-C50-S-C_S0_P",
+      "input_SHA256": "bd4209dde4c8cfd9d60bdee29af9b1e9af257767a486bf3814afa2172a2f0ba1",
+      "exact_binary64_numeric_roundtrip": true,
+      "status_and_missing_CERT_time_verified": true,
+      "provenance_links_verified": true,
+      "B_material_advantages": {
+        "U": false,
+        "L": true,
+        "absolute_gap": true
+      },
+      "independent_delta": 0.0005237715123731919
+    },
+    {
+      "master_line": 129,
+      "role": "R171-C50-S-R",
+      "key": [
+        "R171-C50-S-R",
+        "0",
+        "1",
+        "171",
+        "1200",
+        "7500",
+        "0.097531249987808599"
+      ],
+      "B_run": "04_R171-C50-S-R_S0_B",
+      "P_run": "03_R171-C50-S-R_S0_P",
+      "input_SHA256": "1be92eb1af1f650aad5614852a6978b13f5d198707dc86dddd93a05341d8fd8a",
+      "exact_binary64_numeric_roundtrip": true,
+      "status_and_missing_CERT_time_verified": true,
+      "provenance_links_verified": true,
+      "B_material_advantages": {
+        "U": true,
+        "L": true,
+        "absolute_gap": true
+      },
+      "independent_delta": 0.0005746309692185922
+    },
+    {
+      "master_line": 130,
+      "role": "R171-B50-S-C",
+      "key": [
+        "R171-B50-S-C",
+        "0",
+        "1",
+        "171",
+        "1200",
+        "6900",
+        "0.041119376334195268"
+      ],
+      "B_run": "05_R171-B50-S-C_S0_B",
+      "P_run": "06_R171-B50-S-C_S0_P",
+      "input_SHA256": "1bc1c0648b1b0c8a1839ae78c822178a366ce07cd0905ac9a26d52c735eed2b2",
+      "exact_binary64_numeric_roundtrip": true,
+      "status_and_missing_CERT_time_verified": true,
+      "provenance_links_verified": true,
+      "B_material_advantages": {
+        "U": true,
+        "L": true,
+        "absolute_gap": true
+      },
+      "independent_delta": 0.0007051805516925162
+    },
+    {
+      "master_line": 131,
+      "role": "R171-B50-S-R",
+      "key": [
+        "R171-B50-S-R",
+        "0",
+        "1",
+        "171",
+        "1200",
+        "18600",
+        "0.041872648693753414"
+      ],
+      "B_run": "08_R171-B50-S-R_S0_B",
+      "P_run": "07_R171-B50-S-R_S0_P",
+      "input_SHA256": "1106bd064632dd97b714b51a977e62db3bd66a51891a05e1c1aec6e10e6016f7",
+      "exact_binary64_numeric_roundtrip": true,
+      "status_and_missing_CERT_time_verified": true,
+      "provenance_links_verified": true,
+      "B_material_advantages": {
+        "U": true,
+        "L": true,
+        "absolute_gap": true
+      },
+      "independent_delta": 0.0006087788269940684
+    },
+    {
+      "master_line": 132,
+      "role": "R171-X50-S-C",
+      "key": [
+        "R171-X50-S-C",
+        "0",
+        "1",
+        "171",
+        "1200",
+        "5100",
+        "0.15050170495856463"
+      ],
+      "B_run": "09_R171-X50-S-C_S0_B",
+      "P_run": "10_R171-X50-S-C_S0_P",
+      "input_SHA256": "36db3e2c649d38312ee23c9281895a28bce0dc06afa38598e261afbd01d012f5",
+      "exact_binary64_numeric_roundtrip": true,
+      "status_and_missing_CERT_time_verified": true,
+      "provenance_links_verified": true,
+      "B_material_advantages": {
+        "U": true,
+        "L": true,
+        "absolute_gap": true
+      },
+      "independent_delta": 0.0007293445834188921
+    },
+    {
+      "master_line": 133,
+      "role": "R171-X50-S-R",
+      "key": [
+        "R171-X50-S-R",
+        "0",
+        "1",
+        "171",
+        "1200",
+        "5700",
+        "0.056808095153559383"
+      ],
+      "B_run": "12_R171-X50-S-R_S0_B",
+      "P_run": "11_R171-X50-S-R_S0_P",
+      "input_SHA256": "ffab4a9a4ced2c7205231fc299709fab5466a6c9f203f477025afa5cb3193ca8",
+      "exact_binary64_numeric_roundtrip": true,
+      "status_and_missing_CERT_time_verified": true,
+      "provenance_links_verified": true,
+      "B_material_advantages": {
+        "U": true,
+        "L": true,
+        "absolute_gap": true
+      },
+      "independent_delta": 0.0009200946985277997
+    }
+  ],
+  "check_wall_seconds": 0.32302236557006836,
+  "public_committed_blob_recovery_scope": "Separate delivery receipt at the final scientific commit.",
+  "final_link_rebind_verified": true,
+  "final_rebind_method": "The twelve source URL substitutions are the only byte changes from the independently verified prior master and increment. Reversed replacements reproduce both prior SHA256 values. Both revised immutable Git source blobs match the current evidence, with every endpoint/status/time used in the CSV unchanged.",
+  "previous_endpoint_data_commit": "d814c0a9ffdc6e1800b593bdcf1de35e7b7531bd",
+  "final_rebind_check_seconds": 0.3732147216796875
+}

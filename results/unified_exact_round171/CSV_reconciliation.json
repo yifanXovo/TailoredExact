@@ -1,0 +1,93 @@
+{
+  "UTC": "2026-11-18T01:43:48.473234+00:00",
+  "evidence_data_commit": "26730ec056490cf17502b7a74af418c3f1a18aad",
+  "baseline_commit": "2bf623c537ec363a9d6eb13c9ab0496d074d9c47",
+  "baseline_bytes": 76970,
+  "baseline_SHA256": "ef96de583ff382fa8a303b92f86d30e43b8f863f786117b6ce3241d13d4e5b0c",
+  "baseline_records": 126,
+  "baseline_prefix_exact": true,
+  "master": {
+    "path": "results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv",
+    "bytes": 82303,
+    "SHA256": "0487ebaf90274f85a7cd94358215a701825f328c954a8de235fd5e58633989dc"
+  },
+  "records": 132,
+  "columns": 28,
+  "BOM": "UTF-8",
+  "line_endings": "CRLF",
+  "increment": {
+    "path": "results/unified_exact_round171/GI_TBC_R171_B_increment_28col.csv",
+    "bytes": 5785,
+    "SHA256": "13258a4773565d337bf922a3ce8885063ada980088600a4bac5bcd6aaad0d73d"
+  },
+  "new_B_records": 6,
+  "new_strict_pairs": 6,
+  "new_physical_identities": 6,
+  "B_lower_U_material": 5,
+  "B_higher_L_material": 6,
+  "B_narrower_absolute_gap_material": 6,
+  "B_joint_U_L_gap_material": 5,
+  "mapping": [
+    {
+      "master_line": 128,
+      "physical_key": "ad3f123b8141498289aa3c281882e88d810db669258c14245ee553e28a9c41f3",
+      "input_SHA256": "bd4209dde4c8cfd9d60bdee29af9b1e9af257767a486bf3814afa2172a2f0ba1",
+      "role": "R171-C50-S-C",
+      "B_run": "01_R171-C50-S-C_S0_B",
+      "P_run": "02_R171-C50-S-C_S0_P",
+      "strict_pair": true,
+      "evidence_commit": "26730ec056490cf17502b7a74af418c3f1a18aad"
+    },
+    {
+      "master_line": 129,
+      "physical_key": "15d84f99564f4869eb286a50fd7eef60a4625e4b08607c546d1dcae4ff2c922b",
+      "input_SHA256": "1be92eb1af1f650aad5614852a6978b13f5d198707dc86dddd93a05341d8fd8a",
+      "role": "R171-C50-S-R",
+      "B_run": "04_R171-C50-S-R_S0_B",
+      "P_run": "03_R171-C50-S-R_S0_P",
+      "strict_pair": true,
+      "evidence_commit": "26730ec056490cf17502b7a74af418c3f1a18aad"
+    },
+    {
+      "master_line": 130,
+      "physical_key": "46fb90b512317406df2399489a280fb6e58f01a1ef0725ca3bb5a0678058e7de",
+      "input_SHA256": "1bc1c0648b1b0c8a1839ae78c822178a366ce07cd0905ac9a26d52c735eed2b2",
+      "role": "R171-B50-S-C",
+      "B_run": "05_R171-B50-S-C_S0_B",
+      "P_run": "06_R171-B50-S-C_S0_P",
+      "strict_pair": true,
+      "evidence_commit": "26730ec056490cf17502b7a74af418c3f1a18aad"
+    },
+    {
+      "master_line": 131,
+      "physical_key": "6e89cc388d1ac259cd6d891a2c9a0fa90d6bfc28e3c4deb5e65e322b83edd388",
+      "input_SHA256": "1106bd064632dd97b714b51a977e62db3bd66a51891a05e1c1aec6e10e6016f7",
+      "role": "R171-B50-S-R",
+      "B_run": "08_R171-B50-S-R_S0_B",
+      "P_run": "07_R171-B50-S-R_S0_P",
+      "strict_pair": true,
+      "evidence_commit": "26730ec056490cf17502b7a74af418c3f1a18aad"
+    },
+    {
+      "master_line": 132,
+      "physical_key": "eafafb87235a42eb1eb7de6929a4ab4c2c39bdc49bb78c55764be5a505fb69a8",
+      "input_SHA256": "36db3e2c649d38312ee23c9281895a28bce0dc06afa38598e261afbd01d012f5",
+      "role": "R171-X50-S-C",
+      "B_run": "09_R171-X50-S-C_S0_B",
+      "P_run": "10_R171-X50-S-C_S0_P",
+      "strict_pair": true,
+      "evidence_commit": "26730ec056490cf17502b7a74af418c3f1a18aad"
+    },
+    {
+      "master_line": 133,
+      "physical_key": "43a5030ca8748c10f46e3475d3b71569f938e18e204be2327ecc38c676fd1f71",
+      "input_SHA256": "ffab4a9a4ced2c7205231fc299709fab5466a6c9f203f477025afa5cb3193ca8",
+      "role": "R171-X50-S-R",
+      "B_run": "12_R171-X50-S-R_S0_B",
+      "P_run": "11_R171-X50-S-R_S0_P",
+      "strict_pair": true,
+      "evidence_commit": "26730ec056490cf17502b7a74af418c3f1a18aad"
+    }
+  ],
+  "status_policy": "Qualified CERT uses T_cert_process. OPEN gaps are in percent."
+}

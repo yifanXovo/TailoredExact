@@ -1643,7 +1643,7 @@ All three new strictly matched Seed 1 B/P pairs favor B in U, qualified L and ab
 
 Separately, C also has lower U, higher qualified L and smaller gaps than the same three cold P runs: C/P U reductions are 37.88%, 47.02% and 21.24% on C35/B35/X35. C adds a better Seed 1 U than B on B35 and X35, at weaker L, but loses to B on C35. B already improves all those P endpoints. C/P therefore supplies bounded candidate endpoint evidence, not a promotion of C, a new certificate or extra default-method B/P wins. No M/P Seed 2 cells exist and no historical long-cap P is borrowed.
 
-Close further optimization of the fixed C169 recipe. Preserve its correctly paid complete-H initialization improvements and the B35/X35 Seed 1 primal positives as local research findings, together with every adverse U/L/gap and C20 time result. Do not promote it as a candidate confirmed across these two additional Native Seeds. B/GI-TBC remains uniform default and C166/D167/C169 remain default off. This closes this recipe without adding weights, H seeds, a third Native Seed, longer caps, new neighborhoods or a successor round.
+The two additional Native Seeds did not confirm the fixed C169 recipe as a complete-method improvement. The paid complete-H initialization and B35/X35 Seed 1 primal gains remain local findings alongside the adverse U/L/gap and C20 timing results. B/GI-TBC remains uniform. C166, D167 and C169 remain off.
 
 The fixed materiality scale max(1e-6, 0.001 max(abs(U_reference), 1e-12)) is
 descriptive, not significance or a qualification rule. Complete H includes
@@ -1655,3 +1655,124 @@ is transferred. Inclusion of base guarantees initialization, not terminal
 dominance. Full path/control/parameter/fleet/Start/coverage and cost evidence
 is available in [the fixed confirmation report](https://github.com/yifanXovo/TailoredExact/blob/codex/round170-reweight-confirmation/results/unified_exact_round170/final_report.md)
 and its separate comparison CSVs. Global first-hit timing is unobserved.
+
+## S171 Prospective positive n50 configurations
+
+The precommitted generation draws one compact and one regional 50-station
+selection per archive, with four original hash/farthest anchors and a
+nearest-100 regional pool. The selections within a source are disjoint.
+CITI and CABI use UTM 18N and Divvy uses UTM 16N. Archive coordinates and
+capacities support the spatial cases. Depot, stock, targets and weights
+have synthetic or transformed values. The unchanged shortage generator,
+serialized bytes, original row mapping and historical identity scope are
+in the input ledger. The vehicles have capacities 20, 25 and 30. The original
+problem uses empty departures, at most one nonzero directed service per station,
+prefix capacity, loaded return and paid unloading, with speed 1.5 m/s
+and pickup and drop each 60 s/unit.
+
+Each input uses \(T=T_1\) under §4.1 and \(\lambda=1/\Omega\), where
+\(\Omega=\sum_i\omega_i\) excludes the depot. With \(s=\sum_i D_i-\sum_i b_i>0\)
+and \(a=\min_i \omega_i/D_i>0\), conservation gives
+\(P\ge a\sum_i|D_i-Y_i|\ge as\), hence \(F\ge\lambda as>0\).
+These serialized-data bounds certify positivity for the design. The
+optimization arms use their frozen proof sources. Input horizons and
+the 1,200-s complete-process clock are distinct quantities.
+
+**Table S171.1. Input-derived settings and positivity.**
+
+| Configuration | Archive / geometry | T (s) | Omega | lambda | Shortfall | F floor (approx.) |
+| --- | --- | --- | --- | --- | --- | --- |
+| R171-C50-S-C | CITI compact | 7500 | 12.047404 | 0.083005434199766193 | 91 | 0.07187562 |
+| R171-C50-S-R | CITI regional | 7500 | 10.253124 | 0.097531249987808599 | 81 | 0.07900031 |
+| R171-B50-S-C | CABI compact | 6900 | 24.319435 | 0.041119376334195268 | 50 | 0.05711019 |
+| R171-B50-S-R | CABI regional | 18600 | 23.881938 | 0.041872648693753414 | 50 | 0.05815640 |
+| R171-X50-S-C | Divvy compact | 5100 | 6.644443 | 0.15050170495856463 | 50 | 0.10451497 |
+| R171-X50-S-R | Divvy regional | 5700 | 17.603125 | 0.056808095153559383 | 50 | 0.13314397 |
+
+Each block is run serially at Native Seed 0 and one thread, alternating
+B then P and P then B. B pays for complete own H with seed 20260626
+before exact search. P uses the original compact model and zero user
+starts, retaining Gurobi's default heuristics. Each P Optimize matches
+its own zero-Optimize reference. Each B publishes model, own Start,
+Native log and proof coverage readbacks. The C++ budget starts at
+process entry and allocates each actual Optimize the remaining work
+window. The 6-s shutdown allowance is part of the cap.
+[Input and provenance ledger](../unified_exact_round171/input_manifest.json) ·
+[Matrix](../unified_exact_round171/matrix_frozen.json)
+
+**Table S171.2. All 12 qualified arm endpoints and external clocks.**
+
+| Run | State | Own H F | Final U | Qualified L | Signed U-L | Gap % | Cert. s | Process s | Audit s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 01 / B | OPEN | 0.567418 | 0.536923 | 0.356919 | 0.18000333 | 33.53 | — | 1194.641 | 6.337 |
+| 02 / P | OPEN | — | 0.523772 | 0.291331 | 0.23244038 | 44.38 | — | 1194.088 | 0.727 |
+| 03 / P | OPEN | — | 0.574631 | 0.312450 | 0.26218106 | 45.63 | — | 1194.091 | 0.642 |
+| 04 / B | OPEN | 0.565174 | 0.541165 | 0.355390 | 0.18577515 | 34.33 | — | 1194.076 | 13.491 |
+| 05 / B | OPEN | 0.671872 | 0.653336 | 0.416792 | 0.23654450 | 36.21 | — | 1194.112 | 5.575 |
+| 06 / P | OPEN | — | 0.705181 | 0.343940 | 0.36124065 | 51.23 | — | 1194.086 | 0.583 |
+| 07 / P | OPEN | — | 0.608779 | 0.186291 | 0.42248823 | 69.40 | — | 1194.107 | 0.618 |
+| 08 / B | OPEN | 0.599446 | 0.572824 | 0.378424 | 0.19440016 | 33.94 | — | 1194.098 | 5.570 |
+| 09 / B | OPEN | 0.740072 | 0.660495 | 0.436240 | 0.22425509 | 33.95 | — | 1194.101 | 12.169 |
+| 10 / P | OPEN | — | 0.729345 | 0.284463 | 0.44488203 | 61.00 | — | 1194.086 | 0.619 |
+| 11 / P | OPEN | — | 0.920095 | 0.445402 | 0.47469299 | 51.59 | — | 1194.098 | 0.549 |
+| 12 / B | OPEN | 0.872595 | 0.843694 | 0.551354 | 0.29234004 | 34.65 | — | 1194.086 | 5.544 |
+
+The process clock owns preparation, H, build, Start mapping, all
+Native calls and runtime validation. T_cert is the outer process clock
+of the qualified CERT arm. Independent post-return audit is separate.
+Run labels give the frozen matrix position and arm. The two consecutive
+positions for each configuration follow the order in Table S171.1.
+The complete ledger carries the full run ID.
+The signed U-L retains numerical sign, while the display percentage uses
+the nonnegative gap convention. Missing values are shown with a dash.
+
+Cold P on R171-B50-S-C has Native ObjVal 0.705246149 and a separately verified physical U of 0.705180552 (Native minus physical 6.56e-05). Its incumbent consistency flag is false. The OPEN comparison uses the physical U and the same run's qualified global L of 0.343939898.
+
+**Table S171.3. Recorded work inside the paid clocks.**
+
+| Run | Rows | Cols | H s | Build s | First launch s | LP s | MIP s | After Native s | Work | Nodes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 01 / B | 47811 | 20511 | 1.407 | 2.582 | 2.347 | 14.659 | 1174.948 | 0.042 | 3213.7 | 613 |
+| 02 / P | 27605 | 10504 | 0.000 | — | 0.269 | 0.000 | 1193.738 | 0.036 | 2700.7 | 3110 |
+| 03 / P | 27596 | 10498 | 0.000 | — | 0.269 | 0.000 | 1193.740 | 0.045 | 2820.2 | 1318 |
+| 04 / B | 47681 | 20381 | 0.952 | 5.152 | 1.848 | 43.745 | 1142.793 | 0.025 | 3654.3 | 231 |
+| 05 / B | 46681 | 19381 | 0.246 | 2.539 | 1.117 | 25.792 | 1164.837 | 0.048 | 3363.0 | 525 |
+| 06 / P | 27494 | 10430 | 0.000 | — | 0.258 | 0.000 | 1193.747 | 0.040 | 2819.8 | 3538 |
+| 07 / P | 27473 | 10416 | 0.000 | — | 0.271 | 0.000 | 1193.747 | 0.052 | 2922.9 | 2034 |
+| 08 / B | 46456 | 19141 | 0.196 | 2.405 | 1.023 | 5.108 | 1185.719 | 0.051 | 2934.9 | 1302 |
+| 09 / B | 46133 | 18833 | 0.188 | 4.834 | 1.025 | 37.991 | 1149.751 | 0.050 | 2974.2 | 689 |
+| 10 / P | 27314 | 10310 | 0.000 | — | 0.258 | 0.000 | 1193.756 | 0.037 | 2736.9 | 3234 |
+| 11 / P | 27224 | 10250 | 0.000 | — | 0.260 | 0.000 | 1193.759 | 0.042 | 2939.5 | 4996 |
+| 12 / B | 45613 | 18301 | 0.105 | 2.387 | 0.921 | 12.810 | 1178.082 | 0.043 | 3061.5 | 1020 |
+
+Rows and columns refer to the first actual Optimize model. B build
+seconds are summed over recorded canonical model construction. For P,
+first launch includes preparation, export, environment, import and model
+validation together. The post-Native interval begins at the raw final
+Optimize-return publication in the C++ journal. It includes subsequent
+checked-evidence publication and process finalization. The machine table
+retains the later qualified tail and the two disjoint intervals.
+Costs are nested in the process clock. The producer clocks sum to 14329.67 s. The 6 own H calls took 3.09 s, and 40 Optimize calls (24 LP and 16 MIP) recorded 14298.72 Native s. The six zero-Optimize references took 9.19 s including static checks. Successful independent post-return readers cost 52.42 s (52.42 s across all reader attempts).
+
+**Table S171.4. Interval activity on the six B arms.**
+
+| Configuration | Initial root L | Final L | Root/child LPs | Root/child LP s | Accepted / declined | Peak leaves | Target MIPs / requeues |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| C50-S-C | 0.219183 | 0.356919 | 1/2 | 4.92/9.74 | 0/1 | 1 | 1/1 |
+| C50-S-R | 0.187737 | 0.355390 | 2/4 | 19.39/24.36 | 0/1 | 1 | 1/1 |
+| B50-S-C | 0.142990 | 0.416792 | 1/2 | 13.37/12.42 | 0/1 | 1 | 0/0 |
+| B50-S-R | 0.180074 | 0.378424 | 1/2 | 1.86/3.24 | 0/1 | 1 | 0/0 |
+| X50-S-C | 0.162144 | 0.436240 | 2/4 | 13.70/24.29 | 0/1 | 1 | 1/1 |
+| X50-S-R | 0.376139 | 0.551354 | 1/2 | 4.98/7.83 | 0/1 | 1 | 1/1 |
+
+Root L reaches the original problem only with an eligible returned LP,
+qualified cutoff complement and complete improving-Gini root scope.
+The configuration IDs in this activity table omit the R171 prefix.
+Descendant LP counts include probes. Coverage leaves are unreplaced
+intervals and can be discharged. The exact distribution of accepted
+splits, targets and requeues follows the saved events. These observations
+leave the independent performance effect of external interval treatment
+unresolved.
+[Full costs](../unified_exact_round171/cost_report.json) ·
+[Activity ledger](../unified_exact_round171/activity.json) ·
+[Arm and audit identities](../unified_exact_round171/complete_arms.json)

@@ -145,7 +145,7 @@
 \title{GI-TBC: a Gini-interval tailored branch-and-cut algorithm for
 equitable bicycle redistribution}
 \author{}
-\date{17 November 2026}
+\date{18 November 2026}
 
 \begin{document}
 \maketitle
@@ -165,7 +165,10 @@ visits to objective products, then combines own feasible startup with
 complete true-Gini interval coverage. The breadth panel gives 9/12
 certificates versus 7/12 for each compact control; a positive-resource
 panel gives 4/8 versus 0/8. Seed checks retain open and adverse
-endpoints. Compact and conditional state representations distinguish
+endpoints. In six prospective positive-target n50 pairs at a 1,200-s
+cap, GI-TBC has materially lower feasible objectives in 5/6 and higher
+qualified global bounds in 6/6, with 0/6 certificates versus 0/6 for
+cold P. Compact and conditional state representations distinguish
 preserved information from complete computational efficiency. Verified
 fleet archives and global lower bounds yield continuous-weight
 guarantees: one fixed fleet stays within an absolute objective tolerance
@@ -846,12 +849,12 @@ T; each weight family retains one physical feasible set.
 The fixed-source protocol was committed before once-only generation. Six
 known roles and six new draws form a twelve-input breadth panel (four
 each at \(n\in\{15,20,35\}\)); CITI, CABI and Divvy supply archived
-station geometry/capacity. Ten new draws in total include four
-additional shortage bases at \(n\in\{20,35\}\), each paired at two
-transparently designed route horizons. Targets, initial stock, weights
-and depot are synthetic or transformed; this is not observed demand, a
-new source, or independent population sampling. Every selected source
-row and serialized input is disclosed.
+station geometry/capacity. The ten new draws in the breadth and resource
+studies include four additional shortage bases at \(n\in\{20,35\}\),
+each paired at two transparently designed route horizons. Targets,
+initial stock, weights and depot are synthetic or transformed; this is
+not observed demand, a new source, or independent population sampling.
+Every selected source row and serialized input is disclosed.
 
 Breadth retains \(\lambda=.15\). Resource pairs fix \(\rho=1\) and alter
 only T; the two extra weight levels \(\rho\in\{.5,2\}\) reuse the
@@ -865,9 +868,10 @@ later six-input archived-source cohort uses Seed0 for its B/E+/P
 comparison and Seeds1/2 for the complete B/P confirmation in §4.3. The
 24 additional Seed commands use the exposed six-input cohort.
 
-For each new resource base, let \(d_{\max}\) be its maximum serialized
-station-to-depot distance and \(M\) its vehicle count. Before
-optimization, the route horizons were fixed by
+For each resource base and prospective n50 configuration, let
+\(d_{\max}\) be its maximum serialized station-to-depot distance and
+\(M\) its vehicle count. Before optimization, the route horizons were
+fixed by
 
 \[
 \begin{aligned}
@@ -881,7 +885,8 @@ This input-based rule uses geometry, initial stock, targets and fleet
 size; it supplies neither a binding-horizon guarantee nor an
 outcome-dependent difficulty filter. The weight study preselects
 R-B20-S-T1 and R-X35-S-T2. Within each T pair, every datum except T is
-identical.
+identical. The n50 comparison takes T1 alone and compares B and P within
+each generated configuration.
 
 \Needspace{20\baselineskip}
 
@@ -923,6 +928,8 @@ arms & Six inputs; three within-input paired observations \\
 Compact shared-state comparison & 6 exposed inputs / 12 fresh same-build
 B/C166 Seed0 arms & Equivalent common LP information and complete-method
 costs \\
+Prospective positive n50 & 6 new configurations / 12 B/P Seed0 arms &
+Complete paid endpoints at 1,200 s \\
 \end{longtable}
 }
 
@@ -1428,11 +1435,81 @@ The materiality scale max(1e-6, 0.001 max(abs(U\_\allowbreak{}reference), 1e-12)
 descriptive; there is no significance or population claim. Certification
 uses the qualified process endpoint T\_\allowbreak{}cert\_\allowbreak{}process, with independent
 audit costs separate. S170 gives every initial U, endpoint, signed gap,
-expense and negative result. Close further optimization of this fixed
-recipe. Retain its initialization and local paid positives as bounded
-findings, with B remaining uniform default and C169 default off; this
-selected exposed-input study does not confirm a repeatable
-complete-method benefit.
+expense and negative result. The exposed-input confirmation supports a
+local initialization finding and closes the fixed reweighting line.
+GI-TBC/B remains the uniform default, with C169 disabled.
+
+\subsubsection{4.7 Prospective positive n50 endpoint
+evidence}\label{prospective-positive-n50-endpoint-evidence}
+
+Six precommitted shortage configurations use 50 stations, three vehicles
+of capacities 20, 25 and 30, and one compact and one regional geometry
+from each of CITI, CABI and Divvy. The draws use archived station
+locations and capacities, with synthetic or transformed operational
+inputs. Each configuration uses \(\rho=1\) and its own \(T_1\). Positive
+shortage and weights bound the original objective away from zero. The
+single Seed 0 comparison gives each complete process 1,200 s, including
+B's own H. Each arm is independently qualified. All six inputs enter
+without performance screening (Supplement S171).
+
+\Needspace{8\baselineskip}
+
+\Needspace{15\baselineskip}
+
+\textbf{Table 8. Qualified B and cold P endpoints on the prospective n50
+configurations.}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Archive / geometry
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+B U / L
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+P U / L
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+B / P gap \%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+B / P state
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+CITI compact & 0.536923 / 0.356919 & 0.523772 / 0.291331 & 33.53 / 44.38
+& OPEN / OPEN \\
+CITI regional & 0.541165 / 0.355390 & 0.574631 / 0.312450 & 34.33 /
+45.63 & OPEN / OPEN \\
+CABI compact & 0.653336 / 0.416792 & 0.705181 / 0.343940 & 36.21 / 51.23
+& OPEN / OPEN \\
+CABI regional & 0.572824 / 0.378424 & 0.608779 / 0.186291 & 33.94 /
+69.40 & OPEN / OPEN \\
+Divvy compact & 0.660495 / 0.436240 & 0.729345 / 0.284463 & 33.95 /
+61.00 & OPEN / OPEN \\
+Divvy regional & 0.843694 / 0.551354 & 0.920095 / 0.445402 & 34.65 /
+51.59 & OPEN / OPEN \\
+\end{longtable}
+}
+
+B returned a qualified fleet on 6/6 configurations and P on 6/6. At the
+prespecified descriptive scale, B had a lower U in 5/6 pairs, a higher
+global L in 6/6 and a smaller absolute gap in 6/6. The corresponding
+counts for P were 1/6, 0/6 and 0/6. B certified 0/6 and P 0/6, with 6/6
+joint OPEN and 0/6 joint CERT pairs. The joint-CERT subset is empty. The
+OPEN endpoints quantify progress at the common budget. B spent 6996.1 s
+in Native MIP and 140.1 s in LP calls across the six arms. The B
+controller accepted 0 splits and declined 6. Its 4 child-bound-target
+MIP phases requeued the parent 4 times. The unchanged full/root controls
+leave the controller's independent net benefit unresolved. The
+archived-source n50 observations extend the direct coverage of the
+integrated pair-only method. The comparisons are conditional on these
+geometries, physical horizons and synthetic operational quantities.
 
 \subsection{5. Certified transportation
 decisions}\label{certified-transportation-decisions}
@@ -1449,7 +1526,7 @@ computational time can move in either direction.
 
 \Needspace{8\baselineskip}
 
-\textbf{Table 8. Input-based positive-objective resource design.}
+\textbf{Table 9. Input-based positive-objective resource design.}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1512,10 +1589,10 @@ gives
 The computation uses the complete full-precision fleets and qualified
 global lower sources. Each original lower is reduced by \(10^{-7}\), and
 recomputed feasible objectives receive \(10^{-12}\) upward protection.
-These guards and outward display rounding are retained in Table 9; all
+These guards and outward display rounding are retained in Table 10; all
 arithmetic and source ownership are preserved in the decision data.
 
-\textbf{Table 9. Two-sided resource-value improvement intervals.} The
+\textbf{Table 10. Two-sided resource-value improvement intervals.} The
 bounds use complete physical fleets and qualified global lower sources.
 Displayed interval endpoints are rounded outward after reducing each
 original lower by \(10^{-7}\) and adding \(10^{-12}\) to exactly
@@ -1591,7 +1668,9 @@ weights}\label{quality-between-sampled-objective-weights}
 
 \Needspace{8\baselineskip}
 
-\textbf{Table 10. Objective-weight evidence. (a) Sampled complete-method
+\Needspace{10\baselineskip}
+
+\textbf{Table 11. Objective-weight evidence. (a) Sampled complete-method
 outcomes; C denotes an own qualified certificate.}
 
 {\def\LTcaptype{none} % do not increment counter
@@ -1676,11 +1755,9 @@ true affine-line intersections, active-chord intersections and domain
 endpoints using rational arithmetic. No dense grid or new solver is
 used. Actual binary64 lambda/weight coordinates are retained, including
 small differences from displayed .5/1/2. The numerical guards are those
-stated with Table 9.
+stated with Table 10.
 
-\Needspace{10\baselineskip}
-
-\textbf{Table 11. Continuous-weight quality guarantees from the complete
+\textbf{Table 12. Continuous-weight quality guarantees from the complete
 fleet archive.} Ranges below are display coordinates; the
 machine-readable data preserve exact loaded coordinates. Regret bounds
 are rounded upward.
@@ -1809,8 +1886,15 @@ increases at both Seeds. Local B35/X35 Seed 1 primal gains coexist with
 weaker proof endpoints and do not justify further optimization or
 default adoption of this fixed recipe. The three new same-budget B/P
 pairs strengthen the default method's endpoint evidence, while all n35
-runs remain open. Preserve these mixed and adverse findings and close
-the C169 optimization line.
+runs remain open. The fixed reweighting recipe is closed after this
+mixed confirmation.
+
+The prospective n50 comparison adds six direct tests of the frozen
+complete method. B's material U, L and absolute-gap advantages occur in
+5/6, 6/6 and 6/6 pairs, with 0/6 B and 0/6 P certificates. These
+archived-source shortage results bound the evidence at one solver Seed
+and one paid cap. The controls leave independent external scheduling
+gains and a general scalability claim unresolved.
 
 \clearpage
 
@@ -1854,9 +1938,9 @@ and returns to the same depot, possibly loaded. Travel time
 The route horizon is \(T\); unit pickup/drop times are \(t_p,t_d\), with
 \(h=t_p+t_d\). Penalty multiplier \(\lambda\ge0\) and station weights
 \(\omega_i\ge0\) are data; the current breadth panel uses
-\(\lambda=.15\), the resource panel fixes \(\rho=1\), and the
-within-configuration weight study uses \(\rho\in\{.5,1,2\}\), with
-\(\lambda=\rho/\Omega\), positive weights and \(t_p=t_d=60\). No
+\(\lambda=.15\), the resource and prospective n50 panels fix \(\rho=1\),
+and the within-configuration weight study uses \(\rho\in\{.5,1,2\}\),
+with \(\lambda=\rho/\Omega\), positive weights and \(t_p=t_d=60\). No
 inventory floor is imposed by the compatibility field min\_\allowbreak{}ratio.
 
 The binary variables are arc decisions \(x_{kij}\), station service
@@ -2940,7 +3024,7 @@ rational proofs. Original lowers are conservatively reduced by 1e-7, and
 exact feasible objectives receive a 1e-12 upward guard. No source
 crossing is clipped. The original run objectives, statuses and clocks
 remain unchanged. Likewise, nested physical time domains give the
-two-sided difference interval in Table 9; this is an objective-value
+two-sided difference interval in Table 10; this is an objective-value
 decision bound, not a monetary resource price.
 
 \clearpage
@@ -3249,12 +3333,12 @@ tie rule is asserted.
 
 The historical breadth/resource study's GI-TBC source/PE and policy are
 fixed in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round169-primal-reweight/results/unified_exact_round137/candidate_manifest.json}{candidate\_\allowbreak{}manifest.json};
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round171-frozen-b-n50/results/unified_exact_round137/candidate_manifest.json}{candidate\_\allowbreak{}manifest.json};
 its 120 actual method vectors, inputs, physical horizons, weights, Seeds
 and caps are in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round169-primal-reweight/results/unified_exact_round137/matrix_frozen.json}{matrix\_\allowbreak{}frozen.json},
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round171-frozen-b-n50/results/unified_exact_round137/matrix_frozen.json}{matrix\_\allowbreak{}frozen.json},
 with the prospectively registered sharing and order in
-\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round169-primal-reweight/results/unified_exact_round137/experiment_plan.json}{experiment\_\allowbreak{}plan.json}.
+\href{https://github.com/yifanXovo/TailoredExact/blob/codex/round171-frozen-b-n50/results/unified_exact_round137/experiment_plan.json}{experiment\_\allowbreak{}plan.json}.
 The default vector below uses ms2, tau=.08 and AP off. The three AM
 values are .04/.08/.16; the explicit
 \texttt{-\allowbreak{}-\allowbreak{}round137-\allowbreak{}am-\allowbreak{}threshold} overrides the actual

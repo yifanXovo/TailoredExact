@@ -1,0 +1,391 @@
+{
+  "UTC": "2026-11-18T01:33:28.106734+00:00",
+  "positions_finished": 12,
+  "records": [
+    {
+      "position": 1,
+      "role": "R171-C50-S-C",
+      "arm": "B",
+      "run_id": "01_R171-C50-S-C_S0_B",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-17T21:54:30.638044+00:00",
+        "started_epoch": 1794951275.9965432,
+        "ended_epoch": 1794952470.6380444,
+        "process_outer_seconds": 1194.6411435003392,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/01_R171-C50-S-C_S0_B/result.json",
+          "bytes": 98208,
+          "SHA256": "892c815ffe860a13ee96f602fa8b61fc08c308316f3f521907194995fe42c3c3"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "upper_bound": 0.536922587001196,
+        "lower_bound": 0.3569192543931686,
+        "gap": 0.335250065774615,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 2,
+      "role": "R171-C50-S-C",
+      "arm": "P",
+      "run_id": "02_R171-C50-S-C_S0_P",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-17T22:14:24.963851+00:00",
+        "started_epoch": 1794952470.8756185,
+        "ended_epoch": 1794953664.963851,
+        "process_outer_seconds": 1194.088493200019,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/02_R171-C50-S-C_S0_P/result.json",
+          "bytes": 88780,
+          "SHA256": "aac36dc4a9db2aee59560dd5595b1088ac6784ce21d25cbf882e49c4d42f09be"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "time_limit",
+        "upper_bound": 0.5237715123731919,
+        "lower_bound": 0.29133113141544276,
+        "gap": null,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 3,
+      "role": "R171-C50-S-R",
+      "arm": "P",
+      "run_id": "03_R171-C50-S-R_S0_P",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-17T22:34:19.302249+00:00",
+        "started_epoch": 1794953665.211466,
+        "ended_epoch": 1794954859.3022494,
+        "process_outer_seconds": 1194.090623400174,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/03_R171-C50-S-R_S0_P/result.json",
+          "bytes": 88090,
+          "SHA256": "bf330ae3c9dd5816a7293474b128c9a6cbaf962c490996e2b94509983dbf8626"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "time_limit",
+        "upper_bound": 0.5746309692185925,
+        "lower_bound": 0.31244990597751915,
+        "gap": null,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 4,
+      "role": "R171-C50-S-R",
+      "arm": "B",
+      "run_id": "04_R171-C50-S-R_S0_B",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-17T22:54:13.630354+00:00",
+        "started_epoch": 1794954859.5542493,
+        "ended_epoch": 1794956053.6303542,
+        "process_outer_seconds": 1194.0764902997762,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/04_R171-C50-S-R_S0_B/result.json",
+          "bytes": 98511,
+          "SHA256": "d2bb8d8ecc9de9add35f9d4a7abbe19832830591fc7bdcd76a5db7e0c7f06576"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "upper_bound": 0.5411649199367208,
+        "lower_bound": 0.3553897650640926,
+        "gap": 0.34328750447155953,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 5,
+      "role": "R171-B50-S-C",
+      "arm": "B",
+      "run_id": "05_R171-B50-S-C_S0_B",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-17T23:14:07.965487+00:00",
+        "started_epoch": 1794956053.853952,
+        "ended_epoch": 1794957247.9654877,
+        "process_outer_seconds": 1194.1118020000868,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/05_R171-B50-S-C_S0_B/result.json",
+          "bytes": 98114,
+          "SHA256": "a33305637bf94e7c1467b443be17ff3e9026d3c74b4755386e2747815b6cb638"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "upper_bound": 0.6533362595437868,
+        "lower_bound": 0.41679176194293543,
+        "gap": 0.3620562828795485,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 6,
+      "role": "R171-B50-S-C",
+      "arm": "P",
+      "run_id": "06_R171-B50-S-C_S0_P",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-17T23:34:02.264701+00:00",
+        "started_epoch": 1794957248.1784883,
+        "ended_epoch": 1794958442.2647014,
+        "process_outer_seconds": 1194.0856458996423,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/06_R171-B50-S-C_S0_P/result.json",
+          "bytes": 87762,
+          "SHA256": "68d9f7e5fbae2c8dfd27706e9002ba97fa8c37abe1853336a127c43520cea4f6"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "time_limit",
+        "upper_bound": 0.7051805516925165,
+        "lower_bound": 0.34393989756135385,
+        "gap": null,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 7,
+      "role": "R171-B50-S-R",
+      "arm": "P",
+      "run_id": "07_R171-B50-S-R_S0_P",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-17T23:53:56.592494+00:00",
+        "started_epoch": 1794958442.4847028,
+        "ended_epoch": 1794959636.5914948,
+        "process_outer_seconds": 1194.1072757998481,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/07_R171-B50-S-R_S0_P/result.json",
+          "bytes": 88264,
+          "SHA256": "cc61bb978abfb359fc3fb830a459fec15e0c3b49b28907382b37bbfdca70ed47"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "time_limit",
+        "upper_bound": 0.6087788269940677,
+        "lower_bound": 0.18629059734964354,
+        "gap": null,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 8,
+      "role": "R171-B50-S-R",
+      "arm": "B",
+      "run_id": "08_R171-B50-S-R_S0_B",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-18T00:13:50.900387+00:00",
+        "started_epoch": 1794959636.8024933,
+        "ended_epoch": 1794960830.9003875,
+        "process_outer_seconds": 1194.0978255998343,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/08_R171-B50-S-R_S0_B/result.json",
+          "bytes": 98794,
+          "SHA256": "c0d35cd4720083469a49ca17aa3f73755846d5d4a1cedc9de5c18c0baf39b588"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "upper_bound": 0.5728239621004035,
+        "lower_bound": 0.37842380587773333,
+        "gap": 0.33937155057175505,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 9,
+      "role": "R171-X50-S-C",
+      "arm": "B",
+      "run_id": "09_R171-X50-S-C_S0_B",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-18T00:33:45.208720+00:00",
+        "started_epoch": 1794960831.1073837,
+        "ended_epoch": 1794962025.2087207,
+        "process_outer_seconds": 1194.1009419998154,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/09_R171-X50-S-C_S0_B/result.json",
+          "bytes": 97947,
+          "SHA256": "226b840f5347cab5d805c67915f926bcedbd51689ad04f46e4e5b8dc24163ee8"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "upper_bound": 0.6604951670036365,
+        "lower_bound": 0.43624007503536094,
+        "gap": 0.33952571217987565,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 10,
+      "role": "R171-X50-S-C",
+      "arm": "P",
+      "run_id": "10_R171-X50-S-C_S0_P",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-18T00:53:39.506781+00:00",
+        "started_epoch": 1794962025.4203393,
+        "ended_epoch": 1794963219.506781,
+        "process_outer_seconds": 1194.0861220997758,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/10_R171-X50-S-C_S0_P/result.json",
+          "bytes": 88236,
+          "SHA256": "d305dde0fa8d506e21fb41974c631d0bca0ac7fa8c3ab5d74f1e456dd881c89c"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "time_limit",
+        "upper_bound": 0.7293445834188916,
+        "lower_bound": 0.2844625520837847,
+        "gap": null,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 11,
+      "role": "R171-X50-S-R",
+      "arm": "P",
+      "run_id": "11_R171-X50-S-R_S0_P",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-18T01:13:33.811322+00:00",
+        "started_epoch": 1794963219.7137794,
+        "ended_epoch": 1794964413.8113227,
+        "process_outer_seconds": 1194.0979144000448,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/11_R171-X50-S-R_S0_P/result.json",
+          "bytes": 87665,
+          "SHA256": "58885bf9c4bd9b5b3fe704d96d9e38e166a7c268ebd5e562449c0d7d15a6aa72"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "time_limit",
+        "upper_bound": 0.9200946985278002,
+        "lower_bound": 0.44540171155588204,
+        "gap": null,
+        "strict_certified_original_problem": false
+      }
+    },
+    {
+      "position": 12,
+      "role": "R171-X50-S-R",
+      "arm": "B",
+      "run_id": "12_R171-X50-S-R_S0_B",
+      "process_completed_within_cap": true,
+      "receipt": {
+        "UTC": "2026-11-18T01:33:28.103735+00:00",
+        "started_epoch": 1794964414.0178168,
+        "ended_epoch": 1794965608.1037354,
+        "process_outer_seconds": 1194.0862027001567,
+        "rc": 0,
+        "affinity": {
+          "mask": 4,
+          "set_success": true,
+          "wrapper_killed": false
+        },
+        "result": {
+          "path": "results/unified_exact_round171/complete_raw/12_R171-X50-S-R_S0_B/result.json",
+          "bytes": 97843,
+          "SHA256": "29330d354043aaf14e93edc86a84a92cc2425011af60e5417c5774161b6509e6"
+        },
+        "deadline_seconds": 1200
+      },
+      "raw_endpoint": {
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "upper_bound": 0.8436938142173477,
+        "lower_bound": 0.5513537786926727,
+        "gap": 0.3465001527786051,
+        "strict_certified_original_problem": false
+      }
+    }
+  ],
+  "process_outer_seconds": 14329.670480899513
+}

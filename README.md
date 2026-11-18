@@ -3,13 +3,13 @@
 Exact solvers for the Equity-aware Bike Repositioning Problem.
 
 The main paper algorithm is **GI-TBC/B** (historical S2/ms2), with AP disabled
-and a uniform pair-support configuration. The current R170 manuscript includes
-the fixed paid-initialization confirmation and matched cold controls; the
-mixed/negative result closes further C169 optimization. C166/D167/C169 stay off.
+and a uniform pair-support configuration. The current manuscript includes six prospective 50-station B/P comparisons at
+one 1,200-s cap. The earlier fixed paid-initialization confirmation closed
+the C169 line. C166, D167 and C169 stay off.
 Historical and new measured source/PE identities remain distinct from
 document generation. Start with the
 [paper-S2 release and run guide](docs/paper_s2_release.md), then the
-[advisor/coauthor review packet](docs/paper_review.md).
+[author review packet](docs/paper_review.md). [Authoritative benchmark CSV](results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv).
 
 From the current Windows checkout, display the complete verified command:
 
@@ -28,11 +28,11 @@ Read the [current complete manuscript](results/unified_exact_round137/manuscript
 [main + Appendix A/B PDF](results/unified_exact_round137/manuscript.pdf), and
 [supplement PDF](results/unified_exact_round137/supplement.pdf).
 The [contribution map](results/unified_exact_round165/contribution_positioning.md)
-and [current author memo](results/unified_exact_round170/author_decision_memo.md) explain
+and [current author memo](results/unified_exact_round171/author_decision_memo.md) explain
 the integrated method's finite evidence and the unestablished independent
-performance value of the outer controller. The [R170 report](results/unified_exact_round170/final_report.md)
-separates nonrepeating candidate gains, C20 proof-cost regressions and three
-new same-budget B/P endpoint advantage observations.
+performance value of the outer controller. The [Round171 report](results/unified_exact_round171/final_report.md)
+gives the new paired n50 endpoints and paid costs. The [Round170 report](results/unified_exact_round170/final_report.md)
+retains the fixed candidate and matched cold findings.
 The bare executable retains its **ENS-C compatibility default**. AP and TC are
 closed research studies, with AP research-only and default off.
 
@@ -40,8 +40,8 @@ Round136 was merged into Git `main` by ordinary merge commit in
 [PR #198](https://github.com/yifanXovo/TailoredExact/pull/198). Its historical
 checkout disposition is in the
 [integration, PR disposition and local cleanup](results/unified_exact_round136/RESUME.md)
-record. R170 uses the isolated `ExactEBRP-work/worktrees/round170` checkout
-from verified R169, retaining the dirty R155 `paper-current` entry. The original `E:\codes\ExactEBRP` checkout retains
+record. Round171 uses the isolated ExactEBRP-work/worktrees/round171 checkout
+from verified Round170. The original `E:\codes\ExactEBRP` checkout retains
 user changes and the shared Git store. New work belongs under
 `E:\codes\ExactEBRP-work`; see [workspace policy](WORKSPACE_POLICY.md).
 

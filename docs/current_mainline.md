@@ -1,5 +1,24 @@
 # Current manuscript and research mainline
 
+## Round171 prospective positive n50 evidence
+
+B returned a qualified fleet on 6/6 configurations and P on 6/6. At the prespecified descriptive scale, B had a lower U in 5/6 pairs, a higher global L in 6/6 and a smaller absolute gap in 6/6. The corresponding counts for P were 1/6, 0/6 and 0/6. B certified 0/6 and P 0/6, with 6/6 joint OPEN and 0/6 joint CERT pairs. B remains uniform, with C166, D167 and C169 disabled.
+The main evidence appears in §4.7 and Supplement S171. The previous
+n15/20/35 panels retain their original roles. The six n50 configurations
+use archived source geometry, synthetic operational inputs and one Native
+Seed. The scope at n50 is the complete-method comparison.
+
+[Round171 report](../results/unified_exact_round171/final_report.md) · [Research decision](../results/unified_exact_round171/research_decision.md) ·
+[Current paper](../results/unified_exact_round137/manuscript.md) · [Main PDF](../results/unified_exact_round137/manuscript.pdf) ·
+[Supplement PDF](../results/unified_exact_round137/supplement.pdf) · [Authority and provenance](../results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv)
+
+The CSV authority contains 132 records with its original 126-record
+byte prefix. Six new rows link to the frozen data commit. The local
+round directory keeps the increment and reconciliation.
+[CSV reconciliation](../results/unified_exact_round171/CSV_reconciliation.json)
+
+## Round170 candidate confirmation (historical)
+
 Round170 closes further optimization of fixed C169 after its22-position,
 600s confirmation on four selected exposed inputs and Native Seeds1/2.
 No n35 role retains lower final U at both Seeds; only B35 Seed1 improves

@@ -6,17 +6,13 @@ Read the [current main PDF with complete Appendix A/B](../results/unified_exact_
 [mathematical companion](../results/unified_exact_round137/mathematical_analysis.md),
 [supplement PDF](../results/unified_exact_round137/supplement.pdf) and
 [bibliography](../results/unified_exact_round137/references.bib).
-There is one maintained paper directory. The current [R170 report](../results/unified_exact_round170/final_report.md),
-[decision](../results/unified_exact_round170/research_decision.md) and
-[author memo](../results/unified_exact_round170/author_decision_memo.md) complete
-22 fixed paid confirmation positions at Native Seeds1/2 and600s. C's gains
-do not repeat across both new Seeds on any n35 role; C20 retains certification
-but costs more, particularly at Seed2. Close further C169 optimization and
-retain its initialization/local positives and all adverse results. Uniform
-B remains main and C166/D167/C169 stay off. Computational Section4.6/Table7
-integrates the old/new findings, while Supplements S169/S170 retain complete
-historical/current details. Three new same-budget B/P pairs improve U/L/gap;
-all n35 runs remain OPEN and no physical input or OR-theory claim is added.
+There is one maintained paper directory. The current [Round171 report](../results/unified_exact_round171/final_report.md),
+[decision](../results/unified_exact_round171/research_decision.md) and [author memo](../results/unified_exact_round171/author_decision_memo.md)
+give the six prospectively generated n50 comparisons. B returned a qualified fleet on 6/6 configurations and P on 6/6. At the prespecified descriptive scale, B had a lower U in 5/6 pairs, a higher global L in 6/6 and a smaller absolute gap in 6/6. The corresponding counts for P were 1/6, 0/6 and 0/6. B certified 0/6 and P 0/6, with 6/6 joint OPEN and 0/6 joint CERT pairs.
+The new main table is in §4.7 and the complete arm, cost and controller
+evidence is in Supplement S171. B remains the uniform method. The preceding
+[Round170 confirmation](../results/unified_exact_round170/final_report.md)
+retains its mixed and adverse findings, including the fixed C169 decision.
 
 The retained Round166 evidence includes
 [contribution positioning](../results/unified_exact_round166/contribution_positioning.md)
@@ -47,23 +43,13 @@ E+'s proof gain and cost, and unresolved independent value of external
 control all remain visible. No per-input portfolio or extra experiment is
 used to improve the presentation.
 
-Current independent mathematics, execution/data and research/manuscript
-findings are in the [review directory](../results/unified_exact_round170/review).
-The [full report](../results/unified_exact_round170/final_report.md) links
-new-only recovery, source/build/QA and CSV reconciliation. The absent
-118-row attachment is disclosed; the actual eight-row B increment has three
-strict P pairs and five unpaired rows, without a fabricated126-row master.
+Current mathematics, execution/data and research/manuscript checks are in
+the [Round171 review directory](../results/unified_exact_round171/review). The
+[benchmark CSV](../results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv) is the current authority, with an exact
+126-record prefix and 6 qualified new B rows.
+[CSV reconciliation](../results/unified_exact_round171/CSV_reconciliation.json)
 
-Build the sole current components with:
-
-```powershell
-python -B scripts/round170_documents.py assemble
-python -B scripts/round170_documents.py pdf
-python -B scripts/round170_documents.py qa
-```
-
-The [build record](../results/unified_exact_round170/document_build.json)
-and [page QA](../results/unified_exact_round170/document_qa.json) bind the
-actual exports. The historical R137 generator remains excluded. Future
-research navigation is not an executed query or an automatically started
-Round171.
+Build the current components with the Round171 document entry point.
+Run assemble, pdf and qa in that order.
+[Build script](../scripts/round171_documents.py) ·
+[Build record](../results/unified_exact_round171/document_build.json) · [Page QA](../results/unified_exact_round171/document_qa.json)

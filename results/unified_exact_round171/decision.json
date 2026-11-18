@@ -1,0 +1,66 @@
+{
+  "UTC": "2026-11-18T01:49:26.749301+00:00",
+  "stats": {
+    "certificate": {
+      "B": 0,
+      "P": 0
+    },
+    "feasible": {
+      "B": 6,
+      "P": 6
+    },
+    "U": {
+      "B": 5,
+      "P": 1,
+      "within_delta": 0
+    },
+    "L": {
+      "B": 6,
+      "P": 0,
+      "within_delta": 0
+    },
+    "absolute_gap": {
+      "B": 6,
+      "P": 0,
+      "within_delta": 0
+    },
+    "relative_gap_lower_B": 6,
+    "joint_U_L_abs_gap": 5,
+    "joint_cert": 0,
+    "double_open": 6,
+    "B_lower_U_roles": [
+      "R171-C50-S-R",
+      "R171-B50-S-C",
+      "R171-B50-S-R",
+      "R171-X50-S-C",
+      "R171-X50-S-R"
+    ],
+    "P_lower_U_roles": [
+      "R171-C50-S-C"
+    ],
+    "B_higher_L_roles": [
+      "R171-C50-S-C",
+      "R171-C50-S-R",
+      "R171-B50-S-C",
+      "R171-B50-S-R",
+      "R171-X50-S-C",
+      "R171-X50-S-R"
+    ],
+    "P_higher_L_roles": [],
+    "B_split": 0,
+    "B_decline": 6,
+    "B_child_target_MIP": 4,
+    "B_requeue": 4,
+    "B_H_to_final_material": 6,
+    "B_root_available": 6,
+    "B_root_L_to_final": 6,
+    "B_LP_total": 140.1050000190735,
+    "B_MIP_total": 6996.129999637604,
+    "B_availability_advantage": [],
+    "P_availability_advantage": []
+  },
+  "uniform_B": true,
+  "C166_D167_C169_off": true,
+  "new_OR_mechanism": false,
+  "round_complete_on_this_panel": true
+}
