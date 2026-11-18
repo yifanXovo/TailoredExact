@@ -1,0 +1,589 @@
+{
+  "schema": "round171-independent-execution-data-review-v1",
+  "UTC": "2026-11-18T01:50:57.847299+00:00",
+  "status": "PASS",
+  "review": "Internal independent execution/data reviewer. Standard-library replay and byte reads from actual artifacts and fixed Git snapshots.",
+  "review_started_UTC": "2026-11-18T01:38:17.066000+00:00",
+  "review_finished_UTC": "2026-11-18T01:50:57.847299+00:00",
+  "review_seconds": 760.7812988758087,
+  "review_seconds_scope": "Elapsed reviewer window from first independent inspection through revised data, CSV, and marker recheck. It overlaps the main scientific closeout clock.",
+  "data_commit": "26730ec056490cf17502b7a74af418c3f1a18aad",
+  "findings_resolved_in_revised_data_commit": [
+    "Checked all twelve raw NEJ1 returned-kind marker timestamps, qualified journal tails and C++ exit times after the read-only reporting correction.",
+    "Both CSV provenance columns now point to this revised fixed data commit. The remaining bytes of all six appended rows and their endpoint data are identical."
+  ],
+  "CSV_QA": {
+    "path": "results/unified_exact_round171/CSV_QA.json",
+    "SHA256": "4a111a35e517036efcd41d0eea595def0f1d49d726a8d0ef4d9a1019a4eb5fcf",
+    "master_SHA256": "0487ebaf90274f85a7cd94358215a701825f328c954a8de235fd5e58633989dc",
+    "master_rows": 132,
+    "columns": 28,
+    "new_B_rows": 6,
+    "strict_pairs": 6,
+    "new_physical_keys": 6,
+    "material_advantages": {
+      "B_lower_U_material": 5,
+      "B_higher_L_material": 6,
+      "B_narrower_absolute_gap_material": 6,
+      "B_joint_U_L_gap_material": 5
+    }
+  },
+  "terminals": {
+    "no_live_ExactEBRP_seen_after_terminal_and_all_audits": true,
+    "normal_transition_gaps_charged": true,
+    "actual_postreturn_readers_overlap_following_Native_without_another_Optimize": true
+  },
+  "Optimize_run_by_reviewer": 0,
+  "H_run_by_reviewer": 0,
+  "rebuilt_by_reviewer": false,
+  "producer_edits": 0,
+  "public_delivery_verification_scope": "The final public byte recovery and ordinary Git transfer costs belong to the separate delivery receipt.",
+  "design_checks": [
+    {
+      "role": "R171-C50-S-C",
+      "V": 50,
+      "M": 3,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "source": "CITI",
+      "geometry": "compact",
+      "lambda_hex": "0x1.53fd819473d14p-4",
+      "T_seconds": 7500,
+      "shortage": 91,
+      "positive_floor": 0.07187562037129629,
+      "base_key": "ad3f123b8141498289aa3c281882e88d810db669258c14245ee553e28a9c41f3",
+      "full_key": "868b20c78fad63903efda754e2ec17de4f6b21a68c2fe019726b3ffa98da113f",
+      "input_SHA256": "bd4209dde4c8cfd9d60bdee29af9b1e9af257767a486bf3814afa2172a2f0ba1",
+      "zero_Optimize_compact_fingerprint": -971224224
+    },
+    {
+      "role": "R171-C50-S-R",
+      "V": 50,
+      "M": 3,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "source": "CITI",
+      "geometry": "regional",
+      "lambda_hex": "0x1.8f7ced9091f98p-4",
+      "T_seconds": 7500,
+      "shortage": 81,
+      "positive_floor": 0.07900031249012497,
+      "base_key": "15d84f99564f4869eb286a50fd7eef60a4625e4b08607c546d1dcae4ff2c922b",
+      "full_key": "e1a4dc7728e1dee998e6ccc79f00dea99d9474524494746b78b29a9529a402d0",
+      "input_SHA256": "1be92eb1af1f650aad5614852a6978b13f5d198707dc86dddd93a05341d8fd8a",
+      "zero_Optimize_compact_fingerprint": -81948503
+    },
+    {
+      "role": "R171-B50-S-C",
+      "V": 50,
+      "M": 3,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "source": "CABI",
+      "geometry": "compact",
+      "lambda_hex": "0x1.50d99512cb0a0p-5",
+      "T_seconds": 6900,
+      "shortage": 50,
+      "positive_floor": 0.05711018779835963,
+      "base_key": "46fb90b512317406df2399489a280fb6e58f01a1ef0725ca3bb5a0678058e7de",
+      "full_key": "3746df781afa57f5d08763b6eb8818d4cd38a462c83060b37a820788153cf43c",
+      "input_SHA256": "1bc1c0648b1b0c8a1839ae78c822178a366ce07cd0905ac9a26d52c735eed2b2",
+      "zero_Optimize_compact_fingerprint": 590706615
+    },
+    {
+      "role": "R171-B50-S-R",
+      "V": 50,
+      "M": 3,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "source": "CABI",
+      "geometry": "regional",
+      "lambda_hex": "0x1.57054f1791f72p-5",
+      "T_seconds": 18600,
+      "shortage": 50,
+      "positive_floor": 0.058156398362645446,
+      "base_key": "6e89cc388d1ac259cd6d891a2c9a0fa90d6bfc28e3c4deb5e65e322b83edd388",
+      "full_key": "6d33c68eda2c602aa067f14d9b1956543039d798186ad9a8c7a3ed5ec795ef36",
+      "input_SHA256": "1106bd064632dd97b714b51a977e62db3bd66a51891a05e1c1aec6e10e6016f7",
+      "zero_Optimize_compact_fingerprint": 802781916
+    },
+    {
+      "role": "R171-X50-S-C",
+      "V": 50,
+      "M": 3,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "source": "DIVVY",
+      "geometry": "compact",
+      "lambda_hex": "0x1.343a3ce650700p-3",
+      "T_seconds": 5100,
+      "shortage": 50,
+      "positive_floor": 0.10451496837281922,
+      "base_key": "eafafb87235a42eb1eb7de6929a4ab4c2c39bdc49bb78c55764be5a505fb69a8",
+      "full_key": "980a5d154fe75f954f092e795679fb805409421935e826f6c17320482f4f3fc8",
+      "input_SHA256": "36db3e2c649d38312ee23c9281895a28bce0dc06afa38598e261afbd01d012f5",
+      "zero_Optimize_compact_fingerprint": 271686030
+    },
+    {
+      "role": "R171-X50-S-R",
+      "V": 50,
+      "M": 3,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "source": "DIVVY",
+      "geometry": "regional",
+      "lambda_hex": "0x1.d15f35daa49b7p-5",
+      "T_seconds": 5700,
+      "shortage": 50,
+      "positive_floor": 0.1331439730161548,
+      "base_key": "43a5030ca8748c10f46e3475d3b71569f938e18e204be2327ecc38c676fd1f71",
+      "full_key": "bbdb5e57896eafac3510f1979e0bc50d3658192afdc496e9887c2689df1c74c9",
+      "input_SHA256": "ffab4a9a4ced2c7205231fc299709fab5466a6c9f203f477025afa5cb3193ca8",
+      "zero_Optimize_compact_fingerprint": 110864946
+    }
+  ],
+  "runs": [
+    {
+      "position": 1,
+      "role": "R171-C50-S-C",
+      "arm": "B",
+      "run_id": "01_R171-C50-S-C_S0_B",
+      "start_epoch": 1794951275.9965432,
+      "end_epoch": 1794952470.6380444,
+      "verification_audit_seconds": 6.336883400101215,
+      "process_outer_seconds": 1194.6411435003392,
+      "pid": 119296,
+      "H_self_paid": true,
+      "H_seconds": 1.4074318,
+      "LP": 3,
+      "MIP": 2,
+      "actual_Optimize": 5,
+      "CPP_in_process_seconds": 1194.3910881,
+      "outcome": "OPEN",
+      "cold_NumStart": null
+    },
+    {
+      "position": 2,
+      "role": "R171-C50-S-C",
+      "arm": "P",
+      "run_id": "02_R171-C50-S-C_S0_P",
+      "start_epoch": 1794952470.8756185,
+      "end_epoch": 1794953664.963851,
+      "verification_audit_seconds": 0.7265643002465367,
+      "process_outer_seconds": 1194.088493200019,
+      "pid": 112848,
+      "H_self_paid": false,
+      "H_seconds": 0,
+      "LP": 0,
+      "MIP": 1,
+      "actual_Optimize": 1,
+      "CPP_in_process_seconds": 1194.0430034,
+      "outcome": "OPEN",
+      "cold_NumStart": 0
+    },
+    {
+      "position": 3,
+      "role": "R171-C50-S-R",
+      "arm": "P",
+      "run_id": "03_R171-C50-S-R_S0_P",
+      "start_epoch": 1794953665.211466,
+      "end_epoch": 1794954859.3022494,
+      "verification_audit_seconds": 0.6418360001407564,
+      "process_outer_seconds": 1194.090623400174,
+      "pid": 122224,
+      "H_self_paid": false,
+      "H_seconds": 0,
+      "LP": 0,
+      "MIP": 1,
+      "actual_Optimize": 1,
+      "CPP_in_process_seconds": 1194.0522934,
+      "outcome": "OPEN",
+      "cold_NumStart": 0
+    },
+    {
+      "position": 4,
+      "role": "R171-C50-S-R",
+      "arm": "B",
+      "run_id": "04_R171-C50-S-R_S0_B",
+      "start_epoch": 1794954859.5542493,
+      "end_epoch": 1794956053.6303542,
+      "verification_audit_seconds": 13.490980499889702,
+      "process_outer_seconds": 1194.0764902997762,
+      "pid": 76720,
+      "H_self_paid": true,
+      "H_seconds": 0.9522845,
+      "LP": 6,
+      "MIP": 2,
+      "actual_Optimize": 8,
+      "CPP_in_process_seconds": 1194.0349195,
+      "outcome": "OPEN",
+      "cold_NumStart": null
+    },
+    {
+      "position": 5,
+      "role": "R171-B50-S-C",
+      "arm": "B",
+      "run_id": "05_R171-B50-S-C_S0_B",
+      "start_epoch": 1794956053.853952,
+      "end_epoch": 1794957247.9654877,
+      "verification_audit_seconds": 5.574580700136721,
+      "process_outer_seconds": 1194.1118020000868,
+      "pid": 114612,
+      "H_self_paid": true,
+      "H_seconds": 0.2461476,
+      "LP": 3,
+      "MIP": 1,
+      "actual_Optimize": 4,
+      "CPP_in_process_seconds": 1194.0570756,
+      "outcome": "OPEN",
+      "cold_NumStart": null
+    },
+    {
+      "position": 6,
+      "role": "R171-B50-S-C",
+      "arm": "P",
+      "run_id": "06_R171-B50-S-C_S0_P",
+      "start_epoch": 1794957248.1784883,
+      "end_epoch": 1794958442.2647014,
+      "verification_audit_seconds": 0.5827558999881148,
+      "process_outer_seconds": 1194.0856458996423,
+      "pid": 103512,
+      "H_self_paid": false,
+      "H_seconds": 0,
+      "LP": 0,
+      "MIP": 1,
+      "actual_Optimize": 1,
+      "CPP_in_process_seconds": 1194.04757,
+      "outcome": "OPEN",
+      "cold_NumStart": 0
+    },
+    {
+      "position": 7,
+      "role": "R171-B50-S-R",
+      "arm": "P",
+      "run_id": "07_R171-B50-S-R_S0_P",
+      "start_epoch": 1794958442.4847028,
+      "end_epoch": 1794959636.5914948,
+      "verification_audit_seconds": 0.617966499645263,
+      "process_outer_seconds": 1194.1072757998481,
+      "pid": 115336,
+      "H_self_paid": false,
+      "H_seconds": 0,
+      "LP": 0,
+      "MIP": 1,
+      "actual_Optimize": 1,
+      "CPP_in_process_seconds": 1194.0679346,
+      "outcome": "OPEN",
+      "cold_NumStart": 0
+    },
+    {
+      "position": 8,
+      "role": "R171-B50-S-R",
+      "arm": "B",
+      "run_id": "08_R171-B50-S-R_S0_B",
+      "start_epoch": 1794959636.8024933,
+      "end_epoch": 1794960830.9003875,
+      "verification_audit_seconds": 5.57002570014447,
+      "process_outer_seconds": 1194.0978255998343,
+      "pid": 107804,
+      "H_self_paid": true,
+      "H_seconds": 0.1961974,
+      "LP": 3,
+      "MIP": 1,
+      "actual_Optimize": 4,
+      "CPP_in_process_seconds": 1194.050971,
+      "outcome": "OPEN",
+      "cold_NumStart": null
+    },
+    {
+      "position": 9,
+      "role": "R171-X50-S-C",
+      "arm": "B",
+      "run_id": "09_R171-X50-S-C_S0_B",
+      "start_epoch": 1794960831.1073837,
+      "end_epoch": 1794962025.2087207,
+      "verification_audit_seconds": 12.169127699919045,
+      "process_outer_seconds": 1194.1009419998154,
+      "pid": 96780,
+      "H_self_paid": true,
+      "H_seconds": 0.187577,
+      "LP": 6,
+      "MIP": 2,
+      "actual_Optimize": 8,
+      "CPP_in_process_seconds": 1194.066375,
+      "outcome": "OPEN",
+      "cold_NumStart": null
+    },
+    {
+      "position": 10,
+      "role": "R171-X50-S-C",
+      "arm": "P",
+      "run_id": "10_R171-X50-S-C_S0_P",
+      "start_epoch": 1794962025.4203393,
+      "end_epoch": 1794963219.506781,
+      "verification_audit_seconds": 0.6190589000470936,
+      "process_outer_seconds": 1194.0861220997758,
+      "pid": 17700,
+      "H_self_paid": false,
+      "H_seconds": 0,
+      "LP": 0,
+      "MIP": 1,
+      "actual_Optimize": 1,
+      "CPP_in_process_seconds": 1194.0511629,
+      "outcome": "OPEN",
+      "cold_NumStart": 0
+    },
+    {
+      "position": 11,
+      "role": "R171-X50-S-R",
+      "arm": "P",
+      "run_id": "11_R171-X50-S-R_S0_P",
+      "start_epoch": 1794963219.7137794,
+      "end_epoch": 1794964413.8113227,
+      "verification_audit_seconds": 0.5490481001324952,
+      "process_outer_seconds": 1194.0979144000448,
+      "pid": 100152,
+      "H_self_paid": false,
+      "H_seconds": 0,
+      "LP": 0,
+      "MIP": 1,
+      "actual_Optimize": 1,
+      "CPP_in_process_seconds": 1194.0622291,
+      "outcome": "OPEN",
+      "cold_NumStart": 0
+    },
+    {
+      "position": 12,
+      "role": "R171-X50-S-R",
+      "arm": "B",
+      "run_id": "12_R171-X50-S-R_S0_B",
+      "start_epoch": 1794964414.0178168,
+      "end_epoch": 1794965608.1037354,
+      "verification_audit_seconds": 5.543716200161725,
+      "process_outer_seconds": 1194.0862027001567,
+      "pid": 89888,
+      "H_self_paid": true,
+      "H_seconds": 0.1045428,
+      "LP": 3,
+      "MIP": 2,
+      "actual_Optimize": 5,
+      "CPP_in_process_seconds": 1194.0475999,
+      "outcome": "OPEN",
+      "cold_NumStart": null
+    }
+  ],
+  "clock": {
+    "first_producer_epoch": 1794951275.9965432,
+    "last_producer_end_epoch": 1794965608.1037354,
+    "last_reader_end_epoch": 1794965614.822877,
+    "contiguous_panel_span_seconds": 14332.107192277908,
+    "normal_interposition_transition_seconds": [
+      0.23757410049438477,
+      0.24761509895324707,
+      0.2519998550415039,
+      0.22359776496887207,
+      0.21300053596496582,
+      0.2200014591217041,
+      0.21099853515625,
+      0.20699620246887207,
+      0.21161866188049316,
+      0.20699834823608398,
+      0.20649409294128418
+    ],
+    "max_interposition_transition_seconds": 0.2519998550415039,
+    "audit_of_prior_position_overlaps_following_producer": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        12
+      ]
+    ],
+    "producer_process_sum_seconds": 14329.670480899513,
+    "audit_attempt_sum_seconds": 52.42254390055314,
+    "gross_snapshot_seconds": 15552.065012216568,
+    "occupied_snapshot_seconds": 15552.065012216568,
+    "inactive_continuation_summation_seconds": 0,
+    "cost_snapshot_UTC": "2026-11-18T01:43:47.065012+00:00",
+    "formal_Optimize_calls": 40,
+    "LP": 24,
+    "MIP": 16,
+    "expected_H_calls": 6,
+    "H_seconds": 3.0941810999999997,
+    "Native_seconds": 14298.721999645233,
+    "min_logged_native_TimeLimit": 1121.5947787,
+    "max_logged_native_TimeLimit": 1193.7420455,
+    "qualification_outer_seconds": 9.188781800214201,
+    "qualification_Optimize": 0,
+    "qualification_H": 0,
+    "max_P_budget_request_to_following_phase_sample_delay_seconds": 0.003702900000007503,
+    "readback_marker_scope": "NEJ1 publication/close markers sampled after event JSON close and hash, without an external first-seen clock."
+  },
+  "post_optimize_markers": [
+    {
+      "position": 1,
+      "native_return": 1194.350178,
+      "qualified_journal_end": 1194.360947,
+      "raw_journal_last_entry": 1194.360947,
+      "analytical_post_return": 0.04221540000003188,
+      "qualified_tail": 0.010768999999982043
+    },
+    {
+      "position": 2,
+      "native_return": 1194.0078312,
+      "qualified_journal_end": 1194.0097731,
+      "raw_journal_last_entry": 1194.0097731,
+      "analytical_post_return": 0.03649429999995846,
+      "qualified_tail": 0.0019419000000198139
+    },
+    {
+      "position": 3,
+      "native_return": 1194.0087305,
+      "qualified_journal_end": 1194.0106474,
+      "raw_journal_last_entry": 1194.0106474,
+      "analytical_post_return": 0.044920400000137306,
+      "qualified_tail": 0.001916899999969246
+    },
+    {
+      "position": 4,
+      "native_return": 1194.0113261,
+      "qualified_journal_end": 1194.0205278,
+      "raw_journal_last_entry": 1194.0205278,
+      "analytical_post_return": 0.024967800000013085,
+      "qualified_tail": 0.00920170000017606
+    },
+    {
+      "position": 5,
+      "native_return": 1194.0133411,
+      "qualified_journal_end": 1194.0223704,
+      "raw_journal_last_entry": 1194.0223704,
+      "analytical_post_return": 0.0483819000000949,
+      "qualified_tail": 0.009029300000065632
+    },
+    {
+      "position": 6,
+      "native_return": 1194.0088356,
+      "qualified_journal_end": 1194.0106334,
+      "raw_journal_last_entry": 1194.0106334,
+      "analytical_post_return": 0.04007039999987683,
+      "qualified_tail": 0.0017977999998493033
+    },
+    {
+      "position": 7,
+      "native_return": 1194.0207332,
+      "qualified_journal_end": 1194.0225384,
+      "raw_journal_last_entry": 1194.0225384,
+      "analytical_post_return": 0.05211430000008477,
+      "qualified_tail": 0.0018052000000352564
+    },
+    {
+      "position": 8,
+      "native_return": 1194.0092246,
+      "qualified_journal_end": 1194.0192638,
+      "raw_journal_last_entry": 1194.0192638,
+      "analytical_post_return": 0.050811100000146325,
+      "qualified_tail": 0.010039200000164783
+    },
+    {
+      "position": 9,
+      "native_return": 1194.0173167,
+      "qualified_journal_end": 1194.0282878,
+      "raw_journal_last_entry": 1194.0282878,
+      "analytical_post_return": 0.05033439999988332,
+      "qualified_tail": 0.010971100000006118
+    },
+    {
+      "position": 10,
+      "native_return": 1194.0150094,
+      "qualified_journal_end": 1194.0169178,
+      "raw_journal_last_entry": 1194.0169178,
+      "analytical_post_return": 0.03745359999993525,
+      "qualified_tail": 0.0019084000000475498
+    },
+    {
+      "position": 11,
+      "native_return": 1194.0218473,
+      "qualified_journal_end": 1194.0239172,
+      "raw_journal_last_entry": 1194.0239172,
+      "analytical_post_return": 0.04172199999993609,
+      "qualified_tail": 0.0020698999999240186
+    },
+    {
+      "position": 12,
+      "native_return": 1194.0100641,
+      "qualified_journal_end": 1194.0190601,
+      "raw_journal_last_entry": 1194.0190601,
+      "analytical_post_return": 0.04298370000014984,
+      "qualified_tail": 0.008996000000024651
+    }
+  ],
+  "archive": {
+    "member_count": 4144,
+    "carrier_SHA256": "80d75bf93832b1e4e515cc275bb0cb6294bb1dce1c0d4ddbf0e67ce919fca97f",
+    "membermap_SHA256": "84ee85b9a059e201c5f04147616b2936192a20e393de556c67d925d86116d31a",
+    "raw_uncompressed_bytes": 250451013,
+    "every_archive_member_byte_verified_against_local": true
+  },
+  "measured_source_commit": "781c548b410a2749190e3f0c4b149c2ad885c054",
+  "PE_SHA256": "c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57",
+  "DLL_SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "verified_CPP_source_files": 254,
+  "independent_script_wall_seconds": 13.128496646881104,
+  "exit_marker_epoch": 1794966608.1847575
+}

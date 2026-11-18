@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Static bicycle redistribution couples inventory equity to routes with empty departures, prefix capacity and paid handling, including loaded returns. GI-TBC connects shared inventory states, movement and nonzero visits to objective products, then combines own feasible startup with complete true-Gini interval coverage. The breadth panel gives 9/12 certificates versus 7/12 for each compact control; a positive-resource panel gives 4/8 versus 0/8. Seed checks retain open and adverse endpoints. Compact and conditional state representations distinguish preserved information from complete computational efficiency. Verified fleet archives and global lower bounds yield continuous-weight guarantees: one fixed fleet stays within an absolute objective tolerance of 1.00002e-7 over its covered range. Two-sided route-time bounds establish strict optimal-objective improvement even where optimal routes remain unproved, while large-instance improvement magnitudes remain uncertain. These finite results support the integrated exact method and bounded transportation decisions; the controls leave the independent speed benefit of external interval scheduling unresolved.
+Static bicycle redistribution couples inventory equity to routes with empty departures, prefix capacity and paid handling, including loaded returns. GI-TBC connects shared inventory states, movement and nonzero visits to objective products, then combines own feasible startup with complete true-Gini interval coverage. The breadth panel gives 9/12 certificates versus 7/12 for each compact control; a positive-resource panel gives 4/8 versus 0/8. Seed checks retain open and adverse endpoints. In six prospective positive-target n50 pairs at a 1,200-s cap, GI-TBC has materially lower feasible objectives in 5/6 and higher qualified global bounds in 6/6, with 0/6 certificates versus 0/6 for cold P. Compact and conditional state representations distinguish preserved information from complete computational efficiency. Verified fleet archives and global lower bounds yield continuous-weight guarantees: one fixed fleet stays within an absolute objective tolerance of 1.00002e-7 over its covered range. Two-sided route-time bounds establish strict optimal-objective improvement even where optimal routes remain unproved, while large-instance improvement magnitudes remain uncertain. These finite results support the integrated exact method and bounded transportation decisions; the controls leave the independent speed benefit of external interval scheduling unresolved.
 
 ## 1. Introduction and related work
 
@@ -294,11 +294,11 @@ The comparators isolate different questions. P is the independent cold compact m
 
 Each panel retains its own denominator. Matching AM/mechanism/resource/weight baselines refer to one historical record, counted once. Additional Seeds and representation tests on the later six configurations are exposed-input repetitions. Resource pairs change only T; each weight family retains one physical feasible set.
 
-The fixed-source protocol was committed before once-only generation. Six known roles and six new draws form a twelve-input breadth panel (four each at \(n\in\{15,20,35\}\)); CITI, CABI and Divvy supply archived station geometry/capacity. Ten new draws in total include four additional shortage bases at \(n\in\{20,35\}\), each paired at two transparently designed route horizons. Targets, initial stock, weights and depot are synthetic or transformed; this is not observed demand, a new source, or independent population sampling. Every selected source row and serialized input is disclosed.
+The fixed-source protocol was committed before once-only generation. Six known roles and six new draws form a twelve-input breadth panel (four each at \(n\in\{15,20,35\}\)); CITI, CABI and Divvy supply archived station geometry/capacity. The ten new draws in the breadth and resource studies include four additional shortage bases at \(n\in\{20,35\}\), each paired at two transparently designed route horizons. Targets, initial stock, weights and depot are synthetic or transformed; this is not observed demand, a new source, or independent population sampling. Every selected source row and serialized input is disclosed.
 
 Breadth retains \(\lambda=.15\). Resource pairs fix \(\rho=1\) and alter only T; the two extra weight levels \(\rho\in\{.5,2\}\) reuse the matching \(\rho=1\) baseline at two preselected physical configurations. AM and mechanism defaults share only exactly matching input/T/weight/Seed/cap/configuration runs. The earlier main panels use Seed 0; four preselected full-method triplets and small overlapping AM/mechanism blocks use Seed 1. They are finite repeated observations, not independent new inputs or an estimated runtime distribution. The later six-input archived-source cohort uses Seed0 for its B/E+/P comparison and Seeds1/2 for the complete B/P confirmation in §4.3. The 24 additional Seed commands use the exposed six-input cohort.
 
-For each new resource base, let \(d_{\max}\) be its maximum serialized station-to-depot distance and \(M\) its vehicle count. Before optimization, the route horizons were fixed by
+For each resource base and prospective n50 configuration, let \(d_{\max}\) be its maximum serialized station-to-depot distance and \(M\) its vehicle count. Before optimization, the route horizons were fixed by
 
 \[
 \begin{aligned}
@@ -308,7 +308,7 @@ T_2&=300\left\lceil\frac{1.5T_1}{300}\right\rceil.
 \end{aligned}
 \]
 
-This input-based rule uses geometry, initial stock, targets and fleet size; it supplies neither a binding-horizon guarantee nor an outcome-dependent difficulty filter. The weight study preselects R-B20-S-T1 and R-X35-S-T2. Within each T pair, every datum except T is identical.
+This input-based rule uses geometry, initial stock, targets and fleet size; it supplies neither a binding-horizon guarantee nor an outcome-dependent difficulty filter. The weight study preselects R-B20-S-T1 and R-X35-S-T2. Within each T pair, every datum except T is identical. The n50 comparison takes T1 alone and compares B and P within each generated configuration.
 
 **Table 1. Registered studies, observations and shared defaults.**
 
@@ -323,6 +323,7 @@ This input-based rule uses geometry, initial stock, targets and fleet size; it s
 | Archived-source Seed 0 cohort | 6 inputs / 18 B, E+, P method observations | Complete main method and separate proof extension |
 | Exposed-cohort Seeds1/2 | 24 new B/P arms, plus 12 historical Seed0 B/P arms | Six inputs; three within-input paired observations |
 | Compact shared-state comparison | 6 exposed inputs / 12 fresh same-build B/C166 Seed0 arms | Equivalent common LP information and complete-method costs |
+| Prospective positive n50 | 6 new configurations / 12 B/P Seed0 arms | Complete paid endpoints at 1,200 s |
 
 ### 4.2 Complete main-method panels
 
@@ -486,7 +487,36 @@ The materiality scale max(1e-6, 0.001 max(abs(U_reference), 1e-12)) is descripti
 there is no significance or population claim. Certification uses the
 qualified process endpoint T_cert_process, with independent audit costs
 separate. S170 gives every initial U, endpoint, signed gap, expense and
-negative result. Close further optimization of this fixed recipe. Retain its initialization and local paid positives as bounded findings, with B remaining uniform default and C169 default off; this selected exposed-input study does not confirm a repeatable complete-method benefit.
+negative result. The exposed-input confirmation supports a local initialization finding and closes the fixed reweighting line. GI-TBC/B remains the uniform default, with C169 disabled.
+
+### 4.7 Prospective positive n50 endpoint evidence
+
+Six precommitted shortage configurations use 50 stations, three vehicles
+of capacities 20, 25 and 30, and one compact and one regional geometry
+from each of CITI, CABI and Divvy. The draws use archived station
+locations and capacities, with synthetic or transformed operational
+inputs. Each configuration uses \(\rho=1\) and its own \(T_1\). Positive
+shortage and weights bound the original objective away from zero.
+The single Seed 0 comparison gives each complete process 1,200 s,
+including B's own H. Each arm is independently qualified. All six inputs
+enter without performance screening (Supplement S171).
+
+**Table 8. Qualified B and cold P endpoints on the prospective n50 configurations.**
+
+| Archive / geometry | B U / L | P U / L | B / P gap % | B / P state |
+| --- | --- | --- | --- | --- |
+| CITI compact | 0.536923 / 0.356919 | 0.523772 / 0.291331 | 33.53 / 44.38 | OPEN / OPEN |
+| CITI regional | 0.541165 / 0.355390 | 0.574631 / 0.312450 | 34.33 / 45.63 | OPEN / OPEN |
+| CABI compact | 0.653336 / 0.416792 | 0.705181 / 0.343940 | 36.21 / 51.23 | OPEN / OPEN |
+| CABI regional | 0.572824 / 0.378424 | 0.608779 / 0.186291 | 33.94 / 69.40 | OPEN / OPEN |
+| Divvy compact | 0.660495 / 0.436240 | 0.729345 / 0.284463 | 33.95 / 61.00 | OPEN / OPEN |
+| Divvy regional | 0.843694 / 0.551354 | 0.920095 / 0.445402 | 34.65 / 51.59 | OPEN / OPEN |
+
+B returned a qualified fleet on 6/6 configurations and P on 6/6. At the prespecified descriptive scale, B had a lower U in 5/6 pairs, a higher global L in 6/6 and a smaller absolute gap in 6/6. The corresponding counts for P were 1/6, 0/6 and 0/6. B certified 0/6 and P 0/6, with 6/6 joint OPEN and 0/6 joint CERT pairs. The joint-CERT subset is empty. The OPEN endpoints quantify progress at the common budget. B spent 6996.1 s in Native MIP and 140.1 s in LP calls across the six arms.
+The B controller accepted 0 splits and declined 6. Its 4 child-bound-target MIP phases requeued the parent 4 times. The unchanged full/root controls leave the controller's independent net benefit unresolved. The archived-source n50 observations
+extend the direct coverage of the integrated pair-only method. The
+comparisons are conditional on these geometries, physical horizons
+and synthetic operational quantities.
 
 ## 5. Certified transportation decisions
 
@@ -494,7 +524,7 @@ negative result. Close further optimization of this fixed recipe. Retain its ini
 
 The four input-designed resource pairs fix the physical data, normalized weights and \(\rho=1\), and change only route horizon T. Each base has positive shortage, positive weights and a pre-solve positive objective floor; the design uses no observed difficulty filter. Increasing T enlarges the physical feasible set, but finite-budget bounds and computational time can move in either direction.
 
-**Table 8. Input-based positive-objective resource design.**
+**Table 9. Input-based positive-objective resource design.**
 
 | Base / source | \(n\) | T1 / T2 (s) | Shortage s | \(\Omega\) | Floor lambda a s |
 |---|---|---|---|---|---|
@@ -513,9 +543,9 @@ If \([L_j,U_j]\) contains the optimum at \(T_j\), feasible-set nesting gives
 \max\{0,L_1-U_2\}\le F^*(T_1)-F^*(T_2)\le U_1-L_2.
 \]
 
-The computation uses the complete full-precision fleets and qualified global lower sources. Each original lower is reduced by \(10^{-7}\), and recomputed feasible objectives receive \(10^{-12}\) upward protection. These guards and outward display rounding are retained in Table 9; all arithmetic and source ownership are preserved in the decision data.
+The computation uses the complete full-precision fleets and qualified global lower sources. Each original lower is reduced by \(10^{-7}\), and recomputed feasible objectives receive \(10^{-12}\) upward protection. These guards and outward display rounding are retained in Table 10; all arithmetic and source ownership are preserved in the decision data.
 
-**Table 9. Two-sided resource-value improvement intervals.** The bounds use complete physical fleets and qualified global lower sources. Displayed interval endpoints are rounded outward after reducing each original lower by \(10^{-7}\) and adding \(10^{-12}\) to exactly recomputed feasible objectives; full original endpoints and arithmetic are retained in the decision data.
+**Table 10. Two-sided resource-value improvement intervals.** The bounds use complete physical fleets and qualified global lower sources. Displayed interval endpoints are rounded outward after reducing each original lower by \(10^{-7}\) and adding \(10^{-12}\) to exactly recomputed feasible objectives; full original endpoints and arithmetic are retained in the decision data.
 
 | Base | T1 / T2 (s) | Improvement interval | Interval width | B state T1 / T2 |
 |---|---|---|---|---|
@@ -533,7 +563,7 @@ All four larger-horizon saved B fleets reduce both Gini and average target devia
 
 ### 5.2 Quality between sampled objective weights
 
-**Table 10. Objective-weight evidence. (a) Sampled complete-method outcomes; C denotes an own qualified certificate.**
+**Table 11. Objective-weight evidence. (a) Sampled complete-method outcomes; C denotes an own qualified certificate.**
 
 | Physical configuration | \(\rho\) | P: U / L | PS: U / L | GI-TBC: U / L |
 |---|---|---|---|---|
@@ -564,9 +594,9 @@ v(\rho)\ge\frac{\rho_b-\rho}{\rho_b-\rho_a}L_a+
 
 Let \(L_C\) be the maximum of applicable chords. A repeated actual coordinate uses the greatest qualified lower and contributes no zero-length chord. Chords are never extrapolated. These standard parametric-optimization facts yield
 \(0\le U_{\mathcal A}(\rho)-v(\rho)\le U_{\mathcal A}(\rho)-L_C(\rho)\).
-We calculate the worst bound over the entire covered interval from all true affine-line intersections, active-chord intersections and domain endpoints using rational arithmetic. No dense grid or new solver is used. Actual binary64 lambda/weight coordinates are retained, including small differences from displayed .5/1/2. The numerical guards are those stated with Table 9.
+We calculate the worst bound over the entire covered interval from all true affine-line intersections, active-chord intersections and domain endpoints using rational arithmetic. No dense grid or new solver is used. Actual binary64 lambda/weight coordinates are retained, including small differences from displayed .5/1/2. The numerical guards are those stated with Table 10.
 
-**Table 11. Continuous-weight quality guarantees from the complete fleet archive.** Ranges below are display coordinates; the machine-readable data preserve exact loaded coordinates. Regret bounds are rounded upward.
+**Table 12. Continuous-weight quality guarantees from the complete fleet archive.** Ranges below are display coordinates; the machine-readable data preserve exact loaded coordinates. Regret bounds are rounded upward.
 
 | Fixed physical family | Covered rho range | Runs / distinct G,p lines | Supported archive lines | Worst absolute regret bound |
 |---|---|---|---|---|
@@ -594,4 +624,6 @@ The same verified fleets and qualified global bounds support decisions beyond ce
 
 Further algorithm comparisons require a representation whose conditional information survives the declared physical interface at an acceptable complete cost, followed by independently paid own-H full-method evidence with qualified endpoints and all adverse cases retained. Better local hulls, fewer binaries and small LP times are insufficient substitutes. The unresolved incumbent deficits, physical realization gaps and separate value of interval scheduling are specific scientific questions; the present study closes neither them nor the general scalability of equitable redistribution.
 
-Paid objective reweighting improves complete-H initialization but fails the two-additional-Seed endpoint confirmation: four of six n35 U comparisons regress, only one absolute gap improves, and C20 proof time increases at both Seeds. Local B35/X35 Seed 1 primal gains coexist with weaker proof endpoints and do not justify further optimization or default adoption of this fixed recipe. The three new same-budget B/P pairs strengthen the default method's endpoint evidence, while all n35 runs remain open. Preserve these mixed and adverse findings and close the C169 optimization line.
+Paid objective reweighting improves complete-H initialization but fails the two-additional-Seed endpoint confirmation: four of six n35 U comparisons regress, only one absolute gap improves, and C20 proof time increases at both Seeds. Local B35/X35 Seed 1 primal gains coexist with weaker proof endpoints and do not justify further optimization or default adoption of this fixed recipe. The three new same-budget B/P pairs strengthen the default method's endpoint evidence, while all n35 runs remain open. The fixed reweighting recipe is closed after this mixed confirmation.
+
+The prospective n50 comparison adds six direct tests of the frozen complete method. B's material U, L and absolute-gap advantages occur in 5/6, 6/6 and 6/6 pairs, with 0/6 B and 0/6 P certificates. These archived-source shortage results bound the evidence at one solver Seed and one paid cap. The controls leave independent external scheduling gains and a general scalability claim unresolved.
