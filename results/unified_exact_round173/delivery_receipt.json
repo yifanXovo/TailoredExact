@@ -1,0 +1,196 @@
+{
+  "round": 173,
+  "repository": "yifanXovo/TailoredExact",
+  "branch": "codex/round173-review-entry",
+  "worktree": "E:\\codes\\ExactEBRP-work\\worktrees\\round173",
+  "entry": {
+    "remote_main": "b2b940c1e517a72e226ec60fc49ff19651737632",
+    "prior_PR": "https://github.com/yifanXovo/TailoredExact/pull/234",
+    "prior_PR_state": "open draft",
+    "base_commit": "111d62ac2cdc52927caed2bfb42d20bbef2e8463",
+    "r172_paper_commit": "b770e94be267f27aabfee81bcdd6e7e142034aa3",
+    "reason_for_stacked_base": "The R172 content commit is outside main."
+  },
+  "clock": {
+    "goal_registered_utc": "2026-11-19T22:31:50.000Z",
+    "local_acceptance_utc": "2026-11-19T22:44:48Z",
+    "local_elapsed_seconds": 778,
+    "docs_public_verified_utc": "2026-11-19T22:50:01.499670+00:00",
+    "elapsed_through_docs_public_seconds": 1091.499,
+    "science_limit_seconds": 5400,
+    "timezone_for_report": "Asia/Shanghai"
+  },
+  "document_commit": "6078b43ee08dfb1a332be183222101df9f93fd4f",
+  "PR_at_document_commit": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/235",
+    "number": 235,
+    "state": "open",
+    "draft": true,
+    "head": "codex/round173-review-entry",
+    "head_sha": "6078b43ee08dfb1a332be183222101df9f93fd4f",
+    "base": "codex/round172-journal-manuscript",
+    "base_sha": "111d62ac2cdc52927caed2bfb42d20bbef2e8463"
+  },
+  "public_document_retrieval": {
+    "commit": "6078b43ee08dfb1a332be183222101df9f93fd4f",
+    "url_prefix": "https://raw.githubusercontent.com/yifanXovo/TailoredExact/6078b43ee08dfb1a332be183222101df9f93fd4f/",
+    "authentication": "none",
+    "completed_utc": "2026-11-19T22:50:01.499670+00:00",
+    "seconds": 1.2817090000025928,
+    "files": [
+      {
+        "path": "README.md",
+        "blob": "e58936b28472b396eabef44a656fe085bab43683",
+        "bytes": 3024,
+        "sha256": "37d4fb51da505b6b5e91c6d9d3a1e26cf167d638677c0c4a8d179f385e4f2e1c"
+      },
+      {
+        "path": "docs/paper_review.md",
+        "blob": "bcc2695fe213d3a66ac9654ebe9e607be490b227",
+        "bytes": 6068,
+        "sha256": "f22aaa1b37fdbe867ace4335dc1e630306191804e0b46d76a6778c65236ecb9b"
+      },
+      {
+        "path": "docs/paper_s2_release.md",
+        "blob": "48df3388e1ed7c83daa3fa64723506f11c26ea45",
+        "bytes": 11559,
+        "sha256": "35c5c845d8b10fc95b9867548a4f1a406a111ff9cbfdc9cda1459f228c4d78e0"
+      },
+      {
+        "path": "results/unified_exact_round173/goal.md",
+        "blob": "4819af8c915549edf020ea62b70506e0dba8387b",
+        "bytes": 16899,
+        "sha256": "80bd62e7553f038aeac0febc625abea4abcf99302a26968c83f556a82e8f06fa"
+      },
+      {
+        "path": "results/unified_exact_round173/final_report.md",
+        "blob": "930a44087e66c1cccebc0d9fd3ff40c1e1d3b73c",
+        "bytes": 2721,
+        "sha256": "d43ab24f96c60c70ef0ee92dd25e07490babf9ee693f95138eba1fab24c5db1b"
+      },
+      {
+        "path": "results/unified_exact_round173/review_record.md",
+        "blob": "3256f35b5d1acd29bea725413996f69276671c36",
+        "bytes": 2406,
+        "sha256": "0fbb52d9f337792ba3ed593164c77138633f607c67746c7a834304e6a408ec60"
+      }
+    ],
+    "total_bytes": 42677
+  },
+  "paths_check": {
+    "invocations": 1,
+    "command": "python -B scripts/round172_documents.py paths",
+    "python": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "working_directory": "E:\\codes\\ExactEBRP-work\\worktrees\\round173",
+    "started_utc": "2026-11-19T22:35:46.1688391+00:00",
+    "exit_code": 0,
+    "seconds": 0.144649,
+    "matches_expected": true,
+    "stdout": [
+      "Branch: codex/round172-journal-manuscript",
+      "Base: e8c4a0d3ccbaf1c1a6e6f83242d9163fe29e74e4",
+      "Current paper: E:\\codes\\ExactEBRP-work\\worktrees\\round173\\results\\unified_exact_round137",
+      "Receipts: E:\\codes\\ExactEBRP-work\\worktrees\\round173\\results\\unified_exact_round172",
+      "Temporary: E:\\codes\\ExactEBRP-work\\temp\\round172\\pdf"
+    ]
+  },
+  "frozen": {
+    "r169_through_r171_measured_source": "781c548b410a2749190e3f0c4b149c2ad885c054",
+    "r169_through_r171_measured_PE_sha256": "c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57",
+    "comparison": "Same Git tree or blob IDs at the R172 delivery base and the Round173 document commit.",
+    "trees_and_blobs": {
+      "src": "65d094e51368b01b97b6b3a5e6f1af48fab887fa",
+      "include": "38476f3d7e810d746c0e4794d31a2b0796120cff",
+      "CMakeLists.txt": "641e185bc7f5afcf90d0174932028de001c95f3a",
+      "config": "7ac7d854b49878cb48870ece42c676ed7965714a",
+      "scripts": "098b2aa72f37b78364054233ca300c29ad178838",
+      "results/unified_exact_round137": "b6870791b3c6d99c7c4ffeecc448358018da47c2",
+      "results/unified_exact_round169": "f7cb8a1835bf6dcc336bd7c6cf819a4e77e5fccf",
+      "results/unified_exact_round170": "00746f897881209d834b44e507da8c6641c99970",
+      "results/unified_exact_round171": "21847df5303b8a5120130b51a449bb8ca515914b",
+      "results/unified_exact_round172": "06fda4a8565252b205260b85963e1a2a18f106a8",
+      "results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv": "32a93abb23f57ff909ad450874fdd9b6820868c4"
+    },
+    "byte_identities": {
+      "results/unified_exact_round137/manuscript.pdf": {
+        "blob": "14e9a5d8c0d4212691bd397d80022389b24c2dcb",
+        "sha256": "79f10db5b4fa2d172d0b9e3f797ff15ffa9ab57c6b1c065cacda5b6f9b8207e8",
+        "bytes": 1090434
+      },
+      "results/unified_exact_round137/supplement.pdf": {
+        "blob": "cd994d432cfa24a6ba16f11742414241c82ef5da",
+        "sha256": "63e3ac936e1318e02bdcedd4ed930f0e2fe70da6831e728d6d976e9851524084",
+        "bytes": 468936
+      },
+      "results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv": {
+        "blob": "32a93abb23f57ff909ad450874fdd9b6820868c4",
+        "sha256": "0487ebaf90274f85a7cd94358215a701825f328c954a8de235fd5e58633989dc",
+        "bytes": 82303,
+        "rows": 132,
+        "columns": 28,
+        "bom": "efbbbf",
+        "crlf": 133
+      }
+    }
+  },
+  "new_work_counts": {
+    "solver_runs": 0,
+    "Optimize": 0,
+    "complete_H": 0,
+    "C_plus_plus_builds": 0,
+    "pdf_rebuilds": 0,
+    "experiments": 0,
+    "certificates": 0,
+    "performance_observations": 0,
+    "CSV_records": 0
+  },
+  "ordinary_io_seconds": {
+    "entry_remote_refs": 2.93,
+    "sparse_worktree_setup": 8.0936,
+    "document_git_commit": 1.0488643,
+    "default_route_push_timeout": 21.3537995,
+    "default_route_remote_ref_check_timeout": 21.244439,
+    "document_git_push_recovered": 11.1590147,
+    "draft_creation": 2.453,
+    "draft_readback": 0.964,
+    "public_retrieval": 1.281709,
+    "retention_screen": 0.546944
+  },
+  "git_transport": "The default github.com network route timed out. A per-command Git connection used another GitHub endpoint with normal TLS validation. Repository remote, global settings and credentials stayed in place.",
+  "retention": {
+    "screened_utc": "2026-11-19T22:50:28.6577799+00:00",
+    "screened_round_paths": [
+      "E:\\codes\\ExactEBRP-work\\temp\\round173",
+      "E:\\codes\\ExactEBRP-work\\restore\\round173",
+      "E:\\codes\\ExactEBRP-work\\evidence\\round173",
+      "E:\\codes\\ExactEBRP-work\\raw\\round173",
+      "E:\\codes\\ExactEBRP-work\\build-cache\\round173",
+      "E:\\codes\\ExactEBRP-work\\recovery\\round173"
+    ],
+    "round_owned_temporary_directories_found": [],
+    "ignored_or_untracked_in_round_worktree": [],
+    "deleted_paths": [],
+    "estimated_bytes_released": 0,
+    "E_volume_free_bytes_after_worktree_creation": 135496114176,
+    "E_volume_free_bytes_at_screen": 135503351808,
+    "observed_free_byte_change": 7237632,
+    "volume_change_scope": "Whole-volume observation with zero cleanup, independent of other disk activity.",
+    "retained": "Active Round173 worktree, public document commit, protected user worktrees and all pre-existing research assets.",
+    "protected_head_and_tracked_status_equal_to_entry": true,
+    "protected": [
+      {
+        "location": "E:\\codes\\ExactEBRP",
+        "head": "8dc274eb34ee6d8a575f0b94b57ef04476efc0f1",
+        "tracked_status_rows": 3,
+        "status_listing_sha256": "20d5938fe224fb5661fabe5cdfc7cfd91654b9a9f9544180968f3d2be5566862"
+      },
+      {
+        "location": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current",
+        "head": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+        "tracked_status_rows": 44,
+        "status_listing_sha256": "1b31d41719ddd2507a4c33d7f68e53d414182968ddcc9165192cdeae72a1ec11"
+      }
+    ]
+  },
+  "receipt_note": "The PR snapshot and public file hashes refer to the document commit. This receipt is the sole path in the subsequent delivery commit."
+}
