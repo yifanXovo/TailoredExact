@@ -1,55 +1,20 @@
-# Current author/colleague review packet
+# Author and technical peer review of the R172 manuscript
 
-Read the [current main PDF with complete Appendix A/B](../results/unified_exact_round137/manuscript.pdf),
-[main component](../results/unified_exact_round137/paper_body.md),
-[complete mathematical/algorithmic appendices](../results/unified_exact_round137/model_and_algorithm_appendices.md),
-[mathematical companion](../results/unified_exact_round137/mathematical_analysis.md),
-[supplement PDF](../results/unified_exact_round137/supplement.pdf) and
-[bibliography](../results/unified_exact_round137/references.bib).
-There is one maintained paper directory. The current [Round171 report](../results/unified_exact_round171/final_report.md),
-[decision](../results/unified_exact_round171/research_decision.md) and [author memo](../results/unified_exact_round171/author_decision_memo.md)
-give the six prospectively generated n50 comparisons. B returned a qualified fleet on 6/6 configurations and P on 6/6. At the prespecified descriptive scale, B had a lower U in 5/6 pairs, a higher global L in 6/6 and a smaller absolute gap in 6/6. The corresponding counts for P were 1/6, 0/6 and 0/6. B certified 0/6 and P 0/6, with 6/6 joint OPEN and 0/6 joint CERT pairs.
-The new main table is in §4.7 and the complete arm, cost and controller
-evidence is in Supplement S171. B remains the uniform method. The preceding
-[Round170 confirmation](../results/unified_exact_round170/final_report.md)
-retains its mixed and adverse findings, including the fixed C169 decision.
+Read the [R172 main PDF with Appendices A and B](../results/unified_exact_round137/manuscript.pdf) and [supplement PDF](../results/unified_exact_round137/supplement.pdf). The [complete manuscript Markdown](../results/unified_exact_round137/manuscript.md), [supplement source](../results/unified_exact_round137/supplement.md), [mathematical companion](../results/unified_exact_round137/mathematical_analysis.md), and [bibliography](../results/unified_exact_round137/references.bib) live in the maintained `results/unified_exact_round137/` directory.
 
-The retained Round166 evidence includes
-[contribution positioning](../results/unified_exact_round166/contribution_positioning.md)
-and the [then-current author memo](../results/unified_exact_round166/author_decision_memo.md).
+| Reading question | Where to read |
+| --- | --- |
+| What is the physical problem, how does the shared inventory state work, and what do the two structural results establish? | [§§1–2](../results/unified_exact_round137/paper_body.md#1-introduction-and-related-work), [Appendix A.9](../results/unified_exact_round137/model_and_algorithm_appendices.md#a9-compact-supports-for-the-shared-interface), and [Appendix A.11](../results/unified_exact_round137/model_and_algorithm_appendices.md#a11-conditional-stock-service-product-and-code-hull) |
+| How does the complete algorithm cover the domain and resume from actual solver returns? | [§3.2, Algorithm 1](../results/unified_exact_round137/paper_body.md#32-verified-startup-and-complete-interval-coverage) and [Appendix B](../results/unified_exact_round137/model_and_algorithm_appendices.md#appendix-b-executable-method-specification) |
+| How do B, cold P and independently paid-start PS compare, and what do the Seed and 50-station panels show? | [§4.2](../results/unified_exact_round137/paper_body.md#42-complete-methods-against-cold-and-paid-start-compact-controls), [§4.3](../results/unified_exact_round137/paper_body.md#43-archived-source-cohort-and-within-input-seed-variation), and [§4.4, Table 6](../results/unified_exact_round137/paper_body.md#44-complete-method-endpoints-at-50-stations). See the supplement for [breadth endpoints](../results/unified_exact_round137/supplement.md#breadth-complete-two-sided-endpoints), [Seed evidence](../results/unified_exact_round137/supplement.md#round164-completed-finite-solver-seed-evidence), and [all 12 50-station arms in S171](../results/unified_exact_round137/supplement.md#s171-positive-objective-50-station-configurations). |
+| What do the representation, controller, route-family and initialization controls establish? | [§4.5](../results/unified_exact_round137/paper_body.md#45-representation-continuation-and-startup-controls), with [S166.1](../results/unified_exact_round137/supplement.md#same-build-compact-support-endpoints), [S167.2](../results/unified_exact_round137/supplement.md#s1672-detailed-am-mechanism-and-earlier-seed-interpretation), [S167.3](../results/unified_exact_round137/supplement.md#s1673-conditional-representation-diagnostics), [S168](../results/unified_exact_round137/supplement.md#s168-complete-route-family-target-attainability), and [S170](../results/unified_exact_round137/supplement.md#s170-fixed-paid-initialization-and-matched-cold-controls) |
+| What decisions do the resource and continuous-weight bounds support? | [§5.1, Tables 7–8](../results/unified_exact_round137/paper_body.md#51-what-additional-route-time-can-achieve) and [§5.2, Tables 9–10](../results/unified_exact_round137/paper_body.md#52-quality-between-sampled-objective-weights). See the [resource intervals](../results/unified_exact_round166/analysis/resource_intervals.json) and [weight envelopes](../results/unified_exact_round166/analysis/parameter_envelopes.json). |
+| What was revised, what did the independent readers check, and what remains for the authors? | R172 [revision record](../results/unified_exact_round172/revision_record.md), [technical review record](../results/unified_exact_round172/review_record.md), and [author decision memo](../results/unified_exact_round172/author_decision_memo.md) |
 
-Its representation question was whether legal affine-piece support can compress the
-joint inventory/movement/visit/product graph while preserving integer
-physical points and common raw LP information. The paper gives the
-constructive proof and its exact interface boundary. C166 implements that
-change with a separate absolute-stock binary-product layer. Eight scoped
-LP pairs agree to3.33e-16; all twelve fresh paired complete arms qualify.
-B has3/6 certificates, C1662/6. Two n35 primal gains coexist with weaker
-proof endpoints; X35 worsens on both sides and X20 costs substantially more.
-Uniform B stays main. This is a finite same-build representation study on
-exposed inputs, not new B/P or Seed evidence.
+B is the frozen uniform method. C166, D167 and C169 remain research variants. The independent benefit of the external controller remains unresolved in the full/root contrast. In §4.2, PS certifies X-35-B faster than B, with each method paying for its own start. In §4.3, the saved Seed 0 P fleet for C35 has lower physical U than each of B's Seed 0–2 incumbents. At the registered descriptive scale in Table 6, B has lower physical U in 5/6 pairs, higher qualified L and smaller absolute and relative gaps in 6/6. On CITI compact, P finds the lower U. All 12 arms are OPEN at Seed 0 and 1,200 s. The [authoritative benchmark CSV](../results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv) has 132 records.
 
-The revised decision analysis uses every complete fleet from all four
-specified weight families and all four resource pairs. It distinguishes
-feasible archive envelopes from an optimal frontier, and bounds quality
-throughout continuous intervals. It also reports both sides of route-time
-value, including broad n35 magnitude uncertainty. The private May30
-antecedent's model/decoder attribution is retained; author/publication facts
-remain internal rather than delaying the technical result.
+The route-time analysis bounds the improvement in the original optimum, with wide 35-station magnitude intervals. The continuous-weight analysis bounds regret under the original weighted objective over covered intervals, using feasible fleets and qualified lower evidence. [Supplement decision detail](../results/unified_exact_round137/supplement.md#continuous-weight-archive-and-two-sided-resource-value)
 
-The prior breadth/resource denominators, three-Seed six-input cohort,
-C35 reversal and historical P witness, open n35/fixed-target outcomes,
-E+'s proof gain and cost, and unresolved independent value of external
-control all remain visible. No per-input portfolio or extra experiment is
-used to improve the presentation.
+Author and peer technical review can start with the published R172 PDFs. The authors still need to confirm names and order, affiliations and corresponding author, funding, acknowledgments and disclosures. They also need to confirm the HGA-TGBC antecedent's attribution, accessible version, bibliography and status, any recoverable CITI443 capture metadata, and the public code and data statement, including redistribution and separate solver access. [R172 author decision memo](../results/unified_exact_round172/author_decision_memo.md)
 
-Current mathematics, execution/data and research/manuscript checks are in
-the [Round171 review directory](../results/unified_exact_round171/review). The
-[benchmark CSV](../results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv) is the current authority, with an exact
-126-record prefix and 6 qualified new B rows.
-[CSV reconciliation](../results/unified_exact_round171/CSV_reconciliation.json)
-
-Build the current components with the Round171 document entry point.
-Run assemble, pdf and qa in that order.
-[Build script](../scripts/round171_documents.py) ·
-[Build record](../results/unified_exact_round171/document_build.json) · [Page QA](../results/unified_exact_round171/document_qa.json)
+For document provenance, see the R172 [source manifest](../results/unified_exact_round172/source_manifest.json), [source checks](../results/unified_exact_round172/source_checks.json), [build record](../results/unified_exact_round172/document_build.json), and [page QA](../results/unified_exact_round172/document_qa.json). Use the [R172 rebuild instructions](paper_s2_release.md#rebuild-r172-in-a-new-checkout) when a local export is needed.
