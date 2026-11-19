@@ -2,53 +2,22 @@
 
 Exact solvers for the Equity-aware Bike Repositioning Problem.
 
-The main paper algorithm is **GI-TBC/B** (historical S2/ms2), with AP disabled
-and a uniform pair-support configuration. The current manuscript includes six prospective 50-station B/P comparisons at
-one 1,200-s cap. The earlier fixed paid-initialization confirmation closed
-the C169 line. C166, D167 and C169 stay off.
-Historical and new measured source/PE identities remain distinct from
-document generation. Start with the
-[paper-S2 release and run guide](docs/paper_s2_release.md), then the
-[author review packet](docs/paper_review.md). [Authoritative benchmark CSV](results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv).
+## Paper and author review
 
-From the current Windows checkout, display the complete verified command:
+The current scientific manuscript is **Round172**, delivered in [PR #234](https://github.com/yifanXovo/TailoredExact/pull/234). Its maintained sources and PDFs live in `results/unified_exact_round137/`. The paper presents the shared inventory formulation, the frozen uniform GI-TBC/B method (historical S2/ms2, pair-only with AP off), and bounded transportation decisions.
 
-```powershell
-& 'D:\msys64\ucrt64\bin\python.exe' -B scripts\paper_s2.py `
-  --input results\unified_exact_round130\inputs\UC-B20-B.txt `
-  --out-dir E:\codes\ExactEBRP-work\runs\paper-s2-example `
-  --T 7200 --pickup-time 60 --drop-time 60 --lambda 0.15 --cap 600 --seed 0
-```
+- [Main PDF with Appendices A and B](results/unified_exact_round137/manuscript.pdf) · [Complete manuscript Markdown](results/unified_exact_round137/manuscript.md)
+- [Supplement PDF](results/unified_exact_round137/supplement.pdf) · [Supplement source](results/unified_exact_round137/supplement.md)
+- [Main text](results/unified_exact_round137/paper_body.md) · [Appendix source](results/unified_exact_round137/model_and_algorithm_appendices.md) · [Mathematical companion](results/unified_exact_round137/mathematical_analysis.md) · [Bibliography](results/unified_exact_round137/references.bib)
+- [Author reading guide](docs/paper_review.md) · [R172 author decision memo](results/unified_exact_round172/author_decision_memo.md) · [Revision record](results/unified_exact_round172/revision_record.md) · [Technical review record](results/unified_exact_round172/review_record.md)
+- [Authoritative benchmark CSV (132 records)](results/benchmark_tables/GI_TBC_vs_P_GRB_All_Tested_Instances.csv)
 
-Append `--run` to execute once into that new directory. `--T` is the physical
-route horizon; `--cap` is the whole solver-process budget. The launcher keeps
-complete own H and the full frozen parameter vector. It changes no C++ preset.
+Use the [rebuild and historical run guide](docs/paper_s2_release.md) for a pinned R172 checkout and the [document build entry](scripts/round172_documents.py). The solver launcher in that guide retains the historical Round137 profile.
 
-Read the [current complete manuscript](results/unified_exact_round137/manuscript.md),
-[main + Appendix A/B PDF](results/unified_exact_round137/manuscript.pdf), and
-[supplement PDF](results/unified_exact_round137/supplement.pdf).
-The [contribution map](results/unified_exact_round165/contribution_positioning.md)
-and [current author memo](results/unified_exact_round171/author_decision_memo.md) explain
-the integrated method's finite evidence and the unestablished independent
-performance value of the outer controller. The [Round171 report](results/unified_exact_round171/final_report.md)
-gives the new paired n50 endpoints and paid costs. The [Round170 report](results/unified_exact_round170/final_report.md)
-retains the fixed candidate and matched cold findings.
-The bare executable retains its **ENS-C compatibility default**. AP and TC are
-closed research studies, with AP research-only and default off.
+## Historical evidence and workspace
 
-Round136 was merged into Git `main` by ordinary merge commit in
-[PR #198](https://github.com/yifanXovo/TailoredExact/pull/198). Its historical
-checkout disposition is in the
-[integration, PR disposition and local cleanup](results/unified_exact_round136/RESUME.md)
-record. Round171 uses the isolated ExactEBRP-work/worktrees/round171 checkout
-from verified Round170. The original `E:\codes\ExactEBRP` checkout retains
-user changes and the shared Git store. New work belongs under
-`E:\codes\ExactEBRP-work`; see [workspace policy](WORKSPACE_POLICY.md).
+The six 50-station comparisons in R172 §4.4, Table 6, come from the [Round171 experiment report](results/unified_exact_round171/final_report.md). The [Round170 report](results/unified_exact_round170/final_report.md) records the paid-initialization confirmation and the decision to close C169. C166, D167 and C169 remain research variants outside B. The bare executable retains its **ENS-C compatibility default**. See the [research index](docs/unified_exact_research_index.md) for earlier evidence and the [Round165 contribution map](results/unified_exact_round165/contribution_positioning.md) for its historical framing.
 
-The former K1-AM-SF/R55-R58 entry is
-[historical](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/README.md).
-Use the [research index](docs/unified_exact_research_index.md) for fixed evidence
-versions and earlier results. The root [Manuscript directory](Manuscript/README.md)
-is also historical. Current paper sources and the component-only
-`scripts/round170_documents.py` build are documented in the review packet;
-historical release configurations keep their own identities in the run guide.
+Round136 was merged into Git `main` by ordinary merge commit in [PR #198](https://github.com/yifanXovo/TailoredExact/pull/198). Its local disposition is recorded in the [Round136 continuation record](results/unified_exact_round136/RESUME.md). The [former K1-AM-SF/R55–R58 entry](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/README.md) and the root [Manuscript directory](Manuscript/README.md) are historical.
+
+New work belongs in isolated checkouts under `E:\codes\ExactEBRP-work`. The original `E:\codes\ExactEBRP` contains user changes and the shared Git store. [Workspace policy](WORKSPACE_POLICY.md)
