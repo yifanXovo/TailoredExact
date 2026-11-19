@@ -1,0 +1,9 @@
+# Round172 entry
+
+The round began at 04:28:15 on 19 November 2026 (Asia/Shanghai, recorded goal start). The isolated worktree is E:/codes/ExactEBRP-work/worktrees/round172, on codex/round172-journal-manuscript. Its authority for paper components is results/unified_exact_round137. The supplied goal file was copied verbatim.
+
+The one entry check returned main b2b940c1e517a72e226ec60fc49ff19651737632 and PR #233 Open Draft on codex/round171-frozen-b-n50 at e8c4a0d3ccbaf1c1a6e6f83242d9163fe29e74e4. Main lacks the R171 delivery ancestry, so the latter is the document and data base and its branch is the stacked PR base. Entry CLI elapsed was 0.85 s for PR metadata and 1.52 s for the two available branch refs and absent Round172 ref. Sparse worktree setup took 19.27 s. The project root and paper-current both have pre-existing tracked modifications. They were read only for baseline status.
+
+Inherited data commit 26730ec056490cf17502b7a74af418c3f1a18aad and science carrier a2f8a876effd9860dd78ee9426d6c1d6d918616b are in this ancestry. Source identity is compared by Git blob/tree and uses the existing R171 line-ending qualification. The historical measured-source commit is 781c548b410a2749190e3f0c4b149c2ad885c054. The historical PE is E:/codes/ExactEBRP-work/build-cache/round169/ExactEBRP.exe (9,884,148 bytes, SHA-256 c6ddf0b62f1200d02a8c654fd3f278ced704130f1a8950fc1e6464b9cbb11e57) with Gurobi 13.0.2 DLL SHA-256 9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88. These are historical citations. No solver program was launched for entry.
+
+The authoritative CSV readback was 132 data records and 28 columns, 82,303 bytes, UTF-8 BOM and 133 CRLF line endings. SHA-256 is 0487ebaf90274f85a7cd94358215a701825f328c954a8de235fd5e58633989dc. The baseline PDFs had 55 manuscript pages and 65 supplement pages. The PDF authoring operation marker succeeded once, before the first document operation at 04:32:02.

@@ -441,7 +441,7 @@ Lemmas A1-A4 concern ideal exact arithmetic and valid mathematical domains. Stor
 
 A historical inclusive-cutoff writer could serialize an artificial contradictory row at a legal cutoff boundary. R133 removed that row while retaining valid penalty and domain rows. Its exact boundary fixture and finite qualification remain in the supplement; historical raw and performance denominators are not rewritten. The final implementation retains the corrected writer. For a native-derived bound or closure, the complete physical embedding, applicable cutoff complement and qualified source are required even when an analytic floor independently exists.
 
-Every final selected own fleet is physically verified. Ordinary positive numerical certification additionally requires qualified source/return chains and complete coverage, normal lifecycle completion and a signed gap in \([-10^{-7},10^{-7}]\). Rejected native proof dependencies cannot close a domain. A sufficient independent original-objective zero proof can instead establish optimality while the native-source flag stays rejected. A near-zero positive objective is not exact zero. The finalizer, normal process completion and required output belong to the production clock; later postproduction checks cannot backdate a certificate.
+Every final selected own fleet is physically verified. B's production check for ordinary numerical certification additionally requires a qualified source/return chain, complete coverage and closure of all relevant obligations, normal lifecycle completion and \(L+\varepsilon\ge U\). Admission of a reported positive certificate applies the signed-gap band \([-10^{-7},10^{-7}]\). Rejected native proof dependencies cannot close a domain. A sufficient independent original-objective zero proof can instead establish optimality while the native-source flag stays rejected. A near-zero positive objective is not exact zero. The finalizer, normal process completion and required output belong to the production clock; later postproduction checks cannot backdate a certificate.
 
 The source-rejected zero observations in R132/R133 keep their historical unqualified certificate/performance decisions. They are distinct from the newly executed final-panel observations under the independent-proof rule. Historical numerical anomalies and readout repairs are collected in the supporting material, with unavailable hidden-tree causes left unresolved.
 
@@ -467,9 +467,9 @@ The formulation map below identifies actual variable and row groups. Supplement 
 
 \clearpage
 
-## A.9 Compact joint-state alternative C166
+## A.9 Compact supports for the shared interface
 
-This separately named candidate changes only the inventory representation of B. Let \(M_i=\sum_k(p_{ki}+d_{ki})\), \(V_i=\sum_kz_{ki}\), and fix the legal integer interval \(\mathcal Y_i=\{l_i,\ldots,u_i\}\) and \(0\le\alpha\le\beta\le1\). Put \(m_i(y)=|b_i-y|\), \(v_i(y)=\mathbf1\{y\ne b_i\}\). The shared object is
+The compact-support candidate in Proposition 1 changes only the inventory representation of B. Let \(M_i=\sum_k(p_{ki}+d_{ki})\), \(V_i=\sum_kz_{ki}\), and fix the legal integer interval \(\mathcal Y_i=\{l_i,\ldots,u_i\}\) and \(0\le\alpha\le\beta\le1\). Put \(m_i(y)=|b_i-y|\), \(v_i(y)=\mathbf1\{y\ne b_i\}\). The shared object is
 
 \[
 \mathcal H_i=\operatorname{conv}\{(y,m_i(y),v_i(y),g,gy):y\in\mathcal Y_i,\ g\in[\alpha,\beta]\}.
@@ -533,12 +533,9 @@ For a fixed physical domain and normalized weight vector, \(v(\rho)=\min_x\{G(x)
 
 All feasible-line intersections, overlapping lower-chord intersections and chord interval endpoints partition the covered parameter range into finitely many pieces on which both envelope expressions are affine. Using every distinct anchor pair also makes the maximum applicable-chord envelope continuous: at an interior anchor, starting/ending chords share its L value with an incoming/outgoing anchor chord, while spanning chords remain continuous. The gap therefore attains a maximum at a partition endpoint (or everywhere on a constant piece). Checking all such points proves the stated continuous-interval regret bounds; a grid would not suffice. Same-coordinate lowers combine by maximum, never by a zero-length chord. Outside a chord's endpoint interval no extrapolation is granted.
 
-The application reconstructs complete fleets, verifies fixed physical/normalized-weight identity and uses actual loaded lambda/omega values. Rational G/P/coordinate arithmetic supplements the inherited numerical lower qualifications; it does not turn native solves into rational proofs. Original lowers are conservatively reduced by 1e-7, and exact feasible objectives receive a 1e-12 upward guard. No source crossing is clipped. The original run objectives, statuses and clocks remain unchanged. Likewise, nested physical time domains give the two-sided difference interval in Table 10; this is an objective-value decision bound, not a monetary resource price.
+The application reconstructs complete fleets, verifies fixed physical/normalized-weight identity and uses actual loaded lambda/omega values. Rational G/P/coordinate arithmetic supplements the inherited numerical lower qualifications; it does not turn native solves into rational proofs. Original lowers are conservatively reduced by 1e-7, and exact feasible objectives receive a 1e-12 upward guard. No source crossing is clipped. The original run objectives, statuses and clocks remain unchanged. Likewise, nested physical time domains give the two-sided difference interval in Table 8 of the main text. The bound is measured in objective units.
 
-\clearpage
-
-
-## A.11 Conditional joint stock, service, product and code hull
+## A.11 Conditional stock, service, product and code hull
 
 Write \(D=[l,u]\cap\mathbb Z\), \(m(y)=|b-y|\), \(v(y)=\mathbf1[y\ne b]\), and let \(c(y)\) be the absolute d-bit stock code, \(d=\max\{1,\operatorname{bit\_width}(C)\}\). The enhanced hull is
 
@@ -595,13 +592,23 @@ Path-flow projection and endpoint disjunction are established methods [@behle200
 **Current frozen method.** GI-TBC (historical S2, configuration ms2) uses the unchanged H and controller specified below with uniform pair-only support. Historical full-M-B traces and development variants retain their named identity. GI-TBC-R (implementation s2-root, historical S2R) is the diagnostic root-only control.
 
 
-This appendix defines the controller and finite feasible startup H shared by the adopted GI-TBC method (historical S2, configuration ms2) and its full-M-B predecessor. The current GI-TBC row policy is uniformly pair-only; the underlying H and controller definitions are unchanged. Algorithm 1 appears in Section 3; its two complete subprocedures are given below in B.0; this appendix supplies their data, numerical decisions, decoding and return semantics. Mathematical symbols refer to Appendix A. Historical names are source-map aliases, not additional algorithm variants. The definitions and proofs are retained from R125. The historical Round126 panel used the fixed full-M-B predecessor and cold P-GRB; it is retained under its own identity in [the R130 historical account](https://github.com/yifanXovo/TailoredExact/blob/39043b15b3cceae2cab14a3fbaec39e2b16339ce/results/unified_exact_round130/manuscript.md).
+This appendix defines the controller and finite feasible startup H shared by the adopted GI-TBC method (historical S2, configuration ms2) and its full-M-B predecessor. The current GI-TBC row policy is uniformly pair-only; the underlying H and controller definitions are unchanged. Algorithm 1 appears in Section 3; the two implementation-facing subprocedures below provide the decisions, decoding and return semantics behind it. Mathematical symbols refer to Appendix A. Historical names are source-map aliases, not additional algorithm variants. The definitions and proofs are retained from R125. The historical Round126 panel used the fixed full-M-B predecessor and cold P-GRB; it is retained under its own identity in [the R130 historical account](https://github.com/yifanXovo/TailoredExact/blob/39043b15b3cceae2cab14a3fbaec39e2b16339ce/results/unified_exact_round130/manuscript.md).
 
 
 
 The separately evaluated inclusive-root, support and equivalent-expression controls are documented in Supplement S11 with their original evidence identity.
 
 ## B.0 Complete leaf and cover subprocedures
+
+| Algorithm 1 operation | Realization in the frozen method |
+|---|---|
+| 1. Startup, verified \(U\) and inclusive root | Appendix B.6 and the root-entry check. The inclusive writer retains the cutoff boundary (A.7). |
+| 2. Plateau, current LP and scoped floor | `ControllingLeafScheduler::selectNextByBoundOnly`, `solveLp` and Algorithm 2 step 1. B.2 defines relevance, ordering and cache qualification. |
+| 3. NEXT and child/parent decisions | `evaluateC6FrontierDecision` and `evaluateC6AdaptiveMassSplitDecision`, Algorithm 2 steps 2–5. `runC6NativeTarget` distinguishes NEXT from the child-disjunction target. |
+| 4. Return, fleet and cover | Algorithm 3, the scheduler's `splitLeafAtomically` and the terminal return gate `evaluatePaperTerminalMipDecision`. B.4 lists the recorded flags and the closure priority. |
+| 5. Qualified final return | Native lifecycle and source-usability gates in B.4–B.4.1. The conservative restoration replaces abandoned dependent cover state with a full-domain open obligation if necessary. |
+
+The C++ controller and scheduler are the implementation authority. Algorithms 2 and 3 summarize their active branches and the evidence required to interpret their results. [Frozen controller](https://github.com/yifanXovo/TailoredExact/blob/781c548b410a2749190e3f0c4b149c2ad885c054/src/PaperExternalGiniTree.cpp) · [Frozen scheduler](https://github.com/yifanXovo/TailoredExact/blob/781c548b410a2749190e3f0c4b149c2ad885c054/src/ControllingLeafScheduler.cpp)
 
 ~~~text
 Algorithm 2  ProcessLeaf / ChooseAction
@@ -612,7 +619,7 @@ Precondition: selected unit is still represented; no pending native call.
    On qualified infeasible LP return CLOSE(parent,cutoff evidence).
    Merge a finite optimal parent-LP bound on this same domain.
    If b >= current U-epsilon return FATHOM with its bound source.
-2  Apply NEXT rule (M5) in its stated priority order:
+2  Apply NEXT rule (B.3) in its stated priority order:
        noncontrolling -> REQUEUE;
        strict target -> Native(parent MIP,target NEXT), then RETURN_NATIVE;
        otherwise proceed to 3.
@@ -624,10 +631,11 @@ Precondition: selected unit is still represented; no pending native call.
        but retain raw child LP fields for AM. Children are not active leaves.
    On either incomplete/invalid result return OPEN_STOP/ERROR; keep parent.
 5  If either child is qualified infeasible: return SPLIT(children,empty flags).
-   Otherwise compute score (B2) in B.3, b+=min(raw child bounds):
-       b+<=b+epsilon -> Native(complete parent MIP,no target);
+   Otherwise use (B1) to form score=eta*mu, (B2) for score_tolerance,
+   and b_min=min(raw child bounds):
+       b_min <= b + epsilon -> Native(complete parent MIP,no target);
        score+score_tolerance>=.08 -> return SPLIT(both children);
-       otherwise -> Native(parent MIP,target b+,kind CHILD).
+       otherwise -> Native(parent MIP,target b_min,kind CHILD).
    For a native action return its actually finalized outcome and source identity.
 Postcondition: no unresolved domain removed; no target value admitted as proof
    merely because it was requested; no speculative child counted as active.
@@ -649,8 +657,10 @@ Input: ProcessLeaf outcome, current cover, own witness/epoch/runtime caches
        midpoint, inherited bounds and full union. Install both in one transaction,
        mark parent Replaced, then mark proved infeasible children Empty.
        Discard replaced/empty backend models; failed transaction retains parent.
-4  CLOSE/FATHOM or qualified native OPTIMAL/INFEASIBLE: close only this
-       cutoff obligation and keep its complement floor and evidence.
+4  CLOSE/FATHOM or qualified native OPTIMAL/INFEASIBLE with admissible
+       physical consistency: close only this cutoff obligation and keep
+       its complement floor. A native optimum with a disqualifying
+       physical objective gap leaves the obligation open and stops.
    Target reached + termination requested + bound>=target-epsilon:
        set NEXT milestone only for NEXT, then requeue parent (no forced split).
    REQUEUE: retain all state/coverage, return to selection.
@@ -757,15 +767,16 @@ The outcome object is consumed only after the optimize call returns and request 
 |---|---|
 | LP optimal with finite qualified bound | Merge into that parent, or save on speculative child; child alone changes no active cover |
 | LP infeasible | Parent Empty, or speculative infeasibility retained until atomic split |
-| Target MIP OPTIMAL with bound / INFEASIBLE | Close selected cutoff obligation; retain cutoff-complement floor; discard its model and speculative child models |
+| Target MIP OPTIMAL with bound and admissible physical gap / INFEASIBLE | Close selected cutoff obligation; retain cutoff-complement floor; discard its model and speculative child models |
 | Target reached flag, termination-request flag, available bound ≥target−epsilon | Merge returned bound; set milestone only for NEXT; requeue; preserve parent and siblings |
 | MIP interrupted/TimeLimit before target | Keep qualified partial bound if engineering gates passed; leave region open and end the common lifecycle |
-| Terminal MIP OPTIMAL / INFEASIBLE | Close its own cutoff obligation; never certify siblings by this status |
+| Terminal MIP OPTIMAL with admissible physical gap / INFEASIBLE | Close its own cutoff obligation. Other intervals retain their own obligations. |
+| OPTIMAL with physical gap still open under the return rule | Retain the obligation and stop with the qualified open state. This status alone supplies no physical closure. |
 | Terminal MIP interrupted | Leave region open and stop |
 | Unsupported status, missing optimal bound, failed identity, incomplete LP or native error | Stop with explicit failure; preserve unresolved coverage; dependent unqualified evidence is not admitted |
 | No launch because deadline expired | Leave region and previous evidence unchanged; finalize open result |
 
-The frozen implementation merges same-unit bounds with max(old bound,new bound), without clipping to U. It has no general online source-dependency revocation ledger. The actual qualification/finalization fallback rejects dependent native proof and restores the full unresolved physical domain with its independent nonnegative floor; this does not reconstruct or resume a repaired hidden native tree. Such monotonic accumulation does not itself support revocation of a later-refuted source; replacement qualification must audit actual dependent state rather than simply rename the trace. Empty/Fathomed stores max(previous bound,cutoff); Closed keeps its qualified returned floor. The raw returned L is the scheduler's complete-cover minimum, also **without clipping to U**. Tiny negative signed gaps can therefore occur and remain recorded. On the empty relevant-set path the scheduler helper alone returns 0; the enclosing lifecycle/closure logic determines the outcome.
+The frozen implementation merges same-unit bounds with max(old bound,new bound), without clipping to U. It has no general online source-dependency revocation ledger. The actual qualification/finalization fallback rejects dependent native proof and restores the full unresolved physical domain with its independent nonnegative floor; this does not reconstruct or resume a repaired hidden native tree. Such monotonic accumulation does not itself support revocation of a later-refuted source; replacement qualification must audit actual dependent state rather than simply rename the trace. Empty/Fathomed stores max(previous bound,cutoff); Closed keeps its qualified returned floor. The scheduler's raw lower bound is the minimum stored floor over relevant unreplaced intervals, including applicable Closed, Empty and Fathomed intervals, **without clipping to U**. Tiny negative signed gaps can therefore remain in the record. With no relevant interval the scheduler helper returns 0. The enclosing lifecycle and certificate logic determine the final reported outcome.
 
 For the exact mathematical proof, each cutoff-bound source has unconditional regional floor min(bound,source cutoff), and the analytic complement contributes its cutoff floor (A.6). This describes proof accounting, rather than an extra min-assignment performed by the frozen scheduler. Raw numerical evidence and exact proof-accounting expressions must not be interchanged. The final implementation retains the R133 source qualification and corrected inclusive-domain writer, as explained in A.7 and B.4.1. Its independent zero proof is separate from native-dependent coverage; the supplement retains the historical correction evidence. Remaining numerical limitations still apply.
 
@@ -775,7 +786,7 @@ Every own final fleet is independently checked against the original physical pro
 
 An independently valid full-domain nonnegative floor may prove a zero fleet even after native-source rejection. The rejected native journal and conservative restoration of the full unresolved domain remain unchanged; this is not a successful native proof or a repaired hidden search tree. Without sufficient independent proof, source-rejected positive outcomes retain the restored open domain. Ordinary qualified positive native and outer coverage certificates retain their original policy.
 
-The proof is finalized after the final selected own fleet is known, necessary physical checks have finished and native resources are released. Required outputs and normal process completion are included in the complete production clock. Postproduction verification has its own elapsed time and cannot backfill a proof or an earlier production timestamp. Engineering source anomalies, the finite R133 checks and historical bridge tables are collected in the supplement.
+The enclosing finalization accounts for the final selected fleet, its physical checks and native resource release. Ordinary B coverage certification requires every relevant obligation closed, valid coverage and monotone evidence, a verified incumbent and \(L+\varepsilon\ge U\). The independent zero rule includes its own final physical verification. Required outputs and normal process completion are included in the complete production clock. Postproduction verification has its own elapsed time and cannot backfill a proof or an earlier production timestamp. Engineering source anomalies, the finite R133 checks and historical bridge tables are collected in the supplement.
 
 ## B.5 Teaching states and a separately sourced event
 

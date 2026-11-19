@@ -1,6 +1,6 @@
 # GI-TBC: mathematical objects and mechanism interpretation
 
-This maintained companion explains the physical, inventory, relaxation and complete-method objects used in the current paper. It preserves the earlier exact arguments and integrates the archived-source three-Seed evidence. Production source/PE identities and document-build identities are separate in the [source manifest](../unified_exact_round166/source_manifest.json).
+This companion explains the physical, relaxation, conditional representation and complete-method evidence in the current paper. The main text states the compact-interface and conditional-network results as Propositions 1 and 2 and the coverage result as Proposition 4. Appendices A.6, A.9 and A.11 give their proofs and embedding conditions. Production-source identities and document identities are recorded separately. [Current source manifest](../unified_exact_round172/source_manifest.json)
 
 ## Physical model and effective objective weight
 
@@ -48,7 +48,7 @@ The last inequality uses nonnegative return load. It applies equally to P,
 PS and GI-TBC, and to every physical \(T\). It is the established shortage
 construction, not a new theoretical contribution or a guarantee of difficulty.
 The actual serialized arrays, rather than an intended regime label, establish
-the eight B2 floors. B3 floors scale with the actual \(\rho\).
+the eight resource floors and the six 50-station floors. The weight-study floors scale with the actual \(\rho\).
 
 For fixed remaining physical data and \(T_1\le T_2\), every route feasible
 under \(T_1\) is feasible under \(T_2\); hence

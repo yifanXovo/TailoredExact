@@ -1,18 +1,16 @@
 # Supplement: complete observations, mathematical comparisons and reproducibility
 
-The current tables contain every registered position. C means a performance-eligible qualified certificate; O means open; UEV means evidence outside formal performance eligibility. Open times are null, not the cap. Detailed full-precision arrays, physical operations, raw lifecycle/model evidence and source identities accompany the CSV/JSON authorities. Prior evidence below keeps its original version and denominators.
+The current tables contain every registered position. C means a performance-eligible qualified certificate; O means open; UEV means evidence outside formal performance eligibility. OPEN runs have null certificate times. Detailed full-precision arrays, physical operations, raw lifecycle/model evidence and source identities accompany the CSV/JSON authorities. Prior evidence below keeps its original version and denominators.
 
 ## Reading and source map
 
-The main paper and complete model/algorithm appendices are assembled from
-`paper_body.md` and `model_and_algorithm_appendices.md`. This supplement keeps
-complete breadth/resource/weight/AM/mechanism observations, useful historical
-mathematical comparisons, source provenance and the later cohort evidence.
-The [mathematical companion](mathematical_analysis.md) distinguishes the
-relaxation objects and proof contracts. The [current source manifest](../unified_exact_round167/source_manifest.json)
-and [document build receipt](../unified_exact_round167/document_build.json)
-bind the current PDF to those components. Administrative author decisions are
-kept in the internal memo and are not part of the technical manuscript.
+- **Physical model, shared states and conditional information.** See Appendices A.1–A.9 and A.11 for exact constraints and proofs, and S167.3 for the local and canonical diagnostics. [Mathematical companion](mathematical_analysis.md) · [Conditional diagnostics](#s1673-conditional-representation-diagnostics) · [Implementation names](#s1674-historical-implementation-identity-navigation)
+- **Complete methods and solver Seeds.** The breadth endpoints, paid controls and later six-input Seed cohort accompany §§4.2–4.3. [Breadth endpoints](#breadth-complete-two-sided-endpoints) · [Seed cohort and clocks](#round164-completed-finite-solver-seed-evidence) · [Saved-target availability](#all-pre-frozen-feasible-target-availability-intervals)
+- **Positive-objective 50-station endpoints.** S171 gives the six inputs, all twelve arms, both gaps, physical/Native distinction, costs and interval activity behind Table 6. [50-station panel](#s171-positive-objective-50-station-configurations)
+- **Mechanism and startup boundaries.** S167.2 reports matched row and full/root controls. S168 gives restricted-route-family intervals. Tables S166.1 and S170.6 preserve complete paired results for the compact-support and fixed reweighting candidates. [Controller contrasts](#s1672-detailed-am-mechanism-and-earlier-seed-interpretation) · [Route-family targets](#s168-complete-route-family-target-attainability) · [Compact-support table](#same-build-compact-support-endpoints) · [Paid initialization table](#matched-initialization-endpoints-by-role-and-seed)
+- **Route time and weights.** Physical decomposition, two-sided resource gains and continuous regret bounds accompany §5. [Resource run endpoints](#positive-resource-gi-tbc-operating-points) · [Sampled weights](#objective-weights-all-methods-and-decompositions) · [Continuous bounds](#continuous-weight-archive-and-two-sided-resource-value)
+
+The [current manuscript](manuscript.pdf) contains the six main sections and Appendices A–B. [Source manifest](../unified_exact_round172/source_manifest.json) · [Document build](../unified_exact_round172/document_build.json)
 
 ## Current detailed panel tables
 
@@ -1128,6 +1126,19 @@ The fresh-wrapper outer total is 16328.458215 s;
 its small management difference from summed produce/verify remains charged.
 Reservations of 25200 s and watchdog settings are not reported as consumed costs.
 
+### Same-build compact-support endpoints
+
+**Table S166.1. Same-build complete B/compact-support comparison on the six exposed inputs.** Entries give qualified state and physical U / global L. The last column is paid production seconds. Certificate time is defined only for CERT. The individual endpoints and independent verification costs appear above.
+
+| Input | B: state; U / L | C166: state; U / L | Paid production B / C166 (s) |
+|---|---|---|---|
+| C20-S | CERT; 0.191280592 / 0.191280592 | OPEN; 0.191280592 / 0.186598049 | 210.415 / 1171.44 |
+| B20-B | CERT; 0.423232182 / 0.423232182 | CERT; 0.423232182 / 0.423232182 | 5.09644 / 5.66122 |
+| X20-S | CERT; 0.447747627 / 0.447747627 | CERT; 0.447747627 / 0.447747627 | 125.3 / 544.902 |
+| C35-U | OPEN; 0.12956639 / 0.0198375028 | OPEN; 0.12104327 / 0.0142065407 | 2371.28 / 2371.2 |
+| B35-S | OPEN; 0.194290311 / 0.120234003 | OPEN; 0.179289627 / 0.116053251 | 2371.1 / 2372.23 |
+| X35-S | OPEN; 0.457475317 / 0.394988256 | OPEN; 0.475871153 / 0.386699749 | 2371.14 / 2371.1 |
+
 ### Continuous-weight archive and two-sided resource value
 
 All 50 complete fleet records are recovered and physically checked: 32 weight
@@ -1135,7 +1146,7 @@ observations and 24 resource observations with six shared records. The
 four families preserve the exact physical domain and normalized weight
 vector. Every source owner, dominated fleet, original objective and clock
 remains available. Archive improvement is offline and supplies no free
-formal Start, bound or cutoff. Main Section 5.3 and Appendix A.10 explain
+formal Start, bound or cutoff. Main Section 5.2 and Appendix A.10 explain
 the concavity/finite-intersection argument and safety margins.
 
 | Family | Actual covered rho (display) | Runs / distinct lines / supported | Max archive regret upper | Best fixed-plan regret upper |
@@ -1395,16 +1406,23 @@ There are exactly 88 actual serial Optimize calls: 72 canonical LP, 12 local LP 
 
 ## S167.4 Historical implementation identity navigation
 
-For the later archived-source and three-Seed cohort, the measured C++ is `e920b92e199e825ec89a2932f701861ff158e0d4`; actual method freezes and PE/DLL bindings are in the [R164 method freeze](../unified_exact_round164/method_freeze.json) and [science identity](../unified_exact_round164/science_identity.json). Those observations were produced by the already measured PE, not by a manuscript build. The latest source includes default-off research paths; the main B vector does not enable them. Historical S2/ms2 and paper-S2 are implementation aliases of the specified main method. E+ remains separately named and off in B. The [current document manifest](../unified_exact_round168/source_manifest.json) binds the maintained sources and both study generations.
+The representation names in §2 and the corresponding implementation identities are:
 
-Historical R135 is separately pinned: its [candidate manifest](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/candidate_manifest.json), [first-stage commands](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/C_matrix_frozen.json) and [conditional-stage commands](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/D_matrix_frozen.json) compare S2/AP at lambda=.15. Those observations remain historical; AP is not enabled in the current stage. R134 confirmation and weight observations likewise retain their original identities in the preserved supplement.
+| Scientific object | Implementation or historical label |
+|---|---|
+| Enumerated shared inventory, product and service block of B | VD-P with the movement/visit links A/B and the adopted pair-only GI-TBC/S2 configuration (ms2) |
+| Compact support block with its separate absolute-stock product layer | C166 |
+| Enumerated enhanced hull with the same absolute digits | R_abs |
+| Two-flow interval DAG on the absolute inventory digits | D167 |
+| Earlier logarithmic encoding using the offset from the lower stock bound | LOG, with code of \(y-l\) |
 
+The archived-source three-Seed cohort used measured C++ `e920b92e199e825ec89a2932f701861ff158e0d4` and PE SHA-256 `fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93`. E+ is an independently paid variant outside B. [Archived-source method freeze](../unified_exact_round164/method_freeze.json) · [Measured identities](../unified_exact_round164/science_identity.json)
 
-This appendix is the single maintained model specification for the manuscript. It transcribes the frozen writer, including constraints sometimes redundant for integer solutions. It does not replace the implemented model by a different vehicle-routing formulation. Equations are mathematical real-arithmetic expressions; A.7 states the separate numerical implementation boundary. Historical source-line pointers retained in this derivation refer to snapshot 355eefd2be3fe5651195681faf7b3a63ee4032f8. That historical E3 source base and its binding belong to the earlier attribution controls [@frozenImplementation]. The current GI-TBC identity and the separately pinned historical R134/R135 studies are distinguished in B.1; source_publication.json provides the historical R137 source-byte capsule. The later measured C++ source is e920b92e199e825ec89a2932f701861ff158e0d4 (R163/R164), PE SHA256 fa7283b0ad3e54dc47315ea3d5987a0aaf8daefe58048beb3dae4be76642be93; the current document source manifest distinguishes these generations. Current state/service, own-H, pair-only and inclusive-domain conditions are checked against these final identities, rather than inferred from historical line numbers.
+The historical R135 S2/AP study used \(\lambda=.15\); its method and input identities also distinguish it from the R134 confirmation and weight runs. [R135 manifest](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/candidate_manifest.json) · [First-stage commands](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/C_matrix_frozen.json) · [Conditional-stage commands](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/D_matrix_frozen.json)
 
-The linked [implementation snapshot](https://github.com/yifanXovo/TailoredExact/tree/355eefd2be3fe5651195681faf7b3a63ee4032f8) is the historical source authority for this unchanged formulation map. The final implementation and its exact byte capsule are identified by candidate_manifest.json and source_publication.json in the current reproduction entry. Line locations aid review; they do not replace derivations. This appendix supplies constraint groups and validity premises without claiming every engineering identifier as a mathematical contribution.
+Appendix A transcribes the frozen model and gives its numerical boundary in A.7. Historical E3 source-line pointers belong to snapshot `355eefd2be3fe5651195681faf7b3a63ee4032f8` [@frozenImplementation]. B.1 specifies the active entry. The candidate manifest and source-byte capsule bind the separate breadth/resource study. [Frozen E3 snapshot](https://github.com/yifanXovo/TailoredExact/tree/355eefd2be3fe5651195681faf7b3a63ee4032f8) · [Breadth/resource manifest](candidate_manifest.json) · [Historical source capsule](source_publication.json) · [Current document build](../unified_exact_round172/document_build.json)
 
-The “interval-mip-core-no-exhaustive-subset-duration” policy is overridden by the VD-P preset to `round55-vd-p`, still excluding exhaustive subset duration. Compiler identity is the frozen MSYS2 UCRT64 g++ binary SHA256 `8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1`. Library shuffle and equivalent-key sort order are implementation-version details; the paper does not invent a canonical cross-library tie rule absent in the source.
+The VD-P preset overrides the legacy interval policy with `round55-vd-p`, retaining the exclusion of exhaustive subset duration. The frozen MSYS2 UCRT64 g++ SHA-256 is `8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1`. Library shuffle and equivalent-key sorting follow that implementation.
 
 ## S168 Complete route-family target attainability
 
@@ -1656,7 +1674,22 @@ dominance. Full path/control/parameter/fleet/Start/coverage and cost evidence
 is available in [the fixed confirmation report](https://github.com/yifanXovo/TailoredExact/blob/codex/round170-reweight-confirmation/results/unified_exact_round170/final_report.md)
 and its separate comparison CSVs. Global first-hit timing is unobserved.
 
-## S171 Prospective positive n50 configurations
+### Matched initialization endpoints by role and Seed
+
+**Table S170.6. Fixed paid confirmation at 600 s.** Cells give original U / qualified global L. C after an endpoint marks CERT. The other observed cells are OPEN. A dash denotes an unmeasured position. Only the three 35-station Seed 1 rows include M and P.
+
+| Role/Seed | B: U/L | C: U/L | M: U/L | P: U/L |
+|---|---|---|---|---|
+| C20/1 | 0.191281/0.191281 C | 0.191281/0.191281 C | - | - |
+| C20/2 | 0.191281/0.191281 C | 0.191281/0.191281 C | - | - |
+| C35/1 | 0.111924/0.0144933 | 0.153146/0.0154823 | 0.111924/0.014453 | 0.24655/0.00482444 |
+| C35/2 | 0.115716/0.0152415 | 0.120417/0.0156946 | - | - |
+| B35/1 | 0.208921/0.118979 | 0.168557/0.117813 | 0.208921/0.118979 | 0.318124/0.114075 |
+| B35/2 | 0.174277/0.118326 | 0.192502/0.119374 | - | - |
+| X35/1 | 0.480063/0.36101 | 0.472052/0.350652 | 0.480063/0.360941 | 0.599347/0.348078 |
+| X35/2 | 0.468815/0.36773 | 0.473423/0.36682 | - | - |
+
+## S171 Positive-objective 50-station configurations
 
 The precommitted generation draws one compact and one regional 50-station
 selection per archive, with four original hash/farthest anchors and a
@@ -1670,13 +1703,9 @@ problem uses empty departures, at most one nonzero directed service per station,
 prefix capacity, loaded return and paid unloading, with speed 1.5 m/s
 and pickup and drop each 60 s/unit.
 
-Each input uses \(T=T_1\) under §4.1 and \(\lambda=1/\Omega\), where
-\(\Omega=\sum_i\omega_i\) excludes the depot. With \(s=\sum_i D_i-\sum_i b_i>0\)
-and \(a=\min_i \omega_i/D_i>0\), conservation gives
-\(P\ge a\sum_i|D_i-Y_i|\ge as\), hence \(F\ge\lambda as>0\).
-These serialized-data bounds certify positivity for the design. The
-optimization arms use their frozen proof sources. Input horizons and
-the 1,200-s complete-process clock are distinct quantities.
+Each input uses \(T=T_1\) under §4.1 and \(\lambda=1/\Omega\). The positive floors below follow from the serialized shortfall and weights via §2.1. They characterize the design. B and P use their frozen online bound sources. Input horizons and the 1,200 s complete-process cap are distinct.
+
+The six newly tested configurations extend the direct frozen B evidence. Earlier V50 observations used K1/P or M-B/ENS and matching compact controls. The V100 observations belong to the earlier M-B/ENS material. The protocols, budgets and method identities remain attached to their original results. [Historical scope and input identity](../unified_exact_round171/research_design.md)
 
 **Table S171.1. Input-derived settings and positivity.**
 
@@ -1696,7 +1725,7 @@ starts, retaining Gurobi's default heuristics. Each P Optimize matches
 its own zero-Optimize reference. Each B publishes model, own Start,
 Native log and proof coverage readbacks. The C++ budget starts at
 process entry and allocates each actual Optimize the remaining work
-window. The 6-s shutdown allowance is part of the cap.
+window. The 6 s shutdown allowance is part of the cap. The registered descriptive scale for pair differences in \(U,L\) and absolute gap is \(\max\{10^{-6},\,0.001\max(|U_P|,10^{-12})\}\).
 [Input and provenance ledger](../unified_exact_round171/input_manifest.json) ·
 [Matrix](../unified_exact_round171/matrix_frozen.json)
 
@@ -1726,7 +1755,7 @@ The complete ledger carries the full run ID.
 The signed U-L retains numerical sign, while the display percentage uses
 the nonnegative gap convention. Missing values are shown with a dash.
 
-Cold P on R171-B50-S-C has Native ObjVal 0.705246149 and a separately verified physical U of 0.705180552 (Native minus physical 6.56e-05). Its incumbent consistency flag is false. The OPEN comparison uses the physical U and the same run's qualified global L of 0.343939898.
+For CABI compact (R171-B50-S-C), cold P reports Native ObjVal 0.7052461487625141. Independent physical evaluation of the same run's final fleet gives U = 0.7051805516925163, a difference of about 6.56e-05. The fleet agrees with the original-problem journal witness. The incumbent consistency flag is false, and the full-model lower source is qualified at L = 0.34393989756135385. Table 6 uses the physical U and this L for the OPEN comparison.
 
 **Table S171.3. Recorded work inside the paid clocks.**
 
@@ -1769,8 +1798,7 @@ Root L reaches the original problem only with an eligible returned LP,
 qualified cutoff complement and complete improving-Gini root scope.
 The configuration IDs in this activity table omit the R171 prefix.
 Descendant LP counts include probes. Coverage leaves are unreplaced
-intervals and can be discharged. The exact distribution of accepted
-splits, targets and requeues follows the saved events. These observations
+intervals and can be discharged. The six declined splits are the recorded counter total. The AM ledger has ten decision rows, including four decisions revisited after continuation. It records zero accepted splits and four child-target parent MIP requeues. These observations
 leave the independent performance effect of external interval treatment
 unresolved.
 [Full costs](../unified_exact_round171/cost_report.json) ·
